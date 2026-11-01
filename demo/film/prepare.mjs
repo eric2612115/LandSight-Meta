@@ -102,6 +102,23 @@ function billRow() {
   return { text: m[1], unit: m[2], qty: Number(m[3]), price: Number(m[4]), source: rel(py) }
 }
 const row = billRow()
+// The film's money follows its bill clip: captured with --currency usd, the cold open types the price in dollars,
+// read from the run's USD field for the same bill row (never converted here).
+const CURRENCY = (manifest.bill?.currency ?? process.env.FILM_CURRENCY ?? '').toLowerCase()
+function usdPrice() {
+  const camphor = runs.repo.run.checks.filter((x) => /camph/i.test(String(x.numbers?.bill_text ?? '')) || (x.numbers?.item_id === treeItem(runs.repo.run)?.item_id && num(x.numbers?.unit_price) !== undefined))
+  for (const c of camphor) {
+    const n = c.numbers ?? {}
+    const key = ['unit_price_usd', 'usd_unit_price', 'price_usd'].find((k) => num(n[k]) !== undefined) ?? Object.keys(n).find((k) => /usd/i.test(k) && /price/i.test(k) && num(n[k]) !== undefined)
+    if (key) return { value: n[key], source: `${runs.repo.files.run} · ${c.check_id}.${key}` }
+  }
+  return null
+}
+if (CURRENCY === 'usd') {
+  const usd = usdPrice()
+  if (usd) Object.assign(row, { price_usd: usd.value, price_source: usd.source })
+  else console.warn('WARNING: the bill clip is in USD but the run has no USD price for the camphor row; the cold open stays in NT$')
+}
 
 // ---------- the paper sheet: the counted L-1 and its canopies ----------
 // The repo run's counted plan (the sheet holding the tree item) when its SVG is English, else the frontend's
@@ -137,7 +154,7 @@ const openC = centreOf(openObj.outline)
 const gapAngles = (openObj.gaps ?? []).map(([x, y]) => Math.atan2(y - openC.cy, x - openC.cx)).sort((a, b) => a - b)
 const drawnCount = repoTree.spark_count ?? repoTree.proposed_count ?? repoTree.quote_count ?? repoTree.geometry_count
 const paper = {
-  row: { ...row, display: `${row.text} · ${row.qty} · NT$ ${fmt(row.price)}` },
+  row: { ...row, display: row.price_usd !== undefined ? `${row.text} · ${row.qty} · $ ${fmt(row.price_usd)}` : `${row.text} · ${row.qty} · NT$ ${fmt(row.price)}` },
   drawn: drawnCount,
   drawn_source: `${runs.repo.files.run} · ${repoTree.item_id} ${repoTree.label} (geometry ${repoTree.geometry_count} + ${MODEL.spark} ${(repoTree.spark_count ?? 0) - (repoTree.geometry_count ?? 0)})`,
   sheet: { svg: svgText, viewBox: vb, id: L1.sheet_id, source: P.file },

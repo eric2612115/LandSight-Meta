@@ -2,7 +2,7 @@
  * Records each director scene of the running frontend as a 1920 × 1080, 30 fps H.264 clip cut to its beat window
  * (beats.json, from demo/SCRIPT.md v4), plus the app's sound events and a contact sheet.
  *
- *   node capture.mjs [--source repo|mock] [--no-fallback] [--mock scene,...] [--mode frames|video] [--base URL] [scene ...]
+ *   node capture.mjs [--source repo|mock] [--currency usd] [--no-fallback] [--mock scene,...] [--mode frames|video] [--base URL] [scene ...]
  *
  * --source repo (default) reads <repo>/frontend-mock (the backend's run); a scene the director skips on it for missing
  * data falls back to the frontend's built-in mock unless --no-fallback is given; --mock a,b forces scenes onto the
@@ -48,6 +48,8 @@ const SOURCE = opt('source', 'repo')
 const MODE = opt('mode', 'frames')
 const BASE = opt('base', 'http://localhost:5195')
 const NO_FALLBACK = flag('no-fallback')
+/** --currency usd: the director shows money in that currency (`&currency=usd`); default: the app's own default. */
+const CURRENCY = opt('currency', '')
 /** --mock drop,bill: force these scenes onto the built-in mock (e.g. while the repo run is a stand-in). */
 const FORCE_MOCK = (opt('mock', '') || '').split(',').filter(Boolean)
 const ALL = BEATS.beats.filter((b) => b.scene).map((b) => b.scene)
@@ -62,7 +64,7 @@ const VITE_STUB = readFileSync(join(HERE, 'lib', 'vite-client-stub.js'), 'utf8')
 /** No HMR during a take: serve a stub for Vite's client (styles only). */
 const freeze = (context) => context.route((u) => new URL(u).pathname === '/@vite/client', (route) => route.fulfill({ status: 200, contentType: 'text/javascript', body: VITE_STUB }))
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
-const url = (scene, source) => `${BASE}/?director=1&auto=1&hold=1&scale=1&mute=1&source=${source}#scene=${scene}`
+const url = (scene, source) => `${BASE}/?director=1&auto=1&hold=1&scale=1&mute=1&source=${source}${CURRENCY ? `&currency=${CURRENCY}` : ''}#scene=${scene}`
 
 function ffmpeg(argv, input) {
   return new Promise((resolve, reject) => {
@@ -213,7 +215,7 @@ try {
     writeFileSync(join(OUT, `${scene}.events.json`), JSON.stringify(res.events, null, 1))
     await contact(res.frames, join(OUT, `${scene}.contact.png`))
     manifest[scene] = {
-      beat: beat.n, source, fallback: fellBack ?? null, mode: MODE, url: url(scene, source), seconds, lead: beat.lead ?? 0, fps: FPS,
+      beat: beat.n, source, currency: CURRENCY || null, fallback: fellBack ?? null, mode: MODE, url: url(scene, source), seconds, lead: beat.lead ?? 0, fps: FPS,
       sound_cues: res.events.length, page_errors: res.errors.slice(0, 5), note: res.note ?? null, captured_at: new Date().toISOString(),
     }
     writeFileSync(manifestFile, JSON.stringify(manifest, null, 2))
