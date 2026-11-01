@@ -174,7 +174,7 @@ class Revision:
 
 
 REV_A = Revision("A", "2026-09-18", "ISSUED FOR REVIEW")
-REV_B = Revision("B", "2026-10-14", "TREE ADDED; TREE MOVED 2 M", moves=((5, 0.0, 2.0),), added=((39.0, 2.5),))
+REV_B = Revision("B", "2026-10-14", "TREE MOVED 2 M", moves=((5, 0.0, 2.0),))
 REVISIONS = (REV_A, REV_B)  # the revision history a title block lists up to its own revision
 
 
@@ -295,10 +295,10 @@ class _Sheet:
 
     def leader(self, s, x, y, target, h=TEXT_H):
         """Text at (x, y) with a shoulder under it and a line to `target`; the free end sits under the text's end."""
-        w = text_width(s, h)
+        w, d = text_width(s, h), h * 0.25  # the shoulder sits a quarter of the text height below the baseline
         self.text(s, x, y, h)
         right_side = target[0] >= x + w / 2
-        start, elbow = ((x, y - 0.15), (x + w, y - 0.15)) if right_side else ((x + w, y - 0.15), (x, y - 0.15))
+        start, elbow = ((x, y - d), (x + w, y - d)) if right_side else ((x + w, y - d), (x, y - d))
         self.poly([start, elbow, target], layer="LEADER")
 
     def add(self, kind, label, centre, quote_count, unit="", **kw):
@@ -540,7 +540,9 @@ def _sheet_l1(m: Messiness, rng: random.Random, opts: SiteOptions | None = None,
         _draw_closed_canopy(sh, cx, cy, TREE_R, tree_layers[0], m.exploded)
         sh.add("tree", T["tree"], (cx, cy), 1, T["ea"], note=f"end gap 0 cm; spec {T['spec']}; Rev {rev.letter}: added",
                footprint=_fp(_canopy_vertices(cx, cy, TREE_R)))
-        _revision_cloud(sh, (cx - 2.4, cy - 2.3, cx + 2.4, cy + 2.3), rev.letter)
+    if opts.lang == "en":
+        for cx, cy in [centres[i] for i in moved] + list(rev.added):
+            _revision_cloud(sh, (cx, cy), TREE_R + 0.15, rev.letter)
     xs = [c[0] for c in tree_centres()]
     if m.label_style == "typ":
         cx, cy = centres[2]
@@ -574,10 +576,10 @@ def _sheet_l1(m: Messiness, rng: random.Random, opts: SiteOptions | None = None,
     _legend(sh, 54, legend_y0, 73, 31.5, entries)
 
     if not m.schedule_on_own_sheet:
-        _plant_schedule(sh, m, 54.0, legend_y0 - 2.0)
+        _plant_schedule(sh, m, 54.0, legend_y0 - (2.0 if opts.lang == "zh" else 0.6))
     if opts.lang == "en":
         for i, line in enumerate(GENERAL_NOTES):
-            sh.text(line, 14.0, -6.6 - 0.6 * i, 0.45 if i == 0 else 0.35)
+            sh.text(line, 14.0, -6.5 - 0.62 * i, 0.45 if i == 0 else 0.4)
         sh.add("notes", GENERAL_NOTES[0], (21.0, -7.5), 0, note=GENERAL_NOTES[1])
 
     _title_block(sh, 54, -7.5, "L-1")
@@ -585,20 +587,20 @@ def _sheet_l1(m: Messiness, rng: random.Random, opts: SiteOptions | None = None,
     return sh
 
 
-def _revision_cloud(sh: _Sheet, box, letter: str, arc: float = 0.8):
-    """A revision cloud: a closed LWPOLYLINE of outward arcs around `box`, and a triangle with the revision letter.
-    The cloud is squarish and scalloped, so it never reads as a round canopy."""
-    x0, y0, x1, y1 = box
-    pts = []
-    for (ax, ay), (bx, by) in (((x0, y0), (x1, y0)), ((x1, y0), (x1, y1)), ((x1, y1), (x0, y1)), ((x0, y1), (x0, y0))):
-        n = max(2, round(math.hypot(bx - ax, by - ay) / arc))
-        pts += [(ax + (bx - ax) * i / n, ay + (by - ay) * i / n, -0.45) for i in range(n)]  # CCW: negative = outward
+def _revision_cloud(sh: _Sheet, centre, r: float, letter: str, arc: float = 0.5, bulge: float = 0.8):
+    """A revision cloud around one changed tree: a closed LWPOLYLINE of deep outward arcs on a circle of radius r, and
+    a triangle with the revision letter. The arcs reach about 0.2 m beyond r, so with r = canopy + 0.15 m the cloud
+    clears its own canopy and the row neighbours (4 m apart) without crossing their line work; the deep scallops keep
+    its circularity near 0.6, so geometry never takes it for a canopy."""
+    cx, cy = centre
+    n = max(12, round(2 * math.pi * r / arc))
+    pts = [(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n), bulge) for i in range(n)]
     layer = sh.layer("REVISION")
-    sh.msp.add_lwpolyline(pts, format="xyb", close=True, dxfattribs={"layer": layer})
-    tx, ty = x1 + 0.6, y1 - 0.2
+    sh.msp.add_lwpolyline(pts, format="xyb", close=True, dxfattribs={"layer": layer})  # CCW points: bulge > 0 = outward
+    tx, ty = cx + r + 0.4, cy + r - 0.6
     sh.poly([(tx, ty), (tx + 1.2, ty), (tx + 0.6, ty + 1.04)], layer=layer, close=True)
     sh.text(letter, tx + 0.45, ty + 0.18, 0.45)
-    sh.add("revision_cloud", f"REV {letter}", _box_centre(box), 0, note=f"revision cloud: Rev {letter} change")
+    sh.add("revision_cloud", f"REV {letter}", centre, 0, note=f"revision cloud: Rev {letter} change")
 
 
 def _odd_trees(sh: _Sheet, m: Messiness, opts: SiteOptions, layer: str):
@@ -654,7 +656,7 @@ def _odd_areas(sh: _Sheet, opts: SiteOptions):
 
 
 SCHEDULE_COLS_ZH = ([1.4, 2.8, 1.6, 1.4, 2.6, 2.2, 2.2, 4.8], (4, 7))
-SCHEDULE_COLS_EN = ([1.6, 4.0, 7.0, 1.6, 1.6, 2.6, 2.2, 2.8, 6.6], (5, 8))
+SCHEDULE_COLS_EN = ([1.2, 3.1, 5.0, 1.1, 1.1, 1.9, 1.4, 2.2, 4.5], (5, 8))  # 21.5 m, widths measured at h 0.34
 
 
 def _plant_schedule(sh: _Sheet, m: Messiness, x0: float, y_top: float):
@@ -699,8 +701,8 @@ def _schedule_table_en(sh: _Sheet, x0, y_top, rows, col_w, spec):
     for w in col_w:
         xs.append(xs[-1] + w)
     width = xs[-1] - x0
-    h, rh = 0.42, 0.9
-    heights = [1.1] + [rh] * (len(rows) - 1)
+    h, rh = 0.34, 0.75
+    heights = [1.0] + [rh] * (len(rows) - 1)
     ys = [y_top]
     for hgt in heights:
         ys.append(ys[-1] - hgt)
@@ -716,7 +718,7 @@ def _schedule_table_en(sh: _Sheet, x0, y_top, rows, col_w, spec):
     for r, row in enumerate(rows):
         y_base = ys[r + 1] + (heights[r] - h) / 2
         if len(row) == 1:
-            sh.text(row[0], x0 + 0.3, y_base, 0.55 if r == 0 else h)
+            sh.text(row[0], x0 + 0.3, y_base, 0.5 if r == 0 else h)
             continue
         if r >= 3:
             for i in range(1, len(col_w)):

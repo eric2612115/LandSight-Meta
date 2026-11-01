@@ -26,7 +26,19 @@ def main(argv: list[str] | None = None) -> int:
     v = sub.add_parser("serve", help="serve the page (plain product; add ?director=1 for the film's scenes)")
     v.add_argument("--host", default="127.0.0.1")
     v.add_argument("--port", type=int, default=8795)
+    k = sub.add_parser("package", help="write the sample developer's package (30 files), the price list and the answer key")
+    k.add_argument("out")
+    k.add_argument("--seed", type=int, default=0)
     args = ap.parse_args(argv)
+
+    if args.cmd == "package":
+        from landsight.synth.package import write_package
+
+        pk = write_package(args.out, seed=args.seed)
+        print(json.dumps({"package": str(pk.root), "files": len(pk.files), "answer_key": str(pk.answer_key_path),
+                          "price_list": str(pk.price_list_path), "counted_trees": pk.key["counted_trees"],
+                          "errors": len(pk.key["errors"])}, ensure_ascii=False, indent=1))
+        return 0
 
     if args.cmd == "serve":
         from landsight.app import serve
