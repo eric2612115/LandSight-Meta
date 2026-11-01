@@ -1,0 +1,31 @@
+{
+  "name": "landsight-film",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Landsight demo film: director-scene captures from the running app, paper beats, captions and sound, cut in Remotion to SCRIPT.md v4.",
+  "scripts": {
+    "capture": "node capture.mjs",
+    "prepare-film": "node prepare.mjs",
+    "studio": "node prepare.mjs && remotion studio src/index.ts",
+    "render": "node prepare.mjs && remotion render src/index.ts Film landsight-v1.mp4 --codec h264 --audio-codec aac",
+    "render:alice": "node prepare.mjs && remotion render src/index.ts Film landsight-v1-alice.mp4 --codec h264 --audio-codec aac --props '{\"narrator\":\"alice\"}'",
+    "stills": "node stills.mjs landsight-v1.mp4 12",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "@remotion/google-fonts": "4.0.535",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "playwright": "1.56.1",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}

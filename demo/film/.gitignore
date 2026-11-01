@@ -1,0 +1,7 @@
+node_modules/
+public/
+stills/
+captures/.video/
+captures/.*
+# renders and clips are rebuilt: `npm run render`, `node capture.mjs`
+*.mp4
