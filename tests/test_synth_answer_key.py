@@ -78,3 +78,12 @@ def test_dxf_units_and_layers(site):
     assert {h.layer for h in m.hatches if not h.solid} <= {"HATCH", "HATCH1", "00hatch"}
     clean = load(site("m0")["paths"]["L-1"])
     assert sum(1 for e in clean.entities if e.type == "LWPOLYLINE" and e.closed) >= 8
+
+
+def test_schedule_on_its_own_sheet_moves_the_table_not_the_answer(site):
+    key = site(Messiness(schedule_on_own_sheet=True))
+    assert set(key["paths"]) == {"L-1", "L-2", "L-3", "L-4"}
+    assert key["totals"] == site("m4")["totals"]
+    assert [o["sheet"] for o in key["objects"] if o["kind"] == "schedule"] == ["L-4"]
+    assert not any("植栽表" in t.content for t in load(key["paths"]["L-1"]).texts)
+    assert any("植栽表" in t.content for t in load(key["paths"]["L-4"]).texts)

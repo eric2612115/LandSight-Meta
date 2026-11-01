@@ -62,7 +62,10 @@ def test_schedule_dispute_is_flagged_and_the_drawing_governs(site):
     assert "schedule 12" in tree.flagged_reason
 
 
-def test_naive_baseline_was_recorded_once():
-    rec = json.loads((FIXTURES / "naive_count.json").read_text())
+@pytest.mark.parametrize("name", ["naive_count", "naive_count_no_schedule", "naive_count_l1_only",
+                                  "naive_count_l2_only"])
+def test_naive_baselines_were_recorded_once(name):
+    rec = json.loads((FIXTURES / f"{name}.json").read_text())
     assert rec["prompt"].startswith("How many trees are on this site?") and rec["schema"] is None
     assert rec["answer"] and rec["recorded_at"]
+    assert rec.get("schedule_in_view", True) == (name == "naive_count")
