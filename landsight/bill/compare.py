@@ -241,9 +241,9 @@ def checks(bills: list[Bill], matches: dict[str, Match], drawn: dict[str, dict],
         if lo <= r.price <= hi:
             priced_ok.append(f"{d['name']} {_n(r.price)}" + (" (sample)" if p["basis"] == "sample" else ""))
             continue
-        mid = (lo + hi) / 2
         if r.price < lo:
-            title = (f"{d['name']} NT${_n(r.price)}: about {round(100 * (1 - r.price / mid))}% under your installed list "
+            # One basis for both the title and the reason: the low end of the firm's range.
+            title = (f"{d['name']} NT${_n(r.price)}: about {round(100 * (1 - r.price / lo))}% under your installed list "
                      f"({_n(lo)}–{_n(hi)})")
             why = f"{round(100 * (1 - r.price / lo))}% below the list's low end"
         else:
