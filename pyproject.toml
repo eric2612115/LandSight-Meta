@@ -1,0 +1,14 @@
+[project]
+name = "landsight"
+version = "0.1.0"
+description = "Quantity take-off, regulation check and quotation from a landscape construction drawing"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ezdxf>=1.4.5",
+    "httpx>=0.28.1",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pillow>=13.0.0",
+    "shapely>=2.2.0",
+]
