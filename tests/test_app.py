@@ -1,6 +1,8 @@
 """The API of docs/API.md, offline (recorded Muse Spark and SAM 3.1 responses): health, opening the package (the m4
-site until the sample package exists) gives the 8 items, confirming flips the flagged row, the rules numbers, the
-director's scenes, the rendered sheets and crops, and English everywhere outside citation URLs."""
+site plus the stand-in L-6 detail until the sample package exists) gives the 8 items, confirming flips the flagged row,
+the rules numbers, the director's scenes, the rendered sheets and crops, and English everywhere outside citation URLs.
+The film's conditional builds (grounding points, Spark writing SAM's prompt, the controlled SAM test, the pit
+downgrade) are in tests/test_conditional.py."""
 
 from __future__ import annotations
 
@@ -48,7 +50,7 @@ def test_open_gives_the_eight_items(client):
     assert tree["spark"]["crop_url"] == "/api/crops/I-01.png" and tree["spark"]["confidence"] == 0.95
     assert [i["label"] for i in run["items"][1:]] == ["Duranta", "Azalea", "Lawn", "Grass pavers", "Exposed aggregate",
                                                       "Permeable pavers", "Planter edge"]
-    assert [s["sheet_id"] for s in run["sheets"]] == ["L-1", "L-2", "L-3"]
+    assert [s["sheet_id"] for s in run["sheets"]] == ["L-1", "L-2", "L-3", "L-6"]
     l1, l2 = run["sheets"][0], run["sheets"][1]
     assert l1["counted"] and l1["title"] == "Planting Plan" and not l2["counted"] and l2["kind"] == "elevation"
     t08 = next(o for o in l1["objects"] if o["object_id"] == "T-08")
@@ -59,13 +61,16 @@ def test_open_gives_the_eight_items(client):
     titles = [c["title"] for c in run["checks"]]
     assert "T-08: open outline, Muse Spark says one tree" in titles and "L-2 is an elevation: not counted" in titles
     assert "L-1 legend: 2 symbols not counted" in titles and "Schedule and drawing agree: Camphor 8" in titles
-    assert "SAM 3.1: Azalea 149.5 m² vs CAD 150.0 m² (-0.3%)" in titles
-    assert run["timing"]["spark_calls"] == 5 and run["errors"]["planted"] == 0
+    assert "SAM 3.1: Azalea 149.2 m² vs CAD 150.0 m² (-0.5%)" in titles  # prompted with Muse Spark's legend word
+    assert "L-6 is a detail: not counted" in titles
+    # 3 classify + schedule + T-08 on L-1..L-3; classify + read_detail on L-6; two legend reads
+    assert run["timing"]["spark_calls"] == 9 and run["errors"]["planted"] == 0
 
 
 def test_every_string_is_english_except_citation_urls(client):
     bad = [(p, s) for p, s in strings(client.get("/api/run").json()) if has_cjk(s)]
     bad += [(p, s) for p, s in strings(client.get("/api/director").json()) if has_cjk(s)]
+    bad += [(p, s) for p, s in strings(client.get("/api/rules").json()) if has_cjk(s)]
     assert not bad, bad[:5]
 
 
@@ -84,14 +89,16 @@ def test_rules_numbers(client):
     rules = client.get("/api/rules").json()
     g = rules[0]
     assert g["category"] == "regulation" and g["severity"] == "fail" and g["status"] == "fail"
-    n = g["numbers"]
+    n = g["numbers"]  # the L-6 pit (2.25 m² on a slab) applies: the eight camphors count as small trees
     assert (n["required"], n["provided"], n["A0"], n["r"], n["A_prime"], n["beta"], n["alpha"]) == \
-        (297.0, 265.9, 1500.0, 0.4, 900.0, 0.66, 0.8)
-    assert [t["product"] for t in n["terms"]] == [192.0, 5.4, 75.0, 60.0]
+        (297.0, 214.7, 1500.0, 0.4, 900.0, 0.66, 0.8)
+    assert [t["product"] for t in n["terms"]] == [128.0, 5.4, 75.0, 60.0]
     passing = [f for f in g["fixes"] if f["passes"]]
     assert [f["id"] for f in passing][:2] == ["a", "b"]
-    assert passing[0]["result"] == pytest.approx(304.32) and passing[1]["result"] == pytest.approx(432.12)
+    assert passing[0]["result"] == pytest.approx(304.32) and passing[1]["result"] == pytest.approx(348.92)
+    assert passing[0]["extra_trees"] == 7
     assert passing[1]["extra_trees"] == 0 and passing[1]["object_ids"] == ["T-05"]
+    assert g["before_downgrade"]["provided"] == 265.9 and g["after_downgrade"]["provided"] == 214.7
     assert g["citation"]["article"].endswith("Art. 302") and "flno=302" in g["citation"]["url"]
     assert {r["status"] for r in rules[1:]} == {"pass", "skipped"}
 

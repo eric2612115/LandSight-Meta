@@ -26,6 +26,7 @@ class SiteFacts:
     municipal_class: int | None = None  # 本市新建建築物綠化實施規則 Art. 4 class 1-5, when known
     new_building: bool = True  # §298: the rule applies to new buildings
     project: str = ""
+    artificial_ground: bool | None = None  # 人工地盤: planting on a slab (title block "ARTIFICIAL GROUND" / "ON SLAB")
     sources: dict[str, str] = field(default_factory=dict)
 
     @property
@@ -35,6 +36,20 @@ class SiteFacts:
     @property
     def is_municipal(self) -> bool:
         return self.city_en == "municipal"
+
+
+@dataclass
+class PitFacts:
+    """The tree pit the trees stand in, read from a detail sheet (Muse Spark's read_detail) or given."""
+
+    area_m2: float  # pit plan area, width × length
+    soil_depth_m: float | None
+    from_sheet: str  # the detail sheet it was read from (L-6), or "given"
+    on_slab: bool | None = None  # the detail shows the pit on a slab (artificial ground)
+    width_m: float | None = None
+    length_m: float | None = None
+    why: str = ""  # what the reader read each value from
+    by: str = "spark"  # spark | given
 
 
 @dataclass
@@ -100,6 +115,8 @@ class RuleResult:
     citations: list[Citation] = field(default_factory=list)
     fixes: list[Fix] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    before_downgrade: dict | None = None  # greening on artificial ground: the state before the pit rule
+    after_downgrade: dict | None = None  # ... and after it (provided, re-priced fixes); None when no pit applies
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -134,6 +151,8 @@ def city_of(project: str) -> str:
 SITE_AREA_FIELDS = ("基地面積", "SITE AREA")
 COVERAGE_FIELDS = ("建蔽率", "BUILDING COVERAGE", "COVERAGE")
 PROJECT_FIELDS = ("工程名稱", "PROJECT")
+GROUND_FIELDS = ("GROUND", "人工地盤")
+ARTIFICIAL_WORDS = ("ARTIFICIAL GROUND", "ON SLAB", "PODIUM", "人工地盤")
 
 
 def site_facts(fields_by_sheet: dict[str, dict[str, str]], **overrides) -> SiteFacts:
@@ -157,6 +176,12 @@ def site_facts(fields_by_sheet: dict[str, dict[str, str]], **overrides) -> SiteF
                       city=city_of(project or ""), project=project or "", sources=sources)
     if project:
         sources["city"] = f"title block {p_sheet}: {project}"
+    ground = next(((sheet, k, v) for sheet, fields in fields_by_sheet.items() for k, v in fields.items()
+                   if any(n in k.upper() for n in GROUND_FIELDS) or any(w in f"{k} {v}".upper() for w in ARTIFICIAL_WORDS)),
+                  None)
+    if ground and any(w in f"{ground[1]} {ground[2]}".upper() for w in ARTIFICIAL_WORDS):
+        facts.artificial_ground = True
+        sources["artificial_ground"] = f"title block {ground[0]}: {ground[1]} {ground[2]}"
     for k, v in overrides.items():
         setattr(facts, k, v)
         facts.sources[k] = "given"

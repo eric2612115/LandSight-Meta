@@ -2,8 +2,14 @@
 result into a `Run` (files, sheets, items, checks, tally, timing) plus the director's scene list.
 
 Until the sample package (landsight/synth/package.py) and the ingest triage exist, opening with no path generates
-the m4 synthetic site, files are triaged by extension only, and `errors` is an empty scoreboard. Every string the
-API returns is English (landsight/app/english.py)."""
+the m4 synthetic site plus the stand-in tree-pit detail L-6 (tests/fixtures/detail), files are triaged by extension
+only, and `errors` is an empty scoreboard. Every string the API returns is English (landsight/app/english.py).
+
+Four features of the film's conditional builds each sit behind a flag (FEATURES; switch one off with
+LANDSIGHT_FEATURES_OFF=grounding_points,... or RunState(features=...)), and each degrades to the plain run when its
+recording is missing: grounding_points (Item.spark.points), spark_legend (Muse Spark reads the legend and writes
+SAM's prompts; else the hand-typed probe prompts), sam_control (the same word on line work and on colour), and
+pit_downgrade (the L-6 tree pit read by Muse Spark, and the greening check before and after the §5 downgrade)."""
 
 from __future__ import annotations
 
@@ -14,25 +20,32 @@ import math
 import os
 import re
 import time
+from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-import numpy as np
-import shapely
 from shapely.geometry import Point, Polygon
 
 from landsight.app.english import code, deep, en, label
 from landsight.dxf import metres_per_pixel, render_png, render_svg, render_window
 from landsight.geometry import is_canopy, title_block
 from landsight.geometry.labels import expand
+from landsight.meta.sam_plan import legend_crop, prompts_from_legend, type_masks
+from landsight.meta.spark import MODEL as SPARK_MODEL
+from landsight.meta.spark import ground_points
+from landsight.rules.greening import fmt_n
 from landsight.rules.species import lookup
 from landsight.synth import LEVELS, generate
 
 REPO = Path(__file__).resolve().parents[2]
 SAMPLE = REPO / "samples" / "greenfield"
 M4_DIR = REPO / ".cache" / "sites" / "m4"
-SAM_FIXTURES = REPO / "tests" / "fixtures" / "sam"
+SAM_FIXTURES = REPO / "tests" / "fixtures" / "sam"  # the hand-typed probe (docs/research/sam-probe.md)
+SAM_LEGEND_FIXTURES = SAM_FIXTURES / "spark_legend"  # SAM prompted with Muse Spark's legend words
+STANDIN_DETAIL = REPO / "tests" / "fixtures" / "detail" / "L-6.dxf"  # until the package generator's L-6 exists
 VERSION = "0.1.0"
+FEATURES = ("grounding_points", "spark_legend", "sam_control", "pit_downgrade")
+ON_SEGMENT_M = 0.3  # a grounding point within this distance of a red segment is "on" it
 PAPER = "#f7f5f0"
 
 UNIT = {"株": "plant", "棵": "plant", "m²": "m2", "m2": "m2", "m": "m"}
@@ -55,6 +68,12 @@ SKIP = {"answer_key.json", ".DS_Store"}
 _RENDERS: dict[tuple[str, str], bytes] = {}  # (drawing content hash, kind) -> bytes, shared by every open
 TITLE_KEYS = {"title": ("圖名", "TITLE"), "number": ("圖號", "DRAWING NO", "SHEET NO", "DWG NO"), "date": ("日期", "DATE"),
               "scale": ("比例", "SCALE"), "revision": ("版次", "REV")}
+
+
+def features_from_env(**overrides) -> dict[str, bool]:
+    """Every feature on, except those named in LANDSIGHT_FEATURES_OFF (comma-separated) or overridden."""
+    off = {f.strip() for f in os.environ.get("LANDSIGHT_FEATURES_OFF", "").split(",") if f.strip()}
+    return {f: f not in off for f in FEATURES} | {k: bool(v) for k, v in overrides.items() if k in FEATURES}
 
 
 def _r(v) -> float:
@@ -110,7 +129,9 @@ def triage(folder: Path) -> tuple[list[dict], list[Path]]:
 class RunState:
     """The last opened package, its take-off and the person's confirmations."""
 
-    def __init__(self):
+    def __init__(self, features: dict[str, bool] | None = None):
+        self.features = features_from_env(**(features or {}))
+        self.spark = None  # the Muse Spark client of the last open (fixtures or live)
         self.takeoff = None
         self.pristine = None
         self.folder: Path | None = None
@@ -135,6 +156,8 @@ class RunState:
             folder = SAMPLE
         else:
             generate(M4_DIR, LEVELS["m4"])
+            if STANDIN_DETAIL.is_file():  # the stand-in L-6 tree-pit detail (D-38)
+                (M4_DIR / STANDIN_DETAIL.name).write_bytes(STANDIN_DETAIL.read_bytes())
             folder = M4_DIR
         if live and not os.environ.get("MODEL_API_KEY"):
             raise ValueError("live mode needs MODEL_API_KEY")
@@ -142,7 +165,8 @@ class RunState:
         if not dxfs:
             raise ValueError(f"no DXF drawings in {folder}")
         started = time.monotonic()
-        self.takeoff = run([str(p) for p in dxfs], SparkClient() if live else FixtureSpark())
+        self.spark = SparkClient() if live else FixtureSpark()
+        self.takeoff = run([str(p) for p in dxfs], self.spark, read_details=self.features["pit_downgrade"])
         self.takeoff.seconds = round(time.monotonic() - started, 2)
         self.pristine = copy.deepcopy(self.takeoff.items)
         self.folder, self.files, self.live = folder, files, live
@@ -212,7 +236,8 @@ class RunState:
         items = [self._item(it, oid_of_ref) for it in t.items]
         sam = self._sam_results(objects_by_sheet)
         checks = self._checks(items, objects_by_sheet, sam)
-        sheets = [self._sheet(sg, objects_by_sheet.get(self.sheet_ids[sg.sheet], []), bool(sam.get(self.sheet_ids[sg.sheet])))
+        sheets = [self._sheet(sg, objects_by_sheet.get(self.sheet_ids[sg.sheet], []),
+                              any(c["image"] == "filled" for c in sam.get(self.sheet_ids[sg.sheet], {}).get("calls", [])))
                   for sg in t.sheets]
         folder = self.folder
         shown = str(folder.relative_to(REPO)) if folder.is_relative_to(REPO) else str(folder)
@@ -226,10 +251,24 @@ class RunState:
             "checks": checks,
             "errors": {"planted": 0, "found": [], "flagged": [], "missed": [], "false_alarms": []},
             "tally": self._tally(items),
-            "timing": {"total_s": t.seconds, "spark_calls": t.calls, "sam_calls": sum(len(v) for v in sam.values()),
-                       "recorded": not self.live},
+            "timing": self._timing(sam),
+            "features": dict(self.features),
         }
+        if folder == M4_DIR and STANDIN_DETAIL.is_file():
+            out["package"]["note"] = "the m4 synthetic site, plus a stand-in tree-pit detail L-6 until the sample package exists"
         return deep(out)
+
+    def _timing(self, sam) -> dict:
+        """Wall time of this open, and every Meta call with its recorded time (fixtures carry the real call's seconds;
+        nothing here is typed in)."""
+        spark = [{"model": SPARK_MODEL, "call": c["call"], "seconds": c.get("seconds"), "recorded": bool(c.get("fixture"))}
+                 for c in (self.spark.log if self.spark is not None else [])]
+        sam_calls = [{"model": "sam-3.1", "call": f'"{c["prompt"]}" on {sid} {c["image"]}', "seconds": c["seconds"],
+                      "recorded": True, "prompt_source": c["prompt_source"]}
+                     for sid, entry in sam.items() for c in entry["calls"]]
+        return {"total_s": self.takeoff.seconds, "spark_calls": len(spark), "sam_calls": len(sam_calls),
+                "recorded": not self.live, "spark_s": round(sum(c["seconds"] or 0 for c in spark), 2),
+                "sam_s": round(sum(c["seconds"] or 0 for c in sam_calls), 2), "calls": spark + sam_calls}
 
     def _sheet(self, sg, objects: list[dict], has_filled: bool) -> dict:
         sid = self.sheet_ids[sg.sheet]
@@ -251,6 +290,10 @@ class RunState:
             out["not_counted_reason"] = NOT_COUNTED.get(kind, f"{kind} sheet")
         if has_filled:
             out["filled_png_url"] = f"/api/sheets/{sid}.filled.png"
+        if sg.sheet in self.takeoff.details:
+            d = self.takeoff.details[sg.sheet]
+            out["detail"] = {k: d.get(k) for k in ("pit_w_m", "pit_l_m", "soil_depth_m", "on_slab", "why", "seconds")}
+            out["detail"] |= {"by": "spark", "recorded": bool(d.get("fixture"))}
         return out
 
     def _objects(self) -> tuple[dict[str, list[dict]], dict[str, str]]:
@@ -349,12 +392,36 @@ class RunState:
         if reviewed:
             oid, ref = reviewed[0]
             v, req = t.spark.candidates[ref], t.requests.get(ref, {})
-            out["spark"] = {"crop_url": f"/api/crops/{it.id}.png", "object_id": oid, "answer": v, "why": v.get("why", ""),
-                            "confidence": v.get("confidence"), "points": None, "facts": req.get("facts", ""),
-                            "seconds": req.get("seconds"), "recorded": bool(req.get("fixture"))}
+            answer = v if self.features["grounding_points"] else {k: x for k, x in v.items() if k != "points"}
+            out["spark"] = {"crop_url": f"/api/crops/{it.id}.png", "object_id": oid, "answer": answer, "why": v.get("why", ""),
+                            "confidence": v.get("confidence"), "facts": req.get("facts", ""),
+                            "seconds": req.get("seconds"), "recorded": bool(req.get("fixture")),
+                            "crop_px": req.get("crop_px"), "crop_window_m": req.get("window")}
+            out["spark"] |= self._points(ref, v, req)
         if it.flagged_reason:
             out["flagged_reason"] = self._reason(it, reviewed, oid_of_ref)
         return out
+
+    def _points(self, ref: str, verdict: dict, req: dict) -> dict:
+        """Muse Spark's grounding points on the crop (0-1000) in crop pixels and drawing metres, each with its distance
+        to the nearest red segment; null, with the reason, when the feature is off or Spark returned none."""
+        if not self.features["grounding_points"]:
+            return {"points": None, "points_status": "off", "points_note": "grounding points are switched off"}
+        raw = verdict.get("points")
+        if not raw or not req.get("window") or not req.get("crop_px"):
+            return {"points": None, "points_status": "none_returned",
+                    "points_note": "Muse Spark returned no grounding points for this candidate"}
+        pts = ground_points(raw, req["crop_px"], req["window"])
+        _, cand = self._obj(ref)
+        for pt in pts:
+            pt["to_segment_m"] = round(min(ln.distance(Point(pt["m"])) for ln in cand.lines), 3) if cand else None
+        dists = [pt["to_segment_m"] for pt in pts if pt["to_segment_m"] is not None]
+        on = sum(1 for d in dists if d <= ON_SEGMENT_M)
+        worst = max(dists, default=None)
+        return {"points": pts, "points_status": "returned",
+                "points_note": (f"Muse Spark placed {len(pts)} points; {on} lie within {ON_SEGMENT_M} m of a red segment"
+                                + (f", the farthest {worst:.2f} m" if worst is not None else "")),
+                "points_on_segments": on, "points_max_to_segment_m": worst}
 
     def _reason(self, it, reviewed, oid_of_ref) -> str:
         parts = []
@@ -374,13 +441,19 @@ class RunState:
         return "; ".join(parts)
 
     # ------------------------------------------------------------------------------------------ SAM (recorded)
-    def _sam_results(self, objects_by_sheet) -> dict[str, list[dict]]:
-        """Replay recorded SAM 3.1 calls whose image is this run's render of a sheet (filled, or line work)."""
+    def _sam_results(self, objects_by_sheet) -> dict[str, dict]:
+        """Per plan sheet, the SAM 3.1 calls replayed for this run's renders (filled, or line work), and which path
+        wrote the prompts: "spark_legend" when Muse Spark read the sheet's legend and every prompt built from its words
+        has a recorded SAM answer on this exact image, else "manual" (the hand-typed probe prompts)."""
         if self._sam is not None:
             return self._sam
         self._sam = {}
-        recs = [json.loads(f.read_text()) for f in sorted(SAM_FIXTURES.glob("*.json"))] if SAM_FIXTURES.is_dir() else []
-        if not recs:
+
+        def load_dir(d: Path) -> list[dict]:
+            return [json.loads(f.read_text()) for f in sorted(d.glob("*.json"))] if d.is_dir() else []
+
+        manual, from_legend = load_dir(SAM_FIXTURES), load_dir(SAM_LEGEND_FIXTURES)
+        if not manual and not from_legend:
             return self._sam
         from landsight.meta.sam import decode
 
@@ -390,38 +463,59 @@ class RunState:
                 continue
             shas = {"filled": hashlib.sha256(self.render(sid, "filled.png")).hexdigest(),
                     "lines": hashlib.sha256(self.render(sid, "png")).hexdigest()}
-            for rec in recs:
-                which = next((k for k, v in shas.items() if v == rec["image_sha256"]), None)
-                if which is None:
-                    continue
+            which = {rec["image_sha256"]: k for k, v in shas.items() for rec in manual + from_legend if v == rec["image_sha256"]}
+            mine = [r for r in manual if r["image_sha256"] in which]
+            filled = [r for r in mine if which[r["image_sha256"]] == "filled"]
+            lines = [r for r in mine if which[r["image_sha256"]] == "lines"]
+            source, legend = "manual", None
+            if self.features["spark_legend"]:
+                legend = self._read_legend(sg, sid)
+                if legend and legend.get("prompts"):
+                    recorded = {r["prompt"]: r for r in from_legend if r["image_sha256"] == shas["filled"]}
+                    missing = [q["prompt"] for q in legend["prompts"] if q["prompt"] not in recorded]
+                    if missing:
+                        legend["note"] = (f"no recorded SAM answer for {', '.join(repr(m) for m in missing)} on this image: "
+                                          "the hand-typed prompts ran instead")
+                    else:
+                        source, filled = "spark_legend", [recorded[q["prompt"]] for q in legend["prompts"]]
+            if not filled and not lines:
+                continue
+            calls = []
+            for rec in filled + lines:
                 masks, _ = decode(rec["raw_output"])
-                self._sam.setdefault(sid, []).append({"prompt": rec["prompt"], "image": which, "seconds": rec["seconds"],
-                                                      "recorded_at": rec["recorded_at"],
-                                                      "masks": self._match_masks(sg, sid, masks, rec, objects_by_sheet)})
+                kind = which.get(rec["image_sha256"], "filled")
+                calls.append({"prompt": rec["prompt"], "image": kind, "seconds": rec["seconds"],
+                              "recorded_at": rec["recorded_at"],
+                              "prompt_source": source if kind == "filled" else "manual",
+                              "labels": (rec.get("legend") or {}).get("labels", []),
+                              "masks": self._match_masks(sg, sid, masks, rec, objects_by_sheet)})
+            self._sam[sid] = {"source": source, "legend": legend, "calls": calls}
         return self._sam
 
+    def _read_legend(self, sg, sid) -> dict | None:
+        """Muse Spark reads the legend box of the sheet's filled render; the prompts SAM gets are built from its words
+        (meta.sam_plan). None when the sheet has no legend box; {error} when the call failed or was not recorded."""
+        region = next((r for r in sg.regions if r.kind == "legend"), None)
+        if region is None or self.spark is None:
+            return None
+        crop, box = legend_crop(self.render(sid, "filled.png"), region.polygon.bounds, render_window(sg.model))
+        before = len(self.spark.log)
+        try:
+            rows = self.spark.read_legend(crop, key=f"{sg.model.signature()}:legend")
+        except Exception as e:  # missing fixture or failed call: the hand-typed prompts stand
+            return {"error": f"read_legend: {type(e).__name__}", "prompts": []}
+        last = self.spark.log[-1] if len(self.spark.log) > before else {}
+        prompts, skipped = prompts_from_legend(rows)
+        return {"rows": rows, "prompts": prompts, "skipped": skipped, "crop_px": box, "seconds": last.get("seconds"),
+                "recorded": bool(last.get("fixture"))}
+
     def _match_masks(self, sg, sid, masks, rec, objects_by_sheet) -> list[dict]:
+        """Each mask typed by the outline it lies in (meta.sam_plan.type_masks), never by the prompt."""
         w, h = rec["image_px"]
-        x0, _, _, y1 = render_window(sg.model)
-        mx, my = metres_per_pixel(sg.model, (w, h))
-        objs = [o for o in objects_by_sheet.get(sid, []) if len(o.get("outline", [])) >= 3]
-        polys = [(o, Polygon(o["outline"])) for o in objs]
-        out = []
-        for m in masks:
-            ys, xs = np.nonzero(m.raster)
-            px, py = xs + m.box[0] + 0.5, ys + m.box[1] + 0.5
-            gx, gy = x0 + px * mx, y1 - py * my
-            area = len(xs) * mx * my
-            best, best_n = None, 0
-            for o, poly in polys:
-                n = int(shapely.contains_xy(poly, gx, gy).sum())
-                if n > best_n:
-                    best, best_n = o, n
-            match = best if best is not None and best_n * mx * my >= 0.5 * area else None
-            out.append({"box_px": list(m.box), "score": m.score, "area_m2": round(area, 2),
-                        "object_id": match["object_id"] if match else None,
-                        "excluded": bool(match and match.get("excluded"))})
-        return out
+        outlines = [{"object_id": o["object_id"], "label": o.get("label"), "kind": o["kind"],
+                     "polygon": Polygon(o["outline"]), "excluded": bool(o.get("excluded"))}
+                    for o in objects_by_sheet.get(sid, []) if len(o.get("outline", [])) >= 3]
+        return type_masks(masks, outlines, render_window(sg.model), metres_per_pixel(sg.model, (w, h)))
 
     # ------------------------------------------------------------------------------------------ checks
     def _checks(self, items, objects_by_sheet, sam) -> list[dict]:
@@ -476,10 +570,23 @@ class RunState:
             xs = [o["object_id"] for o in objects_by_sheet.get(sid, []) if o["kind"] == "tree"]
             add(category="sheet", severity="info", by=["spark"],
                 title=f"{sid} is {'an' if k['kind'][0] in 'aeiou' else 'a'} {k['kind']}: not counted",
-                why=(f"Muse Spark classified the sheet as {k['kind']} (confidence {k.get('confidence')}): {en(k.get('why', ''))} "
-                     f"Its {len(xs)} round outlines are the same plants seen from the side."),
+                why=(f"Muse Spark classified the sheet as {k['kind']} (confidence {k.get('confidence')}): {en(k.get('why', ''))}"
+                     + (f" Its {len(xs)} round outlines are the same plants seen from the side." if k["kind"] == "elevation"
+                        else "")),
                 evidence={"sheet_ids": [sid], "object_ids": xs},
                 numbers={"round_outlines": len(xs), "confidence": k.get("confidence")})
+            d = t.details.get(sg.sheet)
+            if d is not None:
+                w, ln, depth = d.get("pit_w_m"), d.get("pit_l_m"), d.get("soil_depth_m")
+                area = round(w * ln, 2) if w and ln else None
+                add(category="sheet", severity="info", by=["spark"],
+                    title=(f"{sid} tree pit: {fmt_n(w)} × {fmt_n(ln)} m = {fmt_n(area)} m² · soil {fmt_n(depth or 0)} m"
+                           + (" · on slab" if d.get("on_slab") else "") if area else f"{sid}: no tree pit read"),
+                    why=f"Muse Spark read the detail sheet: {en(d.get('why', ''))}",
+                    evidence={"sheet_ids": [sid]},
+                    numbers={"pit_w_m": w, "pit_l_m": ln, "pit_area_m2": area, "soil_depth_m": depth,
+                             "on_slab": d.get("on_slab"), "seconds": d.get("seconds")},
+                    used_by_rules=bool(self.features["pit_downgrade"] and t.pit is not None))
         for sg in t.sheets:  # the legend, and "typ." labels, on counted sheets
             sid = self.sheet_ids[sg.sheet]
             if (t.spark.sheet_kinds.get(sg.sheet) or {}).get("kind", "plan") != "plan":
@@ -527,22 +634,77 @@ class RunState:
         return checks
 
     def _sam_checks(self, add, items, objects_by_sheet, sam):
+        """The colour scene's checks, per plan sheet: Muse Spark's legend read (the words SAM was given), the line
+        work (with the controlled test: the same word on lines and on colour), the coloured render's calls, and each
+        item's SAM area against the CAD area. Every one says which path wrote the prompts (`prompt_source`)."""
         objs = {o["object_id"]: o for s in objects_by_sheet.values() for o in s}
-        for sid, calls in sam.items():
-            for call in calls:
-                if call["image"] == "lines":
-                    add(category="area", severity="info", by=["sam"],
-                        title=f"SAM 3.1 on the line drawing of {sid}: {len(call['masks'])} masks",
-                        why=f"Asked for '{call['prompt']}' on the plain line work; SAM sees nothing in lines.",
-                        evidence={"sheet_ids": [sid]}, numbers={"masks": len(call["masks"]), "prompt": call["prompt"]})
-            best: dict[str, tuple[float, dict, str]] = {}  # object -> (score, mask, prompt)
-            for call in calls:
-                if call["image"] != "filled":
+        for sid, entry in sam.items():
+            calls, source, legend = entry["calls"], entry["source"], entry["legend"]
+            filled = [c for c in calls if c["image"] == "filled"]
+            by_prompt = {c["prompt"]: c for c in filled}
+            if legend and legend.get("rows"):
+                pairs = " · ".join(f"{r['swatch_colour_word']} = {label(r['label'])}" for r in legend["rows"])
+                add(category="area", severity="info", by=["spark"], prompt_source=source,
+                    title=f"Muse Spark read the {sid} legend: {pairs}",
+                    why=("Muse Spark looked at the legend box of the coloured render and named each swatch's colour; SAM "
+                         "3.1 is prompted with those words (an area swatch becomes '<colour> area', a tree symbol "
+                         "'<colour> circle'); lines are left to geometry. " + legend.get("note", "")).strip(),
+                    evidence={"sheet_ids": [sid]},
+                    numbers={"entries": len(legend["rows"]), "prompts": [q["prompt"] for q in legend["prompts"]],
+                             "skipped": len(legend["skipped"]), "seconds": legend["seconds"],
+                             "crop_px": legend["crop_px"]},  # the box of filled_png_url Muse Spark was sent
+                    legend=[{"colour": r["swatch_colour_word"], "label": label(r["label"]), "kind": r["kind"]}
+                            for r in legend["rows"]],
+                    prompts=[{"prompt": q["prompt"], "labels": [label(x) for x in q["labels"]], "kind": q["kind"]}
+                             for q in legend["prompts"]],
+                    skipped=[{"label": label(x.get("label", "")), "kind": x.get("kind"), "why": x["why"]}
+                             for x in legend["skipped"]],
+                    recorded=legend["recorded"])
+            control = None
+            for c in calls:
+                if c["image"] != "lines":
                     continue
-                for m in call["masks"]:
+                on_colour = by_prompt.get(c["prompt"])
+                ctl = None
+                if self.features["sam_control"] and on_colour is not None and on_colour["masks"]:
+                    ctl = {"prompt": c["prompt"], "masks_on_lines": len(c["masks"]),
+                           "masks_on_colour": len(on_colour["masks"]), "colour_prompt_source": on_colour["prompt_source"]}
+                    control = control or ctl
+                title = f"SAM 3.1 on the line drawing of {sid}: {len(c['masks'])} masks for '{c['prompt']}'"
+                if ctl:
+                    title += f"; on the coloured render the same words find {ctl['masks_on_colour']}"
+                extra = {"control": ctl} if ctl else {}
+                add(category="area", severity="info", by=["sam"], prompt_source="manual", title=title,
+                    why=f"Asked for '{c['prompt']}' on the plain line work; SAM sees nothing in lines." +
+                        (" The same words on the coloured render are the controlled test: one variable changes." if ctl else ""),
+                    evidence={"sheet_ids": [sid]}, numbers={"masks": len(c["masks"]), "prompt": c["prompt"],
+                                                            "seconds": c["seconds"]}, **extra)
+            if filled:
+                n = sum(len(c["masks"]) for c in filled)
+                legend_hits = sum(1 for c in filled for m in c["masks"] if m["excluded"])
+                by_whom = "Muse Spark's legend words" if source == "spark_legend" else "the hand-typed probe prompts"
+                extra = {"control": control} if control else {}
+                add(category="area", severity="info", by=["sam", "spark"] if source == "spark_legend" else ["sam"],
+                    prompt_source=source,
+                    title=f"SAM 3.1 on the coloured {sid}: {len(filled)} prompts from {by_whom}, {n} masks, "
+                          f"{legend_hits} in the legend excluded",
+                    why=("Each mask takes the type of the outline it lies in, not the prompt's; one prompt can return "
+                         "several types, and masks on legend swatches are a key, not a quantity."),
+                    evidence={"sheet_ids": [sid]},
+                    numbers={"prompts": len(filled), "masks": n, "legend_excluded": legend_hits},
+                    calls=[{"prompt": c["prompt"], "prompt_source": c["prompt_source"], "keyed_to": [label(x) for x in c["labels"]],
+                            "masks": len(c["masks"]), "legend_excluded": sum(1 for m in c["masks"] if m["excluded"]),
+                            "seconds": c["seconds"], "recorded_at": c["recorded_at"],
+                            "mask_list": [{"box_px": m["box_px"], "score": round(m["score"], 3) if m["score"] is not None else None,
+                                           "area_m2": m["area_m2"], "object_id": m["object_id"], "type": label(m["type"] or ""),
+                                           "excluded": m["excluded"]} for m in c["masks"]]}
+                           for c in filled], **extra)
+            best: dict[str, tuple[float, dict, str]] = {}  # object -> (score, mask, prompt)
+            for c in filled:
+                for m in c["masks"]:
                     if m["object_id"] and not m["excluded"]:
                         if m["object_id"] not in best or (m["score"] or 0) > best[m["object_id"]][0]:
-                            best[m["object_id"]] = (m["score"] or 0, m, call["prompt"])
+                            best[m["object_id"]] = (m["score"] or 0, m, c["prompt"])
             for it in items:
                 hits = [(oid, best[oid]) for oid in it["object_ids"] if oid in best]
                 if not hits:
@@ -551,13 +713,17 @@ class RunState:
                 cad_m2 = sum(objs[oid]["area_m2"] for oid, _ in hits)
                 err = (sam_m2 - cad_m2) / cad_m2 * 100 if cad_m2 else 0.0
                 n = f"{len(hits)} of {len(it['object_ids'])} " if len(it["object_ids"]) > 1 else ""
+                prompts = sorted({p for _, (_, _, p) in hits})
                 add(category="area", severity="info" if abs(err) <= 2 else "review", by=["sam", "geometry"],
+                    prompt_source=source,
                     title=f"SAM 3.1: {n}{it['label']} {sam_m2:.1f} m² vs CAD {cad_m2:.1f} m² ({err:+.1f}%)",
-                    why=(f"SAM 3.1 on the coloured render, asked for '{hits[0][1][2]}', returned a mask on "
-                         f"{'each' if len(hits) > 1 else 'the'} outline; its area is set against the geometry's."),
+                    why=(f"SAM 3.1 on the coloured render, asked for {' and '.join(repr(p) for p in prompts)}"
+                         + (" (Muse Spark's words from the legend)" if source == "spark_legend" else "")
+                         + f", returned a mask on {'each' if len(hits) > 1 else 'the'} outline; its area is set against "
+                           "the geometry's."),
                     evidence={"sheet_ids": [sid], "object_ids": [oid for oid, _ in hits]},
                     numbers={"sam_m2": round(sam_m2, 2), "cad_m2": round(cad_m2, 2), "error_pct": round(err, 2),
-                             "confidence": round(min(s for _, (s, _, _) in hits), 3), "prompt": hits[0][1][2],
+                             "confidence": round(min(sc for _, (sc, _, _) in hits), 3), "prompt": prompts[0],
                              "masks": len(hits)},
                     item_ids=[it["item_id"]])
 
@@ -588,8 +754,9 @@ class RunState:
             out["numbers"] = {"required": r.required, "provided": r.provided, "A0": v.get("A0"), "Ap": v.get("Ap"),
                               "r": v.get("r"), "A_prime": v.get("A′"), "beta": v.get("β"), "alpha": v.get("α"),
                               "ra": v.get("ra"), "sum_gi_ai": v.get("ΣGi·Ai"), "terms": self._terms(r)}
-            out["fixes"] = [self._fix(f, r) for f in r.fixes]
+            out["fixes"] = [self._fix(asdict(f), v.get("α", 0.8)) for f in r.fixes]
             out["evidence"] = {"object_ids": [oid for it in self.takeoff.items if it.kind == "tree" for oid in it.objects]}
+            out |= self._downgrade_states(r)
         elif r.required is not None:
             out["numbers"] = {"required": r.required, "provided": r.provided}
         return out
@@ -619,20 +786,51 @@ class RunState:
         return out
 
     @staticmethod
-    def _fix(f, r) -> dict:
-        ch = f.change
+    def _fix(f: dict, alpha0: float) -> dict:
+        """A fix (rules.Fix as a dict) in the API's shape; alpha0 is the native-tree bonus before the fix."""
+        ch = f["change"]
         if "add_trees" in ch:
             sp, n = next(iter(ch["add_trees"].items()))
             text = f"+{n} {label(sp)}, the same species"
         elif "swap" in ch:
             s = ch["swap"]
-            alpha0 = next((tm.value for tm in r.terms if tm.symbol == "α"), 0.8)
-            text = (f"Swap {s['n']} {label(s['from'])} for {label(s['to'])}, a second native species: native-tree bonus "
-                    f"{alpha0:.2f} → {f.alpha:.2f}; no extra trees")
+            what = "Change ONE" if s["n"] == 1 else f"Change {s['n']}"
+            text = (f"{what} {label(s['from'])} to {label(s['to'])}, a second native species: native-tree bonus "
+                    f"{alpha0:.2f} → {f['alpha']:.2f}; no extra trees")
         else:
             text = f"+{ch.get('add_shrub_m2')} m² of shrub bed (Gi 0.5)"
-        return {"label": text, "result": f.provided, "passes": f.passes, "id": f.id, "change": deep(ch),
-                "alpha": f.alpha, "extra_trees": f.extra_trees, "object_ids": f.tone_objects}
+        return {"label": text, "result": f["provided"], "passes": f["passes"], "id": f["id"], "change": deep(ch),
+                "alpha": f["alpha"], "extra_trees": f["extra_trees"], "object_ids": f["tone_objects"]}
+
+    def _downgrade_states(self, r) -> dict:
+        """The gauge's two states (§5 table 1 pit downgrade on artificial ground), each with its computed fixes; both
+        null when no pit applies (feature off, no detail sheet, or not on artificial ground)."""
+        if r.after_downgrade is None:
+            why = ("the pit downgrade is switched off" if not self.features["pit_downgrade"] else
+                   "no tree pit read from a detail sheet" if self.takeoff.pit is None else
+                   "the tree pit is not on artificial ground")
+            return {"before_downgrade": None, "after_downgrade": None, "downgrade_note": why}
+
+        def state(st: dict) -> dict:
+            return {"provided": st["provided"], "required": st["required"], "status": st["status"],
+                    "alpha": st["alpha"], "ra": st["ra"], "sum_gi_ai": st["sum_gi_ai"],
+                    "trees": [{"label": label(t["species"]), "count": t["count"], "gi": t["gi"],
+                               "ai_per_tree": t["ai_per_tree"], "product": t["product"], "pit_note": t["pit_note"]}
+                              for t in st["trees"]],
+                    "fixes": [self._fix(f, st["alpha"]) for f in st["fixes"]]}
+
+        b, a = r.before_downgrade, r.after_downgrade
+        pit = a["pit"]
+        before, after = state(b), state(a)
+        after |= {"pit": {"sheet_id": self.sheet_ids.get(pit["from_sheet"], pit["from_sheet"]),
+                          "width_m": pit["width_m"], "length_m": pit["length_m"], "area_m2": pit["area_m2"],
+                          "soil_depth_m": pit["soil_depth_m"], "on_slab": pit["on_slab"], "by": pit["by"],
+                          "why": pit["why"]},
+                  "artificial_ground": a["artificial_ground"], "rule": a["rule"], "review": a["review"],
+                  "downgraded": [{"label": label(d["species"]), "count": d["count"], "from_gi": d["from_gi"],
+                                  "to_gi": d["to_gi"]} for d in a["downgraded"]],
+                  "repriced": {k: {"extra_trees": v["extra_trees"], "result": v["provided"]} for k, v in a["repriced"].items()}}
+        return {"before_downgrade": before, "after_downgrade": after}
 
     # ------------------------------------------------------------------------------------------ tally, rules, director
     def _tally(self, items) -> list[dict]:
@@ -683,7 +881,7 @@ class RunState:
                                  and plan["sheet_id"] in c["evidence"].get("sheet_ids", []))
                            + cid(lambda c: "label, not" in c["title"]),
                            "item_ids": [hedge["item_id"]], "duration_s": 18})
-        sam_checks = cid(lambda c: c["category"] == "area" and "sam" in c["by"])
+        sam_checks = cid(lambda c: c["category"] == "area")  # Spark's legend read, the line work, the coloured calls
         if sam_checks:  # the SAM probe (docs/research/sam-probe.md) says yes for beds and paving
             scenes.append({"id": "colour", "title": "Lines to colour", "sheet_id": plan["sheet_id"],
                            "sheet_ids": sorted({s for c in checks if c["check_id"] in sam_checks
@@ -692,8 +890,12 @@ class RunState:
                            "check_ids": sam_checks,
                            "item_ids": [i for c in checks if c["check_id"] in sam_checks for i in c.get("item_ids", [])],
                            "duration_s": 22})
+        detail = next((s for s in sheets if s.get("detail")), None)
+        pit_checks = cid(lambda c: c["category"] == "sheet" and "tree pit" in c["title"])
         scenes.append({"id": "gauge", "title": "The gauge", "sheet_id": plan["sheet_id"], "focus": fix_objs,
-                       "check_ids": greening, "item_ids": [trees["item_id"]] if trees else [], "duration_s": 22})
+                       "sheet_ids": [plan["sheet_id"]] + ([detail["sheet_id"]] if detail else []),
+                       "check_ids": greening + pit_checks, "item_ids": [trees["item_id"]] if trees else [],
+                       "duration_s": 22})
         scenes.append({"id": "bill", "title": "The bill", "sheet_id": plan["sheet_id"],
                        "focus": trees["object_ids"] if trees else [], "check_ids": cid(lambda c: c["category"] in ("bill", "price")),
                        "item_ids": [i["item_id"] for i in (trees, hedge) if i], "duration_s": 22,
@@ -702,7 +904,8 @@ class RunState:
                        "sheet_ids": [s["sheet_id"] for s in (other, plan) if s],
                        "focus": ([o["object_id"] for o in other["objects"] if o["kind"] == "tree"] if other else [])
                        + (trees["object_ids"] if trees else []),
-                       "check_ids": cid(lambda c: c["category"] == "sheet" and "not counted" in c["title"] and "legend" not in c["title"])
+                       "check_ids": cid(lambda c: c["category"] == "sheet" and "not counted" in c["title"] and "legend" not in c["title"]
+                                        and (other is None or other["sheet_id"] in c["evidence"].get("sheet_ids", [])))
                        + cid(lambda c: c["category"] == "quantity" and c["title"].startswith(("Schedule says", "Schedule and drawing"))
                              and trees and trees["item_id"] in c.get("item_ids", [])),
                        "item_ids": [trees["item_id"]] if trees else [], "duration_s": 18})

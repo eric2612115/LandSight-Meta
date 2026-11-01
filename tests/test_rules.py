@@ -130,3 +130,74 @@ def test_rules_table_text(m4):
     text = format_rules(m4.rules)
     assert "FAIL · required 297 · provided 265.9" in text and "fix b: swap 1 of 8 樟樹 (Camphor)" in text
     assert "SKIPPED" in text and "no existing trees on the plan" in text
+
+
+# ------------------------------------------------------------------------------ the pit downgrade (§5 table 1)
+SLAB_PIT = dict(soil_depth_m=1.0, from_sheet="L-6", on_slab=True, width_m=1.5, length_m=1.5)
+
+
+def test_pit_of_1_5_to_4_m2_on_a_slab_counts_large_trees_as_small():
+    from landsight.rules import PitFacts
+
+    res = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(2.25, **SLAB_PIT))
+    before, after = res.before_downgrade, res.after_downgrade
+    assert before["provided"] == 265.9 and [f["extra_trees"] for f in before["fixes"][:1]] == [2]
+    assert term(res, "Gi·Ai", "樟樹").value == 128.0 and "counts as a small tree (Gi 1.5 → 1.0)" in \
+        term(res, "Gi·Ai", "樟樹").source
+    assert (res.provided, after["provided"], res.status) == (214.7, 214.7, "fail")
+    a, b = after["fixes"][0], after["fixes"][1]
+    assert (a["id"], a["extra_trees"], a["provided"]) == ("a", 7, pytest.approx(304.32))  # each new tree is small too
+    assert (b["id"], b["change"]["swap"]["n"], b["provided"], b["alpha"]) == ("b", 1, pytest.approx(348.92), 1.3)
+    assert after["repriced"]["a"]["extra_trees"] == [2, 7] and term(res, "pit").value == 2.25
+
+
+def test_a_pit_under_1_5_m2_fails_the_small_tree_minimum_and_needs_review():
+    from landsight.rules import PitFacts
+
+    res = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(1.44, **SLAB_PIT | {"width_m": 1.2,
+                                                                                              "length_m": 1.2}))
+    assert res.status == "needs_review" and res.after_downgrade["review"]
+    assert not [t for t in res.terms if t.symbol == "Gi·Ai" and t.zh.startswith("樟樹")]  # not counted
+    assert any("below the small-tree minimum" in n for n in res.notes)
+
+
+def test_a_4_m2_pit_keeps_large_trees_and_soil_minimums_are_checked():
+    from landsight.rules import PitFacts
+    from landsight.rules.greening import pit_class, soil_minimum
+
+    big = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(4.0, **SLAB_PIT))
+    assert big.after_downgrade["provided"] == big.before_downgrade["provided"] == 265.9
+    assert [soil_minimum(c) for c in ("broadleaf_large", "small_tree", "shrub", "lawn")] == [1.0, 0.7, 0.4, 0.1]
+    shallow = PitFacts(2.25, **SLAB_PIT | {"soil_depth_m": 0.6})
+    assert pit_class("broadleaf_large", shallow)[:2] == ("small_tree", False)  # 0.6 m < the 0.7 m small-tree minimum
+    assert pit_class("broadleaf_large", PitFacts(4.0, **SLAB_PIT | {"soil_depth_m": 0.9}))[1] is False  # < 1.0 m
+    assert pit_class("small_tree", PitFacts(1.5, **SLAB_PIT | {"soil_depth_m": 0.7}))[:2] == ("small_tree", True)
+    res = greening.check(SiteFacts(**local), plantings(), pit=shallow)
+    assert res.status == "needs_review" and any("below the 0.7 m minimum" in n for n in res.notes)
+
+
+def test_no_downgrade_off_artificial_ground_and_title_block_says_artificial_ground():
+    from landsight.rules import PitFacts, site_facts
+
+    ground = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(2.25, 1.0, "L-6", on_slab=False))
+    assert ground.provided == 265.9 and ground.after_downgrade is None
+    assert any("not applied" in n for n in ground.notes)
+    site = site_facts({"L-1": {"SITE AREA": "1,500 m²", "BUILDING COVERAGE": "40%", "GROUND": "ARTIFICIAL GROUND"}})
+    assert site.artificial_ground and site.sources["artificial_ground"] == "title block L-1: GROUND ARTIFICIAL GROUND"
+    by_title = greening.check(site, plantings(), pit=PitFacts(2.25, 1.0, "L-6", on_slab=None))
+    assert by_title.provided == 214.7 and by_title.after_downgrade["artificial_ground"].startswith("title block L-1")
+    given = greening.check(SiteFacts(**local, artificial_ground=True), plantings(), pit=PitFacts(2.25, 1.0, "given"))
+    assert given.provided == 214.7
+
+
+def test_pipeline_reads_the_l6_detail_into_pit_facts(m4, tmp_path):
+    from pathlib import Path
+
+    detail = Path(__file__).parent / "fixtures" / "detail" / "L-6.dxf"
+    paths = [sg.model.path for sg in m4.sheets] + [str(detail)]
+    t = run(paths, FixtureSpark())
+    assert t.spark.sheet_kinds["L-6"]["kind"] == "detail"
+    assert (t.pit.width_m, t.pit.length_m, t.pit.area_m2, t.pit.soil_depth_m, t.pit.on_slab) == (1.5, 1.5, 2.25, 1.0, True)
+    assert t.rules[0].provided == 214.7 and t.rules[0].before_downgrade["provided"] == 265.9
+    skip = run(paths, FixtureSpark(), read_details=False)
+    assert skip.pit is None and skip.rules[0].provided == 265.9 and skip.rules[0].after_downgrade is None

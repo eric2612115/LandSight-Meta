@@ -3,7 +3,10 @@ answer key. Every call is recorded to tests/fixtures/sam/<sheet>__<prompt>.json;
 from those fixtures (offline).
 
   set -a; . ../Meta/.env; set +a; uv run python scripts/sam_probe.py --live   # real calls, one per prompt
+  set -a; . ../Meta/.env; set +a; uv run python scripts/sam_probe.py --live --only "L-3_lines:beige area"
   uv run python scripts/sam_probe.py                                          # offline: print the table again
+
+A probe whose fixture already exists is never called again (no retries, no fishing).
 """
 
 from __future__ import annotations
@@ -36,6 +39,7 @@ PROBES = [  # (image, prompt): one call each, never retried
     ("L-3_filled", "grey area"), ("L-3_filled", "paving"), ("L-3_filled", "hatched rectangle"),
     ("L-3_filled", "beige area"),
     ("L-3_lines", "paving"),  # control: the same sheet as line work (the film's "0 masks" shot)
+    ("L-3_lines", "beige area"),  # controlled test: the word that finds the pavers on colour, on line work
 ]
 
 
@@ -82,30 +86,41 @@ def measure(masks, size, window, mpp, truths) -> list[dict]:
     return rows
 
 
-def run_live(out: Path) -> None:
+def record(png: bytes, size, image: str, sheet: str, prompt: str, model, key: dict, text: str, seconds: float,
+           error: str | None, **extra) -> dict:
+    """The fixture record of one SAM call (the shape tests/test_meta.py and the app replay)."""
+    window, mpp = render_window(model), metres_per_pixel(model, size)
+    masks, diags = samlib.decode(text)
+    return {"image": f"{image}.png", "sheet": sheet, "prompt": prompt, "model": samlib.MODEL,
+            "recorded_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "seconds": round(seconds, 2),
+            "image_sha256": hashlib.sha256(png).hexdigest(), "image_px": list(size),
+            "metres_per_pixel": [round(v, 6) for v in mpp], "window_m": list(window), "error": error,
+            "n_masks": len(masks), "masks": measure(masks, size, window, mpp, truth_objects(key, sheet)),
+            "diagnostics": diags, "raw_output_chars": len(text), "raw_output": text, **extra}
+
+
+def run_live(out: Path, only: set[tuple[str, str]] | None = None) -> None:
     key = generate(out, LEVELS["m4"], coloured=True)
     render_png(load(key["paths"]["L-3"]), out / "L-3_lines.png")
     FIXTURES.mkdir(parents=True, exist_ok=True)
     for image, prompt in PROBES:
+        if only and (image, prompt) not in only:
+            continue
+        if (FIXTURES / f"{image}__{slug(prompt)}.json").exists():
+            print(f"{image:11s} {prompt!r:22s} already recorded: not called again", flush=True)
+            continue
         sheet = image.split("_")[0]
         png = (out / f"{image}.png").read_bytes()
         size = Image.open(out / f"{image}.png").size
         model = load(key["paths"][sheet])
-        window, mpp = render_window(model), metres_per_pixel(model, size)
         try:
             text, seconds = samlib.call(png, prompt)
             error = None
         except Exception as e:  # recorded, not retried
             text, seconds, error = "", 0.0, str(e)[:300]
-        masks, diags = samlib.decode(text)
-        rec = {"image": f"{image}.png", "sheet": sheet, "prompt": prompt, "model": samlib.MODEL,
-               "recorded_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "seconds": round(seconds, 2),
-               "image_sha256": hashlib.sha256(png).hexdigest(), "image_px": list(size),
-               "metres_per_pixel": [round(v, 6) for v in mpp], "window_m": list(window), "error": error,
-               "n_masks": len(masks), "masks": measure(masks, size, window, mpp, truth_objects(key, sheet)),
-               "diagnostics": diags, "raw_output_chars": len(text), "raw_output": text}
+        rec = record(png, size, image, sheet, prompt, model, key, text, seconds, error, prompt_source="manual")
         (FIXTURES / f"{image}__{slug(prompt)}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1))
-        print(f"{image:11s} {prompt!r:22s} masks={len(masks):2d} {seconds:5.1f} s {error or ''}", flush=True)
+        print(f"{image:11s} {prompt!r:22s} masks={rec['n_masks']:2d} {seconds:5.1f} s {error or ''}", flush=True)
 
 
 def table() -> str:
@@ -147,10 +162,12 @@ def table() -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--live", action="store_true", help="call SAM 3.1 once per prompt and record the fixtures")
+    ap.add_argument("--only", action="append", default=[], help="IMAGE:PROMPT, e.g. 'L-3_lines:beige area'")
     args = ap.parse_args()
     if args.live:
+        only = {tuple(o.split(":", 1)) for o in args.only} or None
         with tempfile.TemporaryDirectory() as tmp:
-            run_live(Path(tmp))
+            run_live(Path(tmp), only)
     print(table())
     return 0
 

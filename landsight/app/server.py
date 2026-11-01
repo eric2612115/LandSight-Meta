@@ -23,10 +23,12 @@ FRONTEND_ORIGINS = ["http://localhost:5195", "http://127.0.0.1:5195"]
 MEDIA = {"svg": "image/svg+xml", "png": "image/png", "filled.png": "image/png"}
 
 
-def create_app() -> FastAPI:
+def create_app(features: dict[str, bool] | None = None) -> FastAPI:
+    """The API. `features` switches the conditional builds on or off (landsight.app.run.FEATURES; default: all on,
+    except those named in LANDSIGHT_FEATURES_OFF)."""
     app = FastAPI(title="Landsight", version=VERSION, docs_url=None, redoc_url=None)
     app.add_middleware(CORSMiddleware, allow_origins=FRONTEND_ORIGINS, allow_methods=["*"], allow_headers=["*"])
-    state = RunState()
+    state = RunState(features)
     app.state.landsight = state
 
     def need_run():

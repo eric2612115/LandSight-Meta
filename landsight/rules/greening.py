@@ -10,15 +10,22 @@ carbon fixation must exceed the legal minimum.
 
 Gi from 表1 by planting type, tree Ai from 表2 (16 m² per tree on an urban site; 25 / 36 m² on larger or park
 sites; closer planting uses spacing²), β from §302 by site class. Sources: docs/research/regs.md (read 2026-11-01).
+
+On artificial ground (人工地盤: the title block says ARTIFICIAL GROUND / ON SLAB, the detail sheet shows the pit on a
+slab, or it is given) the 技術規範 §5 表1 minimums apply to the tree pit read from the detail sheet (PitFacts): a large
+tree whose pit is 1.5-4 m² counts as a small tree (Gi 1.5 -> 1.0); a pit under 1.5 m² misses the small-tree minimum,
+so the tree is not counted and the check needs review; soil shallower than the class minimum (1.0 m large tree,
+0.7 m small tree or palm, 0.4 m shrub or vine, 0.1 m grass) likewise. The result then carries two states, before and
+after the downgrade, each with its own fixes (the film's gauge plays both).
 """
 
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
-from landsight.rules.base import (FAIL, NEEDS_REVIEW, NOT_APPLICABLE, PASS, Citation, Fix, Planting, RuleResult,
-                                  SiteFacts, Term)
+from landsight.rules.base import (FAIL, NEEDS_REVIEW, NOT_APPLICABLE, PASS, Citation, Fix, PitFacts, Planting,
+                                  RuleResult, SiteFacts, Term)
 from landsight.rules.species import GI, SECOND_NATIVE, TREE_CLASSES, gloss, lookup
 
 UNIT = "kgCO2e/yr"
@@ -28,6 +35,12 @@ BETA_EN = {"ordinary": "ordinary site", "school_park": "school or park land",
 municipal_BETA = {1: 0.99, 2: 0.83, 3: 0.83, 4: 0.66, 5: 0.66}  # 本市新建建築物綠化實施規則 Art. 6
 MIN_SITE_M2 = 300.0  # §298: sites of 300 m² or less are exempt
 R_CAP = 0.85
+# 技術規範 §5 表1 and its note, artificial ground (屋頂、陽臺、露臺 column): pit areas and soil depths
+PIT_SMALL_MIN_M2 = 1.5  # small tree / palm minimum pit; a large tree in [1.5, 4.0) counts as a small tree
+PIT_LARGE_MIN_M2 = 4.0  # large tree / multilayer minimum pit
+SOIL_MIN_M = {"eco_multilayer": 1.0, "broadleaf_large": 1.0, "small_tree": 0.7, "palm": 0.7, "shrub": 0.4,
+              "vine": 0.4, "lawn": 0.1}
+LARGE_CLASSES = ("eco_multilayer", "broadleaf_large")
 
 BTR = "Building Technical Regulations, Building Design and Construction Chapter"
 STD = "Green Building Site Greening Design Technical Standard"
@@ -64,6 +77,12 @@ CITATIONS = [
              "Tree Ai: 16 m² per tree (urban or small site, 4 m spacing), 25 m² (school, small park, industrial zone, "
              "site ≥ 1 ha), 36 m² (metropolitan or science park, site ≥ 5 ha); closer planting uses spacing²",
              f"{STD}, table 2", STD_URL),
+    Citation("§5", "建築基地綠化設計技術規範 第5點 表1及註",
+             "On artificial ground (roof, balcony, terrace, slab): soil at least 1.0 m for large trees and multilayer "
+             "planting, 0.7 m for small trees and palms, 0.4 m for shrubs and vines, 0.1 m for grass and flowers; a "
+             "tree pit of at least 4.0 m² for a large tree and 1.5 m² for a small tree; a large tree in a pit of "
+             "1.5-4 m² counts as a small tree; planting that misses these minimums is not counted.",
+             f"{STD}, point 5, table 1 and note", STD_URL),
 ]
 
 
@@ -113,9 +132,47 @@ class _Line:
     source: str
     item_id: str
     object_ids: list[str]
+    pit_note: str = ""  # what the pit rule did to this line
 
 
-def _lines(plantings: list[Planting], ai_default: float, notes: list[str], use_low: bool = False) -> list[_Line]:
+def fmt_n(v: float) -> str:
+    """1 -> '1.0', 2.25 -> '2.25', 1.5 -> '1.5': numbers in rule text keep one decimal at least."""
+    t = f"{v:g}"
+    return t if "." in t or "e" in t else t + ".0"
+
+
+def soil_minimum(gi_class: str) -> float | None:
+    """The minimum soil depth on artificial ground for a Gi class (技術規範 §5 表1)."""
+    return SOIL_MIN_M.get(gi_class)
+
+
+def pit_class(gi_class: str, pit: PitFacts) -> tuple[str, bool, str]:
+    """A tree of `gi_class` in `pit` on artificial ground: (the class it counts as, counted?, why)."""
+    a, d = pit.area_m2, pit.soil_depth_m
+    if gi_class in LARGE_CLASSES:
+        if a >= PIT_LARGE_MIN_M2:
+            eff, why = gi_class, f"pit {fmt_n(a)} m² ≥ {fmt_n(PIT_LARGE_MIN_M2)} m²: a large tree"
+        elif a >= PIT_SMALL_MIN_M2:
+            eff = "small_tree"
+            why = (f"pit {fmt_n(a)} m² in [{fmt_n(PIT_SMALL_MIN_M2)}, {fmt_n(PIT_LARGE_MIN_M2)}) m² on artificial ground: a "
+                   f"large tree counts as a small tree (Gi {fmt_n(GI[gi_class][0])} → {fmt_n(GI[eff][0])})")
+        else:
+            return gi_class, False, (f"pit {fmt_n(a)} m² < {fmt_n(PIT_SMALL_MIN_M2)} m², below the small-tree minimum: not "
+                                     "counted, needs review")
+    else:
+        if a < PIT_SMALL_MIN_M2:
+            return gi_class, False, f"pit {fmt_n(a)} m² < {fmt_n(PIT_SMALL_MIN_M2)} m² minimum: not counted, needs review"
+        eff, why = gi_class, f"pit {fmt_n(a)} m² ≥ {fmt_n(PIT_SMALL_MIN_M2)} m²"
+    need = soil_minimum(eff)
+    if d is None:
+        return eff, True, why + "; soil depth not read"
+    if need is not None and d < need - 1e-9:
+        return eff, False, why + f"; soil {fmt_n(d)} m below the {fmt_n(need)} m minimum: not counted, needs review"
+    return eff, True, why + f"; soil {fmt_n(d)} m ≥ {fmt_n(need)} m"
+
+
+def _lines(plantings: list[Planting], ai_default: float, notes: list[str], use_low: bool = False,
+           pit: PitFacts | None = None, review: list[str] | None = None) -> list[_Line]:
     lines = []
     for p in plantings:
         if p.kind == "existing_tree":
@@ -126,6 +183,13 @@ def _lines(plantings: list[Planting], ai_default: float, notes: list[str], use_l
             gi_class = sp.gi_class if sp and sp.gi_class in TREE_CLASSES else "small_tree"
             if sp is None and not use_low:
                 notes.append(f"{p.species}: not in the species table; counted as a small tree (Gi 1.0), not native")
+            pit_note = ""
+            if pit is not None:
+                gi_class, counted, pit_note = pit_class(gi_class, pit)
+                if not counted:
+                    if review is not None:
+                        review.append(f"{p.species} ({p.item_id}): {pit_note}")
+                    continue
             ai = ai_default
             if p.spacing_m and p.spacing_m < math.sqrt(ai_default) - 0.05:
                 ai = round(p.spacing_m ** 2, 2)
@@ -134,7 +198,7 @@ def _lines(plantings: list[Planting], ai_default: float, notes: list[str], use_l
             gi = GI[gi_class][0]
             lines.append(_Line("tree", p.species, gi_class, gi, count * ai, count, bool(sp and sp.native),
                                f"{gi:g} × ({count:g} × {ai:g} m²) = {gi * count * ai:.1f}", p.source, p.item_id,
-                               p.object_ids))
+                               p.object_ids, pit_note))
             continue
         if p.area_m2 is None:
             if not use_low:
@@ -158,8 +222,9 @@ def _evaluate(lines: list[_Line]) -> tuple[float, float, int, float, float]:
     return sigma, ra, species, alpha, sigma * alpha
 
 
-def _with_trees(lines: list[_Line], species: str, delta: float, ai: float) -> list[_Line]:
-    """A copy of the lines with `delta` trees of `species` added (negative removes)."""
+def _with_trees(lines: list[_Line], species: str, delta: float, ai: float, pit: PitFacts | None = None) -> list[_Line]:
+    """A copy of the lines with `delta` trees of `species` added (negative removes). New trees stand in the same pit
+    as the others, so the pit rule prices them too."""
     out, done = [], False
     for ln in lines:
         if ln.count and ln.species == species:
@@ -173,8 +238,11 @@ def _with_trees(lines: list[_Line], species: str, delta: float, ai: float) -> li
     if not done and delta > 0:
         sp = lookup(species)
         gi_class = sp.gi_class if sp and sp.gi_class in TREE_CLASSES else "small_tree"
-        out.append(_Line("tree", species, gi_class, GI[gi_class][0], delta * ai, delta, bool(sp and sp.native), "",
-                         "fix", "", []))
+        gi = GI[gi_class][0]
+        if pit is not None:
+            gi_class, counted, _ = pit_class(gi_class, pit)
+            gi = GI[gi_class][0] if counted else 0.0
+        out.append(_Line("tree", species, gi_class, gi, delta * ai, delta, bool(sp and sp.native), "", "fix", "", []))
     return out
 
 
@@ -188,14 +256,14 @@ def _spread(ids: list[str], k: int) -> list[str]:
     return [ids[min(n - 1, round((j + 0.5) * n / k - 0.5))] for j in range(k)] if n and k else []
 
 
-def fixes(lines: list[_Line], required: float, ai: float) -> list[Fix]:
+def fixes(lines: list[_Line], required: float, ai: float, pit: PitFacts | None = None) -> list[Fix]:
     """The cheapest fixes: (a) more trees of the main species; (b) swap k of them for a second native species, no
-    extra trees; (c) more shrub bed."""
+    extra trees; (c) more shrub bed. With a pit, the added or swapped trees are priced by the pit rule too."""
     out: list[Fix] = []
     trees = sorted([ln for ln in lines if ln.count], key=lambda ln: -ln.count)
     main = trees[0].species if trees else "樟樹"
     for n in range(1, 501):
-        trial = _with_trees(lines, main, n, ai)
+        trial = _with_trees(lines, main, n, ai, pit)
         *_, alpha, tco2 = _evaluate(trial)
         if tco2 > required:
             out.append(Fix("a", f"+{n} {gloss(main)}, the same species", {"add_trees": {main: n}}, round(tco2, 2),
@@ -204,7 +272,7 @@ def fixes(lines: list[_Line], required: float, ai: float) -> list[Fix]:
     if trees:
         second = SECOND_NATIVE if main != SECOND_NATIVE else "樟樹"
         for k in range(1, int(trees[0].count) + 1):
-            trial = _with_trees(_with_trees(lines, main, -k, ai), second, k, trees[0].area / trees[0].count)
+            trial = _with_trees(_with_trees(lines, main, -k, ai, pit), second, k, trees[0].area / trees[0].count, pit)
             _, ra, _, alpha, tco2 = _evaluate(trial)
             if tco2 > required:
                 out.append(Fix("b", f"swap {k} of {trees[0].count:g} {gloss(main)} for {gloss(second)}, a second native "
@@ -226,8 +294,31 @@ def fixes(lines: list[_Line], required: float, ai: float) -> list[Fix]:
     return out
 
 
-def check(site: SiteFacts, items: list[Planting], tree_ai_m2: float | None = None) -> RuleResult:
-    """The §302 check on one site. `items` are Plantings (see rules.inputs.plantings_from_takeoff)."""
+def _state(lines: list[_Line], required: float, ai: float, pit: PitFacts | None = None) -> dict:
+    """One state of the check (before or after the pit downgrade): provided, status, the tree lines and the fixes."""
+    sigma, ra, _, alpha, tco2 = _evaluate(lines)
+    passes = tco2 > required
+    return {"required": round(required, 1), "provided": round(tco2, 1), "status": PASS if passes else FAIL,
+            "sum_gi_ai": round(sigma, 2), "ra": round(ra, 3), "alpha": round(alpha, 3),
+            "trees": [{"species": ln.species, "count": ln.count, "gi_class": ln.gi_class, "gi": ln.gi,
+                       "ai_per_tree": round(ln.area / ln.count, 2), "product": round(ln.gi * ln.area, 2),
+                       "pit_note": ln.pit_note} for ln in lines if ln.count],
+            "fixes": [] if passes else [asdict(f) for f in fixes(lines, required, ai, pit)]}
+
+
+def artificial_ground(site: SiteFacts, pit: PitFacts | None) -> tuple[bool, str]:
+    """Is the planting on artificial ground, and where does that come from?"""
+    if site.artificial_ground:
+        return True, site.sources.get("artificial_ground", "given")
+    if pit is not None and pit.on_slab:
+        return True, f"detail {pit.from_sheet}: the tree pit sits on a slab"
+    return False, ""
+
+
+def check(site: SiteFacts, items: list[Planting], tree_ai_m2: float | None = None,
+          pit: PitFacts | None = None) -> RuleResult:
+    """The §302 check on one site. `items` are Plantings (see rules.inputs.plantings_from_takeoff); `pit` is the tree
+    pit read from a detail sheet: on artificial ground it triggers the §5 表1 downgrade and a before/after pair."""
     res = RuleResult("greening", "Greening: carbon fixation of the planting (綠化總固碳當量)", jurisdiction(site),
                      NEEDS_REVIEW, unit=UNIT, citations=list(CITATIONS))
     if not site.new_building:
@@ -260,12 +351,29 @@ def check(site: SiteFacts, items: list[Planting], tree_ai_m2: float | None = Non
     ]
     ai = tree_ai_m2 or tree_ai(site)
     lines = _lines(items, ai, res.notes)
+    on_slab, slab_source = artificial_ground(site, pit)
+    applied = pit if (pit is not None and on_slab) else None
+    review: list[str] = []
+    if applied is not None:
+        before = _state(lines, required, ai)
+        lines = _lines(items, ai, [], pit=applied, review=review)
+        res.terms.append(Term("pit", "樹穴面積 · 覆土深度", "tree pit area · soil depth (artificial ground)",
+                              round(applied.area_m2, 2), "m²",
+                              (f"{fmt_n(applied.width_m)} m × {fmt_n(applied.length_m)} m = {fmt_n(applied.area_m2)} m²; "
+                               if applied.width_m and applied.length_m else "")
+                              + (f"soil {fmt_n(applied.soil_depth_m)} m" if applied.soil_depth_m is not None
+                                 else "soil not read"),
+                              f"detail {applied.from_sheet} ({applied.by}); artificial ground: {slab_source}", "§5"))
+    elif pit is not None:
+        res.notes.append(f"tree pit read from {pit.from_sheet} ({pit.area_m2:g} m²), but nothing says the planting is on "
+                         "artificial ground: the §5 table 1 pit minimums are not applied")
     for ln in lines:
         zh_type, en_type = GI[ln.gi_class][1], GI[ln.gi_class][2]
         sp = lookup(ln.species)
         en = f"{sp.en if sp else ln.species} · {en_type}" + (" (hedge band)" if ln.kind == "hedge" else "")
         res.terms.append(Term("Gi·Ai", f"{ln.species} · {zh_type}", en, round(ln.gi * ln.area, 2), UNIT, ln.formula,
-                              ln.source, "表1" + (", 表2" if ln.count else "")))
+                              "; ".join(x for x in (ln.source, ln.pit_note) if x),
+                              "表1" + (", 表2" if ln.count else "") + (", §5" if ln.pit_note else "")))
     sigma, ra, n_species, alpha, tco2 = _evaluate(lines)
     trees = [ln for ln in lines if ln.count]
     total = sum(ln.count for ln in trees)
@@ -288,14 +396,44 @@ def check(site: SiteFacts, items: list[Planting], tree_ai_m2: float | None = Non
 
     pending = [p for p in items if p.kind != "existing_tree" and not p.confirmed]
     if pending:
-        alt = _evaluate(_lines(items, ai, [], use_low=True))[4]
+        alt = _evaluate(_lines(items, ai, [], use_low=True, pit=applied))[4]
         flips = (alt > required) != (tco2 > required)
         names = ", ".join(f"{p.species} ({p.item_id})" for p in pending)
         res.notes.append(f"awaiting confirmation: {names}; with the lowest count any source gave, TCO2 = {alt:.1f}, "
                          + ("the result would change, so it needs review" if flips else "the result is the same"))
         if flips:
             res.status = NEEDS_REVIEW
+    if review:
+        res.status = NEEDS_REVIEW
+        res.notes += [f"§5 table 1: {x}" for x in review]
     if res.status != PASS:
-        res.fixes = fixes(lines, required, ai)
+        res.fixes = fixes(lines, required, ai, applied)
+    if applied is not None:
+        after = _state(lines, required, ai, applied)
+        after["status"] = res.status
+        drawn_class = {ln.species: ln.gi_class for ln in _lines(items, ai, []) if ln.count}
+        down = [{"species": ln.species, "count": ln.count, "from_class": drawn_class[ln.species], "to_class": ln.gi_class,
+                 "from_gi": GI[drawn_class[ln.species]][0], "to_gi": ln.gi}
+                for ln in trees if drawn_class.get(ln.species, ln.gi_class) != ln.gi_class]
+        after |= {"pit": asdict(applied), "artificial_ground": slab_source, "downgraded": down, "review": review,
+                  "rule": (f"pit {fmt_n(PIT_SMALL_MIN_M2)}–{fmt_n(PIT_LARGE_MIN_M2)} m² on artificial ground → a large tree "
+                           f"counts as a small tree (Gi {fmt_n(GI['broadleaf_large'][0])} → {fmt_n(GI['small_tree'][0])})"),
+                  "repriced": _repriced(before["fixes"], after["fixes"])}
+        res.before_downgrade, res.after_downgrade = before, after
+        if down:
+            res.notes.append(f"§5 table 1: {sum(d['count'] for d in down):g} large trees count as small trees "
+                             f"(pit {fmt_n(applied.area_m2)} m² on artificial ground): TCO2 {before['provided']:g} → "
+                             f"{after['provided']:g}")
     res.notes.append("regulation check, not legal advice: a licensed architect signs off")
     return res
+
+
+def _repriced(before: list[dict], after: list[dict]) -> dict:
+    """How each fix changed with the downgrade: {"a": {"extra_trees": [2, 7], "provided": [304.32, 304.32]}, ...}."""
+    b = {f["id"]: f for f in before}
+    out = {}
+    for f in after:
+        if f["id"] in b:
+            out[f["id"]] = {"extra_trees": [b[f["id"]]["extra_trees"], f["extra_trees"]],
+                            "provided": [b[f["id"]]["provided"], f["provided"]], "change": [b[f["id"]]["change"], f["change"]]}
+    return out

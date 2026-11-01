@@ -49,10 +49,10 @@ def test_spark_request_shape_and_record_replay(tmp_path):
         replay.classify_sheet(b"other pixels", key="unknown")
 
 
-SAM_FIXTURES = sorted((FIXTURES.parent / "sam").glob("*.json"))
+SAM_FIXTURES = sorted((FIXTURES.parent / "sam").glob("*.json")) + sorted((FIXTURES.parent / "sam" / "spark_legend").glob("*.json"))
 
 
-@pytest.mark.parametrize("path", SAM_FIXTURES, ids=lambda p: p.stem)
+@pytest.mark.parametrize("path", SAM_FIXTURES, ids=lambda p: f"{p.parent.name}/{p.stem}")
 def test_recorded_sam_masks_decode_to_the_recorded_areas(path):
     rec = json.loads(path.read_text())
     masks, diagnostics = decode(rec["raw_output"])
@@ -84,3 +84,66 @@ def test_metres_per_pixel_of_a_render(site):
     mx, my = metres_per_pixel(model, (2100, 1140))
     assert mx == pytest.approx(83.2 / 2100) and my == pytest.approx(45.2 / 1140)
     assert pixel_to_metres(model, (2100, 1140), 0, 0) == pytest.approx((x0, y1))
+
+
+def _echo_transport(seen: list, answer: dict):
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(json.loads(request.content))
+        return httpx.Response(200, json={"choices": [{"message": {"content": json.dumps(answer)}}], "usage": {}})
+    return httpx.MockTransport(handler)
+
+
+def test_points_are_optional_in_the_group_schema_and_legend_detail_calls_are_shaped():
+    from landsight.meta.spark import DETAIL_SCHEMA, GROUP_SCHEMA, LEGEND_SCHEMA
+
+    item = GROUP_SCHEMA["properties"]["candidates"]["items"]
+    assert "points" in item["properties"] and "points" not in item["required"]
+    assert item["properties"]["points"]["items"]["required"] == ["x", "y"]
+    seen: list = []
+    legend = {"swatches": [{"swatch_colour_word": "beige", "label": "PV-1", "kind": "area"}]}
+    client = SparkClient(api_key="k", transport=_echo_transport(seen, legend))
+    assert client.read_legend(b"png") == legend["swatches"]
+    assert seen[0]["response_format"]["json_schema"] == {"name": "read_legend", "schema": LEGEND_SCHEMA}
+    detail = {"pit_w_m": 1.5, "pit_l_m": 1.5, "soil_depth_m": 1.0, "on_slab": True, "why": "1500 x 1500"}
+    client = SparkClient(api_key="k", transport=_echo_transport(seen, detail))
+    assert client.read_detail(b"png") == detail
+    assert seen[1]["response_format"]["json_schema"]["schema"] == DETAIL_SCHEMA
+
+
+def test_newest_recording_wins_when_two_share_an_image(tmp_path):
+    for n, (when, kind) in enumerate([("2026-11-01T16:00:00+00:00", "plan"), ("2026-11-01T17:00:00+00:00", "detail")]):
+        (tmp_path / f"classify_sheet__{n}.json").write_text(json.dumps(
+            {"call": "classify_sheet", "image_sha256": "same", "content_key": "", "recorded_at": when, "seconds": 1.0,
+             "result": {"kind": kind}}))
+    replay = FixtureSpark(tmp_path)
+    assert replay.by_image[("classify_sheet", "same")]["result"]["kind"] == "detail"
+
+
+def test_ground_points_go_from_0_1000_to_pixels_and_metres():
+    from landsight.meta.spark import ground_points
+
+    pts = ground_points([{"x": 500, "y": 250}, {"x": 1004, "y": -3}, {"y": 1}], (1200, 800), (10.0, 0.0, 22.0, 8.0))
+    assert pts[0] == {"norm": [500.0, 250.0], "px": [600.0, 200.0], "m": [16.0, 6.0]}
+    assert pts[1]["norm"] == [1000.0, 0.0] and pts[1]["m"] == [22.0, 8.0]  # clamped, as the Meta docs advise
+    assert len(pts) == 2 and len(ground_points([{"x": 1, "y": 1}] * 20, (10, 10), (0, 0, 1, 1))) == 12
+
+
+def test_masks_take_the_type_of_the_outline_they_lie_in():
+    import numpy as np
+    from shapely.geometry import box
+
+    from landsight.meta.sam import Mask
+    from landsight.meta.sam_plan import type_masks
+
+    window, mpp = (0.0, 0.0, 10.0, 10.0), (0.1, 0.1)  # 100 x 100 px, y down from y = 10 m
+    paving = {"object_id": "P-01", "label": "Permeable pavers", "kind": "paving", "polygon": box(0, 6, 4, 10),
+              "excluded": False}
+    swatch = {"object_id": "X-01", "label": "legend swatch", "kind": "legend", "polygon": box(6, 6, 10, 10),
+              "excluded": True}
+    on_paving = Mask("0", (0, 0, 40, 40), 0.9, np.ones((40, 40), bool))
+    on_swatch = Mask("1", (60, 0, 100, 40), 0.8, np.ones((40, 40), bool))
+    nowhere = Mask("2", (0, 60, 40, 100), 0.7, np.ones((40, 40), bool))
+    got = type_masks([on_paving, on_swatch, nowhere], [paving, swatch], window, mpp)
+    assert [(g["object_id"], g["type"], g["excluded"]) for g in got] == [
+        ("P-01", "Permeable pavers", False), ("X-01", "legend swatch", True), (None, None, False)]
+    assert got[0]["area_m2"] == pytest.approx(16.0)
