@@ -1,9 +1,10 @@
 """The backend half of docs/API.md: open a package (a folder of files), run the pipeline on every DXF, and shape the
 result into a `Run` (files, sheets, items, checks, tally, timing) plus the director's scene list.
 
-Until the sample package (landsight/synth/package.py) and the ingest triage exist, opening with no path generates
-the m4 synthetic site plus the stand-in tree-pit detail L-6 (tests/fixtures/detail), files are triaged by extension
-only, and `errors` is an empty scoreboard. Every string the API returns is English (landsight/app/english.py).
+This is the m4 path (`POST /api/package/open?site=m4`): opening with no path generates the m4 synthetic site plus the
+stand-in tree-pit detail L-6 (tests/fixtures/detail), files are triaged by extension only, and `errors` is an empty
+scoreboard. The default path is the real package through landsight.review (landsight/app/package.py). Every string
+the API returns is English (landsight/app/english.py).
 
 Four features of the film's conditional builds each sit behind a flag (FEATURES; switch one off with
 LANDSIGHT_FEATURES_OFF=grounding_points,... or RunState(features=...)), and each degrades to the plain run when its
@@ -38,7 +39,6 @@ from landsight.rules.species import lookup
 from landsight.synth import LEVELS, generate
 
 REPO = Path(__file__).resolve().parents[2]
-SAMPLE = REPO / "samples" / "greenfield"
 M4_DIR = REPO / ".cache" / "sites" / "m4"
 SAM_FIXTURES = REPO / "tests" / "fixtures" / "sam"  # the hand-typed probe (docs/research/sam-probe.md)
 SAM_LEGEND_FIXTURES = SAM_FIXTURES / "spark_legend"  # SAM prompted with Muse Spark's legend words
@@ -152,8 +152,6 @@ class RunState:
             folder = Path(path).expanduser().resolve()
             if not folder.is_dir():
                 raise ValueError(f"not a folder: {path}")
-        elif SAMPLE.is_dir():
-            folder = SAMPLE
         else:
             generate(M4_DIR, LEVELS["m4"])
             if STANDIN_DETAIL.is_file():  # the stand-in L-6 tree-pit detail (D-38)

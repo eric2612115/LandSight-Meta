@@ -1,6 +1,6 @@
 """Command line: `python -m landsight takeoff <dxf...> [--fixtures]`, `python -m landsight synth <dir>`,
 `python -m landsight review <package_dir> [--fixtures|--live] [--json out.json]` and `python -m landsight serve` (the
-page, http://127.0.0.1:8795)."""
+API of docs/API.md on http://127.0.0.1:8795; the screen is frontend/, http://localhost:5195)."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("--level", choices=sorted(LEVELS), default="m4")
     s.add_argument("--schedule-mismatch", action="store_true")
     s.add_argument("--coloured", action="store_true", help="also write the filled renders of L-1 and L-3")
-    v = sub.add_parser("serve", help="serve the page (plain product; add ?director=1 for the film's scenes)")
+    v = sub.add_parser("serve", help="serve the API (:8795) the frontend (:5195) reads; the sample package opens on first use")
     v.add_argument("--host", default="127.0.0.1")
     v.add_argument("--port", type=int, default=8795)
     k = sub.add_parser("package", help="write the sample developer's package (30 files), the price list and the answer key")
@@ -55,7 +55,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "serve":
         from landsight.app import serve
 
-        print(f"Landsight on http://{args.host}:{args.port}/  ·  director mode: /?director=1  ·  scene: /#scene=eye")
+        print(f"Landsight API on http://{args.host}:{args.port}/api/health (docs/API.md); the screen is the frontend: "
+              "cd frontend && npm run dev, then http://localhost:5195 (film: /?director=1&auto=1)")
         serve(args.host, args.port)
         return 0
 

@@ -20,7 +20,7 @@ export function Eye() {
   const { run, scene } = api
   const { sheet, item, obj } = eyeData(run, scene)!
   const segs = useMemo(() => openSegments(obj), [obj])
-  const lines = useMemo(() => (item.spark ? answerLines(item.spark.answer, 4) : []), [item])
+  const lines = useMemo(() => (item.spark ? answerLines(item.spark.answer, { why: 3, cols: 31, braces: false }) : []), [item])
   const text = lines.join('\n')
   const sheetPoints = useMemo(() => pointsOnSheet(item.spark?.points, obj), [item, obj])
   const src = threeSources(run, item)
@@ -115,7 +115,7 @@ export function Eye() {
         <div className="flex h-full flex-col p-8" style={{ width: PANEL }}>
           <PanelHeader tone="#8fa6ff" icon={<EyeIcon className="h-8 w-8" strokeWidth={2.2} />} title="What Muse Spark saw"
             right={<span className="mono text-[30px] font-bold" style={{ color: phase >= 7 ? '#3ccf7f' : phase >= 5 ? '#8fa6ff' : COLOURS.amber }}>{obj.object_id}</span>} />
-          <div className="mt-5 h-[220px] shrink-0">
+          <div className="mt-5 h-[200px] shrink-0">
             <AnimatePresence>
               {crop && item.spark && (
                 <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: 'easeOut' }} className="h-full">
@@ -124,7 +124,7 @@ export function Eye() {
               )}
             </AnimatePresence>
           </div>
-          <div className="mono mt-4 min-h-0 flex-1 overflow-hidden rounded-xl bg-[#0f1114] px-5 py-3.5 text-[28px] leading-[1.38]" style={{ opacity: phase >= 3 ? 1 : 0, transition: 'opacity 200ms' }}>
+          <div className="mono mt-4 min-h-0 flex-1 overflow-hidden rounded-xl bg-[#0f1114] px-5 py-3.5 text-[28px] leading-[1.3]" style={{ opacity: phase >= 3 ? 1 : 0, transition: 'opacity 200ms' }}>
             {phase >= 3 && shown.map((l, i) => (
               <div key={i} className="whitespace-pre">
                 <JsonLine line={l} />

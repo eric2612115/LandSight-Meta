@@ -31,6 +31,8 @@ from landsight.checks import scale, sheet as sheet_checks
 from landsight.checks.base import Check, cell_ref
 from landsight.ingest import decide_document, decide_image, decide_raster, walk
 from landsight.ingest import pdf as P
+from landsight.review import bill_rows, gauge
+from landsight.review import colour as COL
 from landsight.review import prepass as PP
 from landsight.review import sheets as S
 from landsight.review.score import score
@@ -177,9 +179,12 @@ def _wait(pending) -> None:
 
 
 def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = None, workers: int = 6,
-           price_list: Path | None = None, answer_key: Path | None = None, spark=None) -> dict:
+           price_list: Path | None = None, answer_key: Path | None = None, spark=None, sam=None,
+           keep: dict | None = None) -> dict:
     """Review a package folder. mode "fixtures" replays tests/fixtures/review/ (offline); "live" calls Muse Spark and
-    records every answer there. `spark` injects a client (tests)."""
+    SAM 3.1 and records every answer there. `spark` / `sam` inject clients (tests). `keep`, when a dict, receives what
+    the API needs after the run to serve renders and crops (landsight.app.package): the context, the sheet drafts, the
+    raster pages, the take-off and the coloured renders."""
     started = time.monotonic()
     root, key_path, price_path = locate(Path(package))
     key_path = Path(answer_key) if answer_key else key_path
@@ -231,6 +236,8 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
         matches, align_note = align_box.get("result", ({}, "no bills"))
         ctx.prices = BC.load_price_list(price_path)
         _greening(ctx, notes)
+        sam = sam or COL.ReviewSam(COL.mode_for(mode))
+        colour_checks, filled = COL.colour(ctx, spark, sam, notes)
 
         checks: list[Check] = []
         checks += ingest_checks.ingest(ctx)
@@ -246,10 +253,12 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
         checks += regulation.fire_lane(ctx)
         checks += area.overlaps(ctx)
         checks += area.hatch_labels(ctx)
+        checks += colour_checks
         checks += protected_tree.protected(ctx)
         checks += regulation.greening(ctx)
-        checks += BC.checks(ctx.bills, matches, drawn, ctx.prices, align_note,
-                            price_path.name if price_path else PRICE_LIST)
+        checks += bill_rows.annotate(BC.checks(ctx.bills, matches, drawn, ctx.prices, align_note,
+                                               price_path.name if price_path else PRICE_LIST),
+                                     ctx.bills, matches, drawn, ctx.prices)
         for n, c in enumerate(checks, 1):
             c.check_id = f"C-{n:02d}"
         green = next((c.api() for c in checks if c.category == "regulation" and c.title.startswith("Greening")), None)
@@ -257,6 +266,9 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
             c.check_id = f"C-{len(checks) + 1:02d}"
             checks.append(c)
         check_dicts = [c.api() for c in checks]
+        for c in check_dicts:  # the gauge's two states (before / after the tree-pit rule) on the greening check
+            if c["category"] == "regulation" and c["title"].startswith("Greening"):
+                c.update(gauge.downgrade_states(ctx.greening))
 
         errors = {"planted": 0, "found": [], "flagged": [], "missed": [], "false_alarms": []}
         if key_path is not None and key_path.is_file():
@@ -273,13 +285,20 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
             "checks": check_dicts,
             "errors": errors,
             "tally": _tally(ctx.items),
-            "timing": {"total_s": round(time.monotonic() - started, 2), "spark_calls": spark.calls, "sam_calls": 0,
-                       "spark_s": spark.seconds, "recorded": spark.recorded, "mode": mode,
-                       "calls": [{"call": e["call"], "seconds": e.get("seconds"), "recorded": e.get("recorded")}
-                                 for e in spark.log]},
+            "timing": {"total_s": round(time.monotonic() - started, 2), "spark_calls": spark.calls,
+                       "sam_calls": sam.calls, "spark_s": spark.seconds, "sam_s": sam.seconds,
+                       "recorded": spark.recorded and sam.recorded, "mode": mode,
+                       "calls": [{"call": e["call"], "model": "muse-spark-1.3", "seconds": e.get("seconds"),
+                                  "recorded": e.get("recorded")} for e in spark.log]
+                       + [{"call": e["call"], "model": e["model"], "seconds": e["seconds"], "recorded": e["recorded"],
+                           "prompt_source": e["prompt_source"]} for e in sam.log]},
             "notes": notes + spark.errors,
             "version": VERSION,
         }
+        if keep is not None:
+            keep.update(ctx=ctx, drafts=drafts, takeoff=ctx._takeoff, filled=filled, root=root,
+                        rasters=[{"file_id": f.file_id, "page": pg.index, "png": png, "answer": f.spark,
+                                  "path": f.path, "abs_path": f.abs_path, "why": f.why} for f, pg, png, _ in rasters])
     return _scrub(run)
 
 
@@ -578,8 +597,9 @@ def _prepass_objects(d, pre, existing) -> list[dict]:
         out.append({"object_id": f"Z-{i:02d}", "kind": "fire_lane" if "FIRE" in z.label.upper() else "boundary",
                     "label": z.label, "centre": [_r(c.x), _r(c.y)], "area_m2": z.area_m2,
                     "outline": _ring(z.polygon.exterior.coords) if hasattr(z.polygon, "exterior") else [], "closed": True,
-                    "by": "geometry", "excluded": {"reason": "area where greening cannot count (fire-truck space)",
-                                                   "rule": "Building Technical Regulations, Art. 299"}})
+                    "by": "geometry", "excluded": {"reason": "fire-truck lane marked keep clear: no planting counted here; "
+                                                             "hard-to-green area (Ap) only if the architect declares it",
+                                                   "rule": "Building Technical Regulations, Art. 299 (if declared)"}})
     for ex in pre.existing:
         circle = Point(ex.centre).buffer(ex.canopy_r, quad_segs=16)
         out.append({"object_id": ex.tag, "kind": "existing_tree", "label": ex.label or "existing tree",

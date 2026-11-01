@@ -84,8 +84,9 @@ CITES = {
     "BTR-299": (["national", "formulas", "cite", 0],
                 "Building Technical Regulations, Design and Construction Part, Art. 299",
                 "Minimum greening area = (site area − area where greening is impracticable) × the legal open-space "
-                "ratio; the impracticable areas named include fire-truck space, sports fields, arcades, private and "
-                "in-site roads and existing lanes."),
+                "ratio. An area counts as impracticable only when the architect declares it as one of the kinds the "
+                "article names (fire-truck rescue space recognised by the fire authority, sports fields, arcades, "
+                "private and in-site roads, existing lanes); a label on a landscape sheet does not make it one."),
     "BTR-302": (["national", "constants", "tco2c_factor", "cite"],
                 "Building Technical Regulations, Design and Construction Part, Art. 302",
                 "The planting's total carbon fixation must exceed ½ × minimum greening area × β (β 0.66 for an "

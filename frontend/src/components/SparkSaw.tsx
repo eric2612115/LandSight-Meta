@@ -3,26 +3,52 @@ import { useMemo, useState } from 'react'
 import { pointsOnCrop } from '../lib/model'
 import type { DrawingObject, SparkView } from '../lib/types'
 
-const KEYS = ['is_one_object', 'kind', 'label', 'label_text', 'label_meaning', 'confidence', 'species', 'species_code', 'count', 'implies_count']
-const SKIP = new Set(['why', 'model', 'id', 'facts'])
+/** The fields Muse Spark's group_and_read answer is shown with: exactly what the recorded answer carries for the open
+ * outline (is_one_object, kind, confidence, why, points), nothing derived and nothing invented. */
+const FIELDS = ['is_one_object', 'kind', 'confidence'] as const
 
-/** The answer as short JSON lines: preferred keys first, strings clipped. */
-export function answerLines(answer: Record<string, unknown>, max = 6): string[] {
-  const has = (k: string) => k in answer && answer[k] !== '' && answer[k] !== null && answer[k] !== undefined
-  const keys = [...KEYS.filter(has), ...Object.keys(answer).filter((k) => !KEYS.includes(k) && !SKIP.has(k) && has(k) && typeof answer[k] !== 'object')]
-  const picked = keys.slice(0, max)
-  const val = (v: unknown) => {
-    if (typeof v === 'string') return JSON.stringify(v.length > 22 ? `${v.slice(0, 21)}…` : v)
-    if (typeof v === 'number' || typeof v === 'boolean' || v === null) return JSON.stringify(v)
-    return '…'
+const wrap = (text: string, first: number, rest: number, lines: number): string[] => {
+  const words = text.split(/\s+/)
+  const out: string[] = []
+  let cur = ''
+  for (const w of words) {
+    const room = out.length === 0 ? first : rest
+    if (cur && (cur + ' ' + w).length > room) {
+      out.push(cur)
+      cur = w
+      if (out.length === lines) break
+    } else cur = cur ? `${cur} ${w}` : w
   }
-  return ['{', ...picked.map((k, i) => `  "${k}": ${val(answer[k])}${i < picked.length - 1 ? ',' : ''}`), '}']
+  if (out.length < lines && cur) out.push(cur)
+  const used = out.join(' ').length
+  if (used < text.length && out.length) out[out.length - 1] = `${out[out.length - 1].replace(/[\s,.;:]+$/, '')}…`
+  return out
 }
 
-/** Colour a JSON line: keys soft, strings cobalt, numbers and booleans white. */
+/** The answer as short JSON lines. `why` wraps onto at most `why` lines of `cols` characters; points are summarised. */
+export function answerLines(answer: Record<string, unknown>, opts: { why?: number; cols?: number; braces?: boolean } = {}): string[] {
+  const { why = 0, cols = 34, braces = true } = opts
+  const has = (k: string) => k in answer && answer[k] !== '' && answer[k] !== null && answer[k] !== undefined
+  const lines: string[] = []
+  for (const k of FIELDS) if (has(k)) lines.push(`  "${k}": ${JSON.stringify(answer[k])}`)
+  if (why > 0 && typeof answer.why === 'string' && answer.why) {
+    const head = '  "why": "'
+    const parts = wrap(answer.why, cols - head.length, cols - 4, why)
+    parts.forEach((t, i) => lines.push(i === 0 ? `${head}${t}${parts.length === 1 ? '"' : ''}` : `    ${t}${i === parts.length - 1 ? '"' : ''}`))
+  }
+  const pts = Array.isArray(answer.points) ? answer.points.length : 0
+  if (pts) lines.push(`  "points": [${pts} points]`)
+  const body = lines.map((l, i) => (i < lines.length - 1 && !lines[i + 1].startsWith('    ') ? `${l},` : l))
+  return braces ? ['{', ...body, '}'] : body
+}
+
+/** Colour a JSON line: keys soft, strings cobalt, numbers and booleans white; a wrapped string keeps its colour. */
 export function JsonLine({ line }: { line: string }) {
   const m = line.match(/^(\s*)"([^"]+)":\s(.*?)(,?)$/)
-  if (!m) return <span className="text-mute">{line}</span>
+  if (!m) {
+    if (/^\s{4}\S/.test(line)) return <span className="text-[#8fa6ff]">{line}</span>
+    return <span className="text-mute">{line}</span>
+  }
   const [, ind, key, value, comma] = m
   const isStr = value.startsWith('"')
   return (

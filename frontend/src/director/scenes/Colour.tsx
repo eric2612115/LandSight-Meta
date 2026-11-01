@@ -17,10 +17,12 @@ export function Colour() {
   const api = useDirector()
   const { run, scene } = api
   const d = colourData(run, scene)!
-  const { sheet, masks, raster, colourHref, site } = d
+  const { sheet, masks, raster, colourHref, site, control, legendLine } = d
   const project = useProject()
   const [pour, setPour] = useState(0)
   const [badge, setBadge] = useState(false)
+  const [lines, setLines] = useState(!!control)
+  const [legend, setLegend] = useState(false)
   const [bloom, setBloom] = useState(0)
   const [labels, setLabels] = useState(0)
   const ownColour = !(raster && colourHref === sheet.png_url)
@@ -32,11 +34,18 @@ export function Colour() {
     setLooks(sheet.sheet_id, () => ({}))
     if (!ownColour) setDir({ underlay: 'lines', pour: 0 })
     await s.sleep(250)
-    await api.sheet()?.zoomToBox(site, { rect: { x: 700, y: 110, w: 1180, h: 900 }, duration: 520 })
+    await api.sheet()?.zoomToBox(site, { rect: { x: 700, y: 210, w: 1180, h: 820 }, duration: 520 })
     await s.sleep(500)
     setBadge(true)
     play('tick', { volume: 0.5 })
-    await s.sleep(1700)
+    // the controlled test: the same words on the line work find nothing (two seconds of silence)
+    await s.sleep(control ? 2200 : 1700)
+    if (legendLine) {
+      setLegend(true)
+      play('tick', { volume: 0.4, rate: 1.2 })
+      await s.sleep(1900)
+    }
+    setLines(false)
     play('whoosh', { volume: 0.55 })
     await tween(650, (p) => (ownColour ? setPour(p) : setDir({ pour: p })), s.signal)
     await s.sleep(700)
@@ -115,13 +124,21 @@ export function Colour() {
           {badge && (
             <motion.div key="badge" className="absolute left-[150px] top-[110px] flex items-center gap-3 rounded-2xl bg-violet px-6 py-3 text-[34px] font-semibold text-white shadow-[0_14px_40px_rgba(122,60,255,0.35)]"
               initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-              <span>SAM 3.1 · <motion.span key={found} className="mono inline-block" initial={{ scale: 1.35 }} animate={{ scale: 1 }}>{found}</motion.span> {found === 1 ? 'mask' : 'masks'}</span>
+              <span>SAM 3.1 · {control && <span className="mono font-normal">"{control.prompt}"{lines ? ' on line work' : ''} · </span>}<motion.span key={lines ? 'ctl' : found} className="mono inline-block" initial={{ scale: 1.35 }} animate={{ scale: 1 }}>{lines && control ? control.masks_on_lines : found}</motion.span> {(lines && control ? control.masks_on_lines : found) === 1 ? 'mask' : 'masks'}</span>
               {trees && labels > masks.indexOf(trees) && (
                 <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="border-l border-white/30 pl-3 text-[28px] font-medium">
                   {trees.label}{trees.sam !== undefined && <span className="mono"> · {fmt(trees.sam, 1)} m²</span>}
                   {trees.cad !== undefined && trees.pct !== undefined && <span className="mono font-normal opacity-80"> · CAD {fmt(trees.cad, 1)} {pct(trees.pct)}</span>}
                 </motion.span>
               )}
+            </motion.div>
+          )}
+          {legend && legendLine && (
+            <motion.div key="legend" className="absolute left-[150px] top-[186px] flex items-center gap-3 rounded-2xl bg-cobalt px-6 py-3 text-[30px] font-semibold text-white shadow-[0_14px_40px_rgba(36,87,255,0.35)]"
+              initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+              <span>Spark reads the legend: <span className="mono font-normal">{legendLine.colour}</span> = {legendLine.label}</span>
+              <span className="text-white/70">→</span>
+              <span className="rounded-xl bg-violet px-3 py-0.5">SAM 3.1 <span className="mono font-normal">"{legendLine.prompt}"</span></span>
             </motion.div>
           )}
           {placed.slice(0, labels).map(({ m, x, y }) => {

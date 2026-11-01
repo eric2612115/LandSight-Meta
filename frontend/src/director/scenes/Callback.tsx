@@ -16,13 +16,14 @@ const STRIP = { x: 48, y: 572, w: STAGE.w - 96, h: 300 }
 export function Callback() {
   const api = useDirector()
   const { run, scene } = api
-  const { elev, plan, pairs, check } = callbackData(run, scene)!
+  const { elev, plan, pairs, check, scaleChip } = callbackData(run, scene)!
   const project = useProject()
   const elevRef = useRef<SheetHandle>(null)
   const [strip, setStrip] = useState(false)
   const [ev, setEv] = useState<{ k: number; x: number; y: number } | null>(null)
   const [lines, setLines] = useState(0)
   const [label, setLabel] = useState(false)
+  const [chip, setChip] = useState(false)
   const looks: Record<string, ObjLook> = Object.fromEntries(pairs.map(([e]) => [e.object_id, { fill: '#3a3f47', fillOpacity: 0.1 }]))
 
   useScript(async (s) => {
@@ -52,7 +53,12 @@ export function Callback() {
     await s.sleep(500)
     setLabel(true)
     play('chime', { volume: 0.7 })
-    await s.sleep(2600)
+    await s.sleep(1600)
+    if (scaleChip) {
+      setChip(true)
+      play('tick', { volume: 0.45 })
+    }
+    await s.sleep(2400)
   })
 
   const conf = elev.kind_by === 'spark' ? elev.kind_confidence : undefined
@@ -90,6 +96,19 @@ export function Callback() {
         })}
       </svg>
       <AnimatePresence>
+        {chip && scaleChip && (
+          <motion.div key="l5" className="absolute flex items-center gap-3 rounded-2xl border border-line bg-[rgba(20,22,26,0.94)] px-6 py-3 text-[28px] text-white shadow-[0_18px_50px_rgba(0,0,0,0.5)]"
+            style={{ right: 48, top: 898 }} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.32, ease: 'easeOut' }}>
+            <span className="mono font-semibold">{scaleChip.number}</span>
+            <span className="text-mute">·</span>
+            <span>{scaleChip.enlarged ? 'enlarged plan' : 'plan'}</span>
+            <span className="text-mute">·</span>
+            <span>title <span className="mono">{scaleChip.title}</span></span>
+            <span className="text-mute">·</span>
+            <span className="text-amber">scale bar <span className="mono">{scaleChip.measured}</span></span>
+            <span className="text-mute">· not counted</span>
+          </motion.div>
+        )}
         {label && (
           <motion.div className="absolute left-1/2 rounded-2xl border border-line bg-[rgba(20,22,26,0.94)] px-8 py-3 text-center shadow-[0_18px_50px_rgba(0,0,0,0.5)]"
             style={{ top: 498, x: '-50%' }} initial={{ opacity: 0, y: 12, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.32, ease: 'easeOut' }}>

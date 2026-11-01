@@ -16,12 +16,15 @@ export type FileVerdict = {
   decided_by: 'ext' | 'content' | 'spark'
   why: string
   sheet_id?: string
+  sheet_ids?: string[]
   children?: string[]
+  /** archive members: the archive's file_id */
+  parent?: string
 }
 
 export type ObjectKind =
   | 'tree' | 'existing_tree' | 'hedge' | 'shrub_bed' | 'lawn' | 'paving' | 'planter_edge' | 'legend'
-  | 'title_block' | 'schedule' | 'fire_lane' | 'boundary' | 'match_line'
+  | 'title_block' | 'schedule' | 'fire_lane' | 'boundary' | 'match_line' | 'scale_bar' | 'tree_pit' | 'revision_cloud'
 
 export type DrawingObject = {
   object_id: string
@@ -61,6 +64,8 @@ export type Sheet = {
   objects: DrawingObject[]
   /** extension: the coloured rendering SAM 3.1 reads */
   filled_png_url?: string
+  source?: 'dxf' | 'pdf_vector' | 'pdf_raster'
+  detail?: { pit_w_m?: number; pit_l_m?: number; soil_depth_m?: number; on_slab?: boolean | string; why?: string }
 }
 
 export type SparkView = {
@@ -97,6 +102,22 @@ export type Item = {
 
 export type Severity = 'flag' | 'fail' | 'review' | 'info'
 
+export type Fix = { label: string; result: number | string; passes: boolean; object_ids?: string[]; alpha?: number; alpha_before?: number; extra_trees?: number; id?: string }
+
+/** The greening check before or after the tree-pit rule (§5 table 1), each with its own computed fixes. */
+export type GaugeState = {
+  provided: number
+  required: number
+  status: string
+  alpha: number
+  fixes: Fix[]
+  pit?: { sheet_id: string; width_m?: number; length_m?: number; area_m2?: number; soil_depth_m?: number; on_slab?: boolean; why?: string }
+  rule?: string
+  downgraded?: { label: string; count: number; from_gi: number; to_gi: number }[]
+}
+
+export type SamControl = { prompt: string; masks_on_lines: number; masks_on_colour: number; colour_prompt_source?: string; sheet_id?: string }
+
 export type Check = {
   check_id: string
   category:
@@ -109,7 +130,16 @@ export type Check = {
   evidence: { file_ids?: string[]; sheet_ids?: string[]; object_ids?: string[]; cells?: string[] }
   citation?: { article: string; url: string; gloss: string }
   numbers?: Record<string, unknown>
-  fixes?: { label: string; result: number | string; passes: boolean; object_ids?: string[]; alpha?: number; extra_trees?: number }[]
+  fixes?: Fix[]
+  /** agreement checks: never matched to a planted error, never an alarm */
+  ok?: boolean
+  item_ids?: string[]
+  prompt_source?: 'spark_legend' | 'manual'
+  control?: SamControl
+  legend?: { colour: string; label: string; kind: string }[]
+  prompts?: { prompt: string; labels: string[]; kind: string }[]
+  before_downgrade?: GaugeState | null
+  after_downgrade?: GaugeState | null
 }
 
 export type ErrorScore = { planted: number; found: string[]; flagged: string[]; missed: string[]; false_alarms: string[] }
@@ -148,6 +178,10 @@ export type Scene = {
   item_ids?: string[]
   sheet_ids?: string[]
   duration_s: number
+  /** bill: the three amber rows, in order */
+  amber_check_ids?: string[]
+  /** colour: the controlled test (the same words on line work) */
+  control_check_id?: string
 }
 
 export type Health = { ok: boolean; spark: 'fixtures' | 'live'; version: string }

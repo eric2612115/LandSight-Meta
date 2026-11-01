@@ -19,6 +19,28 @@ def _en(name: str) -> str:
         return name
 
 
+def lane_as_ap(ctx, area_m2: float) -> dict | None:
+    """The greening rule run again with Ap = the lane's measured area (D-43, resolved B): what the requirement and the
+    tree fix would be IF the architect declares the strip fire-truck rescue space under §299. Nothing is subtracted in
+    the main check (Ap = 0). None when the site facts or the take-off are missing."""
+    if ctx.site is None or getattr(ctx, "_takeoff", None) is None:
+        return None
+    from landsight.rules import greening as G
+    from landsight.rules import plantings_from_takeoff
+
+    s2 = copy.copy(ctx.site)
+    s2.hard_to_green_m2 = area_m2
+    base = ctx.greening if ctx.greening is not None else G.check(ctx.site, plantings_from_takeoff(ctx._takeoff), pit=ctx.pit)
+    alt = G.check(s2, plantings_from_takeoff(ctx._takeoff), pit=ctx.pit)
+    if alt.required is None or base.required is None:
+        return None
+    fix0 = next((f for f in base.fixes if f.id == "a"), None)
+    fix1 = next((f for f in alt.fixes if f.id == "a"), None)
+    return {"required_ap0": round(base.required, 1), "required_with_lane_as_ap": round(alt.required, 1),
+            "provided_with_lane_as_ap": round(alt.provided, 1), "still_fails": alt.status != "pass",
+            "tree_fix_ap0": fix0.extra_trees if fix0 else 0, "tree_fix_with_lane_as_ap": fix1.extra_trees if fix1 else 0}
+
+
 def fire_lane(ctx) -> list[Check]:
     out = []
     for sid, pre in ctx.prepass.items():
@@ -30,30 +52,30 @@ def fire_lane(ctx) -> list[Check]:
             tree = ctx.object_at(sid, ex.centre, kinds=("tree",), excluded=True)
             zone = ctx.object_at(sid, ex.centre, kinds=("fire_lane",), excluded=True)
             z = next((z for z in pre.zones if z.label == ex.zone), None)
-            numbers = {"zone_m2": z.area_m2 if z else None}
-            ap_note = ""
-            if ctx.site is not None and z is not None:
-                try:
-                    from landsight.rules import greening as G
-
-                    req0 = 0.5 * G.a_prime(ctx.site)[0] * G.beta(ctx.site)[0]
-                    s2 = copy.copy(ctx.site)
-                    s2.hard_to_green_m2 = z.area_m2
-                    req1 = 0.5 * G.a_prime(s2)[0] * G.beta(s2)[0]
-                    numbers |= {"required_ap0": round(req0, 1), "required_with_lane_as_ap": round(req1, 1)}
-                    ap_note = (f" Counted as hard-to-green area (Ap = {z.area_m2:g} m²) the lane also lowers the requirement "
-                               f"from {req0:.1f} to {req1:.1f} kgCO2e/yr; the greening check keeps Ap = 0, as the "
-                               "drawings do not declare it.")
-                except Exception:
-                    pass
+            numbers = {"zone_m2": z.area_m2} if z else {}
+            ap_note = " The greening check keeps Ap = 0, as the drawings do not declare any hard-to-green area."
+            try:
+                alt = lane_as_ap(ctx, z.area_m2) if z is not None else None
+            except Exception:  # noqa: BLE001 - the rules module is another owner's; the flag stands without the figure
+                alt = None
+            if alt is not None:
+                numbers |= {k: v for k, v in alt.items() if not isinstance(v, bool)}
+                numbers["with_lane_as_ap"] = "fail" if alt["still_fails"] else "pass"
+                ap_note = (f" If the architect confirms this strip is fire-truck rescue space under §299, the requirement "
+                           f"drops to {alt['required_with_lane_as_ap']:.1f} kgCO2e/yr — "
+                           f"{'still a fail' if alt['still_fails'] else 'and the site passes'}"
+                           + (f" — and the tree fix becomes +{alt['tree_fix_with_lane_as_ap']:g}" if alt["still_fails"]
+                              and alt["tree_fix_with_lane_as_ap"] else "")
+                           + f". Until then the greening check keeps Ap = 0 (required {alt['required_ap0']:.1f}), as the "
+                           "drawings do not declare it.")
             refs = [obj_ref(sid, o["object_id"]) for o in (tree, zone) if o]
             out.append(Check(
                 "regulation", f"{tree['object_id'] if tree else 'A tree'} is drawn inside the "
-                f"{(ex.zone or 'exclusion zone').split('—')[0].strip().lower()} — it cannot count toward greening", "flag",
+                f"{(ex.zone or 'exclusion zone').split('—')[0].strip().lower()} — not counted toward greening", "flag",
                 ["geometry", "rule"],
-                f"The canopy's centre lies inside the area labelled '{ex.zone}'. Fire-truck space is named among the areas "
-                f"where greening is impracticable (Art. 299), so the tree is left out of the greening count; it also "
-                f"blocks a lane the drawing says to keep clear.{ap_note}",
+                f"The canopy's centre lies inside the area labelled '{ex.zone}': a tree there blocks a lane the drawing "
+                f"says to keep clear, so it is left out of the greening count until the designer moves it or the "
+                f"architect accepts it.{ap_note}",
                 {"sheet_ids": [sid], "file_ids": ctx.files_of([sid]), "object_ids": refs},
                 citation=citation("BTR-299"), numbers=numbers))
     return out

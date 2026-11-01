@@ -7394,11 +7394,8 @@
     "answer": {
      "is_one_object": true,
      "kind": "tree",
-     "label": "typ. → Camphor",
-     "species_code": "CC",
-     "count": 1,
      "confidence": 0.95,
-     "model": "muse-spark"
+     "why": "Twelve short segments form a single circular canopy with centre mark matching the adjacent tree symbol of same size."
     }
    }
   },

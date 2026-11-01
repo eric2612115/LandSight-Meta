@@ -10,14 +10,20 @@ import { SheetThumb } from '../../components/SheetView'
 import { setDir, useDirector, useScript } from '../core'
 import { OnStage } from './common'
 
-const GRID = { x: 400, y: 88, w: 1480, h: 770 }
-const FOLDER = { x: 205, y: 300 }
-const STRIP_Y = 902
+const GRID = { x: 60, y: 194, w: 1800, h: 706 }
+const FOLDER = { x: 110, y: 130 }
+const STRIP_Y = 912
 
 const SHORT: Record<string, string> = {
   drawing_vector: 'vector', drawing_raster: 'raster', drawing_image: 'image', backup_ignored: 'ignored', archive_unpacked: 'unpacked',
 }
 const short = (f: FileVerdict, n: number) => (n > 12 ? SHORT[f.verdict] ?? (f.verdict === 'unsupported' && f.ext ? `.${f.ext.replace(/^\./, '')} unsupported` : verdictLabel(f)) : verdictLabel(f))
+
+/** A file name without its extension (the badge shows it), shortened in the middle so both ends stay readable. */
+const stem = (f: FileVerdict, max: number) => {
+  const ext = f.ext && f.name.toLowerCase().endsWith(f.ext.toLowerCase()) ? f.name.slice(0, -f.ext.length) : f.name
+  return ext.length <= max ? ext : `${ext.slice(0, Math.ceil(max * 0.62) - 1)}…${ext.slice(ext.length - Math.floor(max * 0.38))}`
+}
 
 const dead = (f: FileVerdict) => f.verdict === 'unsupported' || f.verdict === 'unreadable'
 const quiet = (f: FileVerdict) => dead(f) || f.verdict === 'backup_ignored'
@@ -26,17 +32,23 @@ const quiet = (f: FileVerdict) => dead(f) || f.verdict === 'backup_ignored'
 export function Drop() {
   const api = useDirector()
   const { run } = api
-  const files = run.files
+  // the package's own files (an archive's members are its verdict, not chips of their own)
+  const files = useMemo(() => run.files.filter((f) => !f.parent), [run])
   const n = files.length
-  const cols = n > 24 ? 5 : n > 12 ? 4 : n > 4 ? 3 : Math.max(1, n)
+  const cols = n > 12 ? 2 : n > 4 ? 3 : Math.max(1, n)
   const rows = Math.ceil(n / cols)
-  const gap = n > 24 ? 12 : 16
+  const gap = 20
+  const rowGap = n > 12 ? 3 : 10
   const cardW = (GRID.w - (cols - 1) * gap) / cols
-  const cardH = Math.min(n > 12 ? 100 : 128, (GRID.h - (rows - 1) * 10) / rows)
-  const gridH = rows * cardH + (rows - 1) * 10
+  const cardH = Math.min(n > 12 ? 52 : 128, (GRID.h - (rows - 1) * rowGap) / rows)
+  const gridH = rows * cardH + (rows - 1) * rowGap
   const top = GRID.y + Math.max(0, (GRID.h - gridH) / 2)
   const big = n <= 12
+  const nameMax = Math.floor((cardW - 420) / 15.5)
   const sheets = useMemo(() => files.filter((f) => f.sheet_id && sheetById(run, f.sheet_id)).map((f) => ({ f, s: sheetById(run, f.sheet_id)! })), [files, run])
+  const bills = files.filter((f) => f.verdict === 'bill').length
+  const unsupported = files.filter(dead).length
+  const missing = run.checks.filter((c) => api.scene.check_ids?.includes(c.check_id) && c.category === 'sheet' && c.severity !== 'info').length
   const thumbW = Math.min(176, (1780 - (sheets.length - 1) * 14) / Math.max(1, sheets.length))
   const thumbH = Math.round(thumbW * 0.56)
 
@@ -73,31 +85,37 @@ export function Drop() {
     await s.sleep(2600)
   })
 
-  const pos = (i: number) => ({ x: GRID.x + (i % cols) * (cardW + gap), y: top + Math.floor(i / cols) * (cardH + 10) })
+  // column-major: the folder's own order reads down the first column, then the second
+  const pos = (i: number) => (n > 12
+    ? { x: GRID.x + Math.floor(i / rows) * (cardW + gap), y: top + (i % rows) * (cardH + rowGap) }
+    : { x: GRID.x + (i % cols) * (cardW + gap), y: top + Math.floor(i / cols) * (cardH + rowGap) })
 
   return (
     <OnStage>
       <div className="absolute inset-0 bg-chrome" />
-      {/* the folder */}
+      {/* the folder, and the count line */}
       <AnimatePresence>
         {phase >= 1 && (
-          <motion.div className="absolute flex flex-col items-start" style={{ left: 60, top: 150, width: 300 }} initial={{ opacity: 0, scale: 0.85, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}>
-            <FolderOpen className="text-paper" style={{ width: 150, height: 150 }} strokeWidth={1.3} />
-            <div className="mt-5 text-[30px] font-semibold leading-tight tracking-tight text-white">{run.package.name}</div>
-            <div className="mt-3 text-[28px] text-mute"><span className="mono font-semibold text-white">{n}</span> files · <span className="mono font-semibold text-white">{sheets.length}</span> sheets</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {/* the error board */}
-      <AnimatePresence>
-        {board && (
-          <motion.div className="absolute rounded-2xl border border-line bg-[#171a1f] p-5" style={{ left: 60, top: 560, width: 300 }} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
-            {([['planted', e.planted, '#e8eaed'], ['found', e.found.length, '#3ccf7f'], ['needs review', e.flagged.length, '#8fa6ff'], ['missed', e.missed.length, e.missed.length ? '#f0a500' : '#e8eaed'], ['false alarms', e.false_alarms.length, '#e8eaed']] as const).map(([k, v, c]) => (
-              <div key={k} className="flex items-baseline justify-between py-1">
-                <span className="text-[28px] text-mute">{k}</span>
-                <span className="mono text-[36px] font-bold" style={{ color: c }}><Num value={v} duration={0.9} /></span>
+          <motion.div className="absolute flex items-center gap-6" style={{ left: 60, top: 92, width: 1800 }} initial={{ opacity: 0, scale: 0.9, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}>
+            <FolderOpen className="shrink-0 text-paper" style={{ width: 84, height: 84 }} strokeWidth={1.4} />
+            <div className="min-w-0">
+              <div className="truncate text-[34px] font-semibold leading-tight tracking-tight text-white">{run.package.name}</div>
+              <div className="mt-1 text-[28px] text-mute">
+                <span className="mono font-semibold text-white">{n}</span> files · <span className="mono font-semibold text-white">{sheets.length}</span> drawings on stage · <span className="mono font-semibold text-white">{bills}</span> bills · <span className="mono font-semibold text-white">{unsupported}</span> unsupported{missing > 0 && <> · <span className="mono font-semibold text-amber">{missing}</span> <span className="text-amber">missing</span></>}
               </div>
-            ))}
+            </div>
+            <AnimatePresence>
+              {board && (
+                <motion.div className="ml-auto flex shrink-0 items-baseline gap-6 rounded-2xl border border-line bg-[#171a1f] px-6 py-3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+                  {([['planted', e.planted, '#e8eaed'], ['found', e.found.length, '#3ccf7f'], ['review', e.flagged.length, '#8fa6ff'], ['missed', e.missed.length, e.missed.length ? '#f0a500' : '#e8eaed']] as const).map(([k, v, c]) => (
+                    <span key={k} className="flex items-baseline gap-2">
+                      <span className="text-[28px] text-mute">{k}</span>
+                      <span className="mono text-[34px] font-bold" style={{ color: c }}><Num value={v} duration={0.9} /></span>
+                    </span>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
@@ -115,12 +133,12 @@ export function Drop() {
             initial={{ x: FOLDER.x - p.x - cardW / 2, y: FOLDER.y - p.y - cardH / 2, scale: 0.3, rotate: rot, opacity: 0 }}
             animate={{ x: done && dead(f) ? [0, -12, 12, -8, 8, -3, 0] : 0, y: 0, scale: 1, rotate: 0, opacity: dim ? 0.32 : done && quiet(f) ? 0.55 : 1 }}
             transition={{ default: { delay: phase === 2 ? i * 0.045 : 0, duration: 0.42, ease: [0.16, 1, 0.3, 1] }, x: done && dead(f) ? { duration: 0.45 } : { delay: phase === 2 ? i * 0.045 : 0, duration: 0.42, ease: [0.16, 1, 0.3, 1] }, opacity: { duration: 0.3 } }}>
-            <div className="flex h-full flex-col justify-between px-4 py-3">
+            <div className={`flex h-full ${big ? 'flex-col justify-between py-3' : 'items-center justify-between gap-3'} px-4`}>
               <div className="flex min-w-0 items-center gap-2.5">
-                <span className="mono shrink-0 rounded-md bg-[#2a2f37] px-1.5 py-0.5 text-[18px] font-semibold uppercase text-soft">{(f.ext || '?').replace(/^\./, '')}</span>
-                <span className={`truncate text-[#d5d9df] ${big ? 'text-[28px]' : 'text-[22px]'}`}>{f.name}</span>
+                <span className="mono w-[58px] shrink-0 rounded-md bg-[#2a2f37] px-1.5 py-0.5 text-center text-[20px] font-semibold uppercase text-soft">{(f.ext || '?').replace(/^\./, '')}</span>
+                <span className="truncate text-[28px] text-[#e3e6ea]">{big ? f.name : stem(f, nameMax)}</span>
               </div>
-              <div className="flex h-[40px] items-center">
+              <div className="flex h-[40px] shrink-0 items-center">
                 <AnimatePresence mode="wait">
                   {done ? (
                     <motion.div key="chip" className="flex min-w-0 items-center gap-2" initial={{ opacity: 0, scale: 0.8, y: 6 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.22 }}>

@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { FileSpreadsheet } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Num } from '../../components/Num'
 import { fmt, qty } from '../../lib/format'
 import { centreOf } from '../../lib/geo'
@@ -13,15 +13,15 @@ const PANEL = 900
 const PAD = 28
 const TITLE_H = 64
 const HEAD_H = 54
-const ROW_H = 60
-const COLS = [52, 364, 92, 70, 132, 134]
+const ROW_H = 48
+const COLS = [56, 360, 92, 70, 132, 134]
 
 /** The developer's bill beside the sheet: rows aligned to drawing items, three flags, one click, NT$ running. */
 export function Bill() {
   const api = useDirector()
   const { run, scene } = api
   const d = billData(run, scene)!
-  const { rows, sheet, flags, fileName, site } = d
+  const { rows, sheet, flags, tail, fileName, site } = d
   const project = useProject()
   const [open, setOpen] = useState(false)
   const [wired, setWired] = useState(0)
@@ -29,18 +29,19 @@ export function Bill() {
   const [picked, setPicked] = useState<number | null>(null)
   const [waiting, setWaiting] = useState(false)
   const [money, setMoney] = useState(0)
+  const [hidden, setHidden] = useState(0)
 
   const first = flags.find((f) => f.cell === 'qty') ?? flags[0]
   const firstRow = rows.find((r) => r.row === first?.row)
   const extra = firstRow && firstRow.qty !== undefined && firstRow.drawn !== undefined ? firstRow.qty - firstRow.drawn : 0
   const price = firstRow?.price ?? 0
 
-  const anchors = useMemo(() => rows.map((r) => {
+  const anchors = rows.map((r) => {
     const objs = sheet.objects.filter((o) => r.objectIds.includes(o.object_id))
     if (!objs.length) return null
     const cs = objs.map(centreOf)
     return [cs.reduce((a, c) => a + c[0], 0) / cs.length, cs.reduce((a, c) => a + c[1], 0) / cs.length] as [number, number]
-  }), [rows, sheet])
+  })
 
   useScript(async (s) => {
     setDir({ panelW: 0 })
@@ -71,9 +72,14 @@ export function Bill() {
       play('tick')
       await s.sleep(250)
       setMoney(extra * price)
-      await s.sleep(2600)
+      await s.sleep(2400)
     }
-    await s.sleep(800)
+    for (let i = 0; i < tail.length; i++) {
+      setHidden(i + 1)
+      play(i === 0 ? 'whoosh' : 'thud', { volume: 0.4, rate: 0.8 })
+      await s.sleep(1300)
+    }
+    await s.sleep(900)
   })
 
   const panelLeft = STAGE.w - PANEL_MARGIN - PANEL
@@ -108,8 +114,8 @@ export function Bill() {
           <div className="flex h-full flex-col bg-[#fbfbf9] text-[#1d2026]" style={{ width: PANEL, padding: PAD }}>
             <div className="flex shrink-0 items-center gap-3 rounded-xl bg-[#eceeef] px-4" style={{ height: TITLE_H }}>
               <FileSpreadsheet className="h-8 w-8 text-[#3a3f47]" />
-              <span className="truncate text-[28px] font-semibold">{fileName}</span>
-              <span className="ml-auto rounded-md bg-[#dfe2e5] px-2 py-0.5 text-[22px] font-semibold text-[#5b616b]">the developer’s bill</span>
+              <span className="truncate text-[28px] font-semibold">{fileName.replace(/\.xlsx?$/i, '')}</span>
+              <span className="ml-auto shrink-0 whitespace-nowrap rounded-md bg-[#dfe2e5] px-2 py-0.5 text-[22px] font-semibold text-[#5b616b]">the developer’s bill</span>
             </div>
             <div className="mt-[14px] overflow-hidden rounded-xl border border-[#dadde1]">
               <div className="flex items-center bg-[#f0f1f3] text-[24px] font-semibold uppercase tracking-wide text-[#6b717b]" style={{ height: HEAD_H }}>
@@ -119,8 +125,9 @@ export function Bill() {
               </div>
               {rows.map((r, i) => {
                 const fl = flagFor(r.row)
-                const q = fl.find((f) => f.cell === 'qty')
+                const q = fl.find((f) => f.cell === 'qty' || f.cell === 'unit')
                 const pr = fl.find((f) => f.cell === 'price')
+                const un = fl.find((f) => f.cell === 'unit')
                 const off = !anchors[i] && r.sheetIds.length > 0 && !r.sheetIds.includes(sheet.sheet_id)
                 return (
                   <motion.div key={r.row} initial={false} animate={{ backgroundColor: fl.length ? '#fff1cc' : picked === r.row ? '#fff1cc' : i < wired ? '#ffffff' : '#fbfbf9', scale: fl.length ? [1.035, 1] : 1 }}
@@ -135,7 +142,7 @@ export function Bill() {
                       {off && <span className="mono shrink-0 rounded bg-[#eceef0] px-1.5 text-[20px] text-[#6b717b]">{r.sheetIds[0]}</span>}
                     </div>
                     <div className={`mono px-3 text-right ${q ? 'font-bold text-[#a86f00]' : ''}`} style={{ width: COLS[2] }}>{qty(r.qty)}</div>
-                    <div className="px-3 text-[24px] text-[#6b717b]" style={{ width: COLS[3] }}>{r.unit ?? ''}</div>
+                    <div className={`px-3 text-[24px] ${un ? 'font-bold text-[#a86f00]' : 'text-[#6b717b]'}`} style={{ width: COLS[3] }}>{r.unit ?? ''}</div>
                     <div className={`mono px-3 text-right ${pr ? 'font-bold text-[#a86f00]' : ''}`} style={{ width: COLS[4] }}>{r.price !== undefined ? fmt(r.price) : ''}</div>
                     <div className="mono px-3 text-right" style={{ width: COLS[5] }}>{r.amount !== undefined ? fmt(r.amount) : ''}</div>
                   </motion.div>
@@ -144,17 +151,36 @@ export function Bill() {
             </div>
             <div className="mt-5 space-y-2.5">
               <AnimatePresence>
-                {flags.slice(0, slammed).map((f) => {
+                {flags.slice(0, hidden ? 0 : slammed).map((f) => {
                   const r = rows.find((x) => x.row === f.row)!
+                  const n = f.check.numbers ?? {}
+                  const tag = typeof (f.check as { tag?: unknown }).tag === 'string' ? (f.check as { tag?: string }).tag : undefined
                   const text = f.cell === 'price'
                     ? `NT$${fmt(r.price)} · your list ${fmt(r.listLow)}–${fmt(r.listHigh)}`
-                    : `bill ${qty(r.qty)} · drawn ${qty(r.drawn)}`
+                    : f.cell === 'unit'
+                      ? `billed ${qty(r.qty)} ${r.unit ?? ''} · drawn ${qty(r.drawn)} ${typeof n.drawn_unit === 'string' && n.drawn_unit === 'plant' ? 'plants' : ''} — unit mismatch`
+                      : `bill ${qty(r.qty)} · drawn ${qty(r.drawn)}`
                   return (
                     <motion.div key={f.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.28 }}
-                      className="flex items-baseline gap-3 rounded-xl bg-[#fff1cc] px-4 py-2.5">
-                      <span className="mono text-[24px] font-semibold text-[#a86f00]">row {f.row}</span>
-                      <span className="text-[28px] font-semibold text-[#3d2c00]">{text}</span>
+                      className="flex flex-wrap items-baseline gap-x-3 rounded-xl bg-[#fff1cc] px-4 py-2.5">
+                      <span className="mono shrink-0 text-[24px] font-semibold text-[#a86f00]">row {f.row}</span>
+                      <span className="whitespace-nowrap text-[28px] font-semibold text-[#3d2c00]">{text}</span>
+                      {f.cell === 'price' && tag && <span className="w-full pl-[76px] text-[22px] leading-tight text-[#8a6a1f]">{tag}</span>}
                     </motion.div>
+                  )
+                })}
+              </AnimatePresence>
+            </div>
+            <div className="mt-2.5 space-y-2">
+              <AnimatePresence>
+                {tail.slice(0, hidden).map((c) => {
+                  const n = c.numbers ?? {}
+                  const text = c.category === 'arithmetic'
+                    ? `subtotal ${typeof n.formula === 'string' ? n.formula.replace(/^=/, '') : ''} skips row ${typeof n.row === 'number' ? n.row : ''} · the bill does not add up`
+                    : `${c.title.replace(/ in .*$/, '')} · other totals`
+                  return (
+                    <motion.div key={c.check_id} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
+                      className="rounded-xl bg-[#1d2026] px-4 py-2 text-[28px] font-semibold text-[#ffd27a]">{text}</motion.div>
                   )
                 })}
               </AnimatePresence>

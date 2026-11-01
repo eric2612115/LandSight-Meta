@@ -57,7 +57,19 @@ function normalise(raw: Run, src: SourceKind): Run {
       if (!Array.isArray(it.spark.points)) it.spark.points = undefined
     }
   }
-  for (const c of run.checks) c.evidence ??= {}
+  for (const c of run.checks) {
+    c.evidence ??= {}
+    const refs = c.evidence.object_ids ?? []
+    if (refs.some((r) => r.includes('/'))) {
+      const sheets = new Set(c.evidence.sheet_ids ?? [])
+      c.evidence.object_ids = [...new Set(refs.map((r) => {
+        const i = r.indexOf('/')
+        if (i > 0) sheets.add(r.slice(0, i))
+        return i > 0 ? r.slice(i + 1) : r
+      }))]
+      c.evidence.sheet_ids = [...sheets]
+    }
+  }
   return run
 }
 

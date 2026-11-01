@@ -3,7 +3,7 @@ import { bboxOf, centreOf, padBox, spread, unionBox, type BBox } from '../lib/ge
 import { num } from '../lib/format'
 import { plantName } from '../lib/english'
 import { askedObject, billRows, isRasterSheet, sheetById, tallyKey } from '../lib/model'
-import type { Check, DrawingObject, Item, Run, Scene, Sheet } from '../lib/types'
+import type { Check, DrawingObject, Fix, Item, Run, Scene, Sheet } from '../lib/types'
 
 export const firstPlan = (run: Run) => run.sheets.find((s) => s.counted && s.kind === 'plan') ?? run.sheets[0]
 
@@ -106,10 +106,22 @@ export function colourData(run: Run, scene: Scene) {
     }
   }
   if (!masks.length) return null
-  // rasters can carry untranslatable (non-English) text: vector sheets are painted from their objects instead
-  const colourHref = raster ? sheet.png_url : undefined
+  // the coloured render SAM 3.1 was given, when the run has one; else rasters show themselves and vector sheets are
+  // painted from their objects
+  const colourHref = sheet.filled_png_url ?? (raster ? sheet.png_url : undefined)
   const site = siteBox(run, sheet)
-  return { sheet, masks, raster, colourHref, site }
+  const onSheet = (c: Check) => (c.evidence.sheet_ids ?? []).includes(sheet.sheet_id)
+  const controlCheck = run.checks.find((c) => c.check_id === scene.control_check_id && c.control) ?? run.checks.find((c) => c.control && onSheet(c))
+  const control = controlCheck?.control
+  const legendCheck = run.checks.find((c) => c.legend?.length && onSheet(c))
+  const promptSource = control?.colour_prompt_source ?? legendCheck?.prompt_source ?? controlCheck?.prompt_source
+  // "beige area" -> the legend entry Muse Spark named beige: the words SAM was given came from the legend
+  const head = control?.prompt.replace(/\s+(area|circle)$/, '')
+  const entry = legendCheck?.legend?.find((l) => l.colour === head)
+  const legendLine = promptSource === 'spark_legend' && control && entry
+    ? { colour: entry.colour, label: entry.label.replace(/^[A-Z]{1,3}-?\d*\s+/, ''), prompt: control.prompt }
+    : undefined
+  return { sheet, masks, raster, colourHref, site, control, promptSource, legendLine }
 }
 
 const centreOfBox = (b: BBox): [number, number] => [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]
@@ -132,45 +144,73 @@ export function gaugeData(run: Run, scene: Scene) {
   const provided = num(n.provided)!
   const sheet = sceneSheet(run, scene)
   if (!sheet) return null
-  const fixes = (check.fixes ?? []).filter((f) => num(f.result) !== undefined).slice(0, 2)
+  const before = check.before_downgrade ?? undefined
+  const after = check.after_downgrade ?? undefined
+  const fixes = ((after ?? check).fixes ?? []).filter((f) => num(f.result) !== undefined)
+  const addFix = (st?: { fixes?: Fix[] }) => st?.fixes?.find((f) => f.id === 'a' || /^\+\s*\d+\s/.test(f.label))
+  const swapFix = (st?: { fixes?: Fix[] }) => st?.fixes?.find((f) => f.id === 'b' || /swap|change/i.test(f.label))
   const trees = run.items.find((i) => i.kind === 'tree')
   const treeIds = trees ? sheet.objects.filter((o) => trees.object_ids.includes(o.object_id)).sort((a, b) => centreOf(a)[0] - centreOf(b)[0]).map((o) => o.object_id) : []
-  const swap = fixes.find((f) => /swap|change/i.test(f.label))
-  const words: Record<string, number> = { one: 1, two: 2, three: 3, four: 4 }
-  const kRaw = swap?.label.match(/(?:swap|change)\s+(\w+)/i)?.[1]?.toLowerCase() ?? '0'
-  const k = Number.isFinite(Number(kRaw)) ? Number(kRaw) : words[kRaw] ?? 0
+  const swap = swapFix(after) ?? swapFix(check)
+  const k = Number(swap?.label.match(/(?:swap|change)\s+(\d+)/i)?.[1] ?? 1)
   const swapped = swap?.object_ids?.length ? swap.object_ids : spread(treeIds, k)
   const second = swap?.label.match(/(?:for|to)\s+([A-Z][a-z]+)/)?.[1] ?? 'Bischofia'
-  return { check, required, provided, fixes, sheet, swapped, second, alpha: num(n.alpha), site: siteBox(run, sheet) }
+  const detail = after?.pit ? sheetById(run, after.pit.sheet_id) : run.sheets.find((s) => s.detail)
+  const pitCheck = run.checks.find((c) => scene.check_ids?.includes(c.check_id) && c !== check && num(c.numbers?.pit_area_m2) !== undefined)
+  return {
+    check, required, provided, fixes, sheet, swapped, second, alpha: num(n.alpha), site: siteBox(run, sheet),
+    before, after, add0: addFix(before), add1: addFix(after) ?? addFix(check), swap, k, detail, pitCheck,
+    A0: num(n.A0), r: num(n.r),
+  }
 }
+
+export type BillFlag = { id: string; row: number; cell: 'qty' | 'unit' | 'price'; check: Check }
 
 export function billData(run: Run, scene: Scene) {
   const rows = billRows(run)
   if (!rows.length) return null
   const sheet = sceneSheet(run, scene)
   if (!sheet) return null
-  const order = (scene.check_ids ?? []).filter((id) => rows.some((r) => r.checks.some((c) => c.check_id === id && c.severity !== 'info')))
-  const flags = (order.length ? order : rows.flatMap((r) => r.checks.filter((c) => c.severity !== 'info').map((c) => c.check_id))).slice(0, 3).map((id) => {
+  const isFlag = (c: Check) => c.severity !== 'info' && c.severity !== 'review'
+  const wanted = scene.amber_check_ids?.length ? scene.amber_check_ids : (scene.check_ids ?? [])
+  const order = wanted.filter((id) => rows.some((r) => r.checks.some((c) => c.check_id === id && isFlag(c))))
+  const ids = order.length ? order : rows.flatMap((r) => r.checks.filter(isFlag).map((c) => c.check_id))
+  const flags: BillFlag[] = [...new Set(ids)].slice(0, 3).map((id) => {
     const row = rows.find((r) => r.checks.some((c) => c.check_id === id))!
     const c = row.checks.find((x) => x.check_id === id)!
-    const price = num(c.numbers?.list_low) !== undefined
-    return { id, row: row.row, cell: price ? 'price' as const : 'qty' as const, check: c }
+    const cell = c.category === 'price' ? 'price' as const : c.category === 'units' ? 'unit' as const : 'qty' as const
+    return { id, row: row.row, cell, check: c }
   })
-  const file = run.files.filter((f) => f.verdict === 'bill').sort((a, b) => b.name.localeCompare(a.name)).find((f) => /rev2|current/i.test(f.name + f.why)) ?? run.files.find((f) => f.verdict === 'bill')
-  return { rows, sheet, flags, fileName: file?.name ?? 'Bill of quantities', site: siteBox(run, sheet) }
+  // what the bill hides: flags on the workbook itself (a hidden sheet) and its arithmetic (a subtotal that skips rows)
+  const tail = run.checks.filter((c) => scene.check_ids?.includes(c.check_id) && !flags.some((f) => f.id === c.check_id)
+    && (c.category === 'arithmetic' || (c.category === 'bill' && isFlag(c))))
+  const fileId = rows.map((r) => r.checks.map((c) => c.numbers?.bill_file).find((x) => typeof x === 'string')).find(Boolean) as string | undefined
+  const file = (fileId ? run.files.find((f) => f.file_id === fileId) : undefined) ?? run.files.filter((f) => f.verdict === 'bill').sort((a, b) => b.name.localeCompare(a.name))[0]
+  return { rows, sheet, flags, tail, fileName: file?.name ?? 'Bill of quantities', site: siteBox(run, sheet) }
 }
 
 export function callbackData(run: Run, scene: Scene) {
   const elev = sheetById(run, scene.sheet_id) ?? run.sheets.find((s) => s.kind === 'elevation')
   if (!elev || elev.kind !== 'elevation') return null
   const etrees = elev.objects.filter((o) => o.kind === 'tree').sort((a, b) => centreOf(a)[0] - centreOf(b)[0])
-  const plan = run.sheets.find((s) => s.counted && s.kind === 'plan' && s.objects.some((o) => o.kind === 'tree' && !o.excluded))
+  const plan = (scene.sheet_ids ?? []).map((id) => sheetById(run, id)).find((s) => s && s.counted && s.kind === 'plan') ??
+    run.sheets.find((s) => s.counted && s.kind === 'plan' && s.objects.some((o) => o.kind === 'tree' && !o.excluded))
   if (!plan || !etrees.length) return null
   const ptrees = plan.objects.filter((o) => o.kind === 'tree' && !o.excluded && o.by !== 'sam').sort((a, b) => centreOf(a)[0] - centreOf(b)[0])
   const byId = etrees.every((e) => ptrees.some((p) => p.object_id === e.object_id))
   const pairs = byId ? etrees.map((e) => [e, ptrees.find((p) => p.object_id === e.object_id)!] as const) : etrees.slice(0, ptrees.length).map((e, i) => [e, ptrees[i]] as const)
   const check = run.checks.find((c) => scene.check_ids?.includes(c.check_id) && c.category === 'sheet') ?? run.checks.find((c) => c.category === 'sheet' && (c.evidence.sheet_ids ?? []).includes(elev.sheet_id))
-  return { elev, plan, pairs, check }
+  // the enlarged plan whose title and scale bar disagree: product output, never the cause of the bill's twelve
+  const scale = run.checks.find((c) => scene.check_ids?.includes(c.check_id) && c.category === 'scale') ??
+    run.checks.find((c) => c.category === 'scale' && c.severity !== 'info')
+  const enlarged = scale ? sheetById(run, (scale.evidence.sheet_ids ?? [])[0]) : undefined
+  const scaleChip = scale && enlarged ? {
+    number: enlarged.number,
+    title: typeof scale.numbers?.scale_title === 'string' ? scale.numbers.scale_title : enlarged.scale_title,
+    measured: typeof scale.numbers?.scale_measured === 'string' ? scale.numbers.scale_measured : enlarged.scale_measured,
+    enlarged: /enlarged/i.test(enlarged.title) || /enlarged/i.test(enlarged.not_counted_reason ?? ''),
+  } : undefined
+  return { elev, plan, pairs, check, scaleChip }
 }
 
 export function sceneAvailable(run: Run, s: Scene): boolean {

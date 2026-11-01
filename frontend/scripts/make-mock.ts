@@ -878,7 +878,7 @@ function main() {
       spark: {
         crop_url: '/mock/crops/I-01.svg', confidence: 0.95, points,
         why: 'Twelve straight pieces form one ring of radius 2.0 m with gaps under 0.4 m; the centre cross matches the seven closed canopies; "CAMPHOR, typ." on T-03 applies to identical symbols.',
-        answer: { is_one_object: true, kind: 'tree', label: 'typ. → Camphor', species_code: 'CC', count: 1, confidence: 0.95, model: 'muse-spark' },
+        answer: { is_one_object: true, kind: 'tree', confidence: 0.95, why: 'Twelve short segments form a single circular canopy with centre mark matching the adjacent tree symbol of same size.' },
       },
     },
     { item_id: 'I-02', kind: 'hedge', label: 'Duranta', species_code: 'DE', unit: 'plant', geometry_count: 182, spark_count: 182, schedule_count: 182, label_count: 1, agreed: true, quote_count: 182, object_ids: ['H-01'], sheet_ids: ['L-1'] },

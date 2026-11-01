@@ -1,7 +1,9 @@
 """FastAPI on :8795, the backend half of docs/API.md. The frontend (Vite + React, :5195) lives in frontend/.
 
   GET  /api/health                     {ok, spark: fixtures | live, version}
-  POST /api/package/open               body {"path": folder} or empty (the sample package; the m4 site until it exists)
+  POST /api/package/open               body {"path": folder} or empty: the sample package (samples/greenfield) through
+                                       landsight.review, recorded Meta calls; ?live=1 live Muse Spark and SAM 3.1;
+                                       ?site=m4 the older m4 synthetic site (landsight/app/run.py)
   GET  /api/run                        the last Run
   POST /api/items/{item_id}/confirm    a person confirms a flagged item -> Item
   GET  /api/sheets/{sheet_id}.svg      the sheet as it prints (also .png, and .filled.png: the coloured render SAM saw)
@@ -16,6 +18,7 @@ from fastapi import Body, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 
+from landsight.app.package import PackageState
 from landsight.app.run import VERSION, RunState
 
 PORT = 8795
@@ -28,12 +31,15 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
     except those named in LANDSIGHT_FEATURES_OFF)."""
     app = FastAPI(title="Landsight", version=VERSION, docs_url=None, redoc_url=None)
     app.add_middleware(CORSMiddleware, allow_origins=FRONTEND_ORIGINS, allow_methods=["*"], allow_headers=["*"])
-    state = RunState(features)
-    app.state.landsight = state
+    m4, package = RunState(features), PackageState()
+    current: dict = {"state": None}
+    app.state.landsight = current
 
     def need_run():
-        if state.takeoff is None:
+        st = current["state"]
+        if st is None or (st is m4 and m4.takeoff is None) or (st is package and not package.opened):
             raise HTTPException(404, "no package opened: POST /api/package/open first")
+        return st
 
     @app.get("/")
     def root():
@@ -41,34 +47,40 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
 
     @app.get("/api/health")
     def health():
-        return {"ok": True, "spark": "live" if state.live else "fixtures", "version": VERSION}
+        st = current["state"]
+        return {"ok": True, "spark": "live" if st is not None and st.live else "fixtures", "version": VERSION}
 
     @app.post("/api/package/open")
-    def open_package(body: dict | None = Body(default=None), live: int = 0):
+    def open_package(body: dict | None = Body(default=None), live: int = 0, site: str = ""):
+        path = (body or {}).get("path")
+        st = m4 if site == "m4" else package
+        if site not in ("", "m4", "package"):
+            raise HTTPException(400, f"unknown site {site!r}: leave it out for the package, or site=m4")
         try:
-            return JSONResponse(state.open((body or {}).get("path"), live=bool(live)))
+            out = st.open(path, live=bool(live))
         except ValueError as e:
             raise HTTPException(400, str(e)) from e
+        current["state"] = st
+        return JSONResponse(out)
 
     @app.get("/api/run")
     def run():
-        need_run()
-        return JSONResponse(state.run())
+        return JSONResponse(need_run().run())
 
     @app.post("/api/items/{item_id}/confirm")
     def confirm(item_id: str):
-        need_run()
+        st = need_run()
         try:
-            return JSONResponse(state.confirm(item_id))
+            return JSONResponse(st.confirm(item_id))
         except KeyError as e:
             raise HTTPException(404, f"no item {item_id}") from e
 
     @app.get("/api/sheets/{name}")
     def sheet(name: str):
-        need_run()
+        st = need_run()
         for kind in ("filled.png", "svg", "png"):
             if name.endswith("." + kind):
-                data = state.render(name[: -len(kind) - 1], kind)
+                data = st.render(name[: -len(kind) - 1], kind)
                 if data is None:
                     break
                 return Response(data, media_type=MEDIA[kind])
@@ -76,21 +88,19 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
 
     @app.get("/api/crops/{name}")
     def crop(name: str):
-        need_run()
-        data = state.crop(name.removesuffix(".png")) if name.endswith(".png") else None
+        st = need_run()
+        data = st.crop(name.removesuffix(".png")) if name.endswith(".png") else None
         if data is None:
             raise HTTPException(404, f"no crop {name}")
         return Response(data, media_type="image/png")
 
     @app.get("/api/rules")
     def rules():
-        need_run()
-        return JSONResponse(state.rules())
+        return JSONResponse(need_run().rules())
 
     @app.get("/api/director")
     def director():
-        need_run()
-        return JSONResponse(state.director())
+        return JSONResponse(need_run().director())
 
     return app
 

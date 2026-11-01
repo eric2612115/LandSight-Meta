@@ -16,7 +16,7 @@ from landsight.app.english import has_cjk
 @pytest.fixture(scope="module")
 def client():
     c = TestClient(create_app())
-    c.post("/api/package/open")
+    c.post("/api/package/open?site=m4")
     return c
 
 
@@ -42,7 +42,7 @@ def test_health_and_cors():
 
 
 def test_open_gives_the_eight_items(client):
-    run = client.post("/api/package/open").json()
+    run = client.post("/api/package/open?site=m4").json()
     assert [i["item_id"] for i in run["items"]] == [f"I-0{n}" for n in range(1, 9)]
     tree = run["items"][0]
     assert (tree["label"], tree["species_code"], tree["unit"]) == ("Camphor", "CC", "plant")
@@ -75,14 +75,14 @@ def test_every_string_is_english_except_citation_urls(client):
 
 
 def test_confirm_flips_agreed_and_updates_the_tally(client):
-    client.post("/api/package/open")
+    client.post("/api/package/open?site=m4")
     item = client.post("/api/items/I-01/confirm").json()
     assert item["agreed"] and item["confirmed"] and item["quote_count"] == 8
     run = client.get("/api/run").json()
     assert run["tally"][0]["drawn"] == 8 and run["tally"][0]["status"] == "confirmed"
     assert run["checks"][0]["severity"] == "info" and run["checks"][0]["title"].endswith("confirmed")
     assert client.post("/api/items/I-99/confirm").status_code == 404
-    assert not client.post("/api/package/open").json()["items"][0]["agreed"]
+    assert not client.post("/api/package/open?site=m4").json()["items"][0]["agreed"]
 
 
 def test_rules_numbers(client):

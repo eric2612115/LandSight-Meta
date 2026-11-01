@@ -93,6 +93,22 @@ def test_regulation_checks_cite_and_e30_names_the_greening_report(run):
     assert e30 and re.search(r"greening quantity report.*TCO2", e30[0]["title"], re.I)
 
 
+def test_fire_lane_states_the_299_variant_as_a_condition(run):
+    """D-43 (resolved B): the main greening check keeps Ap = 0; E09 states the §299 figure only as a condition, with
+    the requirement and the tree fix computed by the greening rule run with Ap = the lane's measured area."""
+    e09 = next(c for c in run["checks"] if c["check_id"] == "E09")
+    n = e09["numbers"]
+    a0, r, beta = 1500.0, 0.4, 0.66  # the title block's site facts; β for an ordinary site
+    assert n["zone_m2"] == 92.0 and n["required_ap0"] == 297.0
+    assert n["required_with_lane_as_ap"] == pytest.approx(round(0.5 * (a0 - n["zone_m2"]) * (1 - r) * beta, 1))
+    assert (n["tree_fix_ap0"], n["tree_fix_with_lane_as_ap"], n["with_lane_as_ap"]) == (7, 6, "fail")
+    assert ("If the architect confirms this strip is fire-truck rescue space under §299, the requirement drops to "
+            "278.8 kgCO2e/yr — still a fail — and the tree fix becomes +6.") in e09["why"]
+    assert "impracticable (Art. 299), so" not in e09["why"]
+    green = next(c for c in run["checks"] if c["category"] == "regulation" and c["title"].startswith("Greening"))
+    assert green["numbers"]["Ap"] == 0.0 and green["numbers"]["required"] == 297.0
+
+
 def test_the_run_validates_and_is_english(run):
     assert validate(run) == []
     assert not CJK.search(json.dumps(run, ensure_ascii=False))

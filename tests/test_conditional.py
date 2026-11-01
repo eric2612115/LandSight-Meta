@@ -21,7 +21,7 @@ ALL_OFF = {"grounding_points": False, "spark_legend": False, "sam_control": Fals
 
 def _open(features=None) -> dict:
     c = TestClient(create_app(features))
-    run = c.post("/api/package/open").json()
+    run = c.post("/api/package/open?site=m4").json()
     return {"client": c, "run": run, "rules": c.get("/api/rules").json(), "director": c.get("/api/director").json()}
 
 

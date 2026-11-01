@@ -210,17 +210,22 @@ const ObjectLayer = memo(function ObjectLayer({ objects, looks, ink, onClick }: 
 
 type Anchor = { x: number; y: number; dx: number; dy: number; anchor: 'middle' | 'end' }
 
-/** Where an ID tag sits: inside a canopy when it fits, else alternately above and below the row. */
+/** A tree symbol's centre cross reaches about a quarter of the radius each way; a tag inside starts below it. */
+const CROSS = 0.3
+
+/** Where an ID tag sits: never on the centre cross. Inside a canopy, under the cross, when it fits there; else above
+ * the canopy (alone) or alternately above and below the row (a row of trees). */
 function tagAnchor(o: DrawingObject, tagSize: number, k: number, text: string, rank: number): Anchor {
   const b = bboxOf(o.outline)
   const [cx, cy] = centreOf(o)
   if (o.kind === 'hedge' && b.y1 - b.y0 > (b.x1 - b.x0) * 3) return { x: b.x0, y: cy, dx: -12, dy: tagSize * 0.35, anchor: 'end' }
   if (o.kind === 'tree' || o.kind === 'existing_tree') {
-    const fits = (b.x1 - b.x0) * k >= text.length * tagSize * 0.62 + 10
-    if (fits || rank < 0) return { x: cx, y: cy, dx: 0, dy: tagSize * 0.36, anchor: 'middle' }
-    return rank % 2 === 1
-      ? { x: cx, y: b.y1, dx: 0, dy: -tagSize * 0.32, anchor: 'middle' }
-      : { x: cx, y: b.y0, dx: 0, dy: tagSize * 1.02, anchor: 'middle' }
+    const r = (b.y1 - b.y0) / 2
+    const wide = (b.x1 - b.x0) * 0.78 * k >= text.length * tagSize * 0.62 + 10
+    const tall = r * (0.92 - CROSS) * k >= tagSize * 0.9
+    if (wide && tall) return { x: cx, y: cy - r * CROSS, dx: 0, dy: tagSize * 0.82, anchor: 'middle' }
+    if (rank < 0 || rank % 2 === 1) return { x: cx, y: b.y1, dx: 0, dy: -tagSize * 0.32, anchor: 'middle' }
+    return { x: cx, y: b.y0, dx: 0, dy: tagSize * 1.02, anchor: 'middle' }
   }
   return { x: cx, y: cy, dx: 0, dy: -tagSize * 0.25, anchor: 'middle' }
 }
