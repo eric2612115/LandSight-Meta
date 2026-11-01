@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Lockup } from '../components/Brand'
 import { SheetView, type SheetHandle } from '../components/SheetView'
 import { SourceLegend } from '../components/SourceLegend'
+import { CurrencyToggle } from '../components/CurrencyToggle'
 import { SourceToggle } from '../components/SourceToggle'
 import { Tally } from '../components/Tally'
 import { useRules, useRun } from '../lib/api'
@@ -101,6 +102,7 @@ function Product({ run }: { run: Run }) {
         </div>
         <div className="ml-auto flex items-center gap-5">
           <SourceLegend size={14} />
+          <CurrencyToggle rate={run.currency} />
           <SourceToggle className="relative" dropDown />
           <a href="?director=1" className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-[13px] text-soft hover:border-line-2 hover:text-white">
             <Clapperboard className="h-4 w-4" /> Director

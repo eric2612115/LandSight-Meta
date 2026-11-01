@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -202,8 +203,14 @@ def _unpack(rec: FileRecord, dest: Path) -> list[FileRecord]:
     dest = dest.resolve()
     try:
         members = unpack_zip(rec.abs_path, dest)
+    except zipfile.BadZipFile as e:  # not a zip at all, or a damaged one: this file only, never the package
+        rec.verdict, rec.decided_by, rec.why = "unreadable", "content", f"not a valid zip ({e})"
+        return []
     except (UnsafeArchive, OSError, ValueError) as e:
         rec.verdict, rec.decided_by, rec.why = "unreadable", "content", f"archive not unpacked: {e}"
+        return []
+    except Exception as e:  # noqa: BLE001 - encrypted, unknown compression, a broken member stream
+        rec.verdict, rec.decided_by, rec.why = "unreadable", "content", f"archive not unpacked ({type(e).__name__}: {e})"
         return []
     out = []
     for i, m in enumerate(sorted(members, key=lambda q: q.relative_to(dest).as_posix()), 1):

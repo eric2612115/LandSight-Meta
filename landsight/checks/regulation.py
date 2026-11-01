@@ -19,6 +19,19 @@ def _en(name: str) -> str:
         return name
 
 
+def greening_plantings(ctx) -> list:
+    """The take-off's plantings as the greening rule counts them: lawn that paving on another sheet is drawn over
+    (ctx.paved_lawn, from the overlap check) is left out of the lawn's area."""
+    from landsight.rules import plantings_from_takeoff
+
+    out = plantings_from_takeoff(ctx._takeoff)
+    for p in out:
+        hit = (getattr(ctx, "paved_lawn", None) or {}).get(p.item_id) if p.kind == "lawn" else None
+        if hit:
+            p.less_m2, p.less_why = hit["m2"], hit["why"]
+    return out
+
+
 def lane_as_ap(ctx, area_m2: float) -> dict | None:
     """The greening rule run again with Ap = the lane's measured area (D-43, resolved B): what the requirement and the
     tree fix would be IF the architect declares the strip fire-truck rescue space under §299. Nothing is subtracted in
@@ -26,12 +39,11 @@ def lane_as_ap(ctx, area_m2: float) -> dict | None:
     if ctx.site is None or getattr(ctx, "_takeoff", None) is None:
         return None
     from landsight.rules import greening as G
-    from landsight.rules import plantings_from_takeoff
 
     s2 = copy.copy(ctx.site)
     s2.hard_to_green_m2 = area_m2
-    base = ctx.greening if ctx.greening is not None else G.check(ctx.site, plantings_from_takeoff(ctx._takeoff), pit=ctx.pit)
-    alt = G.check(s2, plantings_from_takeoff(ctx._takeoff), pit=ctx.pit)
+    base = ctx.greening if ctx.greening is not None else G.check(ctx.site, greening_plantings(ctx), pit=ctx.pit)
+    alt = G.check(s2, greening_plantings(ctx), pit=ctx.pit)
     if alt.required is None or base.required is None:
         return None
     fix0 = next((f for f in base.fixes if f.id == "a"), None)
@@ -99,8 +111,11 @@ def greening(ctx) -> list[Check]:
     if res.required is not None:
         state = (f" ({before['provided']:.1f} before the tree-pit rule)" if before else "")
         species = sorted({_en(t['species']) for t in (after or before or {}).get("trees", [])}) or [it["label"] for it in trees]
+        less = [p for p in greening_plantings(ctx) if p.less_m2] if getattr(ctx, "_takeoff", None) is not None else []
         why = (f"Required TCO2c = 0.5 × A′ {v.get('A′')} m² × β {v.get('β')} = {res.required:.1f}; provided (ΣGi·Ai "
                f"{v.get('ΣGi·Ai')}) × α {v.get('α')} = {res.provided:.1f} kgCO2e/yr. "
+               + "".join(f"{_en(p.species)} counted as {p.area_m2 - p.less_m2:g} m², not {p.area_m2:g}: {p.less_why}. "
+                         for p in less)
                + (f"One tree species ({', '.join(species)}), so ra = 0 and α = {v.get('α')}. " if len(species) == 1 else "")
                + ("Fixes: " + "; ".join(f"{f['label']} → {f['result']:g}" for f in fixes) + "." if fixes else ""))
         out.append(Check(
@@ -155,8 +170,9 @@ def _fix(f) -> dict:
         label = f"+{n} {_en(sp)}, the same species"
     elif "swap" in ch:
         s = ch["swap"]
+        kind = "native species" if s.get("to_native", True) else "bird- or butterfly-attracting species"
         label = (f"Change {s['n']} {s.get('from_en') or _en(s['from'])} to {s.get('to_en') or _en(s['to'])}, a second "
-                 f"native species (α → {f.alpha:.2f}); no extra trees")
+                 f"{kind} (α → {f.alpha:.2f}); no extra trees")
     else:
         label = f"+{ch.get('add_shrub_m2')} m² of shrub bed (Gi 0.5)"
     return {"label": label, "result": f.provided, "passes": f.passes, "id": f.id, "extra_trees": f.extra_trees,

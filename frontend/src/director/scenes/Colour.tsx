@@ -27,6 +27,9 @@ export function Colour() {
   const [labels, setLabels] = useState(0)
   const ownColour = !(raster && colourHref === sheet.png_url)
   const found = masks.slice(0, bloom).reduce((a, m) => a + m.polys.length, 0)
+  // the header names one prompt, so its count is the Run's count for that prompt (the controlled test's two numbers);
+  // without a controlled test it counts the masks shown so far
+  const headCount = control ? (lines ? control.masks_on_lines : bloom > 0 ? control.masks_on_colour : control.masks_on_lines) : found
   const radius = useMemo(() => masks.map((m) => Math.max(...m.polys.flat().map(([x, y]) => Math.hypot(x - m.centre[0], y - m.centre[1])))), [masks])
 
   useScript(async (s) => {
@@ -124,7 +127,7 @@ export function Colour() {
           {badge && (
             <motion.div key="badge" className="absolute left-[150px] top-[110px] flex items-center gap-3 rounded-2xl bg-violet px-6 py-3 text-[34px] font-semibold text-white shadow-[0_14px_40px_rgba(122,60,255,0.35)]"
               initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-              <span>SAM 3.1 · {control && <span className="mono font-normal">"{control.prompt}"{lines ? ' on line work' : ''} · </span>}<motion.span key={lines ? 'ctl' : found} className="mono inline-block" initial={{ scale: 1.35 }} animate={{ scale: 1 }}>{lines && control ? control.masks_on_lines : found}</motion.span> {(lines && control ? control.masks_on_lines : found) === 1 ? 'mask' : 'masks'}</span>
+              <span>SAM 3.1 · {control && <span className="mono font-normal">"{control.prompt}"{lines ? ' on line work' : ''} · </span>}<motion.span key={lines ? 'ctl' : headCount} className="mono inline-block" initial={{ scale: 1.35 }} animate={{ scale: 1 }}>{headCount}</motion.span> {headCount === 1 ? 'mask' : 'masks'}</span>
               {trees && labels > masks.indexOf(trees) && (
                 <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="border-l border-white/30 pl-3 text-[28px] font-medium">
                   {trees.label}{trees.sam !== undefined && <span className="mono"> · {fmt(trees.sam, 1)} m²</span>}

@@ -63,7 +63,9 @@ export function hedgeData(run: Run, scene: Scene) {
   const typCheck = run.checks.find((c) => num(c.numbers?.label_at_x) !== undefined)
   const typAt = typCheck ? [num(typCheck.numbers!.label_at_x)!, num(typCheck.numbers!.label_at_y)!] as [number, number] : undefined
   const vertical = b.y1 - b.y0 >= b.x1 - b.x0
-  return { sheet, item, obj, count, rows, length, per, spacing, legend, typAt, vertical, box: b }
+  // who read the planting note (@0.3 m · 2 rows): the check's own `by`, never assumed (D-12: hedge rows are not sent to Spark)
+  const noteBy: 'spark' | 'geometry' | 'rule' = check?.by?.includes('spark') ? 'spark' : check?.by?.includes('geometry') || !check ? 'geometry' : 'rule'
+  return { sheet, item, obj, count, rows, length, per, spacing, legend, typAt, vertical, box: b, noteBy }
 }
 
 const area = (o: DrawingObject) => {

@@ -128,13 +128,13 @@ def test_rules_and_both_gauge_states(api):
     g = next(r for r in rules if r["title"].startswith("Greening"))
     n = g["numbers"]
     assert (n["required"], n["provided"], n["A0"], n["Ap"], n["r"], n["A_prime"], n["beta"], n["alpha"]) == \
-        (297.0, 214.7, 1500.0, 0.0, 0.4, 900.0, 0.66, 0.8)
+        (297.0, 209.9, 1500.0, 0.0, 0.4, 900.0, 0.66, 0.8)  # the lawn without the 20 m² under grass pavers (E10)
     before, after = g["before_downgrade"], g["after_downgrade"]
-    assert before["provided"] == 265.9 and after["provided"] == 214.7
+    assert before["provided"] == 261.1 and after["provided"] == 209.9
     fa = {f["id"]: f for f in before["fixes"]}
     fb = {f["id"]: f for f in after["fixes"]}
     assert fa["a"]["extra_trees"] == 2 and fb["a"]["extra_trees"] == 7
-    assert fb["b"]["extra_trees"] == 0 and fb["b"]["object_ids"] == ["T-05"] and fb["b"]["result"] == pytest.approx(348.92)
+    assert fb["b"]["extra_trees"] == 0 and fb["b"]["object_ids"] == ["T-05"] and fb["b"]["result"] == pytest.approx(341.12)
     assert after["pit"]["sheet_id"] == "L-6" and after["pit"]["area_m2"] == 2.25 and after["downgraded"][0]["to_gi"] == 1.0
 
 

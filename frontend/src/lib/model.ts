@@ -47,7 +47,9 @@ export function cropWindow(o: DrawingObject): BBox {
 
 /** Grounding points onto the crop, in 0..1 of its width/height. Metres near the object, else normalised or pixels. */
 export function pointsOnCrop(points: [number, number][] | undefined, o: DrawingObject | undefined, natural?: { w: number; h: number }): [number, number][] {
-  if (!points?.length) return []
+  if (!Array.isArray(points) || !points.length) return []
+  points = points.filter((p): p is [number, number] => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1]))
+  if (!points.length) return []
   const win = o ? cropWindow(o) : null
   const inside = (p: [number, number]) => win && p[0] >= win.x0 - 3 && p[0] <= win.x1 + 3 && p[1] >= win.y0 - 3 && p[1] <= win.y1 + 3
   if (win && points.every(inside)) return points.map(([x, y]) => [(x - win.x0) / (win.x1 - win.x0), (win.y1 - y) / (win.y1 - win.y0)])

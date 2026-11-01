@@ -261,7 +261,10 @@ class PackageState:
             raise KeyError(item_id)
         if not item["agreed"] and item.get("proposed_count") is not None:
             self.confirmed.add(item_id)
-        return next(i for i in self.run()["items"] if i["item_id"] == item_id)
+        out = next(i for i in self.run()["items"] if i["item_id"] == item_id)
+        if item["agreed"]:  # every source already agreed: nothing to confirm, and the answer says so
+            out |= {"confirmed": True, "note": "already agreed"}
+        return out
 
     def rules(self) -> list[dict]:
         return [c for c in self.run()["checks"] if c["category"] == "regulation"]

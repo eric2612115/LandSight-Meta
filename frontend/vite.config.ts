@@ -28,16 +28,21 @@ function repoMock(): Plugin {
   }
 }
 
+/** The API the dev server proxies /api to: :8795 unless VITE_API_PORT says otherwise
+ * (`uv run python -m landsight serve --port 8796` + `VITE_API_PORT=8796 npm run dev`). */
+const API = `http://127.0.0.1:${process.env.VITE_API_PORT || '8795'}`
+
+// strictPort false: when 5195 is taken, Vite takes the next free port and prints it (or pin one with --port)
 export default defineConfig({
   plugins: [react(), tailwindcss(), repoMock()],
   server: {
     port: 5195,
-    strictPort: true,
-    proxy: { '/api': { target: 'http://localhost:8795', changeOrigin: true } },
+    strictPort: false,
+    proxy: { '/api': { target: API, changeOrigin: true } },
   },
   preview: {
     port: 5195,
-    strictPort: true,
-    proxy: { '/api': { target: 'http://localhost:8795', changeOrigin: true } },
+    strictPort: false,
+    proxy: { '/api': { target: API, changeOrigin: true } },
   },
 })

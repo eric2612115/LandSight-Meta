@@ -282,7 +282,9 @@ def checks(bills: list[Bill], matches: dict[str, Match], drawn: dict[str, dict],
         out.append(Check(
             "bill", f"'{desc}' aligned to {name} ({m.code}) at confidence {m.confidence:.2f}", "review",
             ["spark" if m.by == "spark" else "rule", "bill"],
-            f"The bill spells it '{near[0]}'; the drawing's schedule says {name}. "
+            f"The bill spells it '{near[0]}'; "
+            + (f"the drawing's schedule says {name}. " if drawn[m.code].get("schedule_qty") is not None
+               else f"the drawing labels it {name} (no plant schedule was read). ")
             + (f"Muse Spark: {m.why}" if m.by == "spark" else "Matched by rule.") + " Confirm it is the same item.",
             {"file_ids": sorted({c.split(':')[0] for c in cells}), "cells": cells},
             numbers={"confidence": round(m.confidence, 2)}))

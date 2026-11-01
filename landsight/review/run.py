@@ -25,6 +25,7 @@ from shapely.geometry import Point, Polygon
 
 from landsight.bill import align as A
 from landsight.bill import compare as BC
+from landsight.bill import money
 from landsight.bill.reader import read as read_bill
 from landsight.checks import area, document, ingest as ingest_checks, protected_tree, quantity, regulation, revision
 from landsight.checks import scale, sheet as sheet_checks
@@ -68,6 +69,7 @@ class Context:
     city: str = ""
     details: dict = field(default_factory=dict)  # detail sheet_id -> Spark's read_detail answer
     tree_counts: dict = field(default_factory=dict)
+    paved_lawn: dict = field(default_factory=dict)  # lawn item_id -> {m2, why}: paving drawn over it on another sheet
 
     def file(self, fid):
         return next(f for f in self.files if f.file_id == fid)
@@ -234,6 +236,8 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
             _wait(img_jobs)
             _wait(align_jobs)
         matches, align_note = align_box.get("result", ({}, "no bills"))
+        if align_note and ctx.bills:  # Muse Spark's alignment fell back to the name rule: say so at run level too
+            notes.append(f"bill alignment: {align_note}")
         ctx.prices = BC.load_price_list(price_path)
         _greening(ctx, notes)
         sam = sam or COL.ReviewSam(COL.mode_for(mode))
@@ -265,7 +269,7 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
         for c in document.documents(ctx, green):
             c.check_id = f"C-{len(checks) + 1:02d}"
             checks.append(c)
-        check_dicts = [c.api() for c in checks]
+        check_dicts = [money.add_usd(c.api()) for c in checks]  # USD beside every TWD figure (one dated rate)
         for c in check_dicts:  # the gauge's two states (before / after the tree-pit rule) on the greening check
             if c["category"] == "regulation" and c["title"].startswith("Greening"):
                 c.update(gauge.downgrade_states(ctx.greening))
@@ -293,6 +297,7 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
                        + [{"call": e["call"], "model": e["model"], "seconds": e["seconds"], "recorded": e["recorded"],
                            "prompt_source": e["prompt_source"]} for e in sam.log]},
             "notes": notes + spark.errors,
+            "currency": money.currency(),
             "version": VERSION,
         }
         if keep is not None:
@@ -442,7 +447,11 @@ def _item_label(it, book) -> tuple[str, str | None, str]:
         return c.name, c.code, c.botanical
     if it.kind == "planter_edge":
         return "Planter edge", None, ""
-    return (it.label or "").strip().capitalize(), None, ""
+    words = (it.label or "").strip().split()
+    if len(words) > 1 and (re.fullmatch(r"[A-Z]{1,3}-?\d{1,2}", words[0])
+                           or (re.fullmatch(r"[A-Z]{1,3}", words[0]) and words[1].upper().startswith(words[0]))):
+        words = words[1:]  # a legend code in front of the name ('LA LAWN', 'PV-1 PERMEABLE PAVERS'): the name only
+    return " ".join(words).capitalize(), None, ""
 
 
 def _objects(ctx: Context, by_id: dict) -> None:
@@ -713,7 +722,7 @@ def _greening(ctx: Context, notes: list[str]) -> None:
         return
     try:
         from landsight.rules import greening as G
-        from landsight.rules import plantings_from_takeoff, site_facts
+        from landsight.rules import site_facts
         from landsight.rules.base import CITY_EN as RULE_CITIES
 
         counted = [d for d in ctx.sheets if d.counted]
@@ -727,7 +736,11 @@ def _greening(ctx: Context, notes: list[str]) -> None:
         if not site.city and ctx.city:
             site.city = next((zh for zh, en in RULE_CITIES.items() if en == ctx.city), "")
         ctx.site = site
-        ctx.greening = G.check(site, plantings_from_takeoff(tk), pit=tk.pit)
+        from landsight.checks.area import paved_lawn
+        from landsight.checks.regulation import greening_plantings
+
+        ctx.paved_lawn = paved_lawn(ctx)  # paving drawn over lawn on another sheet: not counted as lawn
+        ctx.greening = G.check(site, greening_plantings(ctx), pit=tk.pit)
     except Exception as e:  # noqa: BLE001 - the rules module is being edited elsewhere; the review stands without it
         notes.append(f"greening check unavailable: {type(e).__name__}: {e}")
 

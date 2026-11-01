@@ -2,7 +2,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FileSpreadsheet } from 'lucide-react'
 import { useState } from 'react'
 import { Num } from '../../components/Num'
-import { fmt, qty } from '../../lib/format'
+import { qty } from '../../lib/format'
+import { overList, useMoney } from '../../lib/money'
 import { centreOf } from '../../lib/geo'
 import { play } from '../../lib/sound'
 import { PANEL_MARGIN, PANEL_TOP, STAGE, homeRect, setDir, setLook, useDirector, useScript } from '../core'
@@ -16,7 +17,8 @@ const HEAD_H = 54
 const ROW_H = 48
 const COLS = [56, 360, 92, 70, 132, 134]
 
-/** The developer's bill beside the sheet: rows aligned to drawing items, three flags, one click, NT$ running. */
+/** The developer's bill beside the sheet: rows aligned to drawing items, three flags, one click, the money running.
+ * Every figure is the Run's TWD, shown in the chosen currency at the Run's dated rate (lib/money). */
 export function Bill() {
   const api = useDirector()
   const { run, scene } = api
@@ -29,12 +31,22 @@ export function Bill() {
   const [picked, setPicked] = useState<number | null>(null)
   const [waiting, setWaiting] = useState(false)
   const [money, setMoney] = useState(0)
+  const m = useMoney(run.currency)
   const [hidden, setHidden] = useState(0)
 
   const first = flags.find((f) => f.cell === 'qty') ?? flags[0]
   const firstRow = rows.find((r) => r.row === first?.row)
   const extra = firstRow && firstRow.qty !== undefined && firstRow.drawn !== undefined ? firstRow.qty - firstRow.drawn : 0
   const price = firstRow?.price ?? 0
+  const billed = m.times(extra, price)
+  // a row whose amount is qty × rate shows qty × the shown rate (the arithmetic on screen holds in USD too); any other
+  // amount (a total, a row that does not add up) is converted as it stands
+  const amountOf = (r: { qty?: number; price?: number; amount?: number }) =>
+    r.amount === undefined ? ''
+      : r.qty !== undefined && r.price !== undefined && Math.abs(r.qty * r.price - r.amount) < 0.5
+        ? m.times(r.qty, r.price).total.replace(/^(NT)?\$/, '')
+        : m.money(r.amount, { symbol: false })
+  const over = overList(run.checks)
 
   const anchors = rows.map((r) => {
     const objs = sheet.objects.filter((o) => r.objectIds.includes(o.object_id))
@@ -71,7 +83,7 @@ export function Bill() {
       firstRow.objectIds.forEach((id) => setLook(sheet.sheet_id, id, { stroke: '#f0a500', strokeWidth: 3, fill: '#f0a500', fillOpacity: 0.26 }))
       play('tick')
       await s.sleep(250)
-      setMoney(extra * price)
+      setMoney(billed.totalValue)
       await s.sleep(2400)
     }
     for (let i = 0; i < tail.length; i++) {
@@ -119,7 +131,7 @@ export function Bill() {
             </div>
             <div className="mt-[14px] overflow-hidden rounded-xl border border-[#dadde1]">
               <div className="flex items-center bg-[#f0f1f3] text-[24px] font-semibold uppercase tracking-wide text-[#6b717b]" style={{ height: HEAD_H }}>
-                {['#', 'Description', 'Qty', 'Unit', 'NT$ each', 'Amount'].map((h, i) => (
+                {['#', 'Description', 'Qty', 'Unit', `${m.symbol} each`, 'Amount'].map((h, i) => (
                   <div key={h} className={`px-3 ${i >= 2 && i !== 3 ? 'text-right' : ''}`} style={{ width: COLS[i] }}>{h}</div>
                 ))}
               </div>
@@ -143,8 +155,8 @@ export function Bill() {
                     </div>
                     <div className={`mono px-3 text-right ${q ? 'font-bold text-[#a86f00]' : ''}`} style={{ width: COLS[2] }}>{qty(r.qty)}</div>
                     <div className={`px-3 text-[24px] ${un ? 'font-bold text-[#a86f00]' : 'text-[#6b717b]'}`} style={{ width: COLS[3] }}>{r.unit ?? ''}</div>
-                    <div className={`mono px-3 text-right ${pr ? 'font-bold text-[#a86f00]' : ''}`} style={{ width: COLS[4] }}>{r.price !== undefined ? fmt(r.price) : ''}</div>
-                    <div className="mono px-3 text-right" style={{ width: COLS[5] }}>{r.amount !== undefined ? fmt(r.amount) : ''}</div>
+                    <div className={`mono px-3 text-right ${pr ? 'font-bold text-[#a86f00]' : ''}`} style={{ width: COLS[4] }}>{r.price !== undefined ? m.money(r.price, { symbol: false }) : ''}</div>
+                    <div className="mono px-3 text-right" style={{ width: COLS[5] }}>{amountOf(r)}</div>
                   </motion.div>
                 )
               })}
@@ -156,7 +168,7 @@ export function Bill() {
                   const n = f.check.numbers ?? {}
                   const tag = typeof (f.check as { tag?: unknown }).tag === 'string' ? (f.check as { tag?: string }).tag : undefined
                   const text = f.cell === 'price'
-                    ? `NT$${fmt(r.price)} · your list ${fmt(r.listLow)}–${fmt(r.listHigh)}`
+                    ? `${m.money(r.price)} · your list ${m.range(r.listLow, r.listHigh)}`
                     : f.cell === 'unit'
                       ? `billed ${qty(r.qty)} ${r.unit ?? ''} · drawn ${qty(r.drawn)} ${typeof n.drawn_unit === 'string' && n.drawn_unit === 'plant' ? 'plants' : ''} — unit mismatch`
                       : `bill ${qty(r.qty)} · drawn ${qty(r.drawn)}`
@@ -185,12 +197,20 @@ export function Bill() {
                 })}
               </AnimatePresence>
             </div>
-            <div className="mt-auto flex items-end justify-between rounded-2xl bg-[#1d2026] px-6 py-5 text-white" style={{ opacity: picked ? 1 : 0, transition: 'opacity 300ms' }}>
-              <div>
-                <div className="text-[28px] text-[#aab1bb]">billed, not drawn</div>
-                <div className="mono text-[30px] text-[#f0a500]">{extra} × NT${fmt(price)}</div>
+            <div className="mt-auto rounded-2xl bg-[#1d2026] px-6 py-5 text-white" style={{ opacity: picked ? 1 : 0, transition: 'opacity 300ms' }}>
+              <div className="flex items-end justify-between">
+                <div>
+                  <div className="text-[28px] text-[#aab1bb]">billed, not drawn</div>
+                  <div className="mono text-[30px] text-[#f0a500]">{extra} × {billed.unit} =</div>
+                </div>
+                <div className="mono text-[60px] font-bold leading-none text-[#f0a500]">{billed.prefix}<Num value={money} duration={1.8} format={(v) => Math.round(v).toLocaleString('en-US')} /></div>
               </div>
-              <div className="mono text-[60px] font-bold leading-none text-[#f0a500]">NT$<Num value={money} duration={1.8} format={(v) => fmt(v)} /></div>
+              {over > 0 && (
+                <div className="mt-3 flex items-baseline justify-between border-t border-white/10 pt-3">
+                  <span className="text-[28px] text-[#aab1bb]">over your price list</span>
+                  <span className="mono text-[40px] font-bold text-[#ffd27a]">{m.money(over)}</span>
+                </div>
+              )}
             </div>
           </div>
         )}

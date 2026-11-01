@@ -165,6 +165,11 @@ export type Run = {
   errors: ErrorScore
   tally: TallyRow[]
   timing: { total_s: number; spark_calls: number; sam_calls: number }
+  /** the dated public rate every USD figure on screen uses; stored prices stay TWD */
+  currency?: { base: string; usd_per_twd: number; twd_per_usd?: number; as_of?: string; source?: string }
+  notes?: string[]
+  /** GET /api/run while a package is being opened: the previous Run, marked */
+  stale?: boolean
 }
 
 export type SceneId = 'drop' | 'wake' | 'eye' | 'hedge' | 'colour' | 'gauge' | 'bill' | 'callback'

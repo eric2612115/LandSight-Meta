@@ -67,6 +67,8 @@ class Planting:
     spacing_m: float | None = None  # measured tree spacing (Ai uses spacing² when closer than the table)
     dbh_m: float | None = None  # trunk diameter at breast height, existing trees
     source: str = ""  # how the number was measured
+    less_m2: float = 0.0  # area left out of the greening sum (paving drawn over this bed or lawn on another sheet)
+    less_why: str = ""  # why, in one line (the overlap check it comes from)
 
 
 @dataclass

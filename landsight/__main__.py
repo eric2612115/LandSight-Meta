@@ -31,7 +31,7 @@ def main(argv: list[str] | None = None) -> int:
     k.add_argument("out")
     k.add_argument("--seed", type=int, default=0)
     r = sub.add_parser("review", help="review a package folder: triage, sheets, take-off, checks, scoreboard")
-    r.add_argument("package_dir")
+    r.add_argument("package_dir", help="the package folder (or the folder `landsight package` wrote it into)")
     mode = r.add_mutually_exclusive_group()
     mode.add_argument("--fixtures", action="store_true", help="replay recorded Muse Spark answers (default, offline)")
     mode.add_argument("--live", action="store_true", help="call Muse Spark and record every answer as a fixture")
@@ -53,11 +53,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.cmd == "serve":
-        from landsight.app import serve
+        from landsight.app.server import PORT, PortBusy, bind, serve
 
-        print(f"Landsight API on http://{args.host}:{args.port}/api/health (docs/API.md); the screen is the frontend: "
-              "cd frontend && npm run dev, then http://localhost:5195 (film: /?director=1&auto=1)")
-        serve(args.host, args.port)
+        try:
+            sock = bind(args.host, args.port)
+        except PortBusy as e:
+            print(f"landsight serve: {e}", file=sys.stderr)
+            return 2
+        proxy = "" if args.port == PORT else f"VITE_API_PORT={args.port} "
+        banner = (f"Landsight API on http://{args.host}:{args.port}/api/health (docs/API.md). The screen, in a second "
+                  f"terminal: cd frontend && {proxy}npm run dev, then http://localhost:5195 (film: /?director=1&auto=1)")
+        serve(args.host, args.port, sock=sock, on_ready=lambda: print(banner, flush=True))
         return 0
 
     if args.cmd == "synth":

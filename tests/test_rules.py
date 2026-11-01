@@ -64,7 +64,8 @@ def test_m4_fixes_more_trees_or_one_second_native_species(m4):
     fixes = {f.id: f for f in m4.rules[0].fixes}
     a, b, c = fixes["a"], fixes["b"], fixes["c"]
     assert a.change == {"add_trees": {"樟樹": 2}} and a.provided == pytest.approx(304.32) and a.passes
-    assert b.change["swap"] == {"from": "樟樹", "to": "茄苳", "n": 1, "from_en": "Camphor", "to_en": "Bischofia"}
+    assert b.change["swap"] == {"from": "樟樹", "to": "茄苳", "n": 1, "from_en": "Camphor", "to_en": "Bischofia",
+                                "to_native": True}
     assert b.extra_trees == 0
     assert b.provided == pytest.approx(432.12) and b.alpha == 1.3 and b.passes and len(b.tone_objects) == 1
     assert c.change == {"add_shrub_m2": 77.8} and c.passes and c.provided > 297.0
@@ -78,15 +79,47 @@ def test_plan_md_arithmetic_with_a_16_m2_hedge():
 
 
 def test_two_species_with_one_native_gets_half_the_bonus():
+    # 小葉欖仁: not native, no bird/butterfly source, and a sparse-leaf tree (疏葉喬木, Gi 1.0) per species.csv
     res = greening.check(SiteFacts(**local), plantings({"樟樹": 4, "小葉欖仁": 4}))
     assert term(res, "ra").value == 0.5 and term(res, "α").value == 1.05
-    assert res.status == "pass" and res.provided == pytest.approx(349.0, abs=0.05) and not res.fixes
+    assert term(res, "Gi·Ai", "小葉欖仁").value == 64.0 and term(res, "Gi·Ai", "樟樹").value == 96.0
+    assert res.status == "pass" and res.provided == pytest.approx(315.4, abs=0.05) and not res.fixes
 
 
-def test_non_native_row_needs_two_swaps():
+def test_sparse_leaf_row_counts_gi_1_and_the_swap_picks_a_native_from_the_table():
     res = greening.check(SiteFacts(**local), plantings({"小葉欖仁": 8}))
+    assert term(res, "Gi·Ai", "小葉欖仁").value == 128.0 and res.provided == pytest.approx(214.7)
     b = next(f for f in res.fixes if f.id == "b")
-    assert b.change["swap"]["n"] == 2 and b.alpha == pytest.approx(0.925) and b.provided == pytest.approx(307.47)
+    assert b.change["swap"]["to"] == "樟樹" and b.change["swap"]["to_native"] is True  # the fewest swaps, natives first
+    assert b.change["swap"]["n"] == 4 and b.alpha == pytest.approx(1.05) and b.provided == pytest.approx(315.42)
+
+
+def test_species_come_from_the_csv():
+    from landsight.rules.species import lookup, table
+
+    assert len([s for s in table() if s.code != "LN"]) == 60
+    tm = lookup("小葉欖仁")
+    assert (tm.gi_class, tm.native, tm.attracting, tm.code, tm.en) == ("small_tree", False, None, "TM", "Madagascar almond")
+    assert lookup("Camphor").zh == lookup("CAMPHOR").zh == "樟樹" and lookup("茄冬").zh == "茄苳"
+    assert lookup("Golden shower").zh == "阿勃勒" and lookup("Bombax ceiba").zh == "木棉"
+    assert lookup("木棉").gi_class == "small_tree"  # 疏葉喬木 in the table
+    assert lookup("小葉欖仁 H3.5m").zh == "小葉欖仁" and lookup("Lawn").gi_class == "lawn" and lookup("Ficus foo") is None
+
+
+def test_ra_counts_bird_or_butterfly_attracting_trees():
+    # 阿勃勒 (Cassia fistula) is not native but attracts birds and butterflies: formula (6) counts it
+    res = greening.check(SiteFacts(**local), plantings({"樟樹": 4, "阿勃勒": 4}))
+    assert term(res, "ra").value == 1.0 and term(res, "α").value == 1.3
+    assert "native or bird/butterfly-attracting of 8 trees" in term(res, "ra").formula
+    kapok = greening.check(SiteFacts(**local), plantings({"小葉欖仁": 4, "木棉": 4}))
+    assert term(kapok, "ra").value == 0.5
+
+
+def test_a_species_not_in_the_table_needs_review():
+    res = greening.check(SiteFacts(**local), plantings({"樟樹": 4, "Ficus foo": 4}))
+    assert res.status == "needs_review" and not res.fixes  # it would pass, but its class is a guess
+    assert any(n.startswith("Ficus foo: needs review: species not in table") for n in res.notes)
+    assert term(res, "Gi·Ai", "Ficus foo").value == 64.0 and term(res, "ra").value == 0.5
 
 
 def test_municipal_site_runs_the_municipal_rules():
@@ -201,3 +234,31 @@ def test_pipeline_reads_the_l6_detail_into_pit_facts(m4, tmp_path):
     assert t.rules[0].provided == 214.7 and t.rules[0].before_downgrade["provided"] == 265.9
     skip = run(paths, FixtureSpark(), read_details=False)
     assert skip.pit is None and skip.rules[0].provided == 265.9 and skip.rules[0].after_downgrade is None
+
+
+def test_every_btr_citation_links_its_own_article():
+    import json
+    import re
+    from pathlib import Path
+
+    from landsight.checks.base import CITES, citation
+
+    assert citation("BTR-299")["url"].endswith("flno=299") and citation("BTR-302")["url"].endswith("flno=302")
+    rules = json.loads((Path(__file__).resolve().parents[1] / "landsight" / "data" / "rules.json").read_text())
+    seen = 0
+
+    def walk(node):
+        nonlocal seen
+        if isinstance(node, dict):
+            url, art = node.get("url", ""), node.get("article", "")
+            if "law.moj.gov.tw" in url and "pcode=D0070115" in url and re.match(r"第\d+條", art or ""):
+                seen += 1
+                assert url.endswith("flno=" + re.match(r"第(\d+)條", art).group(1)), (art, url)
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk(rules)
+    assert seen >= 7 and all(citation(k)["url"] for k in CITES)

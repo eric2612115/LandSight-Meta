@@ -10,6 +10,7 @@ import { useConfirm } from '../lib/api'
 import { kindName, plantName, unitName } from '../lib/english'
 import { bytes, fmt, num, qty } from '../lib/format'
 import { CATEGORY_NAME, CATEGORY_ORDER, SEVERITY_ORDER, askedObject, verdictLabel } from '../lib/model'
+import { useMoney } from '../lib/money'
 import type { Check, ErrorScore, FileVerdict, Item, Run } from '../lib/types'
 
 export const SEVERITY_STYLE: Record<string, { bg: string; fg: string; label: string }> = {
@@ -195,6 +196,7 @@ export function ReviewPanel({ run, onSelect, selectedItem }: { run: Run; onSelec
 export function ChecksBoard({ run, selected, onSelect }: { run: Run; selected?: string; onSelect: (c: Check) => void }) {
   const groups = CATEGORY_ORDER.map((cat) => [cat, run.checks.filter((c) => c.category === cat).sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity] || a.check_id.localeCompare(b.check_id))] as const).filter(([, cs]) => cs.length)
   const extra = run.checks.filter((c) => !(CATEGORY_ORDER as readonly string[]).includes(c.category))
+  const m = useMoney(run.currency)
   return (
     <div className="space-y-4">
       {[...groups, ...(extra.length ? ([['other', extra]] as const) : [])].map(([cat, cs]) => (
@@ -204,7 +206,7 @@ export function ChecksBoard({ run, selected, onSelect }: { run: Run; selected?: 
             <span className="mono">{cs.length}</span>
           </div>
           <div className="overflow-hidden rounded-xl border border-line bg-chrome-2">
-            {cs.map((c, i) => <CheckRow key={c.check_id} c={c} first={i === 0} open={selected === c.check_id} onClick={() => onSelect(c)} />)}
+            {cs.map((c, i) => <CheckRow key={c.check_id} c={c} first={i === 0} open={selected === c.check_id} onClick={() => onSelect(c)} text={m.text} />)}
           </div>
         </div>
       ))}
@@ -212,17 +214,17 @@ export function ChecksBoard({ run, selected, onSelect }: { run: Run; selected?: 
   )
 }
 
-function CheckRow({ c, first, open, onClick }: { c: Check; first: boolean; open: boolean; onClick: () => void }) {
+function CheckRow({ c, first, open, onClick, text = (s) => s }: { c: Check; first: boolean; open: boolean; onClick: () => void; text?: (s: string) => string }) {
   return (
     <div className={`${first ? '' : 'border-t border-line/70'} ${open ? 'bg-[rgba(36,87,255,0.10)]' : ''}`}>
       <button onClick={onClick} className="flex w-full items-start gap-2.5 px-3 py-2 text-left hover:bg-white/[0.03]">
         <span className="mono mt-[3px] w-[42px] shrink-0 text-[12px] font-semibold text-mute">{c.check_id}</span>
-        <span className="min-w-0 flex-1 text-[13.5px] leading-snug text-[#e6e8eb]">{c.title}</span>
+        <span className="min-w-0 flex-1 text-[13.5px] leading-snug text-[#e6e8eb]">{text(c.title)}</span>
         <span className="mt-[2px] flex shrink-0 items-center gap-2"><Sources by={c.by} /><Sev s={c.severity} /></span>
       </button>
       {open && (
         <div className="space-y-2 px-3 pb-3 pl-[64px] text-[13px] leading-snug text-soft">
-          <div>{c.why}</div>
+          <div>{text(c.why)}</div>
           {c.citation && (
             <a href={c.citation.url} target="_blank" rel="noreferrer" className="block rounded-lg border border-line bg-[#111317] px-3 py-2 hover:border-line-2">
               <div className="flex items-center gap-1.5 font-semibold text-white"><ScrollText className="h-3.5 w-3.5 text-mute" />{c.citation.article}<ExternalLink className="h-3 w-3 text-mute" /></div>

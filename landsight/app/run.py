@@ -793,7 +793,8 @@ class RunState:
         elif "swap" in ch:
             s = ch["swap"]
             what = "Change ONE" if s["n"] == 1 else f"Change {s['n']}"
-            text = (f"{what} {label(s['from'])} to {label(s['to'])}, a second native species: native-tree bonus "
+            kind = "a second native species" if s.get("to_native", True) else "a second, bird- or butterfly-attracting species"
+            text = (f"{what} {label(s['from'])} to {s.get('to_en') or label(s['to'])}, {kind}: native-tree bonus "
                     f"{alpha0:.2f} → {f['alpha']:.2f}; no extra trees")
         else:
             text = f"+{ch.get('add_shrub_m2')} m² of shrub bed (Gi 0.5)"

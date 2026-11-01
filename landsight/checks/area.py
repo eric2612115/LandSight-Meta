@@ -11,7 +11,9 @@ PAVING = ("paving",)
 PLANTING = ("lawn", "shrub_bed")
 
 
-def overlaps(ctx, min_m2: float = 0.5) -> list[Check]:
+def overlap_pairs(ctx, min_m2: float = 0.5) -> list[tuple]:
+    """(paving sheet, planting sheet, paving object, planting object, shared polygon) for every paving outline on one
+    counted sheet that covers planting on another by at least `min_m2`."""
     out = []
     counted = [d for d in ctx.sheets if d.counted]
     for a in counted:
@@ -23,18 +25,56 @@ def overlaps(ctx, min_m2: float = 0.5) -> list[Check]:
             for p in pav:
                 for q in pla:
                     inter = Polygon(p["outline"]).intersection(Polygon(q["outline"]))
-                    if inter.area < min_m2:
-                        continue
-                    x0, y0, x1, y1 = inter.bounds
-                    out.append(Check(
-                        "area", f"{p['label']} on {a.number} overlaps {q['label']} on {b.number} by {inter.area:.0f} m²",
-                        "flag", ["geometry"],
-                        f"{p['object_id']} ({p['area_m2']:g} m²) and {q['object_id']} ({q['area_m2']:g} m²) share "
-                        f"{inter.area:.1f} m² ({x1 - x0:g} × {y1 - y0:g} m): the same ground is counted twice, once as "
-                        "paving and once as planting. Which one is built?",
-                        {"sheet_ids": [a.sheet_id, b.sheet_id], "file_ids": ctx.files_of([a.sheet_id, b.sheet_id]),
-                         "object_ids": [obj_ref(a.sheet_id, p["object_id"]), obj_ref(b.sheet_id, q["object_id"])]},
-                        numbers={"overlap_m2": round(inter.area, 2), "paving_m2": p["area_m2"], "planting_m2": q["area_m2"]}))
+                    if inter.area >= min_m2:
+                        out.append((a, b, p, q, inter))
+    return out
+
+
+def paved_lawn(ctx, min_m2: float = 0.5) -> dict[str, dict]:
+    """{lawn item_id: {"m2", "why"}}: the lawn that paving on another sheet is drawn over (the overlap check). The
+    greening sum leaves it out until the designer says which one is built (paving does not fix carbon)."""
+    from shapely.ops import unary_union
+
+    owner = {(s, o): it["item_id"] for it in getattr(ctx, "items", []) for s, o in it.get("_refs", [])}
+    shared: dict[str, list] = {}
+    where: dict[str, list[str]] = {}
+    for a, b, p, q, inter in overlap_pairs(ctx, min_m2):
+        if q["kind"] != "lawn" or (b.sheet_id, q["object_id"]) not in owner:
+            continue
+        iid = owner[(b.sheet_id, q["object_id"])]
+        shared.setdefault(iid, []).append(inter)
+        where.setdefault(iid, []).append(f"{p['label']} on {a.number}")
+    out = {}
+    for iid, polys in shared.items():
+        m2 = round(unary_union(polys).area, 1)
+        out[iid] = {"m2": m2, "why": f"{m2:g} m² lies under {', '.join(dict.fromkeys(where[iid]))} (the overlap check): "
+                                     "left out of the greening sum until the designer says which is built"}
+    return out
+
+
+def overlaps(ctx, min_m2: float = 0.5) -> list[Check]:
+    out = []
+    green_note = {}
+    if getattr(ctx, "greening", None) is not None:
+        green_note = {iid: v["m2"] for iid, v in getattr(ctx, "paved_lawn", {}).items()}
+    owner = {(s, o): it["item_id"] for it in getattr(ctx, "items", []) for s, o in it.get("_refs", [])}
+    for a, b, p, q, inter in overlap_pairs(ctx, min_m2):
+        x0, y0, x1, y1 = inter.bounds
+        why = (f"{p['object_id']} ({p['area_m2']:g} m²) and {q['object_id']} ({q['area_m2']:g} m²) share "
+               f"{inter.area:.1f} m² ({x1 - x0:g} × {y1 - y0:g} m): the same ground is counted twice, once as "
+               "paving and once as planting. Which one is built?")
+        iid = owner.get((b.sheet_id, q["object_id"]))
+        if q["kind"] == "lawn" and iid in green_note:
+            why += (f" Until then the greening check (Art. 302) leaves the overlap out of the lawn: "
+                    f"{q['area_m2']:g} − {inter.area:.1f} = {q['area_m2'] - inter.area:.1f} m² at Gi 0.3.")
+        out.append(Check(
+            "area", f"{p['label']} on {a.number} overlaps {q['label']} on {b.number} by {inter.area:.0f} m²",
+            "flag", ["geometry"], why,
+            {"sheet_ids": [a.sheet_id, b.sheet_id], "file_ids": ctx.files_of([a.sheet_id, b.sheet_id]),
+             "object_ids": [obj_ref(a.sheet_id, p["object_id"]), obj_ref(b.sheet_id, q["object_id"])]},
+            numbers={"overlap_m2": round(inter.area, 2), "paving_m2": p["area_m2"], "planting_m2": q["area_m2"]}
+            | ({"greening_lawn_m2": round(q["area_m2"] - inter.area, 2)} if q["kind"] == "lawn" and iid in green_note
+               else {})))
     return out
 
 

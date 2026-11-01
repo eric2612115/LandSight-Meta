@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { pointsOnCrop } from '../lib/model'
+import { ErrorBoundary } from './ErrorBoundary'
 import type { DrawingObject, SparkView } from '../lib/types'
 
 /** The fields Muse Spark's group_and_read answer is shown with: exactly what the recorded answer carries for the open
@@ -62,8 +63,18 @@ export function JsonLine({ line }: { line: string }) {
   )
 }
 
-/** The crop that was sent, with grounding points popping onto it. */
-export function SparkCrop({ spark, obj, showPoints, className = '', pointSize = 14 }: { spark: SparkView; obj?: DrawingObject; showPoints: boolean; className?: string; pointSize?: number }) {
+type CropProps = { spark: SparkView; obj?: DrawingObject; showPoints: boolean; className?: string; pointSize?: number }
+
+/** The crop that was sent, with grounding points popping onto it; a bad field shows an inline note, never a blank page. */
+export function SparkCrop(props: CropProps) {
+  return (
+    <ErrorBoundary label="Muse Spark's crop" resetKey={props.spark} className={props.className}>
+      <SparkCropInner {...props} />
+    </ErrorBoundary>
+  )
+}
+
+function SparkCropInner({ spark, obj, showPoints, className = '', pointSize = 14 }: CropProps) {
   const [natural, setNatural] = useState<{ w: number; h: number } | undefined>()
   const pts = useMemo(() => spark.points_crop ?? pointsOnCrop(spark.points, obj, natural), [spark.points_crop, spark.points, obj, natural])
   return (

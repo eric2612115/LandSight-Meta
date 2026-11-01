@@ -26,7 +26,7 @@ function deepEnglish<T>(v: T): T {
 const rewrite = (src: SourceKind, url: string | undefined) =>
   url && src === 'repo' && url.startsWith('/api/') ? `/frontend-mock${url}` : url ?? ''
 
-function normalise(raw: Run, src: SourceKind): Run {
+export function normalise(raw: Run, src: SourceKind): Run {
   const run = deepEnglish(raw)
   run.files ??= []
   run.sheets ??= []
@@ -42,21 +42,7 @@ function normalise(raw: Run, src: SourceKind): Run {
     s.title = s.title || s.number || s.sheet_id
     s.objects ??= []
   }
-  for (const it of run.items) {
-    it.label = it.label || kindName(it.kind)
-    if (it.spark) {
-      it.spark.crop_url = rewrite(src, it.spark.crop_url)
-      // points may come as [x, y] metres or as { m: [x, y], norm: [0..1000, 0..1000], px } objects
-      const raw = (it.spark.points ?? []) as unknown[]
-      if (raw.length && !Array.isArray(raw[0])) {
-        const objs = raw as { m?: [number, number]; norm?: [number, number] }[]
-        it.spark.points = objs.filter((p) => Array.isArray(p.m)).map((p) => p.m!)
-        const crop = objs.filter((p) => Array.isArray(p.norm)).map((p) => [p.norm![0] / 1000, p.norm![1] / 1000] as [number, number])
-        if (crop.length) it.spark.points_crop = crop
-      }
-      if (!Array.isArray(it.spark.points)) it.spark.points = undefined
-    }
-  }
+  run.items = run.items.map((it) => normaliseItem(it, src))
   for (const c of run.checks) {
     c.evidence ??= {}
     const refs = c.evidence.object_ids ?? []
@@ -73,13 +59,58 @@ function normalise(raw: Run, src: SourceKind): Run {
   return run
 }
 
+const isPair = (p: unknown): p is [number, number] =>
+  Array.isArray(p) && p.length >= 2 && typeof p[0] === 'number' && typeof p[1] === 'number' && Number.isFinite(p[0]) && Number.isFinite(p[1])
+
+/** One Item as the screen draws it, from GET /api/run or POST /api/items/{id}/confirm alike: the label, the crop URL
+ * for the source, and Spark's grounding points as [x, y] metres (`points`) plus fractions of the crop
+ * (`points_crop`). The API sends points as { m: [x, y], norm: [0..1000, 0..1000], px, to_segment_m } objects. */
+export function normaliseItem(raw: Item, src: SourceKind): Item {
+  const it: Item = { ...raw, label: raw.label || kindName(raw.kind) }
+  if (it.spark) {
+    const sp = { ...it.spark, crop_url: rewrite(src, it.spark.crop_url) }
+    const pts = (Array.isArray(sp.points) ? sp.points : []) as unknown[]
+    if (pts.length && !pts.every(isPair)) {
+      const objs = pts.filter((p): p is { m?: unknown; norm?: unknown } => !!p && typeof p === 'object' && !Array.isArray(p))
+      sp.points = objs.map((p) => p.m).filter(isPair).map((m) => [m[0], m[1]] as [number, number])
+      const crop = objs.map((p) => p.norm).filter(isPair).map((n) => [n[0] / 1000, n[1] / 1000] as [number, number])
+      if (crop.length) sp.points_crop = crop
+    }
+    if (!Array.isArray(sp.points) || !sp.points.every(isPair)) sp.points = undefined
+    if (sp.points_crop && (!Array.isArray(sp.points_crop) || !sp.points_crop.every(isPair))) sp.points_crop = undefined
+    it.spark = sp
+  }
+  return it
+}
+
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
+/** GET /api/run; while the backend is opening a package it answers 202 {status: "running"} or the previous Run with
+ * `stale: true`: ask again, and take the stale Run only if the open never finishes. */
+async function liveRun(): Promise<Run> {
+  let stale: Run | undefined
+  for (let i = 0; i < 40; i++) {
+    const r = await fetch('/api/run', { cache: 'no-store' })
+    if (r.status === 404) throw new Error('GET /api/run → 404')
+    if (!r.ok) throw new Error(`GET /api/run → ${r.status}`)
+    const body = (await r.json()) as Run & { status?: string }
+    if (body.run_id && !body.stale) return body
+    if (body.run_id) stale = body
+    await wait(1500)
+  }
+  if (stale) return stale
+  throw new Error('GET /api/run: the package is still opening')
+}
+
 export async function fetchRun(src: SourceKind): Promise<Run> {
   if (src === 'live') {
+    let run: Run
     try {
-      return normalise(await getJSON<Run>('/api/run'), src)
+      run = await liveRun()
     } catch {
-      return normalise(await getJSON<Run>('/api/package/open', { method: 'POST' }), src)
+      run = await getJSON<Run>('/api/package/open', { method: 'POST' })
     }
+    return normalise(run, src)
   }
   return normalise(await getJSON<Run>(`${BASE[src]}/run.json`), src)
 }
@@ -127,7 +158,7 @@ export function confirmedItem(it: Item): Item {
   return { ...it, confirmed: true, agreed: true, quote_count: it.quote_count ?? it.spark_count ?? it.geometry_count }
 }
 
-function applyConfirm(run: Run, item: Item): Run {
+export function applyConfirm(run: Run, item: Item): Run {
   const items = run.items.map((x) => (x.item_id === item.item_id ? item : x))
   const tally = run.tally.map((t) =>
     (t.species_code && t.species_code === item.species_code) || t.label.toLowerCase() === item.label.toLowerCase()
@@ -144,7 +175,8 @@ export function useConfirm() {
   return useMutation({
     mutationFn: async (item: Item) => {
       if (src !== 'live') return confirmedItem(item)
-      return deepEnglish(await getJSON<Item>(`/api/items/${encodeURIComponent(item.item_id)}/confirm`, { method: 'POST' }))
+      // the server's Item carries Spark's points as objects: the same normalisation as GET /api/run, before the cache
+      return normaliseItem(deepEnglish(await getJSON<Item>(`/api/items/${encodeURIComponent(item.item_id)}/confirm`, { method: 'POST' })), 'live')
     },
     onMutate: async (item) => {
       await qc.cancelQueries({ queryKey: ['run', src] })

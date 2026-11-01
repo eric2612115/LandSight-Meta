@@ -17,7 +17,8 @@ export function Hedge() {
   const api = useDirector()
   const { run, scene } = api
   const d = hedgeData(run, scene)!
-  const { sheet, obj, item, count, rows, length, per, spacing, legend, vertical, box } = d
+  const { sheet, obj, item, count, rows, length, per, spacing, legend, vertical, box, noteBy } = d
+  const noteWho = noteBy === 'spark' ? { who: 'Muse Spark', colour: '#8fa6ff' } : { who: noteBy, colour: '#c3c9d1' }
   const project = useProject()
   const [tape, setTape] = useState(0)
   const [phase, setPhase] = useState(0)
@@ -136,7 +137,7 @@ export function Hedge() {
           <PanelHeader title="Hedge math" right={<span className="mono text-[30px] font-bold text-[#c3c9d1]">{obj.object_id}</span>} />
           <div className="mt-8 space-y-4">
             <Fact show={phase >= 1} who="geometry" colour="#c3c9d1" label="measured" value={`${fmt(length, 1)} m`} />
-            <Fact show={phase >= 1} who="Muse Spark" colour="#8fa6ff" label="the note says" value={`@${spacing} m · ${rows} rows`} />
+            <Fact show={phase >= 1} who={noteWho.who} colour={noteWho.colour} label="the note says" value={`@${spacing} m · ${rows} rows`} />
           </div>
           <div className="mono mt-10 space-y-3 text-[46px] font-semibold leading-tight text-white">
             <Write show={phase >= 2} text={line1} />
