@@ -1,0 +1,172 @@
+[
+ {
+  "check_id": "E09",
+  "category": "regulation",
+  "title": "A tree is drawn inside the fire-truck access lane",
+  "severity": "flag",
+  "by": [
+   "geometry",
+   "rule"
+  ],
+  "why": "T-10 is inside the hatched lane, an area where greening cannot count; it may also block the lane.",
+  "evidence": {
+   "sheet_ids": [
+    "L-1"
+   ],
+   "object_ids": [
+    "T-10",
+    "FL-01"
+   ]
+  },
+  "citation": {
+   "article": "Building Technical Regulations §299 — definitions: area hard to green",
+   "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=299",
+   "gloss": "Fire-truck access lanes and similar areas are excluded from the minimum greening area."
+  }
+ },
+ {
+  "check_id": "E12",
+  "category": "regulation",
+  "title": "Tree pits on the slab are too shallow for large trees",
+  "severity": "flag",
+  "by": [
+   "spark",
+   "rule"
+  ],
+  "why": "L-6: pit 1.2 × 1.2 m (1.44 m²), soil 0.8 m on the basement slab. Large trees then count as small: Gi 1.5 → 1.0.",
+  "evidence": {
+   "sheet_ids": [
+    "L-6"
+   ]
+  },
+  "citation": {
+   "article": "Greening Design Technical Specification, Table 1 — carbon fixation by planting type",
+   "url": "https://www.nlma.gov.tw/",
+   "gloss": "On artificial ground, soil depth and pit size set which Gi class a tree may claim."
+  },
+  "numbers": {
+   "pit_m2": 1.44,
+   "soil_m": 0.8,
+   "gi_from": 1.5,
+   "gi_to": 1
+  }
+ },
+ {
+  "check_id": "E14",
+  "category": "regulation",
+  "title": "Greening carbon fixation is short: 268.1 of 297.0 kgCO₂e/yr",
+  "severity": "fail",
+  "by": [
+   "geometry",
+   "spark",
+   "rule"
+  ],
+  "why": "One tree species gives no native-tree bonus (α 0.8). Σ Gi × Ai = 335.1, × 0.8 = 268.1, below the 297.0 required for a 1,500 m² ordinary site at 40% coverage.",
+  "evidence": {
+   "sheet_ids": [
+    "L-1"
+   ],
+   "object_ids": [
+    "T-01",
+    "T-02",
+    "T-03",
+    "T-04",
+    "T-05",
+    "T-06",
+    "T-07",
+    "T-08",
+    "H-01",
+    "B-01",
+    "L-01"
+   ]
+  },
+  "citation": {
+   "article": "Building Technical Regulations §302 — greening carbon-fixation requirement",
+   "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+   "gloss": "The planting’s total carbon fixation must exceed ½ × the minimum greening area × β (β 0.66 on an ordinary site)."
+  },
+  "numbers": {
+   "required": 297,
+   "A0": 1500,
+   "Ap": 0,
+   "r": 0.4,
+   "A_prime": 900,
+   "beta": 0.66,
+   "provided": 268.1,
+   "sigma": 335.1,
+   "alpha": 0.8,
+   "ra": 0,
+   "unit": "kgCO₂e/yr",
+   "jurisdiction": "national rule · local",
+   "terms": [
+    {
+     "label": "Camphor · 8 trees × 16 m²",
+     "count_or_area": 8,
+     "Ai": 128,
+     "Gi": 1.5,
+     "product": 192
+    },
+    {
+     "label": "Duranta hedge · 54 m × 0.3 m",
+     "count_or_area": 16.2,
+     "Ai": 16.2,
+     "Gi": 0.5,
+     "product": 8.1
+    },
+    {
+     "label": "Azalea bed",
+     "count_or_area": 150,
+     "Ai": 150,
+     "Gi": 0.5,
+     "product": 75
+    },
+    {
+     "label": "Lawn",
+     "count_or_area": 200,
+     "Ai": 200,
+     "Gi": 0.3,
+     "product": 60
+    }
+   ]
+  },
+  "fixes": [
+   {
+    "label": "+2 Camphor, the same species",
+    "result": 306.5,
+    "passes": true
+   },
+   {
+    "label": "swap 2 of 8 Camphor for Bischofia (Bischofia javanica), a second native species — α 0.8 → 1.3, no extra trees",
+    "result": 435.6,
+    "passes": true
+   }
+  ]
+ },
+ {
+  "check_id": "E15",
+  "category": "protected_tree",
+  "title": "Existing camphor DBH 95 cm marked \"to be removed\"",
+  "severity": "review",
+  "by": [
+   "spark",
+   "rule"
+  ],
+  "why": "A trunk of this size may be a protected tree under the city’s rule. Removal needs a review before the permit.",
+  "evidence": {
+   "sheet_ids": [
+    "L-1"
+   ],
+   "object_ids": [
+    "X-01"
+   ]
+  },
+  "citation": {
+   "article": "local City Tree Protection Ordinance — trees of protected size",
+   "url": "https://lawsearch.local.gov.tw/",
+   "gloss": "Trees above a set trunk size may not be removed without approval."
+  },
+  "numbers": {
+   "dbh_cm": 95
+  }
+ }
+]

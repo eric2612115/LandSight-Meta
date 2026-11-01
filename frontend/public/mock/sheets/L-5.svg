@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.760 42.760" width="641" height="599" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="45.760" height="42.760" fill="#ffffff" data-layer="PAPER"/>
+<g >
+<polygon points="14.480,19.680 20.280,19.680 20.280,17.280 14.480,17.280" fill="#f7f5f0" data-layer="FILL"/>
+<polygon points="4.880,39.480 6.130,39.480 6.130,39.080 4.880,39.080" fill="#1d2026" data-layer="FILL"/>
+<polygon points="7.380,39.480 8.630,39.480 8.630,39.080 7.380,39.080" fill="#1d2026" data-layer="FILL"/>
+<polygon points="0.880,41.880 44.880,41.880 44.880,0.880 0.880,0.880" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polygon points="1.380,41.380 44.380,41.380 44.380,1.380 1.380,1.380" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="BORDER"/>
+<polyline points="24.880,33.880 3.880,33.880 3.880,3.880 24.880,3.880" fill="none" stroke="#1d2026" stroke-width="0.100" stroke-dasharray="1.400 0.350 0.250 0.350" stroke-linecap="round" stroke-linejoin="round" data-layer="SITE"/>
+<polygon points="10.812,30.862 10.294,29.966 9.398,29.448 8.362,29.448 7.466,29.966 6.948,30.862 6.948,31.898 7.466,32.794 8.362,33.312 9.398,33.312 10.294,32.794 10.812,31.898" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="8.480,31.380 9.280,31.380" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="8.880,31.780 8.880,30.980" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="9.121,31.315 9.057,31.203 8.945,31.139 8.815,31.139 8.703,31.203 8.639,31.315 8.639,31.445 8.703,31.557 8.815,31.621 8.945,31.621 9.057,31.557 9.121,31.445" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="14.812,30.862 14.294,29.966 13.398,29.448 12.362,29.448 11.466,29.966 10.948,30.862 10.948,31.898 11.466,32.794 12.362,33.312 13.398,33.312 14.294,32.794 14.812,31.898" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="12.480,31.380 13.280,31.380" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="12.880,31.780 12.880,30.980" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="13.121,31.315 13.057,31.203 12.945,31.139 12.815,31.139 12.703,31.203 12.639,31.315 12.639,31.445 12.703,31.557 12.815,31.621 12.945,31.621 13.057,31.557 13.121,31.445" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="18.812,30.862 18.294,29.966 17.398,29.448 16.362,29.448 15.466,29.966 14.948,30.862 14.948,31.898 15.466,32.794 16.362,33.312 17.398,33.312 18.294,32.794 18.812,31.898" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="16.480,31.380 17.280,31.380" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="16.880,31.780 16.880,30.980" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="17.121,31.315 17.057,31.203 16.945,31.139 16.815,31.139 16.703,31.203 16.639,31.315 16.639,31.445 16.703,31.557 16.815,31.621 16.945,31.621 17.057,31.557 17.121,31.445" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="22.812,30.862 22.294,29.966 21.398,29.448 20.362,29.448 19.466,29.966 18.948,30.862 18.948,31.898 19.466,32.794 20.362,33.312 21.398,33.312 22.294,32.794 22.812,31.898" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="20.480,31.380 21.280,31.380" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="20.880,31.780 20.880,30.980" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="21.121,31.315 21.057,31.203 20.945,31.139 20.815,31.139 20.703,31.203 20.639,31.315 20.639,31.445 20.703,31.557 20.815,31.621 20.945,31.621 21.057,31.557 21.121,31.445" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="9.880,21.880 24.880,21.880 24.880,11.880 9.880,11.880" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="24.067,21.880 24.880,21.067" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="23.006,21.880 24.880,20.006" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="21.946,21.880 24.880,18.946" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="20.885,21.880 24.880,17.885" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="19.824,21.880 24.880,16.824" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="18.764,21.880 24.880,15.764" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="17.703,21.880 24.880,14.703" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="16.642,21.880 24.880,13.642" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="15.582,21.880 24.880,12.582" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="14.521,21.880 24.521,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="13.460,21.880 23.460,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="12.400,21.880 22.400,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="11.339,21.880 21.339,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.278,21.880 20.278,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,21.218 19.218,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,20.157 18.157,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,19.096 17.096,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,18.036 16.036,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,16.975 14.975,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,15.914 13.914,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,14.854 12.854,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,13.793 11.793,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="9.880,12.732 10.732,11.880" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="24.880,35.880 24.880,2.880" fill="none" stroke="#1d2026" stroke-width="0.120" stroke-dasharray="1.600 0.400" stroke-linecap="round" stroke-linejoin="round" data-layer="MATCH"/>
+<polygon points="4.880,39.480 6.130,39.480 6.130,39.080 4.880,39.080" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="6.130,39.480 7.380,39.480 7.380,39.080 6.130,39.080" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="7.380,39.480 8.630,39.480 8.630,39.080 7.380,39.080" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="8.630,39.480 9.880,39.480 9.880,39.080 8.630,39.080" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="27.880,40.880 43.880,40.880 43.880,28.380 27.880,28.380" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polyline points="27.880,30.880 43.880,30.880" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="27.880,33.380 43.880,33.380" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="27.880,35.880 43.880,35.880" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="27.880,38.380 43.880,38.380" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="32.680,40.880 32.680,28.380" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<text x="17.380" y="18.280" font-size="0.800" text-anchor="middle" font-weight="600" fill="#1d2026" data-layer="TEXT">AZALEA</text>
+<text x="25.480" y="9.880" font-size="0.600" font-weight="600" transform="rotate(-90.00 25.480 9.880)" fill="#1d2026" data-layer="TEXT">MATCH LINE — SEE L-1</text>
+<text x="4.730" y="40.380" font-size="0.500" fill="#1d2026" data-layer="TEXT">0</text>
+<text x="7.230" y="40.380" font-size="0.500" fill="#1d2026" data-layer="TEXT">2.5</text>
+<text x="9.730" y="40.380" font-size="0.500" fill="#1d2026" data-layer="TEXT">5 m</text>
+<text x="4.880" y="41.080" font-size="0.450" fill="#5b616b" data-layer="TEXT">SCALE BAR 1:100</text>
+<text x="28.180" y="29.847" font-size="0.446" fill="#5b616b" data-layer="TEXT">PROJECT</text>
+<text x="32.980" y="29.847" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">GREENFIELD RESIDENCES</text>
+<text x="28.180" y="32.347" font-size="0.446" fill="#5b616b" data-layer="TEXT">DRAWING</text>
+<text x="32.980" y="32.347" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">ENLARGED PLAN — WEST</text>
+<text x="28.180" y="34.847" font-size="0.446" fill="#5b616b" data-layer="TEXT">SHEET</text>
+<text x="32.980" y="34.847" font-size="0.620" fill="#1d2026" data-layer="TEXT">L-5   REV A</text>
+<text x="28.180" y="37.347" font-size="0.446" fill="#5b616b" data-layer="TEXT">SCALE</text>
+<text x="32.980" y="37.347" font-size="0.620" fill="#1d2026" data-layer="TEXT">1:200</text>
+<text x="28.180" y="39.847" font-size="0.446" fill="#5b616b" data-layer="TEXT">DATE</text>
+<text x="32.980" y="39.847" font-size="0.620" fill="#1d2026" data-layer="TEXT">2026-09-18</text>
+</g></svg>

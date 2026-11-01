@@ -1,0 +1,138 @@
+[
+ {
+  "id": "drop",
+  "title": "Thirty-five files, one verdict each",
+  "duration_s": 15
+ },
+ {
+  "id": "wake",
+  "title": "The drawing wakes up",
+  "sheet_id": "L-1",
+  "focus": [
+   "T-01",
+   "T-02",
+   "T-03",
+   "T-04",
+   "T-05",
+   "T-06",
+   "T-07",
+   "T-08",
+   "H-01",
+   "B-01",
+   "L-01"
+  ],
+  "item_ids": [
+   "I-01",
+   "I-03",
+   "I-04"
+  ],
+  "duration_s": 11
+ },
+ {
+  "id": "eye",
+  "title": "The eye",
+  "sheet_id": "L-1",
+  "focus": [
+   "T-08"
+  ],
+  "item_ids": [
+   "I-01"
+  ],
+  "check_ids": [
+   "E01"
+  ],
+  "duration_s": 20
+ },
+ {
+  "id": "hedge",
+  "title": "Hedge math",
+  "sheet_id": "L-1",
+  "focus": [
+   "H-01"
+  ],
+  "item_ids": [
+   "I-02"
+  ],
+  "check_ids": [
+   "E07"
+  ],
+  "duration_s": 17
+ },
+ {
+  "id": "colour",
+  "title": "Lines to colour",
+  "sheet_id": "PP-1",
+  "focus": [
+   "M-01",
+   "M-02",
+   "M-03",
+   "M-04",
+   "M-05",
+   "M-06",
+   "M-07",
+   "M-08",
+   "M-09",
+   "M-10",
+   "M-11",
+   "M-12",
+   "M-13"
+  ],
+  "item_ids": [
+   "I-01",
+   "I-03",
+   "I-04",
+   "I-05",
+   "I-06",
+   "I-07"
+  ],
+  "duration_s": 15
+ },
+ {
+  "id": "gauge",
+  "title": "The gauge",
+  "sheet_id": "L-1",
+  "check_ids": [
+   "E14"
+  ],
+  "duration_s": 17
+ },
+ {
+  "id": "bill",
+  "title": "The bill",
+  "sheet_id": "L-1",
+  "check_ids": [
+   "E02",
+   "E17",
+   "E19"
+  ],
+  "item_ids": [
+   "I-01",
+   "I-02",
+   "I-03",
+   "I-04",
+   "I-05",
+   "I-06",
+   "I-07"
+  ],
+  "duration_s": 20
+ },
+ {
+  "id": "callback",
+  "title": "Twelve, again",
+  "sheet_id": "L-2",
+  "focus": [
+   "T-01",
+   "T-02",
+   "T-03",
+   "T-04",
+   "T-05",
+   "T-06",
+   "T-07",
+   "T-08"
+  ],
+  "check_ids": [
+   "E04"
+  ],
+  "duration_s": 13
+ }
+]

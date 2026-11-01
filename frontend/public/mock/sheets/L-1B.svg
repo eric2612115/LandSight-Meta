@@ -1,0 +1,681 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.200 45.200" width="1165" height="633" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="83.200" height="45.200" fill="#ffffff" data-layer="PAPER"/>
+<g >
+<polygon points="4.600,41.200 7.100,41.200 7.100,40.800 4.600,40.800" fill="#1d2026" data-layer="FILL"/>
+<polygon points="9.600,41.200 12.100,41.200 12.100,40.800 9.600,40.800" fill="#1d2026" data-layer="FILL"/>
+<polygon points="54.800,38.800 55.800,41.800 54.800,40.900" fill="#1d2026" data-layer="FILL"/>
+<polygon points="15.200,20.400 21.000,20.400 21.000,18.000 15.200,18.000" fill="#f7f5f0" data-layer="FILL"/>
+<polygon points="35.800,20.400 41.400,20.400 41.400,18.000 35.800,18.000" fill="#f7f5f0" data-layer="FILL"/>
+<polygon points="1.600,43.600 81.600,43.600 81.600,1.600 1.600,1.600" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polygon points="2.100,43.100 81.100,43.100 81.100,2.100 2.100,2.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="BORDER"/>
+<polygon points="4.600,34.600 54.600,34.600 54.600,4.600 4.600,4.600" fill="none" stroke="#1d2026" stroke-width="0.100" stroke-dasharray="1.400 0.350 0.250 0.350" stroke-linecap="round" stroke-linejoin="round" data-layer="SITE"/>
+<polyline points="2.100,35.400 57.600,35.400" fill="none" stroke="#1d2026" stroke-width="0.070" stroke-linecap="round" stroke-linejoin="round" data-layer="ROAD"/>
+<polyline points="2.100,42.800 57.600,42.800" fill="none" stroke="#1d2026" stroke-width="0.070" stroke-linecap="round" stroke-linejoin="round" data-layer="ROAD"/>
+<polygon points="4.600,41.200 7.100,41.200 7.100,40.800 4.600,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="7.100,41.200 9.600,41.200 9.600,40.800 7.100,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="9.600,41.200 12.100,41.200 12.100,40.800 9.600,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="12.100,41.200 14.600,41.200 14.600,40.800 12.100,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="53.800,41.800 54.800,38.800 55.800,41.800 54.800,40.900" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="58.600,42.100 79.600,42.100 79.600,27.600 58.600,27.600" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polyline points="58.600,29.671 79.600,29.671" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,31.743 79.600,31.743" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,33.814 79.600,33.814" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,35.886 79.600,35.886" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,37.957 79.600,37.957" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,40.029 79.600,40.029" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.900,42.100 64.900,27.600" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polygon points="11.532,31.582 11.014,30.686 10.118,30.168 9.082,30.168 8.186,30.686 7.668,31.582 7.668,32.618 8.186,33.514 9.082,34.032 10.118,34.032 11.014,33.514 11.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="9.200,32.100 10.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="9.600,32.500 9.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="15.532,31.582 15.014,30.686 14.118,30.168 13.082,30.168 12.186,30.686 11.668,31.582 11.668,32.618 12.186,33.514 13.082,34.032 14.118,34.032 15.014,33.514 15.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="13.200,32.100 14.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="13.600,32.500 13.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="19.532,31.582 19.014,30.686 18.118,30.168 17.082,30.168 16.186,30.686 15.668,31.582 15.668,32.618 16.186,33.514 17.082,34.032 18.118,34.032 19.014,33.514 19.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="17.200,32.100 18.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="17.600,32.500 17.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="23.532,31.582 23.014,30.686 22.118,30.168 21.082,30.168 20.186,30.686 19.668,31.582 19.668,32.618 20.186,33.514 21.082,34.032 22.118,34.032 23.014,33.514 23.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="21.200,32.100 22.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="21.600,32.500 21.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="28.032,31.582 27.514,30.686 26.618,30.168 25.582,30.168 24.686,30.686 24.168,31.582 24.168,32.618 24.686,33.514 25.582,34.032 26.618,34.032 27.514,33.514 28.032,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="25.700,32.100 26.500,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="26.100,32.500 26.100,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="31.532,31.582 31.014,30.686 30.118,30.168 29.082,30.168 28.186,30.686 27.668,31.582 27.668,32.618 28.186,33.514 29.082,34.032 30.118,34.032 31.014,33.514 31.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="29.200,32.100 30.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="29.600,32.500 29.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="35.532,31.582 35.014,30.686 34.118,30.168 33.082,30.168 32.186,30.686 31.668,31.582 31.668,32.618 32.186,33.514 33.082,34.032 34.118,34.032 35.014,33.514 35.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="33.200,32.100 34.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="33.600,32.500 33.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="39.532,31.582 39.014,30.686 38.118,30.168 37.082,30.168 36.186,30.686 35.668,31.582 35.668,32.618 36.186,33.514 37.082,34.032 38.118,34.032 39.014,33.514 39.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="37.200,32.100 38.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="37.600,32.500 37.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="43.532,31.582 43.014,30.686 42.118,30.168 41.082,30.168 40.186,30.686 39.668,31.582 39.668,32.618 40.186,33.514 41.082,34.032 42.118,34.032 43.014,33.514 43.532,32.618" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="41.200,32.100 42.000,32.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="41.600,32.500 41.600,31.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="23.436,27.680 18.600,27.680 18.565,30.429" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="LEADER"/>
+<circle cx="18.565" cy="30.429" r="0.090" fill="#1d2026" stroke="#1d2026" stroke-width="0.050" data-layer="LEADER"/>
+<polygon points="48.339,37.734 47.873,36.927 47.066,36.461 46.134,36.461 45.327,36.927 44.861,37.734 44.861,38.666 45.327,39.473 46.134,39.939 47.066,39.939 47.873,39.473 48.339,38.666" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="46.200,38.200 47.000,38.200" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="46.600,38.600 46.600,37.800" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="52.739,25.634 52.273,24.827 51.466,24.361 50.534,24.361 49.727,24.827 49.261,25.634 49.261,26.566 49.727,27.373 50.534,27.839 51.466,27.839 52.273,27.373 52.739,26.566" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="50.600,26.100 51.400,26.100" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="51.000,26.500 51.000,25.700" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="17.200,8.400 17.161,7.949 17.043,7.511 16.852,7.100 16.592,6.729 16.271,6.408 15.900,6.148 15.489,5.957 15.051,5.839 14.600,5.800 14.149,5.839 13.711,5.957 13.300,6.148 12.929,6.408 12.608,6.729 12.348,7.100 12.157,7.511 12.039,7.949 12.000,8.400 12.039,8.851 12.157,9.289 12.348,9.700 12.608,10.071 12.929,10.392 13.300,10.652 13.711,10.843 14.149,10.961 14.600,11.000 15.051,10.961 15.489,10.843 15.900,10.652 16.271,10.392 16.592,10.071 16.852,9.700 17.043,9.289 17.161,8.851" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="12.800,10.200 16.400,6.600" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="12.800,6.600 16.400,10.200" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="49.000,34.600 53.000,34.600 53.000,4.600 49.000,4.600" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-dasharray="0.600 0.300" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="51.461,34.600 53.000,33.061" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.481,34.600 53.000,31.081" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,33.101 53.000,29.101" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,31.122 53.000,27.122" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,29.142 53.000,25.142" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,27.162 53.000,23.162" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,25.182 53.000,21.182" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,23.202 53.000,19.202" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,21.222 53.000,17.222" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,19.242 53.000,15.242" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,17.262 53.000,13.262" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,15.282 53.000,11.282" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,13.302 53.000,9.302" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,11.323 53.000,7.323" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,9.343 53.000,5.343" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,7.363 51.763,4.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.000,5.383 49.783,4.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,6.139 51.461,4.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,8.119 49.481,4.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,10.099 49.000,6.099" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,12.078 49.000,8.078" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,14.058 49.000,10.058" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,16.038 49.000,12.038" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,18.018 49.000,14.018" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,19.998 49.000,15.998" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,21.978 49.000,17.978" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,23.958 49.000,19.958" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,25.938 49.000,21.938" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,27.918 49.000,23.918" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,29.898 49.000,25.898" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,31.877 49.000,27.877" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.000,33.857 49.000,29.857" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="51.763,34.600 49.000,31.837" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="49.783,34.600 49.000,33.817" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="53.400,33.100 53.400,6.100" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="53.800,33.100 53.800,6.100" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="37.800,9.780 46.666,9.780 53.400,10.800" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="LEADER"/>
+<circle cx="53.400" cy="10.800" r="0.090" fill="#1d2026" stroke="#1d2026" stroke-width="0.050" data-layer="LEADER"/>
+<polygon points="10.600,22.600 25.600,22.600 25.600,12.600 10.600,12.600" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="24.787,22.600 25.600,21.787" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="23.726,22.600 25.600,20.726" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="22.666,22.600 25.600,19.666" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="21.605,22.600 25.600,18.605" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="20.544,22.600 25.600,17.544" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="19.484,22.600 25.600,16.484" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="18.423,22.600 25.600,15.423" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="17.362,22.600 25.600,14.362" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="16.302,22.600 25.600,13.302" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="15.241,22.600 25.241,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="14.180,22.600 24.180,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="13.120,22.600 23.120,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="12.059,22.600 22.059,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.998,22.600 20.998,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,21.938 19.938,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,20.877 18.877,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,19.816 17.816,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,18.756 16.756,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,17.695 15.695,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,16.634 14.634,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,15.574 13.574,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,14.513 12.513,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="10.600,13.452 11.452,12.600" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polygon points="28.600,22.600 48.600,22.600 48.600,12.600 28.600,12.600" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="29.154,21.950 29.090,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.250,21.950 29.250,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.346,21.950 29.410,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.454,21.950 30.390,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.550,21.950 30.550,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.646,21.950 30.710,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.754,21.950 31.690,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.850,21.950 31.850,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.946,21.950 32.010,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.054,21.950 32.990,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.150,21.950 33.150,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.246,21.950 33.310,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.354,21.950 34.290,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.450,21.950 34.450,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.546,21.950 34.610,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.654,21.950 35.590,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.750,21.950 35.750,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.846,21.950 35.910,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.954,21.950 36.890,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.050,21.950 37.050,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.146,21.950 37.210,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.254,21.950 38.190,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.350,21.950 38.350,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.446,21.950 38.510,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.554,21.950 39.490,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.650,21.950 39.650,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.746,21.950 39.810,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.854,21.950 40.790,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.950,21.950 40.950,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.046,21.950 41.110,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.154,21.950 42.090,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.250,21.950 42.250,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.346,21.950 42.410,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.454,21.950 43.390,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.550,21.950 43.550,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.646,21.950 43.710,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.754,21.950 44.690,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.850,21.950 44.850,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.946,21.950 45.010,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.054,21.950 45.990,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.150,21.950 46.150,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.246,21.950 46.310,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.354,21.950 47.290,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.450,21.950 47.450,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.546,21.950 47.610,21.650" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.804,20.910 29.740,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.900,20.910 29.900,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.996,20.910 30.060,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.104,20.910 31.040,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.200,20.910 31.200,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.296,20.910 31.360,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.404,20.910 32.340,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.500,20.910 32.500,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.596,20.910 32.660,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.704,20.910 33.640,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.800,20.910 33.800,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.896,20.910 33.960,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.004,20.910 34.940,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.100,20.910 35.100,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.196,20.910 35.260,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.304,20.910 36.240,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.400,20.910 36.400,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.496,20.910 36.560,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.604,20.910 37.540,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.700,20.910 37.700,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.796,20.910 37.860,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.904,20.910 38.840,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.000,20.910 39.000,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.096,20.910 39.160,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.204,20.910 40.140,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.300,20.910 40.300,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.396,20.910 40.460,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.504,20.910 41.440,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.600,20.910 41.600,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.696,20.910 41.760,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.804,20.910 42.740,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.900,20.910 42.900,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.996,20.910 43.060,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.104,20.910 44.040,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.200,20.910 44.200,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.296,20.910 44.360,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.404,20.910 45.340,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.500,20.910 45.500,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.596,20.910 45.660,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.704,20.910 46.640,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.800,20.910 46.800,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.896,20.910 46.960,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.004,20.910 47.940,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.100,20.910 48.100,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.196,20.910 48.260,20.610" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.154,19.870 29.090,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.250,19.870 29.250,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.346,19.870 29.410,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.454,19.870 30.390,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.550,19.870 30.550,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.646,19.870 30.710,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.754,19.870 31.690,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.850,19.870 31.850,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.946,19.870 32.010,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.054,19.870 32.990,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.150,19.870 33.150,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.246,19.870 33.310,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.354,19.870 34.290,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.450,19.870 34.450,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.546,19.870 34.610,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.654,19.870 35.590,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.750,19.870 35.750,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.846,19.870 35.910,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.954,19.870 36.890,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.050,19.870 37.050,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.146,19.870 37.210,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.254,19.870 38.190,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.350,19.870 38.350,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.446,19.870 38.510,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.554,19.870 39.490,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.650,19.870 39.650,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.746,19.870 39.810,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.854,19.870 40.790,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.950,19.870 40.950,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.046,19.870 41.110,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.154,19.870 42.090,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.250,19.870 42.250,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.346,19.870 42.410,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.454,19.870 43.390,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.550,19.870 43.550,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.646,19.870 43.710,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.754,19.870 44.690,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.850,19.870 44.850,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.946,19.870 45.010,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.054,19.870 45.990,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.150,19.870 46.150,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.246,19.870 46.310,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.354,19.870 47.290,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.450,19.870 47.450,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.546,19.870 47.610,19.570" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.804,18.830 29.740,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.900,18.830 29.900,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.996,18.830 30.060,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.104,18.830 31.040,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.200,18.830 31.200,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.296,18.830 31.360,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.404,18.830 32.340,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.500,18.830 32.500,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.596,18.830 32.660,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.704,18.830 33.640,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.800,18.830 33.800,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.896,18.830 33.960,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.004,18.830 34.940,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.100,18.830 35.100,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.196,18.830 35.260,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.304,18.830 36.240,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.400,18.830 36.400,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.496,18.830 36.560,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.604,18.830 37.540,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.700,18.830 37.700,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.796,18.830 37.860,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.904,18.830 38.840,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.000,18.830 39.000,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.096,18.830 39.160,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.204,18.830 40.140,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.300,18.830 40.300,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.396,18.830 40.460,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.504,18.830 41.440,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.600,18.830 41.600,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.696,18.830 41.760,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.804,18.830 42.740,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.900,18.830 42.900,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.996,18.830 43.060,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.104,18.830 44.040,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.200,18.830 44.200,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.296,18.830 44.360,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.404,18.830 45.340,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.500,18.830 45.500,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.596,18.830 45.660,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.704,18.830 46.640,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.800,18.830 46.800,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.896,18.830 46.960,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.004,18.830 47.940,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.100,18.830 48.100,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.196,18.830 48.260,18.530" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.154,17.790 29.090,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.250,17.790 29.250,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.346,17.790 29.410,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.454,17.790 30.390,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.550,17.790 30.550,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.646,17.790 30.710,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.754,17.790 31.690,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.850,17.790 31.850,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.946,17.790 32.010,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.054,17.790 32.990,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.150,17.790 33.150,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.246,17.790 33.310,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.354,17.790 34.290,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.450,17.790 34.450,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.546,17.790 34.610,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.654,17.790 35.590,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.750,17.790 35.750,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.846,17.790 35.910,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.954,17.790 36.890,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.050,17.790 37.050,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.146,17.790 37.210,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.254,17.790 38.190,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.350,17.790 38.350,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.446,17.790 38.510,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.554,17.790 39.490,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.650,17.790 39.650,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.746,17.790 39.810,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.854,17.790 40.790,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.950,17.790 40.950,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.046,17.790 41.110,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.154,17.790 42.090,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.250,17.790 42.250,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.346,17.790 42.410,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.454,17.790 43.390,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.550,17.790 43.550,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.646,17.790 43.710,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.754,17.790 44.690,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.850,17.790 44.850,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.946,17.790 45.010,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.054,17.790 45.990,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.150,17.790 46.150,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.246,17.790 46.310,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.354,17.790 47.290,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.450,17.790 47.450,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.546,17.790 47.610,17.490" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.804,16.750 29.740,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.900,16.750 29.900,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.996,16.750 30.060,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.104,16.750 31.040,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.200,16.750 31.200,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.296,16.750 31.360,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.404,16.750 32.340,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.500,16.750 32.500,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.596,16.750 32.660,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.704,16.750 33.640,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.800,16.750 33.800,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.896,16.750 33.960,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.004,16.750 34.940,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.100,16.750 35.100,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.196,16.750 35.260,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.304,16.750 36.240,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.400,16.750 36.400,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.496,16.750 36.560,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.604,16.750 37.540,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.700,16.750 37.700,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.796,16.750 37.860,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.904,16.750 38.840,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.000,16.750 39.000,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.096,16.750 39.160,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.204,16.750 40.140,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.300,16.750 40.300,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.396,16.750 40.460,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.504,16.750 41.440,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.600,16.750 41.600,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.696,16.750 41.760,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.804,16.750 42.740,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.900,16.750 42.900,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.996,16.750 43.060,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.104,16.750 44.040,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.200,16.750 44.200,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.296,16.750 44.360,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.404,16.750 45.340,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.500,16.750 45.500,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.596,16.750 45.660,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.704,16.750 46.640,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.800,16.750 46.800,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.896,16.750 46.960,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.004,16.750 47.940,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.100,16.750 48.100,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.196,16.750 48.260,16.450" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.154,15.710 29.090,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.250,15.710 29.250,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.346,15.710 29.410,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.454,15.710 30.390,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.550,15.710 30.550,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.646,15.710 30.710,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.754,15.710 31.690,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.850,15.710 31.850,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.946,15.710 32.010,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.054,15.710 32.990,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.150,15.710 33.150,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.246,15.710 33.310,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.354,15.710 34.290,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.450,15.710 34.450,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.546,15.710 34.610,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.654,15.710 35.590,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.750,15.710 35.750,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.846,15.710 35.910,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.954,15.710 36.890,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.050,15.710 37.050,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.146,15.710 37.210,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.254,15.710 38.190,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.350,15.710 38.350,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.446,15.710 38.510,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.554,15.710 39.490,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.650,15.710 39.650,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.746,15.710 39.810,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.854,15.710 40.790,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.950,15.710 40.950,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.046,15.710 41.110,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.154,15.710 42.090,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.250,15.710 42.250,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.346,15.710 42.410,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.454,15.710 43.390,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.550,15.710 43.550,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.646,15.710 43.710,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.754,15.710 44.690,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.850,15.710 44.850,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.946,15.710 45.010,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.054,15.710 45.990,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.150,15.710 46.150,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.246,15.710 46.310,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.354,15.710 47.290,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.450,15.710 47.450,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.546,15.710 47.610,15.410" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.804,14.670 29.740,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.900,14.670 29.900,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.996,14.670 30.060,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.104,14.670 31.040,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.200,14.670 31.200,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.296,14.670 31.360,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.404,14.670 32.340,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.500,14.670 32.500,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="32.596,14.670 32.660,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.704,14.670 33.640,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.800,14.670 33.800,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.896,14.670 33.960,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.004,14.670 34.940,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.100,14.670 35.100,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.196,14.670 35.260,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.304,14.670 36.240,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.400,14.670 36.400,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.496,14.670 36.560,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.604,14.670 37.540,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.700,14.670 37.700,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.796,14.670 37.860,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.904,14.670 38.840,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.000,14.670 39.000,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.096,14.670 39.160,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.204,14.670 40.140,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.300,14.670 40.300,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.396,14.670 40.460,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.504,14.670 41.440,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.600,14.670 41.600,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.696,14.670 41.760,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.804,14.670 42.740,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.900,14.670 42.900,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.996,14.670 43.060,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.104,14.670 44.040,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.200,14.670 44.200,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.296,14.670 44.360,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.404,14.670 45.340,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.500,14.670 45.500,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="45.596,14.670 45.660,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.704,14.670 46.640,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.800,14.670 46.800,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.896,14.670 46.960,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.004,14.670 47.940,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.100,14.670 48.100,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="48.196,14.670 48.260,14.370" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.154,13.630 29.090,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.250,13.630 29.250,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="29.346,13.630 29.410,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.454,13.630 30.390,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.550,13.630 30.550,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="30.646,13.630 30.710,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.754,13.630 31.690,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.850,13.630 31.850,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="31.946,13.630 32.010,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.054,13.630 32.990,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.150,13.630 33.150,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="33.246,13.630 33.310,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.354,13.630 34.290,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.450,13.630 34.450,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="34.546,13.630 34.610,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.654,13.630 35.590,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.750,13.630 35.750,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="35.846,13.630 35.910,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="36.954,13.630 36.890,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.050,13.630 37.050,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="37.146,13.630 37.210,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.254,13.630 38.190,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.350,13.630 38.350,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="38.446,13.630 38.510,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.554,13.630 39.490,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.650,13.630 39.650,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="39.746,13.630 39.810,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.854,13.630 40.790,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="40.950,13.630 40.950,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="41.046,13.630 41.110,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.154,13.630 42.090,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.250,13.630 42.250,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="42.346,13.630 42.410,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.454,13.630 43.390,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.550,13.630 43.550,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="43.646,13.630 43.710,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.754,13.630 44.690,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.850,13.630 44.850,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="44.946,13.630 45.010,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.054,13.630 45.990,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.150,13.630 46.150,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="46.246,13.630 46.310,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.354,13.630 47.290,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.450,13.630 47.450,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="47.546,13.630 47.610,13.330" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polygon points="58.600,15.100 77.600,15.100 77.600,3.100 58.600,3.100" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polygon points="63.742,7.160 63.302,6.398 62.540,5.958 61.660,5.958 60.898,6.398 60.458,7.160 60.458,8.040 60.898,8.802 61.660,9.242 62.540,9.242 63.302,8.802 63.742,8.040" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="61.700,7.600 62.500,7.600" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polyline points="62.100,8.000 62.100,7.200" fill="none" stroke="#1d2026" stroke-width="0.085" stroke-linecap="round" stroke-linejoin="round" data-layer="TREE"/>
+<polygon points="60.200,12.200 64.000,12.200 64.000,10.700 60.200,10.700" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="63.532,12.200 64.000,11.732" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="62.825,12.200 64.000,11.025" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="62.117,12.200 63.617,10.700" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="61.410,12.200 62.910,10.700" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="60.703,12.200 62.203,10.700" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="60.200,11.996 61.496,10.700" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="60.200,11.289 60.789,10.700" fill="none" stroke="#1d2026" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" data-layer="HATCH"/>
+<polyline points="60.200,13.500 64.000,13.500" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="60.200,13.900 64.000,13.900" fill="none" stroke="#1d2026" stroke-width="0.080" stroke-linecap="round" stroke-linejoin="round" data-layer="PLANT"/>
+<polyline points="58.600,16.200 77.600,16.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,17.300 77.600,17.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,16.200 58.600,17.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,16.200 77.600,17.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,18.250 77.600,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,17.300 58.600,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,17.300 77.600,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="60.100,17.300 60.100,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="63.100,17.300 63.100,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.400,17.300 64.400,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="65.700,17.300 65.700,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="67.700,17.300 67.700,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="69.200,17.300 69.200,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="70.700,17.300 70.700,18.250" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,19.200 77.600,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,18.250 58.600,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,18.250 77.600,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="60.100,18.250 60.100,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="63.100,18.250 63.100,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.400,18.250 64.400,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="65.700,18.250 65.700,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="67.700,18.250 67.700,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="69.200,18.250 69.200,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="70.700,18.250 70.700,19.200" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,20.150 77.600,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,19.200 58.600,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,19.200 77.600,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="60.100,19.200 60.100,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="63.100,19.200 63.100,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.400,19.200 64.400,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="65.700,19.200 65.700,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="67.700,19.200 67.700,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="69.200,19.200 69.200,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="70.700,19.200 70.700,20.150" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,21.100 77.600,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,20.150 58.600,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,20.150 77.600,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="60.100,20.150 60.100,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="63.100,20.150 63.100,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.400,20.150 64.400,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="65.700,20.150 65.700,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="67.700,20.150 67.700,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="69.200,20.150 69.200,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="70.700,20.150 70.700,21.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,22.050 77.600,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,21.100 58.600,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,21.100 77.600,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="60.100,21.100 60.100,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="63.100,21.100 63.100,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.400,21.100 64.400,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="65.700,21.100 65.700,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="67.700,21.100 67.700,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="69.200,21.100 69.200,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="70.700,21.100 70.700,22.050" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,23.000 77.600,23.000" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,22.050 58.600,23.000" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="77.600,22.050 77.600,23.000" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<text x="5.000" y="4.200" font-size="0.450" fill="#5b616b" data-layer="TEXT">SITE BOUNDARY</text>
+<text x="23.100" y="38.000" font-size="0.800" fill="#5b616b" data-layer="TEXT">8 M ROAD</text>
+<text x="4.450" y="42.100" font-size="0.500" fill="#1d2026" data-layer="TEXT">0</text>
+<text x="9.450" y="42.100" font-size="0.500" fill="#1d2026" data-layer="TEXT">5</text>
+<text x="14.450" y="42.100" font-size="0.500" fill="#1d2026" data-layer="TEXT">10 m</text>
+<text x="54.520" y="38.350" font-size="0.800" font-weight="600" fill="#1d2026" data-layer="TEXT">N</text>
+<text x="58.900" y="28.853" font-size="0.446" fill="#5b616b" data-layer="TEXT">PROJECT</text>
+<text x="65.200" y="28.853" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">GREENFIELD RESIDENCES, local</text>
+<text x="58.900" y="30.924" font-size="0.446" fill="#5b616b" data-layer="TEXT">DRAWING</text>
+<text x="65.200" y="30.924" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">PLANTING PLAN (REV B)</text>
+<text x="58.900" y="32.996" font-size="0.446" fill="#5b616b" data-layer="TEXT">SHEET</text>
+<text x="65.200" y="32.996" font-size="0.620" fill="#1d2026" data-layer="TEXT">L-1   REV B</text>
+<text x="58.900" y="35.067" font-size="0.446" fill="#5b616b" data-layer="TEXT">SCALE</text>
+<text x="65.200" y="35.067" font-size="0.620" fill="#1d2026" data-layer="TEXT">1:200</text>
+<text x="58.900" y="37.138" font-size="0.446" fill="#5b616b" data-layer="TEXT">SITE AREA</text>
+<text x="65.200" y="37.138" font-size="0.620" fill="#1d2026" data-layer="TEXT">1,500 m²</text>
+<text x="58.900" y="39.210" font-size="0.446" fill="#5b616b" data-layer="TEXT">BUILDING COVERAGE</text>
+<text x="65.200" y="39.210" font-size="0.620" fill="#1d2026" data-layer="TEXT">40%   ARTIFICIAL GROUND</text>
+<text x="58.900" y="41.281" font-size="0.446" fill="#5b616b" data-layer="TEXT">DATE</text>
+<text x="65.200" y="41.281" font-size="0.620" fill="#1d2026" data-layer="TEXT">2026-10-14</text>
+<text x="18.600" y="27.500" font-size="0.600" fill="#1d2026" data-layer="TEXT">CAMPHOR, typ.</text>
+<text x="18.000" y="7.700" font-size="0.500" fill="#1d2026" data-layer="TEXT">EXISTING CAMPHOR  DBH 95 cm</text>
+<text x="18.000" y="8.600" font-size="0.500" font-weight="600" fill="#1d2026" data-layer="TEXT">TO BE REMOVED</text>
+<text x="51.400" y="22.000" font-size="0.550" font-weight="600" transform="rotate(-90.00 51.400 22.000)" fill="#1d2026" data-layer="TEXT">FIRE TRUCK ACCESS LANE</text>
+<text x="37.800" y="9.600" font-size="0.550" fill="#1d2026" data-layer="TEXT">DURANTA H0.6 @0.3m, 2 ROWS</text>
+<text x="18.100" y="19.000" font-size="0.800" text-anchor="middle" font-weight="600" fill="#1d2026" data-layer="TEXT">AZALEA</text>
+<text x="18.100" y="20.000" font-size="0.550" text-anchor="middle" fill="#1d2026" data-layer="TEXT">150 m²</text>
+<text x="38.600" y="19.000" font-size="0.800" text-anchor="middle" font-weight="600" fill="#1d2026" data-layer="TEXT">LAWN</text>
+<text x="38.600" y="20.000" font-size="0.550" text-anchor="middle" fill="#1d2026" data-layer="TEXT">200 m²</text>
+<text x="59.600" y="4.600" font-size="0.800" font-weight="600" fill="#1d2026" data-layer="TEXT">LEGEND</text>
+<text x="65.200" y="7.850" font-size="0.550" fill="#1d2026" data-layer="TEXT">CC   CAMPHOR</text>
+<text x="65.200" y="8.650" font-size="0.420" fill="#5b616b" data-layer="TEXT">Cinnamomum camphora</text>
+<text x="65.200" y="11.600" font-size="0.550" fill="#1d2026" data-layer="TEXT">RH   AZALEA</text>
+<text x="65.200" y="13.950" font-size="0.550" fill="#1d2026" data-layer="TEXT">DE   DURANTA</text>
+<text x="58.900" y="16.902" font-size="0.500" font-weight="600" fill="#1d2026" data-layer="TEXT">PLANT SCHEDULE</text>
+<text x="58.800" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">CODE</text>
+<text x="60.300" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">NAME</text>
+<text x="63.300" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">QTY</text>
+<text x="64.600" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">UNIT</text>
+<text x="65.900" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">CAL. cm</text>
+<text x="67.900" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">H m</text>
+<text x="69.400" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">W m</text>
+<text x="70.900" y="17.927" font-size="0.400" font-weight="600" fill="#1d2026" data-layer="TEXT">REMARKS</text>
+<text x="58.800" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">CC</text>
+<text x="60.300" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">CAMPHOR</text>
+<text x="63.300" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">9</text>
+<text x="64.600" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">EA</text>
+<text x="65.900" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">10</text>
+<text x="67.900" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">3.5</text>
+<text x="69.400" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">1.5</text>
+<text x="70.900" y="18.877" font-size="0.400" fill="#1d2026" data-layer="TEXT">Cinnamomum camphora</text>
+<text x="58.800" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">DE</text>
+<text x="60.300" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">DURANTA</text>
+<text x="63.300" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">182</text>
+<text x="64.600" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">EA</text>
+<text x="65.900" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="67.900" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">0.6</text>
+<text x="69.400" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="70.900" y="19.827" font-size="0.400" fill="#1d2026" data-layer="TEXT">@0.3 m, 2 ROWS</text>
+<text x="58.800" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">RH</text>
+<text x="60.300" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">AZALEA</text>
+<text x="63.300" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">150</text>
+<text x="64.600" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">m²</text>
+<text x="65.900" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="67.900" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">0.4</text>
+<text x="69.400" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="70.900" y="20.777" font-size="0.400" fill="#1d2026" data-layer="TEXT">4 PLANTS / m²</text>
+<text x="58.800" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">LW</text>
+<text x="60.300" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">LAWN</text>
+<text x="63.300" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">200</text>
+<text x="64.600" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">m²</text>
+<text x="65.900" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="67.900" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="69.400" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">–</text>
+<text x="70.900" y="21.727" font-size="0.400" fill="#1d2026" data-layer="TEXT">CARPET GRASS</text>
+<text x="58.900" y="22.677" font-size="0.400" fill="#1d2026" data-layer="TEXT">TREES TOTAL 9</text>
+</g></svg>

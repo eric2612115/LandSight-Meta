@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.200 45.200" width="1165" height="633" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="83.200" height="45.200" fill="#ffffff" data-layer="PAPER"/>
+<g >
+<polygon points="4.600,41.200 7.100,41.200 7.100,40.800 4.600,40.800" fill="#1d2026" data-layer="FILL"/>
+<polygon points="9.600,41.200 12.100,41.200 12.100,40.800 9.600,40.800" fill="#1d2026" data-layer="FILL"/>
+<polygon points="54.800,38.800 55.800,41.800 54.800,40.900" fill="#1d2026" data-layer="FILL"/>
+<polygon points="1.600,43.600 81.600,43.600 81.600,1.600 1.600,1.600" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polygon points="2.100,43.100 81.100,43.100 81.100,2.100 2.100,2.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="BORDER"/>
+<polygon points="4.600,34.600 54.600,34.600 54.600,4.600 4.600,4.600" fill="none" stroke="#1d2026" stroke-width="0.100" stroke-dasharray="1.400 0.350 0.250 0.350" stroke-linecap="round" stroke-linejoin="round" data-layer="SITE"/>
+<polyline points="2.100,35.400 57.600,35.400" fill="none" stroke="#1d2026" stroke-width="0.070" stroke-linecap="round" stroke-linejoin="round" data-layer="ROAD"/>
+<polyline points="2.100,42.800 57.600,42.800" fill="none" stroke="#1d2026" stroke-width="0.070" stroke-linecap="round" stroke-linejoin="round" data-layer="ROAD"/>
+<polygon points="4.600,41.200 7.100,41.200 7.100,40.800 4.600,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="7.100,41.200 9.600,41.200 9.600,40.800 7.100,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="9.600,41.200 12.100,41.200 12.100,40.800 9.600,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="12.100,41.200 14.600,41.200 14.600,40.800 12.100,40.800" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="53.800,41.800 54.800,38.800 55.800,41.800 54.800,40.900" fill="none" stroke="#1d2026" stroke-width="0.040" stroke-linecap="round" stroke-linejoin="round" data-layer="DIM"/>
+<polygon points="58.600,42.100 79.600,42.100 79.600,27.600 58.600,27.600" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polyline points="58.600,29.671 79.600,29.671" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,31.743 79.600,31.743" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,33.814 79.600,33.814" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,35.886 79.600,35.886" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,37.957 79.600,37.957" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,40.029 79.600,40.029" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.900,42.100 64.900,27.600" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polygon points="11.532,31.582 11.014,30.686 10.118,30.168 9.082,30.168 8.186,30.686 7.668,31.582 7.668,32.618 8.186,33.514 9.082,34.032 10.118,34.032 11.014,33.514 11.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="15.532,31.582 15.014,30.686 14.118,30.168 13.082,30.168 12.186,30.686 11.668,31.582 11.668,32.618 12.186,33.514 13.082,34.032 14.118,34.032 15.014,33.514 15.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="19.532,31.582 19.014,30.686 18.118,30.168 17.082,30.168 16.186,30.686 15.668,31.582 15.668,32.618 16.186,33.514 17.082,34.032 18.118,34.032 19.014,33.514 19.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="23.532,31.582 23.014,30.686 22.118,30.168 21.082,30.168 20.186,30.686 19.668,31.582 19.668,32.618 20.186,33.514 21.082,34.032 22.118,34.032 23.014,33.514 23.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="27.532,31.582 27.014,30.686 26.118,30.168 25.082,30.168 24.186,30.686 23.668,31.582 23.668,32.618 24.186,33.514 25.082,34.032 26.118,34.032 27.014,33.514 27.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="31.532,31.582 31.014,30.686 30.118,30.168 29.082,30.168 28.186,30.686 27.668,31.582 27.668,32.618 28.186,33.514 29.082,34.032 30.118,34.032 31.014,33.514 31.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="35.532,31.582 35.014,30.686 34.118,30.168 33.082,30.168 32.186,30.686 31.668,31.582 31.668,32.618 32.186,33.514 33.082,34.032 34.118,34.032 35.014,33.514 35.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="39.532,31.582 39.014,30.686 38.118,30.168 37.082,30.168 36.186,30.686 35.668,31.582 35.668,32.618 36.186,33.514 37.082,34.032 38.118,34.032 39.014,33.514 39.532,32.618" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="10.600,22.600 25.600,22.600 25.600,12.600 10.600,12.600" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<polygon points="28.600,22.600 48.600,22.600 48.600,12.600 28.600,12.600" fill="none" stroke="#8f959e" stroke-width="0.050" stroke-dasharray="0.400 0.250" stroke-linecap="round" stroke-linejoin="round" data-layer="BG"/>
+<circle cx="7.600" cy="27.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="7.150,27.600 8.050,27.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="7.600,28.050 7.600,27.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="15.600" cy="27.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="15.150,27.600 16.050,27.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="15.600,28.050 15.600,27.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="23.600" cy="27.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="23.150,27.600 24.050,27.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="23.600,28.050 23.600,27.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="31.600" cy="27.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="31.150,27.600 32.050,27.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="31.600,28.050 31.600,27.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="39.600" cy="27.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="39.150,27.600 40.050,27.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="39.600,28.050 39.600,27.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="47.600" cy="27.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="47.150,27.600 48.050,27.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="47.600,28.050 47.600,27.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="51.000" cy="18.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="50.550,18.600 51.450,18.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="51.000,19.050 51.000,18.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<circle cx="51.000" cy="9.600" r="0.450" fill="none" stroke="#1d2026" stroke-width="0.075" data-layer="PIPE"/>
+<polyline points="50.550,9.600 51.450,9.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polyline points="51.000,10.050 51.000,9.150" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="9.300,33.100 9.900,33.100 9.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="13.300,33.100 13.900,33.100 13.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="17.300,33.100 17.900,33.100 17.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="21.300,33.100 21.900,33.100 21.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="25.300,33.100 25.900,33.100 25.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="29.300,33.100 29.900,33.100 29.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="33.300,33.100 33.900,33.100 33.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<polygon points="37.300,33.100 37.900,33.100 37.600,32.600" fill="none" stroke="#1d2026" stroke-width="0.075" stroke-linecap="round" stroke-linejoin="round" data-layer="PIPE"/>
+<text x="5.000" y="4.200" font-size="0.450" fill="#5b616b" data-layer="TEXT">SITE BOUNDARY</text>
+<text x="23.100" y="38.000" font-size="0.800" fill="#5b616b" data-layer="TEXT">8 M ROAD</text>
+<text x="4.450" y="42.100" font-size="0.500" fill="#1d2026" data-layer="TEXT">0</text>
+<text x="9.450" y="42.100" font-size="0.500" fill="#1d2026" data-layer="TEXT">5</text>
+<text x="14.450" y="42.100" font-size="0.500" fill="#1d2026" data-layer="TEXT">10 m</text>
+<text x="54.520" y="38.350" font-size="0.800" font-weight="600" fill="#1d2026" data-layer="TEXT">N</text>
+<text x="58.900" y="28.853" font-size="0.446" fill="#5b616b" data-layer="TEXT">PROJECT</text>
+<text x="65.200" y="28.853" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">GREENFIELD RESIDENCES, local</text>
+<text x="58.900" y="30.924" font-size="0.446" fill="#5b616b" data-layer="TEXT">DRAWING</text>
+<text x="65.200" y="30.924" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">LIGHTING PLAN</text>
+<text x="58.900" y="32.996" font-size="0.446" fill="#5b616b" data-layer="TEXT">SHEET</text>
+<text x="65.200" y="32.996" font-size="0.620" fill="#1d2026" data-layer="TEXT">L-8   REV A</text>
+<text x="58.900" y="35.067" font-size="0.446" fill="#5b616b" data-layer="TEXT">SCALE</text>
+<text x="65.200" y="35.067" font-size="0.620" fill="#1d2026" data-layer="TEXT">1:200</text>
+<text x="58.900" y="37.138" font-size="0.446" fill="#5b616b" data-layer="TEXT">SITE AREA</text>
+<text x="65.200" y="37.138" font-size="0.620" fill="#1d2026" data-layer="TEXT">1,500 m²</text>
+<text x="58.900" y="39.210" font-size="0.446" fill="#5b616b" data-layer="TEXT">BUILDING COVERAGE</text>
+<text x="65.200" y="39.210" font-size="0.620" fill="#1d2026" data-layer="TEXT">40%   ARTIFICIAL GROUND</text>
+<text x="58.900" y="41.281" font-size="0.446" fill="#5b616b" data-layer="TEXT">DATE</text>
+<text x="65.200" y="41.281" font-size="0.620" fill="#1d2026" data-layer="TEXT">2026-09-30</text>
+<text x="8.200" y="27.000" font-size="0.500" fill="#1d2026" data-layer="TEXT">POLE LIGHT 3.5 m</text>
+<text x="10.800" y="36.500" font-size="0.500" fill="#1d2026" data-layer="TEXT">UPLIGHT UNDER CANOPY</text>
+</g></svg>

@@ -1,0 +1,8485 @@
+{
+ "run_id": "mock-2026-11-02-greenfield",
+ "package": {
+  "name": "Greenfield Residences — Landscape Package",
+  "folder": "samples/greenfield",
+  "file_count": 35
+ },
+ "files": [
+  {
+   "file_id": "f01",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-0 Cover and Index.dxf",
+   "name": "L-0 Cover and Index.dxf",
+   "ext": "dxf",
+   "size_bytes": 182400,
+   "verdict": "drawing_vector",
+   "decided_by": "content",
+   "why": "DXF, one sheet: the cover and a drawing index of ten sheets.",
+   "sheet_id": "L-0"
+  },
+  {
+   "file_id": "f02",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-1 Planting Plan.dxf",
+   "name": "L-1 Planting Plan.dxf",
+   "ext": "dxf",
+   "size_bytes": 412800,
+   "verdict": "drawing_vector",
+   "decided_by": "content",
+   "why": "DXF, Rev A of 2026-09-18: the planting plan.",
+   "sheet_id": "L-1"
+  },
+  {
+   "file_id": "f03",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-1 Planting Plan (Rev B).dxf",
+   "name": "L-1 Planting Plan (Rev B).dxf",
+   "ext": "dxf",
+   "size_bytes": 418300,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "A second revision of L-1: Rev B, 2026-10-14, read from the title block.",
+   "sheet_id": "L-1B"
+  },
+  {
+   "file_id": "f04",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-1 Planting Plan.bak",
+   "name": "L-1 Planting Plan.bak",
+   "ext": "bak",
+   "size_bytes": 412800,
+   "verdict": "backup_ignored",
+   "decided_by": "content",
+   "why": "AutoCAD backup with the same content as L-1 Rev A."
+  },
+  {
+   "file_id": "f05",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-2 South Elevation.dxf",
+   "name": "L-2 South Elevation.dxf",
+   "ext": "dxf",
+   "size_bytes": 156200,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "Muse Spark: an elevation — the same eight trees from the side.",
+   "sheet_id": "L-2"
+  },
+  {
+   "file_id": "f06",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-3 Paving Plan.dxf",
+   "name": "L-3 Paving Plan.dxf",
+   "ext": "dxf",
+   "size_bytes": 344100,
+   "verdict": "drawing_vector",
+   "decided_by": "content",
+   "why": "DXF: hatched paving areas, a planter edge.",
+   "sheet_id": "L-3"
+  },
+  {
+   "file_id": "f07",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-4 Plant Schedule.dxf",
+   "name": "L-4 Plant Schedule.dxf",
+   "ext": "dxf",
+   "size_bytes": 98700,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "Muse Spark: a schedule sheet — read, not measured.",
+   "sheet_id": "L-4"
+  },
+  {
+   "file_id": "f08",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-5 Enlarged Plan - West.dxf",
+   "name": "L-5 Enlarged Plan - West.dxf",
+   "ext": "dxf",
+   "size_bytes": 201900,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "Muse Spark: an enlarged plan; a match line found.",
+   "sheet_id": "L-5"
+  },
+  {
+   "file_id": "f09",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-6 Tree Pit Detail.dxf",
+   "name": "L-6 Tree Pit Detail.dxf",
+   "ext": "dxf",
+   "size_bytes": 64300,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "Muse Spark: a detail — pit 1.2 × 1.2 m, soil 0.8 m on the slab.",
+   "sheet_id": "L-6"
+  },
+  {
+   "file_id": "f10",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-7 Irrigation Plan.dxf",
+   "name": "L-7 Irrigation Plan.dxf",
+   "ext": "dxf",
+   "size_bytes": 288000,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "Muse Spark: irrigation — the canopies are background.",
+   "sheet_id": "L-7"
+  },
+  {
+   "file_id": "f11",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/L-8 Lighting Plan.dxf",
+   "name": "L-8 Lighting Plan.dxf",
+   "ext": "dxf",
+   "size_bytes": 241600,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "Muse Spark: lighting — the canopies are background.",
+   "sheet_id": "L-8"
+  },
+  {
+   "file_id": "f12",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/pasted image #1.png",
+   "name": "pasted image #1.png",
+   "ext": "png",
+   "size_bytes": 1204000,
+   "verdict": "drawing_image",
+   "decided_by": "spark",
+   "why": "Material photo: exposed aggregate — matched to P-02."
+  },
+  {
+   "file_id": "f13",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/pasted image #2.png",
+   "name": "pasted image #2.png",
+   "ext": "png",
+   "size_bytes": 988000,
+   "verdict": "drawing_image",
+   "decided_by": "spark",
+   "why": "Material photo: permeable pavers — matched to P-01."
+  },
+  {
+   "file_id": "f14",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/pasted image #3.png",
+   "name": "pasted image #3.png",
+   "ext": "png",
+   "size_bytes": 1102000,
+   "verdict": "drawing_image",
+   "decided_by": "spark",
+   "why": "Material photo: grass pavers — matched to P-03."
+  },
+  {
+   "file_id": "f15",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/pasted image #4.png",
+   "name": "pasted image #4.png",
+   "ext": "png",
+   "size_bytes": 876000,
+   "verdict": "drawing_image",
+   "decided_by": "spark",
+   "why": "Material photo: a granite kerb — no matching item."
+  },
+  {
+   "file_id": "f16",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/pasted image #5.png",
+   "name": "pasted image #5.png",
+   "ext": "png",
+   "size_bytes": 1310000,
+   "verdict": "drawing_image",
+   "decided_by": "spark",
+   "why": "Material photo: azalea in flower — matched to B-01."
+  },
+  {
+   "file_id": "f17",
+   "path": "Greenfield Residences — Landscape Package/Drawings/CAD/pasted image #6.png",
+   "name": "pasted image #6.png",
+   "ext": "png",
+   "size_bytes": 1450000,
+   "verdict": "drawing_image",
+   "decided_by": "spark",
+   "why": "Material photo: a camphor specimen — matched to Camphor."
+  },
+  {
+   "file_id": "f18",
+   "path": "Greenfield Residences — Landscape Package/Drawings/PDF/Landscape Drawings (Full Set).pdf",
+   "name": "Landscape Drawings (Full Set).pdf",
+   "ext": "pdf",
+   "size_bytes": 3820000,
+   "verdict": "drawing_vector",
+   "decided_by": "content",
+   "why": "Vector PDF, nine pages: the same sheets as the DXFs."
+  },
+  {
+   "file_id": "f19",
+   "path": "Greenfield Residences — Landscape Package/Drawings/PDF/L-1 Planting Plan (scan).pdf",
+   "name": "L-1 Planting Plan (scan).pdf",
+   "ext": "pdf",
+   "size_bytes": 5610000,
+   "verdict": "drawing_raster",
+   "decided_by": "content",
+   "why": "Raster only, rotated 1.5°: no vectors to measure.",
+   "sheet_id": "SCAN"
+  },
+  {
+   "file_id": "f20",
+   "path": "Greenfield Residences — Landscape Package/Drawings/PDF/Presentation Plan (Colour).pdf",
+   "name": "Presentation Plan (Colour).pdf",
+   "ext": "pdf",
+   "size_bytes": 7240000,
+   "verdict": "drawing_raster",
+   "decided_by": "spark",
+   "why": "A colour rendering: areas found by SAM 3.1.",
+   "sheet_id": "PP-1"
+  },
+  {
+   "file_id": "f21",
+   "path": "Greenfield Residences — Landscape Package/Drawings/PDF/Design review notes 240910.pdf",
+   "name": "Design review notes 240910.pdf",
+   "ext": "pdf",
+   "size_bytes": 212000,
+   "verdict": "spec",
+   "decided_by": "spark",
+   "why": "Review notes: three issues raised by the reviewer."
+  },
+  {
+   "file_id": "f22",
+   "path": "Greenfield Residences — Landscape Package/Bills/Landscape BOQ rev1.xlsx",
+   "name": "Landscape BOQ rev1.xlsx",
+   "ext": "xlsx",
+   "size_bytes": 48200,
+   "verdict": "bill",
+   "decided_by": "content",
+   "why": "Bill, first revision."
+  },
+  {
+   "file_id": "f23",
+   "path": "Greenfield Residences — Landscape Package/Bills/Landscape BOQ rev1a.xlsx",
+   "name": "Landscape BOQ rev1a.xlsx",
+   "ext": "xlsx",
+   "size_bytes": 48900,
+   "verdict": "bill",
+   "decided_by": "content",
+   "why": "Bill, same day: one row changed."
+  },
+  {
+   "file_id": "f24",
+   "path": "Greenfield Residences — Landscape Package/Bills/Landscape BOQ rev2.xlsx",
+   "name": "Landscape BOQ rev2.xlsx",
+   "ext": "xlsx",
+   "size_bytes": 61700,
+   "verdict": "bill",
+   "decided_by": "content",
+   "why": "Bill, current: eleven rows, a hidden sheet."
+  },
+  {
+   "file_id": "f25",
+   "path": "Greenfield Residences — Landscape Package/Bills/Tree pit guide - shallow roots.pdf",
+   "name": "Tree pit guide - shallow roots.pdf",
+   "ext": "pdf",
+   "size_bytes": 402000,
+   "verdict": "spec",
+   "decided_by": "content",
+   "why": "Specification text: tree pit, shallow-rooted species."
+  },
+  {
+   "file_id": "f26",
+   "path": "Greenfield Residences — Landscape Package/Bills/Tree pit guide - medium roots.pdf",
+   "name": "Tree pit guide - medium roots.pdf",
+   "ext": "pdf",
+   "size_bytes": 398000,
+   "verdict": "spec",
+   "decided_by": "content",
+   "why": "Specification text: tree pit, medium-rooted species."
+  },
+  {
+   "file_id": "f27",
+   "path": "Greenfield Residences — Landscape Package/Bills/Tree pit guide - deep roots.pdf",
+   "name": "Tree pit guide - deep roots.pdf",
+   "ext": "pdf",
+   "size_bytes": 405000,
+   "verdict": "spec",
+   "decided_by": "content",
+   "why": "Specification text: tree pit, deep-rooted species."
+  },
+  {
+   "file_id": "f28",
+   "path": "Greenfield Residences — Landscape Package/Bills/Planting procurement spec.pdf",
+   "name": "Planting procurement spec.pdf",
+   "ext": "pdf",
+   "size_bytes": 655000,
+   "verdict": "spec",
+   "decided_by": "content",
+   "why": "Specification text: plant procurement standard."
+  },
+  {
+   "file_id": "f29",
+   "path": "Greenfield Residences — Landscape Package/Quotes/Irrigation/irrigation-quote-240909.xls",
+   "name": "irrigation-quote-240909.xls",
+   "ext": "xls",
+   "size_bytes": 72704,
+   "verdict": "unsupported",
+   "decided_by": "ext",
+   "why": "Excel 97-2003: save as .xlsx to read it."
+  },
+  {
+   "file_id": "f30",
+   "path": "Greenfield Residences — Landscape Package/Quotes/Metal/street-furniture-quote.pdf",
+   "name": "street-furniture-quote.pdf",
+   "ext": "pdf",
+   "size_bytes": 188000,
+   "verdict": "quote",
+   "decided_by": "content",
+   "why": "A supplier quote: benches and bollards."
+  },
+  {
+   "file_id": "f31",
+   "path": "Greenfield Residences — Landscape Package/Quotes/Metal/metal-details.zip",
+   "name": "metal-details.zip",
+   "ext": "zip",
+   "size_bytes": 96500,
+   "verdict": "archive_unpacked",
+   "decided_by": "ext",
+   "why": "Zip, unpacked: one DXF inside.",
+   "children": [
+    "f32"
+   ]
+  },
+  {
+   "file_id": "f32",
+   "path": "Greenfield Residences — Landscape Package/Quotes/Metal/metal-details.zip/drain-cover-detail.dxf",
+   "name": "drain-cover-detail.dxf",
+   "ext": "dxf",
+   "size_bytes": 121000,
+   "verdict": "drawing_vector",
+   "decided_by": "spark",
+   "why": "A drain cover detail — not a landscape quantity."
+  },
+  {
+   "file_id": "f33",
+   "path": "Greenfield Residences — Landscape Package/Other/BOQ - Landscape - 20241014 (paving update).xlsx",
+   "name": "BOQ - Landscape - 20241014 (paving update).xlsx",
+   "ext": "xlsx",
+   "size_bytes": 63100,
+   "verdict": "bill",
+   "decided_by": "content",
+   "why": "Bill, latest by date: paving 212 → 236 m²."
+  },
+  {
+   "file_id": "f34",
+   "path": "Greenfield Residences — Landscape Package/Green Building Label - required documents.pdf",
+   "name": "Green Building Label - required documents.pdf",
+   "ext": "pdf",
+   "size_bytes": 254000,
+   "verdict": "spec",
+   "decided_by": "spark",
+   "why": "Checklist: a greening report is required."
+  },
+  {
+   "file_id": "f35",
+   "path": "Greenfield Residences — Landscape Package/Planter mood board.pptx",
+   "name": "Planter mood board.pptx",
+   "ext": "pptx",
+   "size_bytes": 2310000,
+   "verdict": "presentation",
+   "decided_by": "ext",
+   "why": "A slide deck, not a drawing."
+  }
+ ],
+ "sheets": [
+  {
+   "sheet_id": "L-0",
+   "file_id": "f01",
+   "title": "Cover and Index",
+   "number": "L-0",
+   "kind": "cover",
+   "kind_confidence": 0.98,
+   "kind_by": "spark",
+   "kind_why": "Title, drawing index and no site geometry.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "NTS",
+   "counted": false,
+   "not_counted_reason": "cover sheet",
+   "svg_url": "/mock/sheets/L-0.svg",
+   "png_url": "/mock/sheets/L-0.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-1",
+   "file_id": "f02",
+   "title": "Planting Plan",
+   "number": "L-1",
+   "kind": "plan",
+   "kind_confidence": 0.97,
+   "kind_by": "spark",
+   "kind_why": "Plan view: canopies in plan, a plant schedule and a north arrow.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "1:200",
+   "scale_measured": "1:200",
+   "counted": true,
+   "svg_url": "/mock/sheets/L-1.svg",
+   "png_url": "/mock/sheets/L-1.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "T-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       6.932,
+       3.018
+      ],
+      [
+       6.414,
+       3.914
+      ],
+      [
+       5.518,
+       4.432
+      ],
+      [
+       4.482,
+       4.432
+      ],
+      [
+       3.586,
+       3.914
+      ],
+      [
+       3.068,
+       3.018
+      ],
+      [
+       3.068,
+       1.982
+      ],
+      [
+       3.586,
+       1.086
+      ],
+      [
+       4.482,
+       0.568
+      ],
+      [
+       5.518,
+       0.568
+      ],
+      [
+       6.414,
+       1.086
+      ],
+      [
+       6.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       10.932,
+       3.018
+      ],
+      [
+       10.414,
+       3.914
+      ],
+      [
+       9.518,
+       4.432
+      ],
+      [
+       8.482,
+       4.432
+      ],
+      [
+       7.586,
+       3.914
+      ],
+      [
+       7.068,
+       3.018
+      ],
+      [
+       7.068,
+       1.982
+      ],
+      [
+       7.586,
+       1.086
+      ],
+      [
+       8.482,
+       0.568
+      ],
+      [
+       9.518,
+       0.568
+      ],
+      [
+       10.414,
+       1.086
+      ],
+      [
+       10.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       14.932,
+       3.018
+      ],
+      [
+       14.414,
+       3.914
+      ],
+      [
+       13.518,
+       4.432
+      ],
+      [
+       12.482,
+       4.432
+      ],
+      [
+       11.586,
+       3.914
+      ],
+      [
+       11.068,
+       3.018
+      ],
+      [
+       11.068,
+       1.982
+      ],
+      [
+       11.586,
+       1.086
+      ],
+      [
+       12.482,
+       0.568
+      ],
+      [
+       13.518,
+       0.568
+      ],
+      [
+       14.414,
+       1.086
+      ],
+      [
+       14.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       18.932,
+       3.018
+      ],
+      [
+       18.414,
+       3.914
+      ],
+      [
+       17.518,
+       4.432
+      ],
+      [
+       16.482,
+       4.432
+      ],
+      [
+       15.586,
+       3.914
+      ],
+      [
+       15.068,
+       3.018
+      ],
+      [
+       15.068,
+       1.982
+      ],
+      [
+       15.586,
+       1.086
+      ],
+      [
+       16.482,
+       0.568
+      ],
+      [
+       17.518,
+       0.568
+      ],
+      [
+       18.414,
+       1.086
+      ],
+      [
+       18.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-05",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      21,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       22.932,
+       3.018
+      ],
+      [
+       22.414,
+       3.914
+      ],
+      [
+       21.518,
+       4.432
+      ],
+      [
+       20.482,
+       4.432
+      ],
+      [
+       19.586,
+       3.914
+      ],
+      [
+       19.068,
+       3.018
+      ],
+      [
+       19.068,
+       1.982
+      ],
+      [
+       19.586,
+       1.086
+      ],
+      [
+       20.482,
+       0.568
+      ],
+      [
+       21.518,
+       0.568
+      ],
+      [
+       22.414,
+       1.086
+      ],
+      [
+       22.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-06",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      25,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       26.932,
+       3.018
+      ],
+      [
+       26.414,
+       3.914
+      ],
+      [
+       25.518,
+       4.432
+      ],
+      [
+       24.482,
+       4.432
+      ],
+      [
+       23.586,
+       3.914
+      ],
+      [
+       23.068,
+       3.018
+      ],
+      [
+       23.068,
+       1.982
+      ],
+      [
+       23.586,
+       1.086
+      ],
+      [
+       24.482,
+       0.568
+      ],
+      [
+       25.518,
+       0.568
+      ],
+      [
+       26.414,
+       1.086
+      ],
+      [
+       26.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-07",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      29,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       30.932,
+       3.018
+      ],
+      [
+       30.414,
+       3.914
+      ],
+      [
+       29.518,
+       4.432
+      ],
+      [
+       28.482,
+       4.432
+      ],
+      [
+       27.586,
+       3.914
+      ],
+      [
+       27.068,
+       3.018
+      ],
+      [
+       27.068,
+       1.982
+      ],
+      [
+       27.586,
+       1.086
+      ],
+      [
+       28.482,
+       0.568
+      ],
+      [
+       29.518,
+       0.568
+      ],
+      [
+       30.414,
+       1.086
+      ],
+      [
+       30.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-08",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      33,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       34.932,
+       3.018
+      ],
+      [
+       34.414,
+       3.914
+      ],
+      [
+       33.518,
+       4.432
+      ],
+      [
+       32.482,
+       4.432
+      ],
+      [
+       31.586,
+       3.914
+      ],
+      [
+       31.068,
+       3.018
+      ],
+      [
+       31.068,
+       1.982
+      ],
+      [
+       31.586,
+       1.086
+      ],
+      [
+       32.482,
+       0.568
+      ],
+      [
+       33.518,
+       0.568
+      ],
+      [
+       34.414,
+       1.086
+      ],
+      [
+       34.932,
+       1.982
+      ]
+     ],
+     "closed": false,
+     "gaps": [
+      [
+       34.376,
+       3.876
+      ],
+      [
+       33.504,
+       4.38
+      ],
+      [
+       32.496,
+       4.38
+      ],
+      [
+       31.624,
+       3.876
+      ],
+      [
+       31.12,
+       3.004
+      ],
+      [
+       31.12,
+       1.996
+      ],
+      [
+       31.624,
+       1.124
+      ],
+      [
+       32.496,
+       0.62
+      ],
+      [
+       33.504,
+       0.62
+      ],
+      [
+       34.376,
+       1.124
+      ],
+      [
+       34.88,
+       1.996
+      ],
+      [
+       34.88,
+       3.004
+      ]
+     ],
+     "by": "spark"
+    },
+    {
+     "object_id": "T-09",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      42,
+      -3.6
+     ],
+     "area_m2": 9.72,
+     "outline": [
+      [
+       43.739,
+       -3.134
+      ],
+      [
+       43.273,
+       -2.327
+      ],
+      [
+       42.466,
+       -1.861
+      ],
+      [
+       41.534,
+       -1.861
+      ],
+      [
+       40.727,
+       -2.327
+      ],
+      [
+       40.261,
+       -3.134
+      ],
+      [
+       40.261,
+       -4.066
+      ],
+      [
+       40.727,
+       -4.873
+      ],
+      [
+       41.534,
+       -5.339
+      ],
+      [
+       42.466,
+       -5.339
+      ],
+      [
+       43.273,
+       -4.873
+      ],
+      [
+       43.739,
+       -4.066
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "outside the site boundary — road reserve"
+     }
+    },
+    {
+     "object_id": "T-10",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      46.4,
+      8.5
+     ],
+     "area_m2": 9.72,
+     "outline": [
+      [
+       48.139,
+       8.966
+      ],
+      [
+       47.673,
+       9.773
+      ],
+      [
+       46.866,
+       10.239
+      ],
+      [
+       45.934,
+       10.239
+      ],
+      [
+       45.127,
+       9.773
+      ],
+      [
+       44.661,
+       8.966
+      ],
+      [
+       44.661,
+       8.034
+      ],
+      [
+       45.127,
+       7.227
+      ],
+      [
+       45.934,
+       6.761
+      ],
+      [
+       46.866,
+       6.761
+      ],
+      [
+       47.673,
+       7.227
+      ],
+      [
+       48.139,
+       8.034
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "inside the fire-truck access lane — greening cannot count here",
+      "rule": "Building Technical Regulations §299"
+     }
+    },
+    {
+     "object_id": "X-01",
+     "kind": "existing_tree",
+     "label": "Existing camphor, DBH 95 cm",
+     "species_code": "CC",
+     "centre": [
+      10,
+      26.2
+     ],
+     "area_m2": 21.13,
+     "outline": [
+      [
+       12.6,
+       26.2
+      ],
+      [
+       12.561,
+       26.651
+      ],
+      [
+       12.443,
+       27.089
+      ],
+      [
+       12.252,
+       27.5
+      ],
+      [
+       11.992,
+       27.871
+      ],
+      [
+       11.671,
+       28.192
+      ],
+      [
+       11.3,
+       28.452
+      ],
+      [
+       10.889,
+       28.643
+      ],
+      [
+       10.451,
+       28.761
+      ],
+      [
+       10,
+       28.8
+      ],
+      [
+       9.549,
+       28.761
+      ],
+      [
+       9.111,
+       28.643
+      ],
+      [
+       8.7,
+       28.452
+      ],
+      [
+       8.329,
+       28.192
+      ],
+      [
+       8.008,
+       27.871
+      ],
+      [
+       7.748,
+       27.5
+      ],
+      [
+       7.557,
+       27.089
+      ],
+      [
+       7.439,
+       26.651
+      ],
+      [
+       7.4,
+       26.2
+      ],
+      [
+       7.439,
+       25.749
+      ],
+      [
+       7.557,
+       25.311
+      ],
+      [
+       7.748,
+       24.9
+      ],
+      [
+       8.008,
+       24.529
+      ],
+      [
+       8.329,
+       24.208
+      ],
+      [
+       8.7,
+       23.948
+      ],
+      [
+       9.111,
+       23.757
+      ],
+      [
+       9.549,
+       23.639
+      ],
+      [
+       10,
+       23.6
+      ],
+      [
+       10.451,
+       23.639
+      ],
+      [
+       10.889,
+       23.757
+      ],
+      [
+       11.3,
+       23.948
+      ],
+      [
+       11.671,
+       24.208
+      ],
+      [
+       11.992,
+       24.529
+      ],
+      [
+       12.252,
+       24.9
+      ],
+      [
+       12.443,
+       25.311
+      ],
+      [
+       12.561,
+       25.749
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "FL-01",
+     "kind": "fire_lane",
+     "label": "Fire-truck access lane",
+     "outline": [
+      [
+       44.4,
+       0
+      ],
+      [
+       48.4,
+       0
+      ],
+      [
+       48.4,
+       30
+      ],
+      [
+       44.4,
+       30
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "H-01",
+     "kind": "hedge",
+     "label": "Duranta",
+     "species_code": "DE",
+     "centre": [
+      49,
+      15
+     ],
+     "length_m": 27,
+     "outline": [
+      [
+       48.8,
+       1.5
+      ],
+      [
+       49.2,
+       1.5
+      ],
+      [
+       49.2,
+       28.5
+      ],
+      [
+       48.8,
+       28.5
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "B-01",
+     "kind": "shrub_bed",
+     "label": "Azalea",
+     "species_code": "RH",
+     "centre": [
+      13.5,
+      17
+     ],
+     "area_m2": 150,
+     "outline": [
+      [
+       6,
+       12
+      ],
+      [
+       21,
+       12
+      ],
+      [
+       21,
+       22
+      ],
+      [
+       6,
+       22
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "L-01",
+     "kind": "lawn",
+     "label": "Lawn",
+     "species_code": "LW",
+     "centre": [
+      34,
+      17
+     ],
+     "area_m2": 200,
+     "outline": [
+      [
+       24,
+       12
+      ],
+      [
+       44,
+       12
+      ],
+      [
+       44,
+       22
+      ],
+      [
+       24,
+       22
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "BD-01",
+     "kind": "boundary",
+     "label": "Site boundary",
+     "outline": [
+      [
+       0,
+       0
+      ],
+      [
+       50,
+       0
+      ],
+      [
+       50,
+       30
+      ],
+      [
+       0,
+       30
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "LG-01",
+     "kind": "legend",
+     "label": "Legend",
+     "outline": [
+      [
+       54,
+       19.5
+      ],
+      [
+       73,
+       19.5
+      ],
+      [
+       73,
+       31.5
+      ],
+      [
+       54,
+       31.5
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "legend — not counted"
+     }
+    },
+    {
+     "object_id": "LG-02",
+     "kind": "legend",
+     "label": "Legend symbol, Camphor",
+     "centre": [
+      57.5,
+      27
+     ],
+     "outline": [
+      [
+       59.142,
+       27.44
+      ],
+      [
+       58.702,
+       28.202
+      ],
+      [
+       57.94,
+       28.642
+      ],
+      [
+       57.06,
+       28.642
+      ],
+      [
+       56.298,
+       28.202
+      ],
+      [
+       55.858,
+       27.44
+      ],
+      [
+       55.858,
+       26.56
+      ],
+      [
+       56.298,
+       25.798
+      ],
+      [
+       57.06,
+       25.358
+      ],
+      [
+       57.94,
+       25.358
+      ],
+      [
+       58.702,
+       25.798
+      ],
+      [
+       59.142,
+       26.56
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "legend symbol — not a tree"
+     }
+    },
+    {
+     "object_id": "SC-01",
+     "kind": "schedule",
+     "label": "Plant schedule",
+     "outline": [
+      [
+       54,
+       11.6
+      ],
+      [
+       73,
+       11.6
+      ],
+      [
+       73,
+       18.4
+      ],
+      [
+       54,
+       18.4
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-1B",
+   "file_id": "f03",
+   "title": "Planting Plan (Rev B)",
+   "number": "L-1",
+   "kind": "plan",
+   "kind_confidence": 0.96,
+   "kind_by": "spark",
+   "kind_why": "Same sheet number as L-1, Rev B in the title block, dated 2026-10-14.",
+   "revision": "B",
+   "date": "2026-10-14",
+   "scale_title": "1:200",
+   "scale_measured": "1:200",
+   "counted": false,
+   "not_counted_reason": "second revision of L-1 — counts shown for both; confirm which governs",
+   "svg_url": "/mock/sheets/L-1B.svg",
+   "png_url": "/mock/sheets/L-1B.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "T-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       6.932,
+       3.018
+      ],
+      [
+       6.414,
+       3.914
+      ],
+      [
+       5.518,
+       4.432
+      ],
+      [
+       4.482,
+       4.432
+      ],
+      [
+       3.586,
+       3.914
+      ],
+      [
+       3.068,
+       3.018
+      ],
+      [
+       3.068,
+       1.982
+      ],
+      [
+       3.586,
+       1.086
+      ],
+      [
+       4.482,
+       0.568
+      ],
+      [
+       5.518,
+       0.568
+      ],
+      [
+       6.414,
+       1.086
+      ],
+      [
+       6.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       10.932,
+       3.018
+      ],
+      [
+       10.414,
+       3.914
+      ],
+      [
+       9.518,
+       4.432
+      ],
+      [
+       8.482,
+       4.432
+      ],
+      [
+       7.586,
+       3.914
+      ],
+      [
+       7.068,
+       3.018
+      ],
+      [
+       7.068,
+       1.982
+      ],
+      [
+       7.586,
+       1.086
+      ],
+      [
+       8.482,
+       0.568
+      ],
+      [
+       9.518,
+       0.568
+      ],
+      [
+       10.414,
+       1.086
+      ],
+      [
+       10.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       14.932,
+       3.018
+      ],
+      [
+       14.414,
+       3.914
+      ],
+      [
+       13.518,
+       4.432
+      ],
+      [
+       12.482,
+       4.432
+      ],
+      [
+       11.586,
+       3.914
+      ],
+      [
+       11.068,
+       3.018
+      ],
+      [
+       11.068,
+       1.982
+      ],
+      [
+       11.586,
+       1.086
+      ],
+      [
+       12.482,
+       0.568
+      ],
+      [
+       13.518,
+       0.568
+      ],
+      [
+       14.414,
+       1.086
+      ],
+      [
+       14.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       18.932,
+       3.018
+      ],
+      [
+       18.414,
+       3.914
+      ],
+      [
+       17.518,
+       4.432
+      ],
+      [
+       16.482,
+       4.432
+      ],
+      [
+       15.586,
+       3.914
+      ],
+      [
+       15.068,
+       3.018
+      ],
+      [
+       15.068,
+       1.982
+      ],
+      [
+       15.586,
+       1.086
+      ],
+      [
+       16.482,
+       0.568
+      ],
+      [
+       17.518,
+       0.568
+      ],
+      [
+       18.414,
+       1.086
+      ],
+      [
+       18.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-05",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      21.5,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       23.432,
+       3.018
+      ],
+      [
+       22.914,
+       3.914
+      ],
+      [
+       22.018,
+       4.432
+      ],
+      [
+       20.982,
+       4.432
+      ],
+      [
+       20.086,
+       3.914
+      ],
+      [
+       19.568,
+       3.018
+      ],
+      [
+       19.568,
+       1.982
+      ],
+      [
+       20.086,
+       1.086
+      ],
+      [
+       20.982,
+       0.568
+      ],
+      [
+       22.018,
+       0.568
+      ],
+      [
+       22.914,
+       1.086
+      ],
+      [
+       23.432,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-06",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      25,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       26.932,
+       3.018
+      ],
+      [
+       26.414,
+       3.914
+      ],
+      [
+       25.518,
+       4.432
+      ],
+      [
+       24.482,
+       4.432
+      ],
+      [
+       23.586,
+       3.914
+      ],
+      [
+       23.068,
+       3.018
+      ],
+      [
+       23.068,
+       1.982
+      ],
+      [
+       23.586,
+       1.086
+      ],
+      [
+       24.482,
+       0.568
+      ],
+      [
+       25.518,
+       0.568
+      ],
+      [
+       26.414,
+       1.086
+      ],
+      [
+       26.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-07",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      29,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       30.932,
+       3.018
+      ],
+      [
+       30.414,
+       3.914
+      ],
+      [
+       29.518,
+       4.432
+      ],
+      [
+       28.482,
+       4.432
+      ],
+      [
+       27.586,
+       3.914
+      ],
+      [
+       27.068,
+       3.018
+      ],
+      [
+       27.068,
+       1.982
+      ],
+      [
+       27.586,
+       1.086
+      ],
+      [
+       28.482,
+       0.568
+      ],
+      [
+       29.518,
+       0.568
+      ],
+      [
+       30.414,
+       1.086
+      ],
+      [
+       30.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-08",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      33,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       34.932,
+       3.018
+      ],
+      [
+       34.414,
+       3.914
+      ],
+      [
+       33.518,
+       4.432
+      ],
+      [
+       32.482,
+       4.432
+      ],
+      [
+       31.586,
+       3.914
+      ],
+      [
+       31.068,
+       3.018
+      ],
+      [
+       31.068,
+       1.982
+      ],
+      [
+       31.586,
+       1.086
+      ],
+      [
+       32.482,
+       0.568
+      ],
+      [
+       33.518,
+       0.568
+      ],
+      [
+       34.414,
+       1.086
+      ],
+      [
+       34.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "T-09",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      37,
+      2.5
+     ],
+     "area_m2": 12,
+     "outline": [
+      [
+       38.932,
+       3.018
+      ],
+      [
+       38.414,
+       3.914
+      ],
+      [
+       37.518,
+       4.432
+      ],
+      [
+       36.482,
+       4.432
+      ],
+      [
+       35.586,
+       3.914
+      ],
+      [
+       35.068,
+       3.018
+      ],
+      [
+       35.068,
+       1.982
+      ],
+      [
+       35.586,
+       1.086
+      ],
+      [
+       36.482,
+       0.568
+      ],
+      [
+       37.518,
+       0.568
+      ],
+      [
+       38.414,
+       1.086
+      ],
+      [
+       38.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "X-01",
+     "kind": "existing_tree",
+     "label": "Existing camphor, DBH 95 cm",
+     "species_code": "CC",
+     "centre": [
+      10,
+      26.2
+     ],
+     "area_m2": 21.13,
+     "outline": [
+      [
+       12.6,
+       26.2
+      ],
+      [
+       12.561,
+       26.651
+      ],
+      [
+       12.443,
+       27.089
+      ],
+      [
+       12.252,
+       27.5
+      ],
+      [
+       11.992,
+       27.871
+      ],
+      [
+       11.671,
+       28.192
+      ],
+      [
+       11.3,
+       28.452
+      ],
+      [
+       10.889,
+       28.643
+      ],
+      [
+       10.451,
+       28.761
+      ],
+      [
+       10,
+       28.8
+      ],
+      [
+       9.549,
+       28.761
+      ],
+      [
+       9.111,
+       28.643
+      ],
+      [
+       8.7,
+       28.452
+      ],
+      [
+       8.329,
+       28.192
+      ],
+      [
+       8.008,
+       27.871
+      ],
+      [
+       7.748,
+       27.5
+      ],
+      [
+       7.557,
+       27.089
+      ],
+      [
+       7.439,
+       26.651
+      ],
+      [
+       7.4,
+       26.2
+      ],
+      [
+       7.439,
+       25.749
+      ],
+      [
+       7.557,
+       25.311
+      ],
+      [
+       7.748,
+       24.9
+      ],
+      [
+       8.008,
+       24.529
+      ],
+      [
+       8.329,
+       24.208
+      ],
+      [
+       8.7,
+       23.948
+      ],
+      [
+       9.111,
+       23.757
+      ],
+      [
+       9.549,
+       23.639
+      ],
+      [
+       10,
+       23.6
+      ],
+      [
+       10.451,
+       23.639
+      ],
+      [
+       10.889,
+       23.757
+      ],
+      [
+       11.3,
+       23.948
+      ],
+      [
+       11.671,
+       24.208
+      ],
+      [
+       11.992,
+       24.529
+      ],
+      [
+       12.252,
+       24.9
+      ],
+      [
+       12.443,
+       25.311
+      ],
+      [
+       12.561,
+       25.749
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "FL-01",
+     "kind": "fire_lane",
+     "label": "Fire-truck access lane",
+     "outline": [
+      [
+       44.4,
+       0
+      ],
+      [
+       48.4,
+       0
+      ],
+      [
+       48.4,
+       30
+      ],
+      [
+       44.4,
+       30
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "H-01",
+     "kind": "hedge",
+     "label": "Duranta",
+     "species_code": "DE",
+     "centre": [
+      49,
+      15
+     ],
+     "length_m": 27,
+     "outline": [
+      [
+       48.8,
+       1.5
+      ],
+      [
+       49.2,
+       1.5
+      ],
+      [
+       49.2,
+       28.5
+      ],
+      [
+       48.8,
+       28.5
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "B-01",
+     "kind": "shrub_bed",
+     "label": "Azalea",
+     "species_code": "RH",
+     "centre": [
+      13.5,
+      17
+     ],
+     "area_m2": 150,
+     "outline": [
+      [
+       6,
+       12
+      ],
+      [
+       21,
+       12
+      ],
+      [
+       21,
+       22
+      ],
+      [
+       6,
+       22
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "L-01",
+     "kind": "lawn",
+     "label": "Lawn",
+     "species_code": "LW",
+     "centre": [
+      34,
+      17
+     ],
+     "area_m2": 200,
+     "outline": [
+      [
+       24,
+       12
+      ],
+      [
+       44,
+       12
+      ],
+      [
+       44,
+       22
+      ],
+      [
+       24,
+       22
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "BD-01",
+     "kind": "boundary",
+     "label": "Site boundary",
+     "outline": [
+      [
+       0,
+       0
+      ],
+      [
+       50,
+       0
+      ],
+      [
+       50,
+       30
+      ],
+      [
+       0,
+       30
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "LG-01",
+     "kind": "legend",
+     "label": "Legend",
+     "outline": [
+      [
+       54,
+       19.5
+      ],
+      [
+       73,
+       19.5
+      ],
+      [
+       73,
+       31.5
+      ],
+      [
+       54,
+       31.5
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "legend — not counted"
+     }
+    },
+    {
+     "object_id": "LG-02",
+     "kind": "legend",
+     "label": "Legend symbol, Camphor",
+     "centre": [
+      57.5,
+      27
+     ],
+     "outline": [
+      [
+       59.142,
+       27.44
+      ],
+      [
+       58.702,
+       28.202
+      ],
+      [
+       57.94,
+       28.642
+      ],
+      [
+       57.06,
+       28.642
+      ],
+      [
+       56.298,
+       28.202
+      ],
+      [
+       55.858,
+       27.44
+      ],
+      [
+       55.858,
+       26.56
+      ],
+      [
+       56.298,
+       25.798
+      ],
+      [
+       57.06,
+       25.358
+      ],
+      [
+       57.94,
+       25.358
+      ],
+      [
+       58.702,
+       25.798
+      ],
+      [
+       59.142,
+       26.56
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "legend symbol — not a tree"
+     }
+    },
+    {
+     "object_id": "SC-01",
+     "kind": "schedule",
+     "label": "Plant schedule",
+     "outline": [
+      [
+       54,
+       11.6
+      ],
+      [
+       73,
+       11.6
+      ],
+      [
+       73,
+       18.4
+      ],
+      [
+       54,
+       18.4
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-2",
+   "file_id": "f05",
+   "title": "South Elevation",
+   "number": "L-2",
+   "kind": "elevation",
+   "kind_confidence": 0.99,
+   "kind_by": "spark",
+   "kind_why": "Trees drawn from the side on a ground line: trunks and canopy ellipses.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "1:100",
+   "counted": false,
+   "not_counted_reason": "elevation — the same trees as L-1, not counted",
+   "svg_url": "/mock/sheets/L-2.svg",
+   "png_url": "/mock/sheets/L-2.svg",
+   "bounds": {
+    "min_x": -4.32,
+    "min_y": -10.32,
+    "max_x": 64.32,
+    "max_y": 10.32
+   },
+   "objects": [
+    {
+     "object_id": "T-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.3
+     ],
+     "outline": [
+      [
+       5.9,
+       2.3
+      ],
+      [
+       5.886,
+       2.508
+      ],
+      [
+       5.846,
+       2.71
+      ],
+      [
+       5.779,
+       2.9
+      ],
+      [
+       5.689,
+       3.071
+      ],
+      [
+       5.579,
+       3.219
+      ],
+      [
+       5.45,
+       3.339
+      ],
+      [
+       5.308,
+       3.428
+      ],
+      [
+       5.156,
+       3.482
+      ],
+      [
+       5,
+       3.5
+      ],
+      [
+       4.844,
+       3.482
+      ],
+      [
+       4.692,
+       3.428
+      ],
+      [
+       4.55,
+       3.339
+      ],
+      [
+       4.421,
+       3.219
+      ],
+      [
+       4.311,
+       3.071
+      ],
+      [
+       4.221,
+       2.9
+      ],
+      [
+       4.154,
+       2.71
+      ],
+      [
+       4.114,
+       2.508
+      ],
+      [
+       4.1,
+       2.3
+      ],
+      [
+       4.114,
+       2.092
+      ],
+      [
+       4.154,
+       1.89
+      ],
+      [
+       4.221,
+       1.7
+      ],
+      [
+       4.311,
+       1.529
+      ],
+      [
+       4.421,
+       1.381
+      ],
+      [
+       4.55,
+       1.261
+      ],
+      [
+       4.692,
+       1.172
+      ],
+      [
+       4.844,
+       1.118
+      ],
+      [
+       5,
+       1.1
+      ],
+      [
+       5.156,
+       1.118
+      ],
+      [
+       5.308,
+       1.172
+      ],
+      [
+       5.45,
+       1.261
+      ],
+      [
+       5.579,
+       1.381
+      ],
+      [
+       5.689,
+       1.529
+      ],
+      [
+       5.779,
+       1.7
+      ],
+      [
+       5.846,
+       1.89
+      ],
+      [
+       5.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.3
+     ],
+     "outline": [
+      [
+       9.9,
+       2.3
+      ],
+      [
+       9.886,
+       2.508
+      ],
+      [
+       9.846,
+       2.71
+      ],
+      [
+       9.779,
+       2.9
+      ],
+      [
+       9.689,
+       3.071
+      ],
+      [
+       9.579,
+       3.219
+      ],
+      [
+       9.45,
+       3.339
+      ],
+      [
+       9.308,
+       3.428
+      ],
+      [
+       9.156,
+       3.482
+      ],
+      [
+       9,
+       3.5
+      ],
+      [
+       8.844,
+       3.482
+      ],
+      [
+       8.692,
+       3.428
+      ],
+      [
+       8.55,
+       3.339
+      ],
+      [
+       8.421,
+       3.219
+      ],
+      [
+       8.311,
+       3.071
+      ],
+      [
+       8.221,
+       2.9
+      ],
+      [
+       8.154,
+       2.71
+      ],
+      [
+       8.114,
+       2.508
+      ],
+      [
+       8.1,
+       2.3
+      ],
+      [
+       8.114,
+       2.092
+      ],
+      [
+       8.154,
+       1.89
+      ],
+      [
+       8.221,
+       1.7
+      ],
+      [
+       8.311,
+       1.529
+      ],
+      [
+       8.421,
+       1.381
+      ],
+      [
+       8.55,
+       1.261
+      ],
+      [
+       8.692,
+       1.172
+      ],
+      [
+       8.844,
+       1.118
+      ],
+      [
+       9,
+       1.1
+      ],
+      [
+       9.156,
+       1.118
+      ],
+      [
+       9.308,
+       1.172
+      ],
+      [
+       9.45,
+       1.261
+      ],
+      [
+       9.579,
+       1.381
+      ],
+      [
+       9.689,
+       1.529
+      ],
+      [
+       9.779,
+       1.7
+      ],
+      [
+       9.846,
+       1.89
+      ],
+      [
+       9.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.3
+     ],
+     "outline": [
+      [
+       13.9,
+       2.3
+      ],
+      [
+       13.886,
+       2.508
+      ],
+      [
+       13.846,
+       2.71
+      ],
+      [
+       13.779,
+       2.9
+      ],
+      [
+       13.689,
+       3.071
+      ],
+      [
+       13.579,
+       3.219
+      ],
+      [
+       13.45,
+       3.339
+      ],
+      [
+       13.308,
+       3.428
+      ],
+      [
+       13.156,
+       3.482
+      ],
+      [
+       13,
+       3.5
+      ],
+      [
+       12.844,
+       3.482
+      ],
+      [
+       12.692,
+       3.428
+      ],
+      [
+       12.55,
+       3.339
+      ],
+      [
+       12.421,
+       3.219
+      ],
+      [
+       12.311,
+       3.071
+      ],
+      [
+       12.221,
+       2.9
+      ],
+      [
+       12.154,
+       2.71
+      ],
+      [
+       12.114,
+       2.508
+      ],
+      [
+       12.1,
+       2.3
+      ],
+      [
+       12.114,
+       2.092
+      ],
+      [
+       12.154,
+       1.89
+      ],
+      [
+       12.221,
+       1.7
+      ],
+      [
+       12.311,
+       1.529
+      ],
+      [
+       12.421,
+       1.381
+      ],
+      [
+       12.55,
+       1.261
+      ],
+      [
+       12.692,
+       1.172
+      ],
+      [
+       12.844,
+       1.118
+      ],
+      [
+       13,
+       1.1
+      ],
+      [
+       13.156,
+       1.118
+      ],
+      [
+       13.308,
+       1.172
+      ],
+      [
+       13.45,
+       1.261
+      ],
+      [
+       13.579,
+       1.381
+      ],
+      [
+       13.689,
+       1.529
+      ],
+      [
+       13.779,
+       1.7
+      ],
+      [
+       13.846,
+       1.89
+      ],
+      [
+       13.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.3
+     ],
+     "outline": [
+      [
+       17.9,
+       2.3
+      ],
+      [
+       17.886,
+       2.508
+      ],
+      [
+       17.846,
+       2.71
+      ],
+      [
+       17.779,
+       2.9
+      ],
+      [
+       17.689,
+       3.071
+      ],
+      [
+       17.579,
+       3.219
+      ],
+      [
+       17.45,
+       3.339
+      ],
+      [
+       17.308,
+       3.428
+      ],
+      [
+       17.156,
+       3.482
+      ],
+      [
+       17,
+       3.5
+      ],
+      [
+       16.844,
+       3.482
+      ],
+      [
+       16.692,
+       3.428
+      ],
+      [
+       16.55,
+       3.339
+      ],
+      [
+       16.421,
+       3.219
+      ],
+      [
+       16.311,
+       3.071
+      ],
+      [
+       16.221,
+       2.9
+      ],
+      [
+       16.154,
+       2.71
+      ],
+      [
+       16.114,
+       2.508
+      ],
+      [
+       16.1,
+       2.3
+      ],
+      [
+       16.114,
+       2.092
+      ],
+      [
+       16.154,
+       1.89
+      ],
+      [
+       16.221,
+       1.7
+      ],
+      [
+       16.311,
+       1.529
+      ],
+      [
+       16.421,
+       1.381
+      ],
+      [
+       16.55,
+       1.261
+      ],
+      [
+       16.692,
+       1.172
+      ],
+      [
+       16.844,
+       1.118
+      ],
+      [
+       17,
+       1.1
+      ],
+      [
+       17.156,
+       1.118
+      ],
+      [
+       17.308,
+       1.172
+      ],
+      [
+       17.45,
+       1.261
+      ],
+      [
+       17.579,
+       1.381
+      ],
+      [
+       17.689,
+       1.529
+      ],
+      [
+       17.779,
+       1.7
+      ],
+      [
+       17.846,
+       1.89
+      ],
+      [
+       17.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-05",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      21,
+      2.3
+     ],
+     "outline": [
+      [
+       21.9,
+       2.3
+      ],
+      [
+       21.886,
+       2.508
+      ],
+      [
+       21.846,
+       2.71
+      ],
+      [
+       21.779,
+       2.9
+      ],
+      [
+       21.689,
+       3.071
+      ],
+      [
+       21.579,
+       3.219
+      ],
+      [
+       21.45,
+       3.339
+      ],
+      [
+       21.308,
+       3.428
+      ],
+      [
+       21.156,
+       3.482
+      ],
+      [
+       21,
+       3.5
+      ],
+      [
+       20.844,
+       3.482
+      ],
+      [
+       20.692,
+       3.428
+      ],
+      [
+       20.55,
+       3.339
+      ],
+      [
+       20.421,
+       3.219
+      ],
+      [
+       20.311,
+       3.071
+      ],
+      [
+       20.221,
+       2.9
+      ],
+      [
+       20.154,
+       2.71
+      ],
+      [
+       20.114,
+       2.508
+      ],
+      [
+       20.1,
+       2.3
+      ],
+      [
+       20.114,
+       2.092
+      ],
+      [
+       20.154,
+       1.89
+      ],
+      [
+       20.221,
+       1.7
+      ],
+      [
+       20.311,
+       1.529
+      ],
+      [
+       20.421,
+       1.381
+      ],
+      [
+       20.55,
+       1.261
+      ],
+      [
+       20.692,
+       1.172
+      ],
+      [
+       20.844,
+       1.118
+      ],
+      [
+       21,
+       1.1
+      ],
+      [
+       21.156,
+       1.118
+      ],
+      [
+       21.308,
+       1.172
+      ],
+      [
+       21.45,
+       1.261
+      ],
+      [
+       21.579,
+       1.381
+      ],
+      [
+       21.689,
+       1.529
+      ],
+      [
+       21.779,
+       1.7
+      ],
+      [
+       21.846,
+       1.89
+      ],
+      [
+       21.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-06",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      25,
+      2.3
+     ],
+     "outline": [
+      [
+       25.9,
+       2.3
+      ],
+      [
+       25.886,
+       2.508
+      ],
+      [
+       25.846,
+       2.71
+      ],
+      [
+       25.779,
+       2.9
+      ],
+      [
+       25.689,
+       3.071
+      ],
+      [
+       25.579,
+       3.219
+      ],
+      [
+       25.45,
+       3.339
+      ],
+      [
+       25.308,
+       3.428
+      ],
+      [
+       25.156,
+       3.482
+      ],
+      [
+       25,
+       3.5
+      ],
+      [
+       24.844,
+       3.482
+      ],
+      [
+       24.692,
+       3.428
+      ],
+      [
+       24.55,
+       3.339
+      ],
+      [
+       24.421,
+       3.219
+      ],
+      [
+       24.311,
+       3.071
+      ],
+      [
+       24.221,
+       2.9
+      ],
+      [
+       24.154,
+       2.71
+      ],
+      [
+       24.114,
+       2.508
+      ],
+      [
+       24.1,
+       2.3
+      ],
+      [
+       24.114,
+       2.092
+      ],
+      [
+       24.154,
+       1.89
+      ],
+      [
+       24.221,
+       1.7
+      ],
+      [
+       24.311,
+       1.529
+      ],
+      [
+       24.421,
+       1.381
+      ],
+      [
+       24.55,
+       1.261
+      ],
+      [
+       24.692,
+       1.172
+      ],
+      [
+       24.844,
+       1.118
+      ],
+      [
+       25,
+       1.1
+      ],
+      [
+       25.156,
+       1.118
+      ],
+      [
+       25.308,
+       1.172
+      ],
+      [
+       25.45,
+       1.261
+      ],
+      [
+       25.579,
+       1.381
+      ],
+      [
+       25.689,
+       1.529
+      ],
+      [
+       25.779,
+       1.7
+      ],
+      [
+       25.846,
+       1.89
+      ],
+      [
+       25.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-07",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      29,
+      2.3
+     ],
+     "outline": [
+      [
+       29.9,
+       2.3
+      ],
+      [
+       29.886,
+       2.508
+      ],
+      [
+       29.846,
+       2.71
+      ],
+      [
+       29.779,
+       2.9
+      ],
+      [
+       29.689,
+       3.071
+      ],
+      [
+       29.579,
+       3.219
+      ],
+      [
+       29.45,
+       3.339
+      ],
+      [
+       29.308,
+       3.428
+      ],
+      [
+       29.156,
+       3.482
+      ],
+      [
+       29,
+       3.5
+      ],
+      [
+       28.844,
+       3.482
+      ],
+      [
+       28.692,
+       3.428
+      ],
+      [
+       28.55,
+       3.339
+      ],
+      [
+       28.421,
+       3.219
+      ],
+      [
+       28.311,
+       3.071
+      ],
+      [
+       28.221,
+       2.9
+      ],
+      [
+       28.154,
+       2.71
+      ],
+      [
+       28.114,
+       2.508
+      ],
+      [
+       28.1,
+       2.3
+      ],
+      [
+       28.114,
+       2.092
+      ],
+      [
+       28.154,
+       1.89
+      ],
+      [
+       28.221,
+       1.7
+      ],
+      [
+       28.311,
+       1.529
+      ],
+      [
+       28.421,
+       1.381
+      ],
+      [
+       28.55,
+       1.261
+      ],
+      [
+       28.692,
+       1.172
+      ],
+      [
+       28.844,
+       1.118
+      ],
+      [
+       29,
+       1.1
+      ],
+      [
+       29.156,
+       1.118
+      ],
+      [
+       29.308,
+       1.172
+      ],
+      [
+       29.45,
+       1.261
+      ],
+      [
+       29.579,
+       1.381
+      ],
+      [
+       29.689,
+       1.529
+      ],
+      [
+       29.779,
+       1.7
+      ],
+      [
+       29.846,
+       1.89
+      ],
+      [
+       29.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-08",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      33,
+      2.3
+     ],
+     "outline": [
+      [
+       33.9,
+       2.3
+      ],
+      [
+       33.886,
+       2.508
+      ],
+      [
+       33.846,
+       2.71
+      ],
+      [
+       33.779,
+       2.9
+      ],
+      [
+       33.689,
+       3.071
+      ],
+      [
+       33.579,
+       3.219
+      ],
+      [
+       33.45,
+       3.339
+      ],
+      [
+       33.308,
+       3.428
+      ],
+      [
+       33.156,
+       3.482
+      ],
+      [
+       33,
+       3.5
+      ],
+      [
+       32.844,
+       3.482
+      ],
+      [
+       32.692,
+       3.428
+      ],
+      [
+       32.55,
+       3.339
+      ],
+      [
+       32.421,
+       3.219
+      ],
+      [
+       32.311,
+       3.071
+      ],
+      [
+       32.221,
+       2.9
+      ],
+      [
+       32.154,
+       2.71
+      ],
+      [
+       32.114,
+       2.508
+      ],
+      [
+       32.1,
+       2.3
+      ],
+      [
+       32.114,
+       2.092
+      ],
+      [
+       32.154,
+       1.89
+      ],
+      [
+       32.221,
+       1.7
+      ],
+      [
+       32.311,
+       1.529
+      ],
+      [
+       32.421,
+       1.381
+      ],
+      [
+       32.55,
+       1.261
+      ],
+      [
+       32.692,
+       1.172
+      ],
+      [
+       32.844,
+       1.118
+      ],
+      [
+       33,
+       1.1
+      ],
+      [
+       33.156,
+       1.118
+      ],
+      [
+       33.308,
+       1.172
+      ],
+      [
+       33.45,
+       1.261
+      ],
+      [
+       33.579,
+       1.381
+      ],
+      [
+       33.689,
+       1.529
+      ],
+      [
+       33.779,
+       1.7
+      ],
+      [
+       33.846,
+       1.89
+      ],
+      [
+       33.886,
+       2.092
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "elevation — the same trees as L-1, not counted"
+     }
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       40,
+       -7.5
+      ],
+      [
+       61,
+       -7.5
+      ],
+      [
+       61,
+       7
+      ],
+      [
+       40,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-3",
+   "file_id": "f06",
+   "title": "Paving Plan",
+   "number": "L-3",
+   "kind": "plan",
+   "kind_confidence": 0.95,
+   "kind_by": "spark",
+   "kind_why": "Plan view of hatched paving areas with callouts.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "1:200",
+   "scale_measured": "1:200",
+   "counted": true,
+   "svg_url": "/mock/sheets/L-3.svg",
+   "png_url": "/mock/sheets/L-3.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "P-01",
+     "kind": "paving",
+     "label": "Permeable pavers",
+     "species_code": "PP",
+     "centre": [
+      15.25,
+      7
+     ],
+     "area_m2": 212,
+     "outline": [
+      [
+       2,
+       3
+      ],
+      [
+       28.5,
+       3
+      ],
+      [
+       28.5,
+       11
+      ],
+      [
+       2,
+       11
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "P-02",
+     "kind": "paving",
+     "label": "Exposed aggregate",
+     "species_code": "EA",
+     "centre": [
+      37,
+      5
+     ],
+     "area_m2": 48,
+     "outline": [
+      [
+       31,
+       3
+      ],
+      [
+       43,
+       3
+      ],
+      [
+       43,
+       7
+      ],
+      [
+       31,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "P-03",
+     "kind": "paving",
+     "label": "Grass pavers",
+     "species_code": "GP",
+     "centre": [
+      34,
+      12
+     ],
+     "area_m2": 36,
+     "outline": [
+      [
+       31,
+       9
+      ],
+      [
+       37,
+       9
+      ],
+      [
+       37,
+       15
+      ],
+      [
+       31,
+       15
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "PE-01",
+     "kind": "planter_edge",
+     "label": "Planter edge",
+     "centre": [
+      10,
+      17.5
+     ],
+     "length_m": 22,
+     "outline": [
+      [
+       6,
+       16
+      ],
+      [
+       14,
+       16
+      ],
+      [
+       14,
+       19
+      ],
+      [
+       6,
+       19
+      ]
+     ],
+     "closed": false,
+     "by": "geometry"
+    },
+    {
+     "object_id": "LG-01",
+     "kind": "legend",
+     "label": "Legend",
+     "outline": [
+      [
+       54,
+       19.5
+      ],
+      [
+       73,
+       19.5
+      ],
+      [
+       73,
+       31.5
+      ],
+      [
+       54,
+       31.5
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "legend — not counted"
+     }
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-4",
+   "file_id": "f07",
+   "title": "Plant Schedule",
+   "number": "L-4",
+   "kind": "schedule",
+   "kind_confidence": 0.99,
+   "kind_by": "spark",
+   "kind_why": "A table of species, quantities and sizes; no drawing.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "NTS",
+   "counted": false,
+   "not_counted_reason": "schedule — read, not measured",
+   "svg_url": "/mock/sheets/L-4.svg",
+   "png_url": "/mock/sheets/L-4.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "SC-01",
+     "kind": "schedule",
+     "label": "Plant schedule",
+     "outline": [
+      [
+       4,
+       21.2
+      ],
+      [
+       23,
+       21.2
+      ],
+      [
+       23,
+       28
+      ],
+      [
+       4,
+       28
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-5",
+   "file_id": "f08",
+   "title": "Enlarged Plan — West",
+   "number": "L-5",
+   "kind": "plan",
+   "kind_confidence": 0.9,
+   "kind_by": "spark",
+   "kind_why": "Enlarged plan of the west half with a match line to L-1.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "1:200",
+   "scale_measured": "1:100",
+   "counted": false,
+   "not_counted_reason": "enlarged plan — repeats four trees of L-1",
+   "svg_url": "/mock/sheets/L-5.svg",
+   "png_url": "/mock/sheets/L-5.svg",
+   "bounds": {
+    "min_x": -3.88,
+    "min_y": -8.88,
+    "max_x": 41.88,
+    "max_y": 33.88
+   },
+   "objects": [
+    {
+     "object_id": "T-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.5
+     ],
+     "outline": [
+      [
+       6.932,
+       3.018
+      ],
+      [
+       6.414,
+       3.914
+      ],
+      [
+       5.518,
+       4.432
+      ],
+      [
+       4.482,
+       4.432
+      ],
+      [
+       3.586,
+       3.914
+      ],
+      [
+       3.068,
+       3.018
+      ],
+      [
+       3.068,
+       1.982
+      ],
+      [
+       3.586,
+       1.086
+      ],
+      [
+       4.482,
+       0.568
+      ],
+      [
+       5.518,
+       0.568
+      ],
+      [
+       6.414,
+       1.086
+      ],
+      [
+       6.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "enlarged plan — repeats L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.5
+     ],
+     "outline": [
+      [
+       10.932,
+       3.018
+      ],
+      [
+       10.414,
+       3.914
+      ],
+      [
+       9.518,
+       4.432
+      ],
+      [
+       8.482,
+       4.432
+      ],
+      [
+       7.586,
+       3.914
+      ],
+      [
+       7.068,
+       3.018
+      ],
+      [
+       7.068,
+       1.982
+      ],
+      [
+       7.586,
+       1.086
+      ],
+      [
+       8.482,
+       0.568
+      ],
+      [
+       9.518,
+       0.568
+      ],
+      [
+       10.414,
+       1.086
+      ],
+      [
+       10.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "enlarged plan — repeats L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.5
+     ],
+     "outline": [
+      [
+       14.932,
+       3.018
+      ],
+      [
+       14.414,
+       3.914
+      ],
+      [
+       13.518,
+       4.432
+      ],
+      [
+       12.482,
+       4.432
+      ],
+      [
+       11.586,
+       3.914
+      ],
+      [
+       11.068,
+       3.018
+      ],
+      [
+       11.068,
+       1.982
+      ],
+      [
+       11.586,
+       1.086
+      ],
+      [
+       12.482,
+       0.568
+      ],
+      [
+       13.518,
+       0.568
+      ],
+      [
+       14.414,
+       1.086
+      ],
+      [
+       14.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "enlarged plan — repeats L-1, not counted"
+     }
+    },
+    {
+     "object_id": "T-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.5
+     ],
+     "outline": [
+      [
+       18.932,
+       3.018
+      ],
+      [
+       18.414,
+       3.914
+      ],
+      [
+       17.518,
+       4.432
+      ],
+      [
+       16.482,
+       4.432
+      ],
+      [
+       15.586,
+       3.914
+      ],
+      [
+       15.068,
+       3.018
+      ],
+      [
+       15.068,
+       1.982
+      ],
+      [
+       15.586,
+       1.086
+      ],
+      [
+       16.482,
+       0.568
+      ],
+      [
+       17.518,
+       0.568
+      ],
+      [
+       18.414,
+       1.086
+      ],
+      [
+       18.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "enlarged plan — repeats L-1, not counted"
+     }
+    },
+    {
+     "object_id": "ML-01",
+     "kind": "match_line",
+     "label": "Match line",
+     "outline": [
+      [
+       21,
+       -2
+      ],
+      [
+       21,
+       31
+      ]
+     ],
+     "closed": false,
+     "by": "geometry"
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       24,
+       -7
+      ],
+      [
+       40,
+       -7
+      ],
+      [
+       40,
+       5.5
+      ],
+      [
+       24,
+       5.5
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-6",
+   "file_id": "f09",
+   "title": "Tree Pit Detail",
+   "number": "L-6",
+   "kind": "detail",
+   "kind_confidence": 0.97,
+   "kind_by": "spark",
+   "kind_why": "A section through one tree pit with dimensions.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "1:20",
+   "counted": false,
+   "not_counted_reason": "detail — pit 1.2 × 1.2 m, soil 0.8 m read for the greening rule",
+   "svg_url": "/mock/sheets/L-6.svg",
+   "png_url": "/mock/sheets/L-6.svg",
+   "bounds": {
+    "min_x": -1.76,
+    "min_y": -2.06,
+    "max_x": 6.56,
+    "max_y": 2.56
+   },
+   "objects": [
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       3,
+       -1.6
+      ],
+      [
+       6.1,
+       -1.6
+      ],
+      [
+       6.1,
+       0.8
+      ],
+      [
+       3,
+       0.8
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-7",
+   "file_id": "f10",
+   "title": "Irrigation Plan",
+   "number": "L-7",
+   "kind": "background",
+   "kind_confidence": 0.93,
+   "kind_by": "spark",
+   "kind_why": "Pipes and heads over dashed canopies: the trees are background.",
+   "revision": "A",
+   "date": "2026-09-30",
+   "scale_title": "1:200",
+   "counted": false,
+   "not_counted_reason": "irrigation — canopies are background",
+   "svg_url": "/mock/sheets/L-7.svg",
+   "png_url": "/mock/sheets/L-7.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "T-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.5
+     ],
+     "outline": [
+      [
+       6.932,
+       3.018
+      ],
+      [
+       6.414,
+       3.914
+      ],
+      [
+       5.518,
+       4.432
+      ],
+      [
+       4.482,
+       4.432
+      ],
+      [
+       3.586,
+       3.914
+      ],
+      [
+       3.068,
+       3.018
+      ],
+      [
+       3.068,
+       1.982
+      ],
+      [
+       3.586,
+       1.086
+      ],
+      [
+       4.482,
+       0.568
+      ],
+      [
+       5.518,
+       0.568
+      ],
+      [
+       6.414,
+       1.086
+      ],
+      [
+       6.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.5
+     ],
+     "outline": [
+      [
+       10.932,
+       3.018
+      ],
+      [
+       10.414,
+       3.914
+      ],
+      [
+       9.518,
+       4.432
+      ],
+      [
+       8.482,
+       4.432
+      ],
+      [
+       7.586,
+       3.914
+      ],
+      [
+       7.068,
+       3.018
+      ],
+      [
+       7.068,
+       1.982
+      ],
+      [
+       7.586,
+       1.086
+      ],
+      [
+       8.482,
+       0.568
+      ],
+      [
+       9.518,
+       0.568
+      ],
+      [
+       10.414,
+       1.086
+      ],
+      [
+       10.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.5
+     ],
+     "outline": [
+      [
+       14.932,
+       3.018
+      ],
+      [
+       14.414,
+       3.914
+      ],
+      [
+       13.518,
+       4.432
+      ],
+      [
+       12.482,
+       4.432
+      ],
+      [
+       11.586,
+       3.914
+      ],
+      [
+       11.068,
+       3.018
+      ],
+      [
+       11.068,
+       1.982
+      ],
+      [
+       11.586,
+       1.086
+      ],
+      [
+       12.482,
+       0.568
+      ],
+      [
+       13.518,
+       0.568
+      ],
+      [
+       14.414,
+       1.086
+      ],
+      [
+       14.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.5
+     ],
+     "outline": [
+      [
+       18.932,
+       3.018
+      ],
+      [
+       18.414,
+       3.914
+      ],
+      [
+       17.518,
+       4.432
+      ],
+      [
+       16.482,
+       4.432
+      ],
+      [
+       15.586,
+       3.914
+      ],
+      [
+       15.068,
+       3.018
+      ],
+      [
+       15.068,
+       1.982
+      ],
+      [
+       15.586,
+       1.086
+      ],
+      [
+       16.482,
+       0.568
+      ],
+      [
+       17.518,
+       0.568
+      ],
+      [
+       18.414,
+       1.086
+      ],
+      [
+       18.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-05",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      21,
+      2.5
+     ],
+     "outline": [
+      [
+       22.932,
+       3.018
+      ],
+      [
+       22.414,
+       3.914
+      ],
+      [
+       21.518,
+       4.432
+      ],
+      [
+       20.482,
+       4.432
+      ],
+      [
+       19.586,
+       3.914
+      ],
+      [
+       19.068,
+       3.018
+      ],
+      [
+       19.068,
+       1.982
+      ],
+      [
+       19.586,
+       1.086
+      ],
+      [
+       20.482,
+       0.568
+      ],
+      [
+       21.518,
+       0.568
+      ],
+      [
+       22.414,
+       1.086
+      ],
+      [
+       22.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-06",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      25,
+      2.5
+     ],
+     "outline": [
+      [
+       26.932,
+       3.018
+      ],
+      [
+       26.414,
+       3.914
+      ],
+      [
+       25.518,
+       4.432
+      ],
+      [
+       24.482,
+       4.432
+      ],
+      [
+       23.586,
+       3.914
+      ],
+      [
+       23.068,
+       3.018
+      ],
+      [
+       23.068,
+       1.982
+      ],
+      [
+       23.586,
+       1.086
+      ],
+      [
+       24.482,
+       0.568
+      ],
+      [
+       25.518,
+       0.568
+      ],
+      [
+       26.414,
+       1.086
+      ],
+      [
+       26.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-07",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      29,
+      2.5
+     ],
+     "outline": [
+      [
+       30.932,
+       3.018
+      ],
+      [
+       30.414,
+       3.914
+      ],
+      [
+       29.518,
+       4.432
+      ],
+      [
+       28.482,
+       4.432
+      ],
+      [
+       27.586,
+       3.914
+      ],
+      [
+       27.068,
+       3.018
+      ],
+      [
+       27.068,
+       1.982
+      ],
+      [
+       27.586,
+       1.086
+      ],
+      [
+       28.482,
+       0.568
+      ],
+      [
+       29.518,
+       0.568
+      ],
+      [
+       30.414,
+       1.086
+      ],
+      [
+       30.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-08",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      33,
+      2.5
+     ],
+     "outline": [
+      [
+       34.932,
+       3.018
+      ],
+      [
+       34.414,
+       3.914
+      ],
+      [
+       33.518,
+       4.432
+      ],
+      [
+       32.482,
+       4.432
+      ],
+      [
+       31.586,
+       3.914
+      ],
+      [
+       31.068,
+       3.018
+      ],
+      [
+       31.068,
+       1.982
+      ],
+      [
+       31.586,
+       1.086
+      ],
+      [
+       32.482,
+       0.568
+      ],
+      [
+       33.518,
+       0.568
+      ],
+      [
+       34.414,
+       1.086
+      ],
+      [
+       34.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "irrigation sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "L-8",
+   "file_id": "f11",
+   "title": "Lighting Plan",
+   "number": "L-8",
+   "kind": "background",
+   "kind_confidence": 0.92,
+   "kind_by": "spark",
+   "kind_why": "Light fixtures over dashed canopies: the trees are background.",
+   "revision": "A",
+   "date": "2026-09-30",
+   "scale_title": "1:200",
+   "counted": false,
+   "not_counted_reason": "lighting — canopies are background",
+   "svg_url": "/mock/sheets/L-8.svg",
+   "png_url": "/mock/sheets/L-8.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "T-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.5
+     ],
+     "outline": [
+      [
+       6.932,
+       3.018
+      ],
+      [
+       6.414,
+       3.914
+      ],
+      [
+       5.518,
+       4.432
+      ],
+      [
+       4.482,
+       4.432
+      ],
+      [
+       3.586,
+       3.914
+      ],
+      [
+       3.068,
+       3.018
+      ],
+      [
+       3.068,
+       1.982
+      ],
+      [
+       3.586,
+       1.086
+      ],
+      [
+       4.482,
+       0.568
+      ],
+      [
+       5.518,
+       0.568
+      ],
+      [
+       6.414,
+       1.086
+      ],
+      [
+       6.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.5
+     ],
+     "outline": [
+      [
+       10.932,
+       3.018
+      ],
+      [
+       10.414,
+       3.914
+      ],
+      [
+       9.518,
+       4.432
+      ],
+      [
+       8.482,
+       4.432
+      ],
+      [
+       7.586,
+       3.914
+      ],
+      [
+       7.068,
+       3.018
+      ],
+      [
+       7.068,
+       1.982
+      ],
+      [
+       7.586,
+       1.086
+      ],
+      [
+       8.482,
+       0.568
+      ],
+      [
+       9.518,
+       0.568
+      ],
+      [
+       10.414,
+       1.086
+      ],
+      [
+       10.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.5
+     ],
+     "outline": [
+      [
+       14.932,
+       3.018
+      ],
+      [
+       14.414,
+       3.914
+      ],
+      [
+       13.518,
+       4.432
+      ],
+      [
+       12.482,
+       4.432
+      ],
+      [
+       11.586,
+       3.914
+      ],
+      [
+       11.068,
+       3.018
+      ],
+      [
+       11.068,
+       1.982
+      ],
+      [
+       11.586,
+       1.086
+      ],
+      [
+       12.482,
+       0.568
+      ],
+      [
+       13.518,
+       0.568
+      ],
+      [
+       14.414,
+       1.086
+      ],
+      [
+       14.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.5
+     ],
+     "outline": [
+      [
+       18.932,
+       3.018
+      ],
+      [
+       18.414,
+       3.914
+      ],
+      [
+       17.518,
+       4.432
+      ],
+      [
+       16.482,
+       4.432
+      ],
+      [
+       15.586,
+       3.914
+      ],
+      [
+       15.068,
+       3.018
+      ],
+      [
+       15.068,
+       1.982
+      ],
+      [
+       15.586,
+       1.086
+      ],
+      [
+       16.482,
+       0.568
+      ],
+      [
+       17.518,
+       0.568
+      ],
+      [
+       18.414,
+       1.086
+      ],
+      [
+       18.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-05",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      21,
+      2.5
+     ],
+     "outline": [
+      [
+       22.932,
+       3.018
+      ],
+      [
+       22.414,
+       3.914
+      ],
+      [
+       21.518,
+       4.432
+      ],
+      [
+       20.482,
+       4.432
+      ],
+      [
+       19.586,
+       3.914
+      ],
+      [
+       19.068,
+       3.018
+      ],
+      [
+       19.068,
+       1.982
+      ],
+      [
+       19.586,
+       1.086
+      ],
+      [
+       20.482,
+       0.568
+      ],
+      [
+       21.518,
+       0.568
+      ],
+      [
+       22.414,
+       1.086
+      ],
+      [
+       22.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-06",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      25,
+      2.5
+     ],
+     "outline": [
+      [
+       26.932,
+       3.018
+      ],
+      [
+       26.414,
+       3.914
+      ],
+      [
+       25.518,
+       4.432
+      ],
+      [
+       24.482,
+       4.432
+      ],
+      [
+       23.586,
+       3.914
+      ],
+      [
+       23.068,
+       3.018
+      ],
+      [
+       23.068,
+       1.982
+      ],
+      [
+       23.586,
+       1.086
+      ],
+      [
+       24.482,
+       0.568
+      ],
+      [
+       25.518,
+       0.568
+      ],
+      [
+       26.414,
+       1.086
+      ],
+      [
+       26.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-07",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      29,
+      2.5
+     ],
+     "outline": [
+      [
+       30.932,
+       3.018
+      ],
+      [
+       30.414,
+       3.914
+      ],
+      [
+       29.518,
+       4.432
+      ],
+      [
+       28.482,
+       4.432
+      ],
+      [
+       27.586,
+       3.914
+      ],
+      [
+       27.068,
+       3.018
+      ],
+      [
+       27.068,
+       1.982
+      ],
+      [
+       27.586,
+       1.086
+      ],
+      [
+       28.482,
+       0.568
+      ],
+      [
+       29.518,
+       0.568
+      ],
+      [
+       30.414,
+       1.086
+      ],
+      [
+       30.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "T-08",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      33,
+      2.5
+     ],
+     "outline": [
+      [
+       34.932,
+       3.018
+      ],
+      [
+       34.414,
+       3.914
+      ],
+      [
+       33.518,
+       4.432
+      ],
+      [
+       32.482,
+       4.432
+      ],
+      [
+       31.586,
+       3.914
+      ],
+      [
+       31.068,
+       3.018
+      ],
+      [
+       31.068,
+       1.982
+      ],
+      [
+       31.586,
+       1.086
+      ],
+      [
+       32.482,
+       0.568
+      ],
+      [
+       33.518,
+       0.568
+      ],
+      [
+       34.414,
+       1.086
+      ],
+      [
+       34.932,
+       1.982
+      ]
+     ],
+     "closed": true,
+     "by": "geometry",
+     "excluded": {
+      "reason": "lighting sheet — canopies are background"
+     }
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  },
+  {
+   "sheet_id": "SCAN",
+   "file_id": "f19",
+   "title": "Planting Plan (scan)",
+   "number": "L-1",
+   "kind": "plan",
+   "kind_confidence": 0.81,
+   "kind_by": "spark",
+   "kind_why": "A raster scan of L-1, rotated 1.5°; title block read by Muse Spark.",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale_title": "1:200",
+   "counted": false,
+   "not_counted_reason": "raster scan — no vectors, not measured",
+   "svg_url": "/mock/sheets/SCAN.svg",
+   "png_url": "/mock/sheets/SCAN.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": []
+  },
+  {
+   "sheet_id": "PP-1",
+   "file_id": "f20",
+   "title": "Presentation Plan (Colour)",
+   "number": "PP-1",
+   "kind": "plan",
+   "kind_confidence": 0.88,
+   "kind_by": "spark",
+   "kind_why": "A coloured rendering of the site; areas by SAM 3.1.",
+   "revision": "A",
+   "date": "2026-09-20",
+   "scale_title": "NTS",
+   "counted": false,
+   "not_counted_reason": "presentation — SAM areas compared with CAD, not counted",
+   "svg_url": "/mock/sheets/PP-1.svg",
+   "png_url": "/mock/sheets/PP-1.svg",
+   "bounds": {
+    "min_x": -4.6,
+    "min_y": -10.6,
+    "max_x": 78.6,
+    "max_y": 34.6
+   },
+   "objects": [
+    {
+     "object_id": "M-01",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      5,
+      2.5
+     ],
+     "area_m2": 13.579,
+     "outline": [
+      [
+       7.037,
+       2.5
+      ],
+      [
+       7.041,
+       2.966
+      ],
+      [
+       6.871,
+       3.401
+      ],
+      [
+       6.597,
+       3.774
+      ],
+      [
+       6.338,
+       4.177
+      ],
+      [
+       5.906,
+       4.382
+      ],
+      [
+       5.468,
+       4.549
+      ],
+      [
+       5,
+       4.596
+      ],
+      [
+       4.533,
+       4.544
+      ],
+      [
+       4.101,
+       4.367
+      ],
+      [
+       3.713,
+       4.114
+      ],
+      [
+       3.337,
+       3.826
+      ],
+      [
+       3.149,
+       3.392
+      ],
+      [
+       2.967,
+       2.964
+      ],
+      [
+       2.889,
+       2.5
+      ],
+      [
+       2.913,
+       2.024
+      ],
+      [
+       3.121,
+       1.595
+      ],
+      [
+       3.399,
+       1.223
+      ],
+      [
+       3.713,
+       0.886
+      ],
+      [
+       4.076,
+       0.581
+      ],
+      [
+       4.53,
+       0.441
+      ],
+      [
+       5,
+       0.393
+      ],
+      [
+       5.467,
+       0.455
+      ],
+      [
+       5.897,
+       0.638
+      ],
+      [
+       6.294,
+       0.877
+      ],
+      [
+       6.671,
+       1.167
+      ],
+      [
+       6.837,
+       1.616
+      ],
+      [
+       7.01,
+       2.041
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-02",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      9,
+      2.5
+     ],
+     "area_m2": 13.791,
+     "outline": [
+      [
+       11.037,
+       2.5
+      ],
+      [
+       11.031,
+       2.964
+      ],
+      [
+       10.903,
+       3.417
+      ],
+      [
+       10.618,
+       3.79
+      ],
+      [
+       10.316,
+       4.151
+      ],
+      [
+       9.935,
+       4.442
+      ],
+      [
+       9.477,
+       4.59
+      ],
+      [
+       9,
+       4.565
+      ],
+      [
+       8.54,
+       4.514
+      ],
+      [
+       8.071,
+       4.429
+      ],
+      [
+       7.659,
+       4.182
+      ],
+      [
+       7.373,
+       3.798
+      ],
+      [
+       7.056,
+       3.436
+      ],
+      [
+       6.938,
+       2.971
+      ],
+      [
+       6.842,
+       2.5
+      ],
+      [
+       6.948,
+       2.032
+      ],
+      [
+       7.156,
+       1.612
+      ],
+      [
+       7.394,
+       1.219
+      ],
+      [
+       7.659,
+       0.819
+      ],
+      [
+       8.105,
+       0.642
+      ],
+      [
+       8.532,
+       0.451
+      ],
+      [
+       9,
+       0.417
+      ],
+      [
+       9.47,
+       0.44
+      ],
+      [
+       9.925,
+       0.58
+      ],
+      [
+       10.288,
+       0.885
+      ],
+      [
+       10.64,
+       1.192
+      ],
+      [
+       10.91,
+       1.58
+      ],
+      [
+       11.081,
+       2.025
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-03",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      13,
+      2.5
+     ],
+     "area_m2": 13.711,
+     "outline": [
+      [
+       15.037,
+       2.5
+      ],
+      [
+       15.021,
+       2.961
+      ],
+      [
+       14.936,
+       3.432
+      ],
+      [
+       14.639,
+       3.807
+      ],
+      [
+       14.295,
+       4.124
+      ],
+      [
+       13.91,
+       4.389
+      ],
+      [
+       13.458,
+       4.508
+      ],
+      [
+       13,
+       4.659
+      ],
+      [
+       12.519,
+       4.607
+      ],
+      [
+       12.096,
+       4.377
+      ],
+      [
+       11.684,
+       4.15
+      ],
+      [
+       11.31,
+       3.847
+      ],
+      [
+       11.077,
+       3.426
+      ],
+      [
+       10.908,
+       2.978
+      ],
+      [
+       10.921,
+       2.5
+      ],
+      [
+       10.984,
+       2.04
+      ],
+      [
+       11.076,
+       1.574
+      ],
+      [
+       11.388,
+       1.215
+      ],
+      [
+       11.684,
+       0.85
+      ],
+      [
+       12.079,
+       0.589
+      ],
+      [
+       12.534,
+       0.46
+      ],
+      [
+       13,
+       0.442
+      ],
+      [
+       13.474,
+       0.425
+      ],
+      [
+       13.898,
+       0.635
+      ],
+      [
+       14.282,
+       0.892
+      ],
+      [
+       14.61,
+       1.216
+      ],
+      [
+       14.869,
+       1.6
+      ],
+      [
+       15.029,
+       2.037
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-04",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      17,
+      2.5
+     ],
+     "area_m2": 13.748,
+     "outline": [
+      [
+       19.037,
+       2.5
+      ],
+      [
+       19.012,
+       2.959
+      ],
+      [
+       18.856,
+       3.394
+      ],
+      [
+       18.659,
+       3.823
+      ],
+      [
+       18.274,
+       4.097
+      ],
+      [
+       17.884,
+       4.336
+      ],
+      [
+       17.467,
+       4.548
+      ],
+      [
+       17,
+       4.628
+      ],
+      [
+       16.526,
+       4.577
+      ],
+      [
+       16.066,
+       4.439
+      ],
+      [
+       15.709,
+       4.119
+      ],
+      [
+       15.346,
+       3.819
+      ],
+      [
+       15.098,
+       3.416
+      ],
+      [
+       15.001,
+       2.956
+      ],
+      [
+       14.873,
+       2.5
+      ],
+      [
+       14.897,
+       2.02
+      ],
+      [
+       15.111,
+       1.59
+      ],
+      [
+       15.383,
+       1.211
+      ],
+      [
+       15.709,
+       0.881
+      ],
+      [
+       16.109,
+       0.649
+      ],
+      [
+       16.537,
+       0.47
+      ],
+      [
+       17,
+       0.34
+      ],
+      [
+       17.477,
+       0.41
+      ],
+      [
+       17.926,
+       0.577
+      ],
+      [
+       18.276,
+       0.9
+      ],
+      [
+       18.677,
+       1.162
+      ],
+      [
+       18.942,
+       1.565
+      ],
+      [
+       19.1,
+       2.021
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-05",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      21,
+      2.5
+     ],
+     "area_m2": 13.726,
+     "outline": [
+      [
+       23.037,
+       2.5
+      ],
+      [
+       23.002,
+       2.957
+      ],
+      [
+       22.888,
+       3.409
+      ],
+      [
+       22.68,
+       3.84
+      ],
+      [
+       22.331,
+       4.169
+      ],
+      [
+       21.913,
+       4.397
+      ],
+      [
+       21.477,
+       4.588
+      ],
+      [
+       21,
+       4.597
+      ],
+      [
+       20.533,
+       4.546
+      ],
+      [
+       20.091,
+       4.387
+      ],
+      [
+       19.655,
+       4.187
+      ],
+      [
+       19.382,
+       3.79
+      ],
+      [
+       19.118,
+       3.406
+      ],
+      [
+       18.971,
+       2.963
+      ],
+      [
+       18.952,
+       2.5
+      ],
+      [
+       18.933,
+       2.028
+      ],
+      [
+       19.145,
+       1.607
+      ],
+      [
+       19.378,
+       1.206
+      ],
+      [
+       19.655,
+       0.814
+      ],
+      [
+       20.083,
+       0.596
+      ],
+      [
+       20.539,
+       0.479
+      ],
+      [
+       21,
+       0.364
+      ],
+      [
+       21.48,
+       0.395
+      ],
+      [
+       21.9,
+       0.632
+      ],
+      [
+       22.27,
+       0.907
+      ],
+      [
+       22.647,
+       1.187
+      ],
+      [
+       22.902,
+       1.584
+      ],
+      [
+       23.048,
+       2.033
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-06",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      25,
+      2.5
+     ],
+     "area_m2": 13.585,
+     "outline": [
+      [
+       27.037,
+       2.5
+      ],
+      [
+       26.992,
+       2.955
+      ],
+      [
+       26.921,
+       3.425
+      ],
+      [
+       26.602,
+       3.778
+      ],
+      [
+       26.31,
+       4.143
+      ],
+      [
+       25.888,
+       4.343
+      ],
+      [
+       25.458,
+       4.506
+      ],
+      [
+       25,
+       4.566
+      ],
+      [
+       24.54,
+       4.516
+      ],
+      [
+       24.062,
+       4.448
+      ],
+      [
+       23.68,
+       4.156
+      ],
+      [
+       23.319,
+       3.84
+      ],
+      [
+       23.139,
+       3.396
+      ],
+      [
+       22.942,
+       2.97
+      ],
+      [
+       22.905,
+       2.5
+      ],
+      [
+       22.969,
+       2.036
+      ],
+      [
+       23.066,
+       1.568
+      ],
+      [
+       23.373,
+       1.202
+      ],
+      [
+       23.68,
+       0.845
+      ],
+      [
+       24.112,
+       0.656
+      ],
+      [
+       24.541,
+       0.489
+      ],
+      [
+       25,
+       0.388
+      ],
+      [
+       25.456,
+       0.503
+      ],
+      [
+       25.928,
+       0.574
+      ],
+      [
+       26.343,
+       0.816
+      ],
+      [
+       26.616,
+       1.211
+      ],
+      [
+       26.861,
+       1.604
+      ],
+      [
+       26.996,
+       2.044
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-07",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      29,
+      2.5
+     ],
+     "area_m2": 13.68,
+     "outline": [
+      [
+       31.037,
+       2.5
+      ],
+      [
+       31.105,
+       2.981
+      ],
+      [
+       30.841,
+       3.386
+      ],
+      [
+       30.623,
+       3.794
+      ],
+      [
+       30.289,
+       4.116
+      ],
+      [
+       29.917,
+       4.404
+      ],
+      [
+       29.467,
+       4.547
+      ],
+      [
+       29,
+       4.66
+      ],
+      [
+       28.547,
+       4.486
+      ],
+      [
+       28.087,
+       4.396
+      ],
+      [
+       27.704,
+       4.125
+      ],
+      [
+       27.355,
+       3.812
+      ],
+      [
+       27.16,
+       3.386
+      ],
+      [
+       26.912,
+       2.977
+      ],
+      [
+       26.858,
+       2.5
+      ],
+      [
+       27.005,
+       2.045
+      ],
+      [
+       27.1,
+       1.585
+      ],
+      [
+       27.367,
+       1.198
+      ],
+      [
+       27.705,
+       0.876
+      ],
+      [
+       28.087,
+       0.603
+      ],
+      [
+       28.543,
+       0.499
+      ],
+      [
+       29,
+       0.413
+      ],
+      [
+       29.459,
+       0.488
+      ],
+      [
+       29.901,
+       0.629
+      ],
+      [
+       30.337,
+       0.824
+      ],
+      [
+       30.684,
+       1.157
+      ],
+      [
+       30.935,
+       1.568
+      ],
+      [
+       31.067,
+       2.028
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-08",
+     "kind": "tree",
+     "label": "Camphor",
+     "species_code": "CC",
+     "centre": [
+      33,
+      2.5
+     ],
+     "area_m2": 13.601,
+     "outline": [
+      [
+       35.037,
+       2.5
+      ],
+      [
+       35.096,
+       2.978
+      ],
+      [
+       34.873,
+       3.402
+      ],
+      [
+       34.644,
+       3.811
+      ],
+      [
+       34.346,
+       4.188
+      ],
+      [
+       33.891,
+       4.351
+      ],
+      [
+       33.476,
+       4.587
+      ],
+      [
+       33,
+       4.629
+      ],
+      [
+       32.525,
+       4.579
+      ],
+      [
+       32.112,
+       4.345
+      ],
+      [
+       31.729,
+       4.094
+      ],
+      [
+       31.391,
+       3.783
+      ],
+      [
+       31.067,
+       3.431
+      ],
+      [
+       31.005,
+       2.955
+      ],
+      [
+       30.937,
+       2.5
+      ],
+      [
+       30.918,
+       2.025
+      ],
+      [
+       31.134,
+       1.601
+      ],
+      [
+       31.362,
+       1.194
+      ],
+      [
+       31.73,
+       0.907
+      ],
+      [
+       32.116,
+       0.664
+      ],
+      [
+       32.545,
+       0.508
+      ],
+      [
+       33,
+       0.437
+      ],
+      [
+       33.463,
+       0.472
+      ],
+      [
+       33.929,
+       0.571
+      ],
+      [
+       34.331,
+       0.832
+      ],
+      [
+       34.653,
+       1.182
+      ],
+      [
+       34.894,
+       1.588
+      ],
+      [
+       35.015,
+       2.04
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-09",
+     "kind": "shrub_bed",
+     "label": "Azalea",
+     "species_code": "RH",
+     "centre": [
+      13.5,
+      17.02
+     ],
+     "area_m2": 147.2,
+     "outline": [
+      [
+       20.52,
+       12.039
+      ],
+      [
+       20.686,
+       12.069
+      ],
+      [
+       20.848,
+       12.124
+      ],
+      [
+       20.919,
+       12.283
+      ],
+      [
+       20.931,
+       12.4
+      ],
+      [
+       20.943,
+       21.626
+      ],
+      [
+       20.936,
+       21.763
+      ],
+      [
+       20.807,
+       21.877
+      ],
+      [
+       20.733,
+       21.981
+      ],
+      [
+       20.592,
+       22.005
+      ],
+      [
+       6.397,
+       21.966
+      ],
+      [
+       6.295,
+       22.001
+      ],
+      [
+       6.179,
+       21.849
+      ],
+      [
+       6.085,
+       21.719
+      ],
+      [
+       6.032,
+       21.662
+      ],
+      [
+       6.124,
+       12.458
+      ],
+      [
+       6.107,
+       12.305
+      ],
+      [
+       6.167,
+       12.128
+      ],
+      [
+       6.336,
+       12.076
+      ],
+      [
+       6.389,
+       12.1
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-10",
+     "kind": "lawn",
+     "label": "Lawn",
+     "species_code": "LW",
+     "centre": [
+      34,
+      17
+     ],
+     "area_m2": 204.4,
+     "outline": [
+      [
+       43.66,
+       11.95
+      ],
+      [
+       43.808,
+       11.905
+      ],
+      [
+       43.981,
+       12.049
+      ],
+      [
+       44.02,
+       12.105
+      ],
+      [
+       44.054,
+       12.255
+      ],
+      [
+       44.082,
+       21.721
+      ],
+      [
+       44.056,
+       21.928
+      ],
+      [
+       43.917,
+       21.986
+      ],
+      [
+       43.845,
+       22.111
+      ],
+      [
+       43.731,
+       22.112
+      ],
+      [
+       24.299,
+       22.079
+      ],
+      [
+       24.12,
+       22.03
+      ],
+      [
+       24.039,
+       21.954
+      ],
+      [
+       23.965,
+       21.889
+      ],
+      [
+       23.932,
+       21.794
+      ],
+      [
+       23.968,
+       12.289
+      ],
+      [
+       24.009,
+       12.107
+      ],
+      [
+       24.084,
+       11.994
+      ],
+      [
+       24.118,
+       11.9
+      ],
+      [
+       24.338,
+       11.915
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-11",
+     "kind": "paving",
+     "label": "Permeable pavers",
+     "species_code": "PP",
+     "centre": [
+      15.25,
+      7.025
+     ],
+     "area_m2": 205.7,
+     "outline": [
+      [
+       28,
+       3.121
+      ],
+      [
+       28.23,
+       3.101
+      ],
+      [
+       28.314,
+       3.233
+      ],
+      [
+       28.421,
+       3.288
+      ],
+      [
+       28.377,
+       3.471
+      ],
+      [
+       28.42,
+       10.647
+      ],
+      [
+       28.377,
+       10.723
+      ],
+      [
+       28.326,
+       10.825
+      ],
+      [
+       28.158,
+       10.971
+      ],
+      [
+       28.069,
+       10.949
+      ],
+      [
+       2.402,
+       10.922
+      ],
+      [
+       2.346,
+       10.89
+      ],
+      [
+       2.199,
+       10.889
+      ],
+      [
+       2.145,
+       10.689
+      ],
+      [
+       2.133,
+       10.555
+      ],
+      [
+       2.111,
+       3.48
+      ],
+      [
+       2.11,
+       3.269
+      ],
+      [
+       2.201,
+       3.221
+      ],
+      [
+       2.301,
+       3.083
+      ],
+      [
+       2.486,
+       3.09
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-12",
+     "kind": "paving",
+     "label": "Exposed aggregate",
+     "species_code": "EA",
+     "centre": [
+      36.975,
+      5.025
+     ],
+     "area_m2": 50.3,
+     "outline": [
+      [
+       42.65,
+       2.942
+      ],
+      [
+       42.862,
+       2.948
+      ],
+      [
+       42.956,
+       3.068
+      ],
+      [
+       43.032,
+       3.12
+      ],
+      [
+       43.01,
+       3.336
+      ],
+      [
+       43.069,
+       6.772
+      ],
+      [
+       43.007,
+       6.918
+      ],
+      [
+       42.946,
+       6.963
+      ],
+      [
+       42.88,
+       7.031
+      ],
+      [
+       42.718,
+       7.086
+      ],
+      [
+       31.245,
+       7.065
+      ],
+      [
+       31.112,
+       7.049
+      ],
+      [
+       30.999,
+       7.024
+      ],
+      [
+       30.964,
+       6.889
+      ],
+      [
+       30.874,
+       6.717
+      ],
+      [
+       30.894,
+       3.321
+      ],
+      [
+       30.951,
+       3.181
+      ],
+      [
+       30.958,
+       3.098
+      ],
+      [
+       31.123,
+       3.016
+      ],
+      [
+       31.275,
+       2.915
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "M-13",
+     "kind": "paving",
+     "label": "Grass pavers",
+     "species_code": "GP",
+     "centre": [
+      34.025,
+      11.975
+     ],
+     "area_m2": 34.1,
+     "outline": [
+      [
+       36.55,
+       9.013
+      ],
+      [
+       36.745,
+       9.044
+      ],
+      [
+       36.849,
+       9.153
+      ],
+      [
+       36.893,
+       9.303
+      ],
+      [
+       36.993,
+       9.351
+      ],
+      [
+       36.968,
+       14.547
+      ],
+      [
+       36.887,
+       14.663
+      ],
+      [
+       36.815,
+       14.752
+      ],
+      [
+       36.753,
+       14.841
+      ],
+      [
+       36.616,
+       14.873
+      ],
+      [
+       31.488,
+       14.858
+      ],
+      [
+       31.277,
+       14.859
+      ],
+      [
+       31.199,
+       14.809
+      ],
+      [
+       31.084,
+       14.639
+      ],
+      [
+       31.115,
+       14.528
+      ],
+      [
+       31.078,
+       9.412
+      ],
+      [
+       31.092,
+       9.242
+      ],
+      [
+       31.215,
+       9.124
+      ],
+      [
+       31.345,
+       9.1
+      ],
+      [
+       31.463,
+       9.09
+      ]
+     ],
+     "closed": true,
+     "by": "sam"
+    },
+    {
+     "object_id": "BD-01",
+     "kind": "boundary",
+     "label": "Site boundary",
+     "outline": [
+      [
+       0,
+       0
+      ],
+      [
+       50,
+       0
+      ],
+      [
+       50,
+       30
+      ],
+      [
+       0,
+       30
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    },
+    {
+     "object_id": "TB-01",
+     "kind": "title_block",
+     "label": "Title block",
+     "outline": [
+      [
+       54,
+       -7.5
+      ],
+      [
+       75,
+       -7.5
+      ],
+      [
+       75,
+       7
+      ],
+      [
+       54,
+       7
+      ]
+     ],
+     "closed": true,
+     "by": "geometry"
+    }
+   ]
+  }
+ ],
+ "items": [
+  {
+   "item_id": "I-01",
+   "kind": "tree",
+   "label": "Camphor",
+   "species_code": "CC",
+   "unit": "plant",
+   "geometry_count": 7,
+   "spark_count": 8,
+   "schedule_count": 8,
+   "label_count": 1,
+   "agreed": false,
+   "flagged_reason": "T-08 is an open outline (12 gaps, up to 40 cm). Muse Spark says one tree; please confirm.",
+   "object_ids": [
+    "T-01",
+    "T-02",
+    "T-03",
+    "T-04",
+    "T-05",
+    "T-06",
+    "T-07",
+    "T-08"
+   ],
+   "sheet_ids": [
+    "L-1"
+   ],
+   "spark": {
+    "crop_url": "/mock/crops/I-01.svg",
+    "confidence": 0.95,
+    "points": [
+     [
+      33,
+      2.5
+     ],
+     [
+      34.414,
+      3.914
+     ],
+     [
+      31.586,
+      3.914
+     ],
+     [
+      31.586,
+      1.086
+     ],
+     [
+      34.414,
+      1.086
+     ]
+    ],
+    "why": "Twelve straight pieces form one ring of radius 2.0 m with gaps under 0.4 m; the centre cross matches the seven closed canopies; \"CAMPHOR, typ.\" on T-03 applies to identical symbols.",
+    "answer": {
+     "is_one_object": true,
+     "kind": "tree",
+     "label": "typ. → Camphor",
+     "species_code": "CC",
+     "count": 1,
+     "confidence": 0.95,
+     "model": "muse-spark"
+    }
+   }
+  },
+  {
+   "item_id": "I-02",
+   "kind": "hedge",
+   "label": "Duranta",
+   "species_code": "DE",
+   "unit": "plant",
+   "geometry_count": 182,
+   "spark_count": 182,
+   "schedule_count": 182,
+   "label_count": 1,
+   "agreed": true,
+   "quote_count": 182,
+   "object_ids": [
+    "H-01"
+   ],
+   "sheet_ids": [
+    "L-1"
+   ]
+  },
+  {
+   "item_id": "I-03",
+   "kind": "shrub_bed",
+   "label": "Azalea",
+   "species_code": "RH",
+   "unit": "m2",
+   "geometry_count": 150,
+   "schedule_count": 150,
+   "agreed": true,
+   "quote_count": 150,
+   "object_ids": [
+    "B-01"
+   ],
+   "sheet_ids": [
+    "L-1"
+   ]
+  },
+  {
+   "item_id": "I-04",
+   "kind": "lawn",
+   "label": "Lawn",
+   "species_code": "LW",
+   "unit": "m2",
+   "geometry_count": 200,
+   "schedule_count": 200,
+   "agreed": true,
+   "quote_count": 200,
+   "object_ids": [
+    "L-01"
+   ],
+   "sheet_ids": [
+    "L-1"
+   ]
+  },
+  {
+   "item_id": "I-05",
+   "kind": "paving",
+   "label": "Permeable pavers",
+   "species_code": "PP",
+   "unit": "m2",
+   "geometry_count": 212,
+   "spark_count": 212,
+   "agreed": true,
+   "quote_count": 212,
+   "object_ids": [
+    "P-01"
+   ],
+   "sheet_ids": [
+    "L-3"
+   ]
+  },
+  {
+   "item_id": "I-06",
+   "kind": "paving",
+   "label": "Exposed aggregate",
+   "species_code": "EA",
+   "unit": "m2",
+   "geometry_count": 48,
+   "spark_count": 48,
+   "agreed": true,
+   "quote_count": 48,
+   "object_ids": [
+    "P-02"
+   ],
+   "sheet_ids": [
+    "L-3"
+   ]
+  },
+  {
+   "item_id": "I-07",
+   "kind": "paving",
+   "label": "Grass pavers",
+   "species_code": "GP",
+   "unit": "m2",
+   "geometry_count": 36,
+   "spark_count": 36,
+   "agreed": true,
+   "quote_count": 36,
+   "object_ids": [
+    "P-03"
+   ],
+   "sheet_ids": [
+    "L-3"
+   ]
+  },
+  {
+   "item_id": "I-08",
+   "kind": "planter_edge",
+   "label": "Planter edge",
+   "unit": "m",
+   "geometry_count": 22,
+   "agreed": true,
+   "quote_count": 22,
+   "object_ids": [
+    "PE-01"
+   ],
+   "sheet_ids": [
+    "L-3"
+   ]
+  }
+ ],
+ "checks": [
+  {
+   "check_id": "E01",
+   "category": "quantity",
+   "title": "T-08 is an open outline; Muse Spark says one tree",
+   "severity": "flag",
+   "by": [
+    "geometry",
+    "spark"
+   ],
+   "why": "Geometry closes seven canopies; the eighth has 12 gaps up to 40 cm. Muse Spark sees one tree and why; a person confirms.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1"
+    ],
+    "object_ids": [
+     "T-08"
+    ]
+   }
+  },
+  {
+   "check_id": "E02",
+   "category": "quantity",
+   "title": "Schedule and bill say 12 Camphor, the drawing shows 8",
+   "severity": "flag",
+   "by": [
+    "geometry",
+    "spark",
+    "bill"
+   ],
+   "why": "L-4 and the bill list 12 Camphor; L-1 shows 8 canopies and its own schedule says 8. The drawing governs; raise it with the developer.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1",
+     "L-4"
+    ],
+    "object_ids": [
+     "T-01",
+     "T-02",
+     "T-03",
+     "T-04",
+     "T-05",
+     "T-06",
+     "T-07",
+     "T-08"
+    ],
+    "cells": [
+     "BOQ rev2!C5"
+    ]
+   },
+   "numbers": {
+    "row": 5,
+    "bill_text": "Camphor tree, cal. 10 cm",
+    "bill_qty": 12,
+    "bill_unit": "EA",
+    "unit_price": 5000,
+    "drawn_qty": 8,
+    "item_id": "I-01",
+    "align_confidence": 0.97,
+    "aligned_to": "CC · Cinnamomum camphora · cal. 10 · H3.5"
+   }
+  },
+  {
+   "check_id": "E03",
+   "category": "revision",
+   "title": "Two revisions of L-1: Rev B is newer and shows 9 trees",
+   "severity": "review",
+   "by": [
+    "spark"
+   ],
+   "why": "Rev A (2026-09-18) and Rev B (2026-10-14) are both in the folder. Counts are shown for both; confirm which revision the quote follows.",
+   "evidence": {
+    "file_ids": [
+     "f02",
+     "f03"
+    ],
+    "sheet_ids": [
+     "L-1",
+     "L-1B"
+    ]
+   },
+   "numbers": {
+    "rev_a_trees": 8,
+    "rev_b_trees": 9
+   }
+  },
+  {
+   "check_id": "E04",
+   "category": "sheet",
+   "title": "L-2 is an elevation — the same trees, not counted",
+   "severity": "info",
+   "by": [
+    "spark"
+   ],
+   "why": "Muse Spark classed L-2 as an elevation: the eight trees drawn from the side. Counting them would double the trees.",
+   "evidence": {
+    "sheet_ids": [
+     "L-2",
+     "L-1"
+    ],
+    "object_ids": [
+     "T-01",
+     "T-02",
+     "T-03",
+     "T-04",
+     "T-05",
+     "T-06",
+     "T-07",
+     "T-08"
+    ]
+   }
+  },
+  {
+   "check_id": "E05",
+   "category": "sheet",
+   "title": "L-5 is an enlarged plan — four trees repeated, not counted",
+   "severity": "info",
+   "by": [
+    "spark",
+    "geometry"
+   ],
+   "why": "A match line at x = 21 m ties L-5 to L-1; T-01 to T-04 appear on both.",
+   "evidence": {
+    "sheet_ids": [
+     "L-5"
+    ],
+    "object_ids": [
+     "T-01",
+     "T-02",
+     "T-03",
+     "T-04"
+    ]
+   }
+  },
+  {
+   "check_id": "E06",
+   "category": "sheet",
+   "title": "L-7 and L-8 show canopies as background",
+   "severity": "info",
+   "by": [
+    "spark"
+   ],
+   "why": "Irrigation and lighting sheets draw the trees dashed for reference; they are not planting sheets.",
+   "evidence": {
+    "sheet_ids": [
+     "L-7",
+     "L-8"
+    ],
+    "file_ids": [
+     "f10",
+     "f11"
+    ]
+   }
+  },
+  {
+   "check_id": "E07",
+   "category": "quantity",
+   "title": "Legend symbol is not a tree",
+   "severity": "info",
+   "by": [
+    "geometry"
+   ],
+   "why": "The tree symbol inside the legend box is excluded from the count.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1"
+    ],
+    "object_ids": [
+     "LG-01",
+     "LG-02"
+    ]
+   }
+  },
+  {
+   "check_id": "E08",
+   "category": "quantity",
+   "title": "A tree is drawn outside the site, in the road reserve",
+   "severity": "flag",
+   "by": [
+    "geometry"
+   ],
+   "why": "T-09 sits 3.6 m south of the boundary. It is drawn, not counted toward greening, and not ours to plant.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1"
+    ],
+    "object_ids": [
+     "T-09"
+    ]
+   }
+  },
+  {
+   "check_id": "E09",
+   "category": "regulation",
+   "title": "A tree is drawn inside the fire-truck access lane",
+   "severity": "flag",
+   "by": [
+    "geometry",
+    "rule"
+   ],
+   "why": "T-10 is inside the hatched lane, an area where greening cannot count; it may also block the lane.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1"
+    ],
+    "object_ids": [
+     "T-10",
+     "FL-01"
+    ]
+   },
+   "citation": {
+    "article": "Building Technical Regulations §299 — definitions: area hard to green",
+    "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=299",
+    "gloss": "Fire-truck access lanes and similar areas are excluded from the minimum greening area."
+   }
+  },
+  {
+   "check_id": "E10",
+   "category": "area",
+   "title": "Paving on L-3 overlaps the lawn on L-1 by 20 m²",
+   "severity": "flag",
+   "by": [
+    "geometry"
+   ],
+   "why": "The permeable-paver hatch on L-3 runs 20 m² into the lawn drawn on L-1: that area would be priced twice.",
+   "evidence": {
+    "sheet_ids": [
+     "L-3",
+     "L-1"
+    ],
+    "object_ids": [
+     "P-01",
+     "L-01"
+    ]
+   },
+   "numbers": {
+    "overlap_m2": 20
+   }
+  },
+  {
+   "check_id": "E12",
+   "category": "regulation",
+   "title": "Tree pits on the slab are too shallow for large trees",
+   "severity": "flag",
+   "by": [
+    "spark",
+    "rule"
+   ],
+   "why": "L-6: pit 1.2 × 1.2 m (1.44 m²), soil 0.8 m on the basement slab. Large trees then count as small: Gi 1.5 → 1.0.",
+   "evidence": {
+    "sheet_ids": [
+     "L-6"
+    ]
+   },
+   "citation": {
+    "article": "Greening Design Technical Specification, Table 1 — carbon fixation by planting type",
+    "url": "https://www.nlma.gov.tw/",
+    "gloss": "On artificial ground, soil depth and pit size set which Gi class a tree may claim."
+   },
+   "numbers": {
+    "pit_m2": 1.44,
+    "soil_m": 0.8,
+    "gi_from": 1.5,
+    "gi_to": 1
+   }
+  },
+  {
+   "check_id": "E13",
+   "category": "bill",
+   "title": "Azalea: 450 plants for 150 m² is 3 per m²; the schedule asks 4",
+   "severity": "flag",
+   "by": [
+    "bill",
+    "spark"
+   ],
+   "why": "At 4 plants per m² the bed needs 600. The bill is 150 plants short.",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!C7"
+    ],
+    "object_ids": [
+     "B-01"
+    ],
+    "sheet_ids": [
+     "L-1"
+    ]
+   },
+   "numbers": {
+    "row": 7,
+    "bill_text": "Azalea, H0.4",
+    "bill_qty": 450,
+    "bill_unit": "EA",
+    "unit_price": 120,
+    "drawn_qty": 600,
+    "item_id": "I-03",
+    "align_confidence": 0.94
+   }
+  },
+  {
+   "check_id": "E14",
+   "category": "regulation",
+   "title": "Greening carbon fixation is short: 268.1 of 297.0 kgCO₂e/yr",
+   "severity": "fail",
+   "by": [
+    "geometry",
+    "spark",
+    "rule"
+   ],
+   "why": "One tree species gives no native-tree bonus (α 0.8). Σ Gi × Ai = 335.1, × 0.8 = 268.1, below the 297.0 required for a 1,500 m² ordinary site at 40% coverage.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1"
+    ],
+    "object_ids": [
+     "T-01",
+     "T-02",
+     "T-03",
+     "T-04",
+     "T-05",
+     "T-06",
+     "T-07",
+     "T-08",
+     "H-01",
+     "B-01",
+     "L-01"
+    ]
+   },
+   "citation": {
+    "article": "Building Technical Regulations §302 — greening carbon-fixation requirement",
+    "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+    "gloss": "The planting’s total carbon fixation must exceed ½ × the minimum greening area × β (β 0.66 on an ordinary site)."
+   },
+   "numbers": {
+    "required": 297,
+    "A0": 1500,
+    "Ap": 0,
+    "r": 0.4,
+    "A_prime": 900,
+    "beta": 0.66,
+    "provided": 268.1,
+    "sigma": 335.1,
+    "alpha": 0.8,
+    "ra": 0,
+    "unit": "kgCO₂e/yr",
+    "jurisdiction": "national rule · local",
+    "terms": [
+     {
+      "label": "Camphor · 8 trees × 16 m²",
+      "count_or_area": 8,
+      "Ai": 128,
+      "Gi": 1.5,
+      "product": 192
+     },
+     {
+      "label": "Duranta hedge · 54 m × 0.3 m",
+      "count_or_area": 16.2,
+      "Ai": 16.2,
+      "Gi": 0.5,
+      "product": 8.1
+     },
+     {
+      "label": "Azalea bed",
+      "count_or_area": 150,
+      "Ai": 150,
+      "Gi": 0.5,
+      "product": 75
+     },
+     {
+      "label": "Lawn",
+      "count_or_area": 200,
+      "Ai": 200,
+      "Gi": 0.3,
+      "product": 60
+     }
+    ]
+   },
+   "fixes": [
+    {
+     "label": "+2 Camphor, the same species",
+     "result": 306.5,
+     "passes": true
+    },
+    {
+     "label": "swap 2 of 8 Camphor for Bischofia (Bischofia javanica), a second native species — α 0.8 → 1.3, no extra trees",
+     "result": 435.6,
+     "passes": true
+    }
+   ]
+  },
+  {
+   "check_id": "E15",
+   "category": "protected_tree",
+   "title": "Existing camphor DBH 95 cm marked \"to be removed\"",
+   "severity": "review",
+   "by": [
+    "spark",
+    "rule"
+   ],
+   "why": "A trunk of this size may be a protected tree under the city’s rule. Removal needs a review before the permit.",
+   "evidence": {
+    "sheet_ids": [
+     "L-1"
+    ],
+    "object_ids": [
+     "X-01"
+    ]
+   },
+   "citation": {
+    "article": "local City Tree Protection Ordinance — trees of protected size",
+    "url": "https://lawsearch.local.gov.tw/",
+    "gloss": "Trees above a set trunk size may not be removed without approval."
+   },
+   "numbers": {
+    "dbh_cm": 95
+   }
+  },
+  {
+   "check_id": "E16",
+   "category": "scale",
+   "title": "L-5: the title block says 1:200, the scale bar measures 1:100",
+   "severity": "flag",
+   "by": [
+    "geometry",
+    "spark"
+   ],
+   "why": "Areas measured on this sheet at the title-block scale would be four times too large.",
+   "evidence": {
+    "sheet_ids": [
+     "L-5"
+    ],
+    "object_ids": [
+     "TB-01"
+    ]
+   },
+   "numbers": {
+    "title": "1:200",
+    "measured": "1:100"
+   }
+  },
+  {
+   "check_id": "E17",
+   "category": "bill",
+   "title": "Hedge: bill 150 plants, drawing 182",
+   "severity": "flag",
+   "by": [
+    "bill",
+    "geometry"
+   ],
+   "why": "27.0 m at 0.3 m in two rows is 182 plants. The bill prices 150 — 32 short.",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!C6"
+    ],
+    "object_ids": [
+     "H-01"
+    ],
+    "sheet_ids": [
+     "L-1"
+    ]
+   },
+   "numbers": {
+    "row": 6,
+    "bill_text": "Duranta hedge, H0.6, 2 rows",
+    "bill_qty": 150,
+    "bill_unit": "EA",
+    "unit_price": 180,
+    "drawn_qty": 182,
+    "item_id": "I-02",
+    "align_confidence": 0.93
+   }
+  },
+  {
+   "check_id": "E18",
+   "category": "bill",
+   "title": "\"Camphore tree\" aligned to Camphor at lower confidence",
+   "severity": "info",
+   "by": [
+    "spark"
+   ],
+   "why": "BOQ rev1a spells it \"Camphore tree\"; Muse Spark aligned it to CC Camphor at 0.81.",
+   "evidence": {
+    "file_ids": [
+     "f23"
+    ],
+    "cells": [
+     "BOQ rev1a!B5"
+    ]
+   },
+   "numbers": {
+    "align_confidence": 0.81
+   }
+  },
+  {
+   "check_id": "E19",
+   "category": "price",
+   "title": "Camphor at NT$5,000 is 65% under your price list",
+   "severity": "flag",
+   "by": [
+    "bill"
+   ],
+   "why": "Your list prices Camphor cal. 10 cm at NT$14,000–16,000. At NT$5,000 the row cannot buy the specified tree.",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!E5"
+    ],
+    "object_ids": [
+     "T-01",
+     "T-02",
+     "T-03",
+     "T-04",
+     "T-05",
+     "T-06",
+     "T-07",
+     "T-08"
+    ],
+    "sheet_ids": [
+     "L-1"
+    ]
+   },
+   "numbers": {
+    "row": 5,
+    "unit_price": 5000,
+    "list_low": 14000,
+    "list_high": 16000,
+    "item_id": "I-01"
+   }
+  },
+  {
+   "check_id": "E20",
+   "category": "price",
+   "title": "Permeable pavers at NT$3,800/m² are twice your list",
+   "severity": "flag",
+   "by": [
+    "bill"
+   ],
+   "why": "Your list: NT$1,700–2,000 per m².",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!E9"
+    ],
+    "object_ids": [
+     "P-01"
+    ],
+    "sheet_ids": [
+     "L-3"
+    ]
+   },
+   "numbers": {
+    "row": 9,
+    "bill_text": "Permeable pavers, 60 mm",
+    "bill_qty": 212,
+    "bill_unit": "m²",
+    "unit_price": 3800,
+    "drawn_qty": 212,
+    "list_low": 1700,
+    "list_high": 2000,
+    "item_id": "I-05",
+    "align_confidence": 0.96
+   }
+  },
+  {
+   "check_id": "E21",
+   "category": "arithmetic",
+   "title": "The subtotal skips row 11",
+   "severity": "flag",
+   "by": [
+    "bill"
+   ],
+   "why": "=SUM(F5:F10) leaves out the grass pavers: the subtotal is NT$54,000 short.",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!F12"
+    ]
+   },
+   "numbers": {
+    "row": 12,
+    "bill_text": "Subtotal",
+    "amount": 1141400,
+    "computed": 1195400
+   }
+  },
+  {
+   "check_id": "E22",
+   "category": "revision",
+   "title": "Four versions of the bill; the newest by date changes paving 212 → 236 m²",
+   "severity": "flag",
+   "by": [
+    "bill"
+   ],
+   "why": "rev1, rev1a, rev2 and the 20241014 budget file differ. The drawing shows 212 m².",
+   "evidence": {
+    "file_ids": [
+     "f22",
+     "f23",
+     "f24",
+     "f33"
+    ],
+    "object_ids": [
+     "P-01"
+    ]
+   },
+   "numbers": {
+    "drawn_qty": 212,
+    "latest_bill_qty": 236
+   }
+  },
+  {
+   "check_id": "E23",
+   "category": "bill",
+   "title": "A hidden sheet holds other totals",
+   "severity": "flag",
+   "by": [
+    "bill"
+   ],
+   "why": "Sheet \"old totals\" is hidden in BOQ rev2 and sums to NT$1,320,000.",
+   "evidence": {
+    "file_ids": [
+     "f24"
+    ]
+   }
+  },
+  {
+   "check_id": "E24",
+   "category": "bill",
+   "title": "Merged two-row header parsed",
+   "severity": "info",
+   "by": [
+    "bill"
+   ],
+   "why": "The bill’s two-row merged header was read into one header row.",
+   "evidence": {
+    "file_ids": [
+     "f24"
+    ]
+   }
+  },
+  {
+   "check_id": "E25",
+   "category": "ingest",
+   "title": "The scanned L-1 has no vectors — read, not measured",
+   "severity": "info",
+   "by": [
+    "spark"
+   ],
+   "why": "Raster only and rotated 1.5°; Muse Spark read its title block (L-1, Rev A).",
+   "evidence": {
+    "file_ids": [
+     "f19"
+    ],
+    "sheet_ids": [
+     "SCAN"
+    ]
+   }
+  },
+  {
+   "check_id": "E26",
+   "category": "ingest",
+   "title": "Excel 97 quote cannot be read — save as .xlsx",
+   "severity": "flag",
+   "by": [
+    "rule"
+   ],
+   "why": "irrigation-quote-240909.xls is in the 1997–2003 format.",
+   "evidence": {
+    "file_ids": [
+     "f29"
+    ]
+   }
+  },
+  {
+   "check_id": "E27",
+   "category": "ingest",
+   "title": "Backup ignored; zip unpacked",
+   "severity": "info",
+   "by": [
+    "rule"
+   ],
+   "why": "L-1 Planting Plan.bak matches Rev A; metal-details.zip holds one drain-cover DXF, not a landscape quantity.",
+   "evidence": {
+    "file_ids": [
+     "f04",
+     "f31",
+     "f32"
+    ]
+   }
+  },
+  {
+   "check_id": "E28",
+   "category": "document",
+   "title": "Pasted material photos matched to paving types",
+   "severity": "review",
+   "by": [
+    "spark"
+   ],
+   "why": "Six photos pasted into the CAD folder: aggregate, pavers and grass pavers matched to P-01 to P-03; one kerb photo has no item.",
+   "evidence": {
+    "file_ids": [
+     "f12",
+     "f13",
+     "f14",
+     "f15",
+     "f16",
+     "f17"
+    ]
+   }
+  },
+  {
+   "check_id": "E29",
+   "category": "sheet",
+   "title": "L-9 Sections is listed in the index but missing",
+   "severity": "flag",
+   "by": [
+    "spark",
+    "rule"
+   ],
+   "why": "The L-0 index lists ten sheets; L-9 is not in the package.",
+   "evidence": {
+    "sheet_ids": [
+     "L-0"
+    ],
+    "file_ids": [
+     "f01"
+    ]
+   }
+  },
+  {
+   "check_id": "E30",
+   "category": "document",
+   "title": "The green-building checklist requires a greening report",
+   "severity": "info",
+   "by": [
+    "spark"
+   ],
+   "why": "The §302 result above is that report’s core number.",
+   "evidence": {
+    "file_ids": [
+     "f34"
+    ]
+   },
+   "citation": {
+    "article": "Building Technical Regulations §302 — greening carbon-fixation requirement",
+    "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+    "gloss": "The greening calculation is a required document for the label."
+   }
+  },
+  {
+   "check_id": "C-B08",
+   "category": "bill",
+   "title": "Lawn: bill matches the drawing",
+   "severity": "info",
+   "by": [
+    "bill",
+    "spark"
+   ],
+   "why": "Bill row 8 aligned to L-01, 200 m².",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!C8"
+    ],
+    "object_ids": [
+     "L-01"
+    ],
+    "sheet_ids": [
+     "L-1"
+    ]
+   },
+   "numbers": {
+    "row": 8,
+    "bill_text": "Lawn, carpet grass",
+    "bill_qty": 200,
+    "bill_unit": "m²",
+    "unit_price": 350,
+    "drawn_qty": 200,
+    "item_id": "I-04",
+    "align_confidence": 0.98
+   }
+  },
+  {
+   "check_id": "C-B10",
+   "category": "bill",
+   "title": "Exposed aggregate: bill matches the drawing",
+   "severity": "info",
+   "by": [
+    "bill",
+    "spark"
+   ],
+   "why": "Bill row 10 aligned to P-02, 48 m².",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!C10"
+    ],
+    "object_ids": [
+     "P-02"
+    ],
+    "sheet_ids": [
+     "L-3"
+    ]
+   },
+   "numbers": {
+    "row": 10,
+    "bill_text": "Exposed aggregate",
+    "bill_qty": 48,
+    "bill_unit": "m²",
+    "unit_price": 2600,
+    "drawn_qty": 48,
+    "item_id": "I-06",
+    "align_confidence": 0.95
+   }
+  },
+  {
+   "check_id": "C-B11",
+   "category": "bill",
+   "title": "Grass pavers: bill matches the drawing",
+   "severity": "info",
+   "by": [
+    "bill",
+    "spark"
+   ],
+   "why": "Bill row 11 aligned to P-03, 36 m².",
+   "evidence": {
+    "cells": [
+     "BOQ rev2!C11"
+    ],
+    "object_ids": [
+     "P-03"
+    ],
+    "sheet_ids": [
+     "L-3"
+    ]
+   },
+   "numbers": {
+    "row": 11,
+    "bill_text": "Grass pavers",
+    "bill_qty": 36,
+    "bill_unit": "m²",
+    "unit_price": 1500,
+    "drawn_qty": 36,
+    "item_id": "I-07",
+    "align_confidence": 0.95
+   }
+  }
+ ],
+ "errors": {
+  "planted": 30,
+  "found": [
+   "E01",
+   "E02",
+   "E04",
+   "E05",
+   "E06",
+   "E07",
+   "E08",
+   "E09",
+   "E10",
+   "E12",
+   "E13",
+   "E14",
+   "E16",
+   "E17",
+   "E18",
+   "E19",
+   "E20",
+   "E21",
+   "E22",
+   "E23",
+   "E24",
+   "E25",
+   "E26",
+   "E27",
+   "E29",
+   "E30"
+  ],
+  "flagged": [
+   "E03",
+   "E15",
+   "E28"
+  ],
+  "missed": [
+   "E11"
+  ],
+  "false_alarms": []
+ },
+ "tally": [
+  {
+   "label": "Camphor",
+   "species_code": "CC",
+   "drawn": 7,
+   "spark": 8,
+   "schedule": 8,
+   "unit": "plant",
+   "status": "flagged"
+  },
+  {
+   "label": "Duranta",
+   "species_code": "DE",
+   "drawn": 182,
+   "spark": 182,
+   "schedule": 182,
+   "unit": "plant",
+   "status": "agreed"
+  },
+  {
+   "label": "Azalea",
+   "species_code": "RH",
+   "drawn": 150,
+   "spark": 0,
+   "schedule": 150,
+   "unit": "m²",
+   "status": "agreed"
+  },
+  {
+   "label": "Lawn",
+   "species_code": "LW",
+   "drawn": 200,
+   "spark": 0,
+   "schedule": 200,
+   "unit": "m²",
+   "status": "agreed"
+  },
+  {
+   "label": "Permeable pavers",
+   "species_code": "PP",
+   "drawn": 212,
+   "spark": 212,
+   "schedule": 0,
+   "unit": "m²",
+   "status": "agreed"
+  },
+  {
+   "label": "Exposed aggregate",
+   "species_code": "EA",
+   "drawn": 48,
+   "spark": 48,
+   "schedule": 0,
+   "unit": "m²",
+   "status": "agreed"
+  },
+  {
+   "label": "Grass pavers",
+   "species_code": "GP",
+   "drawn": 36,
+   "spark": 36,
+   "schedule": 0,
+   "unit": "m²",
+   "status": "agreed"
+  },
+  {
+   "label": "Planter edge",
+   "drawn": 22,
+   "spark": 0,
+   "schedule": 0,
+   "unit": "m",
+   "status": "agreed"
+  }
+ ],
+ "timing": {
+  "total_s": 38.4,
+  "spark_calls": 17,
+  "sam_calls": 2
+ }
+}

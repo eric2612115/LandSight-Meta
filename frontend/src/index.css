@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  --color-chrome: #14161a;
+  --color-chrome-2: #1a1d22;
+  --color-chrome-3: #20242a;
+  --color-line: #2b3038;
+  --color-line-2: #363c45;
+  --color-mute: #8a919c;
+  --color-soft: #c3c8cf;
+  --color-paper: #f7f5f0;
+  --color-ink: #1d2026;
+
+  --color-graphite: #3a3f47;
+  --color-graphite-lt: #b5bcc6;
+  --color-cobalt: #2457ff;
+  --color-cobalt-lt: #6d8dff;
+  --color-violet: #7a3cff;
+  --color-violet-lt: #a684ff;
+  --color-amber: #f0a500;
+  --color-green: #1f9d55;
+  --color-green-lt: #3ccf7f;
+  --color-red: #e5484d;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: #0d0e11;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #e8eaed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- the sheet underlay (inlined print SVG): true-looking line weights at any zoom ---------- */
+.ul * {
+  vector-effect: non-scaling-stroke;
+}
+.ul polyline,
+.ul polygon,
+.ul line,
+.ul path,
+.ul circle,
+.ul ellipse,
+.ul rect {
+  stroke-width: 1.05px;
+}
+.ul [data-layer="FRAME"] { stroke-width: 1.9px; }
+.ul [data-layer="BORDER"] { stroke-width: 0.6px; }
+.ul [data-layer="SITE"] { stroke-width: 1.35px; }
+.ul [data-layer="TREE"] { stroke-width: 1.3px; }
+.ul [data-layer="PLANT"] { stroke-width: 1.15px; }
+.ul [data-layer="HATCH"] { stroke-width: 0.45px; }
+.ul [data-layer="LEADER"] { stroke-width: 0.8px; }
+.ul [data-layer="TABLE"] { stroke-width: 0.7px; }
+.ul [data-layer="DIM"] { stroke-width: 0.8px; }
+.ul [data-layer="BG"] { stroke-width: 0.8px; }
+.ul [data-layer="PIPE"] { stroke-width: 1.2px; }
+.ul [data-layer="ROAD"] { stroke-width: 1px; }
+.ul [data-layer="MATCH"] { stroke-width: 2px; }
+.ul [data-layer="FILL"],
+.ul [data-layer="PAPER"] { stroke-width: 0; }
+.ul text {
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+}
+
+/* objects on the sheet: colour changes are eased */
+.obj {
+  transition:
+    fill 320ms ease-out,
+    fill-opacity 320ms ease-out,
+    stroke 320ms ease-out,
+    stroke-width 320ms ease-out,
+    opacity 320ms ease-out;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #363c45 transparent;
+}
+
+@keyframes pulse-ring {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.9); }
+}

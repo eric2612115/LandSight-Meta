@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.200 45.200" width="1165" height="633" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="83.200" height="45.200" fill="#ffffff" data-layer="PAPER"/>
+<g >
+<polygon points="1.600,43.600 81.600,43.600 81.600,1.600 1.600,1.600" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polygon points="2.100,43.100 81.100,43.100 81.100,2.100 2.100,2.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="BORDER"/>
+<polyline points="8.600,17.100 25.200,17.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,18.300 25.200,18.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,17.100 8.600,18.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,17.100 25.200,18.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,19.500 25.200,19.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,18.300 8.600,19.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,18.300 25.200,19.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,18.300 11.200,19.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,20.700 25.200,20.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,19.500 8.600,20.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,19.500 25.200,20.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,19.500 11.200,20.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,21.900 25.200,21.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,20.700 8.600,21.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,20.700 25.200,21.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,20.700 11.200,21.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,23.100 25.200,23.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,21.900 8.600,23.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,21.900 25.200,23.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,21.900 11.200,23.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,24.300 25.200,24.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,23.100 8.600,24.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,23.100 25.200,24.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,23.100 11.200,24.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,25.500 25.200,25.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,24.300 8.600,25.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,24.300 25.200,25.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,24.300 11.200,25.500" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,26.700 25.200,26.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,25.500 8.600,26.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,25.500 25.200,26.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,25.500 11.200,26.700" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,27.900 25.200,27.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,26.700 8.600,27.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,26.700 25.200,27.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,26.700 11.200,27.900" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,29.100 25.200,29.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,27.900 8.600,29.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,27.900 25.200,29.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,27.900 11.200,29.100" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,30.300 25.200,30.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="8.600,29.100 8.600,30.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="25.200,29.100 25.200,30.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="11.200,29.100 11.200,30.300" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polygon points="58.600,42.100 79.600,42.100 79.600,27.600 58.600,27.600" fill="none" stroke="#1d2026" stroke-width="0.160" stroke-linecap="round" stroke-linejoin="round" data-layer="FRAME"/>
+<polyline points="58.600,29.671 79.600,29.671" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,31.743 79.600,31.743" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,33.814 79.600,33.814" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,35.886 79.600,35.886" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,37.957 79.600,37.957" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="58.600,40.029 79.600,40.029" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<polyline points="64.900,42.100 64.900,27.600" fill="none" stroke="#1d2026" stroke-width="0.050" stroke-linecap="round" stroke-linejoin="round" data-layer="TABLE"/>
+<text x="8.600" y="9.100" font-size="2.600" font-weight="600" fill="#1d2026" data-layer="TEXT">GREENFIELD RESIDENCES</text>
+<text x="8.600" y="12.000" font-size="1.100" fill="#1d2026" data-layer="TEXT">LANDSCAPE PACKAGE · local, national</text>
+<text x="8.600" y="13.800" font-size="0.800" fill="#5b616b" data-layer="TEXT">LANDSCAPE OVER BASEMENT SLAB</text>
+<text x="8.900" y="17.909" font-size="0.688" font-weight="600" fill="#1d2026" data-layer="TEXT">DRAWING INDEX</text>
+<text x="8.800" y="19.109" font-size="0.550" font-weight="600" fill="#1d2026" data-layer="TEXT">L-0</text>
+<text x="11.400" y="19.109" font-size="0.550" font-weight="600" fill="#1d2026" data-layer="TEXT">COVER AND INDEX</text>
+<text x="8.800" y="20.309" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-1</text>
+<text x="11.400" y="20.309" font-size="0.550" fill="#1d2026" data-layer="TEXT">PLANTING PLAN</text>
+<text x="8.800" y="21.509" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-2</text>
+<text x="11.400" y="21.509" font-size="0.550" fill="#1d2026" data-layer="TEXT">SOUTH ELEVATION</text>
+<text x="8.800" y="22.709" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-3</text>
+<text x="11.400" y="22.709" font-size="0.550" fill="#1d2026" data-layer="TEXT">PAVING PLAN</text>
+<text x="8.800" y="23.909" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-4</text>
+<text x="11.400" y="23.909" font-size="0.550" fill="#1d2026" data-layer="TEXT">PLANT SCHEDULE</text>
+<text x="8.800" y="25.109" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-5</text>
+<text x="11.400" y="25.109" font-size="0.550" fill="#1d2026" data-layer="TEXT">ENLARGED PLAN — WEST</text>
+<text x="8.800" y="26.309" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-6</text>
+<text x="11.400" y="26.309" font-size="0.550" fill="#1d2026" data-layer="TEXT">TREE PIT DETAIL</text>
+<text x="8.800" y="27.509" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-7</text>
+<text x="11.400" y="27.509" font-size="0.550" fill="#1d2026" data-layer="TEXT">IRRIGATION PLAN</text>
+<text x="8.800" y="28.709" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-8</text>
+<text x="11.400" y="28.709" font-size="0.550" fill="#1d2026" data-layer="TEXT">LIGHTING PLAN</text>
+<text x="8.800" y="29.909" font-size="0.550" fill="#1d2026" data-layer="TEXT">L-9</text>
+<text x="11.400" y="29.909" font-size="0.550" fill="#1d2026" data-layer="TEXT">SECTIONS</text>
+<text x="58.900" y="28.853" font-size="0.446" fill="#5b616b" data-layer="TEXT">PROJECT</text>
+<text x="65.200" y="28.853" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">GREENFIELD RESIDENCES, local</text>
+<text x="58.900" y="30.924" font-size="0.446" fill="#5b616b" data-layer="TEXT">DRAWING</text>
+<text x="65.200" y="30.924" font-size="0.620" font-weight="600" fill="#1d2026" data-layer="TEXT">COVER AND INDEX</text>
+<text x="58.900" y="32.996" font-size="0.446" fill="#5b616b" data-layer="TEXT">SHEET</text>
+<text x="65.200" y="32.996" font-size="0.620" fill="#1d2026" data-layer="TEXT">L-0   REV A</text>
+<text x="58.900" y="35.067" font-size="0.446" fill="#5b616b" data-layer="TEXT">SCALE</text>
+<text x="65.200" y="35.067" font-size="0.620" fill="#1d2026" data-layer="TEXT">NTS</text>
+<text x="58.900" y="37.138" font-size="0.446" fill="#5b616b" data-layer="TEXT">SITE AREA</text>
+<text x="65.200" y="37.138" font-size="0.620" fill="#1d2026" data-layer="TEXT">1,500 m²</text>
+<text x="58.900" y="39.210" font-size="0.446" fill="#5b616b" data-layer="TEXT">BUILDING COVERAGE</text>
+<text x="65.200" y="39.210" font-size="0.620" fill="#1d2026" data-layer="TEXT">40%</text>
+<text x="58.900" y="41.281" font-size="0.446" fill="#5b616b" data-layer="TEXT">DATE</text>
+<text x="65.200" y="41.281" font-size="0.620" fill="#1d2026" data-layer="TEXT">2026-09-18</text>
+</g></svg>
