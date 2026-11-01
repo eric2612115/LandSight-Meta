@@ -4,6 +4,7 @@ holes filled, that contains the keyword text and covers at most 30% of the sheet
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 
 from shapely.geometry import Point, Polygon
@@ -66,3 +67,33 @@ def exclude(model: Model, items, regions: list[Region] | None = None) -> list[Re
 def region_at(regions: list[Region], x: float, y: float) -> Region | None:
     p = Point(x, y)
     return next((r for r in regions if r.polygon.contains(p)), None)
+
+
+_INLINE_FIELD = re.compile(r"^\s*([^:：]{2,8})\s*[:：]\s*(\S.*)$")
+
+
+def title_block(model: Model, regions: list[Region] | None = None) -> dict[str, str]:
+    """The title block as {field: value}, e.g. {"基地面積": "1,500 m²", "建蔽率": "40%"}. A field is a text in the title
+    region paired with the nearest text to its right on the same row (a two-column table), or one text written
+    "field: value". Empty when the sheet has no title block."""
+    regions = find_regions(model) if regions is None else regions
+    title = next((r for r in regions if r.kind == "title"), None)
+    if title is None:
+        return {}
+    area = title.polygon.buffer(0.05)
+    texts = [t for t in model.texts if area.contains(Point(t.centre))]
+    out: dict[str, str] = {}
+    values = set()
+    for t in sorted(texts, key=lambda t: t.x):
+        if id(t) in values:
+            continue
+        inline = _INLINE_FIELD.match(t.content)
+        if inline:
+            out.setdefault(inline.group(1).strip(), inline.group(2).strip())
+            continue
+        row = [u for u in texts if u is not t and u.x > t.x and abs(u.centre[1] - t.centre[1]) < 0.6 * max(t.height, u.height)]
+        if row:
+            v = min(row, key=lambda u: u.x)
+            out.setdefault(t.content.strip(), v.content.strip())
+            values.add(id(v))
+    return out

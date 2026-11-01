@@ -56,6 +56,25 @@ def _window(model: Model, window):
     return (x0 - pad, y0 - pad, x1 + pad, y1 + pad)
 
 
+def render_window(model: Model, window=None) -> tuple[float, float, float, float]:
+    """The (x0, y0, x1, y1) window in metres that render_png maps onto the full image."""
+    return _window(model, window)
+
+
+def metres_per_pixel(model: Model, png_size: tuple[int, int], window=None) -> tuple[float, float]:
+    """(metres per pixel along x, along y) of a render_png image of `png_size` = (width, height) pixels.
+    The axes fill the figure, so the mapping is linear; x and y differ only by the rounding of the pixel size."""
+    x0, y0, x1, y1 = _window(model, window)
+    return ((x1 - x0) / png_size[0], (y1 - y0) / png_size[1])
+
+
+def pixel_to_metres(model: Model, png_size: tuple[int, int], px: float, py: float, window=None) -> tuple[float, float]:
+    """Drawing coordinates (metres) of a pixel position (origin top-left, y down) in a render_png image."""
+    x0, y0, x1, y1 = _window(model, window)
+    mx, my = metres_per_pixel(model, png_size, window)
+    return (x0 + px * mx, y1 - py * my)
+
+
 def render_png(model: Model, path: str | Path | None = None, filled: bool = False, dpi: int = 150,
                ids: dict[str, tuple[float, float]] | None = None, window=None, highlight=None,
                width_in: float = 14.0) -> bytes:
@@ -122,7 +141,7 @@ def render_png(model: Model, path: str | Path | None = None, filled: bool = Fals
 
 
 def render_svg(model: Model, path: str | Path | None = None, ids: dict[str, tuple[float, float]] | None = None,
-               px_per_m: float = 12.0) -> str:
+               px_per_m: float = 12.0, paper: str = "white") -> str:
     """Write the model as a standalone SVG (metres as user units, y flipped). Text stays text, so CJK renders in
     any browser with a CJK font; hatches become pattern fills. Returns the SVG string."""
     x0, y0, x1, y1 = _window(model, None)
@@ -139,7 +158,7 @@ def render_svg(model: Model, path: str | Path | None = None, ids: dict[str, tupl
            f'height="{H * px_per_m:.0f}" font-family="Heiti TC, PingFang TC, Noto Sans CJK TC, sans-serif">',
            '<defs><pattern id="hatch" width="0.6" height="0.6" patternUnits="userSpaceOnUse" '
            'patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6" stroke="#888" stroke-width="0.05"/>'
-           '</pattern></defs>', f'<rect width="{W:.3f}" height="{H:.3f}" fill="white"/>']
+           '</pattern></defs>', f'<rect width="{W:.3f}" height="{H:.3f}" fill="{paper}"/>']
     for h in model.hatches:
         d = " ".join(ring_d(r.coords) for p in getattr(h.polygon, "geoms", [h.polygon])
                      for r in [p.exterior, *p.interiors])

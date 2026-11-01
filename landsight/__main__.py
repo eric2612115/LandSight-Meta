@@ -1,4 +1,5 @@
-"""Command line: `python -m landsight takeoff <dxf...> [--fixtures]` and `python -m landsight synth <dir>`."""
+"""Command line: `python -m landsight takeoff <dxf...> [--fixtures]`, `python -m landsight synth <dir>` and
+`python -m landsight serve` (the page, http://127.0.0.1:8795)."""
 
 from __future__ import annotations
 
@@ -22,7 +23,17 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("--level", choices=sorted(LEVELS), default="m4")
     s.add_argument("--schedule-mismatch", action="store_true")
     s.add_argument("--coloured", action="store_true", help="also write the filled renders of L-1 and L-3")
+    v = sub.add_parser("serve", help="serve the page (plain product; add ?director=1 for the film's scenes)")
+    v.add_argument("--host", default="127.0.0.1")
+    v.add_argument("--port", type=int, default=8795)
     args = ap.parse_args(argv)
+
+    if args.cmd == "serve":
+        from landsight.app import serve
+
+        print(f"Landsight on http://{args.host}:{args.port}/  ·  director mode: /?director=1  ·  scene: /#scene=eye")
+        serve(args.host, args.port)
+        return 0
 
     if args.cmd == "synth":
         m = LEVELS[args.level]
@@ -41,6 +52,11 @@ def main(argv: list[str] | None = None) -> int:
         spark = RecordingSpark(spark)
     result = run(args.dxf, spark, snap_tol_m=args.snap)
     print(format_items(result.items, result.notes))
+    if result.rules:
+        from landsight.rules import format_rules
+
+        print("\nRegulation check (法規檢核)\n")
+        print(format_rules(result.rules))
     print(f"\n{result.calls} Muse Spark calls, {result.seconds:.1f} s")
     return 0
 

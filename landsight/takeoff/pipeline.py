@@ -10,6 +10,7 @@ from pathlib import Path
 
 from landsight.dxf import load, render_png
 from landsight.geometry import close, exclude, is_canopy
+from landsight.meta.spark import GROUP_PROMPT
 from landsight.takeoff.merge import (Item, SheetGeometry, SparkFindings, attach_labels, candidate_facts,
                                      merge_with_notes, needs_spark)
 
@@ -26,6 +27,18 @@ class Takeoff:
     calls: int = 0
     seconds: float = 0.0
     crops: dict[str, bytes] = field(default_factory=dict)  # "L-1/C-03" -> the PNG Spark saw
+    requests: dict[str, dict] = field(default_factory=dict)  # "L-1/C-03" -> {facts, prompt, seconds} sent to Spark
+    site: object | None = None  # rules.SiteFacts read from the title block
+    rules: list = field(default_factory=list)  # rules.RuleResult, one per rule
+
+    def recheck(self, **site_overrides) -> None:
+        """Run the regulation check again (after a confirmation, or with other site facts)."""
+        from landsight.rules import check_takeoff
+
+        try:
+            self.site, self.rules = check_takeoff(self, **site_overrides)
+        except Exception as e:  # the take-off stands without the rules; the failure is noted
+            self.notes.append(f"rules: check failed: {e}")
 
 
 def _pad(bounds, margin, limit=None):
@@ -52,6 +65,7 @@ def run(paths, spark, snap_tol_m: float = 0.25, max_calls_per_sheet: int = MAX_C
     schedule_rows: list[dict] = []
     schedule = None
     crops: dict[str, bytes] = {}
+    requests: dict[str, dict] = {}
     for path in paths:
         model = load(Path(path))
         key = model.signature()
@@ -88,17 +102,23 @@ def run(paths, spark, snap_tol_m: float = 0.25, max_calls_per_sheet: int = MAX_C
                 continue
             png = candidate_crop(sg, c)
             crops[f"{model.name}/{c.id}"] = png
+            facts = candidate_facts(c, canopy_area)
+            log_before = len(spark.log)
             try:
-                verdicts = spark.group_and_read(png, [{"id": c.id, "facts": candidate_facts(c, canopy_area)}],
-                                                key=f"{key}:{c.signature()}")
+                verdicts = spark.group_and_read(png, [{"id": c.id, "facts": facts}], key=f"{key}:{c.signature()}")
             except Exception as e:
                 findings.errors.append(f"{model.name}/{c.id}: group_and_read failed: {e}")
                 verdicts = []
             calls += 1
+            last = spark.log[-1] if len(spark.log) > log_before else {}
+            requests[f"{model.name}/{c.id}"] = {"id": c.id, "facts": facts, "prompt": GROUP_PROMPT + f"- {c.id}: {facts}",
+                                                "seconds": last.get("seconds"), "fixture": bool(last.get("fixture"))}
             for v in verdicts:
                 if v.get("id") == c.id or len(verdicts) == 1:
                     findings.candidates[f"{model.name}/{c.id}"] = v | {"id": c.id}
     items, notes = merge_with_notes(sheets, findings, schedule_rows)
     notes += findings.errors
-    return Takeoff(items, notes, sheets, findings, schedule, len(spark.log) - calls_before,
-                   round(time.monotonic() - started, 2), crops)
+    result = Takeoff(items, notes, sheets, findings, schedule, len(spark.log) - calls_before,
+                     round(time.monotonic() - started, 2), crops, requests)
+    result.recheck()
+    return result
