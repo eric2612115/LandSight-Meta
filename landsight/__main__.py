@@ -1,5 +1,6 @@
-"""Command line: `python -m landsight takeoff <dxf...> [--fixtures]`, `python -m landsight synth <dir>` and
-`python -m landsight serve` (the page, http://127.0.0.1:8795)."""
+"""Command line: `python -m landsight takeoff <dxf...> [--fixtures]`, `python -m landsight synth <dir>`,
+`python -m landsight review <package_dir> [--fixtures|--live] [--json out.json]` and `python -m landsight serve` (the
+page, http://127.0.0.1:8795)."""
 
 from __future__ import annotations
 
@@ -29,7 +30,18 @@ def main(argv: list[str] | None = None) -> int:
     k = sub.add_parser("package", help="write the sample developer's package (30 files), the price list and the answer key")
     k.add_argument("out")
     k.add_argument("--seed", type=int, default=0)
+    r = sub.add_parser("review", help="review a package folder: triage, sheets, take-off, checks, scoreboard")
+    r.add_argument("package_dir")
+    mode = r.add_mutually_exclusive_group()
+    mode.add_argument("--fixtures", action="store_true", help="replay recorded Muse Spark answers (default, offline)")
+    mode.add_argument("--live", action="store_true", help="call Muse Spark and record every answer as a fixture")
+    r.add_argument("--json", dest="json_out", help="write the Run to this file")
     args = ap.parse_args(argv)
+
+    if args.cmd == "review":
+        from landsight.review.cli import main as review_main
+
+        return review_main(args.package_dir, live=args.live, json_out=args.json_out)
 
     if args.cmd == "package":
         from landsight.synth.package import write_package
