@@ -1,7 +1,8 @@
 node_modules/
+# build output: the clips and their cues (node capture.mjs), the render inputs (node prepare.mjs), the stills
+captures/
 public/
 stills/
-captures/.video/
-captures/.*
-# renders and clips are rebuilt: `npm run render`, `node capture.mjs`
+# renders: only the film itself is kept
 *.mp4
+!landsight-v1.mp4

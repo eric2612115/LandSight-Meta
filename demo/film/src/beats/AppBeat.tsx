@@ -6,14 +6,14 @@ import {CornerTag} from '../ui/Tags';
 
 /** Where a scene leaves room for a caption (1920 × 1080; the tally is bottom-left, panels come in on the right). */
 const POS: Record<string, CaptionPos> = {
-  drop: {left: 44, top: 520, maxWidth: 344},
+  drop: {right: 30, top: 104, compact: true},
   wake: {left: 712, bottom: 56, maxWidth: 760},
   eye: {left: 712, bottom: 56, maxWidth: 540},
   hedge: {left: 712, bottom: 56, maxWidth: 540},
-  colour: {left: 40, top: 230, maxWidth: 520},
+  colour: {left: 40, top: 300, maxWidth: 560},
   gauge: {left: 100, top: 690, maxWidth: 600},
   bill: {left: 40, top: 100, maxWidth: 560},
-  callback: {left: 712, bottom: 56, maxWidth: 760},
+  callback: {right: 30, top: 100, maxWidth: 480},
 };
 
 /** An app beat: the scene's capture, its captions (numbers from the run it was captured on), the corner tag. */
@@ -44,7 +44,7 @@ const Callback: React.FC<{qty: number; drawn: number; t: number}> = ({qty, drawn
   if (t > 4.2) return null;
   const a = Math.min(interpolate(t, [0.2, 0.45], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}), interpolate(t, [3.9, 4.2], [1, 0], {extrapolateLeft: 'clamp'}));
   return (
-    <div style={{position: 'absolute', left: 712, bottom: 56, opacity: a, background: 'rgba(5,5,6,0.94)', border: `1px solid ${C.line}`, borderRadius: 18, padding: '12px 30px 16px'}}>
+    <div style={{position: 'absolute', right: 30, top: 100, opacity: a, background: 'rgba(5,5,6,0.94)', border: `1px solid ${C.line}`, borderRadius: 18, padding: '12px 30px 16px'}}>
       <div style={{fontFamily: FONT.mono, fontSize: 84, fontWeight: 600, color: C.white, lineHeight: 1.1}}>
         {qty} <span style={{color: C.amber}}>≠</span> {drawn}
       </div>

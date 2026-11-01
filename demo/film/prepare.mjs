@@ -158,12 +158,11 @@ function captionsFor(scene, k) {
   const checks = run.checks
   switch (scene) {
     case 'drop': {
-      const files = run.files
-      const inFolder = num(run.package?.file_count) ?? files.length
-      const extra = files.length - inFolder
+      // as the drop scene counts them: the package's own files (an archive's members are its verdict)
+      const files = run.files.filter((f) => !f.parent)
       const bySpark = files.filter((f) => f.decided_by === 'spark').length
       return [
-        { at: 1.2, until: 10.4, kicker: 'triage', text: `${files.length} files · one verdict each`, mono: `${extra > 0 ? `${inFolder} + ${extra} unzipped\n` : ''}Spark ${bySpark} · rule ${files.length - bySpark}` },
+        { at: 1.2, until: 10.4, kicker: spark, text: `decided ${bySpark} of ${files.length} files` },
       ]
     }
     case 'wake': {

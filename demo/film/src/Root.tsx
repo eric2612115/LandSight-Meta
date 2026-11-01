@@ -11,7 +11,7 @@ export const Root: React.FC = () => (
     fps={beats.fps}
     width={beats.width}
     height={beats.height}
-    defaultProps={{narrator: 'brian', repoUrl: 'repo URL · public by Nov 4', showSourceTag: true} satisfies FilmProps}
+    defaultProps={{narrator: 'brian', repoUrl: 'https://github.com/eric2612115/landsight', showSourceTag: true} satisfies FilmProps}
     calculateMetadata={async ({props}) => {
       const data = (await fetch(staticFile('data/film.json')).then((r) => r.json())) as FilmData;
       return {props: {...props, data}};
