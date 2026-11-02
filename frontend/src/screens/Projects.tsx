@@ -3,6 +3,7 @@
  * (runs it, with progress), Open (the run on /review?run=<id>). The firm's price list is shared by every project. */
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
+import { beginCascade } from '../app/cascade'
 import { useNav, useUI } from '../app/state'
 import { useResolvedSource, useRunSel } from '../lib/api'
 import { fmt } from '../lib/format'
@@ -129,14 +130,16 @@ function PackageDetail({ project, pkg, run }: { project: Project; pkg: Package; 
     return () => clearInterval(h)
   }, [t0])
 
+  /** A fresh review: the run opens on /open and every file gets its verdict in the cascade (app/cascade.ts). */
   const start = (live: boolean) => {
     setT0(Date.now())
     setNow(Date.now())
     review.mutate({ packageId: pkg.package_id, live }, {
-      onSuccess: (r) => { setT0(null); openRun(r.run_id); go('review') },
+      onSuccess: (r) => { setT0(null); beginCascade(r.run_id); openRun(r.run_id); go('open') },
       onError: () => setT0(null),
     })
   }
+  /** A stored run from the table opens straight on the review. */
   const open = (r: RunSummary) => {
     openRun(r.id)
     go('review')

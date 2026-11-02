@@ -1,12 +1,14 @@
 /** /open — open a package: the drop zone (a dropped folder is walked and uploaded, D-81; the click path is a folder
  * picker), a folder path on the API's machine, or the sample; every file with its verdict and the reason (B's package
- * tree, in five groups), the run's facts, and Review. */
+ * tree, in five groups), the run's facts, and Review. A package opened fresh lands row by row — the verdict cascade
+ * (app/cascade.ts); a stored run shows its table whole. */
 import { useQueryClient } from '@tanstack/react-query'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { beginCascade, cancelCascade, playCascade, useCascade } from '../app/cascade'
 import { useCounts } from '../app/derive'
 import { upto, useShow } from '../app/show'
-import { useNav, useUI } from '../app/state'
+import { isDirector, useNav, useUI } from '../app/state'
 import { Mark } from '../components/Brand'
 import { normalise, runKey, useResolvedSource, useRunSel } from '../lib/api'
 import { bytes, fmt } from '../lib/format'
@@ -16,6 +18,7 @@ import { useSource } from '../lib/source'
 import type { Run } from '../lib/types'
 import { capMessage, detailOf, entriesOf, formOf, fromInput, isLoneZip, NEEDS_LIVE, runOfUpload, uploadingLine, walkEntries, type Picked, type UploadResponse } from '../lib/upload'
 import { Pulse } from '../shell/Shell'
+import { warmReview } from './Review'
 
 const UPLOAD_OFF = 'This API does not take an uploaded folder (its upload flag is off): type the folder’s path below, or open the sample.'
 
@@ -37,6 +40,13 @@ export function Open({ run }: { run?: Run }) {
   const [path, setPath] = useState('')
   const [over, setOver] = useState(false)
   const picker = useRef<HTMLInputElement>(null)
+
+  // a run opened fresh (the sample, a path, an upload, Review on Projects) plays the cascade once it is on screen;
+  // the director plays its own scene
+  const pending = useCascade((s) => s.pending)
+  useEffect(() => {
+    if (run && pending === run.run_id && !isDirector()) void playCascade(run, { warm: () => warmReview(run) })
+  }, [run, pending])
 
   /** The project an upload goes to: the one selected on the Projects screen, else the first, else a new one. */
   const projectFor = async (): Promise<number> => {
@@ -61,14 +71,16 @@ export function Open({ run }: { run?: Run }) {
       setStage('Reading the package…')
       const body = (await r.json().catch(() => ({}))) as UploadResponse
       const opened = await runOfUpload(body)
+      // the run stays on this screen: its files land in the cascade, then Review
+      beginCascade(opened.run_id)
       useRunSel.getState().open(opened.run_id)
       qc.setQueryData(runKey(src, opened.run_id), opened)
       const pkgId = body.package?.package_id ?? body.package_id
       if (pkgId !== undefined) ui.set({ pkg: pkgId })
       void qc.invalidateQueries({ queryKey: ['projects'] })
       void qc.invalidateQueries({ queryKey: packageRunsKey(src, pkgId) })
-      go('review')
     } catch (e) {
+      cancelCascade()
       setErr(String((e as Error).message ?? e))
     } finally {
       setStage(null)
@@ -93,18 +105,23 @@ export function Open({ run }: { run?: Run }) {
   const open = async (folder?: string) => {
     setErr(null)
     if (src !== 'live') {
-      // the recorded run is the sample package already: show it again, resolving
+      // the recorded run is the sample package already: show it again, resolving, its files landing one by one
       useRunSel.getState().open(undefined)
       await qc.invalidateQueries({ queryKey: runKey(src, undefined) })
+      const again = qc.getQueryData<Run | null>(runKey(src, undefined))
+      if (again) beginCascade(again.run_id)
       return
     }
     setBusy(true)
     try {
       const r = await fetch('/api/package/open', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(folder ? { path: folder } : {}) })
       if (!r.ok) throw new Error(`the server answered ${r.status}${r.status === 422 ? ': give a folder path' : ''}`)
+      const opened = normalise((await r.json()) as Run, 'live')
       useRunSel.getState().open(undefined)
-      qc.setQueryData(runKey(src, undefined), normalise((await r.json()) as Run, 'live'))
+      beginCascade(opened.run_id)
+      qc.setQueryData(runKey(src, undefined), opened)
     } catch (e) {
+      cancelCascade()
       setErr(String((e as Error).message ?? e))
     } finally {
       setBusy(false)
@@ -192,16 +209,21 @@ function Facts({ run }: { run: Run }) {
   )
 }
 
+/** The package table. While the cascade plays (`show.files` counts up) the rows land one by one in the Run's order:
+ * each row slides in with its verdict stamping, a file that is not read lands grey, a file that governs lands lit in
+ * cobalt, and the header counts `read N of M`; otherwise the table is whole. */
 export function Tree({ run }: { run: Run }) {
   const sh = useShow()
   const hi = useUI((s) => s.hi)
   const groups = packageGroups(run)
   const total = groups.reduce((a, g) => a + g.files.length, 0)
+  const playing = sh.files !== null
   const shown = upto(sh.files, total)
+  const counting = playing && shown < total
   const starts = groups.map((_, gi) => groups.slice(0, gi).reduce((a, g) => a + g.files.length, 0))
   return (
     <>
-      <div className="ph">Package <span className="r">{run.package.name} · {run.package.file_count} files{run.files.length > run.package.file_count ? ` + ${run.files.length - run.package.file_count} unpacked` : ''} · {shown < total ? `${shown} of ${total} read` : 'every file has a verdict and a reason'}</span></div>
+      <div className="ph">Package <span className="r">{run.package.name} · {run.package.file_count} files{run.files.length > run.package.file_count ? ` + ${run.files.length - run.package.file_count} unpacked` : ''} · {counting ? <span data-cascade-count>read {shown} of {total}</span> : 'every file has a verdict and a reason'}</span></div>
       <div className="grid h-[28px] flex-none items-center gap-4 border-b border-line-2 px-4 text-ink-3" style={{ gridTemplateColumns: COLS }}>
         <span>File</span><span>Verdict</span><span>Why</span><span>Decided by</span><span className="text-right">Size</span>
       </div>
@@ -209,24 +231,24 @@ export function Tree({ run }: { run: Run }) {
         {groups.map((g, gi) => {
           const start = starts[gi]
           const vis = Math.max(0, Math.min(g.files.length, shown - start))
+          // a group appears with its first row
+          if (playing && vis === 0) return null
+          const junk = g.id === 'unread'
           return (
             <div key={g.id}>
               <div className="g">{g.name} <span className="r">{vis === g.files.length ? g.summary : <><i>{vis}</i>reading…</>}</span></div>
-              {g.files.map((f, j) => {
-                const on = j < vis
+              {g.files.slice(0, vis).map((f) => {
                 const v = verdictOf(run, f)
+                const governs = !!v.strong && /governs/.test(v.text)
                 const lit = hi?.fileId === f.file_id
                 return (
-                  <div key={f.file_id}>
-                    <div className={`grid h-[27px] items-center gap-4 border-l-2 px-4 ${lit ? 'border-blue bg-blue-soft' : 'border-transparent'}`} style={{ gridTemplateColumns: COLS }}>
-                      <span className={`overflow-hidden text-ellipsis whitespace-nowrap ${f.parent ? 'pl-4 text-ink-2' : ''}`}>{f.parent ? '↳ ' : ''}{f.name}</span>
-                      <AnimatePresence initial={false}>
-                        {on ? (
-                          <motion.span key="v" initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className={`whitespace-nowrap ${v.strong ? 'text-blue' : 'text-ink'}`}>{v.text}</motion.span>
-                        ) : <span key="w" className="text-ink-3">…</span>}
-                      </AnimatePresence>
-                      <span className="overflow-hidden text-ellipsis whitespace-nowrap text-ink-2" title={f.why}>{on ? f.why : ''}</span>
-                      <span className="text-ink-3">{on ? BY_NAME[f.decided_by] ?? f.decided_by : ''}</span>
+                  <motion.div key={f.file_id} data-file-row={f.file_id} initial={playing ? { opacity: 0, y: -5 } : false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.16, ease: 'easeOut' }}>
+                    <div className={`grid h-[27px] items-center gap-4 border-l-2 px-4 ${lit ? 'border-blue bg-blue-soft' : 'border-transparent'} ${junk ? 'text-ink-3' : ''}`} style={{ gridTemplateColumns: COLS }}>
+                      <span className={`overflow-hidden text-ellipsis whitespace-nowrap ${f.parent ? 'pl-4' : ''} ${junk ? '' : governs ? 'font-medium text-blue' : f.parent ? 'text-ink-2' : ''}`}>{f.parent ? '↳ ' : ''}{f.name}</span>
+                      <motion.span className={`whitespace-nowrap ${v.strong ? 'text-blue' : junk ? 'text-ink-2' : 'text-ink'}`} style={{ transformOrigin: 'left center' }}
+                        initial={playing ? { opacity: 0, scale: 1.35, x: -4 } : false} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}>{v.text}</motion.span>
+                      <span className={`overflow-hidden text-ellipsis whitespace-nowrap ${junk ? '' : 'text-ink-2'}`} title={f.why}>{f.why}</span>
+                      <span className="text-ink-3">{BY_NAME[f.decided_by] ?? f.decided_by}</span>
                       <span className="mono text-right text-ink-3">{bytes(f.size_bytes)}</span>
                     </div>
                     {lit && hi && (
@@ -234,7 +256,7 @@ export function Tree({ run }: { run: Run }) {
                         From the ask{hi.page ? ` · p. ${hi.page}` : ''}: <mark className="q">“{hi.quote}”</mark>
                       </div>
                     )}
-                  </div>
+                  </motion.div>
                 )
               })}
             </div>

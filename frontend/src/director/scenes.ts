@@ -12,9 +12,9 @@ import { flagsOf, objectsOn, shownMoney, shownText } from '../lib/flags'
 import { fmt, num } from '../lib/format'
 import { bboxOf, padBox, unionBox } from '../lib/geo'
 import { formatMoney, formatTimes, useCurrency, type Currency } from '../lib/money'
-import { packageGroups } from '../lib/pkg'
 import { play } from '../lib/sound'
 import type { Check, Run, Scene, SceneId } from '../lib/types'
+import { revealRows } from '../app/cascade'
 import { tween } from './tween'
 
 export type Ctx = {
@@ -59,7 +59,6 @@ const pick = (run: Run, scene: Scene, ok: (c: Check) => boolean) => run.checks.f
 /* ------------------------------------------------------------------ the scenes */
 
 const drop = async ({ run, sleep, gate }: Ctx) => {
-  const total = packageGroups(run).reduce((a, g) => a + g.files.length, 0)
   prepare('open')
   show({ files: 0, facts: false, pulse: 'drop' })
   frame({ x: 0, y: 48, w: 980, h: 520 }, 0)
@@ -70,14 +69,8 @@ const drop = async ({ run, sleep, gate }: Ctx) => {
   play('whoosh', { volume: 0.5 })
   wide(1600)
   caption('Every file gets a verdict and a reason.')
-  const dead = new Set(packageGroups(run).filter((g) => g.id === 'unread').flatMap((g) => g.files.map((f) => f.file_id)))
-  const order = packageGroups(run).flatMap((g) => g.files)
-  for (let i = 0; i < total; i++) {
-    show({ files: i + 1 })
-    if (dead.has(order[i].file_id)) play('thud', { volume: 0.4 })
-    else play('tick', { rate: order[i].decided_by === 'spark' ? 1.25 : 1, volume: 0.45 })
-    await sleep(95)
-  }
+  // the product's own cascade (app/cascade.ts), on the scene's clock
+  await revealRows(run, sleep)
   play('snap', { volume: 0.6 })
   show({ facts: true })
   await sleep(900)

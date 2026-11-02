@@ -4,8 +4,9 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRe
 import { useFlagActions } from '../app/actions'
 import { inFilter, useFlags } from '../app/derive'
 import { useDecisions, useUI } from '../app/state'
-import type { SheetHandle } from '../components/SheetView'
+import { loadSvg, type SheetHandle } from '../components/SheetView'
 import { filmSheets, type Flag } from '../lib/flags'
+import { isRasterSheet } from '../lib/model'
 import type { Run } from '../lib/types'
 import { FlagList } from '../review/FlagList'
 import { pinsOn } from '../review/model'
@@ -14,6 +15,17 @@ import { SheetPane } from '../review/SheetPane'
 export type ReviewHandle = { sheet: () => SheetHandle | null; select: (id: string | undefined, opts?: { sheet?: string }) => void }
 
 export const defaultSheet = (run: Run) => (filmSheets(run).find((s) => s.counted && s.kind === 'plan') ?? run.sheets[0])?.sheet_id
+
+/** What the review opens with, fetched ahead (during the Open screen's cascade) so the step after it is instant: the
+ * governing sheet's print and the filmstrip's thumbnails. */
+export function warmReview(run: Run) {
+  const sheet = run.sheets.find((s) => s.sheet_id === defaultSheet(run))
+  if (sheet && !isRasterSheet(run, sheet)) void loadSvg(sheet.svg_url)
+  for (const s of filmSheets(run)) {
+    const img = new Image()
+    img.src = s.png_url
+  }
+}
 
 export const Review = forwardRef<ReviewHandle, { run: Run }>(function Review({ run }, ref) {
   const flags = useFlags(run)
