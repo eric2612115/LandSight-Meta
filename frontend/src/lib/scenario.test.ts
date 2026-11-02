@@ -14,12 +14,13 @@ const rate = run.currency!
 const f = { cur: 'usd' as const, rate, money: (t: number | undefined | null) => `$${Math.round((t ?? 0) * rate.usd_per_twd)}`, text: (s: string) => s }
 
 describe('scenarios derived when the Run does not carry them', () => {
-  it('maps the sample’s 21 flags to the four kinds as the backend does', () => {
+  it('maps the sample’s 22 flags to the four kinds as the backend does', () => {
     const alarms = flagsOf(run).filter((x) => x.alarm)
     const by = (s: string) => alarms.filter((x) => x.scenario === s).map((x) => x.id).sort()
-    expect(alarms).toHaveLength(21)
+    expect(alarms).toHaveLength(22)
     expect(by('quote')).toEqual(['E02', 'E02.2', 'E13', 'E17', 'E18', 'E19', 'E20', 'E21', 'E22.2', 'E23'])
-    expect(by('regulation')).toEqual(['E09', 'E12', 'E14', 'E15', 'E30'])
+    // C-53: the Art. 305 water-retention check (D-64), "review", outside the answer key (unscored)
+    expect(by('regulation')).toEqual(['C-53', 'E09', 'E12', 'E14', 'E15', 'E30'])
     expect(by('design')).toEqual(['E01', 'E08', 'E10', 'E11', 'E16', 'E29'])
     expect(by('format')).toEqual([])
   })

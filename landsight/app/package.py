@@ -226,12 +226,14 @@ class PackageState:
 
             conn = self._conn()
             try:
-                rows = service.confirmations(conn, run["run_id"]) if conn.execute(
-                    "SELECT 1 FROM runs WHERE id = ?", (run["run_id"],)).fetchone() else []
+                stored = conn.execute("SELECT 1 FROM runs WHERE id = ?", (run["run_id"],)).fetchone()
+                rows = service.confirmations(conn, run["run_id"]) if stored else []
+                verdicts = service.decisions(conn, run["run_id"]) if stored else {}
             finally:
                 conn.close()
             if rows:
                 run = service.apply_confirmations(run, rows)
+            service.apply_decisions(run, verdicts)  # each check's decision: confirm, dismiss or open
             run["package_id"] = self.package_id
         return deep(run)
 

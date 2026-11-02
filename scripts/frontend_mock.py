@@ -1,6 +1,7 @@
 """Write the real API responses for the sample package to frontend-mock/, so the frontend's "repo" source is the real
 package end to end (the same Run the backend serves, from recorded Muse Spark and SAM 3.1 calls), with every image the
-Run points at stored at its URL path (sheets as SVG and PNG, the coloured renders, the crop Muse Spark saw).
+Run points at stored at its URL path (sheets as SVG and PNG, the coloured renders, the crop Muse Spark saw), and the
+package's runs listing (package_runs.json, GET /api/packages/{id}/runs). Every check carries `decision: "open"`.
 
   uv run python scripts/frontend_mock.py
 """
@@ -8,10 +9,14 @@ Run points at stored at its URL path (sheets as SVG and PNG, the coloured render
 from __future__ import annotations
 
 import json
+import os
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+# a database of its own: the mock holds exactly the run it opens, whatever the repo's landsight.db has seen
+os.environ["LANDSIGHT_DB"] = str(Path(tempfile.mkdtemp(prefix="landsight-mock-")) / "landsight.db")
 
 from fastapi.testclient import TestClient  # noqa: E402
 
@@ -26,6 +31,7 @@ def main() -> int:
     files = {"run.json": c.post("/api/package/open").json(), "rules.json": c.get("/api/rules").json(),
              "director.json": c.get("/api/director").json(), "health.json": c.get("/api/health").json()}
     run = files["run.json"]
+    files["package_runs.json"] = c.get(f"/api/packages/{run['package_id']}/runs").json()  # GET /api/packages/{id}/runs
     flagged = next((i["item_id"] for i in run["items"] if not i["agreed"]), None)
     if flagged:
         files[f"confirm_{flagged}.json"] = c.post(f"/api/items/{flagged}/confirm").json()

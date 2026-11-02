@@ -7,6 +7,8 @@ Tables
   planted, found, flagged, missed, false_alarms, scenarios (json), timing (json), price_list (json: the rows the run
   priced against), run (the Run json)).
 - checks(run_id, check_id, scenario, category, severity, title, why, by, evidence, numbers, body): one row per check.
+- decisions(run_id, check_id, decision, note, decided_at, source): a person's verdict on a flag (confirm, dismiss or
+  open again), one row per check, the latest wins (POST /api/runs/{id}/checks/{check_id}/decision).
 - confirmations(id, run_id, kind, target_id, value, why, source, created_at): a person's confirmations, price edits,
   regulation notes and flags (from the screen or from an answer of POST /api/ask).
 - price_list(code, name, spec, unit, low, high, basis, source, updated_at): the firm's own rates (TWD), seeded from the
@@ -49,6 +51,10 @@ CREATE TABLE IF NOT EXISTS checks (
   run_id TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE, check_id TEXT NOT NULL, scenario TEXT,
   category TEXT, severity TEXT, title TEXT, why TEXT, by TEXT, evidence TEXT, numbers TEXT, body TEXT,
   PRIMARY KEY (run_id, check_id));
+CREATE TABLE IF NOT EXISTS decisions (
+  run_id TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE, check_id TEXT NOT NULL,
+  decision TEXT NOT NULL CHECK (decision IN ('confirm', 'dismiss', 'open')), note TEXT, decided_at TEXT NOT NULL,
+  source TEXT, PRIMARY KEY (run_id, check_id));
 CREATE TABLE IF NOT EXISTS confirmations (
   id INTEGER PRIMARY KEY, run_id TEXT REFERENCES runs(id) ON DELETE CASCADE, kind TEXT NOT NULL,
   target_id TEXT NOT NULL, value TEXT, why TEXT, source TEXT, created_at TEXT NOT NULL);
@@ -70,7 +76,7 @@ CREATE TABLE IF NOT EXISTS meta_calls (
 CREATE INDEX IF NOT EXISTS meta_calls_run ON meta_calls(run_id);
 CREATE INDEX IF NOT EXISTS checks_scenario ON checks(run_id, scenario);
 """
-TABLES = ("projects", "packages", "runs", "checks", "confirmations", "price_list", "species", "rules", "asks",
+TABLES = ("projects", "packages", "runs", "checks", "decisions", "confirmations", "price_list", "species", "rules", "asks",
           "meta_calls")
 
 # The firm's own installed rates (TWD), the sample package's "firm price list.csv" with the firm's codes, plus the rows

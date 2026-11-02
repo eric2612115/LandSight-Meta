@@ -277,10 +277,10 @@ def run_row(conn: sqlite3.Connection, run_id: str):
 
 
 def get_run(conn: sqlite3.Connection, run_id: str) -> dict:
-    """The stored Run with the database's confirmations, notes and flags applied."""
+    """The stored Run with the database's confirmations, notes, flags and decisions applied."""
     row = run_row(conn, run_id)
-    return apply_confirmations(json.loads(row["run"]), confirmations(conn, run_id)) | {
-        "package_id": row["package_id"], "stored": True}
+    run = apply_confirmations(json.loads(row["run"]), confirmations(conn, run_id))
+    return apply_decisions(run, decisions(conn, run_id)) | {"package_id": row["package_id"], "stored": True}
 
 
 def latest_run_id(conn: sqlite3.Connection, package_id: int | None = None) -> str | None:
@@ -290,9 +290,12 @@ def latest_run_id(conn: sqlite3.Connection, package_id: int | None = None) -> st
     return row[0] if row else None
 
 
-def checks(conn: sqlite3.Connection, run_id: str, scenario: str | None = None) -> list[dict]:
+def checks(conn: sqlite3.Connection, run_id: str, scenario: str | None = None, confirmed: bool = False,
+           drop_dismissed: bool = False) -> list[dict]:
     q = "SELECT body FROM checks WHERE run_id = ?" + (" AND scenario = ?" if scenario else "") + " ORDER BY rowid"
-    return [json.loads(r[0]) for r in conn.execute(q, (run_id, scenario) if scenario else (run_id,))]
+    rows = [json.loads(r[0]) for r in conn.execute(q, (run_id, scenario) if scenario else (run_id,))]
+    run = apply_decisions({"checks": rows}, decisions(conn, run_id))
+    return filter_checks(run, confirmed=confirmed, drop_dismissed=drop_dismissed)["checks"]
 
 
 def meta_calls(conn: sqlite3.Connection, run_id: str | None = None, ask_id: int | None = None,
@@ -398,3 +401,78 @@ def seed_samples(conn: sqlite3.Connection) -> dict:
         if folder.is_dir():
             out.append(package_for_folder(conn, folder))
     return {"packages": [{"package_id": p["package_id"], "name": p["name"], "folder": p["folder"]} for p in out]}
+
+
+# --------------------------------------------------------------------------------------------- decisions on checks
+
+DECISIONS = ("confirm", "dismiss", "open")
+NOTE_MAX = 2000
+
+
+def decisions(conn: sqlite3.Connection, run_id: str) -> dict[str, dict]:
+    return {r["check_id"]: {"decision": r["decision"], "note": r["note"], "decided_at": r["decided_at"]}
+            for r in conn.execute("SELECT * FROM decisions WHERE run_id = ?", (run_id,))}
+
+
+def set_decision(conn: sqlite3.Connection, run_id: str, check_id: str, decision: str, note: str | None = None,
+                 source: str = "screen") -> dict:
+    """A person's verdict on one check of a stored run (the latest wins). Raises KeyError for an unknown run or
+    check, ValueError for an unknown decision or a note that is not text."""
+    if decision not in DECISIONS:
+        raise ValueError(f"decision must be one of {', '.join(DECISIONS)}, not {decision!r}")
+    if note is not None and not isinstance(note, str):
+        raise ValueError("note must be a string")
+    if note is not None and len(note) > NOTE_MAX:
+        raise ValueError(f"note is longer than {NOTE_MAX} characters")
+    row = run_row(conn, run_id)
+    if check_id not in {c["check_id"] for c in json.loads(row["run"])["checks"]}:
+        raise KeyError(f"no check {check_id} in run {run_id}")
+    with conn:
+        conn.execute("INSERT INTO decisions(run_id, check_id, decision, note, decided_at, source) VALUES (?,?,?,?,?,?) "
+                     "ON CONFLICT(run_id, check_id) DO UPDATE SET decision = excluded.decision, note = excluded.note, "
+                     "decided_at = excluded.decided_at, source = excluded.source",
+                     (run_id, check_id, decision, note.strip() if isinstance(note, str) and note.strip() else None,
+                      D.now(), source))
+    return decisions(conn, run_id)[check_id]
+
+
+def apply_decisions(run: dict, rows: dict[str, dict]) -> dict:
+    """Every check gets `decision` ("open" unless a person decided), `note` and `decided_at` (in place)."""
+    for c in run.get("checks", []):
+        d = rows.get(c["check_id"]) or {}
+        c["decision"] = d.get("decision", "open")
+        c["note"] = d.get("note")
+        c["decided_at"] = d.get("decided_at")
+    return run
+
+
+def filter_checks(run: dict, confirmed: bool = False, drop_dismissed: bool = False) -> dict:
+    """`confirmed`: only the checks a person confirmed (the Statement); `drop_dismissed`: open and confirmed ones."""
+    if confirmed:
+        run["checks"] = [c for c in run["checks"] if c.get("decision") == "confirm"]
+    elif drop_dismissed:
+        run["checks"] = [c for c in run["checks"] if c.get("decision") != "dismiss"]
+    return run
+
+
+def _counts(sl: dict) -> dict:
+    n = lambda v: len(v) if isinstance(v, list) else (v or 0)  # noqa: E731
+    return {"planted": sl.get("planted", 0), "found": n(sl.get("found")), "flagged": n(sl.get("flagged")),
+            "missed": n(sl.get("missed")), "false_alarms": n(sl.get("false_alarms"))}
+
+
+def package_runs(conn: sqlite3.Connection, package_id: int) -> list[dict]:
+    """Every stored run of a package, newest first, as the Projects screen lists them."""
+    package(conn, package_id)
+    out = []
+    for r in conn.execute("SELECT id, mode, started_at, finished_at, total_s, spark_calls, sam_calls, planted, found, "
+                          "flagged, missed, false_alarms, scenarios FROM runs WHERE package_id = ? "
+                          "ORDER BY finished_at DESC, rowid DESC", (package_id,)):
+        sc = json.loads(r["scenarios"] or "{}")
+        out.append({"run_id": r["id"], "created_at": r["started_at"], "finished_at": r["finished_at"],
+                    "source": "live" if r["mode"] == "live" else "fixtures",
+                    "scoreboard": {"planted": r["planted"] or 0, "found": r["found"] or 0, "flagged": r["flagged"] or 0,
+                                   "missed": r["missed"] or 0, "false_alarms": r["false_alarms"] or 0},
+                    "by_scenario": {k: _counts(sc.get(k) or {}) for k in ("quote", "regulation", "design", "format")},
+                    "seconds": r["total_s"], "calls": {"spark": r["spark_calls"] or 0, "sam": r["sam_calls"] or 0}})
+    return out

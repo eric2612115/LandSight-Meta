@@ -21,7 +21,9 @@ landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
   GET  /api/packages/{id}              one package
   POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N) -> Run; the endpoints above map onto it
   GET  /api/runs/{id}                  a stored Run with its confirmations, notes and flags (?scenario=)
-  GET  /api/runs/{id}/checks           one row per check (?scenario=)
+  GET  /api/runs/{id}/checks           the export listing: open + confirmed checks (?scenario=, ?confirmed=1)
+  POST /api/runs/{id}/checks/{check_id}/decision   {"decision": confirm|dismiss|open, "note"?} -> the check
+  GET  /api/packages/{id}/runs         every stored run of a package, newest first, with its scoreboard
   GET  /api/price-list                 the firm's rates; PUT /api/price-list/{code} {low, high, ...} edits one row
   GET  /api/meta-calls?run=&ask=       every Muse Spark / SAM 3.1 call a run or a question used (&full=0 trims)
   POST /api/ask                        {"question", "run_id"?} -> answer, citations, proposed actions (?live=1)
@@ -109,9 +111,11 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             raise HTTPException(400, str(e)) from e
 
     @app.get("/api/run")
-    def run(scenario: str = ""):
+    def run(scenario: str = "", confirmed: int = 0):
         if scenario and scenario not in SC.SCENARIOS:
             raise HTTPException(400, f"unknown scenario {scenario!r}: one of {', '.join(SC.SCENARIOS)}")
+        if confirmed:
+            return JSONResponse(DBS.filter_checks(scenario_view(need_run().run(), scenario), confirmed=True))
         if current["opening"]:
             st = current["state"]
             prev = None
@@ -240,26 +244,63 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         current["state"] = package
         return JSONResponse(out)
 
-    @app.get("/api/runs/{run_id}")
-    def get_run(run_id: str, scenario: str = ""):
+    def stored_run(run_id: str) -> dict:
+        """A run as the screen sees it: the current one live (renders, confirmations), any other from the database."""
         if package.opened and package.base["run_id"] == run_id:
-            return JSONResponse(scenario_view(package.run(), scenario) | {"stored": True, "current": True})
+            return package.run() | {"stored": True, "current": True}
         c = conn()
         try:
-            return JSONResponse(scenario_view(DBS.get_run(c, run_id), scenario))
+            return DBS.get_run(c, run_id)
         except KeyError as e:
             raise HTTPException(404, str(e).strip("'")) from e
         finally:
             c.close()
 
+    @app.get("/api/runs/{run_id}")
+    def get_run(run_id: str, scenario: str = "", confirmed: int = 0):
+        return JSONResponse(DBS.filter_checks(scenario_view(stored_run(run_id), scenario), confirmed=bool(confirmed)))
+
     @app.get("/api/runs/{run_id}/checks")
-    def get_checks(run_id: str, scenario: str = ""):
+    def get_checks(run_id: str, scenario: str = "", confirmed: int = 0):
+        """The export listing: open and confirmed checks (dismissed ones left out); confirmed=1: confirmed only."""
         if scenario and scenario not in SC.SCENARIOS:
             raise HTTPException(400, f"unknown scenario {scenario!r}: one of {', '.join(SC.SCENARIOS)}")
         c = conn()
         try:
             DBS.run_row(c, run_id)
-            return JSONResponse(DBS.checks(c, run_id, scenario or None))
+            return JSONResponse(DBS.checks(c, run_id, scenario or None, confirmed=bool(confirmed), drop_dismissed=True))
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        finally:
+            c.close()
+
+    @app.post("/api/runs/{run_id}/checks/{check_id}/decision")
+    def decide(run_id: str, check_id: str, body=Body(default=None)):
+        """A person's verdict on one flag: {"decision": "confirm" | "dismiss" | "open", "note"?: string} -> the check."""
+        b = body_dict(body)
+        decision, note = b.get("decision"), b.get("note")
+        if decision not in DBS.DECISIONS:
+            raise HTTPException(422, f'decision must be one of {", ".join(DBS.DECISIONS)}: {{"decision": "confirm", '
+                                     '"note": "..."}')
+        if note is not None and not isinstance(note, str):
+            raise HTTPException(422, "note must be a string")
+        c = conn()
+        try:
+            DBS.set_decision(c, run_id, check_id, decision, note)
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
+        finally:
+            c.close()
+        run = stored_run(run_id)
+        return JSONResponse(next(x for x in run["checks"] if x["check_id"] == check_id))
+
+    @app.get("/api/packages/{package_id}/runs")
+    def get_package_runs(package_id: int):
+        c = conn()
+        try:
+            return JSONResponse(DBS.package_runs(c, package_id))
         except KeyError as e:
             raise HTTPException(404, str(e).strip("'")) from e
         finally:
