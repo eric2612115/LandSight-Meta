@@ -21,6 +21,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from landsight.dxf import load
+from landsight.review.scenarios import ERROR_SCENARIO
 from landsight.synth import bills as B
 from landsight.synth import documents as D
 from landsight.synth import sheets as S
@@ -256,8 +257,8 @@ def errors(key: dict) -> list[dict]:
     ]
     out = []
     for eid, fs, cat, verdict, oids, cs, source, detail in E:
-        row = {"id": eid, "files": fs, "category": cat, "expected_verdict": verdict, "object_ids": oids,
-               "cells": cs, "source": source, "detail": detail, "planted": eid != "E24"}
+        row = {"id": eid, "files": fs, "category": cat, "scenario": ERROR_SCENARIO[eid], "expected_verdict": verdict,
+               "object_ids": oids, "cells": cs, "source": source, "detail": detail, "planted": eid != "E24"}
         out.append(row)
     return out
 

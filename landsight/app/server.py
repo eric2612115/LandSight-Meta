@@ -12,11 +12,26 @@
   GET  /api/crops/{item_id}.png        the exact image Muse Spark was sent for the item
   GET  /api/rules                      the regulation checks
   GET  /api/director                   the film's scenes, as pointers into the run
+  GET  /api/run?scenario=quote         the last Run as one scenario sees it (its checks, its slice of the scoreboard)
+
+landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
+  GET  /api/projects                   projects, their packages and each package's latest run
+  POST /api/projects                   {"name"} -> a project
+  POST /api/projects/{id}/packages     {"path", "name"?} register a package folder
+  GET  /api/packages/{id}              one package
+  POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N) -> Run; the endpoints above map onto it
+  GET  /api/runs/{id}                  a stored Run with its confirmations, notes and flags (?scenario=)
+  GET  /api/runs/{id}/checks           one row per check (?scenario=)
+  GET  /api/price-list                 the firm's rates; PUT /api/price-list/{code} {low, high, ...} edits one row
+  GET  /api/meta-calls?run=&ask=       every Muse Spark / SAM 3.1 call a run or a question used (&full=0 trims)
+  POST /api/ask                        {"question", "run_id"?} -> answer, citations, proposed actions (?live=1)
+  POST /api/ask/actions                {"run_id", "action": {kind, target_id, value, why}} -> applied
 """
 
 from __future__ import annotations
 
 import threading
+from pathlib import Path
 
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,18 +39,23 @@ from fastapi.responses import JSONResponse, Response
 
 from landsight.app.package import PackageState
 from landsight.app.run import VERSION, RunState
+from landsight.review import scenarios as SC
 
 PORT = 8795
 FRONTEND_ORIGINS = ["http://localhost:5195", "http://127.0.0.1:5195"]
 MEDIA = {"svg": "image/svg+xml", "png": "image/png", "filled.png": "image/png"}
 
 
-def create_app(features: dict[str, bool] | None = None) -> FastAPI:
+def create_app(features: dict[str, bool] | None = None, db_path: str | Path | None = None) -> FastAPI:
     """The API. `features` switches the conditional builds on or off (landsight.app.run.FEATURES; default: all on,
-    except those named in LANDSIGHT_FEATURES_OFF)."""
+    except those named in LANDSIGHT_FEATURES_OFF). `db_path`: landsight.db (default LANDSIGHT_DB, else ./landsight.db)."""
+    from landsight.store import connect, default_path
+    from landsight.store import service as DBS
+
+    db = Path(db_path) if db_path else default_path()
     app = FastAPI(title="Landsight", version=VERSION, docs_url=None, redoc_url=None)
-    app.add_middleware(CORSMiddleware, allow_origins=FRONTEND_ORIGINS, allow_methods=["*"], allow_headers=["*"])
-    m4, package = RunState(features), PackageState()
+    app.add_middleware(CORSMiddleware, allow_origins=FRONTEND_ORIGINS, allow_methods=["*", "PUT"], allow_headers=["*"])
+    m4, package = RunState(features), PackageState(db)
     current: dict = {"state": None, "opening": 0}
     lock = threading.Lock()
     app.state.landsight = current
@@ -54,6 +74,9 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
     def health():
         st = current["state"]
         return {"ok": True, "spark": "live" if st is not None and st.live else "fixtures", "version": VERSION}
+
+    def conn():
+        return connect(db)
 
     @app.post("/api/package/open")
     def open_package(body=Body(default=None), live: int = 0, site: str = ""):
@@ -77,8 +100,18 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
         current["state"] = st
         return JSONResponse(out)
 
+    def scenario_view(run: dict, scenario: str) -> dict:
+        if not scenario:
+            return run
+        try:
+            return SC.run_slice(run, scenario)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from e
+
     @app.get("/api/run")
-    def run():
+    def run(scenario: str = ""):
+        if scenario and scenario not in SC.SCENARIOS:
+            raise HTTPException(400, f"unknown scenario {scenario!r}: one of {', '.join(SC.SCENARIOS)}")
         if current["opening"]:
             st = current["state"]
             prev = None
@@ -90,8 +123,8 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
             if prev is None:
                 return JSONResponse({"status": "running", "detail": "a package is being opened; ask again shortly"},
                                     status_code=202)
-            return JSONResponse(prev | {"stale": True, "status": "running"})
-        return JSONResponse(need_run().run())
+            return JSONResponse(scenario_view(prev, scenario) | {"stale": True, "status": "running"})
+        return JSONResponse(scenario_view(need_run().run(), scenario))
 
     @app.post("/api/items/{item_id}/confirm")
     def confirm(item_id: str):
@@ -127,6 +160,210 @@ def create_app(features: dict[str, bool] | None = None) -> FastAPI:
     @app.get("/api/director")
     def director():
         return JSONResponse(need_run().director())
+
+    # ------------------------------------------------------------------------------------------ landsight.db
+    def body_dict(body) -> dict:
+        if body is None:
+            return {}
+        if not isinstance(body, dict):
+            raise HTTPException(422, "the body must be a JSON object")
+        return body
+
+    @app.get("/api/projects")
+    def get_projects():
+        c = conn()
+        try:
+            return JSONResponse(DBS.projects(c))
+        finally:
+            c.close()
+
+    @app.post("/api/projects")
+    def new_project(body=Body(default=None)):
+        name = body_dict(body).get("name")
+        if not isinstance(name, str) or not name.strip():
+            raise HTTPException(422, 'give the project a name: {"name": "..."}')
+        c = conn()
+        try:
+            pid = DBS.ensure_project(c, name.strip())
+            return JSONResponse(next(p for p in DBS.projects(c) if p["project_id"] == pid))
+        finally:
+            c.close()
+
+    @app.post("/api/projects/{project_id}/packages")
+    def add_package(project_id: int, body=Body(default=None)):
+        b = body_dict(body)
+        path = b.get("path")
+        if not isinstance(path, str) or not path.strip():
+            raise HTTPException(422, 'give the package folder: {"path": "<folder>"}')
+        if b.get("name") is not None and not isinstance(b.get("name"), str):
+            raise HTTPException(422, "name must be a string")
+        c = conn()
+        try:
+            return JSONResponse(DBS.register_package(c, project_id, path, b.get("name")))
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        except (ValueError, OSError) as e:
+            raise HTTPException(400, str(e)) from e
+        finally:
+            c.close()
+
+    @app.get("/api/packages/{package_id}")
+    def get_package(package_id: int):
+        c = conn()
+        try:
+            return JSONResponse(DBS.package(c, package_id))
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        finally:
+            c.close()
+
+    @app.post("/api/packages/{package_id}/review")
+    def review_package(package_id: int, live: int = 0, fresh: int = 0):
+        c = conn()
+        try:
+            DBS.package(c, package_id)
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        finally:
+            c.close()
+        if fresh and not live:
+            raise HTTPException(400, "fresh re-asks recorded calls live: add live=1")
+        with lock:
+            current["opening"] += 1
+        try:
+            out = package.open(live=bool(live), package_id=package_id, fresh=-1 if fresh < 0 else fresh)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from e
+        finally:
+            with lock:
+                current["opening"] -= 1
+        current["state"] = package
+        return JSONResponse(out)
+
+    @app.get("/api/runs/{run_id}")
+    def get_run(run_id: str, scenario: str = ""):
+        if package.opened and package.base["run_id"] == run_id:
+            return JSONResponse(scenario_view(package.run(), scenario) | {"stored": True, "current": True})
+        c = conn()
+        try:
+            return JSONResponse(scenario_view(DBS.get_run(c, run_id), scenario))
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        finally:
+            c.close()
+
+    @app.get("/api/runs/{run_id}/checks")
+    def get_checks(run_id: str, scenario: str = ""):
+        if scenario and scenario not in SC.SCENARIOS:
+            raise HTTPException(400, f"unknown scenario {scenario!r}: one of {', '.join(SC.SCENARIOS)}")
+        c = conn()
+        try:
+            DBS.run_row(c, run_id)
+            return JSONResponse(DBS.checks(c, run_id, scenario or None))
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        finally:
+            c.close()
+
+    @app.get("/api/price-list")
+    def get_prices():
+        c = conn()
+        try:
+            return JSONResponse(DBS.price_rows(c))
+        finally:
+            c.close()
+
+    @app.put("/api/price-list/{code}")
+    def put_price(code: str, body=Body(default=None)):
+        b = body_dict(body)
+        if not b:
+            raise HTTPException(422, 'give the fields to change, e.g. {"low": 6200, "high": 7200}')
+        c = conn()
+        try:
+            return JSONResponse(DBS.update_price(c, code, dict(b)))
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
+        finally:
+            c.close()
+
+    @app.get("/api/meta-calls")
+    def get_meta_calls(run: str = "", ask: int | None = None, full: int = 1):
+        c = conn()
+        try:
+            rid = run or (package.base["run_id"] if package.opened else DBS.latest_run_id(c))
+            return JSONResponse(DBS.meta_calls(c, rid if ask is None else (run or None), ask, bool(full)))
+        finally:
+            c.close()
+
+    def ask_run_id(c, b: dict) -> str:
+        rid = b.get("run_id")
+        if rid is not None and not isinstance(rid, str):
+            raise HTTPException(422, "run_id must be a string")
+        rid = rid or (package.base["run_id"] if package.opened else DBS.latest_run_id(c))
+        if not rid:
+            raise HTTPException(404, "no run yet: open or review a package first")
+        try:
+            DBS.run_row(c, rid)
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        return rid
+
+    @app.post("/api/ask")
+    def ask(body=Body(default=None), live: int = 0):
+        import os
+
+        from landsight.ask.service import ask_run
+        from landsight.review.spark import FixtureMissing
+
+        b = body_dict(body)
+        q = b.get("question")
+        if not isinstance(q, str) or not q.strip():
+            raise HTTPException(422, 'ask a question: {"question": "...", "run_id": "..."}')
+        if live and not os.environ.get("MODEL_API_KEY"):
+            raise HTTPException(400, "live mode needs MODEL_API_KEY")
+        c = conn()
+        try:
+            rid = ask_run_id(c, b)
+            return JSONResponse(ask_run(c, rid, q, live=bool(live)))
+        except FixtureMissing as e:
+            raise HTTPException(404, f"no recorded answer for this question on this package ({e}); ask with "
+                                     "live=1 and a key to record one") from e
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
+        finally:
+            c.close()
+
+    @app.post("/api/ask/actions")
+    def ask_action(body=Body(default=None)):
+        from landsight.ask import apply_action
+
+        b = body_dict(body)
+        action = b.get("action") if isinstance(b.get("action"), dict) else {k: b.get(k) for k in
+                                                                            ("kind", "target_id", "value", "why")}
+        c = conn()
+        try:
+            rid = ask_run_id(c, b)
+            out = apply_action(c, rid, action, source=b.get("source") if isinstance(b.get("source"), str) else "ask")
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
+        finally:
+            c.close()
+        if action.get("kind") == "confirm_element" and package.opened and package.base["run_id"] == rid:
+            try:
+                out["item"] = package.confirm(str(action["target_id"]))
+            except KeyError:
+                pass
+        if package.opened and package.base["run_id"] == rid:
+            out["run"] = package.run()
+        else:
+            c = conn()
+            try:
+                out["run"] = DBS.get_run(c, rid)
+            finally:
+                c.close()
+        return JSONResponse(out)
 
     return app
 

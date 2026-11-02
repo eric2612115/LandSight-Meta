@@ -1,7 +1,8 @@
 """The answer-key scoreboard (sample package only): every planted error matched to the checks that report it, by
 category and evidence (files, drawing objects, bill cells); the rest are missed, honestly. A check that raises an
 alarm (flag, fail, review) and matches no planted error is a false alarm. Checks that report agreement (`ok`) are
-never matched and never alarms.
+never matched and never alarms; nor are checks marked `unscored` (a computed index the answer key does not cover,
+such as Art. 305 water retention, D-64): they are listed as "outside the answer key".
 
 Matching rules, per (check, error): the categories must be compatible; the check must share a file (a DXF sheet's
 revisions count as one sheet) or a bill cell with the error; when both name bill cells, one must be shared; when both
@@ -22,6 +23,7 @@ COMPAT = {
     "price": {"price"},
     "ingest": {"ingest", "sheet"},
     "document": {"document"},
+    "floors": {"quantity", "sheet"},  # the tower: one sheet for several floors, floors that look alike
 }
 ALARM = ("flag", "fail", "review")
 
@@ -69,7 +71,7 @@ def score(checks: list[dict], key: dict, files: dict, sheets: dict, objects: dic
 
     assigned: dict[int, str] = {}
     for i, c in enumerate(checks):
-        if c.get("ok"):
+        if c.get("ok") or c.get("unscored"):
             continue
         ev = c.get("evidence") or {}
         paths = set()
@@ -122,6 +124,7 @@ def score(checks: list[dict], key: dict, files: dict, sheets: dict, objects: dic
         else:
             flagged.append(e["id"])
         detail[e["id"]] = mine
-    false_alarms = [i for i, c in enumerate(checks) if c["severity"] in ALARM and not c.get("ok") and i not in assigned]
+    false_alarms = [i for i, c in enumerate(checks) if c["severity"] in ALARM and not c.get("ok")
+                    and not c.get("unscored") and i not in assigned]
     return ({"planted": len(errors), "found": found, "flagged": flagged, "missed": missed,
              "false_alarms": false_alarms, "_detail": detail}, assigned)

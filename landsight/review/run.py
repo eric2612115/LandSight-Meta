@@ -29,12 +29,16 @@ from landsight.bill import money
 from landsight.bill.reader import read as read_bill
 from landsight.checks import area, document, ingest as ingest_checks, protected_tree, quantity, regulation, revision
 from landsight.checks import scale, sheet as sheet_checks
+from landsight.checks import tower as TW
 from landsight.checks.base import Check, cell_ref
 from landsight.ingest import decide_document, decide_image, decide_raster, walk
 from landsight.ingest import pdf as P
 from landsight.review import bill_rows, gauge
+from landsight.review import pending as PEND
 from landsight.review import colour as COL
 from landsight.review import prepass as PP
+from landsight.review import raster as RAS
+from landsight.review import scenarios as SC
 from landsight.review import sheets as S
 from landsight.review.score import score
 from landsight.review.spark import FIXTURES, ReviewSpark, TakeoffSpark
@@ -70,6 +74,10 @@ class Context:
     details: dict = field(default_factory=dict)  # detail sheet_id -> Spark's read_detail answer
     tree_counts: dict = field(default_factory=dict)
     paved_lawn: dict = field(default_factory=dict)  # lawn item_id -> {m2, why}: paving drawn over it on another sheet
+    pending: dict = field(default_factory=dict)  # tree item_id -> what Muse Spark proposed, awaiting a person
+    greening_confirmed: object = None  # the greening result once every pending item is confirmed
+    confirmed_view: bool = False  # checks computed as if every pending item were confirmed
+    extra_plantings: list = field(default_factory=list)
 
     def file(self, fid):
         return next(f for f in self.files if f.file_id == fid)
@@ -182,11 +190,13 @@ def _wait(pending) -> None:
 
 def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = None, workers: int = 6,
            price_list: Path | None = None, answer_key: Path | None = None, spark=None, sam=None,
-           keep: dict | None = None) -> dict:
+           keep: dict | None = None, prices: list[dict] | None = None, price_list_name: str | None = None) -> dict:
     """Review a package folder. mode "fixtures" replays tests/fixtures/review/ (offline); "live" calls Muse Spark and
     SAM 3.1 and records every answer there. `spark` / `sam` inject clients (tests). `keep`, when a dict, receives what
     the API needs after the run to serve renders and crops (landsight.app.package): the context, the sheet drafts, the
-    raster pages, the take-off and the coloured renders."""
+    raster pages, the take-off and the coloured renders. `prices` (rows as landsight.bill.compare.load_price_list
+    returns them) replaces the price list file, e.g. the firm's list in landsight.db; `price_list_name` is how the
+    checks name it."""
     started = time.monotonic()
     root, key_path, price_path = locate(Path(package))
     key_path = Path(answer_key) if answer_key else key_path
@@ -208,6 +218,11 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
                 jobs.append((lambda png=png, k=k: spark.classify_sheet(png, k),
                              lambda a, f=f: decide_raster(f, a) if f.spark is None else None,
                              lambda e, f=f: (decide_raster(f, None, type(e).__name__), notes.append(f"{f.name}: {e}"))))
+            for d in drafts:  # a sheet tied to floors (a tower): which floors, where its planting sits, its soil
+                if d.source == "dxf" and TW.FLOOR_TITLE.search(d.title or ""):
+                    jobs.append((lambda d=d: spark.read_floor_sheet(d.png, d.key + ":floors"),
+                                 lambda a, d=d: setattr(d, "floor_read", a),
+                                 lambda e, d=d: notes.append(f"{d.sheet_id}: read_floor_sheet: {e}")))
             for f in records:
                 if f.text and f.ext == ".pdf":
                     jobs.append((lambda f=f: spark.summarise(f.text, "doc:" + _sha(f.text)),
@@ -224,6 +239,7 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
                                    lambda e, f=f: (decide_image(f, None, type(e).__name__), notes.append(f"{f.name}: {e}")))
                                   for f in images])
             _takeoffs(ctx, spark, tmp / "takeoff", notes)
+            TW.analyse(ctx)  # typical floors × n, soil below the artificial-ground minimum (the tower)
             ctx.bills = [read_bill(f.abs_path, f.path, f.file_id) for f in records if f.verdict == "bill" and f.ext == ".xlsx"]
             drawn = _drawn(ctx)
             align_items = [{"code": c, "name": d["name"], "botanical": d.get("botanical", ""), "kind": d["kind"],
@@ -238,10 +254,11 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
         matches, align_note = align_box.get("result", ({}, "no bills"))
         if align_note and ctx.bills:  # Muse Spark's alignment fell back to the name rule: say so at run level too
             notes.append(f"bill alignment: {align_note}")
-        ctx.prices = BC.load_price_list(price_path)
+        ctx.prices = prices if prices is not None else BC.load_price_list(price_path)
         _greening(ctx, notes)
         sam = sam or COL.ReviewSam(COL.mode_for(mode))
         colour_checks, filled = COL.colour(ctx, spark, sam, notes)
+        raster_items, raster_checks = RAS.measure(ctx, rasters, spark, sam, notes)  # SAM on the raster plan page
 
         checks: list[Check] = []
         checks += ingest_checks.ingest(ctx)
@@ -254,32 +271,47 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
         checks += quantity.schedule(ctx)
         checks += quantity.rows(ctx)
         checks += quantity.boundary(ctx)
-        checks += regulation.fire_lane(ctx)
+        checks += TW.checks(ctx)
+        checks += _both_views(ctx, regulation.fire_lane)
         checks += area.overlaps(ctx)
         checks += area.hatch_labels(ctx)
         checks += colour_checks
+        checks += raster_checks
         checks += protected_tree.protected(ctx)
-        checks += regulation.greening(ctx)
+        checks += _both_views(ctx, regulation.greening)
+        checks += _both_views(ctx, regulation.water_retention)
         checks += bill_rows.annotate(BC.checks(ctx.bills, matches, drawn, ctx.prices, align_note,
-                                               price_path.name if price_path else PRICE_LIST),
+                                               price_list_name or (price_path.name if price_path else PRICE_LIST)),
                                      ctx.bills, matches, drawn, ctx.prices)
         for n, c in enumerate(checks, 1):
             c.check_id = f"C-{n:02d}"
         green = next((c.api() for c in checks if c.category == "regulation" and c.title.startswith("Greening")), None)
-        for c in document.documents(ctx, green):
+        green_c = (dict(green, **green["if_confirmed"]) if green and green.get("if_confirmed") else None)
+        docs = document.documents(ctx, green)
+        if green_c is not None:
+            for a, b in zip(docs, document.documents(ctx, green_c)):
+                if (a.title, a.why) != (b.title, b.why):
+                    a.extra |= {"pending_items": sorted(ctx.pending), "if_confirmed": PEND.variant(b.api())}
+        for c in docs:
             c.check_id = f"C-{len(checks) + 1:02d}"
             checks.append(c)
         check_dicts = [money.add_usd(c.api()) for c in checks]  # USD beside every TWD figure (one dated rate)
         for c in check_dicts:  # the gauge's two states (before / after the tree-pit rule) on the greening check
             if c["category"] == "regulation" and c["title"].startswith("Greening"):
-                c.update(gauge.downgrade_states(ctx.greening))
+                c.update(_keep_in_states(ctx, gauge.downgrade_states(ctx.greening)))
+                if c.get("if_confirmed"):
+                    c["if_confirmed"].update(_keep_in_states(ctx, gauge.downgrade_states(ctx.greening_confirmed)))
 
         errors = {"planted": 0, "found": [], "flagged": [], "missed": [], "false_alarms": []}
+        key = None
         if key_path is not None and key_path.is_file():
             key = json.loads(key_path.read_text())
             errors, assigned = _score(ctx, check_dicts, key)
+        SC.assign(check_dicts, member_files={f.file_id for f in records if f.parent},
+                  page_sheets={d.sheet_id for d in drafts if d.source != "dxf"})
+        scenarios = SC.slices(check_dicts, errors, key["errors"] if key else None)
         sheets_api = [_sheet_api(d, ctx) for d in drafts if d.source in ("dxf", "pdf_vector")]
-        items_api = [{k: v for k, v in it.items() if not k.startswith("_")} for it in ctx.items]
+        items_api = [{k: v for k, v in it.items() if not k.startswith("_")} for it in ctx.items + raster_items]
         run = {
             "run_id": hashlib.sha256(f"{root}{datetime.now(timezone.utc).isoformat()}".encode()).hexdigest()[:12],
             "package": {"name": root.name, "folder": str(root), "file_count": sum(1 for f in records if not f.parent)},
@@ -288,6 +320,7 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
             "items": items_api,
             "checks": check_dicts,
             "errors": errors,
+            "scenarios": scenarios,
             "tally": _tally(ctx.items),
             "timing": {"total_s": round(time.monotonic() - started, 2), "spark_calls": spark.calls,
                        "sam_calls": sam.calls, "spark_s": spark.seconds, "sam_s": sam.seconds,
@@ -305,6 +338,34 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
                         rasters=[{"file_id": f.file_id, "page": pg.index, "png": png, "answer": f.spark,
                                   "path": f.path, "abs_path": f.abs_path, "why": f.why} for f, pg, png, _ in rasters])
     return _scrub(run)
+
+
+def _keep_in_states(ctx: Context, states: dict) -> dict:
+    """The old-tree fix (keep the existing tree) in each gauge state, priced with that state's ΣGi·Ai and α."""
+    keeps = regulation.keep_existing(ctx)
+    for k in ("before_downgrade", "after_downgrade"):
+        st = states.get(k)
+        if st and keeps:
+            st["fixes"] = st["fixes"] + [regulation.keep_fix(x, st["sum_gi_ai"], st["alpha"], st["required"]) for x in keeps]
+    return states
+
+
+def _both_views(ctx: Context, fn) -> list[Check]:
+    """fn(ctx) as the review counts (Muse Spark's proposals waiting) and, when something waits, again as if a person
+    confirmed it; a check whose text changes carries `pending_items` and `if_confirmed` (landsight.review.pending)."""
+    now = fn(ctx)
+    if ctx.greening_confirmed is None:
+        return now
+    saved = ctx.greening
+    ctx.greening, ctx.confirmed_view = ctx.greening_confirmed, True
+    try:
+        then = fn(ctx)
+    finally:
+        ctx.greening, ctx.confirmed_view = saved, False
+    for a, b in zip(now, then):
+        if (a.title, a.why, a.numbers) != (b.title, b.why, b.numbers):
+            a.extra |= {"pending_items": sorted(ctx.pending), "if_confirmed": PEND.variant(b.api())}
+    return now
 
 
 # --------------------------------------------------------------------------------------------- sheets
@@ -740,7 +801,10 @@ def _greening(ctx: Context, notes: list[str]) -> None:
         from landsight.checks.regulation import greening_plantings
 
         ctx.paved_lawn = paved_lawn(ctx)  # paving drawn over lawn on another sheet: not counted as lawn
-        ctx.greening = G.check(site, greening_plantings(ctx), pit=tk.pit)
+        ctx.pending = PEND.pending_trees(ctx.items)  # Muse Spark's proposals wait for a person (D-62)
+        ctx.greening = G.check(site, greening_plantings(ctx, confirmed=False), pit=tk.pit)
+        ctx.greening_confirmed = (G.check(site, greening_plantings(ctx, confirmed=True), pit=tk.pit)
+                                  if ctx.pending else None)
     except Exception as e:  # noqa: BLE001 - the rules module is being edited elsewhere; the review stands without it
         notes.append(f"greening check unavailable: {type(e).__name__}: {e}")
 
@@ -764,6 +828,9 @@ def _sheet_api(d: S.SheetDraft, ctx: Context) -> dict:
         out["page"] = d.page + 1
     if d.units_per_m:
         out["scale_how"] = d.scale_how
+    fi = getattr(ctx, "floor_info", {}).get(d.sheet_id)
+    if fi:
+        out |= {"floors": fi["floors"], "floor_count": fi["n"], "floor_label": fi["label"], "ground": fi["ground"]}
     if d.sheet_id in ctx.details:
         r = ctx.details[d.sheet_id]
         out["detail"] = {k: r.get(k) for k in ("pit_w_m", "pit_l_m", "soil_depth_m", "on_slab", "why")} | {"by": "spark"}
@@ -775,8 +842,9 @@ def _tally(items) -> list[dict]:
     for it in items:
         if it["kind"] not in ("tree", "hedge", "shrub_bed", "lawn") or not it.get("_on_drawing", True):
             continue
-        rows.append({"label": it["label"], "species_code": it["species_code"], "drawn": it["proposed_count"]
-                     if it["proposed_count"] is not None else it["geometry_count"], "spark": it["spark_count"],
+        # 'drawn' is what geometry measured until a person confirms the rest (D-62), as the API's tally shows it
+        rows.append({"label": it["label"], "species_code": it["species_code"], "drawn": it["geometry_count"]
+                     if it["geometry_count"] is not None else it["proposed_count"], "spark": it["spark_count"],
                      "schedule": it["schedule_count"], "unit": it["unit"],
                      "status": "agreed" if it["agreed"] else "flagged", "item_id": it["item_id"]})
     return rows

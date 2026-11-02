@@ -17,6 +17,7 @@ CATEGORIES = {"quantity", "revision", "sheet", "area", "scale", "bill", "price",
 SEVERITIES = {"flag", "fail", "review", "info"}
 CHECK_BY = {"geometry", "spark", "sam", "rule", "bill"}
 TALLY_STATUS = {"agreed", "flagged", "confirmed"}
+SCENARIOS = {"quote", "regulation", "design", "format", "info"}
 
 
 def _num(v) -> bool:
@@ -128,6 +129,7 @@ def validate(run: dict) -> list[str]:
         v.need(c, w, "fixes", lambda x: isinstance(x, list) and all(isinstance(f.get("label"), str) and isinstance(f.get("passes"), bool)
                                                                    and (_num(f.get("result")) or isinstance(f.get("result"), str))
                                                                    for f in x), "list of {label, result, passes}", True)
+        v.need(c, w, "scenario", lambda x: x in SCENARIOS, "quote|regulation|design|format|info", True)
         if c.get("category") == "regulation" and "citation" not in c:
             v.problems.append(f"{w}: a regulation check without a citation")
         check_ids.add(c.get("check_id"))
@@ -144,6 +146,14 @@ def validate(run: dict) -> list[str]:
     v.need(e, "errors", "planted", _num, "number")
     for k in ("found", "flagged", "missed", "false_alarms"):
         v.need(e, "errors", k, lambda x: isinstance(x, list) and all(isinstance(s, str) for s in x), "list of ids")
+    for name, sl in (run.get("scenarios") or {}).items():
+        w = f"scenarios.{name}"
+        if name not in SCENARIOS:
+            v.problems.append(f"{w}: not a scenario")
+            continue
+        v.need(sl, w, "planted", lambda x: isinstance(x, int), "int")
+        for k in ("found", "flagged", "missed", "false_alarms"):
+            v.need(sl, w, k, lambda x: isinstance(x, list) and all(isinstance(s, str) for s in x), "list of ids")
     for i, t in enumerate(run["tally"]):
         w = f"tally[{i}]"
         v.need(t, w, "label", lambda x: isinstance(x, str), "string")

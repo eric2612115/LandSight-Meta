@@ -29,6 +29,11 @@ COLOURED_SHARE = 0.02  # a raster page is a coloured render when this share of i
 RASTER_REASON = "raster PDF page: no vectors, read for its title block only, not measured"
 
 
+def _review(*a, **k):
+    """landsight.review.review, looked up when called (a test slows a reopen down by replacing `review` here)."""
+    return review(*a, **k)
+
+
 def _saturated_share(png: bytes) -> float:
     import numpy as np
     from PIL import Image
@@ -47,30 +52,65 @@ def _png_size(png: bytes) -> tuple[int, int]:
 class PackageState:
     """The last opened package: its Run (from landsight.review), the drafts it was read from, and confirmations."""
 
-    def __init__(self):
+    def __init__(self, db_path: str | Path | None = None):
         self.base: dict | None = None
         self.keep: dict = {}
         self.live = False
         self.confirmed: set[str] = set()
         self._renders: dict[tuple[str, str], bytes] = {}
         self._raster: dict[str, dict] = {}
+        self.db = db_path  # landsight.db: runs, checks and Meta calls are written there; prices come from there
+        self.package_id: int | None = None
+
+    def _conn(self):
+        from landsight.store import connect
+
+        return connect(self.db)
 
     @property
     def opened(self) -> bool:
         return self.base is not None
 
     # ------------------------------------------------------------------------------------------ open
-    def open(self, path: str | None = None, live: bool = False) -> dict:
-        if path:
-            folder = Path(path).expanduser().resolve()
-            if not folder.is_dir():
-                raise ValueError(f"not a folder: {path}")
-        else:
-            folder = SAMPLE if SAMPLE.is_dir() else self._sample_cache()
+    def open(self, path: str | None = None, live: bool = False, package_id: int | None = None,
+             fresh: int = 0) -> dict:
+        """Review a folder (or a registered package) and serve its Run. With a database the run, its checks and every
+        Meta call are written there and the firm's price list is read from there. `fresh` (live only) re-asks that
+        many recorded calls (landsight.review.spark, D-61)."""
         if live and not os.environ.get("MODEL_API_KEY"):
             raise ValueError("live mode needs MODEL_API_KEY")
         keep: dict = {}
-        self.base = review(folder, mode="live" if live else "fixtures", keep=keep)
+        if package_id is not None:
+            if self.db is None:
+                raise ValueError("no database")
+            from landsight.store import service
+
+            conn = self._conn()
+            try:
+                self.base = service.review_package(conn, package_id, live=live, keep=keep, fresh=fresh,
+                                                   review_fn=_review)
+            finally:
+                conn.close()
+        else:
+            if path:
+                folder = Path(path).expanduser().resolve()
+                if not folder.is_dir():
+                    raise ValueError(f"not a folder: {path}")
+            else:
+                folder = SAMPLE if SAMPLE.is_dir() else self._sample_cache()
+            if self.db is not None:
+                from landsight.store import service
+
+                conn = self._conn()
+                try:
+                    package_id = service.package_for_folder(conn, folder)["package_id"]
+                    self.base = service.review_package(conn, package_id, live=live, keep=keep, fresh=fresh,
+                                                       review_fn=_review)
+                finally:
+                    conn.close()
+            else:
+                self.base = review(folder, mode="live" if live else "fixtures", keep=keep)
+        self.package_id = package_id
         self.keep, self.live, self.confirmed, self._renders = keep, live, set(), {}
         self._raster = {}
         for r in keep.get("rasters", []):
@@ -169,6 +209,9 @@ class PackageState:
             self._spark_view(it)
             if it["item_id"] in self.confirmed:
                 it.update(agreed=True, confirmed=True, quote_count=it["proposed_count"])
+        from landsight.review.pending import apply_confirmed
+
+        apply_confirmed(run, self.confirmed)  # the greening, E02 and the rest count T-08 once it is confirmed
         for c in run["checks"]:
             done = [i for i in c.get("item_ids", []) if i in self.confirmed]
             if done and c["category"] == "quantity" and "open outline" in c["title"] and c["severity"] != "info":
@@ -178,6 +221,18 @@ class PackageState:
                 c["confirmed"] = True
         run["tally"] = self._tally(run["items"])
         run["timing"]["total_s"] = self.base["timing"]["total_s"]
+        if self.db is not None:  # notes, flags and confirmations a person (or an answer) left on this run
+            from landsight.store import service
+
+            conn = self._conn()
+            try:
+                rows = service.confirmations(conn, run["run_id"]) if conn.execute(
+                    "SELECT 1 FROM runs WHERE id = ?", (run["run_id"],)).fetchone() else []
+            finally:
+                conn.close()
+            if rows:
+                run = service.apply_confirmations(run, rows)
+            run["package_id"] = self.package_id
         return deep(run)
 
     def _raster_sheets(self, files: list[dict]) -> list[dict]:
@@ -201,6 +256,16 @@ class PackageState:
                  "units": "px"}
             if r["coloured"]:
                 s["filled_png_url"] = f"/api/sheets/{sid}.filled.png"
+            for it in (self.base or {}).get("items", []):  # SAM 3.1's masks on this page, in pixels
+                sam = it.get("sam") or {}
+                if sam.get("raster_sheet_id") != sid:
+                    continue
+                for n, m in enumerate(sam.get("masks") or [], 1):
+                    l, t, rr, b = m["box_px"]
+                    s["objects"].append({"object_id": f"{it['item_id']}-M{n:02d}", "kind": it["kind"],
+                                         "label": f"{it['label']} (SAM 3.1 mask)", "item_id": it["item_id"],
+                                         "centre": [(l + rr) / 2, (t + b) / 2], "area_m2": m["area_m2"],
+                                         "outline": [[l, t], [rr, t], [rr, b], [l, b]], "closed": True, "by": "sam"})
             out.append(s)
             f = next((f for f in files if f["file_id"] == r["file_id"]), None)
             if f is not None:
@@ -245,7 +310,7 @@ class PackageState:
         """The corner tally: 'drawn' is what geometry closed until a person confirms the rest."""
         rows = []
         for it in items:
-            if it["kind"] not in ("tree", "hedge", "shrub_bed", "lawn"):
+            if it["kind"] not in ("tree", "hedge", "shrub_bed", "lawn") or it.get("source") == "sam":
                 continue
             drawn = it["quote_count"] if it.get("confirmed") else it["geometry_count"]
             rows.append({"label": it["label"], "species_code": it["species_code"], "drawn": drawn,
@@ -261,10 +326,29 @@ class PackageState:
             raise KeyError(item_id)
         if not item["agreed"] and item.get("proposed_count") is not None:
             self.confirmed.add(item_id)
+        self._record_confirmation(item_id)
         out = next(i for i in self.run()["items"] if i["item_id"] == item_id)
         if item["agreed"]:  # every source already agreed: nothing to confirm, and the answer says so
             out |= {"confirmed": True, "note": "already agreed"}
         return out
+
+    def _record_confirmation(self, item_id: str, source: str = "screen") -> None:
+        if self.db is None or self.base is None:
+            return
+        from landsight.store import service
+
+        conn = self._conn()
+        try:
+            run_id = self.base["run_id"]
+            if conn.execute("SELECT 1 FROM runs WHERE id = ?", (run_id,)).fetchone():
+                done = conn.execute("SELECT 1 FROM confirmations WHERE run_id = ? AND kind = 'confirm_element' AND "
+                                    "target_id = ?", (run_id, item_id)).fetchone()
+                if not done:
+                    item = next(i for i in self.base["items"] if i["item_id"] == item_id)
+                    service.add_confirmation(conn, run_id, "confirm_element", item_id, item.get("proposed_count"),
+                                             "confirmed on the screen", source)
+        finally:
+            conn.close()
 
     def rules(self) -> list[dict]:
         return [c for c in self.run()["checks"] if c["category"] == "regulation"]
@@ -283,6 +367,11 @@ def _bare(ref: str) -> str:
 def scenes(run: dict) -> list[dict]:
     """The film's scenes (demo/SCRIPT.md v4), each a pointer into this Run: ids that exist in it, nothing typed."""
     items, checks, sheets, files = run["items"], run["checks"], run["sheets"], run["files"]
+    if not sheets:  # a folder with no drawing at all: the drop is the whole film (no sheet to point at)
+        top = [f["file_id"] for f in files if not f.get("parent")]
+        return [{"id": "drop", "title": "The package lands", "focus": top, "file_count": len(top),
+                 "check_ids": [c["check_id"] for c in checks if c["category"] in ("ingest", "sheet")], "item_ids": [],
+                 "duration_s": 19}]
     by_id = {s["sheet_id"]: s for s in sheets}
     cid = lambda pred: [c["check_id"] for c in checks if pred(c)]  # noqa: E731
     on = lambda c, sid: sid in c["evidence"].get("sheet_ids", [])  # noqa: E731

@@ -190,7 +190,8 @@ class SparkClient:
         if r.status_code != 200:
             raise SparkError(f"{call}: HTTP {r.status_code}: {r.text[:300]}")
         data = r.json()
-        self.log.append({"call": call, "seconds": round(seconds, 2), "usage": data.get("usage") or {}})
+        self.log.append({"call": call, "seconds": round(seconds, 2), "usage": data.get("usage") or {},
+                         "id": data.get("id"), "raw": data})  # the raw envelope (never the key)
         return data
 
     def _chat(self, call: str, text: str, images: list[bytes], schema: dict | None) -> dict | str:

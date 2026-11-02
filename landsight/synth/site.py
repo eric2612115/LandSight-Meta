@@ -85,6 +85,7 @@ TEXT_H = 0.6
 # English site (lang="en")
 PROJECT_EN = "Greenfield Residences — landscape over basement slab"
 PROJECT_EN_NAME, PROJECT_EN_WORKS = "Greenfield Residences", "Landscape over basement slab"
+SITE_AREA_TEXT, COVERAGE_TEXT = "1,500 m²", "40%"  # the English title block (landsight.synth.heldout sets its own)
 PAVING_EN = {"透水磚": "PERMEABLE PAVERS", "洗石子": "EXPOSED AGGREGATE", "植草磚": "GRASS PAVERS"}
 PAVING_CODES = {"透水磚": "PV-1", "洗石子": "PV-2", "植草磚": "PV-3"}  # boxed finish codes keyed to the legend
 GENERAL_NOTES = ["GENERAL NOTES",
@@ -402,7 +403,8 @@ def _title_block(sh: _Sheet, x0, y0, number, k: float = 1.0):
         return
     rev = sh.revision or REV_A
     rows = [("PROJECT", PROJECT_EN_NAME), ("WORKS", PROJECT_EN_WORKS), ("TITLE", sh.title), ("DRAWING NO.", number),
-            ("SCALE", sh.scale), ("SITE AREA", "1,500 m²"), ("BUILDING COVERAGE", "40%"), ("GROUND", "ARTIFICIAL GROUND"),
+            ("SCALE", sh.scale), ("SITE AREA", SITE_AREA_TEXT), ("BUILDING COVERAGE", COVERAGE_TEXT),
+            ("GROUND", "ARTIFICIAL GROUND"),
             ("REV", rev.letter), ("DATE", rev.date)]
     history = [r for r in REVISIONS if r.letter <= rev.letter] if rev in REVISIONS else [rev]
     rev_rows = [["REVISIONS"]] + [[r.letter, r.date, r.note] for r in history]
@@ -684,9 +686,10 @@ def _plant_schedule(sh: _Sheet, m: Messiness, x0: float, y_top: float):
             ["SHRUBS"],
             [HEDGE.code, HEDGE.name_en, HEDGE.scientific, str(hedge_count()), "EA", "-", "0.6", "-",
              "@0.3m o.c., DOUBLE ROW"],
-            [SHRUB.code, SHRUB.name_en, SHRUB.scientific, "150", "m²", "-", "0.3", "-", "4 PLANTS/m²"],
+            [SHRUB.code, SHRUB.name_en, SHRUB.scientific, f"{_box_area(SHRUB_BOX):g}", "m²", "-", "0.3", "-",
+             "4 PLANTS/m²"],
             ["GROUNDCOVERS"],
-            [LAWN.code, LAWN.name_en, LAWN.scientific, "200", "m²", "-", "-", "-", "SOD"],
+            [LAWN.code, LAWN.name_en, LAWN.scientific, f"{_box_area(LAWN_BOX):g}", "m²", "-", "-", "-", "SOD"],
             [f"TOTAL TREES: {trees_on_schedule}"],
         ]
         box = _schedule_table_en(sh, x0, y_top, rows, *SCHEDULE_COLS_EN)

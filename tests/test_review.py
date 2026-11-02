@@ -68,7 +68,7 @@ def test_sheet_kinds_and_what_is_counted(run):
 
 
 def test_take_off_quantities_match_the_answer_key(run, pkg):
-    got = {(it["kind"], it["label"]): it["proposed_count"] for it in run["items"]}
+    got = {(it["kind"], it["label"]): it["proposed_count"] for it in run["items"] if it.get("source") != "sam"}
     assert got[("tree", "Camphor")] == pkg.key["counted_trees"]["L-1 Rev B"] == 8
     assert got[("hedge", "Duranta")] == 182
     assert got[("shrub_bed", "Azalea")] == 150 and got[("lawn", "Lawn")] == 200
@@ -101,9 +101,12 @@ def test_fire_lane_states_the_299_variant_as_a_condition(run):
     a0, r, beta = 1500.0, 0.4, 0.66  # the title block's site facts; β for an ordinary site
     assert n["zone_m2"] == 92.0 and n["required_ap0"] == 297.0
     assert n["required_with_lane_as_ap"] == pytest.approx(round(0.5 * (a0 - n["zone_m2"]) * (1 - r) * beta, 1))
-    assert (n["tree_fix_ap0"], n["tree_fix_with_lane_as_ap"], n["with_lane_as_ap"]) == (7, 6, "fail")
+    # 7 Camphor counted until T-08 is confirmed (D-62): +8 / +7; once confirmed, the v1 figures +7 / +6
+    assert (n["tree_fix_ap0"], n["tree_fix_with_lane_as_ap"], n["with_lane_as_ap"]) == (8, 7, "fail")
     assert ("If the architect confirms this strip is fire-truck rescue space under §299, the requirement drops to "
-            "278.8 kgCO2e/yr — still a fail — and the tree fix becomes +6.") in e09["why"]
+            "278.8 kgCO2e/yr — still a fail — and the tree fix becomes +7.") in e09["why"]
+    c = e09["if_confirmed"]["numbers"]
+    assert (c["tree_fix_ap0"], c["tree_fix_with_lane_as_ap"]) == (7, 6) and e09["pending_items"] == ["I-01"]
     assert "impracticable (Art. 299), so" not in e09["why"]
     green = next(c for c in run["checks"] if c["category"] == "regulation" and c["title"].startswith("Greening"))
     assert green["numbers"]["Ap"] == 0.0 and green["numbers"]["required"] == 297.0

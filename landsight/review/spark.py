@@ -130,6 +130,80 @@ ALIGN_SCHEMA = {
 }
 
 
+RASTER_PLAN_PROMPT = (
+    "This image is one page of a landscape drawing package: a coloured plan delivered as a picture, with no CAD file "
+    "behind it. Read what is needed to measure it:\n"
+    "- entries: every filled area type and plant symbol the plan uses, from the legend box and from areas labelled "
+    "directly on the plan (a bed or a lawn labelled in place is an entry too): label, the text exactly as written; "
+    "swatch_colour_word, the fill colour you see, as one or two plain English colour words an image segmentation "
+    "model can be prompted with (for example 'light green', 'grey'), never the material's name; kind, 'area' for a "
+    "filled region, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip such as a hedge; where, "
+    "'legend' or 'plan'; x and y, for an entry labelled on the plan, the centre of its label text normalised to "
+    "0-1000 (x from the left edge, y from the top edge of the image), 0 and 0 for a legend entry.\n"
+    "- legend_box: the legend box's corners, x0 y0 (top left) and x1 y1 (bottom right), each normalised to 0-1000 "
+    "with x from the left edge and y from the top edge of the image; all 0 when there is no legend box.\n"
+    "- scale_bar: the graphic scale bar: x_start and x_end, the x of its zero end and of its far labelled end, y, the "
+    "bar's centre line, all normalised to 0-1000 as above, and distance_m, the distance in metres its far label "
+    "states; all 0 when there is none.\n"
+    "- title_scale: the scale written in the title block (for example '1:200'), empty if none.\n"
+    "- confidence from 0 to 1, and why in one sentence."
+)
+BOX = {"type": "object", "properties": {k: {"type": "number"} for k in ("x0", "y0", "x1", "y1")},
+       "required": ["x0", "y0", "x1", "y1"], "additionalProperties": False}
+RASTER_PLAN_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "entries": {"type": "array", "items": {"type": "object", "properties": {
+            "label": {"type": "string"}, "swatch_colour_word": {"type": "string"},
+            "kind": {"type": "string", "enum": ["area", "symbol", "line"]},
+            "where": {"type": "string", "enum": ["legend", "plan"]}, "x": {"type": "number"}, "y": {"type": "number"}},
+            "required": ["label", "swatch_colour_word", "kind", "where", "x", "y"], "additionalProperties": False}},
+        "legend_box": BOX,
+        "scale_bar": {"type": "object", "properties": {k: {"type": "number"} for k in ("x_start", "x_end", "y",
+                                                                                         "distance_m")},
+                      "required": ["x_start", "x_end", "y", "distance_m"], "additionalProperties": False},
+        "title_scale": {"type": "string"}, "confidence": {"type": "number"}, "why": {"type": "string"},
+    },
+    "required": ["entries", "legend_box", "scale_bar", "title_scale", "confidence", "why"],
+    "additionalProperties": False,
+}
+
+
+FLOOR_PROMPT = (
+    "This image is one sheet of a landscape drawing package for a building with several floors. Read the title block "
+    "and the notes:\n"
+    "- floors: every floor this sheet stands for, each as written without the 'F' ('6', '9', 'R1' for a roof, '1' for "
+    "the ground floor); a title such as '8, 12, 16, 20F' stands for six floors; empty if the sheet is not tied "
+    "to floors.\n"
+    "- typical: true if this one sheet stands for several identical floors.\n"
+    "- floor_label: the floor words exactly as the title block writes them.\n"
+    "- ground: where this sheet's planting sits: 'grade' (natural ground), 'over_basement' (a ground floor over a "
+    "basement slab), 'podium', 'balcony' (balconies or terraces of the typical floors), 'roof', 'mixed' (a detail "
+    "sheet covering several), or 'unknown'.\n"
+    "- soil: every soil depth written on the sheet: planting ('tree', 'shrub', 'lawn', or 'any' when a planter's "
+    "soil is given without naming a plant); ground (as above, for that entry); applies_to, the place or floor it is "
+    "written for, as written; depth_m in metres (1000 mm is 1.0); text, the words as written.\n"
+    "- confidence from 0 to 1, and why in one sentence."
+)
+FLOOR_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "floors": {"type": "array", "items": {"type": "string"}}, "typical": {"type": "boolean"},
+        "floor_label": {"type": "string"},
+        "ground": {"type": "string", "enum": ["grade", "over_basement", "podium", "balcony", "roof", "mixed", "unknown"]},
+        "soil": {"type": "array", "items": {"type": "object", "properties": {
+            "planting": {"type": "string", "enum": ["tree", "shrub", "lawn", "any"]},
+            "ground": {"type": "string", "enum": ["grade", "over_basement", "podium", "balcony", "roof", "mixed",
+                                                  "unknown"]},
+            "applies_to": {"type": "string"}, "depth_m": {"type": "number"}, "text": {"type": "string"}},
+            "required": ["planting", "ground", "applies_to", "depth_m", "text"], "additionalProperties": False}},
+        "confidence": {"type": "number"}, "why": {"type": "string"},
+    },
+    "required": ["floors", "typical", "floor_label", "ground", "soil", "confidence", "why"],
+    "additionalProperties": False,
+}
+
+
 class FixtureMissing(KeyError):
     pass
 
@@ -160,10 +234,16 @@ class ReviewSpark:
     reused inside one run (same call and key) are memoised and not logged twice."""
 
     def __init__(self, mode: str = "fixtures", fixture_dir: Path | str = FIXTURES, resume: bool = True,
-                 timeout: float = 180.0, transport: httpx.BaseTransport | None = None):
+                 timeout: float = 180.0, transport: httpx.BaseTransport | None = None, fresh: int = 0):
         if mode not in ("fixtures", "live"):
             raise ValueError(mode)
         self.mode, self.resume, self.timeout, self.transport = mode, resume, timeout, transport
+        # live only: re-ask this many calls that already have a recording (-1: every one). The new answer is used in
+        # this run and written to <fixture_dir>/fresh/ with its raw envelope and response id; the recording it
+        # re-asked is left as it was, so replays never change.
+        self.fresh_left = fresh if mode == "live" else 0
+        if not resume and mode == "live":
+            self.fresh_left = -1
         self.dir = Path(fixture_dir)
         self.log: list[dict] = []
         self.errors: list[str] = []
@@ -202,18 +282,40 @@ class ReviewSpark:
         return rec
 
     def _record(self, call: str, image_sha: str, key: str, prompt: str, result, seconds: float, usage: dict,
-                extra: dict | None = None) -> None:
-        self.dir.mkdir(parents=True, exist_ok=True)
-        name = f"{call}__{sha256((key or image_sha).encode())[:16]}.json"
-        rec = {"call": call, "image_sha256": image_sha, "content_key": key, "model": MODEL,
-               "recorded_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "seconds": seconds,
-               "usage": usage, "prompt": prompt, **(extra or {}), "result": result}
+                extra: dict | None = None, raw: dict | None = None, fresh_of: dict | None = None) -> dict:
+        """Write one recording: the parsed result, and (from 2026-11-02, D-61) the raw response envelope and its id. A
+        fresh re-ask goes to fresh/ under a timestamped name and never replaces the recording it re-asked."""
+        stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        base = f"{call}__{sha256((key or image_sha).encode())[:16]}"
+        rec = {"call": call, "image_sha256": image_sha, "content_key": key, "model": MODEL, "recorded_at": stamp,
+               "seconds": seconds, "usage": usage, "prompt": prompt, **(extra or {}), "result": result,
+               "response_id": (raw or {}).get("id"), "raw": raw}
+        if fresh_of is not None:
+            name = f"fresh/{base}__{stamp.replace(':', '').replace('-', '')[:15]}.json"
+            n = 2
+            while (self.dir / name).exists():  # two re-asks in one second keep both
+                name = f"fresh/{base}__{stamp.replace(':', '').replace('-', '')[:15]}_{n}.json"
+                n += 1
+            rec |= {"fresh_of": fresh_of.get("fixture"), "same_as_recorded": result == fresh_of.get("result")}
+        else:
+            name = f"{base}.json"
+        (self.dir / name).parent.mkdir(parents=True, exist_ok=True)
         (self.dir / name).write_text(json.dumps(rec, ensure_ascii=False, indent=1))
         rec["fixture"] = name
+        if fresh_of is None:
+            with self._lock:
+                self.by_key[(call, key)] = rec
+                if image_sha:
+                    self.by_image[(call, image_sha)] = rec
+        return rec
+
+    def _take_fresh(self) -> bool:
         with self._lock:
-            self.by_key[(call, key)] = rec
-            if image_sha:
-                self.by_image[(call, image_sha)] = rec
+            if self.fresh_left == 0:
+                return False
+            if self.fresh_left > 0:
+                self.fresh_left -= 1
+            return True
 
     # ------------------------------------------------------------------------------------------ the one path
     def _answer(self, call: str, key: str, images: list[bytes], prompt: str, live, extra: dict | None = None,
@@ -224,24 +326,35 @@ class ReviewSpark:
             if memo_key in self._memo:
                 return self._memo[memo_key]
         rec = self._lookup(call, image_sha, key, image_fallback)
-        if rec is not None and (self.mode == "fixtures" or self.resume):
+        fresh = rec is not None and self.mode == "live" and self._take_fresh()
+        if rec is not None and not fresh and (self.mode == "fixtures" or self.resume):
             entry = {"call": call, "seconds": rec.get("seconds") or 0.0, "usage": rec.get("usage") or {},
-                     "fixture": rec["fixture"], "recorded": True, "key": key}
+                     "fixture": rec["fixture"], "recorded": True, "key": key, "prompt": rec.get("prompt", ""),
+                     "candidates": rec.get("candidates"), "recorded_at": rec.get("recorded_at"),
+                     "model": rec.get("model") or MODEL, "fixture_dir": str(self.dir)}
             result = rec["result"]
         elif self.mode == "fixtures":
             raise FixtureMissing(f"no recording for {call} (key {key[:40]}, image {image_sha[:12]})")
         else:
             started = time.monotonic()
-            result, usage = live()
+            result, usage, raw = live()
             seconds = round(time.monotonic() - started, 2)
-            self._record(call, image_sha, key, prompt, result, seconds, usage, extra)
-            entry = {"call": call, "seconds": seconds, "usage": usage, "fixture": "", "recorded": False, "key": key}
+            new = self._record(call, image_sha, key, prompt, result, seconds, usage, extra, raw,
+                               fresh_of=rec if fresh else None)
+            entry = {"call": call, "seconds": seconds, "usage": usage, "fixture": new["fixture"], "recorded": False,
+                     "key": key, "prompt": prompt, "candidates": (extra or {}).get("candidates"),
+                     "recorded_at": new["recorded_at"], "model": MODEL, "fixture_dir": str(self.dir),
+                     "response_id": new.get("response_id"), "raw": raw}
+            if fresh:
+                entry |= {"fresh_of": rec["fixture"], "same_as_recorded": new.get("same_as_recorded")}
+            result = new["result"]
+        entry["response"] = result
         with self._lock:
             self.log.append(entry)
             self._memo[memo_key] = result
         return result
 
-    def _chat(self, call: str, text: str, images: list[bytes], schema: dict) -> tuple[dict, dict]:
+    def _chat(self, call: str, text: str, images: list[bytes], schema: dict) -> tuple[dict, dict, dict]:
         content = [{"type": "text", "text": text}] + [{"type": "image_url", "image_url": {"url": _png_or_jpeg_url(p)}}
                                                        for p in images]
         body = {"model": MODEL, "reasoning_effort": "low",
@@ -253,7 +366,7 @@ class ReviewSpark:
         if r.status_code != 200:
             raise SparkUnavailable(f"{call}: HTTP {r.status_code}: {r.text[:200]}")
         data = r.json()
-        return json.loads(data["choices"][0]["message"]["content"]), data.get("usage") or {}
+        return json.loads(data["choices"][0]["message"]["content"]), data.get("usage") or {}, data
 
     def _custom(self, call: str, content_key: str, prompt: str, images: list[bytes], schema: dict, extra=None):
         key = f"{content_key}|p={_prompt_tag(prompt, schema)}"
@@ -272,6 +385,15 @@ class ReviewSpark:
     def summarise(self, text: str, key: str) -> dict:
         return self._custom("review_summarise", key, DOCUMENT_PROMPT + text[:12000], [], DOCUMENT_SCHEMA)
 
+    def read_floor_sheet(self, png: bytes, key: str) -> dict:
+        """The floors a sheet stands for (title block), where its planting sits and every soil depth it states."""
+        return self._custom("review_read_floor_sheet", key, FLOOR_PROMPT, [png], FLOOR_SCHEMA)
+
+    def read_raster_plan(self, png: bytes, key: str) -> dict:
+        """A coloured raster plan: its legend and labelled areas (with colour words), the legend box and the scale
+        bar (normalised 0-1000), the title block's scale."""
+        return self._custom("review_read_raster_plan", key, RASTER_PLAN_PROMPT, [png], RASTER_PLAN_SCHEMA)
+
     def align(self, items: list[str], rows: list[str], key: str) -> dict:
         prompt = ALIGN_PROMPT.replace("{items}", "\n".join(items)).replace("{rows}", "\n".join(rows))
         return self._custom("review_align", key, prompt, [], ALIGN_SCHEMA)
@@ -289,8 +411,8 @@ class ReviewSpark:
             client = self._meta()
             before = len(client.log)
             result = fn(client)
-            usage = client.log[-1].get("usage", {}) if len(client.log) > before else {}
-            return result, usage
+            last = client.log[-1] if len(client.log) > before else {}
+            return result, last.get("usage", {}), last.get("raw")
 
         return self._answer(call, key, [png], f"landsight.meta.spark.{call}", live, extra)
 

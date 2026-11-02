@@ -61,6 +61,15 @@ def schedule(ctx) -> list[Check]:
             continue
         drawn = it.get("proposed_count")
         sched = it["schedule_count"]
+        from landsight.checks.tower import schedule_scope
+
+        scope = schedule_scope(ctx, it)  # a schedule on one floor's sheet speaks for that floor (the tower)
+        scoped = ""
+        if scope is not None:
+            on, sheets = scope
+            scoped = (f" (on {', '.join(ctx.sheet(x).number for x in sheets)}, the sheet that carries the schedule; "
+                      f"{_num(drawn)} on all floors)")
+            drawn = on
         same = drawn is not None and abs(float(drawn) - float(sched)) <= 0.01 * max(float(drawn), 1)
         unit = " m²" if it["unit"] == "m2" else ""
         sch_sheets = ctx.schedule_sheets()
@@ -69,20 +78,39 @@ def schedule(ctx) -> list[Check]:
               "file_ids": ctx.files_of(set(it["sheet_ids"]) | set(sch_sheets))}
         src = it.get("_schedule_by", "spark")
         if same:
-            out.append(Check("quantity", f"Schedule and drawing agree: {it['label']} {_num(drawn)}{unit}", "info",
+            out.append(Check("quantity", f"Schedule and drawing agree: {it['label']} {_num(drawn)}{unit}{scoped}", "info",
                              ["geometry", "spark" if src == "spark" else "rule"],
                              "The plant schedule and the measured drawing give the same number.", ev,
                              numbers={"schedule": sched, "drawn": drawn}, extra={"item_ids": [it["item_id"]], "ok": True}))
             continue
         governs = (f" General note on {note[0]}: \"{note[1]}\" — the drawing governs." if note else
                    " Nothing on the sheets says which governs; the drawing is taken.")
-        out.append(Check(
-            "quantity", f"Schedule says {_num(sched)} {it['label']}, drawing shows {_num(drawn)}{unit}", "flag",
-            ["geometry", "spark" if src == "spark" else "rule"],
-            f"The plant schedule ({'read by Muse Spark' if src == 'spark' else 'read from the DXF text'}) and the measured "
-            f"drawing disagree.{governs} Raise it with the developer.", ev,
+        by = ["geometry", "spark" if src == "spark" else "rule"]
+        read = 'read by Muse Spark' if src == 'spark' else 'read from the DXF text'
+        pend = (getattr(ctx, "pending", None) or {}).get(it["item_id"])
+        confirmed = Check(
+            "quantity", f"Schedule says {_num(sched)} {it['label']}, drawing shows {_num(drawn)}{unit}"
+            + (f" ({', '.join(pend['object_ids'])} confirmed)" if pend else ""), "flag", by,
+            f"The plant schedule ({read}) and the measured drawing disagree.{governs} Raise it with the developer.", ev,
             numbers={"schedule": sched, "drawn": drawn, "difference": round(float(sched) - float(drawn or 0), 2)},
-            extra={"item_ids": [it["item_id"]], "governing_note": note[1] if note else None}))
+            extra={"item_ids": [it["item_id"]], "governing_note": note[1] if note else None})
+        if not pend:
+            out.append(confirmed)
+            continue
+        oids = ", ".join(pend["object_ids"])
+        c = Check(
+            "quantity", f"Schedule says {_num(sched)} {it['label']}: drawn {_num(pend['counted'])}, Muse Spark "
+            f"{_num(it.get('spark_count'))} ({oids} to confirm)", "flag", by,
+            f"The plant schedule ({read}) says {_num(sched)}; geometry closed {_num(pend['counted'])} outlines and Muse "
+            f"Spark reads {oids} as one more ({_num(it.get('spark_count'))}), which counts once a person confirms it. "
+            f"Either way the schedule disagrees with the drawing.{governs} Raise it with the developer.", ev,
+            numbers={"schedule": sched, "drawn": pend["counted"], "spark": it.get("spark_count"),
+                     "difference": round(float(sched) - float(pend["counted"]), 2)},
+            extra={"item_ids": [it["item_id"]], "governing_note": note[1] if note else None,
+                   "pending_items": [it["item_id"]]})
+        c.extra["if_confirmed"] = {"title": confirmed.title, "why": confirmed.why, "severity": confirmed.severity,
+                                   "numbers": confirmed.api().get("numbers", {})}
+        out.append(c)
     return out
 
 

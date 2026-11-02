@@ -99,6 +99,19 @@ CITES = {
               "Technical Specification for Building-Site Greening Design, formulas (1)–(6)",
               "TCO2 = (Σ Gi × Ai) × α; TCO2c = 0.5 × A′ × β; α = 0.8 + 0.5 × ra, and ra = 0 with fewer than two tree "
               "species."),
+    "BTR-305": (["national", "water_retention", "cite"],
+                "Building Technical Regulations, Design and Construction Part, Art. 305",
+                "The site must keep the original ground's ability to hold and infiltrate rain: its water-retention index "
+                "must exceed 0.5 × the legal open-space ratio (1 − building coverage)."),
+    "STD-WR": (["national", "water_retention_spec", "cite"],
+               "Technical Specification for Building-Site Water Retention Design, point 5.1 and table 1",
+               "λ = Q′ / Q0, Q0 = A0 × f × t (t = 86,400 s). Green space on natural ground: Q1 = A1·f·t. Unit permeable "
+               "pavers: Q2 = 0.5·A2·f·t + 0.05·h·A2 (h = graded base ≤ 0.25 m; 0 on a concrete base). Garden soil on "
+               "artificial ground (roof, balcony, ground over a basement): Q3 = 0.05·V3, soil counted to 0.6 m deep."),
+    "STD-OLD": (["national", "tree_ai_rules", "old_tree_definition", "cite"],
+                "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+                "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts "
+                "twice its actual canopy projection area; transplanted, it counts as a new tree."),
     "TC-TREE-3": (["local", "protected_trees", "cite", 0],
                   "local City Tree Protection Self-Government Ordinance, Art. 3",
                   "A tree outside forestry land is protected if its diameter at 1.3 m is at least 0.8 m, its girth at "

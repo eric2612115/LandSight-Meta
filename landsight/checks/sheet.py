@@ -101,13 +101,28 @@ def index(ctx) -> list[Check]:
             f" The DXF text lists {', '.join(listed_text)}.")
         if missing:
             titles = _titles(d, missing)
+            # a file named for the sheet that could not be read is not a missing sheet: it is an unreadable one
+            unread = {n: f for n in missing for f in ctx.files
+                      if re.match(rf"^{re.escape(n)}(?![0-9A-Za-z])", f.name or "")
+                      and f.verdict in ("unreadable", "unsupported", "backup_ignored")}
+            absent = [n for n in missing if n not in unread]
+            name = lambda n: f"{n} {titles.get(n, '')}".strip()  # noqa: E731
+            parts = []
+            if absent:
+                parts.append(f"{', '.join(name(n) for n in absent)}: on the drawing index, not in the package")
+            if unread:
+                parts.append(f"{', '.join(name(n) for n in unread)}: on the drawing index, in the package but unreadable "
+                             f"({', '.join(unread[n].name for n in unread)})")
+            why = (f"The index on {d.number} lists {len(listed)} sheets ({', '.join(listed)}); "
+                   + (f"no DXF or PDF page in the package carries {', '.join(absent)}. " if absent else "")
+                   + "".join(f"{unread[n].name} is named for {n} but could not be read: {unread[n].why}. " for n in unread)
+                   + f"{agree.strip()} " + ("Ask for the missing sheet" + ("s" if len(absent) > 1 else "") if absent else "")
+                   + (" and " if absent and unread else "") + ("ask for a readable copy" if unread else "") + ".")
             out.append(Check(
-                "sheet", f"{', '.join(f'{n} {titles.get(n, '')}'.strip() for n in missing)}: on the drawing index, not in "
-                         "the package", "flag", by,
-                f"The index on {d.number} lists {len(listed)} sheets ({', '.join(listed)}); no DXF or PDF page in the "
-                f"package carries {', '.join(missing)}.{agree} Ask for the missing sheet{'s' if len(missing) > 1 else ''}.",
-                {"sheet_ids": [d.sheet_id], "file_ids": [d.file_id]},
-                numbers={"listed": len(listed), "missing": len(missing)}, extra={"missing": missing, "listed": listed}))
+                "sheet", "; ".join(parts), "flag", by, re.sub(r"\s{2,}", " ", why),
+                {"sheet_ids": [d.sheet_id], "file_ids": [d.file_id] + [unread[n].file_id for n in unread]},
+                numbers={"listed": len(listed), "missing": len(absent), "unreadable": len(unread)},
+                extra={"missing": absent, "unreadable": sorted(unread), "listed": listed}))
         else:
             out.append(Check("sheet", f"Drawing index on {d.number}: all {len(listed)} sheets are in the package", "info",
                              by, f"Listed: {', '.join(listed)}.{agree}", {"sheet_ids": [d.sheet_id], "file_ids": [d.file_id]},

@@ -1,6 +1,8 @@
 """Command line: `python -m landsight takeoff <dxf...> [--fixtures]`, `python -m landsight synth <dir>`,
-`python -m landsight review <package_dir> [--fixtures|--live] [--json out.json]` and `python -m landsight serve` (the
-API of docs/API.md on http://127.0.0.1:8795; the screen is frontend/, http://localhost:5195)."""
+`python -m landsight package <dir> [--tower]`, `python -m landsight review <package_dir> [--fixtures|--live]
+[--scenario quote|regulation|design|format] [--json out.json]`, `python -m landsight db init|reset|stats`,
+`python -m landsight ask "<question>" [--run id] [--live]` and `python -m landsight serve` (the API of docs/API.md on
+http://127.0.0.1:8795; the screen is frontend/, http://localhost:5195)."""
 
 from __future__ import annotations
 
@@ -30,20 +32,92 @@ def main(argv: list[str] | None = None) -> int:
     k = sub.add_parser("package", help="write the sample developer's package (30 files), the price list and the answer key")
     k.add_argument("out")
     k.add_argument("--seed", type=int, default=0)
+    k.add_argument("--tower", action="store_true", help="write the tower package (docs/PACKAGE.md v2: six floor sheets, "
+                                                         "the bill, answer key T01-T08) instead")
+    k.add_argument("--layout", choices=["a", "b"], default="a",
+                   help="b: the held-out package (another site layout, a seeded subset of the planted errors)")
     r = sub.add_parser("review", help="review a package folder: triage, sheets, take-off, checks, scoreboard")
     r.add_argument("package_dir", help="the package folder (or the folder `landsight package` wrote it into)")
     mode = r.add_mutually_exclusive_group()
     mode.add_argument("--fixtures", action="store_true", help="replay recorded Muse Spark answers (default, offline)")
     mode.add_argument("--live", action="store_true", help="call Muse Spark and record every answer as a fixture")
     r.add_argument("--json", dest="json_out", help="write the Run to this file")
+    r.add_argument("--scenario", choices=["quote", "regulation", "design", "format", "info"],
+                   help="print only this scenario's checks and its slice of the scoreboard")
+    r.add_argument("--db", help="the database the run is written to (default: LANDSIGHT_DB or ./landsight.db)")
+    r.add_argument("--no-db", action="store_true", help="do not write the run to a database (price list from the CSV)")
+    r.add_argument("--fixture-dir", help="read and write recordings here instead of tests/fixtures/review")
+    r.add_argument("--fresh", default="0", metavar="N|all",
+                   help="with --live: re-ask N recorded Muse Spark calls (all: every Spark and SAM call); the answers "
+                        "and their response ids go to fresh/ beside the recordings, which stay as they are")
+    d = sub.add_parser("db", help="landsight.db: init (create and seed), reset (drop and seed), stats (row counts), "
+                                  "calls (the Meta call table of a run: count, median seconds, tokens, cost)")
+    d.add_argument("action", choices=["init", "reset", "stats", "calls"])
+    d.add_argument("--db", help="the database file (default: LANDSIGHT_DB or ./landsight.db)")
+    d.add_argument("--run", help="calls: the run id (default: the latest run)")
+    a = sub.add_parser("ask", help="ask a reviewed package a question (Muse Spark answers from the package's own text)")
+    a.add_argument("question")
+    a.add_argument("--run", help="the run id (default: the latest run in the database)")
+    a.add_argument("--live", action="store_true", help="call Muse Spark and record the answer")
+    a.add_argument("--db", help="the database file (default: LANDSIGHT_DB or ./landsight.db)")
     args = ap.parse_args(argv)
 
     if args.cmd == "review":
         from landsight.review.cli import main as review_main
+        from landsight.store import default_path
 
-        return review_main(args.package_dir, live=args.live, json_out=args.json_out)
+        db = None if args.no_db else (args.db or str(default_path()))
+        try:
+            fresh = -1 if str(args.fresh).lower() == "all" else max(0, int(args.fresh))
+        except ValueError:
+            print(f"landsight review: --fresh takes a number or 'all', not {args.fresh!r}", file=sys.stderr)
+            return 2
+        return review_main(args.package_dir, live=args.live, json_out=args.json_out, scenario=args.scenario, db=db,
+                           fixture_dir=args.fixture_dir, fresh=fresh)
+
+    if args.cmd == "db":
+        from landsight.store import connect, default_path, init, reset, stats
+
+        path = args.db or default_path()
+        conn = connect(path, create=args.action != "reset")
+        if args.action == "calls":
+            from landsight.store import costs, service
+
+            rid = args.run or service.latest_run_id(conn)
+            rows = [r for r in service.meta_calls(conn, rid) if r["ask_id"] is None]
+            print(f"run {rid}: {len(rows)} Meta calls, {sum(1 for r in rows if r['live'])} live\n")
+            print(costs.markdown(rows))
+            return 0
+        out = {"init": init, "reset": reset, "stats": stats}[args.action](conn)
+        if args.action == "init":
+            from landsight.store.service import seed_samples
+
+            out = seed_samples(conn) | {"tables": stats(conn)}
+        print(json.dumps({"db": str(path), **out}, ensure_ascii=False, indent=1))
+        return 0
+
+    if args.cmd == "ask":
+        from landsight.ask.cli import main as ask_main
+
+        return ask_main(args.question, run_id=args.run, live=args.live, db=args.db)
 
     if args.cmd == "package":
+        if args.layout == "b":
+            from landsight.synth.heldout import write_heldout
+
+            pk = write_heldout(args.out, seed=args.seed)
+            print(json.dumps({"package": str(pk.root), "files": len(pk.files), "answer_key": str(pk.answer_key_path),
+                              "price_list": str(pk.price_list_path), "planted": pk.key["package"]["planted"]},
+                             ensure_ascii=False, indent=1))
+            return 0
+        if args.tower:
+            from landsight.synth.tower import write_tower
+
+            pk = write_tower(args.out, seed=args.seed)
+            print(json.dumps({"package": str(pk.root), "files": len(pk.files), "answer_key": str(pk.answer_key_path),
+                              "price_list": str(pk.price_list_path), "errors": len(pk.key["errors"])},
+                             ensure_ascii=False, indent=1))
+            return 0
         from landsight.synth.package import write_package
 
         pk = write_package(args.out, seed=args.seed)

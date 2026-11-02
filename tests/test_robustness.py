@@ -151,7 +151,8 @@ def test_greening_leaves_the_paved_lawn_out(api):
     assert "Lawn counted as 180 m², not 200: 20 m² lies under Grass pavers on L-3" in green["why"]
     e10 = next(ch for ch in run["checks"] if ch["check_id"] == "E10")
     assert e10["numbers"]["greening_lawn_m2"] == 180.0 and "leaves the overlap out of the lawn" in e10["why"]
-    assert green["numbers"]["sum_gi_ai"] == pytest.approx(262.4)  # 128 + 75 + 0.3 × 180 + 5.4
+    assert green["numbers"]["sum_gi_ai"] == pytest.approx(246.4)  # 7 × 16 + 75 + 0.3 × 180 + 5.4 (T-08 unconfirmed)
+    assert green["if_confirmed"]["numbers"]["sum_gi_ai"] == pytest.approx(262.4)  # 128 + 75 + 0.3 × 180 + 5.4
 
 
 def test_the_docs_quote_the_cli(api):

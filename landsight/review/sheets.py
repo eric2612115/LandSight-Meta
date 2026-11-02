@@ -55,6 +55,7 @@ class SheetDraft:
     counted: bool = False
     not_counted_reason: str = ""
     title_by: str = "geometry"
+    floor_read: dict | None = None  # Muse Spark's read of the floors a sheet stands for and its soil depths (tower)
     bounds: tuple = (0.0, 0.0, 1.0, 1.0)
 
 

@@ -47,9 +47,11 @@ def checks_by_id(run):
 def test_open_serves_the_package(api):
     run = api["run"]
     assert run["package"]["name"] == "Greenfield Residences — Landscape Package" and run["package"]["file_count"] == 30
-    assert [i["item_id"] for i in run["items"]] == [f"I-0{n}" for n in range(1, 9)]
-    assert [i["label"] for i in run["items"]] == ["Camphor", "Duranta", "Azalea", "Lawn", "Permeable pavers",
-                                                  "Exposed aggregate", "Grass pavers", "Planter edge"]
+    dxf = [i for i in run["items"] if i.get("source") != "sam"]
+    assert [i["item_id"] for i in dxf] == [f"I-0{n}" for n in range(1, 9)]
+    assert [i["label"] for i in dxf] == ["Camphor", "Duranta", "Azalea", "Lawn", "Permeable pavers",
+                                         "Exposed aggregate", "Grass pavers", "Planter edge"]
+    assert [i["item_id"] for i in run["items"] if i.get("source") == "sam"] == ["S-01", "S-02", "S-03", "S-04"]
     tree = run["items"][0]
     assert (tree["geometry_count"], tree["spark_count"], tree["schedule_count"], tree["agreed"]) == (7, 8, 12, False)
     assert tree["spark"]["crop_url"] == "/api/crops/I-01.png" and tree["spark"]["object_id"] == "T-08"
@@ -58,7 +60,7 @@ def test_open_serves_the_package(api):
     assert (e["planted"], len(e["found"]), len(e["flagged"]), len(e["missed"]), len(e["false_alarms"])) == (30, 28, 2, 0, 0)
     assert run["tally"][0] | {} == {"label": "Camphor", "species_code": "CC", "drawn": 7, "spark": 8, "schedule": 12,
                                     "unit": "plant", "status": "flagged", "item_id": "I-01", "by": "spark"}
-    assert run["timing"]["sam_calls"] == 8 and run["timing"]["recorded"] is True
+    assert run["timing"]["sam_calls"] == 12 and run["timing"]["recorded"] is True  # 8 on the DXF renders, 4 on F-17
     filled = sorted(s["sheet_id"] for s in run["sheets"] if s.get("filled_png_url"))
     assert filled == ["F-17-p1", "L-1-revB", "L-3"]  # L-1, L-3 and the Presentation Plan page
 
@@ -127,15 +129,22 @@ def test_rules_and_both_gauge_states(api):
     assert all(r["category"] == "regulation" and r["citation"]["url"].startswith("https://") for r in rules)
     g = next(r for r in rules if r["title"].startswith("Greening"))
     n = g["numbers"]
+    # 7 Camphor until a person confirms T-08 (D-62); the lawn without the 20 m² under grass pavers (E10)
     assert (n["required"], n["provided"], n["A0"], n["Ap"], n["r"], n["A_prime"], n["beta"], n["alpha"]) == \
-        (297.0, 209.9, 1500.0, 0.0, 0.4, 900.0, 0.66, 0.8)  # the lawn without the 20 m² under grass pavers (E10)
+        (297.0, 197.1, 1500.0, 0.0, 0.4, 900.0, 0.66, 0.8)
     before, after = g["before_downgrade"], g["after_downgrade"]
-    assert before["provided"] == 261.1 and after["provided"] == 209.9
+    assert before["provided"] == 241.9 and after["provided"] == 197.1
     fa = {f["id"]: f for f in before["fixes"]}
     fb = {f["id"]: f for f in after["fixes"]}
-    assert fa["a"]["extra_trees"] == 2 and fb["a"]["extra_trees"] == 7
-    assert fb["b"]["extra_trees"] == 0 and fb["b"]["object_ids"] == ["T-05"] and fb["b"]["result"] == pytest.approx(341.12)
+    assert fa["a"]["extra_trees"] == 3 and fb["a"]["extra_trees"] == 8
+    assert fb["b"]["extra_trees"] == 0 and fb["b"]["object_ids"] == ["T-05"] and fb["b"]["result"] == pytest.approx(320.32)
+    assert fb["d"]["object_ids"] == ["EX-01"] and fb["d"]["result"] == pytest.approx(264.96)  # keep the old tree
     assert after["pit"]["sheet_id"] == "L-6" and after["pit"]["area_m2"] == 2.25 and after["downgraded"][0]["to_gi"] == 1.0
+    conf = g["if_confirmed"]  # once T-08 is confirmed: the v1 figures
+    assert (conf["numbers"]["provided"], conf["before_downgrade"]["provided"], conf["after_downgrade"]["provided"]) == \
+        (209.9, 261.1, 209.9)
+    cb = {f["id"]: f for f in conf["after_downgrade"]["fixes"]}
+    assert cb["a"]["extra_trees"] == 7 and cb["b"]["result"] == pytest.approx(341.12)
 
 
 def test_director_points_at_real_ids(api):

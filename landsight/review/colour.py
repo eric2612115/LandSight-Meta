@@ -44,8 +44,11 @@ def _slug(s: str) -> str:
 class ReviewSam:
     """Record / replay SAM 3.1 for the review; `log` holds one entry per answer used."""
 
-    def __init__(self, mode: str = "fixtures", fixture_dir: Path | str = SAM_FIXTURES):
+    def __init__(self, mode: str = "fixtures", fixture_dir: Path | str = SAM_FIXTURES, resume: bool = True,
+                 fresh: int = 0):
         self.mode, self.dir = mode, Path(fixture_dir)
+        # live only: re-ask this many recorded prompts (-1: all); answers go to fresh/, the recordings stay as they are
+        self.fresh_left = (-1 if not resume else fresh) if mode == "live" else 0
         self.log: list[dict] = []
         self.recs: dict[tuple[str, str], dict] = {}
         if self.dir.is_dir():
@@ -61,27 +64,43 @@ class ReviewSam:
     def call(self, png: bytes, prompt: str, image: str, **extra) -> dict:
         sha = hashlib.sha256(png).hexdigest()
         rec = self.recs.get((sha, prompt))
+        fresh = (rec is not None and self.mode == "live" and not rec.get("_fresh") and self.fresh_left != 0)
+        if fresh and self.fresh_left > 0:
+            self.fresh_left -= 1
         if rec is None and self.mode != "live":
             raise SamMissing(f"no SAM recording for {prompt!r} on {image} ({sha[:12]})")
-        if rec is None:
+        if rec is None or fresh:
             from landsight.meta import sam as samlib
 
             try:
-                text, seconds, error = *samlib.call(png, prompt), None
+                text, seconds, env = samlib.call_envelope(png, prompt)
+                error = None
             except Exception as e:  # recorded, never retried
-                text, seconds, error = "", 0.0, str(e)[:300]
+                text, seconds, error, env = "", 0.0, str(e)[:300], {}
             size = Image.open(io.BytesIO(png)).size
-            rec = {"image": image, "prompt": prompt, "model": SAM_MODEL,
-                   "recorded_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "seconds": round(seconds, 2),
-                   "image_sha256": sha, "image_px": list(size), "error": error, "raw_output_chars": len(text),
-                   "raw_output": text, **extra}
-            self.dir.mkdir(parents=True, exist_ok=True)
+            stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            new = {"image": image, "prompt": prompt, "model": SAM_MODEL, "recorded_at": stamp,
+                   "seconds": round(seconds, 2), "image_sha256": sha, "image_px": list(size), "error": error,
+                   "raw_output_chars": len(text), "raw_output": text, "response_id": env.get("id"), "envelope": env,
+                   **extra}
             name = f"{_slug(image)}__{_slug(prompt)}__{sha[:8]}.json"
-            (self.dir / name).write_text(json.dumps(rec, ensure_ascii=False, indent=1))
-            rec["fixture"], rec["_live"] = name, True
-            self.recs[(sha, prompt)] = rec
+            if fresh:
+                base = f"fresh/{name[:-5]}__{stamp.replace(':', '').replace('-', '')[:15]}"
+                name, n = f"{base}.json", 2
+                while (self.dir / name).exists():
+                    name, n = f"{base}_{n}.json", n + 1
+                new |= {"fresh_of": rec["fixture"], "same_as_recorded": text == rec.get("raw_output")}
+            (self.dir / name).parent.mkdir(parents=True, exist_ok=True)
+            (self.dir / name).write_text(json.dumps(new, ensure_ascii=False, indent=1))
+            new["fixture"], new["_live"], new["_fresh"] = name, True, True
+            self.recs[(sha, prompt)] = rec = new
+        live = rec.pop("_live", False)
         self.log.append({"call": f'"{prompt}" on {image}', "model": SAM_MODEL, "seconds": rec.get("seconds") or 0.0,
-                         "recorded": not rec.pop("_live", False), "prompt_source": rec.get("prompt_source", "")})
+                         "recorded": not live, "prompt_source": rec.get("prompt_source", ""), "prompt": prompt,
+                         "fixture": str(self.dir / rec["fixture"]) if rec.get("fixture") else "",
+                         "recorded_at": rec.get("recorded_at"), "error": rec.get("error"),
+                         "response": rec.get("raw_output", ""), "image": image, "kind": "sam",
+                         "response_id": rec.get("response_id"), "fresh_of": rec.get("fresh_of") if live else None})
         return rec
 
     @property

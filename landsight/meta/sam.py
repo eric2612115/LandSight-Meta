@@ -95,6 +95,14 @@ def decode(text: str) -> tuple[list[Mask], list[str]]:
 def call(png: bytes, phrase: str, api_key: str | None = None, timeout: float = 120.0,
          transport: httpx.BaseTransport | None = None) -> tuple[str, float]:
     """One SAM 3.1 request for one noun phrase; returns (output text, seconds). The key is never logged."""
+    text, seconds, _ = call_envelope(png, phrase, api_key, timeout, transport)
+    return text, seconds
+
+
+def call_envelope(png: bytes, phrase: str, api_key: str | None = None, timeout: float = 120.0,
+                  transport: httpx.BaseTransport | None = None) -> tuple[str, float, dict]:
+    """call(), plus the response envelope (id, model, usage, status; the output text itself is returned once, not
+    twice)."""
     key = api_key or os.environ.get("MODEL_API_KEY", "")
     body = {
         "model": MODEL,
@@ -110,7 +118,13 @@ def call(png: bytes, phrase: str, api_key: str | None = None, timeout: float = 1
     seconds = time.monotonic() - started
     if r.status_code != 200:
         raise RuntimeError(f"sam-3.1: HTTP {r.status_code}: {r.text[:300]}")
-    return output_text(r.json()), seconds
+    data = r.json()
+    text = output_text(data)
+    env = {k: v for k, v in data.items() if k != "output"}
+    env["output"] = [{"type": it.get("type"), "id": it.get("id"), "status": it.get("status"),
+                      "content_chars": sum(len(c.get("text", "")) for c in it.get("content", []) if isinstance(c, dict))}
+                     for it in data.get("output", []) if isinstance(it, dict)]
+    return text, seconds, env
 
 
 def sam(png: bytes, phrase: str, api_key: str | None = None, timeout: float = 60.0) -> tuple[list[dict], float]:
