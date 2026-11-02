@@ -232,8 +232,8 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
   );
 };
 
-/** A burned caption: Inter, centred in the bottom third, in and out on a short fade. */
-const Burn: React.FC<{text: string; at: number; until: number; t: number}> = ({text, at, until, t}) => {
+/** A burned caption: Inter, centred in the bottom third, in and out on a short fade (shared with scene 2). */
+export const Burn: React.FC<{text: string; at: number; until: number; t: number}> = ({text, at, until, t}) => {
   if (t < at || t > until) return null;
   const a = Math.min(interpolate(t, [at, at + 0.3], [0, 1], {extrapolateRight: 'clamp'}), interpolate(t, [until - 0.25, until], [1, 0], {extrapolateLeft: 'clamp'}));
   return (
