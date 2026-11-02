@@ -123,6 +123,8 @@ const VALUE = [
   String.raw`\b[HW]\d+(?:\.\d+)?(?:-\d+(?:\.\d+)?)?\b`,
   String.raw`\b[A-Z][A-Z0-9]+(?: [A-Z][A-Z0-9.]*)+\b`,
   String.raw`(?<![A-Za-z0-9_])(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?(?:e-?\d+)?`,
+  // a file name with spaces or brackets in it ("Landscape BOQ rev3 (paving update).xlsx"), up to its extension
+  String.raw`\w[^;:\n]*?\.(?:dxf|pdf|xlsx|xls|zip|bak|pptx|png)\b`,
   String.raw`.+?`,
 ].join('|')
 

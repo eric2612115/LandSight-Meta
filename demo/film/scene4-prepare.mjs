@@ -3,7 +3,7 @@
  *
  * - public/tower/<sheet>.png: the six tower sheets, rendered by the repo's own renderer (landsight.dxf.render_png,
  *   the same call the API answers /api/sheets/<id>.png with) from samples/tower's DXF files, via `uv run python`.
- * - public/data/scene4.json: the tower's recorded Run (landsight.db, run 9539ce2f1c3f: runs.run and the scoreboard
+ * - public/data/scene4.json: the tower's recorded Run (landsight.db, run 97e35639fb8d: runs.run and the scoreboard
  *   columns) reduced to what the scene draws: the six sheets with their titles and floors, which are counted and the
  *   Run's words for the two that are not; the three checks pinned (T01, T02, T08) with their lines quoted verbatim
  *   from the check's title or why (asserted here, so nothing on screen is invented); the typical sheet's floors
@@ -73,9 +73,9 @@ const sizes = dxfs.map((d) => pngSize(d.png));
 if (sizes.some(([w, h]) => w !== sizes[0][0] || h !== sizes[0][1])) throw new Error(`the sheet renders differ in size: ${JSON.stringify(sizes)}`);
 
 // ---------- the sheets: what the Run says of each ----------
-/** A floor as the Run names it (title blocks say 4F, R1F), and its storey for the stack (R1 sits above 21F). */
+/** A floor as the Run names it (title blocks say 5F, RF), and its storey for the stack (R sits above 20F). */
 const floorLabel = (f) => `${f}F`;
-const storey = (f) => (f === 'R1' ? 22 : Number(f));
+const storey = (f) => (f === 'R' ? 21 : Number(f));
 /** The Run's sheet verdict for a sheet it does not count: the words after the colon of its "— not counted" check. */
 function notCounted(sheetId) {
   const c = run.checks.find((x) => x.category === 'sheet' && /— not counted$/.test(x.title) && x.evidence?.sheet_ids?.length === 1 && x.evidence.sheet_ids[0] === sheetId);
@@ -113,8 +113,8 @@ if (!/typical/i.test(typical[0].title)) throw new Error(`${typical[0].sheet_id}'
 
 // ---------- the pins: three checks, every line a verbatim fragment of the check's title or why ----------
 const PIN_LINES = {
-  T01: {head: 'One drawing, 6 floors built', line: 'Chinese ixora 20 m² per floor × 6 = 120 m²'},
-  T02: {head: '0.3 m soil, below the 0.4 m minimum', line: '32 m² of planting is left out of the greening sum'},
+  T01: {head: 'One drawing, 4 floors built', line: 'Chinese ixora 36 m² per floor × 4 = 144 m²'},
+  T02: {head: '0.3 m soil, below the 0.4 m minimum', line: '35 m² of planting is left out of the greening sum'},
   T08: {head: 'Only the title block tells them apart', line: 'Check they are different floors before pricing both'},
 };
 const pins = SCENE4.pins.checks.map((id, k) => {

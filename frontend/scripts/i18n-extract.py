@@ -35,7 +35,7 @@ OUT = ROOT / 'frontend' / 'src' / 'i18n' / 'zh-TW.data.source.json'
 DICT = ROOT / 'frontend' / 'src' / 'i18n' / 'zh-TW.data.json'
 ASK_FIXTURES = ROOT / 'tests' / 'fixtures' / 'ask'
 
-SAMPLE_RUN_ID = '20763cf6c96d'  # package 1, greenfield, the recorded sample
+SAMPLE_RUN_ID = '0a45e5bfc345'  # package 1, greenfield, the recorded sample
 LIVE_PACKAGE_FOLDERS = ('samples/tower', 'samples/heldout')  # their latest run, from /api/projects
 
 FILE_EXT = r'(?:dxf|pdf|xlsx|xls|zip|bak|pptx|png)'
@@ -105,8 +105,8 @@ def bind_tokens(file_names: list[str], revisions: list[str]) -> list[tuple[str, 
     for name, rx, g in TOKENS:
         if name == 'file_name':
             rx = _alternation(file_names)
-        elif name == 'revision':
-            rx = _alternation(revisions)
+        elif name == 'revision':  # a bare number ('3') is left to the number token
+            rx = _alternation([r for r in revisions if not r.isdigit()])
         if rx is not None:
             out.append((name, rx, g))
     return out
@@ -153,7 +153,8 @@ PLACEHOLDER = re.compile(r'\{(\d+)\}')
 
 # What one placeholder may hold when a template is matched back against an English string: the exact tokens first
 # (so "{4} {5} M" splits "PLANTING SOIL 1.0" as drawing text + number), any text last.
-_VALUE = '(?:' + '|'.join(rx.pattern for name, rx, g in TOKENS if rx is not None and g == 0 and name not in ('legend_pair',)) + r'|.+?)'
+# … then a file name with spaces or brackets in it ("Landscape BOQ rev3 (paving update).xlsx"), up to its extension
+_VALUE = '(?:' + '|'.join(rx.pattern for name, rx, g in TOKENS if rx is not None and g == 0 and name not in ('legend_pair',)) + r'|\w[^;:\n]*?\.' + FILE_EXT + r'\b|.+?)'
 
 
 def regex_of(template: str) -> re.Pattern[str]:

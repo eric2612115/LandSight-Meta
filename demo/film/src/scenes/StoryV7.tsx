@@ -11,7 +11,7 @@ import type {LiveClips} from './v7-ui';
 /**
  * Film v7, Part 1 (0:00–1:30, 1920 × 1080 at 60 fps; demo/SCRIPT-V7.md): the problem, as a film. One 3D building
  * that falls apart into paper (Tower3D), the four problems a reviewer meets — sheets that disagree (the typical plate
- * × 6 and the tower bill's row), a tree that is not a tree (hook 1 v3), a bill that drifts (the paper desk), the
+ * × 4 and the tower bill's row), a tree that is not a tree (hook 1 v3), a bill that drifts (the paper desk), the
  * building code (the gauge and the pit) — what a developer told us (the real L-1, T-10 clouded), the promise, the two
  * Meta models, and the hand-off to the recorded product. Every number is read from the runs by story-v7-prepare.mjs
  * into public/data/story-v7.json; the type and glass cards follow the Rules; the live slots take Eric's clips.
@@ -106,7 +106,7 @@ const BillPaper: React.FC<{g: StoryV7Data['greenfield']; t: number; hi: 'camphor
   void t;
   return (
     <div style={{position: 'absolute', left: x, top: y, width: 800, opacity: a, background: '#fbfaf6', boxShadow: '0 24px 70px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.2)', padding: '26px 30px', fontFamily: FONT.mono, color: INK}}>
-      <div style={{fontFamily: FONT.sans, fontSize: 18, color: C.mute, letterSpacing: 1.2, textTransform: 'uppercase'}}>BOQ – Landscape – rev3 (paving update).xlsx · governs</div>
+      <div style={{fontFamily: FONT.sans, fontSize: 18, color: C.mute, letterSpacing: 1.2, textTransform: 'uppercase'}}>Landscape BOQ rev3 (paving update).xlsx · governs</div>
       <div style={{display: 'grid', gridTemplateColumns: '40px 1fr 56px 60px 90px', gap: '0 12px', marginTop: 14, fontSize: 17, color: C.mute}}>
         <span>#</span>
         <span>Item</span>

@@ -141,7 +141,7 @@ def test_triage_without_the_model(pkg, tmp_path):
     recs = {r.path: r for r in walk(pkg.root, tmp_path)}
     assert recs["Drawings/CAD/L-1 Planting Plan.bak"].verdict == "backup_ignored"
     assert "byte-identical to L-1 Planting Plan.dxf" in recs["Drawings/CAD/L-1 Planting Plan.bak"].why
-    assert recs["Quotes/Irrigation/irrigation quote (old format).xls"].why == "Excel 97–2003, save as .xlsx"
+    assert recs["Quotes/irrigation quote (old format).xls"].why == "Excel 97–2003, save as .xlsx"
     assert recs["Drawings/PDF/L-1 Planting Plan (scan).pdf"].verdict == "drawing_raster"
     full = recs["Drawings/PDF/Landscape Drawings (Full Set).pdf"]
     assert full.verdict == "drawing_vector" and [p.kind for p in full.pages] == ["vector"] * 9
@@ -153,7 +153,7 @@ def test_bill_reader(pkg):
 
     b = read(pkg.root / "Bills/Landscape BOQ rev2.xlsx")
     t = b.main
-    assert (b.revision, b.date) == ("rev2", "2026-02-19")
+    assert (b.revision, b.date) == ("2", "2026-02-19")
     assert t.merged_header and t.column_names["qty"] == "Quantity / Qty" and t.header_cells == "A3:G4"
     assert [h.name for h in b.hidden] == ["old"]
     camphor = t.rows[0]

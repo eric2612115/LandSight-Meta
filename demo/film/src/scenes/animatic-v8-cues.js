@@ -35,7 +35,7 @@ export const V8 = {
   voice: [
     {n: 1, at: 0.3, pictureUntil: 6, text: 'This is how a landscape package gets checked today. Thirty files, two weeks, one person boxing errors by hand.'},
     {n: 2, at: 8.0, pictureUntil: 10, text: 'Because a building arrives as a stack of drawings —'},
-    {n: 3, at: 11.7, pictureUntil: 18, text: 'and the errors hide between them. One sheet stands for six floors; the bill priced one.'},
+    {n: 3, at: 11.7, pictureUntil: 18, text: 'and the errors hide between them. One sheet stands for four floors; the bill priced one.'},
     {n: 4, at: 18.3, pictureUntil: 24, text: 'Down on the ground, the drawing shows a row of trees. Look closer at the eighth.'},
     {n: 5, at: 24.3, pictureUntil: 30.7, text: "To a person, it's a tree. To a computer, it's twelve loose lines — no tree at all."},
     {n: 6, at: 30.7, pictureUntil: 34, text: 'Muse Spark reads it as one tree — and still asks you before it counts.'},

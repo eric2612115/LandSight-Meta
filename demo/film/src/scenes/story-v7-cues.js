@@ -17,7 +17,7 @@ export const V7 = {
     grid: {settle: 6.0, hold: 8.0},
     push: {start: 8.0, end: 10.0}, // onto L-103 (the L1 fallback under the live slot)
     restack: {start: 10.0, end: 12.4},
-    plates: {start: 12.6, step: 0.32}, // L-103 lights, then 9, 12, 15, 18, 21F
+    plates: {start: 12.6, step: 0.32}, // L-103 lights, then 12F, 16F, 20F
     bill: {rowIn: 15.0, circle: 16.0, dark: 16.9},
     card: {in: 19.0, out: 22.0},
     fade: {out: 22.0},
@@ -81,7 +81,7 @@ export const V7 = {
   /** The voice, one ElevenLabs file per line (Eric's clone), at the script's start times. */
   voice: [
     {n: 1, at: 3.2, text: 'Every building is approved on paper.'},
-    {n: 2, at: 10.5, text: 'One sheet stands for six floors.'},
+    {n: 2, at: 10.5, text: 'One sheet stands for four floors.'},
     {n: 3, at: 15.5, text: 'The bill priced one.'},
     {n: 4, at: 23.0, text: 'This is the tree a person reads.'},
     {n: 5, at: 26.5, text: 'But this — is the tree a computer sees.'},

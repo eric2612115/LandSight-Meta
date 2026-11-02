@@ -204,7 +204,7 @@ export function Inspector({ run, flag, flags, acts, onSelect }: { run: Run; flag
   return (
     <div className="insp" style={{ height: 300, gridTemplateColumns: '1.45fr .95fr 1.1fr 250px' }}>
       <motion.div className="blk" {...col(1)}>
-        <div className="l"><span className="overflow-hidden text-ellipsis"><span className={`hop ${hop >= 1 ? '' : 'dim'}`}>1</span>The bill · {bill?.name.replace(/\.xlsx$/, '').replace(/^BOQ - Landscape - /, 'BOQ ') ?? 'BOQ'}</span><b>{row !== undefined ? `row ${row}${n.bill_cell ? `, cell ${String(n.bill_cell).replace(/^B/, cell === 'price' ? 'F' : cell === 'unit' ? 'D' : cell === 'amount' ? 'G' : 'E')}` : ''}` : c.evidence.cells?.[0]?.split('!')[0] ?? ''}</b></div>
+        <div className="l"><span className="overflow-hidden text-ellipsis"><span className={`hop ${hop >= 1 ? '' : 'dim'}`}>1</span>The bill · {bill?.name.replace(/\.xlsx$/, '').replace(/^Landscape BOQ /, 'BOQ ') ?? 'BOQ'}</span><b>{row !== undefined ? `row ${row}${n.bill_cell ? `, cell ${String(n.bill_cell).replace(/^B/, cell === 'price' ? 'F' : cell === 'unit' ? 'D' : cell === 'amount' ? 'G' : 'E')}` : ''}` : c.evidence.cells?.[0]?.split('!')[0] ?? ''}</b></div>
         {c.category === 'bill' && num(n.hidden_total) !== undefined ? (
           <div className="math mt-2">
             <span>Visible sheet ‘BOQ’</span><span /><b>{m.money(num(n.visible_total))}</b>

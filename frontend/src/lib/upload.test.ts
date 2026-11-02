@@ -24,15 +24,15 @@ describe('the walk of a dropped folder', () => {
       fileEntry('.DS_Store'),
       dirEntry('Greenfield Residences — Landscape Package', [
         dirEntry('Drawings', [fileEntry('L-1 Planting Plan (Rev B).dxf'), fileEntry('._L-1 Planting Plan (Rev B).dxf'), fileEntry('L-0.pdf')]),
-        dirEntry('Billss', [fileEntry('BOQ - Landscape - r3.xlsx'), fileEntry('Thumbs.db')]),
+        dirEntry('Bills', [fileEntry('Landscape BOQ rev3.xlsx'), fileEntry('Thumbs.db')]),
         dirEntry('empty', []),
       ]),
     ])
     const out = await walkEntries([top])
     expect(out.map((x) => x.path)).toEqual([
+      'greenfield/Greenfield Residences — Landscape Package/Bills/Landscape BOQ rev3.xlsx',
       'greenfield/Greenfield Residences — Landscape Package/Drawings/L-0.pdf',
       'greenfield/Greenfield Residences — Landscape Package/Drawings/L-1 Planting Plan (Rev B).dxf',
-      'greenfield/Greenfield Residences — Landscape Package/Billss/BOQ - Landscape - r3.xlsx',
       'greenfield/answer_key.json',
     ])
     expect(out.every((x) => x.file instanceof File)).toBe(true)

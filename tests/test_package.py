@@ -34,20 +34,20 @@ EXPECTED_FILES = sorted([
     "Drawings/PDF/Landscape Drawings (Full Set).pdf",
     "Drawings/PDF/L-1 Planting Plan (scan).pdf",
     "Drawings/PDF/Presentation Plan (Colour).pdf",
-    "Drawings/PDF/Design review notes.pdf",
     "Bills/Landscape BOQ rev1.xlsx",
     "Bills/Landscape BOQ rev1a.xlsx",
     "Bills/Landscape BOQ rev2.xlsx",
-    "Bills/Tree pit guide - shallow roots.pdf",
-    "Bills/Tree pit guide - medium roots.pdf",
-    "Bills/Tree pit guide - deep roots.pdf",
-    "Bills/Planting procurement spec.pdf",
-    "Quotes/Irrigation/irrigation quote (old format).xls",
-    "Quotes/Metal/street-furniture-quote.pdf",
-    "Quotes/Metal/metal-details.zip",
-    "Other/Landscape BOQ rev3 (paving update).xlsx",
-    "Green Building Label - required documents.pdf",
-    "Planter mood board.pptx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx",
+    "Documents/Design review notes.pdf",
+    "Documents/Tree pit guide - shallow roots.pdf",
+    "Documents/Tree pit guide - medium roots.pdf",
+    "Documents/Tree pit guide - deep roots.pdf",
+    "Documents/Planting procurement spec.pdf",
+    "Documents/Green Building Label - required documents.pdf",
+    "Quotes/irrigation quote (old format).xls",
+    "Quotes/street-furniture-quote.pdf",
+    "Quotes/metal-details.zip",
+    "Other/Planter mood board.pptx",
 ])
 CJK = re.compile(r"[⺀-鿿豈-﫿＀-￯　-〿가-힯]")
 
@@ -121,10 +121,10 @@ def test_every_file_has_a_verdict(pkg):
     verdicts = {f["path"]: f for f in pkg.key["files"]}
     assert sorted(verdicts) == EXPECTED_FILES
     assert verdicts["Drawings/CAD/L-1 Planting Plan.bak"]["verdict"] == "backup"
-    assert verdicts["Quotes/Irrigation/irrigation quote (old format).xls"]["verdict"] == "unsupported"
+    assert verdicts["Quotes/irrigation quote (old format).xls"]["verdict"] == "unsupported"
     assert verdicts["Drawings/PDF/L-1 Planting Plan (scan).pdf"]["verdict"] == "drawing · raster"
-    assert verdicts["Quotes/Metal/metal-details.zip"]["contains"][0]["path"] == "drain-cover-detail.dxf"
-    for p in ("Green Building Label - required documents.pdf", "Bills/Planting procurement spec.pdf"):
+    assert verdicts["Quotes/metal-details.zip"]["contains"][0]["path"] == "drain-cover-detail.dxf"
+    for p in ("Documents/Green Building Label - required documents.pdf", "Documents/Planting procurement spec.pdf"):
         assert verdicts[p]["verdict"] in ("spec", "document")
 
 
@@ -165,15 +165,14 @@ def test_scan_and_presentation_are_image_only(pkg):
 
 
 def test_text_documents_say_what_they_must(pkg):
-    text = pymupdf.open(pkg.root / "Green Building Label - required documents.pdf")[0].get_text()
+    text = pymupdf.open(pkg.root / "Documents/Green Building Label - required documents.pdf")[0].get_text()
     assert "Greening quantity report (TCO2 calculation)" in text
-    review = pymupdf.open(pkg.root / "Drawings/PDF/Design review notes.pdf")[0].get_text()
+    review = pymupdf.open(pkg.root / "Documents/Design review notes.pdf")[0].get_text()
     assert "2026-09-10" in review and "Fire-truck access lane" in review
 
 
 def test_bills(pkg):
-    boq = {p.name: p for p in (pkg.root / "Bills").glob("*.xlsx")} | {
-        p.name: p for p in (pkg.root / "Other").glob("*.xlsx")}
+    boq = {p.name: p for p in (pkg.root / "Bills").glob("*.xlsx")}
     assert len(boq) == 4
     for p in boq.values():
         wb = openpyxl.load_workbook(p)
@@ -191,12 +190,13 @@ def test_bills(pkg):
     assert ws[cells["camphor.price"]].value == 4200 and ws[cells["pv1.price"]].value == 3800
     assert ws[cells["duranta.unit"]].value == "m" and ws[cells["duranta.qty"]].value == 27
     assert ws[cells["subtotal"]].value == "=SUM(G6:G17)" and ws[cells["irrigation.amount"]].row == 19
-    budget = openpyxl.load_workbook(boq["Landscape BOQ rev3 (paving update).xlsx"])["BOQ"]
-    assert budget[pkg.key["bills"]["20261014"]["cells"]["pv1.qty"]].value == 236
+    rev3 = openpyxl.load_workbook(boq["Landscape BOQ rev3 (paving update).xlsx"])["BOQ"]
+    assert rev3[pkg.key["bills"]["rev3"]["cells"]["pv1.qty"]].value == 236
+    assert rev3["A2"].value.startswith("Bill of Quantities · Rev 3 · 2026-10-14")
 
 
 def test_irrigation_quote_is_excel_97(pkg):
-    p = pkg.root / "Quotes/Irrigation/irrigation quote (old format).xls"
+    p = pkg.root / "Quotes/irrigation quote (old format).xls"
     assert p.read_bytes()[:8] == bytes.fromhex("D0CF11E0A1B11AE1")  # OLE2 compound file
     xlrd = pytest.importorskip("xlrd")
     sheet = xlrd.open_workbook(p).sheet_by_index(0)
@@ -204,7 +204,7 @@ def test_irrigation_quote_is_excel_97(pkg):
 
 
 def test_zip_holds_one_dxf(pkg):
-    with zipfile.ZipFile(pkg.root / "Quotes/Metal/metal-details.zip") as z:
+    with zipfile.ZipFile(pkg.root / "Quotes/metal-details.zip") as z:
         assert z.namelist() == ["drain-cover-detail.dxf"]
         data = z.read("drain-cover-detail.dxf")
     import ezdxf

@@ -8,8 +8,8 @@
       answer_key.json                              the site key, the thirty errors and every file's triage verdict
 
 Everything is generated and in English; no file in the package contains a Chinese character. Dates follow one 2026
-timeline: bills 2026-01-21 (rev1, rev1a) and 2026-02-19 (rev2), quotes 2026-09-09, design review 2026-09-10,
-drawings Rev A 2026-09-18, Rev B and the budget file 2026-10-14. The answer key is the same for a given seed; the
+timeline: bills 2026-01-21 (Rev 1, Rev 1a) and 2026-02-19 (Rev 2), quotes 2026-09-09, design review 2026-09-10,
+drawings Rev A 2026-09-18, Rev B and the bill's Rev 3 (paving update) 2026-10-14. The answer key is the same for a given seed; the
 DXF files themselves carry ezdxf's creation timestamps.
 """
 
@@ -34,7 +34,7 @@ ANSWER_KEY = "answer_key.json"
 PACKAGE_MESSINESS = Messiness(gap_cm=40, exploded=True, layer_chaos=True, label_style="typ", schedule_mismatch=True,
                               schedule_on_own_sheet=True)
 
-CAD, PDF = "Drawings/CAD", "Drawings/PDF"
+CAD, PDF, BILLS, DOCS, QUOTES = "Drawings/CAD", "Drawings/PDF", "Bills", "Documents", "Quotes"
 SHEET_FILES = {  # sheet name in the answer key -> file in the package
     "L-0": f"{CAD}/L-0 Cover and Index.dxf",
     "L-1": f"{CAD}/L-1 Planting Plan.dxf",
@@ -53,23 +53,23 @@ IMAGES = {f"{CAD}/pasted image #1.png": ("aggregate", "exposed aggregate", "PV-2
 FULL_SET = f"{PDF}/Landscape Drawings (Full Set).pdf"
 SCAN = f"{PDF}/L-1 Planting Plan (scan).pdf"
 PRESENTATION = f"{PDF}/Presentation Plan (Colour).pdf"
-REVIEW = f"{PDF}/Design review notes.pdf"
-BOQ = {"rev1": "Bills/Landscape BOQ rev1.xlsx", "rev1a": "Bills/Landscape BOQ rev1a.xlsx",
-       "rev2": "Bills/Landscape BOQ rev2.xlsx",
-       "20261014": "Other/Landscape BOQ rev3 (paving update).xlsx"}
-PIT_SPECS = {"shallow-rooted": "Bills/Tree pit guide - shallow roots.pdf",
-             "medium": "Bills/Tree pit guide - medium roots.pdf", "deep": "Bills/Tree pit guide - deep roots.pdf"}
-PROCUREMENT = "Bills/Planting procurement spec.pdf"
-IRRIGATION_XLS = "Quotes/Irrigation/irrigation quote (old format).xls"
-FURNITURE_QUOTE = "Quotes/Metal/street-furniture-quote.pdf"
-METAL_ZIP = "Quotes/Metal/metal-details.zip"
+REVIEW = f"{DOCS}/Design review notes.pdf"
+BOQ = {"rev1": f"{BILLS}/Landscape BOQ rev1.xlsx", "rev1a": f"{BILLS}/Landscape BOQ rev1a.xlsx",
+       "rev2": f"{BILLS}/Landscape BOQ rev2.xlsx", "rev3": f"{BILLS}/Landscape BOQ rev3 (paving update).xlsx"}
+PIT_SPECS = {"shallow": f"{DOCS}/Tree pit guide - shallow roots.pdf", "medium": f"{DOCS}/Tree pit guide - medium roots.pdf",
+             "deep": f"{DOCS}/Tree pit guide - deep roots.pdf"}
+PIT_CODES = {"shallow": "TPG-S", "medium": "TPG-M", "deep": "TPG-D"}
+PROCUREMENT = f"{DOCS}/Planting procurement spec.pdf"
+IRRIGATION_XLS = f"{QUOTES}/irrigation quote (old format).xls"
+FURNITURE_QUOTE = f"{QUOTES}/street-furniture-quote.pdf"
+METAL_ZIP = f"{QUOTES}/metal-details.zip"
 ZIP_MEMBER = "drain-cover-detail.dxf"
-GREEN_BUILDING = "Green Building Label - required documents.pdf"
-PPTX = "Planter mood board.pptx"
+GREEN_BUILDING = f"{DOCS}/Green Building Label - required documents.pdf"
+PPTX = "Other/Planter mood board.pptx"
 
 FILES = [SHEET_FILES["L-0"], SHEET_FILES["L-1"], SHEET_FILES["L-1 Rev B"], BAK, *[SHEET_FILES[f"L-{i}"] for i in range(2, 9)],
          *IMAGES, FULL_SET, SCAN, PRESENTATION, REVIEW, BOQ["rev1"], BOQ["rev1a"], BOQ["rev2"], *PIT_SPECS.values(),
-         PROCUREMENT, IRRIGATION_XLS, FURNITURE_QUOTE, METAL_ZIP, BOQ["20261014"], GREEN_BUILDING, PPTX]
+         PROCUREMENT, IRRIGATION_XLS, FURNITURE_QUOTE, METAL_ZIP, BOQ["rev3"], GREEN_BUILDING, PPTX]
 assert len(FILES) == len(set(FILES)) == 30
 
 VERDICTS = ("drawing · vector", "drawing · raster", "drawing · image", "bill", "quote", "spec", "document",
@@ -77,11 +77,11 @@ VERDICTS = ("drawing · vector", "drawing · raster", "drawing · image", "bill"
 CHIPS = {"backup": "backup — ignored", "archive": "archive — unpacked", "unsupported": "unsupported — .xls",
          "drawing · image": "image — read, not measured"}
 
-TREE_PIT_TABLE = [["Standard", "Pit (min.)", "Soil on artificial ground", "Soil on grade", "Drainage layer"],
+TREE_PIT_TABLE = [["Roots", "Pit (min.)", "Soil on artificial ground", "Soil on grade", "Drainage layer"],
                   ["Shallow-rooted", "1.5 x 1.5 m (2.25 m²)", "0.7 m", "1.0 m", "100 mm"],
                   ["Medium", "2.0 x 2.0 m (4.0 m²)", "1.0 m", "1.2 m", "100 mm"],
                   ["Deep-rooted", "2.0 x 2.0 m (4.0 m²)", "1.5 m", "1.5 m", "150 mm"]]
-PIT_SPECIES = {"shallow-rooted": "small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis",
+PIT_SPECIES = {"shallow": "small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis",
                "medium": "medium trees, e.g. Koelreuteria elegans subsp. formosana",
                "deep": "large broadleaf trees, e.g. Cinnamomum camphora (camphor), Bischofia javanica"}
 
@@ -154,7 +154,7 @@ def _bill_summary(cells: dict) -> dict:
                       "rows": [{"key": r.key, "description": r.description, "unit": r.unit, "qty": r.qty,
                                 "unit_price": r.price} for s in bill.sections for r in s.rows],
                       "totals": B.totals(bill), "cells": cells.get(short, {})}
-    out["latest_by_date"] = "20261014"
+    out["latest_by_date"] = "rev3"
     return out
 
 
@@ -175,7 +175,7 @@ def errors(key: dict) -> list[dict]:
         return {"file": BOQ[bill], "sheet": B.SHEET, "cell": cells.get(bill, {}).get(name)}
 
     fm = BOQ["rev2"]
-    both = [fm, BOQ["20261014"]]  # row-level errors the budget file copied
+    both = [fm, BOQ["rev3"]]  # row-level errors Rev 3 copied
     pit = key["tree_pit"]
     legend_tree = [o["id"] for o in key["objects"] if o["sheet"] == "L-1" and o["kind"] == "legend"
                    and o["note"] == "tree symbol"]
@@ -217,7 +217,7 @@ def errors(key: dict) -> list[dict]:
          "Spark (detail) + rules", pit["label"]),
         ("E13", both + [SHEET_FILES["L-4"]], "bill", "Azalea 450 plants for 150 m² = 3 per m² — below the schedule's 4 per m²",
          _ids(key, "L-1", "shrub_bed"), [cell("rev2", "azalea.qty")], "bill vs schedule",
-         "changed from 600 to 450 in rev1a and carried on"),
+         "changed from 600 to 450 in Rev 1a and carried on"),
         ("E14", [SHEET_FILES["L-1"]], "rules", "one tree species → α 0.8; §302 short; two fixes (+2 trees, or swap 2 for "
          "a second native species)", counted, [], "rules", "eight camphors, nothing else"),
         ("E15", [SHEET_FILES["L-1"]], "rules", "may be a protected tree (DBH 95 cm) — needs review; municipal rule",
@@ -235,10 +235,10 @@ def errors(key: dict) -> list[dict]:
          "bill vs price list", f"unit price {B.bills()[Path(fm).stem].row('pv1').price:,.0f} per m²"),
         ("E21", both, "bill", "the subtotal formula skips the last row (irrigation): the bill does not add up", [],
          [cell("rev2", "subtotal")], "bill", f"SUM({cells.get('rev2', {}).get('subtotal_range')})"),
-        ("E22", list(BOQ.values()), "bill", "four versions (rev1, rev1a, rev2, 20261014); latest by date is the "
-         "budget file (2026-10-14); paving 212 → 236 m²", [], [cell("20261014", "pv1.qty")], "bill",
-         "rev1a changes Azalea; rev2 changes four rows; the budget file changes PV-1"),
-        ("E23", [fm], "bill", "hidden sheet found (\"old\": the rev1 bill with other totals)", [],
+        ("E22", list(BOQ.values()), "bill", "four versions (Rev 1, Rev 1a, Rev 2, Rev 3); latest by date is Rev 3, "
+         "the paving update (2026-10-14); paving 212 → 236 m²", [], [cell("rev3", "pv1.qty")], "bill",
+         "Rev 1a changes Azalea; Rev 2 changes four rows; Rev 3 changes PV-1"),
+        ("E23", [fm], "bill", "hidden sheet found (\"old\": the Rev 1 bill with other totals)", [],
          [{"file": fm, "sheet": B.HIDDEN_SHEET, "cell": None}], "bill", "sheet 'old' is hidden"),
         ("E24", list(BOQ.values()), "bill", "merged two-row header parsed (robustness, not an error)", [],
          [cell("rev2", "header")], "bill", "Quantity and Price span two columns over a second header row"),
@@ -264,7 +264,7 @@ def errors(key: dict) -> list[dict]:
 
 
 def _price_verdict(row_key: str, item: str) -> str:
-    """The expected price flag, computed from the rev2 bill and the firm's list."""
+    """The expected price flag, computed from the Rev 2 bill and the firm's list."""
     price = B.bills()[Path(BOQ["rev2"]).stem].row(row_key).price
     _, _, unit, lo, hi, _, _ = next(r for r in B.PRICE_LIST if r[0].startswith(item))
     per = "" if unit == "EA" else f"/{unit}"
@@ -299,20 +299,20 @@ def files() -> list[dict]:
         FULL_SET: ("drawing · vector", "the full set as a vector PDF, nine pages L-0 … L-8"),
         SCAN: ("drawing · raster", "a grey scan of L-1, image only"),
         PRESENTATION: ("drawing · raster", "the coloured presentation plan (for SAM)"),
-        REVIEW: ("document", "design review: three issues"),
-        PROCUREMENT: ("spec", "procurement and measurement standard"),
+        REVIEW: ("document", "design review notes: three issues"),
+        PROCUREMENT: ("spec", "planting procurement and measurement spec"),
         IRRIGATION_XLS: ("unsupported", "Excel 97 — save as .xlsx"),
         FURNITURE_QUOTE: ("quote", "street furniture and metalwork quotation"),
         METAL_ZIP: ("archive", "zip with one metalwork detail DXF"),
         GREEN_BUILDING: ("document", "green-building checklist of required documents"),
-        PPTX: ("presentation", "a slide deck about site office planters, not a drawing"),
+        PPTX: ("presentation", "a planter mood board slide deck, not a drawing"),
     }
     for p, (_, mat, _) in IMAGES.items():
         why[p] = ("drawing · image", f"material photo pasted into the CAD: {mat}")
     for short, p in BOQ.items():
-        why[p] = ("bill", f"bill of quantities, revision {short}")
+        why[p] = ("bill", f"bill of quantities, {short.replace('rev', 'Rev ')}")
     for kind, p in PIT_SPECS.items():
-        why[p] = ("spec", f"tree pit standard, {kind}")
+        why[p] = ("spec", f"tree pit guide, {kind} roots ({PIT_CODES[kind]})")
     out = []
     for f in FILES:
         verdict, line = why[f]
@@ -342,15 +342,15 @@ def _write_documents(root: Path) -> None:
                    ("p", "Please respond in writing with the next issue of the drawings."),
                ])
     for kind, path in PIT_SPECS.items():
-        D.text_pdf(root / path, f"Tree pit guide — {kind}",
-                   f"Developer's standard for tree pits, {kind} species · document TPS-{list(PIT_SPECS).index(kind) + 1:02d}"
+        D.text_pdf(root / path, f"Tree pit guide — {kind} roots",
+                   f"Developer's guide for tree pits, {kind}-rooted species · document {PIT_CODES[kind]}"
                    " · 2026 edition (sample)", [
                        ("h", "1. Scope"),
                        ("p", f"Applies to {PIT_SPECIES[kind]}, planted on grade or on artificial ground (podium over a "
                              "basement slab, roof)."),
                        ("h", "2. Minimum dimensions"),
                        ("table", [TREE_PIT_TABLE[0], next(r for r in TREE_PIT_TABLE[1:]
-                                                          if r[0].lower().startswith(kind.split("-")[0][:4]))],
+                                                          if r[0].lower().startswith(kind[:4]))],
                         [0.18, 0.22, 0.24, 0.18, 0.18]),
                        ("h", "3. Construction"),
                        ("li", "Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth "
@@ -358,7 +358,7 @@ def _write_documents(root: Path) -> None:
                        ("li", "Root ball top level with the finished soil surface; three timber stakes per tree."),
                        ("li", "On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a "
                               "small tree (Gi 1.0 instead of 1.5)."),
-                       ("h", "4. All standards"),
+                       ("h", "4. All guides"),
                        ("table", TREE_PIT_TABLE, [0.18, 0.22, 0.24, 0.18, 0.18]),
                    ])
     D.text_pdf(root / PROCUREMENT, "Planting procurement spec — Landscape Works",
@@ -390,7 +390,7 @@ def _write_documents(root: Path) -> None:
     sub = sum(q * p for _, _, q, p in items)
     tax = round(sub * 0.05)
     D.text_pdf(root / FURNITURE_QUOTE, "Quotation — Street Furniture and Metalwork",
-               f"Northgate Metalwork (sample) · quote MQ- · 2026-09-09 · {PROJECT_EN_NAME} · valid 60 days", [
+               f"Northgate Metalwork (sample) · quote MQ-233 · 2026-09-09 · {PROJECT_EN_NAME} · valid 60 days", [
                    ("table", [["Item", "Unit", "Qty", "Unit price (NT$)", "Amount (NT$)"]]
                     + [[d, u, str(q), f"{p:,}", f"{q * p:,}"] for d, u, q, p in items]
                     + [["Subtotal", "", "", "", f"{sub:,}"], ["Business tax 5%", "", "", "", f"{tax:,}"],

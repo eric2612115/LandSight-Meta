@@ -80,11 +80,11 @@ describe('ask the package, recorded', () => {
   })
 
   it('opens a PDF page of a drawing on the measured drawing, a review check on the review', () => {
-    const soil = RECORDED[0].citations[0]
+    const soil = RECORDED[0].citations.find((c) => c.source === 'Landscape Drawings (Full Set).pdf' && c.page === 7)!
     expect(citeTarget(run, soil)).toMatchObject({ kind: 'sheet', sheetId: 'L-6' })
     const camphor = RECORDED.find((r) => /camphor row/.test(r.question))!
     expect(citeTarget(run, camphor.citations[0])).toEqual({ kind: 'check', checkId: 'E02.2' })
-    expect(citeTarget(run, RECORDED[0].citations[1])).toMatchObject({ kind: 'file', fileId: 'F-22' })
+    expect(citeTarget(run, RECORDED[0].citations[0])).toMatchObject({ kind: 'file', fileId: 'F-08' })
     expect(priceRange('6200-7200')).toEqual([6200, 7200])
   })
 })

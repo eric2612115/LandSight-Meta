@@ -30,16 +30,18 @@ export type PkgGroup = { id: GroupId; name: string; files: FileVerdict[]; summar
 
 const count = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`
 
-/** The latest bill by the date in its name (20261014 > rev2 > rev1a > rev1). */
+/** The latest bill by the revision in its name (rev3 > rev2 > rev1a > rev1). */
 export const latestBill = (run: Run) =>
   run.files.filter((f) => f.verdict === 'bill').sort((a, b) => billKey(b.name).localeCompare(billKey(a.name)))[0]
 
+/** "rev3" → "0003", "rev1a" → "0001a": revisions compare in order; a name without one compares as itself. */
 const billKey = (name: string) => {
-  const m = name.match(/(\d{8})|(\d{4})(-\d)?/)
-  if (!m) return name
-  if (m[1]) return m[1]
-  return `2026${m[2]}${m[3] ?? ''}`
+  const m = name.match(/\brev\s?(\d+)([a-z]?)/i)
+  return m ? `${m[1].padStart(4, '0')}${m[2]}` : name
 }
+
+/** The revision a bill's file name carries ("rev3"), else the name without its extension. */
+export const billRevOf = (name: string) => name.match(/\brev\s?\d+[a-z]?/i)?.[0] ?? name.replace(/\.xlsx?$/, '')
 
 export function packageGroups(run: Run): PkgGroup[] {
   const by: Record<GroupId, FileVerdict[]> = { drawings: [], bills: [], docs: [], sets: [], unread: [] }
@@ -49,7 +51,7 @@ export function packageGroups(run: Run): PkgGroup[] {
   const pdfs = by.docs.filter((f) => f.ext === 'pdf').length
   const summary: Record<GroupId, string> = {
     drawings: `${count(by.drawings.length, 'DXF', 'DXF')} · ${measured} measured`,
-    bills: `${by.bills.length} xlsx${latest ? ` · ${latest.name.replace(/^BOQ - Landscape - /, '').replace(/\.xlsx$/, '').split(' ')[0]} governs` : ''}`,
+    bills: `${by.bills.length} xlsx${latest ? ` · ${billRevOf(latest.name)} governs` : ''}`,
     docs: `${by.docs.length} files · ${pdfs} PDF read`,
     sets: [
       by.sets.filter((f) => f.verdict === 'drawing_vector').length && `${by.sets.filter((f) => f.verdict === 'drawing_vector').length} vector`,

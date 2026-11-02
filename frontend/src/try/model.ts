@@ -97,8 +97,8 @@ export function governingBill(run: Run): FileVerdict | undefined {
   return bills.find((f) => c?.title.includes(f.name)) ?? bills[bills.length - 1]
 }
 
-/** The governing bill's revision name ("20261014") as its file name carries it. */
-export const billRev = (f?: FileVerdict) => f?.name.match(/(\d{6,8}(?:-\d)?)/)?.[1] ?? f?.name ?? ''
+/** The governing bill's revision name ("rev3") as its file name carries it. */
+export const billRev = (f?: FileVerdict) => f?.name.match(/\brev\s?\d+[a-z]?/i)?.[0] ?? f?.name ?? ''
 
 /* ------------------------------------------------------------------ the project card */
 

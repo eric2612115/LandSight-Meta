@@ -8,8 +8,8 @@ import type { Run } from '../lib/types'
 import { capMessage, detailOf, formOf, NEEDS_LIVE, runOfUpload, uploadingLine, type Picked, type UploadResponse } from '../lib/upload'
 import { SAMPLE_RUN, type Sample } from './store'
 
-/** Muse Spark's answer to the film's question, as the API recorded it (tests/fixtures/ask/ask_package__16a0d33f6bc624fe.json,
- * asked live once on run 3d48f7f05e1d; POST /api/ask replays it). */
+/** Muse Spark's answer to the film's question, as the API recorded it (tests/fixtures/ask/ask_package__f43d079dd4347e70.json,
+ * recorded on the greenfield sample, replayed by POST /api/ask on run 0a45e5bfc345). */
 export const RECORDED_T10 = Object.values(import.meta.glob<Answer>('./recorded-ask.json', { eager: true, import: 'default' }))[0]
 
 export async function loadSample(sample: Sample, src: SourceKind): Promise<Run> {

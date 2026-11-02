@@ -8,7 +8,7 @@ import t08 from './t08.json';
 /**
  * Film v8, Part 1 (0:06–1:12): ONE world, grey-box previz, under ONE camera path (demo/SCRIPT-V8.md). The L-1 sheet
  * (the real render) floats high as the first sheet, the other sheets stack under and over it, the stack becomes the
- * tower (the sheets are its floors), the typical plate lights and copies up six floors, the bill row floats beside
+ * tower (the sheets are its floors), the typical plate lights and copies up four floors, the bill row floats beside
  * it; the camera descends to the ground, which carries L-1 at 1 m = 1 unit; the eight canopies; T-08's twelve real
  * LINE segments (src/scenes/t08.json) rise to different heights as the camera orbits it, with the dashed ground grid
  * and the x/y/z axes in the same scene, so they turn as one; the bill billboard, the hedge tape, the pavers; down
@@ -23,13 +23,13 @@ const SX = (X: number) => X + t08.svg.offset_x;
 const SZ = (Y: number) => t08.svg.flip_y - Y;
 const L1 = {w: 83.2, h: 45.2};
 const T8 = {x: SX(t08.centre[0]), z: SZ(t08.centre[1])};
-const TOWER = {x: 29.6, z: 17, podW: 44, podD: 26, podH: 4.5, podFloors: 4, twrW: 24, twrD: 16, twrH: 3.4, twrFloors: 17};
+const TOWER = {x: 29.6, z: 17, podW: 44, podD: 26, podH: 4.5, podFloors: 5, twrW: 24, twrD: 16, twrH: 3.4, twrFloors: 15};
 const DECK_Y = TOWER.podFloors * TOWER.podH;
 type Slab = {i: number; y: number; w: number; d: number; floor: string};
 const SLABS: Slab[] = [];
 for (let k = 0; k < TOWER.podFloors; k++) SLABS.push({i: SLABS.length, y: k * TOWER.podH, w: TOWER.podW, d: TOWER.podD, floor: String(k + 1)});
-for (let k = 0; k < TOWER.twrFloors; k++) SLABS.push({i: SLABS.length, y: DECK_Y + k * TOWER.twrH, w: TOWER.twrW, d: TOWER.twrD, floor: String(k + 5)});
-SLABS.push({i: SLABS.length, y: DECK_Y + TOWER.twrFloors * TOWER.twrH, w: TOWER.twrW, d: TOWER.twrD, floor: 'R1'});
+for (let k = 0; k < TOWER.twrFloors; k++) SLABS.push({i: SLABS.length, y: DECK_Y + k * TOWER.twrH, w: TOWER.twrW, d: TOWER.twrD, floor: String(k + 6)});
+SLABS.push({i: SLABS.length, y: DECK_Y + TOWER.twrFloors * TOWER.twrH, w: TOWER.twrW, d: TOWER.twrD, floor: 'R'});
 const floorY = (f: string) => SLABS.find((s) => s.floor === f)!.y;
 const STACK_Y0 = 120; // where the first sheet floats in the opening
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
@@ -220,10 +220,10 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
   const stackIn = ov(t, 8.0, 10.0);
   const toTower = ov(t, 10.5, 13.0);
   const lc = sheets.findIndex((s) => s.id === 'L-103');
-  const sheetOfSlab = (s: Slab) => (s.floor === '1' ? sheets.findIndex((x) => x.id === 'L-101') : s.floor === '4' ? sheets.findIndex((x) => x.id === 'L-102') : s.floor === '6' ? lc : s.floor === 'R1' ? sheets.findIndex((x) => x.id === 'L-104') : 6 + s.i);
+  const sheetOfSlab = (s: Slab) => (s.floor === '1' ? sheets.findIndex((x) => x.id === 'L-101') : s.floor === '5' ? sheets.findIndex((x) => x.id === 'L-102') : s.floor === '8' ? lc : s.floor === 'R' ? sheets.findIndex((x) => x.id === 'L-104') : 6 + s.i);
   const first = sheets.findIndex((s) => s.id === 'L-1-revB');
   // ---- the lit plates (13–17), the bill row (15), the card (16.5)
-  const lit = ['6', '9', '12', '15', '18', '21'];
+  const lit = ['8', '12', '16', '20'];
   // ---- the ground L-1 unfolds (18–21)
   const groundA = ov(t, 18.0, 21.0);
   // ---- T-08: the twelve pieces rise (25.5–27.5), snap (31.5–32.5); the ring (32.6–33.4)
@@ -342,7 +342,7 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
       {t >= 31.0 && t < 35 ? <Billboard p={camPoint(t, 2.4, -1.2, 8)} w={5} tex={textTexture(['Muse Spark: one tree · 95% · Confirm?', 'a cursor clicks Confirm at 0:33.5 — counted only then'], {bg: 'rgba(20,22,26,0.85)', size: 44, accent: '#9ab4ff'})} cam={cam} a={ov(t, 31.0, 31.6)} /> : null}
 
       {/* the bill billboard beside the row (36–40.5): row 6 lit */}
-      <Billboard p={[22, 0.3, 28.5]} w={16} tex={textTexture(['the bill · BOQ 20261014 (governs)', '6   Camphore tree, cal. 10 cm   EA   12   4,200   ← lit', '7   Duranta hedge                m    27   950', '11  Permeable pavers (PV-1)      m²   236  3,800'], {bg: 'rgba(250,248,242,0.95)', size: 40, mono: true, colour: '#1d2026', accent: '#8a6a00'})} cam={cam} a={billA} />
+      <Billboard p={[22, 0.3, 28.5]} w={16} tex={textTexture(['the bill · BOQ rev3 (governs)', '6   Camphore tree, cal. 10 cm   EA   12   4,200   ← lit', '7   Duranta hedge                m    27   950', '11  Permeable pavers (PV-1)      m²   236  3,800'], {bg: 'rgba(250,248,242,0.95)', size: 40, mono: true, colour: '#1d2026', accent: '#8a6a00'})} cam={cam} a={billA} />
       {billA > 0.5 ? <Billboard p={[33, 0.3, 29.5]} w={7} tex={textTexture(['$516 for trees that aren’t drawn', 'E02.2 · billed 12 · drawn 8 · 4 × $129'], {bg: 'rgba(20,22,26,0.85)', size: 44, accent: '#f0a500'})} cam={cam} a={billA} /> : null}
 
       {/* the hedge H-01 (x = 48.8, y 1.5 → 28.5 in sheet metres): the tape runs 0 → 27 m, the double row of 182 plants */}
@@ -442,19 +442,19 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
             <boxGeometry args={[s.w, 0.4, s.d]} />
             <meshStandardMaterial color="#cfcfcf" transparent opacity={0.95 * toTower} />
           </mesh>
-          {s.floor !== 'R1' ? (
-            <mesh position={[0, 0.4 + (s.floor.length && Number(s.floor) <= 4 ? TOWER.podH - 0.4 : TOWER.twrH - 0.4) / 2, 0]}>
-              <boxGeometry args={[s.w - 1.2, (Number(s.floor) <= 4 ? TOWER.podH : TOWER.twrH) - 0.5, s.d - 1.2]} />
+          {s.floor !== 'R' ? (
+            <mesh position={[0, 0.4 + (s.floor.length && Number(s.floor) <= 5 ? TOWER.podH - 0.4 : TOWER.twrH - 0.4) / 2, 0]}>
+              <boxGeometry args={[s.w - 1.2, (Number(s.floor) <= 5 ? TOWER.podH : TOWER.twrH) - 0.5, s.d - 1.2]} />
               <meshStandardMaterial color="#7f8ba3" transparent opacity={0.6 * toTower} depthWrite={false} />
             </mesh>
           ) : null}
         </group>
       ))}
       {toTower > 0.5 && t < 20 ? <Billboard p={camPoint(t, -22, 22, 90)} w={30} tex={textTexture(['3D tower, blue hour later · the sheets are its floors'], {bg: 'rgba(20,22,26,0.8)', size: 56})} cam={cam} a={ov(t, 12.5, 13)} /> : null}
-      {t >= 14.5 && t < 19 ? <Billboard p={camPoint(t, -24, -4, 90)} w={28} tex={textTexture(['L-103 · typ. floor, lit cobalt · copies to 8, 12, 16, 20F (T01)'], {bg: 'rgba(20,22,26,0.85)', size: 48, accent: '#9ab4ff'})} cam={cam} a={ov(t, 14.5, 15)} /> : null}
+      {t >= 14.5 && t < 19 ? <Billboard p={camPoint(t, -24, -4, 90)} w={28} tex={textTexture(['L-103 · typ. sky garden, lit cobalt · copies to 8F, 12F, 16F, 20F (T01)'], {bg: 'rgba(20,22,26,0.85)', size: 48, accent: '#9ab4ff'})} cam={cam} a={ov(t, 14.5, 15)} /> : null}
       {/* the bill row floats beside the tower (15.5), the glass card (16.5) */}
-      {t >= 15.3 && t < 19.5 ? <Billboard p={camPoint(t, 24, 10, 90)} w={38} tex={textTexture(['13   Planter shrubs, typ. floor  (x 1)   m²   20   620', 'the tower bill, row 13 · the × 1 circled red (T06)'], {bg: 'rgba(250,248,242,0.95)', size: 48, mono: true, colour: '#1d2026', accent: '#c0392b'})} cam={cam} a={ov(t, 15.3, 15.9)} /> : null}
-      {t >= 16.5 && t < 20 ? <Billboard p={camPoint(t, 24, -4, 90)} w={32} tex={textTexture(['Bill: 1 floor · Drawing: 6 floors', 'Planter shrubs, typ. floor x 1: bill 20 m², drawing 120 m² · $19/m²'], {bg: 'rgba(20,22,26,0.85)', size: 52, accent: '#ff8a8a'})} cam={cam} a={ov(t, 16.5, 17)} /> : null}
+      {t >= 15.3 && t < 19.5 ? <Billboard p={camPoint(t, 24, 10, 90)} w={38} tex={textTexture(['13   Sky-garden planter shrubs, typ. floor  (x 1)   m²   36   620', 'the tower bill, row 13 · the × 1 circled red (T06)'], {bg: 'rgba(250,248,242,0.95)', size: 48, mono: true, colour: '#1d2026', accent: '#c0392b'})} cam={cam} a={ov(t, 15.3, 15.9)} /> : null}
+      {t >= 16.5 && t < 20 ? <Billboard p={camPoint(t, 24, -4, 90)} w={32} tex={textTexture(['Bill: 1 floor · Drawing: 4 floors', 'Sky-garden planter shrubs, typ. floor x 1: bill 36 m², drawing 144 m² · $19/m²'], {bg: 'rgba(20,22,26,0.85)', size: 52, accent: '#ff8a8a'})} cam={cam} a={ov(t, 16.5, 17)} /> : null}
     </>
   );
 };

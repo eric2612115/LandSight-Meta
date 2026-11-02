@@ -97,23 +97,23 @@ const SLABS: Slab[] = [];
 {
   const bx = 760;
   const by = 920;
-  for (let k = 0; k < 4; k++) SLABS.push({i: SLABS.length, w: 400, d: 150, x: bx, y: by - k * 40, floor: String(k + 1)});
-  for (let k = 0; k < 17; k++) SLABS.push({i: SLABS.length, w: 220, d: 90, x: bx + 60, y: by - 160 - k * 36, floor: String(k + 5)});
-  SLABS.push({i: SLABS.length, w: 220, d: 90, x: bx + 60, y: by - 160 - 17 * 36, floor: 'R1'});
+  for (let k = 0; k < 5; k++) SLABS.push({i: SLABS.length, w: 400, d: 150, x: bx, y: by - k * 32, floor: String(k + 1)});
+  for (let k = 0; k < 15; k++) SLABS.push({i: SLABS.length, w: 220, d: 90, x: bx + 60, y: by - 160 - k * 36, floor: String(k + 6)});
+  SLABS.push({i: SLABS.length, w: 220, d: 90, x: bx + 60, y: by - 160 - 15 * 36, floor: 'R'});
 }
 const SHEET_W = 230;
 const SHEET_H = 125;
 const slot = (k: number) => ({x: 130 + (k % 6) * 280, y: 120 + Math.floor(k / 6) * 165});
-const SHEET_NAMES = ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1 B', 'L-1 A', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-15', 'F-16 p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'F-17', 'L-3 fill', 'L-1 fill'];
-const sheetOfSlab = (s: Slab) => (s.floor === '1' ? 0 : s.floor === '4' ? 1 : s.floor === '6' ? 2 : s.floor === 'R1' ? 3 : 4 + (s.i > 3 ? s.i - (s.floor === 'R1' ? 1 : 0) : s.i) - (s.i >= 5 ? 1 : 0));
-const LIT = ['6', '9', '12', '15', '18', '21'];
+const SHEET_NAMES = ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1 B', 'L-1 A', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-24', 'F-25 p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'F-26', 'L-3 fill', 'L-1 fill'];
+const sheetOfSlab = (s: Slab) => (s.floor === '1' ? 0 : s.floor === '5' ? 1 : s.floor === '8' ? 2 : s.floor === 'R' ? 3 : 4 + (s.i > 4 ? s.i - (s.floor === 'R' ? 1 : 0) : s.i) - (s.i >= 7 ? 1 : 0));
+const LIT = ['8', '12', '16', '20'];
 
 const Tower: React.FC<{t: number}> = ({t}) => {
   const restack = ov(t, 10, 12.4);
   const dark = ov(t, 16.9, 17.3);
   return (
     <>
-      <Lbl x={640} y={60} text="3D tower, blue hour (three.js) · podium 1–4F + deck · tower 5–21F · roof garden" />
+      <Lbl x={640} y={60} text="3D tower, blue hour (three.js) · podium 1–5F + deck · tower 6–20F · roof garden" />
       {SLABS.map((s) => {
         const li = 3 + s.i * 0.12;
         const lift = ov(t, li, li + 0.5) * (1 - restack);
@@ -132,7 +132,7 @@ const Tower: React.FC<{t: number}> = ({t}) => {
             {/* the slab: a thin box in oblique, or the sheet it becomes */}
             <div style={{position: 'absolute', left: x, top: y, width: w, height: h, background: fill, border: `2px solid ${INK}`, boxSizing: 'border-box', transform: paper < 0.5 ? `skewX(-30deg) translateX(${(s.d * (1 - paper)) / 2}px)` : 'none'}} />
             {paper > 0.5 && fly > 0.9 ? <Lbl x={x + 6} y={y + 6} text={SHEET_NAMES[sheetOfSlab(s)] ?? ''} size={16} /> : null}
-            {lit > 0.5 ? <Lbl x={x + w + 70} y={y - 12} text={litK === 0 ? 'L-103 lit cobalt · 6F' : `copy · ${s.floor}F`} size={16} colour="#9ab4ff" /> : null}
+            {lit > 0.5 ? <Lbl x={x + w + 70} y={y - 12} text={litK === 0 ? 'L-103 lit cobalt · 8F' : `copy · ${s.floor}F`} size={16} colour="#9ab4ff" /> : null}
           </div>
         );
       })}
@@ -145,7 +145,7 @@ const Tower: React.FC<{t: number}> = ({t}) => {
         return <Rect key={idx} x={lerp(sl.x + (k % 2 ? 500 : -500), sl.x, u)} y={lerp(1200, sl.y, u)} w={SHEET_W} h={SHEET_H} a={u} fill="rgba(255,255,255,0.9)" />;
       })}
       {t >= 6 && t < 10 ? <Lbl x={130} y={60} text="30 sheets: the tower's real renders + the greenfield sheets as paper" /> : null}
-      {t >= 10.5 && t < 22 ? <Lbl x={1140} y={560} text="six lit plates: L-103 stands for 8, 12, 16, 20F (T01)" size={18} /> : null}
+      {t >= 10.5 && t < 22 ? <Lbl x={1140} y={560} text="four lit plates: L-103 stands for 8F, 12F, 16F, 20F (T01)" size={18} /> : null}
     </>
   );
 };
@@ -231,7 +231,7 @@ const Desk: React.FC<{t: number}> = ({t}) => {
   return (
     <>
       <Lbl x={60} y={60} text="paper desk (2D) · warm lamp" />
-      <Rect x={60} y={130} w={760} h={260} label="the bill (BOQ 20261014, governs) · real rows from run.json" a={phase === 'total' ? 0.3 : 1}>
+      <Rect x={60} y={130} w={760} h={260} label="the bill (BOQ rev3, governs) · real rows from run.json" a={phase === 'total' ? 0.3 : 1}>
         {rows.map((r, i) => (
           <div key={r[0]} style={{position: 'absolute', left: 16, top: 20 + i * 70, width: 720, ...mono, fontSize: 22, color: INK, background: phase === r[5] ? 'rgba(240,165,0,0.35)' : 'none', padding: '8px 10px', display: 'flex', gap: 24}}>
             <span style={{width: 30}}>{r[0]}</span>
@@ -759,7 +759,7 @@ export const AnimaticV7: React.FC<AnimaticV7Props> = ({data}) => {
               <div style={{position: 'absolute', left: 24, top: 26, ...mono, fontSize: 26, color: WHITE}}>
                 Bill: 1 floor · Drawing: 6 floors
                 <br />
-                <span style={{fontSize: 18, opacity: 0.7}}>Planter shrubs, typ. floor x 1: bill 20 m², drawing 120 m² · $19/m² (T06)</span>
+                <span style={{fontSize: 18, opacity: 0.7}}>Sky-garden planter shrubs, typ. floor x 1: bill 36 m², drawing 144 m² · $19/m² (T06)</span>
               </div>
             </Rect>
           ) : null}

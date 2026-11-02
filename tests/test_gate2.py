@@ -43,8 +43,8 @@ def test_sam_measures_the_raster_presentation_plan(sample_db):
 def test_the_api_serves_the_masks_on_the_raster_sheet():
     c = TestClient(create_app())
     run = c.post("/api/package/open").json()
-    f17 = next(s for s in run["sheets"] if s["sheet_id"] == "F-17-p1")
-    masks = [o for o in f17["objects"] if o["by"] == "sam"]
+    f26 = next(s for s in run["sheets"] if s["sheet_id"] == "F-26-p1")
+    masks = [o for o in f26["objects"] if o["by"] == "sam"]
     assert len(masks) >= 4 and {o["item_id"] for o in masks} == {"S-01", "S-02", "S-03", "S-04"}
 
 

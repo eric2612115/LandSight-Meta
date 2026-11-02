@@ -11,7 +11,7 @@ export const STEPS: Step[] = ['upload', 'choose', 'analyze', 'review']
 export type Sample = 'greenfield' | 'tower'
 
 /** The stored runs of the two samples on the live API (landsight.db), and what the recorded source holds. */
-export const SAMPLE_RUN: Record<Sample, string> = { greenfield: '3d48f7f05e1d', tower: '4d310e3bee91' }
+export const SAMPLE_RUN: Record<Sample, string> = { greenfield: '0a45e5bfc345', tower: '97e35639fb8d' }
 
 export type Chip = { sheetId: string; objectId: string; kind: string; sheetNo: string }
 export type Turn = { id: number; q: string; shown: string; chip?: Chip; a?: Answer; error?: string; marked?: boolean; added?: boolean }

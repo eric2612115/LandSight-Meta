@@ -15,11 +15,11 @@ from landsight.ask.service import ask_run, corpus_for
 from landsight.store import service
 
 QUESTIONS = {
-    "What soil depth does the spec require for trees on the slab?": ["F-22", "F-16"],
+    "What soil depth does the spec require for trees on the slab?": ["F-08", "F-25"],
     "Does Article 302 apply to this 1,500 m² site?": ["rules"],
-    "Which bill revision is current and what changed?": ["F-28"],
-    "Is PV-1 permeable paving?": ["F-16", "F-21"],
-    "What does the green-building checklist require from landscape?": ["F-29"],
+    "Which bill revision is current and what changed?": ["F-04"],
+    "Is PV-1 permeable paving?": ["F-25", "F-07"],
+    "What does the green-building checklist require from landscape?": ["F-06"],
     "Why is the camphor row flagged?": ["run"],
 }
 CJK = re.compile(r"[⺀-鿿豈-﫿　-〿＀-￯가-힯]")
@@ -32,16 +32,16 @@ def test_corpus_is_the_package_and_english(sample_db):
     assert {"pdf_text", "pdf_drawing", "pdf_raster", "bill_row", "bill_version", "sheet", "rule", "price", "check"} <= kinds
     assert not [c.chunk_id for c in corpus if CJK.search(c.text) or CJK.search(c.chunk_id)]
     latest = next(c for c in corpus if c.kind == "bill_version" and "the latest by date" in c.text)
-    assert "20261014" in latest.text and "Permeable pavers (PV-1): qty 212 -> 236" in latest.text
+    assert "rev3 (paving update)" in latest.text and "Permeable pavers (PV-1): qty 212 -> 236" in latest.text
 
 
 def test_retrieval_finds_the_source(sample_db):
     conn, run = sample_db
     corpus = corpus_for(conn, run["run_id"])
     top = {c.chunk_id for _, c in retrieve("Is PV-1 permeable paving?", corpus)}
-    assert {"F-21:p1:2", "check:E11", "price:PV-1"} <= top
+    assert {"F-07:p1:2", "check:E11", "price:PV-1"} <= top
     top = {c.chunk_id for _, c in retrieve("Which bill revision is current and what changed?", corpus)}
-    assert {"F-28:versions", "check:E22"} <= top
+    assert {"F-04:versions", "check:E22"} <= top
 
 
 @pytest.mark.parametrize("question", list(QUESTIONS))
@@ -61,7 +61,7 @@ def test_the_six_recorded_answers_replay_with_verified_citations(sample_db, ques
 def test_what_the_answers_say(sample_db):
     conn, run = sample_db
     a = {q: ask_run(conn, run["run_id"], q) for q in QUESTIONS}
-    assert "20261014" in a["Which bill revision is current and what changed?"]["answer"]
+    assert "rev3" in a["Which bill revision is current and what changed?"]["answer"]
     assert a["Is PV-1 permeable paving?"]["answer"].startswith("Yes")
     assert "1.5 m" in a["What soil depth does the spec require for trees on the slab?"]["answer"]
     acts = a["Why is the camphor row flagged?"]["proposed_actions"]

@@ -14,7 +14,7 @@ export const ANIM = {
     [0, 3, 'tower · crane up', 1],
     [3, 6, 'lift apart → 30 sheets', 1],
     [6, 10, 'LIVE L-PAIN', 1],
-    [10, 15, 'restack · L-103 × 6', 1],
+    [10, 15, 'restack · L-103 × 4', 1],
     [15, 19, 'T06 bill row', 1],
     [19, 22, 'glass card', 1],
     [22, 36, 'hook 1 v3 · one tree', 1],
@@ -44,7 +44,7 @@ export const ANIM = {
   /** The voice, Eric's clone, one file per line at the script's start; `until` is the line's window (the next cue). */
   voice: [
     {n: 1, at: 3.2, until: 10.5, text: 'Every building is approved on paper.'},
-    {n: 2, at: 10.5, until: 15.5, text: 'One sheet stands for six floors.'},
+    {n: 2, at: 10.5, until: 15.5, text: 'One sheet stands for four floors.'},
     {n: 3, at: 15.5, until: 22.0, text: 'The bill priced one.'},
     {n: 4, at: 23.0, until: 26.5, text: 'This is the tree a person reads.'},
     {n: 5, at: 26.5, until: 31.8, text: 'But this — is the tree a computer sees.'},

@@ -7,12 +7,12 @@ import {V7} from './story-v7-cues.js';
 import {clamp01, ease, easeOut, lerp, over} from './v7-ui';
 
 /**
- * The tower at blue hour (film v7, 0:00–0:22): a massing read off the tower package's sheets — a podium 1–4F with
- * its landscaped deck (L-101 ground floor, L-102 the 4F podium garden), a tower 5–21F (L-103, the typical floor planter
- * plan, stands for 8, 12, 16, 20F) and a roof garden (L-104, R1F). Glass, warm windows, a low crane up the
+ * The tower at blue hour (film v7, 0:00–0:22): a massing read off the tower package's sheets — a podium 1–5F with
+ * its landscaped deck (L-101 ground floor, L-102 the 5F podium roof garden), a tower 6–20F (L-103, the typical sky
+ * garden, stands for 8F, 12F, 16F, 20F) and a roof garden (L-104, RF). Glass, warm windows, a low crane up the
  * facade; the floors lift apart from the bottom and each slab tips flat into a paper sheet textured with a real
  * render (public/v7/sheets: the six tower renders and the greenfield sheets), fanning into a grid of thirty; the push
- * onto L-103 (the L1 fallback); the restack; L-103 lit cobalt and copied to the six floors it stands for; five go dark
+ * onto L-103 (the L1 fallback); the restack; L-103 lit cobalt and copied to the four floors it stands for; three go dark
  * when the bill prices one. Everything is a function of the frame (no clocks): render with --gl=angle.
  *
  * This is an illustration of real sheets and real findings; the product's screen is 2D.
@@ -22,27 +22,27 @@ export type Tower3DProps = {sheets: TowerSheet[]; typicalFloors: string[]};
 
 const T = V7.tower;
 // the massing (metres)
-const POD = {w: 44, d: 26, floorH: 4.5, floors: 4};
-const TWR = {w: 24, d: 17, floorH: 3.4, floors: 17, x: -4, z: -1}; // 5–21F, set back on the podium
-const DECK_Y = POD.floors * POD.floorH; // 18: the podium garden (4F deck)
-const ROOF_Y = DECK_Y + TWR.floors * TWR.floorH; // 75.8: the roof garden
+const POD = {w: 44, d: 26, floorH: 4.5, floors: 5};
+const TWR = {w: 24, d: 17, floorH: 3.4, floors: 15, x: -4, z: -1}; // 6–20F, set back on the podium
+const DECK_Y = POD.floors * POD.floorH; // 22.5: the podium roof garden (5F deck)
+const ROOF_Y = DECK_Y + TWR.floors * TWR.floorH; // 73.5: the roof garden
 const SLAB = 0.45;
-/** The 22 slabs, bottom first: 1–4F podium, 5–21F tower, R1F roof. */
+/** The 21 slabs, bottom first: 1–5F podium, 6–20F tower, RF roof. */
 type Slab = {i: number; y: number; w: number; d: number; x: number; z: number; h: number; floor: string; kind: 'podium' | 'tower' | 'roof'};
 const SLABS: Slab[] = [];
 for (let k = 0; k < POD.floors; k++) SLABS.push({i: SLABS.length, y: k * POD.floorH, w: POD.w, d: POD.d, x: 0, z: 0, h: POD.floorH, floor: String(k + 1), kind: 'podium'});
-for (let k = 0; k < TWR.floors; k++) SLABS.push({i: SLABS.length, y: DECK_Y + k * TWR.floorH, w: TWR.w, d: TWR.d, x: TWR.x, z: TWR.z, h: TWR.floorH, floor: String(k + 5), kind: 'tower'});
-SLABS.push({i: SLABS.length, y: ROOF_Y, w: TWR.w, d: TWR.d, x: TWR.x, z: TWR.z, h: 1.2, floor: 'R1', kind: 'roof'});
+for (let k = 0; k < TWR.floors; k++) SLABS.push({i: SLABS.length, y: DECK_Y + k * TWR.floorH, w: TWR.w, d: TWR.d, x: TWR.x, z: TWR.z, h: TWR.floorH, floor: String(k + 6), kind: 'tower'});
+SLABS.push({i: SLABS.length, y: ROOF_Y, w: TWR.w, d: TWR.d, x: TWR.x, z: TWR.z, h: 1.2, floor: 'R', kind: 'roof'});
 const floorY = (floor: string) => SLABS.find((s) => s.floor === floor)!.y;
 
 // the grid of thirty (world units): 6 × 5, facing +z, in front of the tower
 const SHEET_W = 20;
 const SHEET_H = SHEET_W * (1140 / 2100);
 const GRID = {cols: 6, rows: 5, dx: 23, dy: 13.2, cx: 0, cy: 42, z: 24};
-/** Which sheet lies on which slab: floor 1 L-101, 4 L-102, 6 L-103, the roof L-104, the rest in list order. */
+/** Which sheet lies on which slab: floor 1 L-101, 5 L-102, 8 L-103, the roof L-104, the rest in list order. */
 function sheetOfSlab(sheets: TowerSheet[]): number[] {
   const idx = (id: string) => sheets.findIndex((s) => s.id === id);
-  const fixed: Record<string, number> = {'1': idx('L-101'), '4': idx('L-102'), '6': idx('L-103'), R1: idx('L-104')};
+  const fixed: Record<string, number> = {'1': idx('L-101'), '5': idx('L-102'), '8': idx('L-103'), R: idx('L-104')};
   const used = new Set(Object.values(fixed));
   const rest = sheets.map((_, i) => i).filter((i) => !used.has(i));
   return SLABS.map((s) => (fixed[s.floor] !== undefined ? fixed[s.floor] : rest.shift()!));
@@ -188,11 +188,11 @@ function stateAt(t: number, sheets: TowerSheet[]) {
     st.scale = lerp(0.3, 1, u);
     st.a = u;
   });
-  // the six plates: L-103 lights at its own floor and copies rise to 9, 12, 15, 18, 21F
+  // the four plates: L-103 lights at its own floor and copies rise to 12F, 16F, 20F
   const lc = sheets.findIndex((s) => s.id === 'L-103');
   const plates: SheetState[] = [];
   if (t >= T.plates.start - 0.2 && lc >= 0) {
-    const base = SLABS.find((s) => s.floor === '6')!;
+    const base = SLABS.find((s) => s.floor === '8')!;
     const dark = over(t, T.bill.dark, T.bill.dark + 0.5);
     const light = over(t, T.plates.start, T.plates.start + 0.4);
     const lcState = sheetStates[lc];
@@ -203,7 +203,7 @@ function stateAt(t: number, sheets: TowerSheet[]) {
     lcState.pos = new THREE.Vector3(base.x, base.y + SLAB + 0.6, base.z);
     lcState.rot = new THREE.Euler(-Math.PI / 2, 0, 0);
     lcState.scale = lerp(base.w / SHEET_W, tray, light);
-    ['9', '12', '15', '18', '21'].forEach((fl, k) => {
+    ['12', '16', '20'].forEach((fl, k) => {
       const at = T.plates.start + (k + 1) * T.plates.step;
       const u = over(t, at, at + 0.35, easeOut);
       if (u <= 0) return;

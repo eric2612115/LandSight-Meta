@@ -2,7 +2,7 @@
  * Film v7, Part 1: everything StoryV7 needs that is not drawn at render time.
  *
  * - public/data/story-v7.json: every number Part 1 prints, read from the runs — greenfield frontend-mock/run.json and
- *   run_confirmed.json (E01, E02.2, E08, E12, E14, E17, E20, C-27, the tally), the tower run 4d310e3bee91 in
+ *   run_confirmed.json (E01, E02.2, E08, E12, E14, E17, E20, C-27, the tally), the tower run 97e35639fb8d in
  *   landsight.db (T01, T06), the L-1 Rev B objects (the eight canopies, H-01, T-10, the site boundary) and the thirty
  *   sheets of the grid; plus the measured length of every voice clip.
  * - public/v7/sheets/<id>.png: the thirty sheets as 1050 × 570 textures (each render padded onto white at the tower
@@ -31,7 +31,7 @@ const FFMPEG = '/opt/homebrew/bin/ffmpeg';
 const FFPROBE = '/opt/homebrew/bin/ffprobe';
 const UV = 'uv';
 const args = new Set(process.argv.slice(2));
-const TOWER_RUN = '4d310e3bee91';
+const TOWER_RUN = '97e35639fb8d';
 
 for (const d of ['data', 'v7/sheets', 'audio/v7-eric', 'audio/music', 'audio/sfx', 'gen']) mkdirSync(join(PUB, d), {recursive: true});
 
@@ -81,7 +81,7 @@ const before = E14.before_downgrade; // the greening as if the pits were in the 
 const plus2 = before.fixes.find((f) => /^\+2 Camphor/.test(f.label));
 
 // ---------------------------------------------------------------- the thirty sheets of the grid
-const greenfield = ['L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-15-p1', 'F-16-p1', 'F-16-p2', 'F-16-p3', 'F-16-p4', 'F-16-p5', 'F-16-p6', 'F-16-p7', 'F-16-p8', 'F-16-p9', 'F-17-p1', 'L-3.filled', 'L-1-revB.filled'];
+const greenfield = ['L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'];
 const towerIds = ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501'];
 const titleOf = (id) => {
   const t = tower.sheets.find((s) => s.sheet_id === id) || run.sheets.find((s) => s.sheet_id === id.replace('.filled', ''));

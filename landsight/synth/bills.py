@@ -2,12 +2,12 @@
 
 Four revisions of one bill (docs/PACKAGE.md E02, E13, E17-E24):
 
-- rev1 (2026-01-21): the first revision. Camphor 12 @ NT$4,200 [E02, E19 from the start]; Duranta 150 plants.
-- rev1a (same day): one row changed, Azalea 600 -> 450 plants (3 per m2 for a 150 m2 bed) [E13].
-- rev2 (2026-02-19): "Camphore tree" [E18]; the hedge billed as 27 m [E17]; permeable pavers NT$3,800/m2 [E20]; the
-  subtotal formula stops one row short [E21]; a hidden sheet "old" holds the rev1 bill with other totals [E23].
-- rev3 (paving update) (2026-10-14, the budget folder): the rev2 sheet with permeable pavers 212 -> 236 m2
-  [E22]; its other rows (and the short subtotal) are copied unchanged.
+- Rev 1 (2026-01-21): the first revision. Camphor 12 @ NT$4,200 [E02, E19 from the start]; Duranta 150 plants.
+- Rev 1a (same day): one row changed, Azalea 600 -> 450 plants (3 per m2 for a 150 m2 bed) [E13].
+- Rev 2 (2026-02-19): "Camphore tree" [E18]; the hedge billed as 27 m [E17]; permeable pavers NT$3,800/m2 [E20]; the
+  subtotal formula stops one row short [E21]; a hidden sheet "old" holds the Rev 1 bill with other totals [E23].
+- Rev 3, the paving update (2026-10-14): the Rev 2 sheet with permeable pavers 212 -> 236 m2 [E22]; its other rows (and
+  the short subtotal) are copied unchanged.
 
 Every bill has a two-row merged header [E24]: Item / Description / Spec, then Quantity (Unit, Qty) and Price (Unit
 price (NT$), Amount (NT$)). Amounts are formulas (=Qty*Unit price), followed by Subtotal, Overhead and profit 8%,
@@ -80,7 +80,7 @@ IRRIGATION_QUOTE = [
     ("Installation and testing", "including trenching on the podium", "LS", 1, 36000),
 ]
 IRRIGATION_TOTAL = sum(q * p for *_, q, p in IRRIGATION_QUOTE)
-IRRIGATION_QUOTE_NO, IRRIGATION_DATE = "IQ-", "2026-09-09"
+IRRIGATION_QUOTE_NO, IRRIGATION_DATE = "IQ-417", "2026-09-09"
 
 # The firm's own price list, installed rates (NT$). `source` cites ids in landsight/data/unit_prices.csv; basis
 # "published_budget" where city budget rows bracket the range, "sample" where no direct source exists.
@@ -126,20 +126,20 @@ def _base_sections() -> list[Section]:
 
 def bills() -> dict[str, Bill]:
     """The four revisions, keyed by file stem."""
-    b0121 = Bill("Landscape BOQ rev1", "rev1", "2026-01-21", _base_sections())
-    b0121_1 = Bill("Landscape BOQ rev1a", "rev1a", "2026-01-21", deepcopy(b0121.sections))
-    b0121_1.row("azalea").qty = 450
-    b0219 = Bill("Landscape BOQ rev2", "rev2", "2026-02-19", deepcopy(b0121_1.sections),
-                 subtotal_skips_last=True, hidden_old=b0121)
-    r = b0219.row("camphor")
+    rev1 = Bill("Landscape BOQ rev1", "1", "2026-01-21", _base_sections())
+    rev1a = Bill("Landscape BOQ rev1a", "1a", "2026-01-21", deepcopy(rev1.sections))
+    rev1a.row("azalea").qty = 450
+    rev2 = Bill("Landscape BOQ rev2", "2", "2026-02-19", deepcopy(rev1a.sections), subtotal_skips_last=True,
+                hidden_old=rev1)
+    r = rev2.row("camphor")
     r.description = "Camphore tree, cal. 10 cm"
-    r = b0219.row("duranta")
+    r = rev2.row("duranta")
     r.description, r.spec, r.unit, r.qty, r.price = "Duranta hedge", "Duranta erecta, H0.6 m, double row", "m", 27, 950
-    b0219.row("pv1").price = 3800
-    budget = Bill("Landscape BOQ rev3 (paving update)", "rev3 (paving update)", "2026-10-14",
-                  deepcopy(b0219.sections), subtotal_skips_last=True)
-    budget.row("pv1").qty = 236
-    return {b.name: b for b in (b0121, b0121_1, b0219, budget)}
+    rev2.row("pv1").price = 3800
+    rev3 = Bill("Landscape BOQ rev3 (paving update)", "3", "2026-10-14", deepcopy(rev2.sections),
+                subtotal_skips_last=True)
+    rev3.row("pv1").qty = 236
+    return {b.name: b for b in (rev1, rev1a, rev2, rev3)}
 
 
 def totals(bill: Bill) -> dict[str, float]:

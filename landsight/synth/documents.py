@@ -215,14 +215,14 @@ def texture_png(kind: str, path: Path, seed: int, size: int = 256) -> Path:
 
 
 def planters_pptx(path: Path) -> Path:
-    """Two slides about temporary planters at the site office: not a drawing, not part of the works."""
+    """A two-slide planter mood board: not a drawing, not part of the works."""
     from pptx import Presentation
     from pptx.util import Inches, Pt
 
     prs = Presentation()
     s1 = prs.slides.add_slide(prs.slide_layouts[0])
     s1.shapes.title.text = "Planter mood board"
-    s1.placeholders[1].text = "Temporary planting at the sales office · Greenfield Residences · September 2026"
+    s1.placeholders[1].text = "Planter ideas for the entrance court · Greenfield Residences · September 2026"
     s2 = prs.slides.add_slide(prs.slide_layouts[5])
     s2.shapes.title.text = "Planter layout and schedule"
     rows = [("Planter", "Size", "Qty", "Planting"), ("P1 rectangular", "1.2 x 0.4 x 0.5 m", "6", "Duranta, 4 per planter"),

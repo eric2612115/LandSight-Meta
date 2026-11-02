@@ -8,7 +8,7 @@ export const SCENE4 = {
   fps: 30,
   duration: 12,
   /** The tower's recorded run (landsight.db, runs.id) and the package it reviewed. */
-  run: '9539ce2f1c3f',
+  run: '97e35639fb8d',
   packageDir: 'samples/tower',
   /** 0–2 s: the six sheets lie flat, fanned, seen in plan; the camera is a little high (zoom < 1). */
   fan: {centre: [960, 470], zoom: 1.1, stepDeg: 7, stepX: 190, dy: 12},
@@ -20,7 +20,7 @@ export const SCENE4 = {
   rise: {start: 2.2, step: 0.7},
   /** 4.8–5.25 s: the two sheets the Run does not count leave the frame, tagged with the Run's words. */
   exit: {start: 4.8, step: 0.45, tagSeconds: 1.3, tagAt: [[1150, 400], [1150, 468]]},
-  /** The building: sheet width in world px, one storey's height in world px (the roof sits one storey above 21F). */
+  /** The building: sheet width in world px, one storey's height in world px (the roof sits one storey above 20F). */
   building: {width: 560, storey: 22},
   /** 6–10 s: the pins, in this order, 1.5 s apart; the typical sheet's five copies rise at the first pin. */
   pins: {start: 6.0, step: 1.5, checks: ['T01', 'T02', 'T08'], column: {x: 1150, maxWidth: 760, gap: 150}},

@@ -172,9 +172,9 @@ RASTER_PLAN_SCHEMA = {
 FLOOR_PROMPT = (
     "This image is one sheet of a landscape drawing package for a building with several floors. Read the title block "
     "and the notes:\n"
-    "- floors: every floor this sheet stands for, each as written without the 'F' ('6', '9', 'R1' for a roof, '1' for "
-    "the ground floor); a title such as '8, 12, 16, 20F' stands for six floors; empty if the sheet is not tied "
-    "to floors.\n"
+    "- floors: every floor this sheet stands for, each as written without the 'F' ('3', '10', 'R' for a roof written "
+    "'RF', '1' for the ground floor); a title such as '3F, 6F, 9F' stands for three floors; empty if the sheet is not "
+    "tied to floors.\n"
     "- typical: true if this one sheet stands for several identical floors.\n"
     "- floor_label: the floor words exactly as the title block writes them.\n"
     "- ground: where this sheet's planting sits: 'grade' (natural ground), 'over_basement' (a ground floor over a "

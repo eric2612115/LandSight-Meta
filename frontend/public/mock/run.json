@@ -220,8 +220,8 @@
   },
   {
    "file_id": "f21",
-   "path": "Greenfield Residences — Landscape Package/Drawings/PDF/Design review notes 240910.pdf",
-   "name": "Design review notes 240910.pdf",
+   "path": "Greenfield Residences — Landscape Package/Documents/Design review notes.pdf",
+   "name": "Design review notes.pdf",
    "ext": "pdf",
    "size_bytes": 212000,
    "verdict": "spec",
@@ -260,7 +260,7 @@
   },
   {
    "file_id": "f25",
-   "path": "Greenfield Residences — Landscape Package/Bills/Tree pit guide - shallow roots.pdf",
+   "path": "Greenfield Residences — Landscape Package/Documents/Tree pit guide - shallow roots.pdf",
    "name": "Tree pit guide - shallow roots.pdf",
    "ext": "pdf",
    "size_bytes": 402000,
@@ -270,7 +270,7 @@
   },
   {
    "file_id": "f26",
-   "path": "Greenfield Residences — Landscape Package/Bills/Tree pit guide - medium roots.pdf",
+   "path": "Greenfield Residences — Landscape Package/Documents/Tree pit guide - medium roots.pdf",
    "name": "Tree pit guide - medium roots.pdf",
    "ext": "pdf",
    "size_bytes": 398000,
@@ -280,7 +280,7 @@
   },
   {
    "file_id": "f27",
-   "path": "Greenfield Residences — Landscape Package/Bills/Tree pit guide - deep roots.pdf",
+   "path": "Greenfield Residences — Landscape Package/Documents/Tree pit guide - deep roots.pdf",
    "name": "Tree pit guide - deep roots.pdf",
    "ext": "pdf",
    "size_bytes": 405000,
@@ -290,7 +290,7 @@
   },
   {
    "file_id": "f28",
-   "path": "Greenfield Residences — Landscape Package/Bills/Planting procurement spec.pdf",
+   "path": "Greenfield Residences — Landscape Package/Documents/Planting procurement spec.pdf",
    "name": "Planting procurement spec.pdf",
    "ext": "pdf",
    "size_bytes": 655000,
@@ -300,8 +300,8 @@
   },
   {
    "file_id": "f29",
-   "path": "Greenfield Residences — Landscape Package/Quotes/Irrigation/irrigation-quote-240909.xls",
-   "name": "irrigation-quote-240909.xls",
+   "path": "Greenfield Residences — Landscape Package/Quotes/irrigation quote (old format).xls",
+   "name": "irrigation quote (old format).xls",
    "ext": "xls",
    "size_bytes": 72704,
    "verdict": "unsupported",
@@ -310,7 +310,7 @@
   },
   {
    "file_id": "f30",
-   "path": "Greenfield Residences — Landscape Package/Quotes/Metal/street-furniture-quote.pdf",
+   "path": "Greenfield Residences — Landscape Package/Quotes/street-furniture-quote.pdf",
    "name": "street-furniture-quote.pdf",
    "ext": "pdf",
    "size_bytes": 188000,
@@ -320,7 +320,7 @@
   },
   {
    "file_id": "f31",
-   "path": "Greenfield Residences — Landscape Package/Quotes/Metal/metal-details.zip",
+   "path": "Greenfield Residences — Landscape Package/Quotes/metal-details.zip",
    "name": "metal-details.zip",
    "ext": "zip",
    "size_bytes": 96500,
@@ -333,7 +333,7 @@
   },
   {
    "file_id": "f32",
-   "path": "Greenfield Residences — Landscape Package/Quotes/Metal/metal-details.zip/drain-cover-detail.dxf",
+   "path": "Greenfield Residences — Landscape Package/Quotes/metal-details.zip/drain-cover-detail.dxf",
    "name": "drain-cover-detail.dxf",
    "ext": "dxf",
    "size_bytes": 121000,
@@ -343,8 +343,8 @@
   },
   {
    "file_id": "f33",
-   "path": "Greenfield Residences — Landscape Package/Other/BOQ - Landscape - 20241014 (paving update).xlsx",
-   "name": "BOQ - Landscape - 20241014 (paving update).xlsx",
+   "path": "Greenfield Residences — Landscape Package/Bills/Landscape BOQ rev3 (paving update).xlsx",
+   "name": "Landscape BOQ rev3 (paving update).xlsx",
    "ext": "xlsx",
    "size_bytes": 63100,
    "verdict": "bill",
@@ -353,7 +353,7 @@
   },
   {
    "file_id": "f34",
-   "path": "Greenfield Residences — Landscape Package/Green Building Label - required documents.pdf",
+   "path": "Greenfield Residences — Landscape Package/Documents/Green Building Label - required documents.pdf",
    "name": "Green Building Label - required documents.pdf",
    "ext": "pdf",
    "size_bytes": 254000,
@@ -363,13 +363,13 @@
   },
   {
    "file_id": "f35",
-   "path": "Greenfield Residences — Landscape Package/Planter mood board.pptx",
+   "path": "Greenfield Residences — Landscape Package/Other/Planter mood board.pptx",
    "name": "Planter mood board.pptx",
    "ext": "pptx",
    "size_bytes": 2310000,
    "verdict": "presentation",
    "decided_by": "ext",
-   "why": "A slide deck, not a drawing."
+   "why": "A planter mood board slide deck, not a drawing."
   }
  ],
  "sheets": [
@@ -8108,7 +8108,7 @@
    "by": [
     "bill"
    ],
-   "why": "rev1, rev1a, rev2 and the 20241014 budget file differ. The drawing shows 212 m².",
+   "why": "Rev 1, Rev 1a, Rev 2 and Rev 3 (the paving update) differ. The drawing shows 212 m².",
    "evidence": {
     "file_ids": [
      "f22",
@@ -8181,7 +8181,7 @@
    "by": [
     "rule"
    ],
-   "why": "irrigation-quote-240909.xls is in the 1997–2003 format.",
+   "why": "irrigation quote (old format).xls is in the 1997–2003 format.",
    "evidence": {
     "file_ids": [
      "f29"

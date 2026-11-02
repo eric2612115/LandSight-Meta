@@ -7,7 +7,7 @@ import {SCENE4} from './scene4-cues.js';
  * Scene 4, "Six sheets, one building" (12 s, 1920 × 1080, 30 fps; hook 4 of demo/OPENING-V6.md). The six sheets of
  * the tower package (public/tower/*.png, the repo's own renders of samples/tower's DXF files) lie flat and fanned on
  * the dark field. The camera tilts and the four plan sheets rise one by one, each to the floor its title block
- * names in the recorded Run (public/data/scene4.json, landsight.db run 9539ce2f1c3f), so the stack reads as a
+ * names in the recorded Run (public/data/scene4.json, landsight.db run 97e35639fb8d), so the stack reads as a
  * building under a slow orbit; the two sheets the Run does not count leave, tagged with the Run's words. Cobalt pins
  * light on the floors where three checks fired, each with lines quoted from the check; at the first the typical sheet
  * gains its five copies (the Run: it stands for 6 floors). The orbit settles and the Run's scoreboard lands.
@@ -231,7 +231,7 @@ export const Scene4Tower: React.FC<Scene4Props> = ({data}) => {
       {plates.map((pl) => {
         if (!pl.label || pl.labelA <= 0) return null;
         const c = project(-W / 2, H / 2, pl.pose, cam);
-        // a copy's label sits a little lower on its corner, a sheet's a little higher, so R1F and 21F clear each other
+        // a copy's label sits a little lower on its corner, a sheet's a little higher, so RF and 20F clear each other
         return (
           <div key={`label-${pl.key}`} style={{position: 'absolute', left: c.x - 16 - 400, width: 400, top: c.y - (pl.ghost ? 10 : 25), textAlign: 'right', opacity: pl.labelA, transform: `translateX(${(1 - pl.labelA) * 10}px)`, fontFamily: FONT.mono, fontSize: 28, fontWeight: pl.ghost ? 400 : 600, color: pl.ghost ? C.mute : C.soft, whiteSpace: 'nowrap', letterSpacing: 0.5, textShadow: '0 2px 10px rgba(0,0,0,0.7)'}}>
             {pl.label}

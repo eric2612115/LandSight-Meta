@@ -28,7 +28,7 @@ def _n(v) -> str:
 
 
 def order(bills: list[Bill]) -> list[Bill]:
-    """Oldest first: by date, then by revision label (rev1 before rev1a), then by file name."""
+    """Oldest first: by date, then by revision label (1 before 1a), then by file name."""
     return sorted(bills, key=lambda b: (b.date, len(b.revision), b.revision, b.rel))
 
 

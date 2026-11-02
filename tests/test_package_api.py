@@ -60,9 +60,9 @@ def test_open_serves_the_package(api):
     assert (e["planted"], len(e["found"]), len(e["flagged"]), len(e["missed"]), len(e["false_alarms"])) == (30, 28, 2, 0, 0)
     assert run["tally"][0] | {} == {"label": "Camphor", "species_code": "CC", "drawn": 7, "spark": 8, "schedule": 12,
                                     "unit": "plant", "status": "flagged", "item_id": "I-01", "by": "spark"}
-    assert run["timing"]["sam_calls"] == 12 and run["timing"]["recorded"] is True  # 8 on the DXF renders, 4 on F-17
+    assert run["timing"]["sam_calls"] == 12 and run["timing"]["recorded"] is True  # 8 on the DXF renders, 4 on F-26
     filled = sorted(s["sheet_id"] for s in run["sheets"] if s.get("filled_png_url"))
-    assert filled == ["F-17-p1", "L-1-revB", "L-3"]  # L-1, L-3 and the Presentation Plan page
+    assert filled == ["F-26-p1", "L-1-revB", "L-3"]  # L-1, L-3 and the Presentation Plan page
 
 
 def test_every_string_and_every_svg_text_node_is_english(api):
