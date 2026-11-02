@@ -44,7 +44,8 @@ SAM_FIXTURES = REPO / "tests" / "fixtures" / "sam"  # the hand-typed probe (docs
 SAM_LEGEND_FIXTURES = SAM_FIXTURES / "spark_legend"  # SAM prompted with Muse Spark's legend words
 STANDIN_DETAIL = REPO / "tests" / "fixtures" / "detail" / "L-6.dxf"  # until the package generator's L-6 exists
 VERSION = "0.1.0"
-FEATURES = ("grounding_points", "spark_legend", "sam_control", "pit_downgrade")
+FEATURES = ("grounding_points", "spark_legend", "sam_control", "pit_downgrade",
+            "upload")  # upload: POST /api/projects/{id}/packages/upload, a dropped folder (D-81)
 ON_SEGMENT_M = 0.3  # a grounding point within this distance of a red segment is "on" it
 PAPER = "#f7f5f0"
 

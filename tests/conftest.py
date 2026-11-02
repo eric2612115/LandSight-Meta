@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 
 os.environ["LANDSIGHT_DB"] = str(Path(tempfile.mkdtemp(prefix="landsight-test-db-")) / "landsight.db")
+os.environ["LANDSIGHT_UPLOADS"] = tempfile.mkdtemp(prefix="landsight-test-uploads-")  # never out/uploads in tests
 
 from landsight.synth import LEVELS, Messiness, generate
 

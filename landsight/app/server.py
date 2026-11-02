@@ -18,6 +18,8 @@ landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
   GET  /api/projects                   projects, their packages and each package's latest run
   POST /api/projects                   {"name"} -> a project
   POST /api/projects/{id}/packages     {"path", "name"?} register a package folder
+  POST /api/projects/{id}/packages/upload   multipart, one part per file (filename = relative path) -> {package, run,
+                                       upload}; feature "upload" (LANDSIGHT_FEATURES_OFF=upload switches it off)
   GET  /api/packages/{id}              one package
   POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N) -> Run; the endpoints above map onto it
   GET  /api/runs/{id}                  a stored Run with its confirmations, notes and flags (?scenario=)
@@ -35,7 +37,7 @@ from __future__ import annotations
 import threading
 from pathlib import Path
 
-from fastapi import Body, FastAPI, HTTPException
+from fastapi import Body, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 
@@ -58,6 +60,7 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
     app = FastAPI(title="Landsight", version=VERSION, docs_url=None, redoc_url=None)
     app.add_middleware(CORSMiddleware, allow_origins=FRONTEND_ORIGINS, allow_methods=["*", "PUT"], allow_headers=["*"])
     m4, package = RunState(features), PackageState(db)
+    flags = m4.features  # LANDSIGHT_FEATURES_OFF=upload,... switches a feature off
     current: dict = {"state": None, "opening": 0}
     lock = threading.Lock()
     app.state.landsight = current
@@ -75,7 +78,8 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
     @app.get("/api/health")
     def health():
         st = current["state"]
-        return {"ok": True, "spark": "live" if st is not None and st.live else "fixtures", "version": VERSION}
+        return {"ok": True, "spark": "live" if st is not None and st.live else "fixtures", "version": VERSION,
+                "features": {"upload": bool(flags.get("upload"))}}
 
     def conn():
         return connect(db)
@@ -210,6 +214,55 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             raise HTTPException(400, str(e)) from e
         finally:
             c.close()
+
+    @app.post("/api/projects/{project_id}/packages/upload")
+    async def upload_package(project_id: int, request: Request):
+        """A dropped folder: multipart, one part per file, filename = its relative path (top folder included). The
+        files go to out/uploads/<content hash>/, the folder is registered (the same content → the same package) and
+        reviewed by package id from the recordings, like POST /api/packages/{id}/review."""
+        from starlette.concurrency import run_in_threadpool
+
+        from landsight.app import upload as UP
+
+        if not flags.get("upload"):
+            raise HTTPException(404, "upload is switched off (LANDSIGHT_FEATURES_OFF=upload): register a folder by path")
+        c = conn()
+        try:
+            if not c.execute("SELECT 1 FROM projects WHERE id = ?", (project_id,)).fetchone():
+                raise HTTPException(404, f"no project {project_id}")
+        finally:
+            c.close()
+        try:
+            got = await UP.receive(request)
+        except UP.UploadError as e:
+            return JSONResponse(e.body(), status_code=e.status)
+        uid, folder, reused = await run_in_threadpool(UP.settle, got)
+        c = conn()
+        try:
+            pk = DBS.register_package(c, project_id, folder)
+        except (ValueError, OSError) as e:
+            raise HTTPException(400, f"the upload is not a package folder: {e}") from e
+        finally:
+            c.close()
+        upload = {"id": uid, "folder": DBS._folder_key(folder), "files": len(got.files), "bytes": got.total,
+                  "skipped": got.skipped, "reused": reused}
+        with lock:
+            current["opening"] += 1
+        try:
+            run = await run_in_threadpool(lambda: package.open(live=False, package_id=pk["package_id"]))
+            current["state"] = package
+        except Exception as e:  # noqa: BLE001 - whatever was dropped, the answer is the package and why it did not read
+            run = None
+            upload["review_error"] = f"{type(e).__name__}: {str(e)[:200]}"
+        finally:
+            with lock:
+                current["opening"] -= 1
+        c = conn()
+        try:
+            pk = DBS.package(c, pk["package_id"])
+        finally:
+            c.close()
+        return JSONResponse({"package": pk, "run": run, "upload": upload})
 
     @app.get("/api/packages/{package_id}")
     def get_package(package_id: int):

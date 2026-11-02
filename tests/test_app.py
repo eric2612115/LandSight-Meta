@@ -35,7 +35,8 @@ def strings(obj, path=""):
 
 def test_health_and_cors():
     c = TestClient(create_app())
-    assert c.get("/api/health").json() == {"ok": True, "spark": "fixtures", "version": "0.1.0"}
+    assert c.get("/api/health").json() == {"ok": True, "spark": "fixtures", "version": "0.1.0",
+                                           "features": {"upload": True}}
     r = c.options("/api/health", headers={"Origin": "http://localhost:5195", "Access-Control-Request-Method": "GET"})
     assert r.headers["access-control-allow-origin"] == "http://localhost:5195"
     assert c.get("/api/run").status_code == 404
