@@ -158,3 +158,61 @@ def test_e29_says_unreadable_when_the_sheet_file_is_there(tmp_path):
     idx = next(c for c in run["checks"] if "drawing index" in c["title"])
     assert "L-9 Sections: on the drawing index, in the package but unreadable (L-9 Sections.dxf)" in idx["title"]
     assert idx["unreadable"] == ["L-9"] and "L-9" not in idx["missing"] and "readable copy" in idx["why"]
+
+
+def test_api_fresh_all_reasks_spark_and_sam(tmp_path, monkeypatch):
+    """POST /api/packages/{id}/review?live=1&fresh=all re-asks every Muse Spark and every SAM 3.1 call (fake clients
+    that answer what the recording says, with new ids), as the CLI's --fresh all does; fresh=N re-asks N Spark calls."""
+    import hashlib
+    import shutil
+
+    from landsight.meta import sam as samlib
+    from landsight.review import colour, spark as RS
+
+    repo_fx = SAMPLE.parents[1] / "tests" / "fixtures" / "review"
+    fx = tmp_path / "review"
+    (fx / "sam").mkdir(parents=True)
+    for f in repo_fx.glob("*.json"):
+        shutil.copy(f, fx / f.name)
+    for f in (repo_fx / "sam").glob("*.json"):
+        shutil.copy(f, fx / "sam" / f.name)
+    monkeypatch.setattr(RS, "FIXTURES", fx)
+    monkeypatch.setattr(colour, "SAM_FIXTURES", fx / "sam")
+    monkeypatch.setenv("MODEL_API_KEY", "fake-key-for-tests")
+    asked = {"spark": 0, "sam": 0}
+    original = RS.ReviewSpark._answer
+
+    def fake_answer(self, call, key, images, prompt, live, extra=None, image_fallback=True):
+        rec = self._lookup(call, RS._image_sha(images) if images else "", key, image_fallback)
+
+        def fake_live():  # the fake Muse Spark: the recorded answer, a new id
+            asked["spark"] += 1
+            return rec["result"], rec.get("usage") or {}, {"id": f"fake-{asked['spark']}"}
+
+        return original(self, call, key, images, prompt, fake_live if rec is not None else live, extra, image_fallback)
+
+    sam_recs = {(r["image_sha256"], r["prompt"]): r for r in
+                (json.loads(f.read_text()) for f in (fx / "sam").glob("*.json"))}
+
+    def fake_sam(png, prompt, *a, **k):  # the fake SAM 3.1: the recorded token stream, a new id
+        asked["sam"] += 1
+        return sam_recs[(hashlib.sha256(png).hexdigest(), prompt)]["raw_output"], 0.01, {"id": f"resp_fake_{asked['sam']}"}
+
+    monkeypatch.setattr(RS.ReviewSpark, "_answer", fake_answer)
+    monkeypatch.setattr(samlib, "call_envelope", fake_sam)
+    c = TestClient(create_app())
+    pid = c.post("/api/package/open").json()["package_id"]
+    assert c.post(f"/api/packages/{pid}/review?live=1&fresh=sometimes").status_code == 422
+    run = c.post(f"/api/packages/{pid}/review?live=1&fresh=all").json()
+    fresh = run["timing"]["fresh"]
+    spark_n = sum(1 for x in fresh if x["response_id"].startswith("fake-"))
+    sam_n = sum(1 for x in fresh if x["response_id"].startswith("resp_fake_"))
+    assert spark_n == run["timing"]["spark_calls"] == asked["spark"] == 39
+    assert sam_n == run["timing"]["sam_calls"] == asked["sam"] == 12
+    e = run["errors"]
+    assert (e["planted"], len(e["found"]), len(e["flagged"]), len(e["missed"]), len(e["false_alarms"])) == (30, 28, 2, 0, 0)
+    assert len(list((fx / "fresh").glob("*.json"))) == 39 and len(list((fx / "sam" / "fresh").glob("*.json"))) == 12
+    assert sorted(p.name for p in fx.glob("*.json")) == sorted(p.name for p in repo_fx.glob("*.json"))  # untouched
+    asked.update(spark=0, sam=0)
+    some = c.post(f"/api/packages/{pid}/review?live=1&fresh=3").json()
+    assert len(some["timing"]["fresh"]) == 3 == asked["spark"] and asked["sam"] == 0

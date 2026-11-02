@@ -21,7 +21,7 @@ landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
   POST /api/projects/{id}/packages/upload   multipart, one part per file (filename = relative path) -> {package, run,
                                        upload}; feature "upload" (LANDSIGHT_FEATURES_OFF=upload switches it off)
   GET  /api/packages/{id}              one package
-  POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N) -> Run; the endpoints above map onto it
+  POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N|all) -> Run; the endpoints above map onto it
   GET  /api/runs/{id}                  a stored Run with its confirmations, notes and flags (?scenario=)
   GET  /api/runs/{id}/checks           the export listing: open + confirmed checks (?scenario=, ?confirmed=1)
   POST /api/runs/{id}/checks/{check_id}/decision   {"decision": confirm|dismiss|open, "note"?} -> the check
@@ -275,7 +275,16 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             c.close()
 
     @app.post("/api/packages/{package_id}/review")
-    def review_package(package_id: int, live: int = 0, fresh: int = 0):
+    def review_package(package_id: int, live: int = 0, fresh: str = "0"):
+        """?live=1&fresh=N re-asks N recorded Muse Spark calls; fresh=all (or -1) every Spark and SAM 3.1 call — the
+        CLI's --fresh N|all."""
+        f = fresh.strip().lower()
+        if f == "all" or f == "-1":
+            fresh_n = -1
+        elif f.isdigit():
+            fresh_n = int(f)
+        else:
+            raise HTTPException(422, f"fresh must be a number of calls or 'all', not {fresh!r}")
         c = conn()
         try:
             DBS.package(c, package_id)
@@ -283,12 +292,12 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             raise HTTPException(404, str(e).strip("'")) from e
         finally:
             c.close()
-        if fresh and not live:
+        if fresh_n and not live:
             raise HTTPException(400, "fresh re-asks recorded calls live: add live=1")
         with lock:
             current["opening"] += 1
         try:
-            out = package.open(live=bool(live), package_id=package_id, fresh=-1 if fresh < 0 else fresh)
+            out = package.open(live=bool(live), package_id=package_id, fresh=fresh_n)
         except ValueError as e:
             raise HTTPException(400, str(e)) from e
         finally:
