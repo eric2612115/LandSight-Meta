@@ -27,7 +27,7 @@ export function Projects({ run }: { run?: Run }) {
   return (
     <div className="grid h-[1004px] gap-px bg-line" style={{ gridTemplateColumns: '580px 1fr' }}>
       <aside className="flex min-h-0 min-w-0 flex-col overflow-hidden bg-pane">
-        <div className="ph">Projects <span className="r flex items-center gap-3">{live ? 'landsight.db' : 'recorded reviews (docs/STACK.md)'}<button className="btn !py-0.5" onClick={() => setNaming(naming === null ? '' : null)}>New project</button></span></div>
+        <div className="ph">Projects <span className="r flex items-center gap-3">{live ? 'landsight.db' : 'recorded reviews (docs/STACK.md)'}<button className="btn !py-0.5" onClick={() => setNaming(naming === null ? '' : null)}>New project</button><button className="btn primary !py-0.5" onClick={() => window.location.assign(`/try${window.location.search}`)}>Quick review →</button></span></div>
         <AnimatePresence>
           {naming !== null && (
             <motion.div className="flex gap-2 border-b border-line-2 p-3" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
