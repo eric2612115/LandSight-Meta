@@ -3,7 +3,7 @@ import 'd3-transition'
 import { zoom as d3zoom, zoomIdentity, zoomTransform, type ZoomBehavior } from 'd3-zoom'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  forwardRef, memo, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, type ReactNode,
+  forwardRef, memo, useCallback, useEffect, useId, useImperativeHandle, useMemo, useRef, useState, type ReactNode,
 } from 'react'
 import { en } from '../lib/english'
 import { bboxOf, centreOf, openSegments, padBox, pathOf, unionBox, type BBox } from '../lib/geo'
@@ -65,7 +65,7 @@ const svgCache = new Map<string, Promise<{ html: string; W: number; H: number } 
 let idSeq = 0
 
 /** Fetch the print SVG, drop its paper and any CJK text, namespace its ids; cached per URL. */
-function loadSvg(url: string) {
+export function loadSvg(url: string) {
   let p = svgCache.get(url)
   if (!p) {
     p = fetch(url, { cache: 'force-cache' })
@@ -106,9 +106,10 @@ function paddedWindow(sheet: Sheet): BBox {
   return { x0: b.min_x, y0: b.min_y, x1: b.max_x, y1: b.max_y }
 }
 
-function useUnderlay(sheet: Sheet | undefined, raster: boolean): Underlay | null | 'loading' {
+function useUnderlay(sheet: Sheet | undefined, rasterSheet: boolean, href?: string): Underlay | null | 'loading' {
   const [state, setState] = useState<{ key: string; u: Underlay | null } | null>(null)
-  const url = sheet ? (raster ? sheet.png_url : sheet.svg_url) : ''
+  const raster = rasterSheet || !!href
+  const url = sheet ? (href ?? (raster ? sheet.png_url : sheet.svg_url)) : ''
   const key = `${sheet?.sheet_id}|${url}|${raster}`
   useEffect(() => {
     if (!sheet || !url) return
@@ -342,9 +343,13 @@ type Props = {
   initialView?: View
   /** CAD-viewer furniture: live scale bar, cursor readout in metres, double-click to fit */
   cad?: boolean
-  /** the faint dark grid the paper sits on */
+  /** the faint grid the paper sits on */
   grid?: boolean
   className?: string
+  /** a raster to show instead of the print SVG (the coloured render SAM 3.1 reads) */
+  underlayHref?: string
+  /** a second raster poured over the underlay from the top, 0..1 (the colour scene) */
+  pourHref?: string
 }
 
 const LINES_FILTER = 'grayscale(1) contrast(2.6) brightness(1.32)'
@@ -364,13 +369,15 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
   const initialRef = useRef(props.initialView)
   const fitRef = useRef<(() => void) | null>(null)
   const readoutRef = useRef<HTMLSpanElement>(null)
+  /** true once the view is anywhere but home (a gesture or a camera move); a resize then keeps it */
+  const movedRef = useRef(false)
   useEffect(() => {
     interactiveRef.current = interactive
     homeRef.current = homeRect
     onViewRef.current = props.onView
   })
 
-  const u = useUnderlay(sheet, raster)
+  const u = useUnderlay(sheet, raster, props.underlayHref)
   const underlay = u === 'loading' ? null : u
   const win = underlay ? underlay.win : paddedWindow(sheet)
   const ink = u === null
@@ -382,6 +389,7 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
       .scaleExtent([0.05, 5000])
       .filter((ev: Event & { button?: number; ctrlKey?: boolean }) => interactiveRef.current && !ev.button)
       .on('zoom', (ev) => {
+        if (ev.sourceEvent) movedRef.current = true
         const t = ev.transform
         viewRef.current = { k: t.k, x: t.x, y: t.y }
         if (!raf.current) {
@@ -407,7 +415,8 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
     }
   }, [])
 
-  const go = useCallback((v: View, duration = 0) => {
+  const go = useCallback((v: View, duration = 0, home = false) => {
+    movedRef.current = !home
     const svg = svgRef.current
     const zb = zoomRef.current
     if (!svg || !zb) return Promise.resolve()
@@ -429,12 +438,18 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
   useEffect(() => {
     if (homedFor.current === sheet.sheet_id) return
     homedFor.current = sheet.sheet_id
-    void go(initialRef.current ?? fitView(paddedWindow(sheet), homeRef.current), 0).then(() => setReady(true))
+    void go(initialRef.current ?? fitView(paddedWindow(sheet), homeRef.current), 0, !initialRef.current).then(() => setReady(true))
   }, [go, sheet])
+
+  // the pane changed size (the dock grew or shrank): a sheet still at home is fitted again
+  const { x: hx, y: hy, w: hw, h: hh } = homeRect
+  useEffect(() => {
+    if (!movedRef.current && homedFor.current === sheet.sheet_id) void go(fitView(paddedWindow(sheet), { x: hx, y: hy, w: hw, h: hh }), 0, true)
+  }, [go, sheet, hx, hy, hw, hh])
 
   const objects = sheet.objects
   useEffect(() => {
-    fitRef.current = () => void go(fitView(paddedWindow(sheet), homeRef.current), 320)
+    fitRef.current = () => void go(fitView(paddedWindow(sheet), homeRef.current), 320, true)
   }, [go, sheet])
 
   useImperativeHandle(ref, (): SheetHandle => {
@@ -445,7 +460,7 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
         const b = objectBox(ids)
         return b ? go(fitView(padBox(b, o.pad ?? 2), o.rect ?? homeRef.current), o.duration ?? 320) : Promise.resolve()
       },
-      home: (o = {}) => go(fitView(paddedWindow(sheet), o.rect ?? homeRef.current), o.duration ?? 320),
+      home: (o = {}) => go(fitView(paddedWindow(sheet), o.rect ?? homeRef.current), o.duration ?? 320, true),
       setView: (v, duration = 0) => go(v, duration),
       view: () => viewRef.current,
       fitView,
@@ -483,7 +498,7 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
         onMouseLeave={props.cad ? () => { if (readoutRef.current) readoutRef.current.textContent = '' } : undefined}>
         <defs>
           <filter id="paper-shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy={W * 0.004} stdDeviation={W * 0.009} floodColor="#000" floodOpacity="0.6" />
+            <feDropShadow dx="0" dy={W * 0.003} stdDeviation={W * 0.006} floodColor="#000" floodOpacity="0.22" />
           </filter>
           {pour > 0 && (
             <clipPath id={clipId}>
@@ -502,6 +517,11 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
               <UnderlayLayer u={underlay} filter="none" />
             </g>
           )}
+          {props.pourHref && pour > 0 && (
+            <g clipPath={`url(#${clipId})`}>
+              <UnderlayLayer u={{ kind: 'raster', href: props.pourHref, win: paddedWindow(sheet) }} />
+            </g>
+          )}
           <ObjectLayer objects={objects} looks={looks} ink={ink} onClick={props.onObjectClick} />
           <DotLayer objects={objects} looks={looks} k={view.k} />
           <PulseLayer objects={objects} looks={looks} />
@@ -512,10 +532,10 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
       </svg>
       {props.html && <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>{props.html(ctx)}</div>}
       {props.cad && (
-        <div className="pointer-events-none absolute bottom-4 right-4 flex items-end gap-4 rounded-lg border border-line bg-[rgba(18,20,24,0.88)] px-3 py-2 text-[12px] text-soft backdrop-blur">
-          <span ref={readoutRef} className="mono min-w-[190px] text-right text-mute" />
+        <div className="pointer-events-none absolute bottom-3 right-3 flex items-end gap-4 border border-line bg-pane/95 px-3 py-1.5 text-[12px] text-ink-2">
+          <span ref={readoutRef} className="mono min-w-[196px] text-right text-ink-3" />
           <ScaleBar k={view.k} />
-          {sheet.scale_title && <span className="mono text-mute">sheet {sheet.scale_title}</span>}
+          {sheet.scale_title && <span className="mono text-ink-3">sheet {sheet.scale_title}</span>}
         </div>
       )}
     </div>
@@ -530,10 +550,10 @@ function ScaleBar({ k }: { k: number }) {
   const px = m * k
   return (
     <span className="flex flex-col items-start gap-1">
-      <span className="mono leading-none text-soft">{m < 1 ? `${m * 100} cm` : `${m} m`}</span>
+      <span className="mono leading-none text-ink-2">{m < 1 ? `${m * 100} cm` : `${m} m`}</span>
       <svg width={px + 2} height={8}>
-        <path d={`M1,1V7H${px + 1}V1`} fill="none" stroke="#c3c8cf" strokeWidth={1.5} />
-        <rect x={1} y={4} width={px / 2} height={3} fill="#c3c8cf" />
+        <path d={`M1,1V7H${px + 1}V1`} fill="none" stroke="#5c636d" strokeWidth={1.2} />
+        <rect x={1} y={4} width={px / 2} height={3} fill="#5c636d" />
       </svg>
     </span>
   )
@@ -541,6 +561,7 @@ function ScaleBar({ k }: { k: number }) {
 
 /** A faint grid in drawing metres under the paper, so the canvas reads as unbounded. */
 function Grid({ view, width, height }: { view: View; width: number; height: number }) {
+  const uid = useId().replace(/:/g, '')
   const step = NICE.find((v) => v * view.k >= 22) ?? 1000
   const s = step * view.k
   const ox = ((view.x % s) + s) % s
@@ -551,15 +572,15 @@ function Grid({ view, width, height }: { view: View; width: number; height: numb
   return (
     <g pointerEvents="none">
       <defs>
-        <pattern id="grid-minor" width={s} height={s} patternUnits="userSpaceOnUse" x={ox} y={oy}>
-          <path d={`M${s},0H0V${s}`} fill="none" stroke="rgba(255,255,255,0.035)" strokeWidth={1} />
+        <pattern id={`gmin${uid}`} width={s} height={s} patternUnits="userSpaceOnUse" x={ox} y={oy}>
+          <path d={`M${s},0H0V${s}`} fill="none" stroke="rgba(23,26,30,0.045)" strokeWidth={1} />
         </pattern>
-        <pattern id="grid-major" width={major} height={major} patternUnits="userSpaceOnUse" x={mx} y={my}>
-          <path d={`M${major},0H0V${major}`} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={1} />
+        <pattern id={`gmaj${uid}`} width={major} height={major} patternUnits="userSpaceOnUse" x={mx} y={my}>
+          <path d={`M${major},0H0V${major}`} fill="none" stroke="rgba(23,26,30,0.075)" strokeWidth={1} />
         </pattern>
       </defs>
-      <rect width={width} height={height} fill="url(#grid-minor)" />
-      <rect width={width} height={height} fill="url(#grid-major)" />
+      <rect width={width} height={height} fill={`url(#gmin${uid})`} />
+      <rect width={width} height={height} fill={`url(#gmaj${uid})`} />
     </g>
   )
 }
@@ -578,4 +599,36 @@ export function SheetThumb({ sheet, raster, className }: { sheet: Sheet; raster?
   if (raster) return <img src={sheet.png_url} alt="" className={className} style={{ objectFit: 'contain', mixBlendMode: 'multiply' }} />
   if (!svg) return <div className={className} />
   return <svg className={`ul ${className ?? ''}`} viewBox={`0 0 ${svg.W} ${svg.H}`} preserveAspectRatio="xMidYMid meet" dangerouslySetInnerHTML={{ __html: svg.html }} />
+}
+
+export type CropMark = { id: string; outline: number[][]; closed?: boolean; label?: string; dashed?: boolean; tone?: 'blue' | 'ink' | 'mute' }
+
+/** A window of a sheet as it prints, with marks drawn on it: the inspector's and the callout's crop. `box` in metres. */
+export function SheetCrop({ sheet, box, marks = [], className, raster, labelSize = 0.9 }: {
+  sheet: Sheet; box: BBox; marks?: CropMark[]; className?: string; raster?: boolean; labelSize?: number
+}) {
+  const u = useUnderlay(sheet, !!raster)
+  const underlay = u === 'loading' ? null : u
+  const w = box.x1 - box.x0
+  const h = box.y1 - box.y0
+  const tone = { blue: '#2457ff', ink: '#171a1e', mute: '#8a919b' }
+  return (
+    <svg className={className} viewBox={`${box.x0} ${-box.y1} ${w} ${h}`} preserveAspectRatio="xMidYMid meet" style={{ display: 'block', background: '#f7f5f0' }}>
+      {underlay && <UnderlayLayer u={underlay} />}
+      {marks.map((m) => {
+        const c = tone[m.tone ?? 'blue']
+        const b = bboxOf(m.outline)
+        return (
+          <g key={m.id}>
+            <path d={pathOf(m.outline, m.closed ?? true)} fill={m.dashed ? 'none' : c} fillOpacity={m.dashed ? 0 : 0.12} stroke={c} strokeWidth={1.6}
+              strokeDasharray={m.dashed ? '4 3' : undefined} vectorEffect="non-scaling-stroke" />
+            {m.label && (
+              <text x={(b.x0 + b.x1) / 2} y={-b.y0 + labelSize * 1.25} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontWeight={600}
+                fontSize={labelSize} fill={c} style={{ paintOrder: 'stroke', stroke: '#f7f5f0', strokeWidth: labelSize * 0.25 }}>{m.label}</text>
+            )}
+          </g>
+        )
+      })}
+    </svg>
+  )
 }

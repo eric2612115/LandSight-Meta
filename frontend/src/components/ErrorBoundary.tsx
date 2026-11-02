@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (!this.state.error) return this.props.children
     return (
-      <div role="alert" className={`flex items-center justify-center rounded-lg border border-[#5a3b3b] bg-[#2a1d1d] px-3 py-2 text-[13px] text-[#ffb3b3] ${this.props.className ?? ''}`}>
+      <div role="alert" className={`flex items-center justify-center border border-line bg-pane px-3 py-2 text-[13px] text-ink-2 ${this.props.className ?? ''}`}>
         {this.props.label ?? 'This part'} could not be shown ({this.state.error.message}); the rest of the screen still works.
       </div>
     )

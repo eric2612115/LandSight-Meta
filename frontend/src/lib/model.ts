@@ -1,8 +1,7 @@
 /** Derived views of a Run that both modes share. */
-import { en, plantName, unitName } from './english'
+import { en } from './english'
 import { bboxOf, type BBox } from './geo'
-import type { Check, DrawingObject, FileVerdict, Item, Run, Sheet, TallyRow } from './types'
-import type { TallyView } from '../components/Tally'
+import type { Check, DrawingObject, FileVerdict, Item, Run, Sheet } from './types'
 
 export const sheetById = (run: Run, id?: string) => run.sheets.find((s) => s.sheet_id === id)
 
@@ -69,18 +68,6 @@ export function pointsOnSheet(points: [number, number][] | undefined, o: Drawing
 
 export const tallyKey = (t: { label: string; species_code?: string }) => (t.species_code || t.label).toLowerCase()
 
-export function tallyView(rows: TallyRow[]): TallyView[] {
-  return rows.map((t) => ({
-    key: tallyKey(t),
-    label: plantName(t.label, t.species_code, t.label).common,
-    unit: t.unit === 'plant' ? 'plant' : unitName(t.unit),
-    drawn: t.drawn,
-    spark: t.spark,
-    schedule: t.schedule,
-    status: t.status,
-  }))
-}
-
 export const itemTallyRow = (run: Run, it: Item) =>
   run.tally.find((t) => (t.species_code && t.species_code === it.species_code) || t.label.toLowerCase() === it.label.toLowerCase())
 
@@ -112,7 +99,7 @@ export function sheetForCheck(run: Run, c: Check, preferred?: string): Sheet | u
 
 export const VERDICT_NAME: Record<FileVerdict['verdict'], string> = {
   drawing_vector: 'drawing · vector', drawing_raster: 'drawing · raster', drawing_image: 'drawing · image', bill: 'bill',
-  quote: 'quote', spec: 'spec', presentation: 'presentation', backup_ignored: 'backup — ignored',
+  quote: 'quote', spec: 'spec', document: 'document', presentation: 'presentation', backup_ignored: 'backup — ignored',
   archive_unpacked: 'archive — unpacked', unsupported: 'unsupported', unreadable: 'unreadable',
 }
 

@@ -3,7 +3,7 @@ import { useLayoutEffect, useState, type ReactNode } from 'react'
 export const STAGE_W = 1920
 export const STAGE_H = 1080
 
-/** A fixed 1920 × 1080 stage scaled to fit the window, so screen recordings are exact. */
+/** A fixed 1920 × 1080 stage scaled to fit the window, so screenshots and recordings are exact (`?scale=1` pins it). */
 export function Stage({ children }: { children: ReactNode }) {
   const [scale, setScale] = useState(1)
   useLayoutEffect(() => {
@@ -14,8 +14,8 @@ export function Stage({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('resize', fit)
   }, [])
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-[#0b0c0f]">
-      <div className="relative flex-none overflow-hidden bg-chrome" style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})`, transformOrigin: 'center' }}>
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-[#d9dce0]">
+      <div id="stage" className="relative flex-none overflow-hidden bg-bg" style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})`, transformOrigin: 'center' }}>
         {children}
       </div>
     </div>

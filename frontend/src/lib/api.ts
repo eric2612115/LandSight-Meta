@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { create } from 'zustand'
 import { en, kindName } from './english'
 import { useSource, type SourceKind } from './source'
 import type { Check, Item, Run, Scene } from './types'
@@ -43,10 +44,13 @@ export function normalise(raw: Run, src: SourceKind): Run {
     s.objects ??= []
   }
   run.items = run.items.map((it) => normaliseItem(it, src))
+  for (const f of run.files) f.ext = (f.ext ?? '').replace(/^\./, '').toLowerCase()
   for (const c of run.checks) {
     c.evidence ??= {}
     const refs = c.evidence.object_ids ?? []
     if (refs.some((r) => r.includes('/'))) {
+      // object ids are unique per sheet only: keep the sheet-qualified refs for drawing them
+      c.evidence.refs = refs.filter((r) => r.includes('/'))
       const sheets = new Set(c.evidence.sheet_ids ?? [])
       c.evidence.object_ids = [...new Set(refs.map((r) => {
         const i = r.indexOf('/')
@@ -102,8 +106,10 @@ async function liveRun(): Promise<Run> {
   throw new Error('GET /api/run: the package is still opening')
 }
 
-export async function fetchRun(src: SourceKind): Promise<Run> {
+/** The run on screen: `?run=<id>` (GET /api/runs/{id}), else the server's current run. */
+export async function fetchRun(src: SourceKind, id?: string): Promise<Run> {
   if (src === 'live') {
+    if (id) return normalise(await getJSON<Run>(`/api/runs/${encodeURIComponent(id)}`), src)
     let run: Run
     try {
       run = await liveRun()
@@ -112,8 +118,28 @@ export async function fetchRun(src: SourceKind): Promise<Run> {
     }
     return normalise(run, src)
   }
-  return normalise(await getJSON<Run>(`${BASE[src]}/run.json`), src)
+  const run = normalise(await getJSON<Run>(`${BASE[src]}/run.json`), src)
+  if (id && id !== run.run_id) throw new Error(`run ${id} is in landsight.db, not in the recording: start the API (landsight serve) to open it`)
+  return run
 }
+
+/** Which run the screens show: `?run=<id>` in the address, kept across screens. */
+export const useRunSel = create<{ id?: string; open: (id?: string) => void }>((set) => ({
+  id: typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('run') ?? undefined,
+  open: (id) => {
+    try {
+      const u = new URL(window.location.href)
+      if (id) u.searchParams.set('run', id)
+      else u.searchParams.delete('run')
+      window.history.replaceState(window.history.state, '', u)
+    } catch {
+      /* no URL */
+    }
+    set({ id })
+  },
+}))
+
+export const runKey = (src: SourceKind | null, id?: string) => ['run', src, id ?? 'current'] as const
 
 export async function fetchDirector(src: SourceKind): Promise<Scene[]> {
   const url = src === 'live' ? '/api/director' : `${BASE[src]}/director.json`
@@ -140,7 +166,8 @@ export function useResolvedSource() {
 
 export function useRun() {
   const src = useResolvedSource()
-  return useQuery({ queryKey: ['run', src], queryFn: () => fetchRun(src!), enabled: !!src, staleTime: Infinity, retry: 1 })
+  const id = useRunSel((s) => s.id)
+  return useQuery({ queryKey: runKey(src, id), queryFn: () => fetchRun(src!, id), enabled: !!src, staleTime: Infinity, retry: 1 })
 }
 
 export function useDirectorScenes() {
@@ -171,6 +198,8 @@ export function applyConfirm(run: Run, item: Item): Run {
 /** POST /api/items/{id}/confirm, optimistic; in mock modes the confirmation stays local. */
 export function useConfirm() {
   const src = useResolvedSource()
+  const id = useRunSel((s) => s.id)
+  const key = runKey(src, id)
   const qc = useQueryClient()
   return useMutation({
     mutationFn: async (item: Item) => {
@@ -179,18 +208,18 @@ export function useConfirm() {
       return normaliseItem(deepEnglish(await getJSON<Item>(`/api/items/${encodeURIComponent(item.item_id)}/confirm`, { method: 'POST' })), 'live')
     },
     onMutate: async (item) => {
-      await qc.cancelQueries({ queryKey: ['run', src] })
-      const prev = qc.getQueryData<Run>(['run', src])
-      if (prev) qc.setQueryData<Run>(['run', src], applyConfirm(prev, confirmedItem(item)))
+      await qc.cancelQueries({ queryKey: key })
+      const prev = qc.getQueryData<Run>(key)
+      if (prev) qc.setQueryData<Run>(key, applyConfirm(prev, confirmedItem(item)))
       return { prev }
     },
     onError: (_e, _item, ctx) => {
-      if (ctx?.prev) qc.setQueryData(['run', src], ctx.prev)
+      if (ctx?.prev) qc.setQueryData(key, ctx.prev)
     },
     onSuccess: (item) => {
-      const cur = qc.getQueryData<Run>(['run', src])
-      if (cur) qc.setQueryData<Run>(['run', src], applyConfirm(cur, item))
-      if (src === 'live') void qc.invalidateQueries({ queryKey: ['run', src] })
+      const cur = qc.getQueryData<Run>(key)
+      if (cur) qc.setQueryData<Run>(key, applyConfirm(cur, item))
+      if (src === 'live') void qc.invalidateQueries({ queryKey: key })
     },
   })
 }

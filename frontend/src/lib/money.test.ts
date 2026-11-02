@@ -11,6 +11,8 @@ describe('money', () => {
     expect(formatMoney(354000, 'usd', rate)).toBe('$10,900')
     expect(formatMoney(4200, 'usd', rate, { symbol: false })).toBe('129')
     expect(formatMoney(undefined, 'usd', rate)).toBe('–')
+    expect(formatMoney(155, 'usd', rate)).toBe('$4.77')
+    expect(formatTimes(150, 155, 'usd', rate).total).toBe('$716')
   })
 
   it('falls back to TWD when the Run carries no rate', () => {

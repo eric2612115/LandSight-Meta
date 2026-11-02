@@ -1,7 +1,7 @@
 /** The API contract of docs/API.md, as the frontend reads it. */
 
 export type Verdict =
-  | 'drawing_vector' | 'drawing_raster' | 'drawing_image' | 'bill' | 'quote' | 'spec' | 'presentation'
+  | 'drawing_vector' | 'drawing_raster' | 'drawing_image' | 'bill' | 'quote' | 'spec' | 'document' | 'presentation'
   | 'backup_ignored' | 'archive_unpacked' | 'unsupported' | 'unreadable'
 
 export type Source = 'geometry' | 'spark' | 'sam' | 'rule' | 'bill'
@@ -127,7 +127,7 @@ export type Check = {
   severity: Severity
   by: Source[]
   why: string
-  evidence: { file_ids?: string[]; sheet_ids?: string[]; object_ids?: string[]; cells?: string[] }
+  evidence: { file_ids?: string[]; sheet_ids?: string[]; object_ids?: string[]; cells?: string[]; /** "sheet/object" as the API sent them */ refs?: string[] }
   citation?: { article: string; url: string; gloss: string }
   numbers?: Record<string, unknown>
   fixes?: Fix[]
@@ -140,7 +140,17 @@ export type Check = {
   prompts?: { prompt: string; labels: string[]; kind: string }[]
   before_downgrade?: GaugeState | null
   after_downgrade?: GaugeState | null
+  /** v2: the kind of catch (docs/API.md); derived in lib/scenario.ts when absent */
+  scenario?: 'quote' | 'regulation' | 'design' | 'format' | 'info'
+  /** v2: items Muse Spark proposed that a person has not confirmed; the check as served counts geometry only */
+  pending_items?: string[]
+  confirmed_state?: boolean
+  unscored?: boolean
+  notes?: Annotation[]
+  flags?: Annotation[]
 }
+
+export type Annotation = { kind: 'confirm_element' | 'confirm_price' | 'regulation_note' | 'flag'; target_id: string; value: unknown; why: string; source: string; at?: string }
 
 export type ErrorScore = { planted: number; found: string[]; flagged: string[]; missed: string[]; false_alarms: string[] }
 
@@ -170,9 +180,12 @@ export type Run = {
   notes?: string[]
   /** GET /api/run while a package is being opened: the previous Run, marked */
   stale?: boolean
+  /** v2: the scoreboard per kind of catch; derived in lib/scenario.ts when absent */
+  scenarios?: Record<string, { planted: number; found: string[]; flagged: string[]; missed: string[]; false_alarms: string[]; checks: number; alarms: number }>
+  annotations?: Annotation[]
 }
 
-export type SceneId = 'drop' | 'wake' | 'eye' | 'hedge' | 'colour' | 'gauge' | 'bill' | 'callback'
+export type SceneId = 'drop' | 'wake' | 'eye' | 'hedge' | 'colour' | 'gauge' | 'bill' | 'ask' | 'callback'
 
 export type Scene = {
   id: SceneId

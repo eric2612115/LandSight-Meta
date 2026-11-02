@@ -7,10 +7,14 @@ export type Rate = { base: string; usd_per_twd: number; as_of?: string; source?:
 
 const thousands = (v: number) => Math.round(v).toLocaleString('en-US')
 
-/** The figure in the shown currency (USD rounded to whole dollars); null when it cannot be shown. */
+/** The figure in the shown currency (USD rounded to whole dollars, or to cents under $20 — a plant at $4.77 is not
+ * $5); null when it cannot be shown. */
 export function moneyValue(twd: number | undefined | null, cur: Currency, rate?: Rate | null): number | null {
   if (twd === undefined || twd === null || !Number.isFinite(twd)) return null
-  if (cur === 'usd' && rate?.usd_per_twd) return Math.round(twd * rate.usd_per_twd)
+  if (cur === 'usd' && rate?.usd_per_twd) {
+    const v = twd * rate.usd_per_twd
+    return Math.abs(v) < 20 ? Math.round(v * 100) / 100 : Math.round(v)
+  }
   return twd
 }
 
@@ -19,19 +23,25 @@ export function formatMoney(twd: number | undefined | null, cur: Currency, rate?
   const v = moneyValue(twd, cur, rate)
   if (v === null) return '–'
   const usd = cur === 'usd' && !!rate?.usd_per_twd
-  const body = usd ? thousands(v) : Number.isInteger(v) ? thousands(v) : v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  const body = Number.isInteger(v) ? thousands(v) : v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   return opts.symbol === false ? body : `${usd ? '$' : 'NT$'}${body}`
 }
 
 /** A range with the symbol once: NT$6,200–7,200 · $191–222. */
 export function formatRange(low: number | undefined | null, high: number | undefined | null, cur: Currency, rate?: Rate | null): string {
+  const a = moneyValue(low, cur, rate)
+  const b = moneyValue(high, cur, rate)
+  if (a !== null && b !== null && (!Number.isInteger(a) || !Number.isInteger(b))) {
+    const f2 = (v: number) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    return `${symbolOf(cur, rate)}${f2(a)}–${f2(b)}`
+  }
   return `${formatMoney(low, cur, rate)}–${formatMoney(high, cur, rate, { symbol: false })}`
 }
 
 /** n × a unit price, with the total from the shown unit so the arithmetic on screen holds (4 × $129 = $516). */
 export function formatTimes(n: number, twd: number | undefined | null, cur: Currency, rate?: Rate | null) {
   const unit = moneyValue(twd, cur, rate) ?? 0
-  const total = n * unit
+  const total = Math.round(n * unit * 100) / 100
   const usd = cur === 'usd' && !!rate?.usd_per_twd
   return { unit: formatMoney(twd, cur, rate), total: `${usd ? '$' : 'NT$'}${thousands(total)}`, totalValue: total, prefix: usd ? '$' : 'NT$' }
 }
