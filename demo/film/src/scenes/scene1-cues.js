@@ -1,18 +1,19 @@
 /**
- * Scene 1, "One tree" (15 s): every cue the scene places, in seconds, shared by scene1-prepare.mjs (which mixes the
- * effects) and src/scenes/Scene1Tree.tsx (which draws them), so a stroke you see separate is the rasp you hear.
+ * Scene 1, "One tree" (15 s, 60 fps): every cue the scene places, in seconds (never frames, so the scene plays the same
+ * at any frame rate), shared by scene1-prepare.mjs (which mixes the effects) and src/scenes/Scene1Tree.tsx (which
+ * draws them), so a stroke you see separate is the rasp you hear.
  */
 
 export const SCENE1 = {
-  fps: 30,
+  fps: 60,
   duration: 15,
   /** 0–3 s: the plan, a slow push toward the frontage row; the scan line crosses the row and hits T-08. */
   push: {end: 3.0, zoom: 2.2},
   scan: {start: 1.0, hit: 2.4, out: 2.75, x0: 1.5, xEnd: 36.0},
   /** 3–5 s: the sheet falls to the dark field; T-08 lifts to the centre at ×6. */
   lift: {start: 3.0, end: 4.0, sheetOut: 3.6},
-  /** 5–9 s: the orbit to 90°; each stroke rasps as it separates. */
-  orbit: {start: 5.0, frames: 96},
+  /** 5–9 s: the orbit to 90° (a spring that settles in 3.2 s); each stroke rasps as it separates. */
+  orbit: {start: 5.0, seconds: 3.2},
   rasps: Array.from({length: 12}, (_, i) => 5.15 + i * 0.14),
   /** 9–12 s: a tag per stroke, the counter in the corner. */
   tags: {start: 9.2, step: 0.2, out: 12.0},

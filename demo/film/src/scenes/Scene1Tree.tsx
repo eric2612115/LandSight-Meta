@@ -5,12 +5,19 @@ import {SCENE1, voicePlan} from './scene1-cues.js';
 import t08 from './t08.json';
 
 /**
- * Scene 1, "One tree" (15 s, 1920 × 1080, 30 fps). The real L-1 (Rev B) in plan view, a slow push toward the frontage
+ * Scene 1, "One tree" (15 s, 1920 × 1080, 60 fps). The real L-1 (Rev B) in plan view, a slow push toward the frontage
  * row; a cobalt scan line crosses the row and the eighth canopy, T-08, lights. The sheet falls to the dark field and
  * only T-08's line work stays, centred at ×6: the twelve LINE entities of the DXF (src/scenes/t08.json, read with
  * ezdxf) and its centre cross. The camera orbits 90°; each piece sits at its own depth, so the circle shears apart
  * into twelve strokes; each gets its entity tag and the corner counts entities, not trees; then the camera returns,
  * the strokes snap back and the cobalt ring closes.
+ *
+ * T-08 is drawn in true 3D, but the projection is done here, not by the browser: each piece is a line segment in the
+ * sheet plane at its own depth, the camera orbits about the tree's vertical axis on a spring, every endpoint goes
+ * through one perspective divide in JS (`project`) and what reaches the DOM is twelve plain `<line>`s in a single
+ * flat 1920 × 1080 SVG, so at 0° they sit exactly on the sheet's own lines and from the side they are a scatter of
+ * strokes in depth. (The first prototype used CSS `perspective` / `preserve-3d` / `rotateY` with one SVG layer per
+ * piece; Chromium resamples each layer's texture under the 3D transform, so the strokes shimmered frame to frame.)
  */
 export type Scene1Data = {
   sheet: {svg: string; viewBox: number[]; id: string; source: string};
@@ -18,7 +25,9 @@ export type Scene1Data = {
 };
 export type Scene1Props = {data?: Scene1Data};
 
-const P = 1400; // perspective, px
+const P = 1400; // the camera: the eye sits P px in front of the tree's centre (the perspective distance)
+const STROKE = 4; // px, a lifted stroke at the centre depth; scaled by its own depth, never thinner than STROKE_MIN
+const STROKE_MIN = 2.5;
 const FIELD = '#0b0c0f';
 const INK = '#000000';
 const RING_PAD = 0.32; // m outside the canopy
@@ -38,25 +47,27 @@ ORDER.forEach((piece, rank) => {
 });
 
 const [cx, cy] = t08.centre;
-/** A piece in px about the tree centre (y down), scaled by (P − z) / P so that, under `perspective: P` with its
- * origin at the centre, the plan view at 0° projects exactly onto the original circle. */
+/** A piece's endpoints in px about the tree centre (x right, y down) in the sheet plane at depth z, scaled by
+ * (P − z) / P so that, after the perspective divide, the plan view at 0° lands exactly on the original circle. */
 function piecePx(points: number[][], S: number, z: number): number[][] {
   const k = (P - z) / P;
   return points.map(([X, Y]) => [k * S * (X - cx), -k * S * (Y - cy)]);
 }
-/** Each piece turns back by this fraction of the parent's angle about the tree's axis at its own depth, so that at
+/** Each piece turns back by this fraction of the camera's angle about the tree's axis at its own depth, so that at
  * 90° a stroke is still seen at 54° rather than edge-on (a flat line seen from the side is a dot). Zero at 0°, so
- * the plan view stays exact. */
+ * the plan view stays exact; the depth ORDER above was searched under this turn. */
 const TWIST = 0.4;
-/** Where a point of a piece lands on screen: the parent's rotateY(θ), the piece's translateZ(z) and rotateY(−TWIST·θ),
- * then the perspective divide. The net is R(θ(1 − TWIST))·p + z·(sin θ, 0, cos θ). */
+/** Where a point (px, py) of a piece at depth z lands on screen when the camera has orbited θ about the tree's
+ * vertical axis: the orbit (the point turns by θ about the axis, the piece's own shape by θ(1 − TWIST)), then the
+ * perspective divide. Returns the screen point and f, how much nearer than the centre it is (1 at the centre
+ * depth), which also scales the stroke; the net is R(θ(1 − TWIST))·p + z·(sin θ, 0, cos θ), then × P / (P − z′). */
 function project(px: number, py: number, z: number, thetaDeg: number, Cx: number, Cy: number) {
   const th = (thetaDeg * Math.PI) / 180;
   const own = th * (1 - TWIST);
   const x1 = px * Math.cos(own) + z * Math.sin(th);
   const z1 = -px * Math.sin(own) + z * Math.cos(th);
   const f = P / (P - z1);
-  return {x: Cx + x1 * f, y: Cy + py * f};
+  return {x: Cx + x1 * f, y: Cy + py * f, f};
 }
 
 export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
@@ -84,10 +95,12 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
   const Cx = lerp(ox + zoom * SX(cx) * PX0, 960, v);
   const Cy = lerp(oy + zoom * SY(cy) * PX0, 540, v);
   const S = lerp(zoom * PX0, 6 * PX0, v); // px per metre
-  const sw = lerp(0.06, 0.075, v) * S; // the sheet's own line weight on the sheet, a touch heavier once lifted
+  /** A stroke's width: the sheet's own line weight (0.06 m) while on the sheet, so T-08 is no bolder than its
+   * neighbours, then STROKE px scaled by the stroke's depth once lifted. */
+  const strokeW = (f: number) => lerp(0.06 * S, Math.max(STROKE_MIN, STROKE * f), v);
 
   // ---------- the orbit (5–9 s) and the return (12 s) ----------
-  const s1 = frame < SCENE1.orbit.start * fps ? 0 : spring({frame: frame - SCENE1.orbit.start * fps, fps, config: {damping: 200}, durationInFrames: SCENE1.orbit.frames});
+  const s1 = frame < SCENE1.orbit.start * fps ? 0 : spring({frame: frame - SCENE1.orbit.start * fps, fps, config: {damping: 200}, durationInFrames: Math.round(SCENE1.orbit.seconds * fps)});
   const s2 = frame < SCENE1.back.start * fps ? 0 : spring({frame: frame - SCENE1.back.start * fps, fps, config: {damping: 12, stiffness: 170, mass: 1}});
   const theta = 90 * (s1 - s2);
   const flat = theta === 0;
@@ -100,6 +113,16 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
         ? interpolateColors(clamp01((t - SCENE1.orbit.start) / 0.8), [0, 1], [C.white, C.cobaltLt])
         : interpolateColors(clamp01((t - (SCENE1.back.start + 0.3)) / 0.5), [0, 1], [C.cobaltLt, C.white]);
   const crossAlpha = t < SCENE1.back.start ? 1 - clamp01((t - SCENE1.orbit.start) / 0.6) : clamp01((t - (SCENE1.back.start + 0.4)) / 0.5);
+
+  // ---------- T-08 projected: the twelve pieces and the cross as flat lines, far first ----------
+  const projectSeg = (points: number[][], z: number, handle: string) => {
+    const [a, b] = piecePx(points, S, z);
+    const e0 = project(a[0], a[1], z, theta, Cx, Cy);
+    const e1 = project(b[0], b[1], z, theta, Cx, Cy);
+    return {handle, e0, e1, f: (e0.f + e1.f) / 2};
+  };
+  const strokes = t08.canopy.map((seg, i) => projectSeg(seg.points, DEPTH[i], seg.handle)).sort((p, q) => p.f - q.f);
+  const cross = t08.cross.map((seg) => projectSeg(seg.points, 0, seg.handle));
 
   // ---------- the ring ----------
   const ringP = t < SCENE1.back.start ? clamp01((t - SCENE1.ring.open) / (SCENE1.ring.drawn - SCENE1.ring.open)) : clamp01((t - SCENE1.ring.closeStart) / (SCENE1.ring.closeEnd - SCENE1.ring.closeStart));
@@ -121,7 +144,6 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
   const counterA = Math.min(clamp01((t - SCENE1.tags.start) / 0.2), 1 - clamp01((t - SCENE1.tags.out) / 0.3));
 
   const plan = voicePlan(data.narration.clips['1'], data.narration.clips['2']);
-  const L = 600; // half-size of each piece's own svg, px
 
   return (
     <AbsoluteFill style={{background: FIELD, overflow: 'hidden'}}>
@@ -154,32 +176,20 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
         </AbsoluteFill>
       ) : null}
 
-      {/* T-08: its twelve pieces (and the cross) in 3D about its centre; at 0° they sit exactly on the sheet's own lines */}
-      <AbsoluteFill style={{perspective: P, perspectiveOrigin: `${Cx}px ${Cy}px`}}>
-        <div style={{position: 'absolute', left: Cx, top: Cy, width: 0, height: 0, transformStyle: 'preserve-3d', transform: `rotateY(${theta}deg)`}}>
-          {t08.canopy.map((seg, i) => {
-            const z = DEPTH[i];
-            const [a, b] = piecePx(seg.points, S, z);
-            return (
-              <div key={seg.handle} style={{position: 'absolute', left: 0, top: 0, width: 0, height: 0, transform: `translate3d(0, 0, ${z}px) rotateY(${-TWIST * theta}deg)`}}>
-                <svg width={2 * L} height={2 * L} viewBox={`${-L} ${-L} ${2 * L} ${2 * L}`} style={{position: 'absolute', left: -L, top: -L, overflow: 'visible'}}>
-                  <line x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={col} strokeWidth={sw} strokeLinecap="round" />
-                </svg>
-              </div>
-            );
-          })}
-          {crossAlpha > 0 ? (
-            <div style={{position: 'absolute', left: 0, top: 0, width: 0, height: 0, opacity: crossAlpha}}>
-              <svg width={2 * L} height={2 * L} viewBox={`${-L} ${-L} ${2 * L} ${2 * L}`} style={{position: 'absolute', left: -L, top: -L, overflow: 'visible'}}>
-                {t08.cross.map((seg) => {
-                  const [a, b] = piecePx(seg.points, S, 0);
-                  return <line key={seg.handle} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={col} strokeWidth={sw} strokeLinecap="round" />;
-                })}
-              </svg>
-            </div>
-          ) : null}
-        </div>
-      </AbsoluteFill>
+      {/* T-08: its twelve pieces (and the cross), projected above into one flat SVG at the frame's own size; at 0°
+          they sit exactly on the sheet's own lines, from the side they are a scatter of strokes in depth */}
+      <svg width={1920} height={1080} viewBox="0 0 1920 1080" shapeRendering="geometricPrecision" style={{position: 'absolute', inset: 0}}>
+        {strokes.map((s) => (
+          <line key={s.handle} x1={s.e0.x} y1={s.e0.y} x2={s.e1.x} y2={s.e1.y} stroke={col} strokeWidth={strokeW(s.f)} strokeLinecap="round" />
+        ))}
+        {crossAlpha > 0 ? (
+          <g opacity={crossAlpha}>
+            {cross.map((s) => (
+              <line key={s.handle} x1={s.e0.x} y1={s.e0.y} x2={s.e1.x} y2={s.e1.y} stroke={col} strokeWidth={strokeW(s.f)} strokeLinecap="round" />
+            ))}
+          </g>
+        ) : null}
+      </svg>
 
       {/* the cobalt ring, drawn from the top, in the plan views only */}
       {ringP > 0 && ringA > 0 ? (

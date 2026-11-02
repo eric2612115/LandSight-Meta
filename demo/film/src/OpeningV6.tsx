@@ -6,7 +6,8 @@ import {Scene2Folder} from './scenes/Scene2Folder';
 import type {Scene2Data} from './scenes/Scene2Folder';
 import {SCENE2} from './scenes/scene2-cues.js';
 
-/** The v6 opening so far (demo/OPENING-V6.md): hook 1 "One tree" (0:00–0:15), a straight cut, hook 2 "The folder bursts" (0:15–0:24). */
+/** The v6 opening so far (demo/OPENING-V6.md): hook 1 "One tree" (0:00–0:15), a straight cut, hook 2 "The folder bursts" (0:15–0:24).
+ * At scene 1's 60 fps: both scenes place every cue in seconds (useCurrentFrame / fps), so scene 2 plays here at 60 and on its own at 30. */
 export type OpeningV6Props = {scene1?: Scene1Data; scene2?: Scene2Data};
 export const OPENING_V6 = {duration: SCENE1.duration + SCENE2.duration, fps: SCENE1.fps};
 

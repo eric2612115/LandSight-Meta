@@ -5,7 +5,7 @@ import {Burn} from './Scene1Tree';
 import {SCENE2} from './scene2-cues.js';
 
 /**
- * Scene 2, "The folder bursts" (9 s, 1920 × 1080, 30 fps). A folder slides in from the left edge of the dark field
+ * Scene 2, "The folder bursts" (9 s, 1920 × 1080; 30 fps on its own, 60 fps inside OpeningV6: every cue is in seconds). A folder slides in from the left edge of the dark field
  * and tips; the thirty real file names of the recorded Run (public/data/scene2.json, from frontend-mock/run.json
  * files[], plus the one zip member) pour out as cards with a little physics and scatter in the Open screen's five
  * groups. One cobalt scan line sweeps left to right; as it crosses a card the card is stamped with its verdict in
@@ -130,8 +130,9 @@ export const Scene2Folder: React.FC<Scene2Props> = ({data}) => {
         const stamped = t >= c.stamp;
         const st = sp(c.stamp, {damping: 10, stiffness: 260});
         const stampScale = stamped ? lerp(1.35, 1, st) : 1.35;
-        const stampA = stamped ? clamp01((frame - F(c.stamp) + 1) / 2) : 0;
-        const reasonA = stamped ? 1 - clamp01((frame - F(c.stamp) + 1) / 3) : 1;
+        // the verdict lands over two frames of the 30 fps cut and the reason gives way over three; in seconds, so it is the same at 60 fps
+        const stampA = stamped ? clamp01((t - c.stamp + 1 / 30) / (2 / 30)) : 0;
+        const reasonA = stamped ? 1 - clamp01((t - c.stamp + 1 / 30) / (3 / 30)) : 1;
         const flash = stamped ? Math.exp(-(t - c.stamp) / 0.18) : 0;
         const pulse = c.governs ? Math.sin(Math.PI * clamp01((t - SCENE2.pulse) / 0.7)) : 0;
 
