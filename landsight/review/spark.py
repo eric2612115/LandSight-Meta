@@ -406,7 +406,20 @@ class ReviewSpark:
             self._client = SparkClient(api_key=self.api_key)
         return self._client
 
-    def _via_meta(self, call: str, png: bytes, key: str, fn, extra=None):
+    def _via_meta(self, call: str, png: bytes, key: str, fn, extra=None, facts: str = ""):
+        """A take-off call (landsight.meta.spark's prompt and schema), keyed like the review's own calls: the content
+        key plus a hash of the prompt as sent (facts included) and the schema, with no fallback to the image hash, so
+        a changed prompt is never answered by an old recording. The recording keeps the prompt text."""
+        from landsight.meta import spark as M
+
+        prompt, schema = {"group_and_read": (M.GROUP_PROMPT, M.GROUP_SCHEMA),
+                          "read_schedule": (M.SCHEDULE_PROMPT, M.SCHEDULE_SCHEMA),
+                          "read_detail": (M.DETAIL_PROMPT, M.DETAIL_SCHEMA),
+                          "read_legend": (M.LEGEND_PROMPT, M.LEGEND_SCHEMA)}[call]
+        prompt += facts
+        content = key or "img:" + _image_sha([png])
+        tagged = f"{content}|p={_prompt_tag(prompt, schema)}"
+
         def live():
             client = self._meta()
             before = len(client.log)
@@ -414,11 +427,12 @@ class ReviewSpark:
             last = client.log[-1] if len(client.log) > before else {}
             return result, last.get("usage", {}), last.get("raw")
 
-        return self._answer(call, key, [png], f"landsight.meta.spark.{call}", live, extra)
+        return self._answer(call, tagged, [png], prompt, live, extra, image_fallback=False)
 
     def group_and_read(self, png: bytes, candidates: list[dict], key: str = "") -> list[dict]:
         return self._via_meta("group_and_read", png, key, lambda c: c.group_and_read(png, candidates),
-                              {"candidates": candidates})
+                              {"candidates": candidates},
+                              facts="\n".join(f"- {c['id']}: {c['facts']}" for c in candidates))
 
     def read_schedule(self, png: bytes, key: str = "") -> dict:
         return self._via_meta("read_schedule", png, key, lambda c: c.read_schedule(png))
