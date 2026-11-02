@@ -148,6 +148,10 @@ export type Check = {
   unscored?: boolean
   notes?: Annotation[]
   flags?: Annotation[]
+  /** a person's verdict, kept by the backend (POST /api/runs/{run}/checks/{check}/decision): "open" until decided */
+  decision?: 'open' | 'confirm' | 'dismiss'
+  note?: string | null
+  decided_at?: string | null
 }
 
 export type Annotation = { kind: 'confirm_element' | 'confirm_price' | 'regulation_note' | 'flag'; target_id: string; value: unknown; why: string; source: string; at?: string }

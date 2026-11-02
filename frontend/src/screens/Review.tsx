@@ -85,7 +85,7 @@ export const Review = forwardRef<ReviewHandle, { run: Run }>(function Review({ r
       <FlagList run={run} flags={flags} pinNo={pinNo} sheetId={sheetId} onSelect={(f) => select(f)} onSheet={(id) => ui.set({ sheetId: id, compare: false, colour: false })} />
       <SheetPane ref={sheetRef} run={run} sheet={sheet} flags={flags} pins={pins} selected={selected} onSelect={(f) => select(f)}
         onSheet={(id) => ui.set({ sheetId: id, compare: false, colour: false })}
-        acts={{ confirm: (f) => acts.confirm(f.check), dismiss: (f) => acts.dismiss(f.check), reopen: (f) => acts.reopen(f.check) }} />
+        acts={{ confirm: (f) => acts.confirm(f.check), dismiss: (f) => acts.dismiss(f.check), reopen: (f) => acts.reopen(f.check), note: (f, text) => acts.note(f.check, text) }} />
     </div>
   )
 })

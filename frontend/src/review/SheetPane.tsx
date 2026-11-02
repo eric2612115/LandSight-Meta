@@ -28,7 +28,7 @@ type Props = {
   selected?: Flag
   onSelect: (f: Flag) => void
   onSheet: (id: string) => void
-  acts: { confirm: (f: Flag) => void; dismiss: (f: Flag) => void; reopen: (f: Flag) => void }
+  acts: { confirm: (f: Flag) => void; dismiss: (f: Flag) => void; reopen: (f: Flag) => void; note: (f: Flag, text: string) => void }
 }
 
 export const SheetPane = forwardRef<SheetHandle, Props>(function SheetPane({ run, sheet, flags, pins, selected, onSelect, onSheet, acts }, ref) {
@@ -187,7 +187,7 @@ export const SheetPane = forwardRef<SheetHandle, Props>(function SheetPane({ run
 const upto = (v: number | null, n: number) => (v === null ? n : Math.min(n, v))
 
 const actsFor = (f: Flag, acts: Props['acts'], state?: 'confirmed' | 'dismissed') => ({
-  state, onConfirm: () => acts.confirm(f), onDismiss: () => acts.dismiss(f), onReopen: () => acts.reopen(f),
+  state, onConfirm: () => acts.confirm(f), onDismiss: () => acts.dismiss(f), onReopen: () => acts.reopen(f), onNote: (text: string) => acts.note(f, text),
 })
 
 function oneToOne(ref: React.RefObject<SheetHandle | null>, sheet: Sheet, rect: { x: number; y: number; w: number; h: number }) {

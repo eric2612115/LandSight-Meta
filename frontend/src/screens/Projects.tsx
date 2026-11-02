@@ -1,12 +1,12 @@
-/** / — the product's home: projects, their packages (folders) and each package's runs with the scoreboard by
- * scenario. New project, Add package (a folder path, or one of the three samples), Review (runs it, with progress),
- * Open (the run on /review?run=<id>). The firm's price list is shared by every project. */
+/** / — the product's home: projects, their packages (folders) and each package's runs (GET /api/packages/{id}/runs)
+ * with the scoreboard by scenario. New project, Add package (a folder path, or one of the three samples), Review
+ * (runs it, with progress), Open (the run on /review?run=<id>). The firm's price list is shared by every project. */
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import { useNav, useUI } from '../app/state'
 import { useResolvedSource, useRunSel } from '../lib/api'
 import { fmt } from '../lib/format'
-import { SAMPLES, useAddPackage, useNewProject, useProjects, useReviewPackage, whereRun, type Package, type Project, type RunSummary } from '../lib/projects'
+import { countsOf, runRows, SAMPLES, useAddPackage, useNewProject, usePackageRuns, useProjects, useProjectStore, useReviewPackage, whereRun, type Package, type Project, type RunSummary } from '../lib/projects'
 import { CATCHES, SCENARIO_NAME, scenarioSlices } from '../lib/scenario'
 import type { Run } from '../lib/types'
 import { Tree } from './Open'
@@ -70,6 +70,8 @@ export function Projects({ run }: { run?: Run }) {
   )
 }
 
+const NO_RUNS: RunSummary[] = []
+
 export const scoreLine = (r: Pick<RunSummary, 'planted' | 'found' | 'flagged' | 'missed' | 'false_alarms'>) =>
   `planted ${r.planted} · found ${r.found} · flagged ${r.flagged} · missed ${r.missed} · false alarms ${r.false_alarms}`
 
@@ -112,9 +114,12 @@ function PackageDetail({ project, pkg, run }: { project: Project; pkg: Package; 
   const curId = useRunSel((s) => s.id)
   const [t0, setT0] = useState<number | null>(null)
   const [now, setNow] = useState(0)
-  // the run on screen fills in what the API's summary leaves out (the scenarios, SAM calls)
-  const runs = (pkg.run_list ?? (pkg.latest_run ? [pkg.latest_run] : [])).map((r) =>
-    run && r.id === run.run_id ? { ...r, scenarios: r.scenarios ?? scenarioSlices(run), sam_calls: r.sam_calls ?? run.timing.sam_calls } : r)
+  const listing = usePackageRuns(pkg.package_id)
+  const session = useProjectStore((s) => s.session[pkg.package_id]) ?? NO_RUNS
+  // every run of the package from the listing; until it answers, the package record (its latest run) and this
+  // session's reviews, where the run on screen fills in what the summary leaves out (the scenarios, SAM calls)
+  const runs = runRows(listing.data, session, pkg.run_list ?? (pkg.latest_run ? [pkg.latest_run] : [])).map((r) =>
+    run && r.id === run.run_id ? { ...r, scenarios: r.scenarios ?? countsOf(scenarioSlices(run)), sam_calls: r.sam_calls ?? run.timing.sam_calls } : r)
   const mine = run && runs.some((r) => r.id === run.run_id)
   const latestOpenable = runs.find((r) => r.id && (src === 'live' || r.openable))
 
@@ -161,7 +166,8 @@ function PackageDetail({ project, pkg, run }: { project: Project; pkg: Package; 
       )}
       {review.error && <div className="flex-none border-b border-line-2 px-5 py-2 text-ink">{String((review.error as Error).message)}</div>}
 
-      <div className="flex-none px-5 pb-1 pt-4 font-semibold">Runs <span className="font-normal text-ink-3">· every review of this folder, newest first{src !== 'live' ? ' · the recorded mock opens the sample’s fixtures run; the others live in landsight.db' : ''}</span></div>
+      <div className="flex-none px-5 pb-1 pt-4 font-semibold">Runs <span className="font-normal text-ink-3">· every review of this folder, newest first{src !== 'live' ? ' · the recorded mock opens the sample’s fixtures run; the others live in landsight.db' : ''}{listing.isLoading ? ' · reading…' : ''}</span></div>
+      {listing.error && <div className="flex-none px-5 pb-1 text-ink">The runs of this package could not be read: {String((listing.error as Error).message)}</div>}
       <div className="flex-none px-3">
         <table className="ledger stmt w-full" style={{ tableLayout: 'fixed' }}>
           <colgroup><col style={{ width: 140 }} /><col style={{ width: 96 }} /><col /><col style={{ width: 76 }} /><col style={{ width: 92 }} /><col style={{ width: 76 }} /><col style={{ width: 70 }} /><col style={{ width: 92 }} /><col style={{ width: 70 }} /><col style={{ width: 70 }} /><col style={{ width: 96 }} /></colgroup>
@@ -176,8 +182,8 @@ function PackageDetail({ project, pkg, run }: { project: Project; pkg: Package; 
                   <td title={r.finished_at}>{r.finished_at.slice(0, 10)}</td>
                   <td title={r.note}>{scoreLine(r)}</td>
                   {CATCHES.map((s) => {
-                    const sl = r.scenarios?.[s] as { planted: number; found?: string[]; flagged?: string[] } | undefined
-                    return <td key={s} className="r tnum">{sl ? `${sl.planted}${sl.found ? ` · ${sl.found.length}${sl.flagged?.length ? `+${sl.flagged.length}` : ''}` : ''}` : '–'}</td>
+                    const sl = r.scenarios?.[s]
+                    return <td key={s} className="r tnum">{sl ? `${sl.planted}${sl.found !== undefined ? ` · ${sl.found}${sl.flagged ? `+${sl.flagged}` : ''}` : ''}` : '–'}</td>
                   })}
                   <td className="r tnum">{r.spark_calls}</td>
                   <td className="r tnum">{r.sam_calls ?? '–'}</td>

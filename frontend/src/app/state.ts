@@ -1,6 +1,8 @@
 /** The app's own state: which screen, what is selected, what the owner decided, and the camera the director moves. */
 import { create } from 'zustand'
+import { mergeDecisions, type Decision, type Seed } from '../lib/decisions'
 import type { Scenario } from '../lib/scenario'
+import type { Check } from '../lib/types'
 
 export const isDirector = () => {
   try {
@@ -101,13 +103,14 @@ export const useUI = create<UI>((set) => ({
 
 /* ------------------------------------------------------------------ decisions */
 
-export type Decision = { state: 'confirmed' | 'dismissed'; at: number; source: 'screen' | 'ask' }
+export type { Decision } from '../lib/decisions'
 
 type Decisions = {
   runId?: string
   d: Record<string, Decision>
   notes: Record<string, string>
-  load: (runId: string, seed?: { d?: Record<string, Decision>; notes?: Record<string, string> }) => void
+  /** seed: what the run's annotations say; opts.checks: the checks' own `decision` words; opts.live: the server is the record */
+  load: (runId: string, seed?: Partial<Seed>, opts?: { checks?: Check[]; live?: boolean }) => void
   decide: (checkId: string, state: Decision['state'] | null, source?: Decision['source']) => void
   note: (checkId: string, text: string) => void
   reset: () => void
@@ -124,22 +127,28 @@ function persist(s: Pick<Decisions, 'runId' | 'd' | 'notes'>) {
   }
 }
 
-/** Confirmed and dismissed flags with the owner's notes, per run; kept in the browser (not in director mode) and
- * seeded from the Run's own annotations when the backend sends them. */
+/** Confirmed and dismissed flags with the owner's notes, per run. On the live source the checks' own `decision`
+ * words are the record (lib/decisions.ts says how they merge with the Run's annotations and what this browser
+ * saved); on the recorded mocks the decision stays in the browser (not in director mode). */
 export const useDecisions = create<Decisions>((set, get) => ({
   d: {},
   notes: {},
-  load: (runId, seed) => {
+  load: (runId, seed, opts) => {
     if (get().runId === runId) return
-    let saved: { d?: Record<string, Decision>; notes?: Record<string, string> } = {}
+    let saved: Seed = { d: {}, notes: {} }
     if (!isDirector()) {
       try {
-        saved = JSON.parse(window.localStorage.getItem(KEY(runId)) ?? '{}')
+        const s = JSON.parse(window.localStorage.getItem(KEY(runId)) ?? '{}') as Partial<Seed>
+        saved = { d: s.d ?? {}, notes: s.notes ?? {} }
       } catch {
-        saved = {}
+        /* nothing saved, or unreadable */
       }
     }
-    set({ runId, d: { ...seed?.d, ...saved.d }, notes: { ...seed?.notes, ...saved.notes } })
+    const live = opts?.live === true
+    const m = mergeDecisions({ checks: opts?.checks ?? [], annotations: { d: seed?.d ?? {}, notes: seed?.notes ?? {} }, saved, live })
+    set({ runId, d: m.d, notes: m.notes })
+    // the server is the record on live: what this browser kept for the run is brought in line with it
+    if (live) persist({ runId, d: m.d, notes: m.notes })
   },
   decide: (id, state, source = 'screen') => {
     const d = { ...get().d }

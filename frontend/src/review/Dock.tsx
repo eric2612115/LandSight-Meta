@@ -16,7 +16,7 @@ import type { Check, Fix, Run, Sheet } from '../lib/types'
 import { Pulse } from '../shell/Shell'
 import { cropBox } from './model'
 
-type Acts = { state?: 'confirmed' | 'dismissed'; onConfirm: () => void; onDismiss: () => void; onReopen: () => void }
+type Acts = { state?: 'confirmed' | 'dismissed'; onConfirm: () => void; onDismiss: () => void; onReopen: () => void; /** the note typed under the flag (sent to the live backend with its decision) */ onNote?: (text: string) => void }
 
 export const isGreening = (c: Check) => num(c.numbers?.required) !== undefined && num(c.numbers?.provided) !== undefined && c.category === 'regulation'
 export const isQuote = (f: Flag) => f.scenario === 'quote' && (num(nums(f.check).row) !== undefined || f.check.category === 'bill' || f.check.category === 'arithmetic')
@@ -25,7 +25,8 @@ const by = (c: Check) => c.by.map((b) => (b === 'spark' ? 'Muse Spark' : b === '
 
 function Decide({ id, acts, wide }: { id: string; acts: Acts; wide?: boolean }) {
   const note = useDecisions((s) => s.notes[id] ?? '')
-  const setNote = useDecisions((s) => s.note)
+  const noteLocal = useDecisions((s) => s.note)
+  const setNote = (text: string) => (acts.onNote ? acts.onNote(text) : noteLocal(id, text))
   const pulse = useShow((s) => s.pulse)
   return (
     <div className="acts">
@@ -40,7 +41,7 @@ function Decide({ id, acts, wide }: { id: string; acts: Acts; wide?: boolean }) 
           <button className="btn" onClick={acts.state === 'dismissed' ? acts.onReopen : acts.onDismiss}>{acts.state === 'dismissed' ? 'Dismissed · reopen' : 'Dismiss'}</button>
         </>
       )}
-      {!wide && <input className="field" placeholder="Note for the developer…" value={note} onChange={(e) => setNote(id, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />}
+      {!wide && <input className="field" placeholder="Note for the developer…" value={note} onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => e.stopPropagation()} />}
     </div>
   )
 }
@@ -185,7 +186,8 @@ export function Inspector({ run, flag, flags, acts, onSelect }: { run: Run; flag
   const rows = useMemo(() => billRows(run), [run])
   const bill = run.files.find((f) => f.file_id === n.bill_file) ?? latestBill(run)
   const note = useDecisions((s) => s.notes[flag.id] ?? '')
-  const setNote = useDecisions((s) => s.note)
+  const noteLocal = useDecisions((s) => s.note)
+  const setNote = (text: string) => (acts.onNote ? acts.onNote(text) : noteLocal(flag.id, text))
   const mo = moneyOf(c)
   const sheet = run.sheets.find((s) => s.sheet_id === flag.sheetIds[0])
   const related = flags.filter((f) => f.id !== flag.id && f.alarm && (
@@ -255,7 +257,7 @@ export function Inspector({ run, flag, flags, acts, onSelect }: { run: Run; flag
         <div className="l"><span className="overflow-hidden text-ellipsis"><span className="mono text-blue">{flag.id}</span> · Quote · {c.by.map((b) => (b === 'spark' ? 'Muse Spark' : b)).join(' · ')}</span></div>
         <div className="line-clamp-2 text-[14px] font-semibold leading-snug">{m.text(c.title)}</div>
         <textarea className="field min-h-[64px] flex-1" placeholder={`Note for the developer — e.g. “Row ${row ?? ''}: ${mo.kind === 'over' ? 'reduce to the drawn quantity' : 'please confirm'}.”`} value={note}
-          onChange={(e) => setNote(flag.id, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />
+          onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => e.stopPropagation()} />
         <Decide id={flag.id} acts={acts} wide />
         <span className="hint">Confirmed flags are the query letter. ↑↓ moves, ⏎ confirms, ⌫ dismisses.</span>
       </div>

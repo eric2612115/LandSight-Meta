@@ -1,14 +1,16 @@
-/** What the owner's clicks do: confirm or dismiss a flag, apply an action Muse Spark proposed. On the live backend a
- * confirmation is recorded with POST /api/ask/actions (a `flag` annotation, source "screen"); on the recorded mock it
- * stays in the browser. */
+/** What the owner's clicks do: confirm, dismiss or reopen a flag, apply an action Muse Spark proposed. On the live
+ * backend a decision goes to POST /api/runs/{run}/checks/{check}/decision and the Check that comes back replaces the
+ * one in the cached Run (the screen shows the decision at once, and takes it back if the server refuses); on the
+ * recorded mocks it stays in the browser. */
 import { useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
-import { normalise, runKey, useConfirm, useResolvedSource, useRunSel } from '../lib/api'
+import { useCallback, useEffect } from 'react'
+import { normalise, postDecision, runKey, useConfirm, useResolvedSource, useRunSel } from '../lib/api'
 import { postAction, priceRange, type ProposedAction } from '../lib/ask'
+import { applyCheck, toWord, type DecisionWord } from '../lib/decisions'
 import { useSavePrice } from '../lib/prices'
 import { play } from '../lib/sound'
 import type { Check, Item, Run } from '../lib/types'
-import { useDecisions, type Decision } from './state'
+import { isDirector, useDecisions, type Decision } from './state'
 
 /** The item a flag stands for when confirming the flag means accepting what Muse Spark proposed (T-08 is one tree):
  * the check's only object is the object Spark was asked about. */
@@ -18,26 +20,60 @@ export function proposedItem(run: Run, c: Check): Item | undefined {
     (c.item_ids?.includes(it.item_id) ?? true))
 }
 
+/** Send one decision to the live backend with the flag's note, and put the Check it returns into the cached Run;
+ * the recorded mocks have no decision endpoint, and the director's film writes nothing (its decisions are not kept
+ * either). `onFail` takes the screen back when the server refuses. */
+function useSendDecision() {
+  const src = useResolvedSource()
+  const qc = useQueryClient()
+  const selId = useRunSel((s) => s.id)
+  return useCallback((run: Run, c: Check, word: DecisionWord, onFail?: () => void) => {
+    if (src !== 'live' || isDirector()) return
+    const note = useDecisions.getState().notes[c.check_id]
+    const key = runKey(src, selId)
+    postDecision(run.run_id, c.check_id, word, note || undefined).then((check) => {
+      const cur = qc.getQueryData<Run>(key)
+      if (cur && cur.run_id === run.run_id) qc.setQueryData<Run>(key, applyCheck(cur, check))
+    }, (e: unknown) => {
+      console.warn(`decision on ${c.check_id} not saved: ${String((e as Error)?.message ?? e)}`)
+      onFail?.()
+    })
+  }, [src, qc, selId])
+}
+
+let noteTimer: ReturnType<typeof setTimeout> | undefined
+
 export function useFlagActions(run: Run) {
   const src = useResolvedSource()
   const confirmItem = useConfirm()
   const decide = useDecisions((s) => s.decide)
+  const setNote = useDecisions((s) => s.note)
+  const send = useSendDecision()
+  const stateOf = (c: Check) => useDecisions.getState().d[c.check_id]?.state ?? null
+  const act = (c: Check, state: Decision['state'] | null) => {
+    const prev = stateOf(c)
+    decide(c.check_id, state)
+    send(run, c, toWord(state), () => decide(c.check_id, prev))
+  }
   return {
     confirm: (c: Check, opts: { quiet?: boolean } = {}) => {
-      decide(c.check_id, 'confirmed')
+      act(c, 'confirmed')
       if (!opts.quiet) play('chime', { volume: 0.6 })
       const it = proposedItem(run, c)
       if (it) confirmItem.mutate(it)
-      if (src === 'live') {
-        const note = useDecisions.getState().notes[c.check_id]
-        void postAction(run, { kind: 'flag', target_id: c.check_id, value: note || c.title, why: 'Confirmed on the review screen: goes to the query letter' }, 'screen').catch(() => {})
-      }
     },
     dismiss: (c: Check) => {
-      decide(c.check_id, 'dismissed')
+      act(c, 'dismissed')
       play('tick', { volume: 0.4 })
     },
-    reopen: (c: Check) => decide(c.check_id, null),
+    reopen: (c: Check) => act(c, null),
+    /** The note typed under a flag; on live it goes to the server with the flag's present decision once typing pauses. */
+    note: (c: Check, text: string) => {
+      setNote(c.check_id, text)
+      if (src !== 'live') return
+      if (noteTimer) clearTimeout(noteTimer)
+      noteTimer = setTimeout(() => send(run, c, toWord(stateOf(c))), 700)
+    },
   }
 }
 
@@ -47,6 +83,7 @@ export function useAskAction(run: Run | undefined) {
   const qc = useQueryClient()
   const confirmItem = useConfirm()
   const savePrice = useSavePrice()
+  const send = useSendDecision()
   return async (a: ProposedAction): Promise<string> => {
     if (!run) throw new Error('no run')
     const d = useDecisions.getState()
@@ -63,10 +100,12 @@ export function useAskAction(run: Run | undefined) {
       if (!r) throw new Error('a price needs low-high')
       await savePrice.mutateAsync({ code: a.target_id, low: r[0], high: r[1] })
     }
-    // the screen shows it at once, whichever source recorded it
-    if (a.kind === 'flag' && run.checks.some((c) => c.check_id === a.target_id)) {
+    // the screen shows it at once, whichever source recorded it; on live the decision is stored with the check too
+    const flagged = a.kind === 'flag' ? run.checks.find((c) => c.check_id === a.target_id) : undefined
+    if (flagged) {
       d.decide(a.target_id, 'confirmed', 'ask')
       if (!d.notes[a.target_id]) d.note(a.target_id, a.value)
+      send(run, flagged, 'confirm')
     }
     if (a.kind === 'regulation_note') d.note(a.target_id, a.value)
     play('chime', { volume: 0.6 })
@@ -77,9 +116,11 @@ export function useAskAction(run: Run | undefined) {
 
 type Annotation = { kind: string; target_id: string; value?: unknown; source?: string }
 
-/** Seed the decisions from what the backend recorded (annotations, and per-check flags and notes). */
+/** Seed the decisions from what the backend recorded: each check's own `decision`, `note` and `decided_at` (the
+ * record, on live), and the older annotations (a `flag` → confirmed, and per-check flags and notes). */
 export function useRunDecisions(run: Run | undefined) {
   const load = useDecisions((s) => s.load)
+  const src = useResolvedSource()
   useEffect(() => {
     if (!run) return
     const d: Record<string, Decision> = {}
@@ -95,6 +136,6 @@ export function useRunDecisions(run: Run | undefined) {
       if (a.kind === 'flag') d[a.target_id] = { state: 'confirmed', at: 0, source: a.source === 'ask' ? 'ask' : 'screen' }
       if (typeof a.value === 'string' && a.value && (a.kind === 'regulation_note' || a.kind === 'flag')) notes[a.target_id] = a.value
     }
-    load(run.run_id, { d, notes })
-  }, [run, load])
+    load(run.run_id, { d, notes }, { checks: run.checks, live: src === 'live' })
+  }, [run, load, src])
 }

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { create } from 'zustand'
 import { isDirector, useNav } from '../app/state'
+import type { DecisionWord } from './decisions'
 import { en, kindName } from './english'
 import { useSource, type SourceKind } from './source'
 import type { Check, Item, Run, Scene } from './types'
@@ -47,22 +48,38 @@ export function normalise(raw: Run, src: SourceKind): Run {
   }
   run.items = run.items.map((it) => normaliseItem(it, src))
   for (const f of run.files) f.ext = (f.ext ?? '').replace(/^\./, '').toLowerCase()
-  for (const c of run.checks) {
-    c.evidence ??= {}
-    const refs = c.evidence.object_ids ?? []
-    if (refs.some((r) => r.includes('/'))) {
-      // object ids are unique per sheet only: keep the sheet-qualified refs for drawing them
-      c.evidence.refs = refs.filter((r) => r.includes('/'))
-      const sheets = new Set(c.evidence.sheet_ids ?? [])
-      c.evidence.object_ids = [...new Set(refs.map((r) => {
-        const i = r.indexOf('/')
-        if (i > 0) sheets.add(r.slice(0, i))
-        return i > 0 ? r.slice(i + 1) : r
-      }))]
-      c.evidence.sheet_ids = [...sheets]
-    }
-  }
+  for (const c of run.checks) normaliseCheck(c)
   return run
+}
+
+/** One Check as the screen draws it (in place): the evidence's "sheet/object" refs split into sheet and object ids. */
+export function normaliseCheck(c: Check): Check {
+  c.evidence ??= {}
+  const refs = c.evidence.object_ids ?? []
+  if (refs.some((r) => r.includes('/'))) {
+    // object ids are unique per sheet only: keep the sheet-qualified refs for drawing them
+    c.evidence.refs = refs.filter((r) => r.includes('/'))
+    const sheets = new Set(c.evidence.sheet_ids ?? [])
+    c.evidence.object_ids = [...new Set(refs.map((r) => {
+      const i = r.indexOf('/')
+      if (i > 0) sheets.add(r.slice(0, i))
+      return i > 0 ? r.slice(i + 1) : r
+    }))]
+    c.evidence.sheet_ids = [...sheets]
+  }
+  return c
+}
+
+/** POST /api/runs/{run}/checks/{check}/decision: a person's verdict on one check of a stored run (the current run
+ * included), with the note when there is one (an absent note clears the stored one). The Check comes back as the
+ * run's `checks` list serves it, normalised the same way. 422 for a bad body, 404 for an unknown run or check. */
+export async function postDecision(runId: string, checkId: string, decision: DecisionWord, note?: string): Promise<Check> {
+  const body: { decision: DecisionWord; note?: string } = { decision }
+  if (note) body.note = note
+  const raw = await getJSON<Check>(`/api/runs/${encodeURIComponent(runId)}/checks/${encodeURIComponent(checkId)}/decision`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+  })
+  return normaliseCheck(deepEnglish(raw))
 }
 
 const isPair = (p: unknown): p is [number, number] =>
