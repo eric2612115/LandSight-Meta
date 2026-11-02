@@ -1,0 +1,341 @@
+{
+ "object_id": "T-08",
+ "sheet_id": "L-1-revB",
+ "source": "samples/greenfield/Greenfield Residences \u2014 Landscape Package/Drawings/CAD/L-1 Planting Plan (Rev B).dxf",
+ "units": "sheet metres; the sheet SVG maps X -> x = X + 4.6, Y -> y = 34.6 - Y (L-1-revB bounds in run.json)",
+ "read_with": "ezdxf 1.4.5: every LINE in modelspace with both ends within 2.05 m of the centre (33.0, 2.5); pieces ordered by angle from east, counter-clockwise",
+ "centre": [
+  33.0,
+  2.5
+ ],
+ "radius": 1.957,
+ "total_length_m": 7.455,
+ "gap_m": [
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4
+ ],
+ "canopy": [
+  {
+   "handle": "104",
+   "type": "LINE",
+   "layer": "tree",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     31.172,
+     1.803
+    ],
+    [
+     31.482,
+     1.265
+    ]
+   ]
+  },
+  {
+   "handle": "105",
+   "type": "LINE",
+   "layer": "tree",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     31.765,
+     0.982
+    ],
+    [
+     32.303,
+     0.672
+    ]
+   ]
+  },
+  {
+   "handle": "106",
+   "type": "LINE",
+   "layer": "$00100",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     32.689,
+     0.568
+    ],
+    [
+     33.311,
+     0.568
+    ]
+   ]
+  },
+  {
+   "handle": "107",
+   "type": "LINE",
+   "layer": "$00100",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     33.697,
+     0.672
+    ],
+    [
+     34.235,
+     0.982
+    ]
+   ]
+  },
+  {
+   "handle": "108",
+   "type": "LINE",
+   "layer": "$00100",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     34.518,
+     1.265
+    ],
+    [
+     34.828,
+     1.803
+    ]
+   ]
+  },
+  {
+   "handle": "109",
+   "type": "LINE",
+   "layer": "TREES",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     34.932,
+     2.189
+    ],
+    [
+     34.932,
+     2.811
+    ]
+   ]
+  },
+  {
+   "handle": "FE",
+   "type": "LINE",
+   "layer": "tree",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     34.828,
+     3.197
+    ],
+    [
+     34.518,
+     3.735
+    ]
+   ]
+  },
+  {
+   "handle": "FF",
+   "type": "LINE",
+   "layer": "TREES",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     34.235,
+     4.018
+    ],
+    [
+     33.697,
+     4.328
+    ]
+   ]
+  },
+  {
+   "handle": "100",
+   "type": "LINE",
+   "layer": "$00100",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     33.311,
+     4.432
+    ],
+    [
+     32.689,
+     4.432
+    ]
+   ]
+  },
+  {
+   "handle": "101",
+   "type": "LINE",
+   "layer": "TREES",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     32.303,
+     4.328
+    ],
+    [
+     31.765,
+     4.018
+    ]
+   ]
+  },
+  {
+   "handle": "102",
+   "type": "LINE",
+   "layer": "tree",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     31.482,
+     3.735
+    ],
+    [
+     31.172,
+     3.197
+    ]
+   ]
+  },
+  {
+   "handle": "103",
+   "type": "LINE",
+   "layer": "1",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     31.068,
+     2.811
+    ],
+    [
+     31.068,
+     2.189
+    ]
+   ]
+  }
+ ],
+ "cross": [
+  {
+   "handle": "10A",
+   "type": "LINE",
+   "layer": "TREES",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     32.6,
+     2.5
+    ],
+    [
+     33.4,
+     2.5
+    ]
+   ]
+  },
+  {
+   "handle": "10B",
+   "type": "LINE",
+   "layer": "TREES",
+   "linetype": "BYLAYER",
+   "points": [
+    [
+     33.0,
+     2.1
+    ],
+    [
+     33.0,
+     2.9
+    ]
+   ]
+  }
+ ],
+ "bounds": {
+  "min_x": -4.6,
+  "min_y": -10.6,
+  "max_x": 78.6,
+  "max_y": 34.6
+ },
+ "svg": {
+  "offset_x": 4.6,
+  "flip_y": 34.6,
+  "note": "svg x = X + offset_x; svg y = flip_y - Y"
+ },
+ "row": [
+  {
+   "id": "T-02",
+   "centre": [
+    5.0,
+    2.5
+   ],
+   "r": 1.954,
+   "closed": true
+  },
+  {
+   "id": "T-03",
+   "centre": [
+    9.0,
+    2.5
+   ],
+   "r": 1.954,
+   "closed": true
+  },
+  {
+   "id": "T-04",
+   "centre": [
+    13.0,
+    2.5
+   ],
+   "r": 1.954,
+   "closed": true
+  },
+  {
+   "id": "T-05",
+   "centre": [
+    17.0,
+    2.5
+   ],
+   "r": 1.954,
+   "closed": true
+  },
+  {
+   "id": "T-06",
+   "centre": [
+    21.0,
+    2.5
+   ],
+   "r": 1.954,
+   "closed": true
+  },
+  {
+   "id": "T-01",
+   "centre": [
+    25.0,
+    4.5
+   ],
+   "r": 1.954,
+   "closed": true
+  },
+  {
+   "id": "T-07",
+   "centre": [
+    29.0,
+    2.5
+   ],
+   "r": 1.952,
+   "closed": true
+  },
+  {
+   "id": "T-08",
+   "centre": [
+    33.0,
+    2.5
+   ],
+   "r": 1.944,
+   "closed": false
+  }
+ ],
+ "row_source": "frontend-mock/run.json \u00b7 sheets[L-1-revB].objects of item I-01"
+}
