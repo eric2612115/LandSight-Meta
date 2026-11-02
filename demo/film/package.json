@@ -12,6 +12,7 @@
     "render:alice": "node prepare.mjs && remotion render src/index.ts Film landsight-v1-alice.mp4 --codec h264 --audio-codec aac --props '{\"narrator\":\"alice\"}'",
     "render:scene1": "node scene1-prepare.mjs && remotion render src/index.ts Scene1Tree scene1-prototype.mp4 --codec h264 --audio-codec aac",
     "render:scene2": "node scene2-prepare.mjs && remotion render src/index.ts Scene2Folder scene2-prototype.mp4 --codec h264 --audio-codec aac",
+    "render:scene4": "node scene4-prepare.mjs && remotion render src/index.ts Scene4Tower scene4-prototype.mp4 --codec h264 --audio-codec aac",
     "render:opening": "node scene1-prepare.mjs && node scene2-prepare.mjs && remotion render src/index.ts OpeningV6 opening-v6-prototype.mp4 --codec h264 --audio-codec aac",
     "stills": "node stills.mjs landsight-v1.mp4 12",
     "typecheck": "tsc --noEmit"

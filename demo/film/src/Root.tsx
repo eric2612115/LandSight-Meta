@@ -6,6 +6,9 @@ import {SCENE1} from './scenes/scene1-cues.js';
 import {Scene2Folder} from './scenes/Scene2Folder';
 import type {Scene2Data, Scene2Props} from './scenes/Scene2Folder';
 import {SCENE2} from './scenes/scene2-cues.js';
+import {Scene4Tower} from './scenes/Scene4Tower';
+import type {Scene4Data, Scene4Props} from './scenes/Scene4Tower';
+import {SCENE4} from './scenes/scene4-cues.js';
 import {OPENING_V6, OpeningV6} from './OpeningV6';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
@@ -51,6 +54,20 @@ export const Root: React.FC = () => (
     defaultProps={{} satisfies Scene2Props}
     calculateMetadata={async ({props}) => {
       const data = (await fetch(staticFile('data/scene2.json')).then((r) => r.json())) as Scene2Data;
+      return {props: {...props, data}};
+    }}
+  />
+  {/* Scene 4 prototype, "Six sheets, one building": node scene4-prepare.mjs first (public/tower/*.png, public/data/scene4.json, the effects) */}
+  <Composition
+    id="Scene4Tower"
+    component={Scene4Tower}
+    durationInFrames={Math.round(SCENE4.duration * SCENE4.fps)}
+    fps={SCENE4.fps}
+    width={beats.width}
+    height={beats.height}
+    defaultProps={{} satisfies Scene4Props}
+    calculateMetadata={async ({props}) => {
+      const data = (await fetch(staticFile('data/scene4.json')).then((r) => r.json())) as Scene4Data;
       return {props: {...props, data}};
     }}
   />
