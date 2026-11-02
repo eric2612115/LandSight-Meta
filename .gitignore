@@ -10,3 +10,7 @@ node_modules/
 .DS_Store
 .cache/
 landsight.db
+
+# Chinese reading copies for the owner; the repo stays English
+docs/zh-TW/
+demo/zh-TW/
