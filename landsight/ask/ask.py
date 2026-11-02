@@ -89,8 +89,15 @@ def _image(ch: Chunk) -> bytes | None:
     return png
 
 
-def build_prompt(question: str, top: list[tuple[float, Chunk]]) -> tuple[str, list[Chunk], list[Chunk]]:
-    """(prompt, the chunks in order, the chunks whose page image is attached)."""
+LANGS = ("en", "zh-TW")
+ANSWER_EN = "- answer: English, one to four sentences"
+ANSWER_ZH = ("- answer: Traditional Chinese as written in national (繁體中文), one to four sentences; ids, file names and "
+             "quoted drawing text stay as written")
+
+
+def build_prompt(question: str, top: list[tuple[float, Chunk]], lang: str = "en") -> tuple[str, list[Chunk], list[Chunk]]:
+    """(prompt, the chunks in order, the chunks whose page image is attached). `lang` "zh-TW" asks for the answer in
+    Traditional Chinese (national); the citations' quotes stay verbatim."""
     chunks = [c for _, c in top]
     shown: list[Chunk] = []
     seen_renders = set()
@@ -104,18 +111,23 @@ def build_prompt(question: str, top: list[tuple[float, Chunk]]) -> tuple[str, li
     for c in chunks:
         c.extra["image"] = c in shown
     sources = "\n\n".join(f"{c.header(i)}\n{c.text}" for i, c in enumerate(chunks, 1))
-    return PROMPT.replace("{question}", question.strip()).replace("{sources}", sources), chunks, shown
+    prompt = PROMPT if lang == "en" else PROMPT.replace(ANSWER_EN, ANSWER_ZH)
+    return prompt.replace("{question}", question.strip()).replace("{sources}", sources), chunks, shown
 
 
-def ask(question: str, corpus: list[Chunk], spark, k: int = 14) -> dict:
-    """Ask the package. `spark` is a landsight.review.spark.ReviewSpark (fixtures or live) whose log records the call."""
+def ask(question: str, corpus: list[Chunk], spark, k: int = 14, lang: str = "en") -> dict:
+    """Ask the package. `spark` is a landsight.review.spark.ReviewSpark (fixtures or live) whose log records the call.
+    `lang`: "en" (the default; its recordings keep their keys) or "zh-TW" (the answer in Traditional Chinese, recorded
+    under its own key)."""
     question = (question or "").strip()
     if not question:
         raise ValueError("ask a question")
+    if lang not in LANGS:
+        raise ValueError(f"lang must be one of {', '.join(LANGS)}")
     top = retrieve(question, corpus, k=k)
-    prompt, chunks, shown = build_prompt(question, top)
+    prompt, chunks, shown = build_prompt(question, top, lang)
     images = [img for img in (_image(c) for c in shown) if img]
-    key = "ask:" + hashlib.sha256(question.encode()).hexdigest()[:16]
+    key = "ask:" + hashlib.sha256(question.encode()).hexdigest()[:16] + ("" if lang == "en" else f"|lang={lang}")
     result = spark._custom("ask_package", key, prompt, images, SCHEMA)
     by_file: dict[str, list[Chunk]] = {}
     for c in chunks:

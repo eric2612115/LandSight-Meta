@@ -28,7 +28,7 @@ landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
   GET  /api/packages/{id}/runs         every stored run of a package, newest first, with its scoreboard
   GET  /api/price-list                 the firm's rates; PUT /api/price-list/{code} {low, high, ...} edits one row
   GET  /api/meta-calls?run=&ask=       every Muse Spark / SAM 3.1 call a run or a question used (&full=0 trims)
-  POST /api/ask                        {"question", "run_id"?} -> answer, citations, proposed actions (?live=1)
+  POST /api/ask                        {"question", "run_id"?, "lang"?} -> answer, citations, proposed actions (?live=1)
   POST /api/ask/actions                {"run_id", "action": {kind, target_id, value, why}} -> applied
 """
 
@@ -422,12 +422,15 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         q = b.get("question")
         if not isinstance(q, str) or not q.strip():
             raise HTTPException(422, 'ask a question: {"question": "...", "run_id": "..."}')
+        lang = b.get("lang") or "en"
+        if lang not in ("en", "zh-TW"):
+            raise HTTPException(422, 'lang must be "en" or "zh-TW"')
         if live and not os.environ.get("MODEL_API_KEY"):
             raise HTTPException(400, "live mode needs MODEL_API_KEY")
         c = conn()
         try:
             rid = ask_run_id(c, b)
-            return JSONResponse(ask_run(c, rid, q, live=bool(live)))
+            return JSONResponse(ask_run(c, rid, q, live=bool(live), lang=lang))
         except FixtureMissing as e:
             raise HTTPException(404, f"no recorded answer for this question on this package ({e}); ask with "
                                      "live=1 and a key to record one") from e

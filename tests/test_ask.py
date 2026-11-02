@@ -97,3 +97,17 @@ def test_api_ask_and_actions(sample_db):
     assert c.post("/api/ask/actions", json={"run_id": rid, "kind": "teleport", "target_id": "I-01"}).status_code == 422
     stored = c.get(f"/api/runs/{rid}").json()
     assert [a["kind"] for a in stored["annotations"]] == ["confirm_price", "regulation_note", "flag", "confirm_element"]
+
+
+def test_ask_lang_zh_tw_has_its_own_prompt_and_recording(sample_db):
+    from landsight.ask.ask import build_prompt
+
+    en, _, _ = build_prompt("Is PV-1 permeable paving?", [])
+    zh, _, _ = build_prompt("Is PV-1 permeable paving?", [], "zh-TW")
+    assert "answer: English" in en and "Traditional Chinese" not in en
+    assert "Traditional Chinese as written in national" in zh and "answer: English" not in zh
+    c = TestClient(create_app())
+    q = "Why is the camphor row flagged?"
+    assert c.post("/api/ask", json={"question": q, "lang": "fr"}).status_code == 422
+    assert c.post("/api/ask", json={"question": q, "lang": "en"}).json()["citations"][0]["verified"]  # same key as before
+    assert c.post("/api/ask", json={"question": q, "lang": "zh-TW"}).status_code == 404  # its own key: not recorded yet
