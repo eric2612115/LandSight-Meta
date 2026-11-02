@@ -23,7 +23,9 @@ export type Scene1Data = {
   sheet: {svg: string; viewBox: number[]; id: string; source: string};
   narration: {voice: string; dir: string; clips: Record<string, number>};
 };
-export type Scene1Props = {data?: Scene1Data};
+/** v3 (film v7): `offset` shifts the scene's clock (seconds), `silent` drops its own sound, `burn` its own captions,
+ * `reference` draws the dashed grid in the sheet plane and the dashed x, y, z axes that turn with the orbit. */
+export type Scene1Props = {data?: Scene1Data; offset?: number; silent?: boolean; burn?: boolean; reference?: boolean};
 
 const P = 1400; // the camera: the eye sits P px in front of the tree's centre (the perspective distance)
 const STROKE = 4; // px, a lifted stroke at the centre depth; scaled by its own depth, never thinner than STROKE_MIN
@@ -70,9 +72,10 @@ function project(px: number, py: number, z: number, thetaDeg: number, Cx: number
   return {x: Cx + x1 * f, y: Cy + py * f, f};
 }
 
-export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
-  const frame = useCurrentFrame();
+export const Scene1Tree: React.FC<Scene1Props> = ({data, offset = 0, silent = false, burn = true, reference = true}) => {
+  const frame0 = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const frame = frame0 + Math.round(offset * fps);
   const t = frame / fps;
   if (!data) return <AbsoluteFill style={{background: FIELD}} />;
 
@@ -123,6 +126,34 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
   };
   const strokes = t08.canopy.map((seg, i) => projectSeg(seg.points, DEPTH[i], seg.handle)).sort((p, q) => p.f - q.f);
   const cross = t08.cross.map((seg) => projectSeg(seg.points, 0, seg.handle));
+
+  // ---------- the dashed reference (v3): a grid in the sheet plane and the x, y, z axes, through the same projection,
+  // so the orbit reads as a turn of a plane in space rather than strokes shattering; in once the sheet has gone, out at the snap
+  const refA = reference ? Math.min(clamp01((t - SCENE1.lift.sheetOut) / 0.6), 1 - clamp01((t - (SCENE1.back.start + 0.35)) / 0.45)) : 0;
+  const refLines: {x1: number; y1: number; x2: number; y2: number; k: string; w: number; o: number}[] = [];
+  const refLabels: {x: number; y: number; text: string}[] = [];
+  if (refA > 0) {
+    const step = 0.5 * S; // 0.5 m
+    const E = 3.0 * S; // ± 3 m
+    const seg = (ax: number, ay: number, az: number, bx: number, by: number, bz: number, k: string, w: number, o: number) => {
+      const p = project(ax, ay, az, theta, Cx, Cy);
+      const q = project(bx, by, bz, theta, Cx, Cy);
+      refLines.push({x1: p.x, y1: p.y, x2: q.x, y2: q.y, k, w, o});
+    };
+    for (let i = -6; i <= 6; i++) {
+      if (i === 0) continue;
+      seg(i * step, -E, 0, i * step, E, 0, `gv${i}`, 1.3, 0.24);
+      seg(-E, i * step, 0, E, i * step, 0, `gh${i}`, 1.3, 0.24);
+    }
+    const A = E * 1.25;
+    seg(-A, 0, 0, A, 0, 0, 'ax', 2.2, 0.62);
+    seg(0, -A, 0, 0, A, 0, 'ay', 2.2, 0.62);
+    seg(0, 0, -A, 0, 0, A, 'az', 2.2, 0.62);
+    const lx = project(A + 14, 0, 0, theta, Cx, Cy);
+    const ly = project(0, -A - 14, 0, theta, Cx, Cy);
+    const lz = project(0, 0, A + 14, theta, Cx, Cy);
+    refLabels.push({x: lx.x, y: lx.y, text: 'x'}, {x: ly.x, y: ly.y, text: 'y'}, {x: lz.x, y: lz.y, text: 'z · depth'});
+  }
 
   // ---------- the ring ----------
   const ringP = t < SCENE1.back.start ? clamp01((t - SCENE1.ring.open) / (SCENE1.ring.drawn - SCENE1.ring.open)) : clamp01((t - SCENE1.ring.closeStart) / (SCENE1.ring.closeEnd - SCENE1.ring.closeStart));
@@ -179,6 +210,16 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
       {/* T-08: its twelve pieces (and the cross), projected above into one flat SVG at the frame's own size; at 0°
           they sit exactly on the sheet's own lines, from the side they are a scatter of strokes in depth */}
       <svg width={1920} height={1080} viewBox="0 0 1920 1080" shapeRendering="geometricPrecision" style={{position: 'absolute', inset: 0}}>
+        {refA > 0 ? (
+          <g opacity={refA}>
+            {refLines.map((l) => (
+              <line key={l.k} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={l.k.startsWith('a') ? C.soft : C.white} strokeWidth={l.w} strokeOpacity={l.o} strokeDasharray={l.k.startsWith('a') ? '10 10' : '5 9'} strokeLinecap="round" />
+            ))}
+            {refLabels.map((l) => (
+              <text key={l.text} x={l.x} y={l.y + 8} fontSize={24} fontFamily={FONT.mono} fontWeight={600} fill={C.soft} fillOpacity={0.75} textAnchor="middle">{l.text}</text>
+            ))}
+          </g>
+        ) : null}
         {strokes.map((s) => (
           <line key={s.handle} x1={s.e0.x} y1={s.e0.y} x2={s.e1.x} y2={s.e1.y} stroke={col} strokeWidth={strokeW(s.f)} strokeLinecap="round" />
         ))}
@@ -227,17 +268,19 @@ export const Scene1Tree: React.FC<Scene1Props> = ({data}) => {
       ) : null}
 
       {/* burned captions, bottom third */}
-      {SCENE1.captions.map((c) => (
-        <Burn key={c.text} text={c.text} at={c.at} until={c.until} t={t} />
-      ))}
+      {burn
+        ? SCENE1.captions.map((c) => (
+            <Burn key={c.text} text={c.text} at={c.at} until={c.until} t={t} />
+          ))
+        : null}
 
-      {/* sound: the two lines, then the effects track */}
-      {plan.map((p) => (
+      {/* sound: the two lines, then the effects track (not when the scene plays inside another film) */}
+      {silent ? null : plan.map((p) => (
         <Sequence key={p.n} from={Math.round(p.at * fps)} durationInFrames={Math.ceil((p.seconds + 0.2) * fps)} name={`voice ${p.n}`}>
           <Audio src={staticFile(`${data.narration.dir}/line-0${p.n}.wav`)} volume={1} />
         </Sequence>
       ))}
-      <Audio src={staticFile('gen/scene1-sfx.wav')} volume={1} name="effects" />
+      {silent ? null : <Audio src={staticFile('gen/scene1-sfx.wav')} volume={1} name="effects" />}
     </AbsoluteFill>
   );
 };

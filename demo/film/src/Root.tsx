@@ -10,6 +10,12 @@ import {Scene4Tower} from './scenes/Scene4Tower';
 import type {Scene4Data, Scene4Props} from './scenes/Scene4Tower';
 import {SCENE4} from './scenes/scene4-cues.js';
 import {OPENING_V6, OpeningV6} from './OpeningV6';
+import {StoryV7} from './scenes/StoryV7';
+import type {StoryV7Data, StoryV7Props} from './scenes/StoryV7';
+import {V7} from './scenes/story-v7-cues.js';
+import {AnimaticV7} from './scenes/AnimaticV7';
+import type {AnimaticData, AnimaticV7Props} from './scenes/AnimaticV7';
+import {ANIM} from './scenes/animatic-v7-cues.js';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -86,6 +92,37 @@ export const Root: React.FC = () => (
         fetch(staticFile('data/scene2.json')).then((r) => r.json()) as Promise<Scene2Data>,
       ]);
       return {props: {...props, scene1, scene2}};
+    }}
+  />
+  {/* Film v7, Part 1 (demo/SCRIPT-V7.md): node story-v7-prepare.mjs first (public/data/story-v7.json, the textures, the voice, M1, the effects, the mix); render with --gl=angle */}
+  <Composition
+    id="StoryV7"
+    component={StoryV7}
+    durationInFrames={Math.round(V7.duration * V7.fps)}
+    fps={V7.fps}
+    width={V7.width}
+    height={V7.height}
+    defaultProps={{live: {}, audio: 'mix'} satisfies StoryV7Props}
+    calculateMetadata={async ({props}) => {
+      const [story, scene1] = await Promise.all([
+        fetch(staticFile('data/story-v7.json')).then((r) => r.json()) as Promise<StoryV7Data>,
+        fetch(staticFile('data/scene1.json')).then((r) => r.json()) as Promise<Scene1Data>,
+      ]);
+      return {props: {...props, story, scene1}};
+    }}
+  />
+  {/* Film v7 animatic, the whole 3:00 in previz: node animatic-v7-prepare.mjs first (the voice, the ticks, public/data/animatic-v7.json) */}
+  <Composition
+    id="AnimaticV7"
+    component={AnimaticV7}
+    durationInFrames={ANIM.duration * ANIM.fps}
+    fps={ANIM.fps}
+    width={ANIM.width}
+    height={ANIM.height}
+    defaultProps={{} satisfies AnimaticV7Props}
+    calculateMetadata={async ({props}) => {
+      const data = (await fetch(staticFile('data/animatic-v7.json')).then((r) => r.json())) as AnimaticData;
+      return {props: {...props, data}};
     }}
   />
   </>
