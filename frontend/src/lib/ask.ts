@@ -22,14 +22,21 @@ export type Answer = {
 
 let seq = 0
 
-/** POST /api/ask; the recorded answer when the screen is not on the live backend. */
+/** POST /api/ask; the recorded answer when the screen is not on the live backend. On the live backend a question
+ * the recording does not hold is asked again with ?live=1, so Muse Spark reads the package for it (one call,
+ * recorded by the server); without MODEL_API_KEY the server says so and the dock shows it. */
 export async function ask(question: string, run: Run, live: boolean): Promise<Answer> {
   const q = question.trim()
   if (live) {
-    const r = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, run_id: run.run_id }) })
+    const post = (url: string) =>
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, run_id: run.run_id }) })
+    let r = await post('/api/ask')
     if (r.ok) return { ...((await r.json()) as Answer), via: 'live' }
     if (r.status !== 404) throw new Error(`POST /api/ask → ${r.status}`)
-    return none(q, run, 'The server has no recording of this question. Start it with live calls (?live=1 and MODEL_API_KEY) and Muse Spark reads the package for it.')
+    r = await post('/api/ask?live=1')
+    if (r.ok) return { ...((await r.json()) as Answer), via: 'live' }
+    const detail = await r.text().catch(() => '')
+    return none(q, run, `The recording has no answer to this question, and the live call did not go through (${r.status}${detail ? `: ${detail.slice(0, 200)}` : ''}). Start the API with MODEL_API_KEY set and Muse Spark reads the package for it.`)
   }
   const seed = matchRecorded(q)
   if (!seed) return none(q, run, 'No recorded answer matches this question. On the live backend with ?live=1, Muse Spark reads the package’s own PDFs, bills and rules and answers it, with citations.')

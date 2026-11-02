@@ -18,7 +18,9 @@ const Director = lazy(() => import('./director/Director'))
 /** One app, five routes (/ projects, /open, /review, /statement, /prices), the Ask dock over all of them, and the
  * director layer playing the film on the same screens. */
 export default function App() {
-  const run = useRun()
+  const q = useRun()
+  // `null` is the home screen's "no current run"; the screens take Run | undefined
+  const run = { ...q, data: q.data ?? undefined }
   const route = useNav((s) => s.route)
   const director = isDirector()
   useRunDecisions(run.data)

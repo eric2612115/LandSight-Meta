@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { create } from 'zustand'
+import { isDirector, useNav } from '../app/state'
 import { en, kindName } from './english'
 import { useSource, type SourceKind } from './source'
 import type { Check, Item, Run, Scene } from './types'
@@ -106,14 +108,18 @@ async function liveRun(): Promise<Run> {
   throw new Error('GET /api/run: the package is still opening')
 }
 
-/** The run on screen: `?run=<id>` (GET /api/runs/{id}), else the server's current run. */
-export async function fetchRun(src: SourceKind, id?: string): Promise<Run> {
+/** The run on screen: `?run=<id>` (GET /api/runs/{id}), else the server's current run. With no current run the
+ * review, Statement and director screens open the sample package (POST /api/package/open, which reviews it and
+ * stores a run); the Projects, Open and Prices screens never do — they answer `null` and show "No package open",
+ * so visiting the home screen does not add a run to landsight.db. */
+export async function fetchRun(src: SourceKind, id?: string, openIfNone = true): Promise<Run | null> {
   if (src === 'live') {
     if (id) return normalise(await getJSON<Run>(`/api/runs/${encodeURIComponent(id)}`), src)
     let run: Run
     try {
       run = await liveRun()
     } catch {
+      if (!openIfNone) return null
       run = await getJSON<Run>('/api/package/open', { method: 'POST' })
     }
     return normalise(run, src)
@@ -167,7 +173,15 @@ export function useResolvedSource() {
 export function useRun() {
   const src = useResolvedSource()
   const id = useRunSel((s) => s.id)
-  return useQuery({ queryKey: runKey(src, id), queryFn: () => fetchRun(src!, id), enabled: !!src, staleTime: Infinity, retry: 1 })
+  const route = useNav((s) => s.route)
+  const wantsRun = isDirector() || route === 'review' || route === 'statement'
+  const q = useQuery({ queryKey: runKey(src, id), queryFn: () => fetchRun(src!, id, wantsRun), enabled: !!src, staleTime: Infinity, retry: 1 })
+  // the home screen left the query at `null` (no current run); a screen that needs one asks again, and may open the sample
+  const { data, isFetching, refetch } = q
+  useEffect(() => {
+    if (wantsRun && data === null && !isFetching) void refetch()
+  }, [wantsRun, data, isFetching, refetch])
+  return q
 }
 
 export function useDirectorScenes() {
