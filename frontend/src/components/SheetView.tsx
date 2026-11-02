@@ -498,7 +498,7 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
         onMouseLeave={props.cad ? () => { if (readoutRef.current) readoutRef.current.textContent = '' } : undefined}>
         <defs>
           <filter id="paper-shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy={W * 0.003} stdDeviation={W * 0.006} floodColor="#000" floodOpacity="0.22" />
+            <feDropShadow dx="0" dy={W * 0.003} stdDeviation={W * 0.006} style={{ floodColor: '#000', floodOpacity: 'var(--paper-shadow)' }} />
           </filter>
           {pour > 0 && (
             <clipPath id={clipId}>
@@ -508,7 +508,8 @@ export const SheetView = forwardRef<SheetHandle, Props>(function SheetView(props
         </defs>
         {props.grid !== false && <Grid view={view} width={width} height={height} />}
         <g transform={`translate(${view.x},${view.y}) scale(${view.k})`}>
-          <rect x={win.x0} y={-win.y1} width={W} height={H} fill="#f7f5f0" filter="url(#paper-shadow)" opacity={props.paperOpacity ?? 1} />
+          <rect x={win.x0} y={-win.y1} width={W} height={H} fill="#f7f5f0" filter="url(#paper-shadow)" opacity={props.paperOpacity ?? 1}
+            vectorEffect="non-scaling-stroke" style={{ stroke: 'var(--color-paper-edge)', strokeWidth: 1 }} />
           <g ref={ulRef}>
             {underlay && <UnderlayLayer u={underlay} filter={underlayMode === 'lines' ? LINES_FILTER : 'none'} />}
           </g>
@@ -552,8 +553,8 @@ function ScaleBar({ k }: { k: number }) {
     <span className="flex flex-col items-start gap-1">
       <span className="mono leading-none text-ink-2">{m < 1 ? `${m * 100} cm` : `${m} m`}</span>
       <svg width={px + 2} height={8}>
-        <path d={`M1,1V7H${px + 1}V1`} fill="none" stroke="#5c636d" strokeWidth={1.2} />
-        <rect x={1} y={4} width={px / 2} height={3} fill="#5c636d" />
+        <path d={`M1,1V7H${px + 1}V1`} fill="none" strokeWidth={1.2} style={{ stroke: 'var(--color-ink-2)' }} />
+        <rect x={1} y={4} width={px / 2} height={3} style={{ fill: 'var(--color-ink-2)' }} />
       </svg>
     </span>
   )
@@ -573,10 +574,10 @@ function Grid({ view, width, height }: { view: View; width: number; height: numb
     <g pointerEvents="none">
       <defs>
         <pattern id={`gmin${uid}`} width={s} height={s} patternUnits="userSpaceOnUse" x={ox} y={oy}>
-          <path d={`M${s},0H0V${s}`} fill="none" stroke="rgba(23,26,30,0.045)" strokeWidth={1} />
+          <path d={`M${s},0H0V${s}`} fill="none" strokeWidth={1} style={{ stroke: 'var(--color-grid)' }} />
         </pattern>
         <pattern id={`gmaj${uid}`} width={major} height={major} patternUnits="userSpaceOnUse" x={mx} y={my}>
-          <path d={`M${major},0H0V${major}`} fill="none" stroke="rgba(23,26,30,0.075)" strokeWidth={1} />
+          <path d={`M${major},0H0V${major}`} fill="none" strokeWidth={1} style={{ stroke: 'var(--color-grid-2)' }} />
         </pattern>
       </defs>
       <rect width={width} height={height} fill={`url(#gmin${uid})`} />

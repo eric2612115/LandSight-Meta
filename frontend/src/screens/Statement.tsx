@@ -85,7 +85,7 @@ export function StatementScreen({ run }: { run: Run }) {
             <table className="pr">
               <tbody>
                 <tr><td>Required<span className="bar"><i style={{ width: '100%' }} /></span></td><td>0.5 × {fmt(g.A_prime, 0)} m² × {fmt(g.beta, 2)}</td><td>{fmt(g.required, 1)}</td></tr>
-                <tr><td>Provided, as drawn<span className="bar"><i style={{ width: `${Math.min(100, (g.provided / g.required) * 100)}%`, background: '#171a1e' }} /></span></td><td>{fmt(g.sum_gi_ai, 1)} × α {fmt(g.alpha, 1)}</td><td>{fmt(g.provided, 1)}</td></tr>
+                <tr><td>Provided, as drawn<span className="bar"><i style={{ width: `${Math.min(100, (g.provided / g.required) * 100)}%`, background: 'var(--color-ink)' }} /></span></td><td>{fmt(g.sum_gi_ai, 1)} × α {fmt(g.alpha, 1)}</td><td>{fmt(g.provided, 1)}</td></tr>
                 {(totals.greening.fixes ?? []).slice(0, 3).map((x) => (
                   <tr key={x.label}><td className="overflow-hidden text-ellipsis" style={{ maxWidth: 380 }} title={x.label}>Fix {x.id ?? ''} · {x.label.replace(/, the same species/, '').replace(/, a second native species.*$/, '')}</td><td>{x.passes ? 'passes' : 'short'}</td><td className="text-blue">{fmt(num(x.result), 1)}</td></tr>
                 ))}

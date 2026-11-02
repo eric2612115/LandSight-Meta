@@ -1,11 +1,13 @@
 /** The frame every screen shares: the 48 px top bar (brand, package, the four steps, Ask), the 28 px status bar (run
  * facts, the rate, TWD / USD), the camera the director moves, and the caption it burns in. */
 import { AnimatePresence, motion } from 'framer-motion'
+import { Moon, Sun, SunMoon } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Lockup } from '../components/Brand'
 import { fmt } from '../lib/format'
 import { useCurrency, useMoney } from '../lib/money'
 import { useSource } from '../lib/source'
+import { nextThemePref, useTheme } from '../lib/theme'
 import type { Run } from '../lib/types'
 import { useCounts } from '../app/derive'
 import { useShow } from '../app/show'
@@ -22,7 +24,7 @@ export function TopBar({ run }: { run?: Run }) {
   return (
     <header className="top">
       <div className="brand">
-        <button onClick={() => go('open')} className="cursor-pointer border-0 bg-transparent p-0" aria-label="Landsight"><Lockup size={22} colour="#171a1e" /></button>
+        <button onClick={() => go('open')} className="cursor-pointer border-0 bg-transparent p-0" aria-label="Landsight"><Lockup size={22} colour="var(--color-ink)" /></button>
         {run && <Crumbs run={run} />}
       </div>
       {run ? <Steps run={run} route={route} go={go} /> : <div />}
@@ -34,8 +36,29 @@ export function TopBar({ run }: { run?: Run }) {
         <button className={`btn ghost ${route === 'prices' ? 'on' : ''}`} onClick={() => go('prices')}>Price list</button>
         <button className="btn ghost" onClick={() => go(route === 'statement' ? 'review' : 'statement')}>{route === 'statement' ? 'Review' : 'Statement'}</button>
         <button className="btn" onClick={() => go('statement')}>Export…</button>
+        <ThemeToggle />
       </div>
     </header>
+  )
+}
+
+const THEME_WORD = { light: 'light', dark: 'dark', system: 'system' } as const
+
+/** Light → dark → system (sun, moon, both), in the currency switch's style; the choice is kept in this browser
+ * (lib/theme.ts). */
+function ThemeToggle() {
+  const pref = useTheme((s) => s.pref)
+  const resolved = useTheme((s) => s.resolved)
+  const cycle = useTheme((s) => s.cycle)
+  const Icon = pref === 'light' ? Sun : pref === 'dark' ? Moon : SunMoon
+  const next = nextThemePref(pref)
+  const now = `${THEME_WORD[pref]}${pref === 'system' ? ` (${resolved} now)` : ''}`
+  return (
+    <div className="seg sm" role="group" aria-label="Theme">
+      <button className="flex items-center !px-[6px] !py-[4px]" onClick={cycle} data-theme-toggle={pref} aria-label={`Theme: ${now}; switch to ${THEME_WORD[next]}`} title={`Theme: ${now} · click for ${THEME_WORD[next]}`}>
+        <Icon size={14} strokeWidth={1.75} aria-hidden />
+      </button>
+    </div>
   )
 }
 

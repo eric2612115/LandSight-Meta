@@ -148,7 +148,7 @@ export function GaugeDock({ run, flag, acts }: { run: Run; flag: Flag; acts: Act
         </div>
         <div className="relative mt-2 h-[22px] bg-hover">
           {twice && ui.gauge === 'after' && <div className="absolute inset-y-0 left-0 border-r border-dashed border-ink-3 bg-line-2" style={{ width: pct(before!.provided) }} />}
-          <motion.div className="absolute inset-y-0 left-0" style={{ background: pass ? '#2457ff' : '#171a1e' }} initial={false} animate={{ width: pct(value) }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} />
+          <motion.div className="absolute inset-y-0 left-0" style={{ background: pass ? 'var(--color-blue-fill)' : 'var(--color-ink)' }} initial={false} animate={{ width: pct(value) }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} />
           <div className="absolute -bottom-1 -top-1 w-[2px] bg-blue" style={{ left: pct(required) }} />
         </div>
         <div className="mono mt-1.5 flex justify-between text-[13px]">

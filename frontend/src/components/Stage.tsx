@@ -14,7 +14,7 @@ export function Stage({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('resize', fit)
   }, [])
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-[#d9dce0]">
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-stage">
       <div id="stage" className="relative flex-none overflow-hidden bg-bg" style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})`, transformOrigin: 'center' }}>
         {children}
       </div>

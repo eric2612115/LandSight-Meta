@@ -11,6 +11,19 @@
       rel="stylesheet"
     />
     <title>Landsight</title>
+    <script>
+      // the theme before first paint, so there is no flash: ?theme=dark|light, else this browser's choice
+      // (localStorage landsight.theme), else the system (index.css's prefers-color-scheme rule); src/lib/theme.ts keeps it
+      ;(function () {
+        try {
+          var q = new URLSearchParams(location.search).get('theme')
+          var t = q === 'dark' || q === 'light' ? q : localStorage.getItem('landsight.theme')
+          if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t)
+        } catch (e) {
+          /* no storage */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

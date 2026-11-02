@@ -116,9 +116,9 @@ export function Open({ run }: { run?: Run }) {
       <aside className="flex min-h-0 min-w-0 flex-col overflow-hidden bg-pane">
         <div className="ph">Open a package <span className="r">{src === 'live' ? 'uploaded to the API, or a folder on its machine' : 'recorded run of the sample package'}</span></div>
         <div className="p-4">
-          <div className={`relative flex h-[230px] flex-col items-center justify-center gap-2 border-[1.5px] border-dashed text-center transition-colors ${over ? 'border-blue bg-blue-soft' : 'border-[#c4c9d0] bg-hover'}`}
+          <div className={`relative flex h-[230px] flex-col items-center justify-center gap-2 border-[1.5px] border-dashed text-center transition-colors ${over ? 'border-blue bg-blue-soft' : 'border-dash bg-hover'}`}
             onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = canUpload ? 'copy' : 'none'; setOver(true) }} onDragLeave={() => setOver(false)} onDrop={onDrop}>
-            <Mark size={40} colour="#171a1e" />
+            <Mark size={40} colour="var(--color-ink)" />
             <div className="text-[15px] font-semibold">Drop the developer’s package here</div>
             <div className="max-w-[420px] text-ink-2">{src !== 'live'
               ? 'Dropping a folder needs the live API (landsight serve). This is the recorded run of the sample package.'
