@@ -1,8 +1,9 @@
-/** / — open a package: the drop zone or the sample, every file with its verdict and the reason (B's package tree, in
- * five groups), the run's facts, and Review. */
+/** /open — open a package: the drop zone (a dropped folder is walked and uploaded, D-81; the click path is a folder
+ * picker), a folder path on the API's machine, or the sample; every file with its verdict and the reason (B's package
+ * tree, in five groups), the run's facts, and Review. */
 import { useQueryClient } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useCounts } from '../app/derive'
 import { upto, useShow } from '../app/show'
 import { useNav, useUI } from '../app/state'
@@ -10,18 +11,84 @@ import { Mark } from '../components/Brand'
 import { normalise, runKey, useResolvedSource, useRunSel } from '../lib/api'
 import { bytes, fmt } from '../lib/format'
 import { BY_NAME, packageGroups, verdictOf } from '../lib/pkg'
+import { packageRunsKey, useNewProject, useProjects } from '../lib/projects'
+import { useSource } from '../lib/source'
 import type { Run } from '../lib/types'
+import { capMessage, detailOf, entriesOf, formOf, fromInput, isLoneZip, NEEDS_LIVE, runOfUpload, uploadingLine, walkEntries, type Picked, type UploadResponse } from '../lib/upload'
 import { Pulse } from '../shell/Shell'
+
+const UPLOAD_OFF = 'This API does not take an uploaded folder (its upload flag is off): type the folder’s path below, or open the sample.'
 
 export function Open({ run }: { run?: Run }) {
   const go = useNav((s) => s.go)
   const sh = useShow()
   const src = useResolvedSource()
   const qc = useQueryClient()
+  const ui = useUI()
+  /** GET /api/health features.upload: false when the API's upload is switched off (LANDSIGHT_FEATURES_OFF=upload) */
+  const uploadOn = useSource((s) => s.features?.upload)
+  const canUpload = src === 'live' && uploadOn !== false
+  const { projects } = useProjects()
+  const newProject = useNewProject()
   const [busy, setBusy] = useState(false)
+  /** the upload's stage: "Uploading N files (X MB)…", then "Reading the package…" */
+  const [stage, setStage] = useState<string | null>(null)
   const [err, setErr] = useState<string | null>(null)
   const [path, setPath] = useState('')
   const [over, setOver] = useState(false)
+  const picker = useRef<HTMLInputElement>(null)
+
+  /** The project an upload goes to: the one selected on the Projects screen, else the first, else a new one. */
+  const projectFor = async (): Promise<number> => {
+    const sel = projects.find((p) => p.packages.some((k) => k.package_id === ui.pkg)) ?? projects[0]
+    if (sel) return sel.project_id
+    return (await newProject.mutateAsync('New project')).project_id
+  }
+
+  /** POST the walked folder, wait for its review, open the run. */
+  const upload = async (files: Picked[]) => {
+    setErr(null)
+    if (src !== 'live') return setErr(NEEDS_LIVE)
+    if (uploadOn === false) return setErr(UPLOAD_OFF)
+    const cap = capMessage(files)
+    if (cap) return setErr(cap)
+    setStage(uploadingLine(files))
+    try {
+      const pid = await projectFor()
+      const r = await fetch(`/api/projects/${pid}/packages/upload`, { method: 'POST', body: formOf(files) })
+      if (r.status === 404) throw new Error(UPLOAD_OFF)
+      if (!r.ok) throw new Error(await detailOf(r))
+      setStage('Reading the package…')
+      const body = (await r.json().catch(() => ({}))) as UploadResponse
+      const opened = await runOfUpload(body)
+      useRunSel.getState().open(opened.run_id)
+      qc.setQueryData(runKey(src, opened.run_id), opened)
+      const pkgId = body.package?.package_id ?? body.package_id
+      if (pkgId !== undefined) ui.set({ pkg: pkgId })
+      void qc.invalidateQueries({ queryKey: ['projects'] })
+      void qc.invalidateQueries({ queryKey: packageRunsKey(src, pkgId) })
+      go('review')
+    } catch (e) {
+      setErr(String((e as Error).message ?? e))
+    } finally {
+      setStage(null)
+    }
+  }
+
+  const onDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setOver(false)
+    // the entries must be taken before anything awaits: the DataTransfer is emptied once the handler returns
+    const entries = entriesOf(e.dataTransfer)
+    const loose = entries.length ? [] : Array.from(e.dataTransfer.files)
+    if (src !== 'live') return setErr(NEEDS_LIVE)
+    if (uploadOn === false) return setErr(UPLOAD_OFF)
+    if (isLoneZip(entries)) return setErr('A .zip is not opened as a package yet: unpack it and drop the folder.')
+    if (!entries.length && !loose.length) return setErr('Nothing to read in that drop: drop the developer’s folder.')
+    setErr(null)
+    setStage('Reading the folder…')
+    walkEntries(entries).then((files) => upload(files.length ? files : fromInput(loose)), (x: unknown) => { setStage(null); setErr(`The folder could not be read: ${String((x as Error)?.message ?? x)}`) })
+  }
 
   const open = async (folder?: string) => {
     setErr(null)
@@ -47,23 +114,33 @@ export function Open({ run }: { run?: Run }) {
   return (
     <div className="grid h-[1004px] gap-px bg-line" style={{ gridTemplateColumns: '580px 1fr' }}>
       <aside className="flex min-h-0 min-w-0 flex-col overflow-hidden bg-pane">
-        <div className="ph">Open a package <span className="r">{src === 'live' ? 'the API reads a folder on this machine' : 'recorded run of the sample package'}</span></div>
+        <div className="ph">Open a package <span className="r">{src === 'live' ? 'uploaded to the API, or a folder on its machine' : 'recorded run of the sample package'}</span></div>
         <div className="p-4">
           <div className={`relative flex h-[230px] flex-col items-center justify-center gap-2 border-[1.5px] border-dashed text-center transition-colors ${over ? 'border-blue bg-blue-soft' : 'border-[#c4c9d0] bg-hover'}`}
-            onDragOver={(e) => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
-            onDrop={(e) => {
-              e.preventDefault()
-              setOver(false)
-              const name = e.dataTransfer.files[0]?.name
-              setErr(`Browsers do not pass a dropped folder’s path${name ? ` (“${name}”)` : ''}: type its path below, or open the sample.`)
-            }}>
+            onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = canUpload ? 'copy' : 'none'; setOver(true) }} onDragLeave={() => setOver(false)} onDrop={onDrop}>
             <Mark size={40} colour="#171a1e" />
             <div className="text-[15px] font-semibold">Drop the developer’s package here</div>
-            <div className="max-w-[420px] text-ink-2">A folder or a .zip, as it arrived: drawings, bills, specs, scans and the files nobody can open. Every file gets a verdict and a reason.</div>
-            <button className="btn primary relative mt-2" onClick={() => open()} disabled={busy}>{busy ? 'Reading the package…' : 'Open the sample package'}{sh.pulse === 'drop' && <Pulse />}</button>
+            <div className="max-w-[420px] text-ink-2">{src !== 'live'
+              ? 'Dropping a folder needs the live API (landsight serve). This is the recorded run of the sample package.'
+              : uploadOn === false
+                ? 'This API’s upload is switched off (LANDSIGHT_FEATURES_OFF=upload): type the folder’s path below, or open the sample.'
+                : 'The folder as it arrived: drawings, bills, specs, scans and the files nobody can open. Every file gets a verdict and a reason.'}</div>
+            {stage ? (
+              <div className="mt-2 flex items-center gap-2 text-ink">
+                <span className="relative inline-block h-[2px] w-[120px] overflow-hidden bg-line-2"><motion.span className="absolute inset-y-0 w-1/3 bg-blue" animate={{ x: ['-100%', '300%'] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }} /></span>
+                <b className="font-medium">{stage}</b>
+              </div>
+            ) : (
+              <div className="mt-2 flex items-center gap-2">
+                <button className="btn" disabled={busy || !canUpload} onClick={() => picker.current?.click()} title={src !== 'live' ? 'needs the live API (landsight serve)' : !canUpload ? 'the API’s upload is switched off' : 'the folder, every file inside it'}>Choose a folder…</button>
+                <button className="btn primary relative" onClick={() => open()} disabled={busy}>{busy ? 'Reading the package…' : 'Open the sample package'}{sh.pulse === 'drop' && <Pulse />}</button>
+              </div>
+            )}
+            <input ref={picker} type="file" multiple className="hidden" {...{ webkitdirectory: '' }}
+              onChange={(e) => { const fs = fromInput(Array.from(e.target.files ?? [])); e.target.value = ''; void upload(fs) }} />
           </div>
           <div className="mt-3 flex gap-2">
-            <input className="field" placeholder="or a folder on this machine — /path/to/package" value={path} onChange={(e) => setPath(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && path && open(path)} />
+            <input className="field" placeholder="or a folder on the API’s machine — /path/to/package" value={path} onChange={(e) => setPath(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && path && open(path)} />
             <button className="btn" disabled={!path || busy || src !== 'live'} onClick={() => open(path)} title={src !== 'live' ? 'needs the live API' : ''}>Open</button>
           </div>
           {err && <div className="mt-2 text-ink-2">{err}</div>}

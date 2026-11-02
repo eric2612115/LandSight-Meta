@@ -23,8 +23,10 @@ type SourceState = {
   resolved: SourceKind | null
   available: Record<SourceKind, boolean>
   sparkMode?: string
+  /** GET /api/health `features` (upload: a dropped folder is taken); undefined until the API answers, or on an older one */
+  features?: Record<string, boolean>
   setPref: (p: SourcePref) => void
-  setProbe: (available: Record<SourceKind, boolean>, sparkMode?: string) => void
+  setProbe: (available: Record<SourceKind, boolean>, sparkMode?: string, features?: Record<string, boolean>) => void
 }
 
 const pick = (pref: SourcePref, a: Record<SourceKind, boolean>): SourceKind =>
@@ -42,7 +44,7 @@ export const useSource = create<SourceState>((set, get) => ({
     }
     set({ pref, resolved: get().resolved === null ? null : pick(pref, get().available) })
   },
-  setProbe: (available, sparkMode) => set({ available, sparkMode, resolved: pick(get().pref, available) }),
+  setProbe: (available, sparkMode, features) => set({ available, sparkMode, features, resolved: pick(get().pref, available) }),
 }))
 
 async function ok(url: string, timeout = 1500): Promise<Response | null> {
@@ -66,11 +68,13 @@ export function startProbing(): () => void {
     const [health, repo] = await Promise.all([ok('/api/health'), ok('/frontend-mock/run.json')])
     let live = false
     let spark: string | undefined
+    let features: Record<string, boolean> | undefined
     if (health) {
       try {
         const j = await health.json()
         live = j?.ok === true
         spark = j?.spark
+        if (j?.features && typeof j.features === 'object') features = j.features
       } catch {
         live = false
       }
@@ -78,8 +82,8 @@ export function startProbing(): () => void {
     if (stopped) return
     const prev = useSource.getState()
     const next = { live, repo: !!repo, mock: true }
-    if (prev.resolved === null || prev.available.live !== next.live || prev.available.repo !== next.repo || prev.sparkMode !== spark) {
-      prev.setProbe(next, spark)
+    if (prev.resolved === null || prev.available.live !== next.live || prev.available.repo !== next.repo || prev.sparkMode !== spark || JSON.stringify(prev.features) !== JSON.stringify(features)) {
+      prev.setProbe(next, spark, features)
     }
     if (!live) timer = setTimeout(probe, 5000)
   }

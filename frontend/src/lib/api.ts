@@ -108,11 +108,12 @@ export function normaliseItem(raw: Item, src: SourceKind): Item {
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-/** GET /api/run; while the backend is opening a package it answers 202 {status: "running"} or the previous Run with
- * `stale: true`: ask again, and take the stale Run only if the open never finishes. */
-async function liveRun(): Promise<Run> {
+/** GET /api/run; while the backend is opening or reviewing a package it answers 202 {status: "running"} or the
+ * previous Run with `stale: true`: ask again (every 1.5 s, `tries` times), and take the stale Run only if the open
+ * never finishes. */
+export async function liveRun(tries = 40): Promise<Run> {
   let stale: Run | undefined
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < tries; i++) {
     const r = await fetch('/api/run', { cache: 'no-store' })
     if (r.status === 404) throw new Error('GET /api/run → 404')
     if (!r.ok) throw new Error(`GET /api/run → ${r.status}`)
