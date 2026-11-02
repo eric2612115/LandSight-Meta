@@ -3,7 +3,7 @@ result into a `Run` (files, sheets, items, checks, tally, timing) plus the direc
 
 This is the m4 path (`POST /api/package/open?site=m4`): opening with no path generates the m4 synthetic site plus the
 stand-in tree-pit detail L-6 (tests/fixtures/detail), files are triaged by extension only, and `errors` is an empty
-scoreboard. The default path is the real package through landsight.review (landsight/app/package.py). Every string
+scoreboard. The default path is the sample package through landsight.review (landsight/app/package.py). Every string
 the API returns is English (landsight/app/english.py).
 
 Four features of the film's conditional builds each sit behind a flag (FEATURES; switch one off with

@@ -16,6 +16,9 @@ import {V7} from './scenes/story-v7-cues.js';
 import {AnimaticV7} from './scenes/AnimaticV7';
 import type {AnimaticData, AnimaticV7Props} from './scenes/AnimaticV7';
 import {ANIM} from './scenes/animatic-v7-cues.js';
+import {AnimaticV8} from './scenes/AnimaticV8';
+import type {AnimaticV8Data, AnimaticV8Props} from './scenes/AnimaticV8';
+import {V8} from './scenes/animatic-v8-cues.js';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -122,6 +125,21 @@ export const Root: React.FC = () => (
     defaultProps={{} satisfies AnimaticV7Props}
     calculateMetadata={async ({props}) => {
       const data = (await fetch(staticFile('data/animatic-v7.json')).then((r) => r.json())) as AnimaticData;
+      return {props: {...props, data}};
+    }}
+  />
+  {/* Film v8 animatic, one journey: the world's sheet textures come from story-v7.json (node story-v7-prepare.mjs --no-audio --no-mix --no-pdf); public/v8 holds the hi-res L-1 and the /try capture; render with --gl=angle */}
+  <Composition
+    id="AnimaticV8"
+    component={AnimaticV8}
+    durationInFrames={V8.duration * V8.fps}
+    fps={V8.fps}
+    width={V8.width}
+    height={V8.height}
+    defaultProps={{} satisfies AnimaticV8Props}
+    calculateMetadata={async ({props}) => {
+      const story = (await fetch(staticFile('data/story-v7.json')).then((r) => r.json())) as StoryV7Data;
+      const data: AnimaticV8Data = {sheets: story.sheets.map((s) => ({id: s.id, png: s.png}))};
       return {props: {...props, data}};
     }}
   />

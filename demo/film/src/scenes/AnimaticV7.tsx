@@ -785,7 +785,7 @@ export const AnimaticV7: React.FC<AnimaticV7Props> = ({data}) => {
         <>
           <Live
             title="LIVE L-TURN (1:22–1:30)"
-            lines={['the same dim room · Finder on the real package folder, list view: .bak, .xls, .zip, scans, four bill versions', 'he scrolls and leans back', `1:25 a lamp clicks on, the room warms ${warm > 0 ? '← lamp on' : ''}`, "he turns to the lens: “No more of this. Here's the real product.” (his own audio; the clone stands in here)", 'fallback: the folder as a screen capture, the light as a grade change, the card below']}
+            lines={['the same dim room · Finder on the sample package folder, list view: .bak, .xls, .zip, scans, four bill versions', 'he scrolls and leans back', `1:25 a lamp clicks on, the room warms ${warm > 0 ? '← lamp on' : ''}`, "he turns to the lens: “No more of this. Here's the real product.” (his own audio; the clone stands in here)", 'fallback: the folder as a screen capture, the light as a grade change, the card below']}
             warm={warm}
           />
           {t >= 86.6 ? <Lbl x={120} y={620} text="fallback card: The real product. Recorded, not mocked." size={24} /> : null}

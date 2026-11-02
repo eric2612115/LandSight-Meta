@@ -16,6 +16,7 @@
     "render:opening": "node scene1-prepare.mjs && node scene2-prepare.mjs && remotion render src/index.ts OpeningV6 opening-v6-prototype-v2.mp4 --codec h264 --crf 16 --audio-codec aac",
     "render:v7": "node story-v7-prepare.mjs && remotion render src/index.ts StoryV7 story-v7-preview.mp4 --codec h264 --crf 18 --audio-codec aac --gl=angle",
     "render:animatic": "node animatic-v7-prepare.mjs && remotion render src/index.ts AnimaticV7 animatic-v7.mp4 --codec h264 --crf 23 --audio-codec aac",
+    "render:animatic8": "remotion render src/index.ts AnimaticV8 animatic-v8.mp4 --codec h264 --crf 23 --gl=angle",
     "stills": "node stills.mjs landsight-v1.mp4 12",
     "typecheck": "tsc --noEmit"
   },
