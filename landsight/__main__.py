@@ -1,8 +1,9 @@
 """Command line: `python -m landsight takeoff <dxf...> [--fixtures]`, `python -m landsight synth <dir>`,
 `python -m landsight package <dir> [--tower]`, `python -m landsight review <package_dir> [--fixtures|--live]
 [--scenario quote|regulation|design|format] [--json out.json]`, `python -m landsight db init|reset|stats`,
-`python -m landsight ask "<question>" [--run id] [--live]` and `python -m landsight serve` (the API of docs/API.md on
-http://127.0.0.1:8795; the screen is frontend/, http://localhost:5195)."""
+`python -m landsight ask "<question>" [--run id] [--live]`, `python -m landsight memory seed-sample|distil|show|apply|
+forget [--firm f]` and `python -m landsight serve` (the API of docs/API.md on http://127.0.0.1:8795; the screen is
+frontend/, http://localhost:5195). `--reader open` on review and ask reads with Muse Spark Open (docs/NEW-MODES.md)."""
 
 from __future__ import annotations
 
@@ -11,6 +12,10 @@ import json
 import sys
 
 from landsight.synth import LEVELS, Messiness, generate
+
+READER_HELP = ("which Muse Spark reads: api (muse-spark-1.3 on the Meta Model API, the default) or open (Muse Spark "
+               "Open, Meta's open weights, on Baseten or the firm's own server; recordings in tests/fixtures/open/); "
+               "default LANDSIGHT_READER, else api")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -50,6 +55,7 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--fresh", default="0", metavar="N|all",
                    help="with --live: re-ask N recorded Muse Spark calls (all: every Spark and SAM call); the answers "
                         "and their response ids go to fresh/ beside the recordings, which stay as they are")
+    r.add_argument("--reader", choices=["api", "open"], default=None, help=READER_HELP)
     d = sub.add_parser("db", help="landsight.db: init (create and seed), reset (drop and seed), stats (row counts), "
                                   "calls (the Meta call table of a run: count, median seconds, tokens, cost)")
     d.add_argument("action", choices=["init", "reset", "stats", "calls"])
@@ -60,6 +66,19 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--run", help="the run id (default: the latest run in the database)")
     a.add_argument("--live", action="store_true", help="call Muse Spark and record the answer")
     a.add_argument("--db", help="the database file (default: LANDSIGHT_DB or ./landsight.db)")
+    a.add_argument("--reader", choices=["api", "open"], default=None, help=READER_HELP)
+    m = sub.add_parser("memory", help="firm memory (Muse Wonder): learn the firm's habits from its decisions, apply "
+                                      "them to a run (docs/NEW-MODES.md)")
+    m.add_argument("action", choices=["seed-sample", "distil", "show", "apply", "forget"],
+                   help="seed-sample: review the sample from its recordings and record the sample firm's decisions; "
+                        "distil: Muse Wonder turns the firm's decisions into its habits; show: print them; apply: order "
+                        "a run's findings by the habits and draft the reply in the firm's voice; forget: delete them")
+    m.add_argument("--firm", default="default", help="the firm's name (default: default)")
+    m.add_argument("--run", help="apply: the run id (default: the latest run); distil: only this run's decisions")
+    m.add_argument("--package", help="apply: review this package folder from its recordings first and apply to that run")
+    m.add_argument("--live", action="store_true", help="call Muse Wonder and record the answer (MODEL_API_KEY)")
+    m.add_argument("--json", dest="json_out", help="write the result to this file")
+    m.add_argument("--db", help="the database file (default: LANDSIGHT_DB or ./landsight.db)")
     args = ap.parse_args(argv)
 
     if args.cmd == "review":
@@ -73,7 +92,13 @@ def main(argv: list[str] | None = None) -> int:
             print(f"landsight review: --fresh takes a number or 'all', not {args.fresh!r}", file=sys.stderr)
             return 2
         return review_main(args.package_dir, live=args.live, json_out=args.json_out, scenario=args.scenario, db=db,
-                           fixture_dir=args.fixture_dir, fresh=fresh)
+                           fixture_dir=args.fixture_dir, fresh=fresh, reader=args.reader)
+
+    if args.cmd == "memory":
+        from landsight.memory.cli import main as memory_main
+
+        return memory_main(args.action, firm=args.firm, run_id=args.run, package=args.package, live=args.live,
+                           db=args.db, json_out=args.json_out)
 
     if args.cmd == "db":
         from landsight.store import connect, default_path, init, reset, stats
@@ -99,7 +124,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "ask":
         from landsight.ask.cli import main as ask_main
 
-        return ask_main(args.question, run_id=args.run, live=args.live, db=args.db)
+        return ask_main(args.question, run_id=args.run, live=args.live, db=args.db, reader=args.reader)
 
     if args.cmd == "package":
         if args.layout == "b":

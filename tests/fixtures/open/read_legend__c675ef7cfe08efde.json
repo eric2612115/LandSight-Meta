@@ -1,0 +1,79 @@
+{
+ "call": "read_legend",
+ "image_sha256": "8298dc440d11fb63c3c00cca2005c628c0dcfd3e10c5eda9223211ed4efc15b1",
+ "content_key": "78517f870b23ac52e9e9cee456290a42890b53129699a4533100963e786485df:legend|p=4e2b3bb1|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:01:41+00:00",
+ "seconds": 4.25,
+ "usage": {
+  "prompt_tokens": 641,
+  "completion_tokens": 506,
+  "total_tokens": 1147,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 374,
+   "audio_tokens": 0,
+   "reasoning_tokens": 412,
+   "rejected_prediction_tokens": 550
+  }
+ },
+ "prompt": "This image is the legend box cropped from a coloured landscape plan. For each entry in it (a filled swatch, a plant symbol or a line, with the text that keys it) return: swatch_colour_word, the colour you see in the swatch as one or two plain English colour words that an image segmentation model could be prompted with to find areas of that colour on the plan (for example 'beige', 'light grey', 'dark green'), never the material's name; label, the text the entry keys, exactly as written; kind, 'area' for a filled rectangle that keys a paved or planted area, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip that keys a hedge or an edge. Skip the legend's own title.",
+ "result": [
+  {
+   "swatch_colour_word": "light green",
+   "label": "CC CAMPHOR",
+   "kind": "symbol"
+  },
+  {
+   "swatch_colour_word": "light green",
+   "label": "AZ AZALEA",
+   "kind": "area"
+  },
+  {
+   "swatch_colour_word": "light grey",
+   "label": "FIRE TRUCK ACCESS LANE",
+   "kind": "area"
+  },
+  {
+   "swatch_colour_word": "dark green",
+   "label": "DU DURANTA",
+   "kind": "line"
+  }
+ ],
+ "response_id": "chatcmpl-cf302bd5d67141d9a55110d61bf02738",
+ "raw": {
+  "id": "chatcmpl-cf302bd5d67141d9a55110d61bf02738",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"swatches\":[{\"swatch_colour_word\":\"light green\",\"label\":\"CC CAMPHOR\",\"kind\":\"symbol\"},{\"swatch_colour_word\":\"light green\",\"label\":\"AZ AZALEA\",\"kind\":\"area\"},{\"swatch_colour_word\":\"light grey\",\"label\":\"FIRE TRUCK ACCESS LANE\",\"kind\":\"area\"},{\"swatch_colour_word\":\"dark green\",\"label\":\"DU DURANTA\",\"kind\":\"line\"}]}",
+     "role": "assistant",
+     "reasoning_content": "Need to return for each entry: swatch_colour_word, label, kind.\n\nWe have legend entries:\n\n- First: green polygon with cross. Symbol? Actually that's a plant symbol: CC CAMPHOR. Swatch colour? The fill is light green? The image shows green polygon. So colour word maybe \"light green\" or \"green\". Need one or two plain English colour words. Provide \"light green\" or \"green\". Use \"light green\".\n\nkind: 'symbol' for plant symbol.\n\nlabel: \"CC CAMPHOR\"\n\n- Second: hatched rectangle green diagonal stripes. AZ AZALEA. Swatch colour: ? The hatching is green on white? But swatch colour word: maybe \"light green\" or \"green striped\"? Need colour you see in swatch as one or two plain English colour words. Could be \"light green\" or \"green\". Or \"striped green\"? But instruction: swatch_colour_word, the colour you see in the swatch as one or two plain English colour words. For hatched, it's green? Or maybe \"green hatched\" but they want colour word. Probably \"light green\" again? Or \"green\". Provide \"light green\".\n\nNeed kind: \"area\" for filled rectangle that keys a paved or planted area. This is AZ AZALEA area -> area.\n\n- Third: grey rectangle FIRE TRUCK ACCESS LANE. Colour: \"light grey\" or \"grey\". Kind: \"area\"\n\n- Fourth: dark green line DU DURANTA. Colour: \"dark green\". Kind: \"line\"\n\nNeed output JSON list.\n\nProvide entries.\n\nSkip legend title.\n\nReturn JSON array.\n\nMake sure label exactly as written: \"CC CAMPHOR\", \"AZ AZALEA\", \"FIRE TRUCK ACCESS LANE\", \"DU DURANTA\"\n\nKind mapping correct.\n\nSwatch_colour_word: for first entry maybe \"light green\", second \"light green\" or \"green striped\", third \"light grey\", fourth \"dark green\"\n\nProvide."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743298,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 641,
+   "completion_tokens": 506,
+   "total_tokens": 1147,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 374,
+    "audio_tokens": 0,
+    "reasoning_tokens": 412,
+    "rejected_prediction_tokens": 550
+   }
+  }
+ }
+}

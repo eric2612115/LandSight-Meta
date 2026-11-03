@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "f867994579087eae7005d8ce3ee435e54957ab531b67df287e8deb621c9465c6",
+ "content_key": "pdfpage:2d0ff26a42e71bd90ac50c880b0c636ff51ae5453b51650be9ef0116cac2e81b|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:39+00:00",
+ "seconds": 7.86,
+ "usage": {
+  "prompt_tokens": 3572,
+  "completion_tokens": 359,
+  "total_tokens": 3931,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 384
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 253,
+   "audio_tokens": 0,
+   "reasoning_tokens": 233,
+   "rejected_prediction_tokens": 489
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "detail",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-6",
+   "title": "Tree Pit Detail",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:20"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Sheet shows a single-element construction detail with PLAN 1:20 and SECTION A-A 1:20 of Tree Pit 1500x1500 on slab, labeled materials and dimensions, not a top-down planting/paving plan or elevation."
+ },
+ "response_id": "chatcmpl-b547a03d68394872b2322a1bc315ccc4",
+ "raw": {
+  "id": "chatcmpl-b547a03d68394872b2322a1bc315ccc4",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"detail\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-6\",\"title\":\"Tree Pit Detail\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:20\"},\"index\":[],\"confidence\":0.98,\"why\":\"Sheet shows a single-element construction detail with PLAN 1:20 and SECTION A-A 1:20 of Tree Pit 1500x1500 on slab, labeled materials and dimensions, not a top-down planting/paving plan or elevation.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need return fields: kind, discipline, enlarged_partial, match_line, title_block values, index, confidence.\n\nKind: detail (construction detail or section of one element, such as tree pit). Shows PLAN 1:20 and SECTION A-A 1:20 of tree pit 1500x1500 on slab. So detail.\n\nDiscipline: planting? Title block: Tree Pit Detail, Landscape over basement slab. But discipline maybe planting? Could be general. The detail is about tree pit planting soil. So planting.\n\nenlarged_partial: false? It's a detail, not enlarged partial plan. So false. match_line false.\n\ntitle_block: number, title, revision, date, scale. Values: DRAWING NO. L-6, TITLE Tree Pit Detail, REV A, DATE 2026-09-18, SCALE 1:20. Need to provide as strings. number = L-6, title = Tree Pit Detail, revision = A, date = 2026-09-18, scale = 1:20\n\nindex: empty list (no drawing index).\n\nconfidence high 0.98.\n\nProvide JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743233,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 359,
+   "total_tokens": 3931,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 384
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 253,
+    "audio_tokens": 0,
+    "reasoning_tokens": 233,
+    "rejected_prediction_tokens": 489
+   }
+  }
+ }
+}

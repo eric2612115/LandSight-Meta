@@ -1,0 +1,64 @@
+{
+ "call": "review_look_image",
+ "image_sha256": "cb73f241ac855a310b3f4c1ab2987b629da58433ba85b908282cebb6432d38f6",
+ "content_key": "image:3f2164b6805a37f71004b220d49119348ca7d697c716aac06fc1c9a01026ba5d|p=67960435|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:58+00:00",
+ "seconds": 5.33,
+ "usage": {
+  "prompt_tokens": 457,
+  "completion_tokens": 451,
+  "total_tokens": 908,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 310,
+   "audio_tokens": 0,
+   "reasoning_tokens": 361,
+   "rejected_prediction_tokens": 677
+  }
+ },
+ "prompt": "This image was found in a landscape drawing package, among the CAD files. Decide what it is: 'material_photo' (a close photo or texture of a surface material such as paving, stone, gravel or timber), 'drawing' (a plan, elevation, detail or diagram), 'document' (a scanned page of text or a table) or 'other'. If it is a material photo, name the material in a few plain words and say which of these finish codes from the package's legends it most likely shows, or 'none': AZ AZALEA; PV-1 PERMEABLE PAVERS; PV-2 EXPOSED AGGREGATE; PV-3 GRASS PAVERS. Give your confidence from 0 to 1 and why in one sentence about what you see.",
+ "result": {
+  "kind": "material_photo",
+  "material": "speckled exposed aggregate / terrazzo",
+  "matches_code": "PV-2 EXPOSED AGGREGATE",
+  "confidence": 0.88,
+  "why": "tight close-up of irregular beige/grey/black aggregate flecks with no drawing lines or text visible is a surface texture not a plan."
+ },
+ "response_id": "chatcmpl-c8eec8f0ec634b8cb21ca4f8b245cfdc",
+ "raw": {
+  "id": "chatcmpl-c8eec8f0ec634b8cb21ca4f8b245cfdc",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{ \"kind\": \"material_photo\", \"material\": \"speckled exposed aggregate / terrazzo\", \"matches_code\": \"PV-2 EXPOSED AGGREGATE\", \"confidence\": 0.88, \"why\": \"tight close-up of irregular beige/grey/black aggregate flecks with no drawing lines or text visible is a surface texture not a plan.\" }",
+     "role": "assistant",
+     "reasoning_content": "We need to decide what image is: material_photo, drawing, document, or other. If material photo, name material and say which finish codes.\n\nWe have an image: speckled texture beige/gray/black dots. Could be exposed aggregate. So material_photo. Name material in few plain words: e.g., exposed aggregate concrete or terrazzo? Which finish codes: PV-2 EXPOSED AGGREGATE. So PV-2.\n\nGive confidence and why in one sentence about what you see.\n\nBut we must follow instruction: Answer only from what you are shown; never guess values not visible.\n\nWe must not guess? However we are to classify. So we need to provide type.\n\nProbably material_photo, exposed aggregate texture, PV-2.\n\nConfidence maybe 0.85 ?\n\nWe need to say why in one sentence about what you see.\n\nWe should not hallucinate. The image shows a speckled mottled surface.\n\nWe must answer concisely.\n\nPossibly also could be AZ AZALEA? No.\n\nSo answer: material_photo, exposed aggregate / terrazzo aggregate surface, PV-2.\n\nProvide confidence 0.9.\n\nWe must ensure we never guess values not visible. The finish codes given are provided, so we can match.\n\nWe should not invent values.\n\nProvide final answer in structured format.\n\nProbably mention: material_photo.\n\nIf it is material photo, name material and say which finish code it most likely shows, or 'none'.\n\nSo we say: speckled exposed aggregate concrete.\n\nConfidence.\n\nWe must ensure we answer only from what shown.\n\nWe should comply.\n\nWe need to be helpful AI assistant.\n\nProbably format JSON? Not specified. Provide plain answer.\n\nMake sure to include confidence 0-1 and why.\n\nWe should not add extra speculation.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743254,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 457,
+   "completion_tokens": 451,
+   "total_tokens": 908,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 310,
+    "audio_tokens": 0,
+    "reasoning_tokens": 361,
+    "rejected_prediction_tokens": 677
+   }
+  }
+ }
+}

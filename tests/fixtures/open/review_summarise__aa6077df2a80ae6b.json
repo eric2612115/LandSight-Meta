@@ -1,0 +1,78 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:728f720fd0f2e665752d472a1dd966865d04fa36f18bbb4521df97cd915098da|p=12f4ad91|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:46+00:00",
+ "seconds": 2.23,
+ "usage": {
+  "prompt_tokens": 578,
+  "completion_tokens": 578,
+  "total_tokens": 1156,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 433,
+   "audio_tokens": 0,
+   "reasoning_tokens": 274,
+   "rejected_prediction_tokens": 582
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nQuotation — Street Furniture and Metalwork\nNorthgate Metalwork (sample) · quote MQ-233 · 2026-09-09 · Greenfield Residences · valid\n60 days\nItem\nUnit\nQty\nUnit price (NT$)\nAmount (NT$)\nBench, steel and timber, 1.8 m\nEA\n4\n28,000\n112,000\nLitter bin, 60 L\nEA\n3\n9,500\n28,500\nBollard, fixed, steel\nEA\n6\n6,800\n40,800\nDrain cover 600 x 600, ductile iron\n(detail D-01)\nEA\n5\n7,200\n36,000\nBicycle rack, 5 bays\nEA\n2\n14,500\n29,000\nSubtotal\n246,300\nBusiness tax 5%\n12,315\nTotal\n258,615\nExcludes drainage channels and installation. Drain cover detail D-01: see metal-details.zip.\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "kind": "quote",
+  "title": "Quotation — Street Furniture and Metalwork",
+  "summary": "Supplier priced quotation MQ-233 from Northgate Metalwork dated 2026-09-09 for street furniture and metalwork for Greenfield Residences.",
+  "key_facts": [
+   "Quote reference MQ-233 dated 2026-09-09, valid 60 days",
+   "Bench, steel and timber, 1.8 m: 4 EA at NT$ 28,000 = NT$ 112,000",
+   "Bollard, fixed, steel: 6 EA at NT$ 6,800 = NT$ 40,800",
+   "Drain cover 600 x 600, ductile iron (detail D-01): 5 EA at NT$ 7,200 = NT$ 36,000",
+   "Subtotal NT$ 246,300 + Business tax 5% NT$ 12,315 = Total NT$ 258,615",
+   "Excludes drainage channels and installation"
+  ],
+  "required": [
+   {
+    "item": "Drain cover detail D-01",
+    "status": "see metal-details.zip"
+   }
+  ],
+  "confidence": 0.98,
+  "why": "Document is explicitly headed 'Quotation' with supplier, quote number, unit prices, amounts and total."
+ },
+ "response_id": "chatcmpl-bd48d31c5a284518a60e934576461306",
+ "raw": {
+  "id": "chatcmpl-bd48d31c5a284518a60e934576461306",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\n  \"kind\": \"quote\",\n  \"title\": \"Quotation — Street Furniture and Metalwork\",\n  \"summary\": \"Supplier priced quotation MQ-233 from Northgate Metalwork dated 2026-09-09 for street furniture and metalwork for Greenfield Residences.\",\n  \"key_facts\": [\n    \"Quote reference MQ-233 dated 2026-09-09, valid 60 days\",\n    \"Bench, steel and timber, 1.8 m: 4 EA at NT$ 28,000 = NT$ 112,000\",\n    \"Bollard, fixed, steel: 6 EA at NT$ 6,800 = NT$ 40,800\",\n    \"Drain cover 600 x 600, ductile iron (detail D-01): 5 EA at NT$ 7,200 = NT$ 36,000\",\n    \"Subtotal NT$ 246,300 + Business tax 5% NT$ 12,315 = Total NT$ 258,615\",\n    \"Excludes drainage channels and installation\"\n  ],\n  \"required\": [\n    {\n      \"item\": \"Drain cover detail D-01\",\n      \"status\": \"see metal-details.zip\"\n    }\n  ],\n  \"confidence\": 0.98,\n  \"why\": \"Document is explicitly headed 'Quotation' with supplier, quote number, unit prices, amounts and total.\"\n}",
+     "role": "assistant",
+     "reasoning_content": "We need to classify document. It's a quotation. Provide title, summary, key facts, etc.\n\nWe must answer only from what shown; never guess values not visible.\n\nClassification: 'quote'\n\nTitle as written: \"Quotation — Street Furniture and Metalwork\" maybe exactly.\n\nOne-sentence summary.\n\nUp to six key facts reviewer pricing must know (keep numbers exactly as written). Numbers exactly as written: quantities, unit prices, amounts etc.\n\nNeed to list key facts: e.g., quote for 4 benches at 28,000 each, etc. Need include validity 60 days, excludes drainage channels and installation, etc.\n\nIf document lists documents or deliverables, each one with status. It lists? Drain cover detail D-01: see metal-details.zip. That's a deliverable reference.\n\nConfidence 0 to 1; why in one sentence.\n\nProvide required JSON? The prompt says Give its title ... Provide fields. Probably need structured output. Not specified format. Provide classification, title, summary, key facts, deliverables, confidence, why.\n\nEnsure numbers exactly as written.\n\nAlso note synthetic document note.\n\nNeed to include amounts: subtotal 246,300, tax 5% 12,315, total 258,615.\n\nList items.\n\nProvide confidence high because clearly labeled Quotation.\n\nWe must ensure not guessing.\n\nProvide output."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743245,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 578,
+   "completion_tokens": 578,
+   "total_tokens": 1156,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 256
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 433,
+    "audio_tokens": 0,
+    "reasoning_tokens": 274,
+    "rejected_prediction_tokens": 582
+   }
+  }
+ }
+}

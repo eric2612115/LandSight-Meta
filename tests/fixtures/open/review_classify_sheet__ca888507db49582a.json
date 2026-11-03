@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "ac37139e93fcfbbda50e307cb8e9e5c5b94f50bb1b8b8aff38df1f3ae1942919",
+ "content_key": "dxf:5fd3a27efe1bf8269aec785bc7485e3e1b0ac1fb900a06259cbe957c201e5154|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:17+00:00",
+ "seconds": 5.32,
+ "usage": {
+  "prompt_tokens": 2222,
+  "completion_tokens": 234,
+  "total_tokens": 2456,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 163,
+   "audio_tokens": 0,
+   "reasoning_tokens": 126,
+   "rejected_prediction_tokens": 334
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "elevation",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-2",
+   "title": "South Elevation",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:100"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Side view on ground line labeled SOUTH ELEVATION 1:100 with trees CC H3.5 and title block confirming South Elevation matches elevation definition."
+ },
+ "response_id": "chatcmpl-0950d18661584c90b0e39c929b64666a",
+ "raw": {
+  "id": "chatcmpl-0950d18661584c90b0e39c929b64666a",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"elevation\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-2\",\"title\":\"South Elevation\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:100\"},\"index\":[],\"confidence\":0.98,\"why\":\"Side view on ground line labeled SOUTH ELEVATION 1:100 with trees CC H3.5 and title block confirming South Elevation matches elevation definition.\"}",
+     "role": "assistant",
+     "reasoning_content": "kind: elevation (side view of plants standing on ground line)\ndiscipline: planting? Or general? Shows trees CC H3.5 South elevation. Likely planting. discipline planting.\nenlarged_partial: false, match_line false\ntitle_block: number L-2, title South Elevation, revision A, date 2026-09-18, scale 1:100\nindex: empty list\nconfidence high 0.98\n\nNeed return format JSON.\n\nProvide fields exactly.\n\ntitle_block: values written: number, title, revision, date, scale\n\nSo produce.\n\nconfidence why one sentence.\n\nMake sure.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743213,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 2222,
+   "completion_tokens": 234,
+   "total_tokens": 2456,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 163,
+    "audio_tokens": 0,
+    "reasoning_tokens": 126,
+    "rejected_prediction_tokens": 334
+   }
+  }
+ }
+}

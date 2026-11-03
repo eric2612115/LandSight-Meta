@@ -1,0 +1,83 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "4f7db7cfd22207c44d334fa2819a92d86821561bfc776aa4e2fda628cdca24c5",
+ "content_key": "dxf:27c75ad9827d504122e42277aab366c4096cad22e9934bec5dc008816cad8543|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:19+00:00",
+ "seconds": 7.57,
+ "usage": {
+  "prompt_tokens": 3572,
+  "completion_tokens": 263,
+  "total_tokens": 3835,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 191,
+   "audio_tokens": 0,
+   "reasoning_tokens": 117,
+   "rejected_prediction_tokens": 313
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "cover",
+  "discipline": "general",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-0",
+   "title": "Cover and Index",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "NTS"
+  },
+  "index": [
+   "L-1",
+   "L-2",
+   "L-3",
+   "L-4",
+   "L-5",
+   "L-6",
+   "L-7",
+   "L-8",
+   "L-9"
+  ],
+  "confidence": 0.99,
+  "why": "Sheet is titled GREENFIELD RESIDENCES LANDSCAPE PACKAGE with a DRAWING INDEX table and title block labeled Cover and Index / L-0, clearly a cover sheet."
+ },
+ "response_id": "chatcmpl-125eab0e302b45f6bcb2e8bca5d60243",
+ "raw": {
+  "id": "chatcmpl-125eab0e302b45f6bcb2e8bca5d60243",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"cover\",\"discipline\":\"general\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-0\",\"title\":\"Cover and Index\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"NTS\"},\"index\":[\"L-1\",\"L-2\",\"L-3\",\"L-4\",\"L-5\",\"L-6\",\"L-7\",\"L-8\",\"L-9\"],\"confidence\":0.99,\"why\":\"Sheet is titled GREENFIELD RESIDENCES LANDSCAPE PACKAGE with a DRAWING INDEX table and title block labeled Cover and Index / L-0, clearly a cover sheet.\"}",
+     "role": "assistant",
+     "reasoning_content": "Need to return JSON with fields.\n\nKind: 'cover' - sheet is cover and index.\nDiscipline: general? Could be general.\nenlarged_partial false, match_line false.\ntitle_block: number L-0, title Cover and Index, revision A, date 2026-09-18, scale NTS\nindex: list L-1, L-2, L-3, L-4, L-5, L-6, L-7, L-8, L-9\nconfidence high.\n\nProvide reasoning sentence.\n\nEnsure format correct JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743213,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 263,
+   "total_tokens": 3835,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 191,
+    "audio_tokens": 0,
+    "reasoning_tokens": 117,
+    "rejected_prediction_tokens": 313
+   }
+  }
+ }
+}

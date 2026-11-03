@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "b9fca04d0ea39b159389347c3f9f1554fc0c336d804705293ed22a2e6e05a92b",
+ "content_key": "dxf:de2f44ad10f60be15272ae1fe67b27b6b3e3a3a1b30a78277e96bfc67ce0455d|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:20+00:00",
+ "seconds": 8.33,
+ "usage": {
+  "prompt_tokens": 3572,
+  "completion_tokens": 327,
+  "total_tokens": 3899,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 230,
+   "audio_tokens": 0,
+   "reasoning_tokens": 214,
+   "rejected_prediction_tokens": 449
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "plan",
+  "discipline": "paving",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-3",
+   "title": "Paving Plan",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:200"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Top-down paving plan with PV-1/2/3 hatches, legend and north arrow; title block clearly labels Paving Plan L-3 at 1:200."
+ },
+ "response_id": "chatcmpl-955b039b7a944d8f8083909c3b6d9fd9",
+ "raw": {
+  "id": "chatcmpl-955b039b7a944d8f8083909c3b6d9fd9",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"plan\",\"discipline\":\"paving\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-3\",\"title\":\"Paving Plan\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:200\"},\"index\":[],\"confidence\":0.98,\"why\":\"Top-down paving plan with PV-1/2/3 hatches, legend and north arrow; title block clearly labels Paving Plan L-3 at 1:200.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to return JSON fields.\n\nLook at image: It's a paving plan. Top-down plan with paving types PV-1, PV-2, PV-3. Legend shows. Title block: PROJECT Greenfield Residences, WORKS Landscape over basement slab, TITLE Paving Plan, DRAWING NO. L-3, SCALE 1:200, SITE AREA 1500 m², BUILDING COVERAGE 40%, GROUND ARTIFICIAL GROUND, REV A, DATE 2026-09-18, REVISIONS A 2026-09-18 ISSUED FOR REVIEW.\n\nSo kind: 'plan' , discipline: paving. enlarged_partial false, match_line false. title_block values: number L-3, title Paving Plan, revision A, date 2026-09-18, scale 1:200. index empty list.\n\nConfidence high.\n\nNeed to output format as per instructions. Probably JSON.\n\nProvide those fields.\n\nEnsure discipline: paving.\n\nProvide confidence why: clear paving plan with legend...\n\nReturn."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743213,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 327,
+   "total_tokens": 3899,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 230,
+    "audio_tokens": 0,
+    "reasoning_tokens": 214,
+    "rejected_prediction_tokens": 449
+   }
+  }
+ }
+}

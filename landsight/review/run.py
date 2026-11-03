@@ -188,18 +188,21 @@ def _wait(pending) -> None:
 
 def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = None, workers: int = 6,
            price_list: Path | None = None, answer_key: Path | None = None, spark=None, sam=None,
-           keep: dict | None = None, prices: list[dict] | None = None, price_list_name: str | None = None) -> dict:
+           keep: dict | None = None, prices: list[dict] | None = None, price_list_name: str | None = None,
+           reader: str | None = None) -> dict:
     """Review a package folder. mode "fixtures" replays tests/fixtures/review/ (offline); "live" calls Muse Spark and
     SAM 3.1 and records every answer there. `spark` / `sam` inject clients (tests). `keep`, when a dict, receives what
     the API needs after the run to serve renders and crops (landsight.app.package): the context, the sheet drafts, the
     raster pages, the take-off and the coloured renders. `prices` (rows as landsight.bill.compare.load_price_list
     returns them) replaces the price list file, e.g. the firm's list in landsight.db; `price_list_name` is how the
-    checks name it."""
+    checks name it. `reader` (else LANDSIGHT_READER, else "api") picks the Muse Spark that reads: "open" sends every
+    Spark call to Muse Spark Open (landsight.review.spark), with its recordings kept apart."""
     started = time.monotonic()
     root, key_path, price_path = locate(Path(package))
     key_path = Path(answer_key) if answer_key else key_path
     price_path = Path(price_list) if price_list else price_path
-    spark = spark or ReviewSpark(mode, fixture_dir or FIXTURES)
+    spark = spark or ReviewSpark(mode, fixture_dir or FIXTURES, reader=reader)
+    reader_used = getattr(spark, "reader", "api")
     notes: list[str] = []
     with tempfile.TemporaryDirectory(prefix="landsight-review-") as tmp:
         tmp = Path(tmp)
@@ -254,7 +257,8 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
             notes.append(f"bill alignment: {align_note}")
         ctx.prices = prices if prices is not None else BC.load_price_list(price_path)
         _greening(ctx, notes)
-        sam = sam or COL.ReviewSam(COL.mode_for(mode))
+        sam = sam or (COL.review_sam(mode, "open", fixture_dir) if reader_used == "open"
+                      else COL.ReviewSam(COL.mode_for(mode)))
         colour_checks, filled = COL.colour(ctx, spark, sam, notes)
         raster_items, raster_checks = RAS.measure(ctx, rasters, spark, sam, notes)  # SAM on the raster plan page
 
@@ -323,10 +327,11 @@ def review(package, mode: str = "fixtures", fixture_dir: Path | str | None = Non
             "timing": {"total_s": round(time.monotonic() - started, 2), "spark_calls": spark.calls,
                        "sam_calls": sam.calls, "spark_s": spark.seconds, "sam_s": sam.seconds,
                        "recorded": spark.recorded and sam.recorded, "mode": mode,
-                       "calls": [{"call": e["call"], "model": "muse-spark-1.3", "seconds": e.get("seconds"),
-                                  "recorded": e.get("recorded")} for e in spark.log]
+                       "calls": [{"call": e["call"], "model": e.get("model") or "muse-spark-1.3",
+                                  "seconds": e.get("seconds"), "recorded": e.get("recorded")} for e in spark.log]
                        + [{"call": e["call"], "model": e["model"], "seconds": e["seconds"], "recorded": e["recorded"],
-                           "prompt_source": e["prompt_source"]} for e in sam.log]},
+                           "prompt_source": e["prompt_source"]} for e in sam.log],
+                       **({"reader": "open", "model": spark.model} if reader_used == "open" else {})},
             "notes": notes + spark.errors,
             "currency": money.currency(),
             "version": VERSION,

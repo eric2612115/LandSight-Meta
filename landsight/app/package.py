@@ -91,12 +91,18 @@ class PackageState:
 
     # ------------------------------------------------------------------------------------------ open
     def open(self, path: str | None = None, live: bool = False, package_id: int | None = None,
-             fresh: int = 0) -> dict:
+             fresh: int = 0, reader: str | None = None) -> dict:
         """Review a folder (or a registered package) and serve its Run. With a database the run, its checks and every
         Meta call are written there and the firm's price list is read from there. `fresh` (live only) re-asks that
-        many recorded calls (landsight.review.spark, D-61)."""
-        if live and not os.environ.get("MODEL_API_KEY"):
+        many recorded calls (landsight.review.spark, D-61). `reader` (else LANDSIGHT_READER, else "api"): "open" reads
+        with Muse Spark Open (landsight.review.spark)."""
+        from landsight.review.spark import live_problem, reader_name
+
+        reader = reader_name(reader)
+        if live and reader == "api" and not os.environ.get("MODEL_API_KEY"):
             raise ValueError("live mode needs MODEL_API_KEY")
+        if live and reader == "open" and live_problem("open"):
+            raise ValueError(live_problem("open"))
         keep: dict = {}
         if package_id is not None:
             if self.db is None:
@@ -106,7 +112,7 @@ class PackageState:
             conn = self._conn()
             try:
                 self.base = service.review_package(conn, package_id, live=live, keep=keep, fresh=fresh,
-                                                   review_fn=_review)
+                                                   review_fn=_review, reader=reader)
             finally:
                 conn.close()
         else:
@@ -123,11 +129,12 @@ class PackageState:
                 try:
                     package_id = service.package_for_folder(conn, folder)["package_id"]
                     self.base = service.review_package(conn, package_id, live=live, keep=keep, fresh=fresh,
-                                                       review_fn=_review)
+                                                       review_fn=_review, reader=reader)
                 finally:
                     conn.close()
             else:
-                self.base = review(folder, mode="live" if live else "fixtures", keep=keep)
+                self.base = review(folder, mode="live" if live else "fixtures", keep=keep,
+                                   **({"reader": reader} if reader != "api" else {}))
         self.package_id = package_id
         self.keep, self.live, self.confirmed, self._renders = keep, live, set(), {}
         self._raster = {}

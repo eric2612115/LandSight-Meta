@@ -29,10 +29,12 @@ def corpus_for(conn, run_id: str) -> list:
     return _CORPUS[key]
 
 
-def ask_run(conn, run_id: str, question: str, live: bool = False, spark=None, lang: str = "en") -> dict:
+def ask_run(conn, run_id: str, question: str, live: bool = False, spark=None, lang: str = "en",
+            reader: str | None = None) -> dict:
+    """`reader` (else LANDSIGHT_READER, else "api"): "open" asks Muse Spark Open, recorded in tests/fixtures/open/ask/."""
     from landsight.review.spark import ReviewSpark
 
-    spark = spark or ReviewSpark("live" if live else "fixtures", FIXTURES)
+    spark = spark or ReviewSpark("live" if live else "fixtures", FIXTURES, reader=reader)
     out = ask(question, corpus_for(conn, run_id), spark, lang=lang)
     out["run_id"] = run_id
     out["ask_id"] = service.save_ask(conn, run_id, question, out, spark.log[-1:])

@@ -1,0 +1,98 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:fd958ab3828ad1731a848f5b36bed8c0a95f2911a73c084855d326b3d7edb522|p=c8539ad2|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:42+00:00",
+ "seconds": 2.56,
+ "usage": {
+  "prompt_tokens": 539,
+  "completion_tokens": 697,
+  "total_tokens": 1236,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 529,
+   "audio_tokens": 0,
+   "reasoning_tokens": 273,
+   "rejected_prediction_tokens": 647
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nGreen Building Label — Required Documents\nGreenery indicator · checklist of documents to submit with the application · sample\nchecklist\nDocument\nStatus\nGreening quantity report (TCO2 calculation)\nrequired\nPlanting plan with every species named\nrequired\nPlant schedule with species, quantities, soil depth and pit\narea\nrequired\nTree pit and soil depth details for artificial ground\nrequired\nSite plan showing areas excluded from greening (fire-truck\nspace, driveways)\nrequired\nExisting tree survey and tree protection plan\nif existing trees are\naffected\nThe greening quantity report shows TCO2 = (ΣGi × Ai) × α against TCO2c = 0.5 × A′ × β (Building\nTechnical Regulations, Design and Construction, §302), with the inputs read from the planting plan\nand the plant schedule.\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "kind": "document",
+  "title": "Green Building Label — Required Documents",
+  "summary": "Sample checklist of documents to submit with a Green Building Label application for the greenery indicator, listing required reports, plans and details and the TCO2 formula reference.",
+  "key_facts": [
+   "Sample document: synthetic, generated for the Landsight demo package. Not a real project record.",
+   "TCO2 = (ΣGi × Ai) × α against TCO2c = 0.5 × A′ × β (Building Technical Regulations, Design and Construction, §302)",
+   "Inputs for TCO2 calculation are read from the planting plan and the plant schedule",
+   "Plant schedule must show species, quantities, soil depth and pit area",
+   "Site plan must show areas excluded from greening (fire-truck space, driveways)",
+   "Tree pit and soil depth details for artificial ground is required"
+  ],
+  "required": [
+   {
+    "item": "Greening quantity report (TCO2 calculation)",
+    "status": "required"
+   },
+   {
+    "item": "Planting plan with every species named",
+    "status": "required"
+   },
+   {
+    "item": "Plant schedule with species, quantities, soil depth and pit area",
+    "status": "required"
+   },
+   {
+    "item": "Tree pit and soil depth details for artificial ground",
+    "status": "required"
+   },
+   {
+    "item": "Site plan showing areas excluded from greening (fire-truck space, driveways)",
+    "status": "required"
+   },
+   {
+    "item": "Existing tree survey and tree protection plan",
+    "status": "if existing trees are affected"
+   }
+  ],
+  "confidence": 0.96,
+  "why": "Text is explicitly labeled as a sample checklist of documents to submit, not a priced quote, measured bill, or technical spec setting construction dimensions."
+ },
+ "response_id": "chatcmpl-f09244349aee45ddad3e33c278a8a754",
+ "raw": {
+  "id": "chatcmpl-f09244349aee45ddad3e33c278a8a754",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\n  \"kind\": \"document\",\n  \"title\": \"Green Building Label — Required Documents\",\n  \"summary\": \"Sample checklist of documents to submit with a Green Building Label application for the greenery indicator, listing required reports, plans and details and the TCO2 formula reference.\",\n  \"key_facts\": [\n    \"Sample document: synthetic, generated for the Landsight demo package. Not a real project record.\",\n    \"TCO2 = (ΣGi × Ai) × α against TCO2c = 0.5 × A′ × β (Building Technical Regulations, Design and Construction, §302)\",\n    \"Inputs for TCO2 calculation are read from the planting plan and the plant schedule\",\n    \"Plant schedule must show species, quantities, soil depth and pit area\",\n    \"Site plan must show areas excluded from greening (fire-truck space, driveways)\",\n    \"Tree pit and soil depth details for artificial ground is required\"\n  ],\n  \"required\": [\n    {\n      \"item\": \"Greening quantity report (TCO2 calculation)\",\n      \"status\": \"required\"\n    },\n    {\n      \"item\": \"Planting plan with every species named\",\n      \"status\": \"required\"\n    },\n    {\n      \"item\": \"Plant schedule with species, quantities, soil depth and pit area\",\n      \"status\": \"required\"\n    },\n    {\n      \"item\": \"Tree pit and soil depth details for artificial ground\",\n      \"status\": \"required\"\n    },\n    {\n      \"item\": \"Site plan showing areas excluded from greening (fire-truck space, driveways)\",\n      \"status\": \"required\"\n    },\n    {\n      \"item\": \"Existing tree survey and tree protection plan\",\n      \"status\": \"if existing trees are affected\"\n    }\n  ],\n  \"confidence\": 0.96,\n  \"why\": \"Text is explicitly labeled as a sample checklist of documents to submit, not a priced quote, measured bill, or technical spec setting construction dimensions.\"\n}",
+     "role": "assistant",
+     "reasoning_content": "We need to classify. This is checklist of documents to submit with application - sample checklist. It's document? Or spec? It sets rules? It mentions TCO2 calculation formula. But it's a checklist. The categories: spec, quote, bill, document. This is a checklist of documents to submit - that is not spec? Spec sets rules, dimensions or measurement methods. This does mention formula but it's a checklist. Probably classify as 'document'. Title: Green Building Label — Required Documents. Summary: checklist of required documents for greenery indicator application including TCO2 report etc. Key facts: need numbers exactly as written. Provide up to six key facts reviewer pricing must know. List docs: greening quantity report, planting plan, plant schedule, tree pit details, site plan, existing tree survey. Statuses required or if existing trees are affected. Also formula TCO2 = (ΣGi × Ai) × α against TCO2c = 0.5 × A′ × β (§302). And note synthetic sample. Confidence.\n\nEnsure answer format? Need to give classification, title, summary, key facts, deliverables with status, confidence, why.\n\nProvide JSON? The prompt: Classify it: ... Give its title ... Provide? Probably structured answer.\n\nWe must answer only from what shown; never guess values not visible. Provide confidence.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743240,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 539,
+   "completion_tokens": 697,
+   "total_tokens": 1236,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 529,
+    "audio_tokens": 0,
+    "reasoning_tokens": 273,
+    "rejected_prediction_tokens": 647
+   }
+  }
+ }
+}

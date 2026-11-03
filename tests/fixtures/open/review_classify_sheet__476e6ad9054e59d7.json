@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "e10946e75f77afea0195cb8d25c830873021b6de302e9243b8ff89092ccb289c",
+ "content_key": "dxf:e307ca055c5f465647a9ffe822f5f8962493e3f11d5368e9bad36b764ab37161|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:28+00:00",
+ "seconds": 16.02,
+ "usage": {
+  "prompt_tokens": 4529,
+  "completion_tokens": 285,
+  "total_tokens": 4814,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 191,
+   "audio_tokens": 0,
+   "reasoning_tokens": 157,
+   "rejected_prediction_tokens": 467
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "plan",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-1",
+   "title": "Planting Plan",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:200"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Title block explicitly states ‘Planting Plan’ at 1:200 with planting symbols (CC Camphor, AZ Azalea, LA Lawn, DU Duranta) shown in top-down plan view and no match line, confirming a planting plan discipline."
+ },
+ "response_id": "chatcmpl-d0b7af412c3342f8b4b75acb59185f94",
+ "raw": {
+  "id": "chatcmpl-d0b7af412c3342f8b4b75acb59185f94",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"plan\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-1\",\"title\":\"Planting Plan\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:200\"},\"index\":[],\"confidence\":0.98,\"why\":\"Title block explicitly states ‘Planting Plan’ at 1:200 with planting symbols (CC Camphor, AZ Azalea, LA Lawn, DU Duranta) shown in top-down plan view and no match line, confirming a planting plan discipline.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to return kind, discipline, enlarged_partial, match_line, title_block, index, confidence.\n\nImage: shows planting plan. Title block says TITLE: Planting Plan, Drawing No. L-1, SCALE 1:200 etc. So kind = 'plan' . discipline = planting. enlarged_partial? Is it only part of site? The site area 1500 m2, shows landscape over basement slab, with TOWER ABOVE text. Probably not enlarged partial, it's full site? No match line. So false. match_line false.\n\nTitle_block: number L-1, title Planting Plan, revision A, date 2026-09-18, scale 1:200\n\nindex: empty list.\n\nConfidence high.\n\nNeed to provide JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743213,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 4529,
+   "completion_tokens": 285,
+   "total_tokens": 4814,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 191,
+    "audio_tokens": 0,
+    "reasoning_tokens": 157,
+    "rejected_prediction_tokens": 467
+   }
+  }
+ }
+}

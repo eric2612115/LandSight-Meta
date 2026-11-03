@@ -10,6 +10,14 @@ Each recording is {call, image_sha256, content_key, model, recorded_at, seconds,
 landsight.meta.FixtureSpark reads. Keys are content hashes (DXF signature, PDF text, image bytes) plus a hash of the
 prompt and schema, so editing a prompt never replays an answer to another prompt. The API key is read from
 MODEL_API_KEY and is never logged or written.
+
+Readers (`reader=`, else LANDSIGHT_READER, else "api"):
+- "api": muse-spark-1.3 on the Meta Model API (the default; nothing below changes it).
+- "open": Muse Spark Open, Meta's open-weight release, on any OpenAI-compatible server: Baseten's hosted endpoint by
+  default (meta-models/muse-spark-open-1026, key BASETEN_API_KEY), or the firm's own server running the published
+  weights with vLLM or SGLang (LANDSIGHT_OPEN_BASE_URL, LANDSIGHT_OPEN_MODEL, LANDSIGHT_OPEN_API_KEY if it has one).
+  Every call type, the same prompts and schemas. Its recordings live apart, in tests/fixtures/open/ (the questions in
+  tests/fixtures/open/ask/), and their keys end in the model id, so an answer from one model never replays as another's.
 """
 
 from __future__ import annotations
@@ -29,8 +37,57 @@ try:  # the meta module's constants, when present
     from landsight.meta.spark import BASE_URL, MODEL
 except Exception:  # pragma: no cover - the other module is being edited; keep our own defaults
     BASE_URL, MODEL = "https://api.meta.ai/v1", "muse-spark-1.3"
+from landsight.meta.spark import parse_json
 
 FIXTURES = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "review"
+ASK_FIXTURES = FIXTURES.parent / "ask"
+
+READERS = ("api", "open")
+OPEN_BASE_URL = "https://inference.baseten.co/v1"
+OPEN_MODEL = "meta-models/muse-spark-open-1026"
+OPEN_FIXTURES = FIXTURES.parent / "open"
+
+
+def reader_name(reader: str | None = None) -> str:
+    """The reader: the argument, else LANDSIGHT_READER, else "api"."""
+    r = (reader or os.environ.get("LANDSIGHT_READER") or "api").strip().lower()
+    if r not in READERS:
+        raise ValueError(f"reader must be one of {', '.join(READERS)}, not {r!r}")
+    return r
+
+
+def open_endpoint() -> tuple[str, str, str]:
+    """(base URL, model id, key) of the open reader. LANDSIGHT_OPEN_BASE_URL and LANDSIGHT_OPEN_MODEL point it at a
+    server the firm runs; the key is LANDSIGHT_OPEN_API_KEY, else BASETEN_API_KEY for Baseten's own URL only (a Baseten
+    key is never sent to another host)."""
+    base = (os.environ.get("LANDSIGHT_OPEN_BASE_URL") or OPEN_BASE_URL).rstrip("/")
+    model = os.environ.get("LANDSIGHT_OPEN_MODEL") or OPEN_MODEL
+    key = os.environ.get("LANDSIGHT_OPEN_API_KEY") or (os.environ.get("BASETEN_API_KEY", "") if base == OPEN_BASE_URL
+                                                       else "")
+    return base, model, key
+
+
+def live_problem(reader: str | None = None) -> str | None:
+    """Why this reader cannot be asked live (None when it can)."""
+    if reader_name(reader) == "api":
+        return None if os.environ.get("MODEL_API_KEY") else "live mode needs MODEL_API_KEY"
+    base, _, key = open_endpoint()
+    if key or base != OPEN_BASE_URL:  # a self-hosted server may run without a key
+        return None
+    return "live mode with the open reader needs BASETEN_API_KEY (or LANDSIGHT_OPEN_API_KEY)"
+
+
+def fixture_dir_for(reader: str, fixture_dir: Path | str) -> Path:
+    """The open reader's recordings live apart: the review's and the questions' default folders become
+    tests/fixtures/open/ and tests/fixtures/open/ask/; a folder given explicitly stays as given."""
+    d = Path(fixture_dir)
+    if reader != "open":
+        return d
+    if d == FIXTURES:
+        return OPEN_FIXTURES
+    if d == ASK_FIXTURES:
+        return OPEN_FIXTURES / "ask"
+    return d
 
 SYSTEM = ("You review landscape construction drawing packages (drawings, bills of quantities, specifications) for a "
           "landscape design firm that is deciding whether to take a job. Answer only from what you are shown; never "
@@ -234,9 +291,18 @@ class ReviewSpark:
     reused inside one run (same call and key) are memoised and not logged twice."""
 
     def __init__(self, mode: str = "fixtures", fixture_dir: Path | str = FIXTURES, resume: bool = True,
-                 timeout: float = 180.0, transport: httpx.BaseTransport | None = None, fresh: int = 0):
+                 timeout: float = 180.0, transport: httpx.BaseTransport | None = None, fresh: int = 0,
+                 reader: str | None = None):
         if mode not in ("fixtures", "live"):
             raise ValueError(mode)
+        self.reader = reader_name(reader)
+        if self.reader == "open":
+            self.base_url, self.model, open_key = open_endpoint()
+        else:
+            self.base_url, self.model, open_key = BASE_URL, MODEL, ""
+        # the open reader's keys end in its model id: an answer from one model never replays as another's
+        self._key_tag = f"|m={self.model}" if self.reader == "open" else ""
+        fixture_dir = fixture_dir_for(self.reader, fixture_dir)
         self.mode, self.resume, self.timeout, self.transport = mode, resume, timeout, transport
         # live only: re-ask this many calls that already have a recording (-1: every one). The new answer is used in
         # this run and written to <fixture_dir>/fresh/ with its raw envelope and response id; the recording it
@@ -252,9 +318,15 @@ class ReviewSpark:
         self.by_image: dict[tuple[str, str], dict] = {}
         self.by_key: dict[tuple[str, str], dict] = {}
         self._load()
-        self.api_key = os.environ.get("MODEL_API_KEY", "") if mode == "live" else ""
-        if mode == "live" and not self.api_key:
-            raise SparkUnavailable("live mode needs MODEL_API_KEY")
+        if self.reader == "open":
+            self.api_key = open_key if mode == "live" else ""
+            problem = live_problem("open") if mode == "live" else None
+            if problem:
+                raise SparkUnavailable(problem)
+        else:
+            self.api_key = os.environ.get("MODEL_API_KEY", "") if mode == "live" else ""
+            if mode == "live" and not self.api_key:
+                raise SparkUnavailable("live mode needs MODEL_API_KEY")
         self._client = None  # landsight.meta.SparkClient for the take-off's calls, created on first use
 
     # ------------------------------------------------------------------------------------------ fixtures
@@ -287,7 +359,7 @@ class ReviewSpark:
         fresh re-ask goes to fresh/ under a timestamped name and never replaces the recording it re-asked."""
         stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
         base = f"{call}__{sha256((key or image_sha).encode())[:16]}"
-        rec = {"call": call, "image_sha256": image_sha, "content_key": key, "model": MODEL, "recorded_at": stamp,
+        rec = {"call": call, "image_sha256": image_sha, "content_key": key, "model": self.model, "recorded_at": stamp,
                "seconds": seconds, "usage": usage, "prompt": prompt, **(extra or {}), "result": result,
                "response_id": (raw or {}).get("id"), "raw": raw}
         if fresh_of is not None:
@@ -331,7 +403,7 @@ class ReviewSpark:
             entry = {"call": call, "seconds": rec.get("seconds") or 0.0, "usage": rec.get("usage") or {},
                      "fixture": rec["fixture"], "recorded": True, "key": key, "prompt": rec.get("prompt", ""),
                      "candidates": rec.get("candidates"), "recorded_at": rec.get("recorded_at"),
-                     "model": rec.get("model") or MODEL, "fixture_dir": str(self.dir)}
+                     "model": rec.get("model") or self.model, "fixture_dir": str(self.dir)}
             result = rec["result"]
         elif self.mode == "fixtures":
             raise FixtureMissing(f"no recording for {call} (key {key[:40]}, image {image_sha[:12]})")
@@ -343,7 +415,7 @@ class ReviewSpark:
                                fresh_of=rec if fresh else None)
             entry = {"call": call, "seconds": seconds, "usage": usage, "fixture": new["fixture"], "recorded": False,
                      "key": key, "prompt": prompt, "candidates": (extra or {}).get("candidates"),
-                     "recorded_at": new["recorded_at"], "model": MODEL, "fixture_dir": str(self.dir),
+                     "recorded_at": new["recorded_at"], "model": self.model, "fixture_dir": str(self.dir),
                      "response_id": new.get("response_id"), "raw": raw}
             if fresh:
                 entry |= {"fresh_of": rec["fixture"], "same_as_recorded": new.get("same_as_recorded")}
@@ -357,9 +429,11 @@ class ReviewSpark:
     def _chat(self, call: str, text: str, images: list[bytes], schema: dict) -> tuple[dict, dict, dict]:
         content = [{"type": "text", "text": text}] + [{"type": "image_url", "image_url": {"url": _png_or_jpeg_url(p)}}
                                                        for p in images]
-        body = {"model": MODEL, "reasoning_effort": "low",
+        body = {"model": self.model, "reasoning_effort": "low",
                 "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": content}],
                 "response_format": {"type": "json_schema", "json_schema": {"name": call, "schema": schema}}}
+        if self.reader == "open":
+            return self._chat_open(call, body)
         with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
             r = client.post(BASE_URL.rstrip("/") + "/chat/completions", json=body,
                             headers={"Authorization": f"Bearer {self.api_key}"})
@@ -368,8 +442,32 @@ class ReviewSpark:
         data = r.json()
         return json.loads(data["choices"][0]["message"]["content"]), data.get("usage") or {}, data
 
+    def _chat_open(self, call: str, body: dict) -> tuple[dict, dict, dict]:
+        """The open reader's request: the same body to the open endpoint; one retry on HTTP 429, 5xx or a dropped
+        connection; a fenced answer is unwrapped. The key (if any) goes in the header and nowhere else."""
+        headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
+        r = None
+        for attempt in range(2):
+            try:
+                with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
+                    r = client.post(self.base_url + "/chat/completions", json=body, headers=headers)
+            except httpx.TransportError as e:
+                if attempt == 0:
+                    continue
+                raise SparkUnavailable(f"{call}: {type(e).__name__}") from e
+            if r.status_code == 200 or not (r.status_code == 429 or r.status_code >= 500):
+                break
+        if r.status_code != 200:
+            raise SparkUnavailable(f"{call}: HTTP {r.status_code}: {r.text[:200]}")
+        data = r.json()
+        try:
+            result = parse_json(data["choices"][0]["message"]["content"] or "")
+        except Exception as e:  # noqa: BLE001 - an unreadable answer is a failed call, noted by the caller
+            raise SparkUnavailable(f"{call}: {e}") from e
+        return result, data.get("usage") or {}, data
+
     def _custom(self, call: str, content_key: str, prompt: str, images: list[bytes], schema: dict, extra=None):
-        key = f"{content_key}|p={_prompt_tag(prompt, schema)}"
+        key = f"{content_key}|p={_prompt_tag(prompt, schema)}{self._key_tag}"
         return self._answer(call, key, images, prompt, lambda: self._chat(call, prompt, images, schema), extra,
                             image_fallback=False)  # the key carries the prompt; an image alone never does
 
@@ -403,7 +501,11 @@ class ReviewSpark:
         if self._client is None:
             from landsight.meta import SparkClient
 
-            self._client = SparkClient(api_key=self.api_key)
+            if self.reader == "open":
+                self._client = SparkClient(api_key=self.api_key, model=self.model, base_url=self.base_url,
+                                           timeout=self.timeout, transport=self.transport, open_weights=True)
+            else:
+                self._client = SparkClient(api_key=self.api_key)
         return self._client
 
     def _via_meta(self, call: str, png: bytes, key: str, fn, extra=None, facts: str = ""):
@@ -418,7 +520,7 @@ class ReviewSpark:
                           "read_legend": (M.LEGEND_PROMPT, M.LEGEND_SCHEMA)}[call]
         prompt += facts
         content = key or "img:" + _image_sha([png])
-        tagged = f"{content}|p={_prompt_tag(prompt, schema)}"
+        tagged = f"{content}|p={_prompt_tag(prompt, schema)}{self._key_tag}"
 
         def live():
             client = self._meta()

@@ -1,0 +1,399 @@
+{
+ "call": "firm_habits",
+ "image_sha256": "",
+ "content_key": "habits:2a91f78d0f7bf5db|p=98a3c93c",
+ "model": "muse-wonder-1.0",
+ "recorded_at": "2026-11-03T22:10:42+00:00",
+ "seconds": 21.41,
+ "usage": {
+  "completion_tokens": 2869,
+  "prompt_tokens": 3202,
+  "total_tokens": 6071,
+  "completion_tokens_details": {
+   "reasoning_tokens": 788
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "Below are decisions a landscape design firm's estimator made on the findings of an automated review of developers' landscape packages (drawings, bills of quantities, documents). Each finding shows its id, package, scenario, category, severity, title, the reviewer's reason and its numbers; then the estimator's decision (confirm: raise it with the developer; dismiss: not worth raising) and the estimator's note. Distil the firm's habits, so that the next package can be handled the firm's way:\n- summary: two sentences on how this firm reviews a package.\n- send_back: the kinds of finding the firm always raises with the developer, in the order the firm wants them in its email, most important first. Define each kind as broadly as the decisions allow, so that it carries over to the next package, whose findings will be different ones: by categories and scenarios first; add severities or keywords only where the firm treats findings of the same category and scenario differently (for example it sends one kind of bill finding back and keeps another). Each: name (a short heading for the email to the developer), match (categories, scenarios and severities chosen from the lists below, and keywords: lower-case words from the titles; an empty list matches anything), why the firm raises it (from the notes), and evidence (the finding ids that show it).\n- handle_internally: the kinds of finding the firm notes but does not send back, in the same form.\n- pricing: basis (what the firm's rates include), tolerance_pct (how far, in percent, a developer's unit rate may sit outside the firm's list before the firm queries it; 0 if the decisions do not say), up to five conventions, and evidence.\n- species_substitutions: the plants the firm proposes instead of others: from, to, when, evidence.\n- reply: how the firm writes to a developer: tone (a few words), greeting, opening (one sentence), closing (one sentence), sign_off, up to five rules for wording the points, and evidence.\nUse only what the decisions show; leave a list empty rather than guess.\nCategories: quantity, revision, sheet, area, scale, bill, price, arithmetic, units, regulation, protected_tree, ingest, document. Scenarios: quote, regulation, design, format, info. Severities: flag, fail, review, info.\n\nDecisions:\n- [E01] package: Greenfield Residences — Landscape Package | design | quantity | flag | \"T-08: open outline (12 pieces, 12 gaps up to 0.40 m); Muse Spark says one tree\" | reason: Geometry could not close T-08's line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence 0.92): Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol. It is…\n  decision: dismiss | note: \"Open outlines in the CAD we confirm on our side; the developer does not need to hear about line work.\"\n- [E02.2] package: Greenfield Residences — Landscape Package | quote | quantity | flag | \"Camphore tree, cal. 10 cm: bill 12, drawing 8\" | reason: The latest bill has 12 plants; the governing drawing shows 8; the plant schedule says 12, and the drawing governs (general note); Tree pit on slab 12 EA follows the same 12. | numbers: bill_qty 12.0, bill_unit EA, drawn_qty 8, drawn_unit plant, unit_price 4200.0, list_low 6200.0, list_high 7200.0, amount 50400.0\n  decision: confirm | note: \"Row 6: reduce to the drawn quantity. The drawing governs; give both numbers.\"\n- [E09] package: Greenfield Residences — Landscape Package | regulation | regulation | flag | \"T-09 is drawn inside the fire truck access lane — not counted toward greening\" | reason: The canopy's centre lies inside the area labelled 'FIRE TRUCK ACCESS LANE — KEEP CLEAR': a tree there blocks a lane the drawing says to keep clear, so it is left out of the greening count until the designer moves it or the architect…\n  decision: confirm | note: \"Fire lane first, before any money: the permit fails without it. Ask them to move the tree out of the lane.\"\n- [E12] package: Greenfield Residences — Landscape Package | regulation | regulation | flag | \"Tree pit 1.5 × 1.5 m = 2.25 m² on artificial ground: 7 large trees count as small (Gi 1.5 → 1.0)\" | reason: Muse Spark read the detail L-6: Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition. On artificial…\n  decision: confirm | note: \"On slabs and roofs we propose shallow-rooted planting rather than more soil: Chinese ixora in planters with less than 0.45 m of soil.\"\n- [E13] package: Greenfield Residences — Landscape Package | quote | quantity | flag | \"Azalea: 450 plants for 150 m² = 3.0 per m², below the schedule's 4 per m²\" | reason: The schedule asks 4 plants per m²; the drawn bed is 150 m², so 600 plants. The bill has 450. | numbers: bill_qty 450.0, bill_unit EA, drawn_qty 150, drawn_unit m2, unit_price 155.0, list_low 140.0, list_high 170.0, amount 69750.0\n  decision: confirm | note: \"Ask for 4 per m² as the schedule says. Where the spec only says azalea we propose Rhododendron simsii, the native azalea.\"\n- [E14] package: Greenfield Residences — Landscape Package | regulation | regulation | fail | \"Greening (Art. 302): required 297.0, provided 197.1 (241.9 before the tree-pit rule) — fail · 7 trees counted, T-08 to confirm\" | reason: 7 Camphor counted (closed outlines, geometry); T-08, which Muse Spark reads as one more tree, counts once a person confirms it (8 then). Required TCO2c = 0.5 × A′ 900.0 m² × β 0.66 = 297.0; provided (ΣGi·Ai 246.4) × α 0.8 = 197.1… | numbers: required 297.0, provided 197.1\n  decision: confirm | note: \"A greening fail goes near the top. Offer the cheapest fix that passes (a second native species), not more trees.\"\n- [E15] package: Greenfield Residences — Landscape Package | regulation | protected_tree | review | \"EX-01 existing tree DBH 95 cm marked TO BE REMOVED: may be a protected tree — needs review\" | reason: The label reads 'EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED'. DBH 0.95 m reaches the 0.8 m threshold of the local tree protection rule (Art. 3: DBH ≥ 0.8 m or girth ≥ 2.5 m). Protection is the city's designation, not the drawing's:…\n  decision: confirm | note: \"We never price a tree removal without the city's tree survey. Ask for it.\"\n- [E16] package: Greenfield Residences — Landscape Package | design | scale | flag | \"L-5: title block says 1:200, the scale bar measures 1:100\" | reason: The scale bar (0 · 1 · 2 · 3 · 4 · 5 m) puts 2 drawing units in a metre; the frame and title block are the size of the package's other sheets, so the content plots at 1:100, not 1:200. Areas measured on this sheet as if it were 1 unit = 1…\n  decision: dismiss | note: \"We measure off the scale bar ourselves; a wrong title-block scale is not worth their time.\"\n- [E17] package: Greenfield Residences — Landscape Package | quote | units | flag | \"Duranta hedge: billed 27 m, drawn 182 plants\" | reason: The drawing counts Duranta by plant (182: 2 rows of 27 m at 0.3 m); the bill prices 27 m, one row's length. Price per plant, as the procurement standard measures hedges. | numbers: bill_qty 27.0, bill_unit m, drawn_qty 182, drawn_unit plant, unit_price 950.0, amount 25650.0\n  decision: confirm | note: \"We price hedges per plant, never per metre. If Duranta is short at the nursery we offer Chinese ixora at the same spacing.\"\n- [E18] package: Greenfield Residences — Landscape Package | quote | bill | review | \"'Camphore tree, cal. 10 cm' aligned to Camphor (CC) at confidence 0.85\" | reason: The bill spells it 'camphore'; the drawing's schedule says Camphor. Muse Spark: Misspelt Camphore but botanical spec matches CC. Confirm it is the same item. | numbers: bill_qty 12.0, bill_unit EA, drawn_qty 8, drawn_unit plant, unit_price 4200.0, list_low 6200.0, list_high 7200.0, amount 50400.0\n  decision: dismiss | note: \"A misspelt row does not change the price. Never raise spelling.\"\n- [E19] package: Greenfield Residences — Landscape Package | quote | price | flag | \"Camphor NT$4,200: about 32% under your installed list (6,200–7,200)\" | reason: The bill's unit rate against the firm's own installed range in your price list (landsight.db): 32% below the list's low end. The list row says: cal. 10 cm, H3.0-3.5 m, installed; source P006 municipal budget 6,149 (2021); P002 municipal… | numbers: bill_qty 12.0, bill_unit EA, drawn_qty 8, drawn_unit plant, unit_price 4200.0, bill_price 4200.0, list_low 6200.0, list_high 7200.0, amount 50400.0\n  decision: confirm | note: \"Under our installed list: we quote our own range (installed, 12 months of maintenance included), never their number. Say it politely.\"\n- [E20] package: Greenfield Residences — Landscape Package | quote | price | flag | \"Permeable pavers NT$3,800: 65% over the top of your list (1,300–2,300)\" | reason: The bill's unit rate against the firm's own installed range in your price list (landsight.db): 65% above the list's high end. The list row says: paver + bedding + base; source P048-P051 1,210-1,410; P052 2,120-2,340. | numbers: bill_qty 236.0, bill_unit m², drawn_qty 212, drawn_unit m2, unit_price 3800.0, bill_price 3800.0, list_low 1300.0, list_high 2300.0, amount 896800.0\n  decision: confirm | note: \"More than 15% outside our list gets queried; inside 15% we let it go.\"\n- [E21] package: Greenfield Residences — Landscape Package | quote | arithmetic | fail | \"The subtotal SUM(G6:G17) skips Irrigation system\" | reason: The subtotal formula stops at row 17; row 19 (Irrigation system, NT$117,190) is left out, so the bill does not add up in 2 versions. | numbers: bill_qty 1.0, bill_unit LS, unit_price 117190.0, amount 117190.0\n  decision: confirm | note: \"Arithmetic always comes first among the money points: it moves their total. Ask politely, 'please check the subtotal', never 'error'.\"\n- [E22.2] package: Greenfield Residences — Landscape Package | quote | quantity | flag | \"Permeable pavers (PV-1): bill 236, drawing 212\" | reason: The latest bill has 236 m²; the governing drawing shows 212. Bill 3 (2026-10-14) changed it from 212 to 236; the drawing was not changed. | numbers: bill_qty 236.0, bill_unit m², drawn_qty 212, drawn_unit m2, unit_price 3800.0, list_low 1300.0, list_high 2300.0, amount 896800.0\n  decision: confirm | note: \"Same as the camphor row: a bill quantity that differs from the drawing always goes back, with both numbers.\"\n- [E23] package: Greenfield Residences — Landscape Package | quote | bill | flag | \"Hidden sheet 'old' in Landscape BOQ rev2.xlsx\" | reason: The workbook hides a sheet 'old' with 11 priced rows totalling NT$1,132,628, against NT$1,458,608 on the visible sheet. Ask which one the developer priced from.\n  decision: dismiss | note: \"Hidden or old sheets are their housekeeping, not worth a line in the email.\"\n- [E29] package: Greenfield Residences — Landscape Package | design | sheet | flag | \"L-9 Sections: on the drawing index, not in the package\" | reason: The index on L-0 lists 9 sheets (L-1, L-2, L-3, L-4, L-5, L-6, L-7, L-8, L-9); no DXF or PDF page in the package carries L-9. Muse Spark's read and the DXF text agree. Ask for the missing sheet.\n  decision: confirm | note: \"Ask for every sheet the index lists before we price. Missing sheets go in the same email, which we keep short and sign as the estimating team.\"",
+ "result": {
+  "handle_internally": [
+   {
+    "evidence": [
+     "E01"
+    ],
+    "match": {
+     "categories": [
+      "quantity"
+     ],
+     "keywords": [
+      "open",
+      "outline"
+     ],
+     "scenarios": [
+      "design"
+     ],
+     "severities": []
+    },
+    "name": "Open drawing outlines",
+    "why": "The firm confirms open outlines in the CAD on its own side; the developer does not need to hear about line work."
+   },
+   {
+    "evidence": [
+     "E16"
+    ],
+    "match": {
+     "categories": [
+      "scale"
+     ],
+     "keywords": [
+      "scale"
+     ],
+     "scenarios": [
+      "design"
+     ],
+     "severities": []
+    },
+    "name": "Title-block scale discrepancies",
+    "why": "The firm measures off the scale bar itself; a wrong title-block scale is not worth the developer's time."
+   },
+   {
+    "evidence": [
+     "E18"
+    ],
+    "match": {
+     "categories": [
+      "bill"
+     ],
+     "keywords": [
+      "aligned"
+     ],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Bill spelling or item alignment",
+    "why": "A misspelt row does not change the price, and the firm never raises spelling."
+   },
+   {
+    "evidence": [
+     "E23"
+    ],
+    "match": {
+     "categories": [
+      "bill"
+     ],
+     "keywords": [
+      "hidden",
+      "sheet",
+      "old"
+     ],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Hidden or old bill sheets",
+    "why": "Hidden or old sheets are the developer's housekeeping, not worth a line in the email."
+   }
+  ],
+  "pricing": {
+   "basis": "The firm's own installed list range, with 12 months of maintenance included.",
+   "conventions": [
+    "Quote the firm's own installed range, never the developer's number.",
+    "The governing drawing controls quantities; bill quantities that differ from it are reduced or corrected to the drawn quantity.",
+    "Hedges are priced per plant, never per metre.",
+    "A rate more than 15% outside the firm's list is queried; a rate inside 15% is let go.",
+    "Arithmetic is addressed first among the money points because it moves the developer's total."
+   ],
+   "evidence": [
+    "E19",
+    "E20",
+    "E02.2",
+    "E17",
+    "E21"
+   ],
+   "tolerance_pct": 15
+  },
+  "reply": {
+   "closing": "",
+   "evidence": [
+    "E19",
+    "E21",
+    "E29",
+    "E02.2",
+    "E18"
+   ],
+   "greeting": "",
+   "opening": "",
+   "rules": [
+    "Be polite when querying a price and quote the firm's own range rather than the developer's number.",
+    "For arithmetic, ask politely to 'please check the subtotal' and never use the word 'error'.",
+    "For quantity differences, give both the bill and drawing numbers.",
+    "Never raise spelling.",
+    "Keep the email short."
+   ],
+   "sign_off": "the estimating team",
+   "tone": "polite, short"
+  },
+  "send_back": [
+   {
+    "evidence": [
+     "E09"
+    ],
+    "match": {
+     "categories": [
+      "regulation"
+     ],
+     "keywords": [
+      "fire",
+      "lane"
+     ],
+     "scenarios": [
+      "regulation"
+     ],
+     "severities": []
+    },
+    "name": "Tree blocking fire truck access",
+    "why": "Fire lane comes first, before any money, because the permit fails without it; ask them to move the tree out of the lane."
+   },
+   {
+    "evidence": [
+     "E14"
+    ],
+    "match": {
+     "categories": [
+      "regulation"
+     ],
+     "keywords": [
+      "greening"
+     ],
+     "scenarios": [
+      "regulation"
+     ],
+     "severities": [
+      "fail"
+     ]
+    },
+    "name": "Greening requirement failure",
+    "why": "A greening fail goes near the top; offer the cheapest fix that passes rather than more trees."
+   },
+   {
+    "evidence": [
+     "E15"
+    ],
+    "match": {
+     "categories": [
+      "protected_tree"
+     ],
+     "keywords": [
+      "protected",
+      "removed"
+     ],
+     "scenarios": [
+      "regulation"
+     ],
+     "severities": []
+    },
+    "name": "Possible protected tree removal",
+    "why": "The firm never prices a tree removal without the city's tree survey and asks for that survey."
+   },
+   {
+    "evidence": [
+     "E12"
+    ],
+    "match": {
+     "categories": [
+      "regulation"
+     ],
+     "keywords": [
+      "tree",
+      "pit",
+      "artificial"
+     ],
+     "scenarios": [
+      "regulation"
+     ],
+     "severities": []
+    },
+    "name": "Tree pit on artificial ground",
+    "why": "On slabs and roofs the firm proposes shallow-rooted planting rather than more soil, so the pit rule and its effect on the greening count must be raised."
+   },
+   {
+    "evidence": [
+     "E29"
+    ],
+    "match": {
+     "categories": [
+      "sheet"
+     ],
+     "keywords": [
+      "index",
+      "package"
+     ],
+     "scenarios": [
+      "design"
+     ],
+     "severities": []
+    },
+    "name": "Missing indexed sheet",
+    "why": "The firm asks for every sheet listed on the index before it prices."
+   },
+   {
+    "evidence": [
+     "E21"
+    ],
+    "match": {
+     "categories": [
+      "arithmetic"
+     ],
+     "keywords": [
+      "subtotal"
+     ],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Bill arithmetic",
+    "why": "Arithmetic always comes first among the money points because it moves the developer's total."
+   },
+   {
+    "evidence": [
+     "E02.2",
+     "E22.2"
+    ],
+    "match": {
+     "categories": [
+      "quantity"
+     ],
+     "keywords": [],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Bill quantity differs from drawing",
+    "why": "A bill quantity that differs from the governing drawing always goes back, with both numbers given."
+   },
+   {
+    "evidence": [
+     "E13"
+    ],
+    "match": {
+     "categories": [
+      "quantity"
+     ],
+     "keywords": [
+      "azalea",
+      "per"
+     ],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Planting density below schedule",
+    "why": "Ask for the density stated in the schedule, such as 4 plants per m², rather than the lower billed quantity."
+   },
+   {
+    "evidence": [
+     "E17"
+    ],
+    "match": {
+     "categories": [
+      "units"
+     ],
+     "keywords": [
+      "hedge",
+      "billed",
+      "drawn"
+     ],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Hedge billing unit mismatch",
+    "why": "The firm prices hedges per plant, never per metre, in line with the procurement standard."
+   },
+   {
+    "evidence": [
+     "E19",
+     "E20"
+    ],
+    "match": {
+     "categories": [
+      "price"
+     ],
+     "keywords": [],
+     "scenarios": [
+      "quote"
+     ],
+     "severities": []
+    },
+    "name": "Unit rate outside the firm's list",
+    "why": "A rate more than 15% outside the firm's installed list gets queried, whether it is under or over the list."
+   }
+  ],
+  "species_substitutions": [
+   {
+    "evidence": [
+     "E13"
+    ],
+    "from": "azalea",
+    "to": "Rhododendron simsii",
+    "when": "Where the specification only says azalea; it is the native azalea."
+   },
+   {
+    "evidence": [
+     "E17"
+    ],
+    "from": "Duranta",
+    "to": "Chinese ixora",
+    "when": "If Duranta is short at the nursery, at the same spacing."
+   },
+   {
+    "evidence": [
+     "E12"
+    ],
+    "from": "large trees on artificial ground",
+    "to": "Chinese ixora in planters",
+    "when": "On slabs and roofs, as shallow-rooted planting in planters with less than 0.45 m of soil rather than adding more soil."
+   }
+  ],
+  "summary": "The firm sends back permit-blocking regulation problems and missing information before money, then arithmetic, quantity, unit and price issues measured against the governing drawing, schedules and its own installed list. It handles drawing-production details, scale-bar measurement, spelling and workbook housekeeping internally, keeps the email short and polite, and favours practical planting substitutions over more expensive soil or tree additions."
+ },
+ "response_id": "chatcmpl-01a1a376-ed87-779c-b129-ca36e1e5bded",
+ "raw": {
+  "id": "chatcmpl-01a1a376-ed87-779c-b129-ca36e1e5bded",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\n  \"handle_internally\": [\n    {\n      \"evidence\": [\n        \"E01\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"quantity\"\n        ],\n        \"keywords\": [\n          \"open\",\n          \"outline\"\n        ],\n        \"scenarios\": [\n          \"design\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Open drawing outlines\",\n      \"why\": \"The firm confirms open outlines in the CAD on its own side; the developer does not need to hear about line work.\"\n    },\n    {\n      \"evidence\": [\n        \"E16\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"scale\"\n        ],\n        \"keywords\": [\n          \"scale\"\n        ],\n        \"scenarios\": [\n          \"design\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Title-block scale discrepancies\",\n      \"why\": \"The firm measures off the scale bar itself; a wrong title-block scale is not worth the developer's time.\"\n    },\n    {\n      \"evidence\": [\n        \"E18\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"bill\"\n        ],\n        \"keywords\": [\n          \"aligned\"\n        ],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Bill spelling or item alignment\",\n      \"why\": \"A misspelt row does not change the price, and the firm never raises spelling.\"\n    },\n    {\n      \"evidence\": [\n        \"E23\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"bill\"\n        ],\n        \"keywords\": [\n          \"hidden\",\n          \"sheet\",\n          \"old\"\n        ],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Hidden or old bill sheets\",\n      \"why\": \"Hidden or old sheets are the developer's housekeeping, not worth a line in the email.\"\n    }\n  ],\n  \"pricing\": {\n    \"basis\": \"The firm's own installed list range, with 12 months of maintenance included.\",\n    \"conventions\": [\n      \"Quote the firm's own installed range, never the developer's number.\",\n      \"The governing drawing controls quantities; bill quantities that differ from it are reduced or corrected to the drawn quantity.\",\n      \"Hedges are priced per plant, never per metre.\",\n      \"A rate more than 15% outside the firm's list is queried; a rate inside 15% is let go.\",\n      \"Arithmetic is addressed first among the money points because it moves the developer's total.\"\n    ],\n    \"evidence\": [\n      \"E19\",\n      \"E20\",\n      \"E02.2\",\n      \"E17\",\n      \"E21\"\n    ],\n    \"tolerance_pct\": 15\n  },\n  \"reply\": {\n    \"closing\": \"\",\n    \"evidence\": [\n      \"E19\",\n      \"E21\",\n      \"E29\",\n      \"E02.2\",\n      \"E18\"\n    ],\n    \"greeting\": \"\",\n    \"opening\": \"\",\n    \"rules\": [\n      \"Be polite when querying a price and quote the firm's own range rather than the developer's number.\",\n      \"For arithmetic, ask politely to 'please check the subtotal' and never use the word 'error'.\",\n      \"For quantity differences, give both the bill and drawing numbers.\",\n      \"Never raise spelling.\",\n      \"Keep the email short.\"\n    ],\n    \"sign_off\": \"the estimating team\",\n    \"tone\": \"polite, short\"\n  },\n  \"send_back\": [\n    {\n      \"evidence\": [\n        \"E09\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"regulation\"\n        ],\n        \"keywords\": [\n          \"fire\",\n          \"lane\"\n        ],\n        \"scenarios\": [\n          \"regulation\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Tree blocking fire truck access\",\n      \"why\": \"Fire lane comes first, before any money, because the permit fails without it; ask them to move the tree out of the lane.\"\n    },\n    {\n      \"evidence\": [\n        \"E14\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"regulation\"\n        ],\n        \"keywords\": [\n          \"greening\"\n        ],\n        \"scenarios\": [\n          \"regulation\"\n        ],\n        \"severities\": [\n          \"fail\"\n        ]\n      },\n      \"name\": \"Greening requirement failure\",\n      \"why\": \"A greening fail goes near the top; offer the cheapest fix that passes rather than more trees.\"\n    },\n    {\n      \"evidence\": [\n        \"E15\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"protected_tree\"\n        ],\n        \"keywords\": [\n          \"protected\",\n          \"removed\"\n        ],\n        \"scenarios\": [\n          \"regulation\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Possible protected tree removal\",\n      \"why\": \"The firm never prices a tree removal without the city's tree survey and asks for that survey.\"\n    },\n    {\n      \"evidence\": [\n        \"E12\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"regulation\"\n        ],\n        \"keywords\": [\n          \"tree\",\n          \"pit\",\n          \"artificial\"\n        ],\n        \"scenarios\": [\n          \"regulation\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Tree pit on artificial ground\",\n      \"why\": \"On slabs and roofs the firm proposes shallow-rooted planting rather than more soil, so the pit rule and its effect on the greening count must be raised.\"\n    },\n    {\n      \"evidence\": [\n        \"E29\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"sheet\"\n        ],\n        \"keywords\": [\n          \"index\",\n          \"package\"\n        ],\n        \"scenarios\": [\n          \"design\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Missing indexed sheet\",\n      \"why\": \"The firm asks for every sheet listed on the index before it prices.\"\n    },\n    {\n      \"evidence\": [\n        \"E21\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"arithmetic\"\n        ],\n        \"keywords\": [\n          \"subtotal\"\n        ],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Bill arithmetic\",\n      \"why\": \"Arithmetic always comes first among the money points because it moves the developer's total.\"\n    },\n    {\n      \"evidence\": [\n        \"E02.2\",\n        \"E22.2\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"quantity\"\n        ],\n        \"keywords\": [],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Bill quantity differs from drawing\",\n      \"why\": \"A bill quantity that differs from the governing drawing always goes back, with both numbers given.\"\n    },\n    {\n      \"evidence\": [\n        \"E13\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"quantity\"\n        ],\n        \"keywords\": [\n          \"azalea\",\n          \"per\"\n        ],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Planting density below schedule\",\n      \"why\": \"Ask for the density stated in the schedule, such as 4 plants per m², rather than the lower billed quantity.\"\n    },\n    {\n      \"evidence\": [\n        \"E17\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"units\"\n        ],\n        \"keywords\": [\n          \"hedge\",\n          \"billed\",\n          \"drawn\"\n        ],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Hedge billing unit mismatch\",\n      \"why\": \"The firm prices hedges per plant, never per metre, in line with the procurement standard.\"\n    },\n    {\n      \"evidence\": [\n        \"E19\",\n        \"E20\"\n      ],\n      \"match\": {\n        \"categories\": [\n          \"price\"\n        ],\n        \"keywords\": [],\n        \"scenarios\": [\n          \"quote\"\n        ],\n        \"severities\": []\n      },\n      \"name\": \"Unit rate outside the firm's list\",\n      \"why\": \"A rate more than 15% outside the firm's installed list gets queried, whether it is under or over the list.\"\n    }\n  ],\n  \"species_substitutions\": [\n    {\n      \"evidence\": [\n        \"E13\"\n      ],\n      \"from\": \"azalea\",\n      \"to\": \"Rhododendron simsii\",\n      \"when\": \"Where the specification only says azalea; it is the native azalea.\"\n    },\n    {\n      \"evidence\": [\n        \"E17\"\n      ],\n      \"from\": \"Duranta\",\n      \"to\": \"Chinese ixora\",\n      \"when\": \"If Duranta is short at the nursery, at the same spacing.\"\n    },\n    {\n      \"evidence\": [\n        \"E12\"\n      ],\n      \"from\": \"large trees on artificial ground\",\n      \"to\": \"Chinese ixora in planters\",\n      \"when\": \"On slabs and roofs, as shallow-rooted planting in planters with less than 0.45 m of soil rather than adding more soil.\"\n    }\n  ],\n  \"summary\": \"The firm sends back permit-blocking regulation problems and missing information before money, then arithmetic, quantity, unit and price issues measured against the governing drawing, schedules and its own installed list. It handles drawing-production details, scale-bar measurement, spelling and workbook housekeeping internally, keeps the email short and polite, and favours practical planting substitutions over more expensive soil or tree additions.\"\n}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793743842,
+  "model": "muse-wonder-1.0",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 2869,
+   "prompt_tokens": 3202,
+   "total_tokens": 6071,
+   "completion_tokens_details": {
+    "reasoning_tokens": 788
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ }
+}

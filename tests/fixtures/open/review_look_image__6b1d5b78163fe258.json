@@ -1,0 +1,64 @@
+{
+ "call": "review_look_image",
+ "image_sha256": "1af4a9ae7367edb32cc20016283313333ffa818907e8c89fa48da41c5f36fa94",
+ "content_key": "image:d43a59fc4ac14ee90b2e459aac45b1e3750b609ee5c5eef1f0ab36c6c77e04d3|p=67960435|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:58+00:00",
+ "seconds": 4.76,
+ "usage": {
+  "prompt_tokens": 457,
+  "completion_tokens": 238,
+  "total_tokens": 695,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 154,
+   "audio_tokens": 0,
+   "reasoning_tokens": 154,
+   "rejected_prediction_tokens": 434
+  }
+ },
+ "prompt": "This image was found in a landscape drawing package, among the CAD files. Decide what it is: 'material_photo' (a close photo or texture of a surface material such as paving, stone, gravel or timber), 'drawing' (a plan, elevation, detail or diagram), 'document' (a scanned page of text or a table) or 'other'. If it is a material photo, name the material in a few plain words and say which of these finish codes from the package's legends it most likely shows, or 'none': AZ AZALEA; PV-1 PERMEABLE PAVERS; PV-2 EXPOSED AGGREGATE; PV-3 GRASS PAVERS. Give your confidence from 0 to 1 and why in one sentence about what you see.",
+ "result": {
+  "kind": "material_photo",
+  "material": "grey and brown brick paving/wall texture",
+  "matches_code": "none",
+  "confidence": 0.92,
+  "why": "Image shows a close-up repeating running-bond brick pattern with no grass, aggregate exposure, or permeable paver voids visible so it does not match the listed PV codes"
+ },
+ "response_id": "chatcmpl-c5092c5e441b4c22b3bcce87ed4e2f7b",
+ "raw": {
+  "id": "chatcmpl-c5092c5e441b4c22b3bcce87ed4e2f7b",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\": \"material_photo\", \"material\": \"grey and brown brick paving/wall texture\", \"matches_code\": \"none\", \"confidence\": 0.92, \"why\": \"Image shows a close-up repeating running-bond brick pattern with no grass, aggregate exposure, or permeable paver voids visible so it does not match the listed PV codes\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to classify image. It's a brick pattern: material_photo likely. It shows brick wall texture. Which finish codes? AZ AZALEA; PV-1 permeable pavers; PV-2 exposed aggregate; PV-3 grass pavers. Brick does not match any. So none. Confidence high.\n\nWe must not guess values not visible. But this is brick, so none. Provide JSON? The instruction: decide what it is. Need to follow format likely? Probably want JSON with fields. The user says answer only from what you are shown; never guess values. Give confidence 0-1 and why in one sentence about what you see.\n\nProvide classification: material_photo, material name, finish code none, confidence, why.\n\nWe should comply."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743254,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 457,
+   "completion_tokens": 238,
+   "total_tokens": 695,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 154,
+    "audio_tokens": 0,
+    "reasoning_tokens": 154,
+    "rejected_prediction_tokens": 434
+   }
+  }
+ }
+}

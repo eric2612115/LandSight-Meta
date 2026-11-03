@@ -1,0 +1,73 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:1bca8b32467a2b04a7790bde4326092ecefc950578775c1a01d23693ac7aab2e|p=784ca302|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:46+00:00",
+ "seconds": 2.68,
+ "usage": {
+  "prompt_tokens": 718,
+  "completion_tokens": 612,
+  "total_tokens": 1330,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 450,
+   "audio_tokens": 0,
+   "reasoning_tokens": 327,
+   "rejected_prediction_tokens": 684
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nTree pit guide — shallow roots\nDeveloper's guide for tree pits, shallow-rooted species · document TPG-S · 2026 edition\n(sample)\n1. Scope\nApplies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade\nor on artificial ground (podium over a basement slab, roof).\n2. Minimum dimensions\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\n3. Construction\n•  Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth\n   above.\n•  Root ball top level with the finished soil surface; three timber stakes per tree.\n•  On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a\n   small tree (Gi 1.0 instead of 1.5).\n4. All guides\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\nMedium\n2.0 x 2.0 m (4.0\nm²)\n1.0 m\n1.2 m\n100 mm\nDeep-rooted\n2.0 x 2.0 m (4.0\nm²)\n1.5 m\n1.5 m\n150 mm\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "kind": "spec",
+  "title": "Tree pit guide — shallow roots",
+  "summary": "Developer's guide TPG-S (2026 edition) setting minimum pit dimensions, soil depths and drainage for shallow-rooted small trees and palms on grade and on artificial ground.",
+  "key_facts": [
+   "Applies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade or on artificial ground (podium over a basement slab, roof)",
+   "Shallow-rooted minimum pit: 1.5 x 1.5 m (2.25 m²)",
+   "Soil depth on artificial ground: 0.7 m - shallow-rooted",
+   "Soil depth on grade: 1.0 m - shallow-rooted",
+   "Drainage layer: 100 mm - shallow-rooted",
+   "On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a small tree (Gi 1.0 instead of 1.5)"
+  ],
+  "required": [],
+  "confidence": 0.96,
+  "why": "Explicitly labelled as a developer's guide/specification with a table of minimum dimensions and construction rules, marked as a synthetic sample document."
+ },
+ "response_id": "chatcmpl-73a24ed2c0914492b746d9df25158c63",
+ "raw": {
+  "id": "chatcmpl-73a24ed2c0914492b746d9df25158c63",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\n  \"kind\": \"spec\",\n  \"title\": \"Tree pit guide — shallow roots\",\n  \"summary\": \"Developer's guide TPG-S (2026 edition) setting minimum pit dimensions, soil depths and drainage for shallow-rooted small trees and palms on grade and on artificial ground.\",\n  \"key_facts\": [\n    \"Applies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade or on artificial ground (podium over a basement slab, roof)\",\n    \"Shallow-rooted minimum pit: 1.5 x 1.5 m (2.25 m²)\",\n    \"Soil depth on artificial ground: 0.7 m - shallow-rooted\",\n    \"Soil depth on grade: 1.0 m - shallow-rooted\",\n    \"Drainage layer: 100 mm - shallow-rooted\",\n    \"On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a small tree (Gi 1.0 instead of 1.5)\"\n  ],\n  \"required\": [],\n  \"confidence\": 0.96,\n  \"why\": \"Explicitly labelled as a developer's guide/specification with a table of minimum dimensions and construction rules, marked as a synthetic sample document.\"\n}",
+     "role": "assistant",
+     "reasoning_content": "Classify document. It's a tree pit guide — shallow roots, developer's guide for tree pits. Is this spec or document? It's a standard/spec that sets rules, dimensions or measurement methods. It gives minimum dimensions. So spec.\n\nTitle as written? \"Tree pit guide — shallow roots\" Or developer's guide... Provide title as written. Use first line.\n\nSummary: guide for minimum pit dimensions for shallow-rooted species etc.\n\nKey facts: Need numbers exactly as written. Pit min 1.5 x 1.5 m (2.25 m²), Soil on artificial ground 0.7 m, Soil on grade 1.0 m, Drainage layer 100 mm, etc. Also applies to small trees and palms e.g. Lagerstroemia indica, Livistona chinensis. Also medium/deep specs? Might be sample but include.\n\nDocument lists documents or deliverables? No, this is not lists deliverables. But says \"All guides\" table includes shallow, medium, deep. Not deliverables.\n\nConfidence? High 0.95 because synthetic etc.\n\nNeed to output classification 'spec', title, summary, key facts up to six, and if document lists documents/deliverables each one with status. No deliverables list.\n\nWhy in one sentence.\n\nMust answer only from what shown; never guess values not visible.\n\nProvide confidence and why.\n\nMake format clear.\n\nWe must not hallucinate.\n\nReturn JSON? Instruction says classify, give title, summary, key facts, and if... Need structured answer. Probably provide fields.\n\nEnsure answer only from what shown.\n\nProvide exactly numbers.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743244,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 718,
+   "completion_tokens": 612,
+   "total_tokens": 1330,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 450,
+    "audio_tokens": 0,
+    "reasoning_tokens": 327,
+    "rejected_prediction_tokens": 684
+   }
+  }
+ }
+}

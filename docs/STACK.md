@@ -114,17 +114,57 @@ sample) and on the raster Presentation Plan (a picture with no CAD behind it); n
 (D-03) returned no boxes for "tree", "tree symbol", "circle", "rectangle" or "text label" on a rendered CAD line
 drawing at any line weight, nor on a simulated scan, while a filled render answered "circle" at 0.965. The review keeps
 that as a controlled test in every run (D-48): the same phrase Spark wrote is sent to the coloured render and to the
-plain line drawing, one variable changed. Recorded result (after the 2026-11-02 re-recording, where Spark named the azalea swatch "green"): "green area" 16 masks on L-1 colour, 0 on L-1 lines;
+plain line drawing, one variable changed. Recorded result (the SAM recordings of 2026-11-03): "light green area" 15 masks on L-1 colour, 0 on L-1 lines;
 "beige area" 2 on L-3 colour, 0 on L-3 lines (docs/research/sam-probe.md). Spark writes the prompts
 (landsight/meta/sam_plan.py): area → "<colour> area", symbol → "<colour> circle"; legend lines (hedges) are skipped
 because a 10 px band came back +33% in the probe, and hedges are counted along their line by geometry (D-20). A mask is
 typed by the CAD outline holding at least half its pixels (DXF renders) or by the label Spark saw written inside it
 (the raster plan, D-67), never by the prompt; masks of overlapping colour words are pooled (IoU ≥ 0.8 is one region);
 masks inside the legend box are a key and are dropped. On the sample the CAD governs every quantity and SAM's areas
-are the cross-check: −0.3% to −1.2% on the three pavings, lawn and azalea, +2.3% on the planter edge, +4.5% on the
+are the cross-check: −0.1% to −1.2% on the three pavings, lawn and azalea, +2.4% on the planter edge, +5.3% on the
 eight canopies (the dark edge line is inside the mask); on the raster plan the four items S-01…S-04 stay flagged
-until a person confirms them (lawn 195.0 m², −2.5% against the DXF; azalea 146.0, −2.7%; the fire lane 78.8, −14.3%,
+until a person confirms them (lawn 195.7 m², −2.2% against the DXF; azalea 146.4, −2.4%; the fire lane 78.4, −14.8%,
 a canopy covers part of it; 11 tree symbols, as the DXF draws).
+
+### Muse Spark Open (`meta-models/muse-spark-open-1026`), opt-in: the open reader
+
+The open-weight release of Muse Spark (816B mixture of experts, 42B active), called through Baseten's OpenAI-compatible
+endpoint `https://inference.baseten.co/v1`. The same endpoint shape serves a firm's own vLLM or SGLang server, so
+confidential drawings can stay on infrastructure the firm controls.
+
+- **Switch:** `LANDSIGHT_READER=open`, `--reader open` on `review` and `ask`, `?reader=open` on
+  `POST /api/packages/{id}/review` and `POST /api/ask`.
+- **Endpoint:** `LANDSIGHT_OPEN_BASE_URL` and `LANDSIGHT_OPEN_MODEL` point it elsewhere. The key is
+  `LANDSIGHT_OPEN_API_KEY`, or else `BASETEN_API_KEY`, and the latter only for Baseten's URL.
+- **Routed:** every Muse Spark call type, the image ones included (the model takes images; tested first), with the same
+  prompts and schemas. SAM 3.1 stays on the Meta Model API: it replays from recordings and goes live only with
+  `MODEL_API_KEY`.
+- **Recordings:** `tests/fixtures/open/`, with `ask/` for the questions. Each key ends in `|m=<model>`, so the default
+  recordings are never read or written by the open reader.
+- **Parity:** one live pass on the sample (2026-11-03 22:00 UTC; 39 Spark calls on Baseten, 12 SAM replayed, 141.8 s
+  wall, $0.2253 at list prices) scored the same 30 · 28 · 2 · 0 · 0. It read T-08 as a planter edge, not a tree, so
+  the camphor count lost its proposed eighth tree.
+
+docs/NEW-MODES.md §1 has the table and the commands.
+
+### Muse Wonder (`muse-wonder-1.0`), opt-in: firm memory
+
+Meta's model for long-horizon work, called with the same Chat Completions request and a JSON schema
+(landsight/memory/wonder.py). It is in preview and costs $4.00 per 1M input tokens and $20.00 per 1M output. The API
+has no memory store: "active memory" is a trait of the model, and the Responses API's `previous_response_id` carries
+conversation turns only. The store is ours: table `firm_memory` in landsight.db, one row per firm. It makes two
+recorded calls (`tests/fixtures/memory/`):
+
+- **`firm_habits`:** distils the firm's decisions (confirm or dismiss, with notes) into habits: what to send back and
+  in what order, what to keep internal, pricing basis and tolerance, plant substitutions, reply voice.
+- **`firm_reply`:** drafts the reply to the developer from the habits and the next run's findings. Those findings are
+  first grouped and ordered by the habits with no model (landsight/memory/habits.py). Every id and number in the draft
+  is checked against what Wonder was given.
+
+**Example:** learned from 16 sample decisions on Greenfield (21.4 s, about $0.07) and applied to the tower (13.0 s,
+about $0.04). The firm's regulation and drawing points move ahead of money, and the email quotes the firm's installed
+range instead of the developer's rate. `landsight memory …` and `/api/firms/{firm}/memory`, `/api/runs/{id}/memory`;
+docs/NEW-MODES.md §2.
 
 ### What is Meta, what is ours
 
@@ -193,6 +233,8 @@ Calls that other packages and the owner's questions add:
 | tests/fixtures/review/fresh/ | 99 | live re-asks of recorded Spark calls (`--fresh`), timestamped, never replayed |
 | tests/fixtures/review/sam/fresh/ | 22 | live re-asks of recorded SAM calls |
 | tests/fixtures/ask/ | 9 | ask_package: the six questions of the brief and the three the dock and the /try screen ask (all recorded 2026-11-02 21:14–21:15 UTC) |
+| tests/fixtures/open/ | 39 (+1 in ask/) | the open reader (Muse Spark Open on Baseten): the sample's parity pass and one question, keys ending in the model id (docs/NEW-MODES.md) |
+| tests/fixtures/memory/ | 2 | Muse Wonder: firm_habits (the sample firm's habits) and firm_reply (the tower's reply in its voice) |
 | tests/fixtures/spark/, sam/, detail/ | 25, 13 (+5), 2 | the take-off's own recordings from the 2026-11-01 spike and scripts/eval.py (classify_sheet, group_and_read, read_legend, read_detail, the naive counts; SAM probes on L-1 and L-3; the L-6 detail sheet) |
 
 A recording is `{call, image_sha256, content_key, model, recorded_at, seconds, usage, prompt, result, response_id,
@@ -389,11 +431,11 @@ registers the dropped folder and reviews it from the recordings: the outer sampl
 
 ## 10 Tests and gates
 
-**pytest** (`uv run pytest -q`): 224 passed in 482.9 s on 2026-11-03 (on a loaded machine), 19 test files under tests/ plus conftest.py;
+**pytest** (`uv run pytest -q`): 239 passed in 745.5 s on 2026-11-04 (on a loaded machine), 21 test files under tests/ plus conftest.py;
 collected cases per file (pytest's collection, parametrized cases counted apart): test_ask 11, test_app 7,
-test_conditional 11, test_decisions 3, test_gate2 11, test_geometry 20, test_meta 26, test_money 3, test_package 17,
-test_package_api 9, test_review 13, test_robustness 9, test_rules 21, test_scenarios 5, test_store 6,
-test_synth_answer_key 13, test_takeoff 9, test_tower 7, test_upload 23. They run offline on the recordings
+test_conditional 11, test_decisions 3, test_gate2 11, test_geometry 20, test_memory 5, test_meta 26, test_money 3,
+test_open_reader 7, test_package 18, test_package_api 9, test_review 13, test_robustness 9, test_rules 21,
+test_scenarios 5, test_store 7, test_synth_answer_key 13, test_takeoff 9, test_tower 8, test_upload 23. They run offline on the recordings
 with `LANDSIGHT_DB` pointed at a temporary file; test_meta injects an httpx transport, so no key is needed.
 
 **vitest** (`cd frontend && npx vitest run`): 36 passed in 6 files (confirm, decisions, money, projects, scenario,
@@ -415,11 +457,12 @@ judge sees replays, and with one a second live pass replays what is recorded unl
 ## 11 Repo layout
 
 ```
-landsight/      the Python package: ingest, dxf, geometry, takeoff, review, checks, bill, rules, meta, ask, store, synth, app, data
+landsight/      the Python package: ingest, dxf, geometry, takeoff, review, checks, bill, rules, meta, ask, store, synth, app, data,
+                memory (firm memory, Muse Wonder)
 frontend/       the screen: Vite + React + TypeScript, five routes, the Ask dock, director mode, vitest
 frontend-mock/  the API's real responses for the sample package with every image (the screen's offline source)
 samples/        greenfield/, heldout/, tower/: each a package folder with its answer key and firm price list
-tests/          pytest (19 files) and fixtures/: every recorded Meta answer
+tests/          pytest (21 files) and fixtures/: every recorded Meta answer
 scripts/        eval.py (the accuracy table), frontend_mock.py, sam_probe.py, naive_probe.py, make_detail_sheet.py,
                 record_conditional.py, recording notes (capture.md, review_live.md)
 docs/           API, DECISIONS (D-01…D-82), STACK, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, GATE-RUN-1/2, OVERNIGHT,

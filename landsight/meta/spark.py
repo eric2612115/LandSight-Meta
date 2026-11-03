@@ -15,6 +15,11 @@ Every call takes an optional `key`: a content key (a hash of the DXF content, no
 uses when the image hash does not match (another machine, another matplotlib build). RecordingSpark wraps a real
 client and writes each response to tests/fixtures/spark/; FixtureSpark replays them offline. The API key is read
 from MODEL_API_KEY and is never logged.
+
+SparkClient(open_weights=True) sends the same requests to Muse Spark Open, Meta's open-weight release, on any
+OpenAI-compatible server (Baseten's hosted endpoint, or the firm's own vLLM or SGLang): the key is the one given (none
+for a server without one, never MODEL_API_KEY), one retry on HTTP 429, 5xx or a dropped connection, and an answer
+wrapped in a code fence is unwrapped (landsight.review.spark chooses the reader).
 """
 
 from __future__ import annotations
@@ -168,13 +173,31 @@ def data_url(png: bytes) -> str:
     return "data:image/png;base64," + base64.b64encode(png).decode()
 
 
+def parse_json(text: str):
+    """A JSON answer. An answer wrapped in a code fence or in a sentence is unwrapped to its outermost object (used
+    for the open-weight reader only; the Meta Model API's answers are parsed with json.loads alone)."""
+    try:
+        return json.loads(text)
+    except ValueError:
+        pass
+    s = (text or "").strip()
+    i, j = s.find("{"), s.rfind("}")
+    if i < 0 or j <= i:
+        raise SparkError(f"the answer is not JSON: {s[:120]!r}")
+    try:
+        return json.loads(s[i:j + 1])
+    except ValueError as e:
+        raise SparkError(f"the answer is not JSON: {s[:120]!r}") from e
+
+
 class SparkClient:
     """Real calls to Muse Spark. `transport` lets tests inject an httpx transport; nothing else is global."""
 
     def __init__(self, api_key: str | None = None, model: str = MODEL, base_url: str = BASE_URL,
-                 timeout: float = 180.0, transport: httpx.BaseTransport | None = None):
-        self.api_key = api_key or os.environ.get("MODEL_API_KEY", "")
-        if not self.api_key:
+                 timeout: float = 180.0, transport: httpx.BaseTransport | None = None, open_weights: bool = False):
+        self.open_weights = open_weights  # Muse Spark Open on an OpenAI-compatible server (see the module docstring)
+        self.api_key = (api_key or "") if open_weights else (api_key or os.environ.get("MODEL_API_KEY", ""))
+        if not self.api_key and not open_weights:
             raise SparkError("MODEL_API_KEY is not set")
         self.model = model
         self.url = base_url.rstrip("/") + "/chat/completions"
@@ -184,8 +207,18 @@ class SparkClient:
 
     def _post(self, call: str, body: dict) -> dict:
         started = time.monotonic()
-        with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
-            r = client.post(self.url, json=body, headers={"Authorization": f"Bearer {self.api_key}"})
+        headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
+        tries = 2 if self.open_weights else 1
+        for attempt in range(tries):
+            try:
+                with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
+                    r = client.post(self.url, json=body, headers=headers)
+            except httpx.TransportError:
+                if attempt + 1 < tries:
+                    continue
+                raise
+            if r.status_code == 200 or attempt + 1 == tries or not (r.status_code == 429 or r.status_code >= 500):
+                break
         seconds = time.monotonic() - started
         if r.status_code != 200:
             raise SparkError(f"{call}: HTTP {r.status_code}: {r.text[:300]}")
@@ -203,7 +236,9 @@ class SparkClient:
             body["response_format"] = {"type": "json_schema", "json_schema": {"name": call, "schema": schema}}
         data = self._post(call, body)
         message = data["choices"][0]["message"]["content"]
-        return json.loads(message) if schema is not None else message
+        if schema is None:
+            return message
+        return parse_json(message) if self.open_weights else json.loads(message)
 
     def classify_sheet(self, png: bytes, key: str = "") -> dict:
         return self._chat("classify_sheet", CLASSIFY_PROMPT, [png], CLASSIFY_SCHEMA)

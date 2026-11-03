@@ -22,19 +22,27 @@ landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
   POST /api/projects/{id}/packages/upload   multipart, one part per file (filename = relative path) -> {package, run,
                                        upload}; feature "upload" (LANDSIGHT_FEATURES_OFF=upload switches it off)
   GET  /api/packages/{id}              one package
-  POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N|all) -> Run; the endpoints above map onto it
+  POST /api/packages/{id}/review       run the review (?live=1, ?fresh=N|all, ?reader=open) -> Run; the endpoints
+                                       above map onto it
   GET  /api/runs/{id}                  a stored Run with its confirmations, notes and flags (?scenario=)
   GET  /api/runs/{id}/checks           the export listing: open + confirmed checks (?scenario=, ?confirmed=1)
   POST /api/runs/{id}/checks/{check_id}/decision   {"decision": confirm|dismiss|open, "note"?} -> the check
   GET  /api/packages/{id}/runs         every stored run of a package, newest first, with its scoreboard
   GET  /api/price-list                 the firm's rates; PUT /api/price-list/{code} {low, high, ...} edits one row
   GET  /api/meta-calls?run=&ask=       every Muse Spark / SAM 3.1 call a run or a question used (&full=0 trims)
-  POST /api/ask                        {"question", "run_id"?, "lang"?} -> answer, citations, proposed actions (?live=1)
+  POST /api/ask                        {"question", "run_id"?, "lang"?} -> answer, citations, proposed actions (?live=1,
+                                       ?reader=open)
   POST /api/ask/actions                {"run_id", "action": {kind, target_id, value, why}} -> applied
+
+The reader (docs/NEW-MODES.md): LANDSIGHT_READER=open (or ?reader=open) sends every Muse Spark call to Muse Spark
+Open, Meta's open weights, on Baseten or on the firm's own server; recordings in tests/fixtures/open/.
+Firm memory (landsight/memory, Muse Wonder): GET /api/firms/{firm}/memory, POST /api/firms/{firm}/memory/distil
+(?live=1), DELETE /api/firms/{firm}/memory, GET /api/runs/{id}/memory?firm= (?live=1).
 """
 
 from __future__ import annotations
 
+import os
 import threading
 from collections import OrderedDict
 from pathlib import Path
@@ -116,8 +124,20 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
     @app.get("/api/health")
     def health():
         st = current["state"]
-        return {"ok": True, "spark": "live" if st is not None and st.live else "fixtures", "version": VERSION,
-                "features": {"upload": bool(flags.get("upload"))}}
+        out = {"ok": True, "spark": "live" if st is not None and st.live else "fixtures", "version": VERSION,
+               "features": {"upload": bool(flags.get("upload"))}}
+        reader = os.environ.get("LANDSIGHT_READER", "").strip().lower()
+        if reader == "open":  # only said when the open reader is on, so the default answer is unchanged
+            from landsight.review.spark import open_endpoint
+
+            out["reader"] = {"name": "open", "model": open_endpoint()[1]}
+        return out
+
+    def reader_arg(reader: str) -> str | None:
+        r = (reader or "").strip().lower()
+        if r and r not in ("api", "open"):
+            raise HTTPException(422, f"reader must be api or open, not {reader!r}")
+        return r or None
 
     def conn():
         return connect(db)
@@ -313,9 +333,10 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             c.close()
 
     @app.post("/api/packages/{package_id}/review")
-    def review_package(package_id: int, live: int = 0, fresh: str = "0"):
+    def review_package(package_id: int, live: int = 0, fresh: str = "0", reader: str = ""):
         """?live=1&fresh=N re-asks N recorded Muse Spark calls; fresh=all (or -1) every Spark and SAM 3.1 call — the
-        CLI's --fresh N|all."""
+        CLI's --fresh N|all. ?reader=open reads with Muse Spark Open (else LANDSIGHT_READER, else the Meta Model API)."""
+        rd = reader_arg(reader)
         f = fresh.strip().lower()
         if f == "all" or f == "-1":
             fresh_n = -1
@@ -335,7 +356,7 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         with lock:
             current["opening"] += 1
         try:
-            out = package.open(live=bool(live), package_id=package_id, fresh=fresh_n)
+            out = package.open(live=bool(live), package_id=package_id, fresh=fresh_n, **({"reader": rd} if rd else {}))
         except ValueError as e:
             raise HTTPException(400, str(e)) from e
         finally:
@@ -450,11 +471,9 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         return rid
 
     @app.post("/api/ask")
-    def ask(body=Body(default=None), live: int = 0):
-        import os
-
+    def ask(body=Body(default=None), live: int = 0, reader: str = ""):
         from landsight.ask.service import ask_run
-        from landsight.review.spark import FixtureMissing
+        from landsight.review.spark import FixtureMissing, live_problem, reader_name
 
         b = body_dict(body)
         q = b.get("question")
@@ -463,17 +482,94 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         lang = b.get("lang") or "en"
         if lang not in ("en", "zh-TW"):
             raise HTTPException(422, 'lang must be "en" or "zh-TW"')
-        if live and not os.environ.get("MODEL_API_KEY"):
+        rd = reader_arg(reader)
+        try:
+            rd_name = reader_name(rd)
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
+        if live and rd_name == "api" and not os.environ.get("MODEL_API_KEY"):
             raise HTTPException(400, "live mode needs MODEL_API_KEY")
+        if live and rd_name == "open" and live_problem("open"):
+            raise HTTPException(400, live_problem("open"))
         c = conn()
         try:
             rid = ask_run_id(c, b)
-            return JSONResponse(ask_run(c, rid, q, live=bool(live), lang=lang))
+            return JSONResponse(ask_run(c, rid, q, live=bool(live), lang=lang, **({"reader": rd} if rd else {})))
         except FixtureMissing as e:
             raise HTTPException(404, f"no recorded answer for this question on this package ({e}); ask with "
                                      "live=1 and a key to record one") from e
         except ValueError as e:
             raise HTTPException(422, str(e)) from e
+        finally:
+            c.close()
+
+    # ------------------------------------------------------------------------------- firm memory (Muse Wonder)
+    def memory_live(live: int) -> None:
+        if live and not os.environ.get("MODEL_API_KEY"):
+            raise HTTPException(400, "live mode needs MODEL_API_KEY (Muse Wonder)")
+
+    @app.get("/api/firms/{firm}/memory")
+    def get_firm_memory(firm: str):
+        from landsight.memory import NoMemory, get_memory
+
+        c = conn()
+        try:
+            return JSONResponse(get_memory(c, firm))
+        except NoMemory as e:
+            raise HTTPException(404, e.args[0]) from e
+        finally:
+            c.close()
+
+    @app.post("/api/firms/{firm}/memory/distil")
+    def distil_firm_memory(firm: str, body=Body(default=None), live: int = 0):
+        """Muse Wonder distils the firm's habits from the decisions in landsight.db ({"run_ids": [...]} to limit them);
+        a recorded answer replays, live=1 asks and records."""
+        from landsight.memory import distil
+        from landsight.review.spark import FixtureMissing, SparkUnavailable
+
+        b = body_dict(body)
+        run_ids = b.get("run_ids")
+        if run_ids is not None and (not isinstance(run_ids, list) or not all(isinstance(r, str) for r in run_ids)):
+            raise HTTPException(422, 'run_ids must be a list of run ids: {"run_ids": ["..."]}')
+        memory_live(live)
+        c = conn()
+        try:
+            return JSONResponse(distil(c, firm, live=bool(live), run_ids=run_ids or None))
+        except FixtureMissing as e:
+            raise HTTPException(404, f"no recorded Muse Wonder answer for these decisions ({e}); distil with live=1 "
+                                     "and a key to record one") from e
+        except SparkUnavailable as e:
+            raise HTTPException(502, str(e)) from e
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
+        finally:
+            c.close()
+
+    @app.delete("/api/firms/{firm}/memory")
+    def forget_firm_memory(firm: str):
+        from landsight.memory import forget
+
+        c = conn()
+        try:
+            return JSONResponse({"firm": firm, "forgotten": forget(c, firm)})
+        finally:
+            c.close()
+
+    @app.api_route("/api/runs/{run_id}/memory", methods=["GET", "POST"])
+    def apply_firm_memory(run_id: str, firm: str = "default", live: int = 0):
+        """A stored run as the firm would handle it: before (the run's order, the neutral email) and after (the firm's
+        groups and order, the email drafted by Muse Wonder in the firm's voice; recorded, live=1 to ask)."""
+        from landsight.memory import NoMemory, apply
+
+        memory_live(live)
+        c = conn()
+        try:
+            DBS.run_row(c, run_id)
+            return JSONResponse(apply(c, firm, run_id, live=bool(live)))
+        except NoMemory as e:
+            raise HTTPException(404, e.args[0]) from e
+        except KeyError as e:
+            raise HTTPException(404, str(e).strip("'")) from e
         finally:
             c.close()
 

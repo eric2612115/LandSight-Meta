@@ -9,14 +9,15 @@ from landsight.ask.service import ask_run
 from landsight.store import connect, service
 
 
-def main(question: str, run_id: str | None = None, live: bool = False, db: str | None = None) -> int:
+def main(question: str, run_id: str | None = None, live: bool = False, db: str | None = None,
+         reader: str | None = None) -> int:
     conn = connect(db)
     run_id = run_id or service.latest_run_id(conn)
     if run_id is None:
         print("landsight ask: no run in the database; review a package first (landsight review <dir>)", file=sys.stderr)
         return 2
     try:
-        out = ask_run(conn, run_id, question, live=live)
+        out = ask_run(conn, run_id, question, live=live, reader=reader)
     except (KeyError, ValueError) as e:
         print(f"landsight ask: {e}", file=sys.stderr)
         return 2
@@ -27,5 +28,6 @@ def main(question: str, run_id: str | None = None, live: bool = False, db: str |
     for a in out["proposed_actions"]:
         print(f"  action {a['kind']} {a['target_id']} = {a['value']}: {a['why']}")
     call = out["call"]
-    print(f"  Muse Spark {'recorded' if call.get('recorded') else 'live'}, {call.get('seconds')} s · ask {out['ask_id']}")
+    model = f" ({call['model']})" if call.get("model") and call["model"] != "muse-spark-1.3" else ""
+    print(f"  Muse Spark{model} {'recorded' if call.get('recorded') else 'live'}, {call.get('seconds')} s · ask {out['ask_id']}")
     return 0

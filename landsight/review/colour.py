@@ -25,9 +25,10 @@ from shapely.geometry import Polygon
 
 from landsight.checks.base import Check, obj_ref
 from landsight.meta.sam_plan import legend_crop, prompts_from_legend, type_masks
-from landsight.review.spark import FIXTURES
+from landsight.review.spark import FIXTURES, OPEN_FIXTURES
 
 SAM_FIXTURES = FIXTURES / "sam"
+OPEN_SAM_FIXTURES = OPEN_FIXTURES / "sam"  # SAM answers first needed by a review with the open reader
 SAM_MODEL = "sam-3.1"
 NOT_OUTLINES = {"boundary", "revision_cloud", "title_block", "scale_bar", "match_line", "schedule"}
 AGREE_PCT = 2.0
@@ -45,20 +46,24 @@ class ReviewSam:
     """Record / replay SAM 3.1 for the review; `log` holds one entry per answer used."""
 
     def __init__(self, mode: str = "fixtures", fixture_dir: Path | str = SAM_FIXTURES, resume: bool = True,
-                 fresh: int = 0):
+                 fresh: int = 0, also: tuple[Path | str, ...] = ()):
         self.mode, self.dir = mode, Path(fixture_dir)
         # live only: re-ask this many recorded prompts (-1: all); answers go to fresh/, the recordings stay as they are
         self.fresh_left = (-1 if not resume else fresh) if mode == "live" else 0
         self.log: list[dict] = []
         self.recs: dict[tuple[str, str], dict] = {}
-        if self.dir.is_dir():
-            for f in sorted(self.dir.glob("*.json")):
+        # `also`: folders whose recordings are read too, never written (the open reader reads the default SAM
+        # recordings and writes its new ones to its own folder); this folder's own recordings win
+        for d in [Path(a) for a in also] + [self.dir]:
+            if not d.is_dir():
+                continue
+            for f in sorted(d.glob("*.json")):
                 try:
                     rec = json.loads(f.read_text())
                 except ValueError:
                     continue
                 if rec.get("image_sha256") and rec.get("prompt") is not None:
-                    rec["fixture"] = f.name
+                    rec["fixture"] = f.name if d == self.dir else str(f)
                     self.recs[(rec["image_sha256"], rec["prompt"])] = rec
 
     def call(self, png: bytes, prompt: str, image: str, **extra) -> dict:
@@ -118,6 +123,15 @@ class ReviewSam:
 
 def mode_for(spark_mode: str) -> str:
     return "live" if spark_mode == "live" and os.environ.get("MODEL_API_KEY") else "fixtures"
+
+
+def review_sam(spark_mode: str, reader: str = "api", fixture_dir: Path | str | None = None, fresh: int = 0) -> ReviewSam:
+    """SAM 3.1 for a review. With the open reader and the default folders, SAM's new recordings go to
+    tests/fixtures/open/sam/ and the default ones are read as well, so tests/fixtures/review/sam/ is never written.
+    SAM itself stays on the Meta Model API: live only with MODEL_API_KEY; without it, recorded answers or a note."""
+    sdir = Path(fixture_dir) / "sam" if fixture_dir else (OPEN_SAM_FIXTURES if reader == "open" else SAM_FIXTURES)
+    also = (SAM_FIXTURES,) if reader == "open" and not fixture_dir else ()
+    return ReviewSam(mode_for(spark_mode), sdir, fresh=-1 if fresh == -1 else 0, also=also)
 
 
 def _bounds(outline) -> tuple[float, float, float, float]:

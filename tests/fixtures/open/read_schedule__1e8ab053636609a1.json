@@ -1,0 +1,86 @@
+{
+ "call": "read_schedule",
+ "image_sha256": "e6fae272fd00d44c33524e106e8eb86717b0159caa7addeca961e8f65e059c8d",
+ "content_key": "28b99e82fe36edb9eeab0c952992a595a77d0b8f70559b4cae42e3cd089a775e:schedule|p=4c6ddfbe|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:01:14+00:00",
+ "seconds": 7.63,
+ "usage": {
+  "prompt_tokens": 2569,
+  "completion_tokens": 475,
+  "total_tokens": 3044,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 368,
+   "audio_tokens": 0,
+   "reasoning_tokens": 263,
+   "rejected_prediction_tokens": 381
+  }
+ },
+ "prompt": "This is a plant schedule table (植栽表) cropped from a planting plan. Return one row per plant: species exactly as written, qty as a number, unit as written (株, m², m), and spec (the 規格 columns and the remarks joined into one short string). Skip the title row, the header rows and the totals line; copy the totals line into footer.",
+ "result": {
+  "rows": [
+   {
+    "species": "Camphor — Cinnamomum camphora",
+    "qty": 12,
+    "unit": "EA",
+    "spec": "CAL 10cm HT 3.5m SPREAD 1.5m NATIVE ROOT-BALLED"
+   },
+   {
+    "species": "Duranta — Duranta erecta",
+    "qty": 182,
+    "unit": "EA",
+    "spec": "HT 0.6m @0.3m o.c. DOUBLE ROW"
+   },
+   {
+    "species": "Azalea — Rhododendron spp.",
+    "qty": 150,
+    "unit": "m²",
+    "spec": "HT 0.3m 4 PLANTS/m²"
+   },
+   {
+    "species": "Lawn — Zoysia matrella",
+    "qty": 200,
+    "unit": "m²",
+    "spec": "SOD"
+   }
+  ],
+  "footer": "TOTAL TREES: 12"
+ },
+ "response_id": "chatcmpl-9f250e69fecc4cc596faeea8f3cd693b",
+ "raw": {
+  "id": "chatcmpl-9f250e69fecc4cc596faeea8f3cd693b",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{ \"rows\": [ { \"species\": \"Camphor — Cinnamomum camphora\", \"qty\": 12, \"unit\": \"EA\", \"spec\": \"CAL 10cm HT 3.5m SPREAD 1.5m NATIVE ROOT-BALLED\" }, { \"species\": \"Duranta — Duranta erecta\", \"qty\": 182, \"unit\": \"EA\", \"spec\": \"HT 0.6m @0.3m o.c. DOUBLE ROW\" }, { \"species\": \"Azalea — Rhododendron spp.\", \"qty\": 150, \"unit\": \"m²\", \"spec\": \"HT 0.3m 4 PLANTS/m²\" }, { \"species\": \"Lawn — Zoysia matrella\", \"qty\": 200, \"unit\": \"m²\", \"spec\": \"SOD\" } ], \"footer\": \"TOTAL TREES: 12\" }",
+     "role": "assistant",
+     "reasoning_content": "Task: Return one row per plant: species exactly as written, qty as number, unit as written (株, m², m), and spec (規格 columns and remarks joined into one short string). Skip title row, header rows and totals line; copy totals line into footer.\n\nThis is plant schedule table. Need to extract.\n\nWe have:\n\nCC Camphor Cinnamomum camphora 12 EA 10 3.5 1.5 NATIVE, ROOT-BALLED\nDU Duranta Duranta erecta 182 EA - 0.6 - @0.3m o.c., DOUBLE ROW\nAZ Azalea Rhododendron spp. 150 m² - 0.3 - 4 PLANTS/m²\nLA Lawn Zoysia matrella 200 m² - - - SOD\n\nNeed format? Probably JSON? \"Return one row per plant...\" Probably need list.\n\nWe should return one row per plant.\n\nAlso skip title row, header rows and totals line; copy totals line into footer.\n\nSo footer: TOTAL TREES: 12\n\nWe need comply with conventions? But this is schedule table, so straightforward.\n\nProvide species exactly as written, qty, unit, spec.\n\nMake rows.\n\nWe must not invent.\n\nProvide maybe table.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743267,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 2569,
+   "completion_tokens": 475,
+   "total_tokens": 3044,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 368,
+    "audio_tokens": 0,
+    "reasoning_tokens": 263,
+    "rejected_prediction_tokens": 381
+   }
+  }
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "5ad3aaf96cb1e7facf63bc3ab0d84303ea906c053c308926d032f458f395c2c1",
+ "content_key": "raster:40481febad5d666ca0f22ef6baee1fcc425b56f5e5d0da65df1009495442d745|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:50+00:00",
+ "seconds": 11.11,
+ "usage": {
+  "prompt_tokens": 4529,
+  "completion_tokens": 304,
+  "total_tokens": 4833,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 384
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 198,
+   "audio_tokens": 0,
+   "reasoning_tokens": 188,
+   "rejected_prediction_tokens": 544
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "plan",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-1",
+   "title": "Planting Plan",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:200"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Title block explicitly labels sheet L-1 as Planting Plan at 1:200 with planting symbols, legend, and top-down bed/tree layout; no match line or partial-site indicator present."
+ },
+ "response_id": "chatcmpl-f6861b44d54b482da2f76e0df1f38f0a",
+ "raw": {
+  "id": "chatcmpl-f6861b44d54b482da2f76e0df1f38f0a",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"plan\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-1\",\"title\":\"Planting Plan\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:200\"},\"index\":[],\"confidence\":0.98,\"why\":\"Title block explicitly labels sheet L-1 as Planting Plan at 1:200 with planting symbols, legend, and top-down bed/tree layout; no match line or partial-site indicator present.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need produce JSON with kind, discipline, enlarged_partial, match_line, title_block, index, confidence.\n\nThe image is a planting plan. Title block says Planting Plan. Shows CC Camphor, AZ Azalea, LA Lawn, DU Duranta. So kind is 'plan'. Discipline planting.\n\nEnlarged partial? Does sheet show only part of site? It shows TOWER ABOVE — see tower package. But the site boundary is dashed. Seems whole landscape over basement slab. But is it enlarged partial? No match line. So enlarged_partial false, match_line false.\n\nTitle_block values: number L-1, title Planting Plan, revision A, date 2026-09-18, scale 1:200. Provide.\n\nIndex: if sheet carries drawing index, every sheet number it lists... No index.\n\nConfidence high.\n\nWe must answer only from what shown; never guess.\n\nReturn JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743241,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 4529,
+   "completion_tokens": 304,
+   "total_tokens": 4833,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 384
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 198,
+    "audio_tokens": 0,
+    "reasoning_tokens": 188,
+    "rejected_prediction_tokens": 544
+   }
+  }
+ }
+}

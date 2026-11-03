@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "630a872d526d730227b48990978c13e5f5bf9fb5531f211db55f8551cd61758f",
+ "content_key": "dxf:28b99e82fe36edb9eeab0c952992a595a77d0b8f70559b4cae42e3cd089a775e|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:18+00:00",
+ "seconds": 6.82,
+ "usage": {
+  "prompt_tokens": 3572,
+  "completion_tokens": 218,
+  "total_tokens": 3790,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 384
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 140,
+   "audio_tokens": 0,
+   "reasoning_tokens": 115,
+   "rejected_prediction_tokens": 406
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "schedule",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-4",
+   "title": "Plant Schedule",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "NTS"
+  },
+  "index": [],
+  "confidence": 0.99,
+  "why": "Sheet is dominated by a PLANT SCHEDULE table and title block explicitly labels TITLE as Plant Schedule; no plan graphics or match lines present."
+ },
+ "response_id": "chatcmpl-5e018cee55604b11a7f891629f03ba1f",
+ "raw": {
+  "id": "chatcmpl-5e018cee55604b11a7f891629f03ba1f",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"schedule\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-4\",\"title\":\"Plant Schedule\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"NTS\"},\"index\":[],\"confidence\":0.99,\"why\":\"Sheet is dominated by a PLANT SCHEDULE table and title block explicitly labels TITLE as Plant Schedule; no plan graphics or match lines present.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to return kind, discipline etc. The sheet is PLANT SCHEDULE table. So kind schedule. discipline planting. enlarged_partial false, match_line false. title_block values: number L-4, title Plant Schedule, revision A, date 2026-09-18, scale NTS. index empty list. confidence high 0.95 why.\n\nProvide JSON? The instruction says return fields. Likely output JSON. Provide confidence and why.\n\nWe must answer only from what shown; never guess. Provide title_block with values.\n\nSo produce final answer."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743213,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 218,
+   "total_tokens": 3790,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 384
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 140,
+    "audio_tokens": 0,
+    "reasoning_tokens": 115,
+    "rejected_prediction_tokens": 406
+   }
+  }
+ }
+}

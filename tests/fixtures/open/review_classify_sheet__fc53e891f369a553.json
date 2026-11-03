@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "28e7aef60ddd7c6dc9bd3dae932522a51456c04b5defe2a19c8e45fd59f67692",
+ "content_key": "pdfpage:823d582de65942093584a677ebe23fdb9e090541000094e72b10c4f7c6e7cb4f|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:32+00:00",
+ "seconds": 4.5,
+ "usage": {
+  "prompt_tokens": 2222,
+  "completion_tokens": 249,
+  "total_tokens": 2471,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 384
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 169,
+   "audio_tokens": 0,
+   "reasoning_tokens": 146,
+   "rejected_prediction_tokens": 391
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "elevation",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-2",
+   "title": "South Elevation",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:100"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Sheet shows side view on ground line labeled SOUTH ELEVATION 1:100 with tree symbols and title block confirming elevation type."
+ },
+ "response_id": "chatcmpl-a5efe9a9868c41b291fc89aadf4411ea",
+ "raw": {
+  "id": "chatcmpl-a5efe9a9868c41b291fc89aadf4411ea",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"elevation\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-2\",\"title\":\"South Elevation\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:100\"},\"index\":[],\"confidence\":0.98,\"why\":\"Sheet shows side view on ground line labeled SOUTH ELEVATION 1:100 with tree symbols and title block confirming elevation type.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to return kind elevation, discipline planting? Or general? It's South Elevation showing trees CC H3.5. Discipline planting likely. Or general? Elevation of planting. Kind elevation. discipline planting. enlarged_partial false, match_line false. Title block values: number L-2, title South Elevation, revision A, date 2026-09-18, scale 1:100. Index empty list. confidence high.\n\nNeed to ensure discipline correct: planting. Could be general? But trees are planting. So planting.\n\nProvide JSON with fields.\n\nNeed to include title_block with number, title, revision, date, scale.\n\nAlso index empty.\n\nconfidence 0.97 why one sentence.\n\nEnsure format exactly.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743228,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 2222,
+   "completion_tokens": 249,
+   "total_tokens": 2471,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 384
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 169,
+    "audio_tokens": 0,
+    "reasoning_tokens": 146,
+    "rejected_prediction_tokens": 391
+   }
+  }
+ }
+}

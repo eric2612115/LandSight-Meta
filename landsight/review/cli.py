@@ -31,20 +31,24 @@ def raster_sheets(keep: dict) -> list[dict]:
     return out
 
 
-def _spark(live: bool, fixture_dir: str | None, fresh: int):
+def _spark(live: bool, fixture_dir: str | None, fresh: int, reader: str | None = None):
     """None (the review's default recorder) unless the recordings go elsewhere or calls are asked again."""
     if not fixture_dir and not fresh:
         return None
     from landsight.review.spark import FIXTURES, ReviewSpark
 
-    return ReviewSpark("live" if live else "fixtures", Path(fixture_dir) if fixture_dir else FIXTURES, fresh=fresh)
+    return ReviewSpark("live" if live else "fixtures", Path(fixture_dir) if fixture_dir else FIXTURES, fresh=fresh,
+                       reader=reader)
 
 
-def _sam(live: bool, fixture_dir: str | None, fresh: int):
+def _sam(live: bool, fixture_dir: str | None, fresh: int, reader: str | None = None):
     if not fixture_dir and not fresh:
         return None
-    from landsight.review.colour import SAM_FIXTURES, ReviewSam, mode_for
+    from landsight.review.colour import SAM_FIXTURES, ReviewSam, mode_for, review_sam
+    from landsight.review.spark import reader_name
 
+    if reader_name(reader) == "open":
+        return review_sam("live" if live else "fixtures", "open", fixture_dir, fresh)
     return ReviewSam(mode_for("live" if live else "fixtures"),
                      Path(fixture_dir) / "sam" if fixture_dir else SAM_FIXTURES, fresh=-1 if fresh == -1 else 0)
 
@@ -63,7 +67,7 @@ def print_scenario(run: dict, scenario: str) -> None:
 
 
 def main(package_dir: str, live: bool = False, json_out: str | None = None, scenario: str | None = None,
-         db: str | None = None, fixture_dir: str | None = None, fresh: int = 0) -> int:
+         db: str | None = None, fixture_dir: str | None = None, fresh: int = 0, reader: str | None = None) -> int:
     try:
         locate(Path(package_dir))
     except (ValueError, OSError) as e:
@@ -76,14 +80,26 @@ def main(package_dir: str, live: bool = False, json_out: str | None = None, scen
     if fresh and not live:
         print("landsight review: --fresh re-asks recorded calls live and needs --live", file=sys.stderr)
         return 2
+    from landsight.review.spark import live_problem, reader_name
+
+    try:
+        reader = reader_name(reader)
+    except ValueError as e:
+        print(f"landsight review: {e}", file=sys.stderr)
+        return 2
+    if live and live_problem(reader):
+        print(f"landsight review: {live_problem(reader)}", file=sys.stderr)
+        return 2
     keep: dict = {}
     if db:
         from landsight.store import service
 
-        run = service.review_folder(package_dir, live=live, db_path=db, keep=keep, fixture_dir=fixture_dir, fresh=fresh)
+        run = service.review_folder(package_dir, live=live, db_path=db, keep=keep, fixture_dir=fixture_dir, fresh=fresh,
+                                    reader=reader)
     else:
         run = review(package_dir, mode="live" if live else "fixtures", keep=keep,
-                     spark=_spark(live, fixture_dir, fresh), sam=_sam(live, fixture_dir, fresh))
+                     spark=_spark(live, fixture_dir, fresh, reader), sam=_sam(live, fixture_dir, fresh, reader),
+                     reader=reader)
     if json_out:
         Path(json_out).write_text(json.dumps(run, ensure_ascii=False, indent=1))
     if scenario is not None:
@@ -125,7 +141,8 @@ def main(package_dir: str, live: bool = False, json_out: str | None = None, scen
     calls = t.get("calls", [])
     live_spark = sum(1 for c in calls if c.get("recorded") is False and c.get("model") != "sam-3.1")
     live_sam = sum(1 for c in calls if c.get("recorded") is False and c.get("model") == "sam-3.1")
-    print(f"\n{t['spark_calls']} Muse Spark calls ({'recorded' if not live_spark else f'{live_spark} live'}), "
+    reader_note = f" with the open reader ({t['model']})" if t.get("reader") == "open" else ""
+    print(f"\n{t['spark_calls']} Muse Spark calls{reader_note} ({'recorded' if not live_spark else f'{live_spark} live'}), "
           f"{t['spark_s']} s of calls; {t['sam_calls']} SAM 3.1 calls ({'recorded' if not live_sam else f'{live_sam} live'}), "
           f"{t['sam_s']} s; {t['total_s']} s in all")
     for f in t.get("fresh", []):

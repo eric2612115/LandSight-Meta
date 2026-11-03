@@ -1,0 +1,78 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:badde7d4ff0106cde9c325a109235eb687a1425f399a7d386db37407c1939551|p=c4069e78|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:44+00:00",
+ "seconds": 2.36,
+ "usage": {
+  "prompt_tokens": 666,
+  "completion_tokens": 677,
+  "total_tokens": 1343,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 511,
+   "audio_tokens": 0,
+   "reasoning_tokens": 393,
+   "rejected_prediction_tokens": 651
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nPlanting procurement spec — Landscape Works\nGreenfield Residences · supply, measurement and pricing rules for the bill of quantities ·\n2026 (sample)\n1. Plant material\n•  Nursery grown, root-balled, true to the botanical name on the plant schedule.\n•  Trees: caliper measured 1.0 m above ground; height and spread within 10% of the schedule.\n•  Substitutions only with the designer's written approval.\n2. Measurement\n•  Quantities are measured net from the drawings; plant quantities on plan take precedence over\n   the schedule.\n•  Trees and shrubs by number of plants; hedges by number of plants at the stated spacing, not\n   by length.\n•  Beds, lawn and paving by area in m²; edges by length in m.\n3. Pricing\n•  Unit rates include supply, planting and 12 months of establishment maintenance.\n•  Prices in NT$, excluding the 5% business tax; overhead and profit stated separately.\n4. Paving\nCode\nMaterial\nSpecification\nPV-1\nPermeable pavers\nconcrete, 200 x 100 x 80 mm, on 30 mm sand\nPV-2\nExposed aggregate\n100 mm, 6-10 mm aggregate\nPV-3\nGrass pavers\nconcrete grid 400 x 400 x 80 mm, soil and sod\nMaterial samples and photos are submitted for approval before ordering.\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "kind": "spec",
+  "title": "Planting procurement spec — Landscape Works",
+  "summary": "Procurement, measurement and pricing rules for supply and planting at Greenfield Residences, including plant material standards and paving specifications PV-1 to PV-3.",
+  "key_facts": [
+   "Trees: caliper measured 1.0 m above ground; height and spread within 10% of the schedule",
+   "Unit rates include supply, planting and 12 months of establishment maintenance",
+   "Prices in NT$, excluding the 5% business tax; overhead and profit stated separately",
+   "PV-1 Permeable pavers: concrete, 200 x 100 x 80 mm, on 30 mm sand",
+   "PV-2 Exposed aggregate: 100 mm, 6-10 mm aggregate",
+   "PV-3 Grass pavers: concrete grid 400 x 400 x 80 mm, soil and sod"
+  ],
+  "required": [
+   {
+    "item": "Material samples and photos",
+    "status": "submitted for approval before ordering"
+   }
+  ],
+  "confidence": 0.96,
+  "why": "Text explicitly defines itself as supply, measurement and pricing rules for the bill of quantities with dimensioned specifications."
+ },
+ "response_id": "chatcmpl-49b27f8011a142ff87bf74e39e8a683d",
+ "raw": {
+  "id": "chatcmpl-49b27f8011a142ff87bf74e39e8a683d",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\n  \"kind\": \"spec\",\n  \"title\": \"Planting procurement spec \\u2014 Landscape Works\",\n  \"summary\": \"Procurement, measurement and pricing rules for supply and planting at Greenfield Residences, including plant material standards and paving specifications PV-1 to PV-3.\",\n  \"key_facts\": [\n    \"Trees: caliper measured 1.0 m above ground; height and spread within 10% of the schedule\",\n    \"Unit rates include supply, planting and 12 months of establishment maintenance\",\n    \"Prices in NT$, excluding the 5% business tax; overhead and profit stated separately\",\n    \"PV-1 Permeable pavers: concrete, 200 x 100 x 80 mm, on 30 mm sand\",\n    \"PV-2 Exposed aggregate: 100 mm, 6-10 mm aggregate\",\n    \"PV-3 Grass pavers: concrete grid 400 x 400 x 80 mm, soil and sod\"\n  ],\n  \"required\": [\n    {\n      \"item\": \"Material samples and photos\",\n      \"status\": \"submitted for approval before ordering\"\n    }\n  ],\n  \"confidence\": 0.96,\n  \"why\": \"Text explicitly defines itself as supply, measurement and pricing rules for the bill of quantities with dimensioned specifications.\"\n}",
+     "role": "assistant",
+     "reasoning_content": "Need to classify document. It's Planting procurement spec — Landscape Works ... Title? Give title as written. Then one sentence summary, up to six key facts reviewer must know keep numbers exactly, and if document lists documents or deliverables, each with status.\n\nClassify as 'spec' since it's a standard/spec sets rules.\n\nTitle: \"Planting procurement spec — Landscape Works\" or include Greenfield Residences? The title as written is that line.\n\nOne sentence summary: describes rules for supply measurement pricing for Greenfield Residences landscape works.\n\nKey facts: Need numbers exactly as written: Trees caliper measured 1.0 m above ground; height/spread within 10%; unit rates include 12 months establishment; prices in NT$, excluding 5% business tax; PV-1 permeable pavers 200x100x80 mm on 30 mm sand; PV-2 100 mm 6-10 mm aggregate; PV-3 400x400x80 mm etc. Provide up to six.\n\nAlso deliverables: Material samples and photos are submitted for approval before ordering. Status: required? As written: \"submitted for approval before ordering.\" Probably status required.\n\nConfidence high: 0.95? But note sample document synthetic. Explain why.\n\nNeed format presumably JSON? The instruction: Give its title as written, a one-sentence summary, up to six key facts... and if document lists documents or deliverables, each one with its status as written, confidence from 0 to1; why in one sentence.\n\nWe should provide structured output.\n\nProbably output in JSON with fields: classification, title, summary, key_facts, deliverables, confidence, why.\n\nWe must keep numbers exactly.\n\nAdd that Trees caliper measured 1.0 m above ground.\n\nHedges by number of plants at stated spacing, not by length.\n\nPricing includes etc.\n\nProvide confidence.\n\nWe must not guess values not visible.\n\nProceed to final."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743242,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 666,
+   "completion_tokens": 677,
+   "total_tokens": 1343,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 256
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 511,
+    "audio_tokens": 0,
+    "reasoning_tokens": 393,
+    "rejected_prediction_tokens": 651
+   }
+  }
+ }
+}

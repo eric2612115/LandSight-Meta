@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "fc068a9d996a56d2c35d88198e80ef8f36c6f785a0b42b5333686ff527af8736",
+ "content_key": "pdfpage:c039e2640a42ff413fe9d8b5ff9a0d721e5bfe989143e5557ec4a4c1ec70611d|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:34+00:00",
+ "seconds": 9.43,
+ "usage": {
+  "prompt_tokens": 4529,
+  "completion_tokens": 232,
+  "total_tokens": 4761,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 384
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 159,
+   "audio_tokens": 0,
+   "reasoning_tokens": 108,
+   "rejected_prediction_tokens": 352
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "plan",
+  "discipline": "planting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-1",
+   "title": "Planting Plan",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:200"
+  },
+  "index": [],
+  "confidence": 0.98,
+  "why": "Top-down planting plan with plant symbols, legend (CC Camphor, AZ Azalea, LA Lawn, DU Duranta) and title block explicitly labelled Planting Plan; no match line or key plan indicating an enlarged partial view."
+ },
+ "response_id": "chatcmpl-a8ffaeec88414f01b145c6f9bffb1b33",
+ "raw": {
+  "id": "chatcmpl-a8ffaeec88414f01b145c6f9bffb1b33",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"plan\",\"discipline\":\"planting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-1\",\"title\":\"Planting Plan\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:200\"},\"index\":[],\"confidence\":0.98,\"why\":\"Top-down planting plan with plant symbols, legend (CC Camphor, AZ Azalea, LA Lawn, DU Duranta) and title block explicitly labelled Planting Plan; no match line or key plan indicating an enlarged partial view.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to determine kind, discipline etc. This is a planting plan top-down with legends showing camphor, azalea, lawn etc. So kind plan, discipline planting. Not enlarged partial; it's entire site? Title block shows scale 1:200, etc. No match line. enlarged_partial false, match_line false. Title block values: number L-1, title Planting Plan, revision A, date 2026-09-18, scale 1:200. Index empty. Confidence high.\n\nProvide JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743226,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 4529,
+   "completion_tokens": 232,
+   "total_tokens": 4761,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 384
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 159,
+    "audio_tokens": 0,
+    "reasoning_tokens": 108,
+    "rejected_prediction_tokens": 352
+   }
+  }
+ }
+}

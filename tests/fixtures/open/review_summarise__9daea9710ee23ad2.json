@@ -1,0 +1,73 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:5a3745832cc99944da3788d572648fe1a5342451aa1475bc9627ff5903f5a3ac|p=548dfda4|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:44+00:00",
+ "seconds": 2.76,
+ "usage": {
+  "prompt_tokens": 725,
+  "completion_tokens": 603,
+  "total_tokens": 1328,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 441,
+   "audio_tokens": 0,
+   "reasoning_tokens": 306,
+   "rejected_prediction_tokens": 700
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nTree pit guide — deep roots\nDeveloper's guide for tree pits, deep-rooted species · document TPG-D · 2026 edition\n(sample)\n1. Scope\nApplies to large broadleaf trees, e.g. Cinnamomum camphora (camphor), Bischofia javanica, planted\non grade or on artificial ground (podium over a basement slab, roof).\n2. Minimum dimensions\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nDeep-rooted\n2.0 x 2.0 m (4.0\nm²)\n1.5 m\n1.5 m\n150 mm\n3. Construction\n•  Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth\n   above.\n•  Root ball top level with the finished soil surface; three timber stakes per tree.\n•  On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a\n   small tree (Gi 1.0 instead of 1.5).\n4. All guides\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\nMedium\n2.0 x 2.0 m (4.0\nm²)\n1.0 m\n1.2 m\n100 mm\nDeep-rooted\n2.0 x 2.0 m (4.0\nm²)\n1.5 m\n1.5 m\n150 mm\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "kind": "spec",
+  "title": "Tree pit guide — deep roots",
+  "summary": "Developer's guide TPG-D 2026 edition sample setting minimum pit dimensions and construction for deep-rooted large broadleaf trees on grade and on artificial ground.",
+  "key_facts": [
+   "Applies to large broadleaf trees e.g. Cinnamomum camphora (camphor), Bischofia javanica on grade or on artificial ground (podium over basement slab, roof)",
+   "Deep-rooted minimum pit: 2.0 x 2.0 m (4.0 m²)",
+   "Deep-rooted soil depth: 1.5 m on artificial ground and 1.5 m on grade",
+   "Deep-rooted drainage layer: 150 mm on waterproofed slab with filter fabric",
+   "On artificial ground greening standard counts large tree in pit of 1.5–4 m² as small tree (Gi 1.0 instead of 1.5)",
+   "Root ball top level with finished soil surface; three timber stakes per tree"
+  ],
+  "required": [],
+  "confidence": 0.96,
+  "why": "Text explicitly labels itself as developer's guide TPG-D with minimum dimensions and construction rules, matching spec definition."
+ },
+ "response_id": "chatcmpl-5e56c07fda174be1bf722f8b9e56c64f",
+ "raw": {
+  "id": "chatcmpl-5e56c07fda174be1bf722f8b9e56c64f",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\n  \"kind\": \"spec\",\n  \"title\": \"Tree pit guide \\u2014 deep roots\",\n  \"summary\": \"Developer's guide TPG-D 2026 edition sample setting minimum pit dimensions and construction for deep-rooted large broadleaf trees on grade and on artificial ground.\",\n  \"key_facts\": [\n    \"Applies to large broadleaf trees e.g. Cinnamomum camphora (camphor), Bischofia javanica on grade or on artificial ground (podium over basement slab, roof)\",\n    \"Deep-rooted minimum pit: 2.0 x 2.0 m (4.0 m\\u00b2)\",\n    \"Deep-rooted soil depth: 1.5 m on artificial ground and 1.5 m on grade\",\n    \"Deep-rooted drainage layer: 150 mm on waterproofed slab with filter fabric\",\n    \"On artificial ground greening standard counts large tree in pit of 1.5\\u20134 m\\u00b2 as small tree (Gi 1.0 instead of 1.5)\",\n    \"Root ball top level with finished soil surface; three timber stakes per tree\"\n  ],\n  \"required\": [],\n  \"confidence\": 0.96,\n  \"why\": \"Text explicitly labels itself as developer's guide TPG-D with minimum dimensions and construction rules, matching spec definition.\"\n}",
+     "role": "assistant",
+     "reasoning_content": "We need classify document. It's tree pit guide. It's spec? It sets rules dimensions. Title: Tree pit guide — deep roots ? Might be Developer's guide... Title as written: \"Tree pit guide — deep roots\" maybe full? Provide title as written. Summary. Key facts: dimensions etc. Need numbers exactly as written. Provide up to six key facts reviewer must know. Provide deliverables? Not.\n\nConfidence high.\n\nWe must answer only from what shown, never guess values not visible.\n\nProvide classification: spec\n\nNeed JSON? Previous instruction: classify it: 'spec', 'quote', 'bill' or 'document'. Give title, summary, key facts, deliverables status, confidence.\n\nProvide format. Probably need structured output.\n\nFollow instruction: Give its title as written, one-sentence summary, up to six key facts..., and if document lists..., each one with status. Confidence 0-1; why.\n\nProvide numbers exactly as written.\n\nEnsure extract numbers: Pit min 2.0 x 2.0 m (4.0 m²), Soil on artificial ground 1.5 m, Soil on grade 1.5 m, Drainage layer 150 mm for deep-rooted. Also shallow etc but main is deep. Include note about greening standard counts large tree in pit 1.5–4 m² as small tree (Gi 1.0 instead of 1.5).\n\nProvide confidence 0.95? why in one sentence.\n\nMake sure not guessing.\n\n"
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743242,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 725,
+   "completion_tokens": 603,
+   "total_tokens": 1328,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 256
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 441,
+    "audio_tokens": 0,
+    "reasoning_tokens": 306,
+    "rejected_prediction_tokens": 700
+   }
+  }
+ }
+}

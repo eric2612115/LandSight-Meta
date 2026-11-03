@@ -370,3 +370,34 @@ drawn on a typical-floor sheet; its counts (`geometry_count`, `proposed_count`, 
   scenario regulation, `citation` Art. 92: the narrowest clear width between the walls on a layer named for egress
   (A-EGRESS) once the planters inside are taken out; `numbers: {clear_m, walls_m, minimum_m, floors}`, `floors:
   string[]` when the sheet stands for several floors.
+
+# v3 (2026-11-04): the open reader and firm memory (both opt-in; docs/NEW-MODES.md)
+
+## The open reader
+`POST /api/packages/{package_id}/review?reader=open` and `POST /api/ask?reader=open` (with or without `live=1`) read
+with Muse Spark Open (`meta-models/muse-spark-open-1026` on Baseten, or the server named by `LANDSIGHT_OPEN_BASE_URL`)
+instead of `muse-spark-1.3`. `LANDSIGHT_READER=open` makes it the server's default. A Run read this way carries
+`timing.reader: "open"` and `timing.model`; every call in `timing.calls` and `/api/meta-calls` names the open model.
+`reader` other than `api` or `open` → 422; `live=1` with the open reader and no key → 400. `/api/health` adds
+`reader: {name: "open", model}` only when `LANDSIGHT_READER=open`; otherwise its answer is unchanged.
+
+## Firm memory (Muse Wonder)
+### GET /api/firms/{firm}/memory → `FirmMemory` (404 when the firm has none)
+`{firm, habits, evidence, model, call, updated_at}`: `habits` is Muse Wonder's distillation `{summary, send_back:
+Group[], handle_internally: Group[], pricing: {basis, tolerance_pct, conventions, evidence}, species_substitutions:
+[{from, to, when, evidence}], reply: {tone, greeting, opening, closing, sign_off, rules, evidence}}`, where `Group` is
+`{name, match: {categories, scenarios, severities, keywords}, why, evidence: string[]}`; `evidence` lists the decisions
+it was learned from; `call` is the Wonder call (model, seconds, usage, response_id, recorded, fixture).
+### POST /api/firms/{firm}/memory/distil `{run_ids?: string[]}` → `FirmMemory` (`?live=1` asks Muse Wonder)
+From every confirmed or dismissed check in landsight.db (or only those runs). 422 when there is nothing to learn from;
+404 when no recording answers these decisions and `live` is off; 400 for `live=1` without `MODEL_API_KEY`.
+### DELETE /api/firms/{firm}/memory → `{firm, forgotten: boolean}`
+### GET or POST /api/runs/{run_id}/memory?firm=default → `Applied` (`&live=1` drafts the reply live)
+`{firm, run_id, package, memory: {model, updated_at, decisions}, before: {order: string[], findings, reply},
+after: {order, groups: [{name, why, send, checks: [{check_id, severity, scenario, category, title, outside_list_pct?,
+firm_notes?}]}], sent: string[], kept_internal: string[], reply}}`. A `reply` is `{subject, body, order, by}`
+(`by`: `template` or `muse-wonder-1.0`); Wonder's also carries `missing`, `added`, `unverified_numbers` (its checks)
+and `call`. 404 for an unknown run or a firm with no memory.
+
+CLI: `landsight review|ask … --reader open`; `landsight memory seed-sample|distil|show|apply|forget [--firm f] [--run
+id] [--package dir] [--live] [--json f] [--db f]`.

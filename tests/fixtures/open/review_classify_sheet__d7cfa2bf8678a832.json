@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "a72a9b3f5703ebc6b376d787930768dae7b62738361489d8e8e28fa93d33dd0f",
+ "content_key": "pdfpage:f831749287ea55c3889daddfe6ea15e57be6210d0c41a01693e51b9d8480fc83|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:39+00:00",
+ "seconds": 7.71,
+ "usage": {
+  "prompt_tokens": 3572,
+  "completion_tokens": 290,
+  "total_tokens": 3862,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 189,
+   "audio_tokens": 0,
+   "reasoning_tokens": 167,
+   "rejected_prediction_tokens": 518
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "background",
+  "discipline": "irrigation",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-7",
+   "title": "Irrigation Plan",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:200"
+  },
+  "index": [],
+  "confidence": 0.96,
+  "why": "Sheet's dominant trade is irrigation (IRRIGATION LEGEND, PE MAINLINE, DRIP LINE, title 'Irrigation Plan' L-7) with planting shown only as thin background reference, matching background definition."
+ },
+ "response_id": "chatcmpl-4f0f43ba10bc4b8883b27bd70df5c64d",
+ "raw": {
+  "id": "chatcmpl-4f0f43ba10bc4b8883b27bd70df5c64d",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"background\",\"discipline\":\"irrigation\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-7\",\"title\":\"Irrigation Plan\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:200\"},\"index\":[],\"confidence\":0.96,\"why\":\"Sheet's dominant trade is irrigation (IRRIGATION LEGEND, PE MAINLINE, DRIP LINE, title 'Irrigation Plan' L-7) with planting shown only as thin background reference, matching background definition.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to classify sheet. Image shows irrigation plan with irrigation legend, spray head, solenoid valve etc. Title block shows TITLE Irrigation Plan, DRAWING NO. L-7. So this is background? Definition: background is plan of another trade such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols. Here primary is irrigation trade, so kind should be 'background', discipline irrigation. Also could legend? No mainly plan. So kind background, discipline irrigation.\n\nenlarged_partial: false? No match line or key plan. match_line false.\n\ntitle_block: number L-7, title Irrigation Plan, revision A, date 2026-09-18, scale 1:200. Need extract.\n\nindex empty list.\n\nconfidence high.\n\nReturn JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743233,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 290,
+   "total_tokens": 3862,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 189,
+    "audio_tokens": 0,
+    "reasoning_tokens": 167,
+    "rejected_prediction_tokens": 518
+   }
+  }
+ }
+}

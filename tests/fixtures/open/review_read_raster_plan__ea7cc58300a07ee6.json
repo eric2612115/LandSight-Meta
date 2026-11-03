@@ -1,0 +1,156 @@
+{
+ "call": "review_read_raster_plan",
+ "image_sha256": "5ad3aaf96cb1e7facf63bc3ab0d84303ea906c053c308926d032f458f395c2c1",
+ "content_key": "raster:40481febad5d666ca0f22ef6baee1fcc425b56f5e5d0da65df1009495442d745:plan|p=16b9e9e3|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:02:09+00:00",
+ "seconds": 13.16,
+ "usage": {
+  "prompt_tokens": 4612,
+  "completion_tokens": 1230,
+  "total_tokens": 5842,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 866,
+   "audio_tokens": 0,
+   "reasoning_tokens": 679,
+   "rejected_prediction_tokens": 1696
+  }
+ },
+ "prompt": "This image is one page of a landscape drawing package: a coloured plan delivered as a picture, with no CAD file behind it. Read what is needed to measure it:\n- entries: every filled area type and plant symbol the plan uses, from the legend box and from areas labelled directly on the plan (a bed or a lawn labelled in place is an entry too): label, the text exactly as written; swatch_colour_word, the fill colour you see, as one or two plain English colour words an image segmentation model can be prompted with (for example 'light green', 'grey'), never the material's name; kind, 'area' for a filled region, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip such as a hedge; where, 'legend' or 'plan'; x and y, for an entry labelled on the plan, the centre of its label text normalised to 0-1000 (x from the left edge, y from the top edge of the image), 0 and 0 for a legend entry.\n- legend_box: the legend box's corners, x0 y0 (top left) and x1 y1 (bottom right), each normalised to 0-1000 with x from the left edge and y from the top edge of the image; all 0 when there is no legend box.\n- scale_bar: the graphic scale bar: x_start and x_end, the x of its zero end and of its far labelled end, y, the bar's centre line, all normalised to 0-1000 as above, and distance_m, the distance in metres its far label states; all 0 when there is none.\n- title_scale: the scale written in the title block (for example '1:200'), empty if none.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "entries": [
+   {
+    "label": "CC CAMPHOR",
+    "swatch_colour_word": "green",
+    "kind": "symbol",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "label": "AZ AZALEA",
+    "swatch_colour_word": "green",
+    "kind": "area",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "label": "FIRE TRUCK ACCESS LANE",
+    "swatch_colour_word": "grey",
+    "kind": "area",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "label": "DU DURANTA",
+    "swatch_colour_word": "dark green",
+    "kind": "line",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "label": "AZ AZALEA",
+    "swatch_colour_word": "green",
+    "kind": "area",
+    "where": "plan",
+    "x": 215,
+    "y": 574
+   },
+   {
+    "label": "LA LAWN",
+    "swatch_colour_word": "light green",
+    "kind": "area",
+    "where": "plan",
+    "x": 462,
+    "y": 573
+   },
+   {
+    "label": "DU H0.6 @0.3m o.c. DOUBLE ROW",
+    "swatch_colour_word": "dark green",
+    "kind": "line",
+    "where": "plan",
+    "x": 556,
+    "y": 448
+   },
+   {
+    "label": "CC typ.",
+    "swatch_colour_word": "green",
+    "kind": "symbol",
+    "where": "plan",
+    "x": 236,
+    "y": 732
+   },
+   {
+    "label": "EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED",
+    "swatch_colour_word": "green",
+    "kind": "symbol",
+    "where": "plan",
+    "x": 344,
+    "y": 407
+   },
+   {
+    "label": "FIRE TRUCK ACCESS LANE — KEEP CLEAR",
+    "swatch_colour_word": "grey",
+    "kind": "area",
+    "where": "plan",
+    "x": 78,
+    "y": 565
+   }
+  ],
+  "legend_box": {
+   "x0": 704,
+   "y0": 347,
+   "x1": 935,
+   "y1": 571
+  },
+  "scale_bar": {
+   "x_start": 54,
+   "x_end": 177,
+   "y": 910,
+   "distance_m": 10
+  },
+  "title_scale": "1:200",
+  "confidence": 0.87,
+  "why": "Plan has a clear legend box with 4 swatches and plan labels for LAWN, AZALEA and DURANTA hedge plus typical CC trees that are visible; scale bar 0-10m and title block 1:200 are legible but coordinates are estimated from a picture."
+ },
+ "response_id": "chatcmpl-98a8cb694a25475f93ba2471b1a2df4a",
+ "raw": {
+  "id": "chatcmpl-98a8cb694a25475f93ba2471b1a2df4a",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"entries\": [{\"label\": \"CC CAMPHOR\",\"swatch_colour_word\": \"green\",\"kind\": \"symbol\",\"where\": \"legend\",\"x\": 0,\"y\": 0},{\"label\": \"AZ AZALEA\",\"swatch_colour_word\": \"green\",\"kind\": \"area\",\"where\": \"legend\",\"x\": 0,\"y\": 0},{\"label\": \"FIRE TRUCK ACCESS LANE\",\"swatch_colour_word\": \"grey\",\"kind\": \"area\",\"where\": \"legend\",\"x\": 0,\"y\": 0},{\"label\": \"DU DURANTA\",\"swatch_colour_word\": \"dark green\",\"kind\": \"line\",\"where\": \"legend\",\"x\": 0,\"y\": 0},{\"label\": \"AZ AZALEA\",\"swatch_colour_word\": \"green\",\"kind\": \"area\",\"where\": \"plan\",\"x\": 215,\"y\": 574},{\"label\": \"LA LAWN\",\"swatch_colour_word\": \"light green\",\"kind\": \"area\",\"where\": \"plan\",\"x\": 462,\"y\": 573},{\"label\": \"DU H0.6 @0.3m o.c. DOUBLE ROW\",\"swatch_colour_word\": \"dark green\",\"kind\": \"line\",\"where\": \"plan\",\"x\": 556,\"y\": 448},{\"label\": \"CC typ.\",\"swatch_colour_word\": \"green\",\"kind\": \"symbol\",\"where\": \"plan\",\"x\": 236,\"y\": 732},{\"label\": \"EXISTING CAMPHOR DBH 95 cm \\u2014 TO BE REMOVED\",\"swatch_colour_word\": \"green\",\"kind\": \"symbol\",\"where\": \"plan\",\"x\": 344,\"y\": 407},{\"label\": \"FIRE TRUCK ACCESS LANE \\u2014 KEEP CLEAR\",\"swatch_colour_word\": \"grey\",\"kind\": \"area\",\"where\": \"plan\",\"x\": 78,\"y\": 565}], \"legend_box\": {\"x0\": 704,\"y0\": 347,\"x1\": 935,\"y1\": 571}, \"scale_bar\": {\"x_start\": 54,\"x_end\": 177,\"y\": 910,\"distance_m\": 10}, \"title_scale\": \"1:200\", \"confidence\": 0.87, \"why\": \"Plan has a clear legend box with 4 swatches and plan labels for LAWN, AZALEA and DURANTA hedge plus typical CC trees that are visible; scale bar 0-10m and title block 1:200 are legible but coordinates are estimated from a picture.\"}",
+     "role": "assistant",
+     "reasoning_content": "Need to parse image.\n\nEntries: filled area types and plant symbols from legend box and from areas labelled directly on plan.\n\nLegend box: corners x0 y0 x1 y1 normalized 0-1000. Look at legend box on right side. Approx coordinates.\n\nScale_bar: graphic scale bar: x_start x_end, y, distance_m. Bottom left has scale bar 0 to 10m. Need estimate.\n\nTitle_scale: scale written in title block (1:200). Found bottom right table.\n\nEntries: need to list every entry.\n\nLegend entries:\n- CC CAMPHOR — green polygon with + . kind symbol? But it's a tree symbol. Legend says CC CAMPHOR, swatch is green circle polygon. So kind symbol.\n- AZ AZALEA — hatched green rectangle, kind area\n- FIRE TRUCK ACCESS LANE — grey rectangle, kind area\n- DU DURANTA — dark green strip, kind line? Or area? spec says line or strip such as hedge. This is a linear hedge. So kind line.\n\nPlan entries:\n- AZ AZALEA — hatched area label in plan centre left, swatch light green? Actually hatched green. So area, plan.\n- LA LAWN — light green rectangle, area, plan\n- DU H0.6 @0.3m o.c. DOUBLE ROW — vertical dark green line on right side, line, plan — but text is DU ... So label exactly as written: DU H0.6 @0.3m o.c. DOUBLE ROW\n- CC typ. — label for row of 8 trees at bottom, symbol, plan. The text \"CC typ.\" maybe refers to CC CAMPHOR typical. So entry.\n- EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED — label for existing tree at top, symbol? Area? That tree is to be removed, but still a symbol.\n- Also maybe? FIRE TRUCK ACCESS LANE — KEEP CLEAR — W 4.0 M — label on left grey vertical strip, but that is plan label for fire lane. However legend already has FIRE TRUCK ACCESS LANE, but plan also has labelled strip. Should include? The plan has grey vertical strip with text FIRE TRUCK ACCESS LANE — KEEP CLEAR and W 4.0 M. That's an area labelled directly on plan. Should include as entry with where plan.\n\nAlso TOWER ABOVE — see the tower package is not landscape, ignore.\n\nWe must produce entries list with label, swatch_colour_word, kind, where, x y.\n\nNeed to assign swatch colours: plain English.\n\nAZ AZALEA hatch: medium green? striped light green? Let's say 'green' or 'light green' for lawn, 'green' for azalea hatch, dark green for duranta.\n\nWe must output JSON.\n\nLegend_box corners estimate: legend box on right middle. Approx x0 ~705 y0 ~348 x1 ~933 y1 ~570.\n\nScale_bar: bottom left graphic bar 0-10m. Estimate x_start ~54 x_end ~177 y ~914 distance_m 10.\n\nTitle_scale: \"1:200\"\n\nConfidence: moderate ~0.85\n\nProvide entries.\n\nInclude both legend and plan entries.\n\nLet's craft final answer."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743318,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 4612,
+   "completion_tokens": 1230,
+   "total_tokens": 5842,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 866,
+    "audio_tokens": 0,
+    "reasoning_tokens": 679,
+    "rejected_prediction_tokens": 1696
+   }
+  }
+ }
+}

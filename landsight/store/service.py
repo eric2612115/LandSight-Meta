@@ -148,21 +148,25 @@ def update_price(conn: sqlite3.Connection, code: str, fields: dict) -> dict:
 # --------------------------------------------------------------------------------------------- reviews
 
 
-def _recorders(live: bool, fixture_dir: str | Path | None, fresh: int):
+def _recorders(live: bool, fixture_dir: str | Path | None, fresh: int, reader: str | None = None):
     """Muse Spark and SAM 3.1 recorders. `fresh` (live only): re-ask that many recorded Spark calls, -1 every Spark
-    and SAM call; the new answers go to fresh/ beside the recordings, which stay as they are."""
-    from landsight.review.colour import SAM_FIXTURES, ReviewSam, mode_for
+    and SAM call; the new answers go to fresh/ beside the recordings, which stay as they are. `reader` (else
+    LANDSIGHT_READER, else "api"): "open" reads with Muse Spark Open, its recordings kept apart."""
+    from landsight.review.colour import SAM_FIXTURES, ReviewSam, mode_for, review_sam
     from landsight.review.spark import FIXTURES, ReviewSpark
 
     mode = "live" if live else "fixtures"
     sdir = Path(fixture_dir) if fixture_dir else FIXTURES
-    spark = ReviewSpark(mode, sdir, fresh=int(fresh or 0))
+    spark = ReviewSpark(mode, sdir, fresh=int(fresh or 0), reader=reader)
+    if spark.reader == "open":
+        return spark, review_sam(mode, "open", fixture_dir, fresh)
     sam = ReviewSam(mode_for(mode), sdir / "sam" if fixture_dir else SAM_FIXTURES, fresh=-1 if fresh == -1 else 0)
     return spark, sam
 
 
 def review_package(conn: sqlite3.Connection, package_id: int, live: bool = False, keep: dict | None = None,
-                   fixture_dir: str | Path | None = None, fresh: int = 0, review_fn=None) -> dict:
+                   fixture_dir: str | Path | None = None, fresh: int = 0, review_fn=None,
+                   reader: str | None = None) -> dict:
     """Review a registered package against the firm's price list in the database; the Run, its checks and every Meta
     call are written to the database. Returns the Run."""
     from landsight.review.run import review as default_review
@@ -170,7 +174,7 @@ def review_package(conn: sqlite3.Connection, package_id: int, live: bool = False
     review = review_fn or default_review
 
     pk = package(conn, package_id)
-    spark, sam = _recorders(live, fixture_dir, fresh)
+    spark, sam = _recorders(live, fixture_dir, fresh, reader)
     prices = review_prices(conn)
     started = D.now()
     run = review(pk["path"], mode="live" if live else "fixtures", spark=spark, sam=sam, keep=keep, prices=prices,
@@ -185,11 +189,12 @@ def review_package(conn: sqlite3.Connection, package_id: int, live: bool = False
 
 
 def review_folder(folder: str | Path, live: bool = False, db_path: str | Path | None = None, keep: dict | None = None,
-                  fixture_dir: str | Path | None = None, fresh: int = 0) -> dict:
+                  fixture_dir: str | Path | None = None, fresh: int = 0, reader: str | None = None) -> dict:
     conn = D.connect(db_path)
     try:
         pk = package_for_folder(conn, folder)
-        return review_package(conn, pk["package_id"], live=live, keep=keep, fixture_dir=fixture_dir, fresh=fresh)
+        return review_package(conn, pk["package_id"], live=live, keep=keep, fixture_dir=fixture_dir, fresh=fresh,
+                              reader=reader)
     finally:
         conn.close()
 

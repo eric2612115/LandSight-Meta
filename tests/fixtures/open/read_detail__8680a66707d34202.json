@@ -1,0 +1,64 @@
+{
+ "call": "read_detail",
+ "image_sha256": "630867e805fa8e75d6a1667218c2b58a3d74ddf3da0a881ecd45564b31058a0d",
+ "content_key": "720880925a68e4e76f614f2baaba6f667d87f44eff66b73506f9870952c3026e:detail|p=35833438|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:01:23+00:00",
+ "seconds": 9.03,
+ "usage": {
+  "prompt_tokens": 3457,
+  "completion_tokens": 356,
+  "total_tokens": 3813,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 267,
+   "audio_tokens": 0,
+   "reasoning_tokens": 249,
+   "rejected_prediction_tokens": 356
+  }
+ },
+ "prompt": "This is a construction detail sheet from a landscape drawing package. Read the tree pit: pit_w_m and pit_l_m, the plan dimensions of the tree pit in metres (a dimension written in millimetres, such as 1500, is 1.5 m); soil_depth_m, the depth of planting soil in the pit in metres; on_slab, true if the pit sits on a structural slab or artificial ground (a roof, a podium, a basement slab), false otherwise; why, one sentence naming the text or dimension each value was read from. Use 0 for a dimension that is not shown.",
+ "result": {
+  "pit_w_m": 1.5,
+  "pit_l_m": 1.5,
+  "soil_depth_m": 1.0,
+  "on_slab": true,
+  "why": "Values read from title text 'TREE PIT 1500 X 1500 - SOIL DEPTH 1000 - ON SLAB' and plan dimension lines 1500x1500 and section dimension 1000 and label 'BASEMENT SLAB (ARTIFICIAL GROUND)' confirming on slab."
+ },
+ "response_id": "chatcmpl-d9bfd3c97afc4c9994a4343c08cd1ec9",
+ "raw": {
+  "id": "chatcmpl-d9bfd3c97afc4c9994a4343c08cd1ec9",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"pit_w_m\":1.5,\"pit_l_m\":1.5,\"soil_depth_m\":1.0,\"on_slab\":true,\"why\":\"Values read from title text 'TREE PIT 1500 X 1500 - SOIL DEPTH 1000 - ON SLAB' and plan dimension lines 1500x1500 and section dimension 1000 and label 'BASEMENT SLAB (ARTIFICIAL GROUND)' confirming on slab.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to read tree pit dimensions. The drawing shows TREE PIT 1500 x 1500 - SOIL DEPTH 1000 - ON SLAB. So pit_w_m = 1.5 m, pit_l_m =1.5 m, soil_depth_m = 1.0 m (or 1000 mm). on_slab true because \"ON SLAB\" and \"BASEMENT SLAB (ARTIFICIAL GROUND)\". Need to provide why sentence naming text or dimension each value was read from.\n\nUse 0 for dimension not shown.\n\nProvide JSON? Prompt says read tree pit: pit_w_m and pit_l_m, plan dimensions... soil_depth_m... on_slab true/false... why one sentence naming text or dimension each value was read from. Likely output JSON with those fields.\n\nWe should output values.\n\npit_w_m 1.5, pit_l_m 1.5, soil_depth_m 1.0, on_slab true.\n\nwhy: mention text \"TREE PIT 1500×1500 - SOIL DEPTH 1000 - ON SLAB\" and dimension lines 1500 and 1000 and basement slab label.\n\nNeed one sentence.\n\nProceed."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743276,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3457,
+   "completion_tokens": 356,
+   "total_tokens": 3813,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 267,
+    "audio_tokens": 0,
+    "reasoning_tokens": 249,
+    "rejected_prediction_tokens": 356
+   }
+  }
+ }
+}

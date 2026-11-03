@@ -1,0 +1,73 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:09b222d2d8e92ba09f0230cfa4e64bc4c8d88720f307f3fa269995180590121c|p=97f2b24b|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:41+00:00",
+ "seconds": 1.93,
+ "usage": {
+  "prompt_tokens": 533,
+  "completion_tokens": 439,
+  "total_tokens": 972,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 128
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 314,
+   "audio_tokens": 0,
+   "reasoning_tokens": 202,
+   "rejected_prediction_tokens": 561
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nDesign Review — Issues\nGreenfield Residences — landscape package · review meeting 2026-09-10 · drawings reviewed:\nprevious issue (before Rev A) · reviewer: sample reviewer\nNo.\nSheet\nIssue\nAction\n1\nL-1, L-6\nTrees on the podium: confirm the tree pit size and\nthe soil depth on the basement slab against the\ngreening standard before the permit set.\nDesigner, Rev A\n2\nL-1\nFire-truck access lane along the west boundary:\nkeep the lane clear of planting; show its extent on\nthe planting plan.\nDesigner, Rev A\n3\nL-4, bill\nPlant schedule and bill quantities must agree with\nthe planting plan; the plan governs.\nDeveloper\nPlease respond in writing with the next issue of the drawings.\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "kind": "document",
+  "title": "Design Review — Issues",
+  "summary": "Meeting review comments for the Greenfield Residences landscape package listing three issues to be addressed before the permit set.",
+  "key_facts": [
+   "Review meeting dated 2026-09-10 for Greenfield Residences — landscape package",
+   "Drawings reviewed: previous issue (before Rev A)",
+   "Issue 1 on Sheets L-1, L-6: confirm tree pit size and soil depth on basement slab against greening standard before permit set — Action: Designer, Rev A",
+   "Issue 2 on Sheet L-1: fire-truck access lane along west boundary to be kept clear of planting and shown on planting plan — Action: Designer, Rev A",
+   "Issue 3 on Sheet L-4, bill: plant schedule and bill quantities must agree with planting plan; the plan governs — Action: Developer",
+   "Document is marked as synthetic sample for Landsight demo package, not a real project record"
+  ],
+  "required": [],
+  "confidence": 0.98,
+  "why": "Document is explicitly labeled as design review issues/meeting notes with no specification clauses, measurement methods, or priced quantities."
+ },
+ "response_id": "chatcmpl-85cbbfca86724fc6a18af64386d10b2d",
+ "raw": {
+  "id": "chatcmpl-85cbbfca86724fc6a18af64386d10b2d",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"document\",\"title\":\"Design Review — Issues\",\"summary\":\"Meeting review comments for the Greenfield Residences landscape package listing three issues to be addressed before the permit set.\",\"key_facts\":[\"Review meeting dated 2026-09-10 for Greenfield Residences — landscape package\",\"Drawings reviewed: previous issue (before Rev A)\",\"Issue 1 on Sheets L-1, L-6: confirm tree pit size and soil depth on basement slab against greening standard before permit set — Action: Designer, Rev A\",\"Issue 2 on Sheet L-1: fire-truck access lane along west boundary to be kept clear of planting and shown on planting plan — Action: Designer, Rev A\",\"Issue 3 on Sheet L-4, bill: plant schedule and bill quantities must agree with planting plan; the plan governs — Action: Developer\",\"Document is marked as synthetic sample for Landsight demo package, not a real project record\"],\"required\":[] ,\"confidence\":0.98,\"why\":\"Document is explicitly labeled as design review issues/meeting notes with no specification clauses, measurement methods, or priced quantities.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need to classify document. It's Design Review — Issues. That's document (meeting notes, review comments, checklists, letters). Title as written: \"Design Review — Issues\" or \"Design Review — Issues Greenfield Residences — landscape package · review meeting...\" Need title as written. Probably \"Design Review — Issues\"\n\nSummary one sentence.\n\nUp to six key facts: numbers exactly as written. Provide key facts reviewer pricing must know.\n\nIf document lists documents or deliverables, each one with status. Does it list documents? It lists drawings reviewed: previous issue (before Rev A) etc. Maybe list Sheets L-1, L-6, L-4, bill.\n\nConfidence why.\n\nWe must not guess values not visible. Keep numbers exactly.\n\nWe need JSON? Instruction: Classify it: 'spec' ... Give its title as written, one-sentence summary, up to six key facts ... and if document lists... Confidence 0-1 why... Probably provide structured answer.\n\nFollow recipient."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743240,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 533,
+   "completion_tokens": 439,
+   "total_tokens": 972,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 128
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 314,
+    "audio_tokens": 0,
+    "reasoning_tokens": 202,
+    "rejected_prediction_tokens": 561
+   }
+  }
+ }
+}

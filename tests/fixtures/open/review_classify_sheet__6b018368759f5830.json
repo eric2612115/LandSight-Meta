@@ -1,0 +1,73 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "ad56343427342ecb8d83038ae94d28ffe8a119462fe2575ee02039793b5a4102",
+ "content_key": "dxf:e7fece198961530454dd354e6c63f2def479cd6e5e74f041021e4a7abd3ea7f2|p=ace754ed|m=meta-models/muse-spark-open-1026",
+ "model": "meta-models/muse-spark-open-1026",
+ "recorded_at": "2026-11-03T22:00:29+00:00",
+ "seconds": 9.28,
+ "usage": {
+  "prompt_tokens": 3572,
+  "completion_tokens": 383,
+  "total_tokens": 3955,
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 256,
+   "audio_tokens": 0,
+   "reasoning_tokens": 265,
+   "rejected_prediction_tokens": 640
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "kind": "background",
+  "discipline": "lighting",
+  "enlarged_partial": false,
+  "match_line": false,
+  "title_block": {
+   "number": "L-8",
+   "title": "Lighting Plan",
+   "revision": "A",
+   "date": "2026-09-18",
+   "scale": "1:200"
+  },
+  "index": [],
+  "confidence": 0.96,
+  "why": "Sheet is a Lighting Plan with LIGHTING LEGEND and circuit symbols; trees are faint reference background, so it is a background lighting plan, not a planting/paving plan, with title-block data clearly readable."
+ },
+ "response_id": "chatcmpl-e4dda8fde9f94ee29d6387cb09e680d8",
+ "raw": {
+  "id": "chatcmpl-e4dda8fde9f94ee29d6387cb09e680d8",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "content": "{\"kind\":\"background\",\"discipline\":\"lighting\",\"enlarged_partial\":false,\"match_line\":false,\"title_block\":{\"number\":\"L-8\",\"title\":\"Lighting Plan\",\"revision\":\"A\",\"date\":\"2026-09-18\",\"scale\":\"1:200\"},\"index\":[],\"confidence\":0.96,\"why\":\"Sheet is a Lighting Plan with LIGHTING LEGEND and circuit symbols; trees are faint reference background, so it is a background lighting plan, not a planting/paving plan, with title-block data clearly readable.\"}",
+     "role": "assistant",
+     "reasoning_content": "We need return kind, discipline, enlarged_partial, match_line, title_block, index, confidence and why.\n\nImage shows lighting plan. There's a Lighting Legend. Plan drawing with bollards, tree uplights, pole lights, circuit. Title block says: DRAWING NO. L-8, TITLE Lighting Plan, REV A, DATE 2026-09-18, SCALE 1:200.\n\nkind? It's a background? Definition: background is a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols. This is lighting discipline. The trees appear as thin lines but the main subject is lighting. According to definitions, kind 'plan' is a top-down plan whose own subject is planting or paving. 'background' is plan of another trade where trees and beds appear only as thin reference. So this is background kind. Discipline lighting.\n\nenlarged_partial: false? No match line, shows whole site? There's a dash-dot boundary around. Probably not enlarged partial. So false, match_line false.\n\ntitle_block values: number L-8, title Lighting Plan, revision A, date 2026-09-18, scale 1:200.\n\nindex empty list.\n\nconfidence high.\n\nNeed to output JSON."
+    },
+    "finish_reason": "stop"
+   }
+  ],
+  "created": 1793743222,
+  "model": "meta-models/muse-spark-open-1026",
+  "object": "chat.completion",
+  "usage": {
+   "prompt_tokens": 3572,
+   "completion_tokens": 383,
+   "total_tokens": 3955,
+   "prompt_tokens_details": {
+    "audio_tokens": 0,
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": 256,
+    "audio_tokens": 0,
+    "reasoning_tokens": 265,
+    "rejected_prediction_tokens": 640
+   }
+  }
+ }
+}
