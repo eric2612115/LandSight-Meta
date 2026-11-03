@@ -26,10 +26,12 @@ VF = f"scale=in_color_matrix=bt2020:in_range=tv:out_range=pc,format=gbrpf32le,lu
 
 # marks in 4K px at the reference frame (the last): centre x, y, box w, h; `anchor` follows another mark when lost
 CLIPS = {
-    'A': {'src': LIVE / 'A-cut.mov', 'marks': {
-        'philips': {'c': (2872, 1180), 'box': (170, 52), 'ctx': (220, 80), 'slope': 0.12},
-        'asus': {'c': (1275, 1466), 'box': (170, 54), 'ctx': (200, 70), 'anchor': 'philips'},
-        'apple': {'c': (1345, 1518), 'box': (110, 130), 'anchor': 'asus', 'rigid': True},
+    # the screen shot, stabilised (A-cut-stab40.mov: the camera path smoothed, 1.15× zoom; 29.98 fps, 8-bit, the phone's
+    # HLG values carried through, so it is decoded and graded exactly as the original)
+    'A': {'src': LIVE / 'A-cut-stab40.mov', 'rate': '49800/1661', 'marks': {
+        'philips': {'c': (3108, 1232), 'box': (196, 60), 'ctx': (250, 92), 'slope': 0.1},
+        'asus': {'c': (1285, 1563), 'box': (190, 60), 'ctx': (230, 80), 'anchor': 'philips'},
+        'apple': {'c': (1360, 1615), 'box': (126, 150), 'anchor': 'asus', 'rigid': True},
     }},
     'B': {'src': LIVE / 'B-cut.mov', 'marks': {
         'asus': {'c': (2843, 1390), 'box': (110, 50), 'ctx': (260, 110), 'slope': 0.38},
@@ -41,7 +43,14 @@ CLIPS = {
 # the camera whips past), its centre is keyed by hand on the raw frames (4K px) and interpolated; before the first key
 # the mark is behind Eric's head and chair and nothing is painted. The Apple mark rides under it at a keyed offset.
 MANUAL = {
+    # the stabilised screen shot tracks well; before these frames a mark is off frame or behind the chair (no paint)
     'A': {
+        'philips': {'from': 50},
+        'asus': {'from': 52},
+        'apple': {'offset': {60: (-24, 57), 115: (20, 57), 130: (40, 52), 160: (50, 55), 175: (50, 58), 237: (75, 52)}, 'of': 'asus', 'from': 56},
+    },
+    # (the keys used on the original, unstabilised A-cut.mov)
+    'A-orig': {
         'asus': {'keys': {60: (1880, 1450), 70: (1820, 1450), 80: (1760, 1450), 86: (1720, 1460), 90: (1700, 1467), 100: (1645, 1480),
                           110: (1605, 1488), 120: (1590, 1485), 130: (1555, 1540), 140: (1550, 1578), 150: (1555, 1587), 160: (1560, 1588),
                           170: (1535, 1580), 176: (1530, 1573)}, 'from': 56},
@@ -65,6 +74,9 @@ def interp_keys(keys, f):
 def apply_manual(name, tr, n):
     man = MANUAL.get(name, {})
     for m, c in man.items():
+        if 'keys' not in c and 'offset' not in c:
+            for f in range(min(c['from'], n)):
+                tr[m]['pos'][f] = None
         if 'keys' in c:
             last = max(c['keys'])
             for f in range(n):
@@ -218,7 +230,7 @@ def main(name):
     cfg = CLIPS[name]
     tr, n = track(name, cfg)
     apply_manual(name, tr, n)
-    rate = '30000/1001'
+    rate = cfg.get('rate', '30000/1001')
     out = WORK / f'{name}-graded.mp4'
     enc = subprocess.Popen([FFMPEG, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb48le', '-s', f'{W}x{H}', '-r', rate, '-i', '-',
                             '-c:v', 'libx264', '-crf', '14', '-preset', 'slow', '-pix_fmt', 'yuv420p', '-g', '15',

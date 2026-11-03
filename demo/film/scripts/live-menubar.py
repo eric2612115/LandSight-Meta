@@ -10,9 +10,10 @@ from PIL import Image
 
 src, dst = sys.argv[1], sys.argv[2]
 a = np.asarray(Image.open(src).convert('RGB'), np.float32)
-x0, x1 = 600, 2010
-# the band's top and bottom (4K px) at x0 and x1: the camera is rolled a little
-top0, bot0, top1, bot1 = 603, 630, 586, 613
+# the band's top and bottom (4K px) at x0 and x1 on the stabilised shot's last frame (A-cut-stab40.mov); the camera is
+# rolled a little. (On the original A-cut.mov: x 600–2010, top/bottom 603/630 → 586/613.)
+x0, x1 = 505, 2135
+top0, bot0, top1, bot1 = 574, 609, 554, 591
 out = a.copy()
 k = 151
 pad = np.pad(a, ((0, 0), (k, k), (0, 0)), mode='edge')

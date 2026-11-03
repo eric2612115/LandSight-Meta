@@ -31,6 +31,14 @@ import {V11} from './scenes/animatic-v11-cues.js';
 import {FILM_V2_SHEETS, FilmV2} from './scenes/FilmV2';
 import type {FilmV2Props} from './scenes/FilmV2';
 import {V2 as FV2} from './scenes/film-v2-cues.js';
+import {FILM_V3_SHEETS, FilmV3} from './scenes/FilmV3';
+import type {FilmV3Props} from './scenes/FilmV3';
+import {FilmV4} from './scenes/FilmV4';
+import type {FilmV4Props} from './scenes/FilmV4';
+import {FILM_V5_SHEETS, FilmV5} from './scenes/FilmV5';
+import type {FilmV5Props} from './scenes/FilmV5';
+import {FILM_V6_SHEETS, FilmV6} from './scenes/FilmV6';
+import type {FilmV6Props} from './scenes/FilmV6';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -195,7 +203,7 @@ export const Root: React.FC = () => (
     fps={60}
     width={FV2.width}
     height={FV2.height}
-    defaultProps={{sheets: FILM_V2_SHEETS, proxy: false, timecode: false, voice: true} satisfies FilmV2Props}
+    defaultProps={{sheets: FILM_V2_SHEETS, proxy: false, timecode: false, sound: true} satisfies FilmV2Props}
   />
   <Composition
     id="FilmV2Review"
@@ -204,7 +212,67 @@ export const Root: React.FC = () => (
     fps={30}
     width={FV2.width}
     height={FV2.height}
-    defaultProps={{sheets: FILM_V2_SHEETS, proxy: true, timecode: true, voice: true} satisfies FilmV2Props}
+    defaultProps={{sheets: FILM_V2_SHEETS, proxy: true, timecode: true, sound: true} satisfies FilmV2Props}
+  />
+  {/* Film v3: the restyle of v2 (white studio, white study model, editorial type, exploded floors); same beats and sound.
+      node film-v2-prepare.mjs, scripts/stage-v2-sheets.py --v3 first; render with --gl=angle. */}
+  <Composition
+    id="FilmV3"
+    component={FilmV3}
+    durationInFrames={Math.round(FV2.duration * 60)}
+    fps={60}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V3_SHEETS, proxy: false, timecode: false, sound: true} satisfies FilmV3Props}
+  />
+  <Composition
+    id="FilmV3Review"
+    component={FilmV3}
+    durationInFrames={Math.round(FV2.duration * 30)}
+    fps={30}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V3_SHEETS, proxy: true, timecode: true, sound: true} satisfies FilmV3Props}
+  />
+  {/* v3, variant B: the console grammar on the exploded tower and the lift shaft (stills for the choice of look) */}
+  <Composition
+    id="FilmV3Console"
+    component={FilmV3}
+    durationInFrames={Math.round(FV2.duration * 60)}
+    fps={60}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V3_SHEETS, proxy: false, timecode: false, sound: true, console: true} satisfies FilmV3Props}
+  />
+  {/* Film v4: the approved cut's sound, narration and timing with Part 1 and the end as a teardown (demo/film/teardown-v4,
+      recorded to public/v4/part1.mp4 and end.mp4); Part 2 is the product's capture under the console's top bar. 1080p60,
+      no timecode. */}
+  <Composition
+    id="FilmV4"
+    component={FilmV4}
+    durationInFrames={Math.round(FV2.duration * 60)}
+    fps={60}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sound: true} satisfies FilmV4Props}
+  />
+  <Composition
+    id="FilmV5"
+    component={FilmV5}
+    durationInFrames={Math.round(FV2.duration * 60)}
+    fps={60}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V5_SHEETS, proxy: false, timecode: false, sound: true, look: 'ink'} satisfies FilmV5Props}
+  />
+  <Composition
+    id="FilmV6"
+    component={FilmV6}
+    durationInFrames={Math.round(FV2.duration * 60)}
+    fps={60}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V6_SHEETS, proxy: false, timecode: false, sound: true} satisfies FilmV6Props}
   />
   </>
 );

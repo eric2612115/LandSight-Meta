@@ -5,12 +5,14 @@ its ink, with a faint, fixed paper grain. Writes demo/film/public/v2/sheets/<id>
 plus l6-border.json (the drawn border of L-6 as fractions of the image: the push lands on it).
 
     uv run python demo/film/scripts/stage-v2-sheets.py   (from the repo root)
+    uv run python demo/film/scripts/stage-v2-sheets.py --v3   the restyle: crisp white paper, no grain → public/v3/sheets
 """
 
 from __future__ import annotations
 
 import importlib.util
 import io
+import sys
 import json
 from pathlib import Path
 
@@ -22,9 +24,10 @@ spec = importlib.util.spec_from_file_location("v11", HERE / "stage-v11-sheets.py
 v11 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(v11)
 
-OUT = v11.REPO / "demo" / "film" / "public" / "v2" / "sheets"
+V3 = "--v3" in sys.argv
+OUT = v11.REPO / "demo" / "film" / "public" / ("v3" if V3 else "v2") / "sheets"
 DPI = {"L-1": 400, "L-6": 300, "L-102": 300, "L-103": 300, "L-104": 300, "L-101": 200}
-PAPER = np.array([247, 245, 240], np.float32)
+PAPER = np.array([255, 255, 255] if V3 else [247, 245, 240], np.float32)
 INK = np.array([29, 32, 38], np.float32)
 
 
@@ -41,7 +44,8 @@ def paper(img: Image.Image, seed: int) -> Image.Image:
     a = np.asarray(img.convert("RGB"), np.float32) / 255.0
     # ink-ness per channel (black → 1, white → 0); coloured fills keep their hue, pulled toward the paper's warmth
     out = PAPER[None, None] * a + INK[None, None] * (1 - a)
-    out *= 1 + grain(a.shape[0], a.shape[1], seed)[..., None]
+    if not V3:
+        out *= 1 + grain(a.shape[0], a.shape[1], seed)[..., None]
     return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8))
 
 

@@ -1,6 +1,10 @@
 import {ThreeCanvas} from '@remotion/three';
 import {useEffect, useMemo, useState} from 'react';
-import {useThree} from '@react-three/fiber';
+import {useFrame, useThree} from '@react-three/fiber';
+import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
+import {BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js';
+import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
 import {AbsoluteFill, continueRender, delayRender, staticFile, useVideoConfig} from 'remotion';
 import * as THREE from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
@@ -147,8 +151,8 @@ function pathAt(t: number): Cam {
 /** The end: a slow drift past the tower at dusk, from the south-east. `u` 0–1 over the end. */
 function duskAt(u: number): Cam {
   const a = -0.55 + 0.22 * u;
-  const r = 150 - 18 * u;
-  return {pos: V(TX + Math.sin(a) * -r, 46 - 6 * u, TZ + Math.cos(a) * r), look: V(TX - 46, 30, TZ + 16), fov: 40};
+  const r = 178 - 20 * u;
+  return {pos: V(TX + Math.sin(a) * -r, 50 - 6 * u, TZ + Math.cos(a) * r), look: V(TX - 44, 33, TZ + 18), fov: 40};
 }
 export function cameraAt(t: number, dusk?: number): Cam {
   return dusk !== undefined ? duskAt(dusk) : pathAt(t);
@@ -472,6 +476,28 @@ const Look: React.FC<{night: boolean}> = ({night}) => {
   scene.environmentIntensity = night ? 0.12 : 0.32;
   return null;
 };
+/**
+ * A soft depth of field for the end (behind the bullets): the tower in focus, the far ground and the near paper soft.
+ * A real lens blur in the render (three's BokehPass, a fixed kernel), never a CSS blur.
+ */
+const Dof: React.FC<{focus: number}> = ({focus}) => {
+  const {gl, scene, camera, size} = useThree();
+  const fx = useMemo(() => {
+    const rt = new THREE.WebGLRenderTarget(1, 1, {type: THREE.HalfFloatType, samples: 4});
+    const composer = new EffectComposer(gl, rt);
+    composer.addPass(new RenderPass(scene, camera));
+    const bokeh = new BokehPass(scene, camera, {focus, aperture: 0.00005, maxblur: 0.0032});
+    composer.addPass(bokeh);
+    composer.addPass(new OutputPass());
+    return {composer, bokeh};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gl, scene, camera]);
+  fx.composer.setPixelRatio(gl.getPixelRatio());
+  fx.composer.setSize(size.width, size.height);
+  (fx.bokeh.uniforms as Record<string, {value: number}>).focus.value = focus;
+  useFrame(() => fx.composer.render(), 1);
+  return null;
+};
 /** The lift shaft in plan on L-102 (drawer-local): centre and side. */
 export const SHAFT = {x: 3, z: 2, s: 2.5};
 
@@ -500,7 +526,9 @@ const Sheet: React.FC<{w: number; h: number; map: THREE.Texture; tint: THREE.Col
 };
 
 const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1: THREE.Texture; dusk?: number}> = ({t, sheets, tex, l1, dusk}) => {
-  const night = dusk !== undefined;
+  // the end (`dusk`): the finished project in the same materials and light as Part 1 (Eric's note), seen on a slow orbit
+  const end = dusk !== undefined;
+  const night = false;
   const M = mats();
   const idx = (id: string) => sheets.findIndex((s) => s.id === id);
   const first = idx(FIRST);
@@ -508,20 +536,20 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
   const used = new Set(Object.values(fixed));
   const rest = sheets.map((_, i) => i).filter((i) => !used.has(i));
   const sheetOfSlab = SLABS.map((s) => (fixed[s.floor] !== undefined ? fixed[s.floor] : rest.shift()!));
-  const ts = night ? 1 : treeScale(t);
-  const rise = night ? 0 : riseAt(t);
+  const ts = end ? 1 : treeScale(t);
+  const rise = end ? 0 : riseAt(t);
   const ringP = ov(t, 53.4, 54.0, (u) => u);
-  const counted = night ? 0 : countedAt(t);
-  const hedgeA = night ? 0 : Math.min(ov(t, 69.0, 69.6), 1 - ov(t, 74.0, 74.6));
+  const counted = end ? 0 : countedAt(t);
+  const hedgeA = end ? 0 : Math.min(ov(t, 69.0, 69.6), 1 - ov(t, 74.0, 74.6));
   const hedgeN = hedgeGrow(t);
-  const pavA = night ? 0 : Math.min(ov(t, 74.4, 74.9), 1 - ov(t, 77.3, 77.8));
+  const pavA = end ? 0 : Math.min(ov(t, 74.4, 74.9), 1 - ov(t, 77.3, 77.8));
   const shrink = pitShrink(t);
-  const pitOn = !night && t >= 77.6 && t < 87.2;
-  const paper = night ? 1 : paperAt(t);
-  const toTower = night ? 1 : towerA(t);
+  const pitOn = !end && t >= 77.6 && t < 87.2;
+  const paper = end ? 1 : paperAt(t);
+  const toTower = end ? 1 : towerA(t);
   const slide = planterSlide(t);
   const pOut = plantersOut(t);
-  const fpGlow = night ? 0 : ov(t, 18.8, 19.6) * (1 - ov(t, 21.0, 22.0));
+  const fpGlow = end ? 0 : ov(t, 18.8, 19.6) * (1 - ov(t, 21.0, 22.0));
   const ink = night ? '#c9cfdb' : PAL.ink;
   // the key light and its shadow frustum never move (a moving shadow map shimmers): one box over the whole scene
   const focus = KEY.target;
@@ -531,6 +559,7 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
     <>
       <CameraRig t={t} dusk={dusk} />
       <Look night={night} />
+      {end ? <Dof focus={cameraAt(t, dusk).pos.distanceTo(new THREE.Vector3(TX, 28, TZ))} /> : null}
       {night ? (
         <>
           <color attach="background" args={[PAL.duskSky]} />
@@ -692,11 +721,11 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
         </group>
       ) : null}
       {SEVEN.map((s, k) => {
-        const a = night ? 1 : t >= P.seven ? sevenAt(t, k) : 0;
+        const a = end ? 1 : t >= P.seven ? sevenAt(t, k) : 0;
         if (a <= 0) return null;
         return (
           <group key={k}>
-            <Ring x={s.x} z={s.z} r={s.r} colour={night ? ink : PAL.green} th={0.1} op={a} />
+            <Ring x={s.x} z={s.z} r={s.r} colour={end ? ink : PAL.green} th={0.1} op={a} />
             <Tree x={s.x} z={s.z} r={0.9} s={a} h={1.9} seed={100 + k} night={night} />
           </group>
         );
@@ -707,23 +736,23 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
         const si = sheetOfSlab[s.i];
         const isFirst = s.floor === '1';
         const a0 = isFirst ? 1 : ov(t, 16.0 + (s.i % 10) * 0.16, 17.1 + (s.i % 10) * 0.16);
-        if (!night && a0 <= 0) return null;
+        if (!end && a0 <= 0) return null;
         const yStack = S0 + s.i * 3.0;
-        const settle = night ? 1 : ov(t, 18.4 + (s.i / SLABS.length) * 0.6, 19.8 + (s.i / SLABS.length) * 0.6);
+        const settle = end ? 1 : ov(t, 18.4 + (s.i / SLABS.length) * 0.6, 19.8 + (s.i / SLABS.length) * 0.6);
         const y0 = lerp(yStack, s.y + 0.45, settle);
         const big = isFirst ? lerp(1.04, 1, ov(t, B.pull, 17.0)) : 1;
         const w0 = lerp(L1.w * big, s.w, settle);
         const from = [TX + (s.i % 2 ? 150 : -150), yStack + (s.i % 3) * 24, TZ + (s.i % 2 ? -70 : 100)];
         const d = drawerAt(t, s.floor);
-        const x = (isFirst || night ? TX : lerp(from[0], TX, smooth(a0))) + d.dx;
-        const z = isFirst || night ? TZ : lerp(from[2], TZ, smooth(a0));
-        const y = isFirst || night ? y0 + d.dy : lerp(from[1], y0, smooth(a0)) + d.dy;
+        const x = (isFirst || end ? TX : lerp(from[0], TX, smooth(a0))) + d.dx;
+        const z = isFirst || end ? TZ : lerp(from[2], TZ, smooth(a0));
+        const y = isFirst || end ? y0 + d.dy : lerp(from[1], y0, smooth(a0)) + d.dy;
         const lit = litAt(t, s.floor);
         const typical = TY.floors.includes(s.floor) && lit.k > 0;
         const map = typical ? tex[fixed['8']] : tex[si];
         const h = w0 * aspect(map);
         const onStage = d.out > 0.02;
-        const op = night ? 0 : Math.min(1, isFirst ? 1 : a0) * (onStage ? 1 : 1 - 0.75 * settle);
+        const op = Math.min(1, isFirst ? 1 : a0) * (onStage ? 1 : 1 - 0.75 * settle);
         if (op <= 0.002) return null;
         const shaftHole = s.floor === '5' && t > 35.0 && t < 39.8 && onStage;
         const tint = new THREE.Color('#ffffff').lerp(new THREE.Color(lit.colour), 0.3 * lit.k);
@@ -749,7 +778,7 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
       {/* L-102's drawer: the shaft, an open dark void with its lift car below; planter B-10 over it, then off the core */}
       {(() => {
         const d = drawerAt(t, '5');
-        if (night || d.out <= 0.02 || t < 35.0 || t > 39.8) return null;
+        if (end || d.out <= 0.02 || t < 35.0 || t > 39.8) return null;
         const hx = TX + d.dx + SHAFT.x;
         const hz = TZ + SHAFT.z;
         const y0 = Y5 + d.dy + 0.45;
@@ -805,7 +834,7 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
       {/* L-103's drawer: the escape corridor; two planters pinch it to 0.9 m, then step into niches in the wall line */}
       {(() => {
         const d = drawerAt(t, '8');
-        if (night || d.out <= 0.02 || t < 39.3 || t > 46.0) return null;
+        if (end || d.out <= 0.02 || t < 39.3 || t > 46.0) return null;
         const C = CORRIDOR;
         const wallH = 1.0;
         const segs: [number, number][] = [];
@@ -939,7 +968,7 @@ export const WorldV2: React.FC<WorldV2Props> = ({t, sheets, l1, dusk}) => {
   const urls = useMemo(() => [...sheets.map((s) => staticFile(s.png)), staticFile(l1)], [sheets, l1]);
   const tex = useTextures(urls);
   return (
-    <AbsoluteFill style={{background: dusk !== undefined ? PAL.duskSky : PAL.sky}}>
+    <AbsoluteFill style={{background: PAL.sky}}>
       {tex ? (
         <ThreeCanvas width={width} height={height} shadows gl={{antialias: true, alpha: false, powerPreference: 'high-performance'}} camera={{fov: 42, near: 0.5, far: 900, position: [0, 100, 100]}}>
           <Scene t={t} sheets={sheets} tex={tex.slice(0, sheets.length)} l1={tex[sheets.length]} dusk={dusk} />

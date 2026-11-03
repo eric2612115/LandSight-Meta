@@ -6,6 +6,9 @@
  * its holds cut (timed from its cues file); the end at dusk. Captions: one line at a time, phrase by phrase.
  */
 import cues from './try-v2-cues.json' with {type: 'json'};
+// the narration as spoken (scripts/voice-v3.py, D-93; the v2 narration is kept in voice-v2-old.json): each line's start
+// and its characters' times in film seconds
+import aligned from './voice-v2.json' with {type: 'json'};
 
 export const WPS = 155 / 60;
 
@@ -22,16 +25,17 @@ export const PART2_AT = 94.1;
  * "building Landsight … ten minutes" 11.0–14.5.
  */
 export const B_OFFSET = 0.9;
+// A is the stabilised screen shot (A-cut-stab40.mov, 7.94 s): 0–7.44 s at 1.3× under line 2, its last 0.5 s before the push
 export const LIVE = [
   {start: 0, end: 2.95, clip: 'B', from: 0.9, rate: 1},
-  {start: 2.95, end: 8.95, clip: 'A', from: 0.0, rate: 1.3},
-  {start: 8.95, end: 13.7, clip: 'B', from: 9.85, rate: 1},
-  {start: 13.7, end: 14.2, clip: 'A', from: 7.8, rate: 1},
+  {start: 2.95, end: 8.67, clip: 'A', from: 0.0, rate: 1.3},
+  {start: 8.67, end: 13.7, clip: 'B', from: 9.57, rate: 1},
+  {start: 13.7, end: 14.2, clip: 'A', from: 7.44, rate: 1},
 ];
 /** The push: the screen shot's last frame, warped so the drawn border of L-6 on the monitor (4K px) lands on the 3D sheet. */
 export const PUSH = {
   still: 14.2, warp: [13.78, B.land], fade: [14.86, B.land + 0.04],
-  quad: [[789.5, 731], [1979.5, 724.5], [1975.5, 1405.5], [797.5, 1366.5]],
+  quad: [[730, 723], [2087, 714], [2083.7, 1491.3], [739.3, 1447.3]],
   size: [3840, 2160],
 };
 
@@ -50,8 +54,8 @@ export const SEGMENTS = [
   [CAP.e14 - 0.2, CAP.e14 + 3.7],
   [CAP.select1 - 0.3, CAP.select2 + 1.7],
   [CAP.create - 0.6, CAP.create + 4.4],
-  [CAP.create + 8.3, CAP.create + 10.5],
-  [CAP.ask - 0.2, CAP.mark + 2.2],
+  [CAP.create + 7.95, CAP.closeReport - 0.01],
+  [CAP.ask - 0.2, CAP.mark + 1.6],
 ];
 export const PART2_S = SEGMENTS.reduce((a, [f, t]) => a + (t - f), 0);
 export function capToFilm(tc) {
@@ -73,6 +77,11 @@ export function filmToCap(t) {
   return SEGMENTS[SEGMENTS.length - 1][1];
 }
 export const CLOSE_AT = PART2_AT + PART2_S;
+/** Large type over the end of Part 2, one card at a time (the family of "Two weeks → ten minutes.", smaller). */
+export const BIG = [
+  {at: capToFilm(CAP.create - 0.6) + 0.25, until: capToFilm(CAP.create - 0.6) + 2.55, text: 'Change request — clouded, numbered, priced.'},
+  {at: capToFilm(CAP.create + 7.95) + 0.15, until: capToFilm(CAP.create + 7.95) + 2.35, text: 'Reply to the developer — ready to send.'},
+];
 export const END = {
   bullets: [
     {at: 0.3, text: 'Reads every sheet, bill and PDF', by: 'Muse Spark 1.3'},
@@ -80,9 +89,9 @@ export const END = {
     {at: 1.7, text: 'Checks quantities, prices, scales, legends and the local building code', by: ''},
     {at: 2.4, text: '30 planted errors: 28 found · 2 flagged · 0 missed', by: ''},
   ],
-  line: 4.3,
-  logo: 6.9,
-  hold: 3.6,
+  line: 4.6,
+  logo: 7.6,
+  hold: 3.4,
 };
 export const LOGO_AT = CLOSE_AT + END.logo;
 
@@ -120,40 +129,61 @@ export const V2 = {
    * are timed at 155 wpm from `at`. `pictureUntil` is the end of the line's picture.
    */
   voice: [
-    {n: 1, at: 1.38 - B_OFFSET, who: 'Eric', text: 'Every building gets approved on drawings like these.', spans: [[1.38, 3.6]]},
-    {n: 2, at: 4.04 - B_OFFSET, who: 'Eric', text: 'A landscape package is thirty files — and checking it by hand takes about two weeks.', spans: [[4.04, 9.6]]},
-    {n: 3, at: 10.12 - B_OFFSET, who: 'Eric', text: "I'm Eric. I built Landsight to do it in ten minutes.", spans: [[10.12, 10.6], [11.0, 14.5]]},
-    {n: 4, at: 15.2, pictureUntil: B.drawer103, text: 'A building arrives as a stack of flat drawings — and the errors hide between the floors.'},
-    {n: 5, at: B.drawer103 + 0.1, pictureUntil: B.roof, text: 'One sheet stands for four floors. The bill priced one. Landsight finds the other three.'},
-    {n: 6, at: B.roof + 0.1, pictureUntil: B.alike, text: 'On the roof: thirty centimetres of soil; the rule asks for forty.'},
-    {n: 7, at: B.alike + 0.1, pictureUntil: B.lift, text: 'Two sheets: the same drawing, different titles.'},
-    {n: 8, at: B.lift + 0.1, pictureUntil: B.corridor, text: 'A planter on top of the lift shaft — sent back.'},
-    {n: 9, at: B.corridor + 0.1, pictureUntil: B.ground, text: 'Planters squeeze the escape corridor to ninety centimetres. The code asks for one-twenty.'},
+    // the opening, spoken by Eric's clone since he no longer appears on camera (scripts/opening-v3.py); timed from
+    // voice-v2.json like the narration, its numbers a beat after the cold open's cards (5.1, 8.4, 13.0)
+    {n: 1, at: 0.331, who: 'Eric', text: 'Every building gets approved on drawings like these.'},
+    {n: 2, at: 3.78, who: 'Eric', text: 'A landscape package is thirty files, and checking it by hand takes about two weeks.'},
+    {n: 3, at: 9.62, who: 'Eric', text: "I'm Eric. I built Landsight to do it in ten minutes."},
+    {n: 4, at: 15.2, pictureUntil: B.drawer103, text: 'A building shows up as a stack of flat drawings. The mistakes hide between the floors.'},
+    {n: 5, at: B.drawer103 + 0.1, pictureUntil: B.roof, text: 'One sheet covers four floors. The bill priced one. Landsight finds the other three.'},
+    {n: 6, at: B.roof + 0.1, pictureUntil: B.alike, text: 'The roof has thirty centimetres of soil. The rule says forty.'},
+    {n: 7, at: B.alike + 0.1, pictureUntil: B.lift, text: 'Two sheets? Same drawing, different titles.'},
+    {n: 8, at: B.lift + 0.1, pictureUntil: B.corridor, text: 'A planter on the lift shaft? That goes back.'},
+    {n: 9, at: B.corridor + 0.1, pictureUntil: B.ground, text: 'Here, planters squeeze the escape corridor down to ninety centimetres. The code wants one-twenty.'},
     {n: 10, at: B.ground + 0.1, pictureUntil: B.tree, text: 'On the ground, a row of trees.'},
-    {n: 11, at: B.tree + 0.1, pictureUntil: B.confirm, text: 'You see a tree. A computer sees twelve loose lines.'},
-    {n: 12, at: B.confirm + 0.1, pictureUntil: B.raster, text: 'Muse Spark reads one tree — and asks you before it counts.'},
-    {n: 13, at: B.raster + 0.1, pictureUntil: B.bills, text: 'Only a coloured picture? SAM 3.1 measures every patch: lawn, a hundred and ninety-five square metres; the drawings say two hundred.'},
-    {n: 14, at: B.bills + 0.1, pictureUntil: B.hedge, text: 'The bill: twelve trees; eight are drawn.'},
-    {n: 15, at: B.hedge + 0.1, pictureUntil: B.pavers, text: 'A hedge note means a hundred and eighty-two plants; the bill prices metres.'},
-    {n: 16, at: B.pavers + 0.1, pictureUntil: B.pit, text: 'Pavers, ten thousand over your own price list.'},
-    {n: 17, at: B.pit + 0.2, pictureUntil: B.findings, text: 'On the slab, the pits are too small — big trees count as small, and the greenery falls short. Seven more trees fix it.'},
-    {n: 18, at: B.findings + 0.1, pictureUntil: B.type, text: 'A developer told us: nonsense goes straight back; the rest, flag one by one.'},
-    {n: 19, at: PART2_AT + 0.15, pictureUntil: capToFilm(CAP.continue), text: 'Drop the folder as it came. Every file gets a verdict; the bill that governs is named.'},
-    {n: 20, at: capToFilm(CAP.continue) + 0.3, pictureUntil: capToFilm(CAP.analyze), text: 'It reads the project off the title block — with your price list and your local rules. Analyze.'},
-    {n: 21, at: capToFilm(CAP.analyze) + 0.2, pictureUntil: capToFilm(CAP.review), text: 'Muse Spark reads every sheet, SAM 3.1 measures the colour plans, geometry counts — the reading takes about two minutes.'},
-    {n: 22, at: capToFilm(CAP.review) + 0.2, pictureUntil: capToFilm(CAP.e14 - 0.2), text: "On the right, the developer's way: send back, fix before pricing, the code. Every item opens on the drawing — and nothing counts until you confirm."},
-    {n: 23, at: capToFilm(CAP.e14) + 0.1, pictureUntil: capToFilm(CAP.select1 - 0.3), text: 'Short on greenery? It shows the fixes that pass.'},
-    {n: 24, at: capToFilm(CAP.select1) + 0.1, pictureUntil: capToFilm(CAP.ask - 0.2), text: 'Pick what goes back — it writes the change request, clouded and priced on the drawing.'},
-    {n: 25, at: capToFilm(CAP.ask) + 0.1, pictureUntil: CLOSE_AT, text: "Point at anything and say what you think. It answers from the package — even when you're wrong."},
-    {n: 26, at: CLOSE_AT + 0.5, pictureUntil: CLOSE_AT + END.line, text: 'Thirty planted errors: twenty-eight found, two flagged, none missed.'},
-    {n: 27, at: CLOSE_AT + END.line, pictureUntil: LOGO_AT + END.hold, text: 'Every number, traced to the drawing.'},
+    {n: 11, at: B.tree + 0.1, pictureUntil: B.confirm, text: 'You see a tree. A computer just sees twelve loose lines.'},
+    {n: 12, at: B.confirm + 0.1, pictureUntil: B.raster, text: 'Muse Spark sees one tree, then asks you before it counts.'},
+    {n: 13, at: B.raster + 0.1, pictureUntil: B.bills, text: "A coloured picture? SAM 3.1 measures every patch. The lawn's a hundred and ninety-five square metres. The drawings say two hundred."},
+    {n: 14, at: B.bills + 0.1, pictureUntil: B.hedge, text: 'The bill says twelve. Eight are drawn.'},
+    {n: 15, at: B.hedge + 0.1, pictureUntil: B.pavers, text: "One hedge label means a hundred and eighty-two plants. The bill's in metres."},
+    {n: 16, at: B.pavers + 0.1, pictureUntil: B.pit, text: 'The pavers? Ten thousand over your price list.'},
+    {n: 17, at: B.pit + 0.2, pictureUntil: B.findings, text: 'On the slab, the pits are too small. So big trees count as small, and the greenery falls short. Seven more trees fix it.'},
+    {n: 18, at: B.findings - 0.3, pictureUntil: B.type, text: 'A developer told us: send the nonsense straight back, and flag the rest one by one.'},
+    {n: 19, at: PART2_AT + 0.15, pictureUntil: capToFilm(CAP.continue), text: 'Drop in the folder, as is. Every file gets a verdict, and it names the bill that counts.'},
+    {n: 20, at: capToFilm(CAP.continue) + 0.3, pictureUntil: capToFilm(CAP.analyze), text: 'It reads the project straight off the title block. Your price list, your local rules. Hit analyze.'},
+    {n: 21, at: capToFilm(CAP.analyze) + 0.2, pictureUntil: capToFilm(CAP.review), text: 'Muse Spark reads every sheet. SAM 3.1 measures the colour plans. Geometry counts. All in about two minutes.'},
+    {n: 22, at: capToFilm(CAP.review) + 0.2, pictureUntil: capToFilm(CAP.e14 - 0.2), text: "On the right, it's sorted the way developers work: send back, fix before pricing, the code. Every item opens on the drawing, and nothing counts until you confirm."},
+    {n: 23, at: capToFilm(CAP.e14) + 0.1, pictureUntil: capToFilm(CAP.select1 - 0.3), text: 'Short on greenery? It shows you the fixes that would pass.'},
+    {n: 24, at: capToFilm(CAP.select1) + 0.1, pictureUntil: capToFilm(CAP.ask - 0.2), text: 'Pick what goes back. It writes the change request, clouded and priced right on the drawing, and drafts your reply to the developer, ready to send.'},
+    {n: 25, at: capToFilm(CAP.ask) + 0.1, pictureUntil: CLOSE_AT, text: "Point at anything and ask. It answers from the package, and it'll tell you when you're wrong."},
+    {n: 26, at: CLOSE_AT + 0.2, pictureUntil: CLOSE_AT + END.line, text: 'We planted thirty errors. It found twenty-eight, flagged two, missed none.'},
+    {n: 27, at: CLOSE_AT + 5.45, pictureUntil: LOGO_AT + END.hold, text: 'Every number, traced to the drawing.'},
   ],
 };
 
 export const wordCount = (text) => text.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length;
 export const MAX_CHARS = 42;
 
-/** Splits a line into one-line phrases (≤ MAX_CHARS), breaking at its pauses, then at the most balanced word gap. */
+const NUMBER_WORD = /^(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million)(-(one|two|three|four|five|six|seven|eight|nine|twenty))?$|^\d[\d.,]*$/i;
+/** For each word of a phrase, the number it belongs to ("a hundred and ninety-five" is one number), or -1. */
+export function numberWords(words) {
+  const bare = words.map((w) => w.replace(/[,;:.?!]+$/, '').toLowerCase());
+  const isNum = (i) => i >= 0 && i < bare.length && NUMBER_WORD.test(bare[i]);
+  const ids = bare.map(() => -1);
+  let id = -1;
+  for (let i = 0; i < bare.length; i++) {
+    const glue = (bare[i] === 'a' && /^(hundred|thousand|million)$/.test(bare[i + 1] ?? '')) ||
+      (bare[i] === 'and' && /^(hundred|thousand|million)$/.test(bare[i - 1] ?? '') && isNum(i + 1));
+    if (!isNum(i) && !glue) continue;
+    ids[i] = i > 0 && ids[i - 1] >= 0 && !/[,;:.?!]$/.test(words[i - 1]) ? ids[i - 1] : ++id;
+  }
+  return ids;
+}
+
+/**
+ * Splits a line into one-line phrases (≤ MAX_CHARS), breaking at its pauses, then at the most balanced word gap; never
+ * inside a number, nor between a number and the word it counts ("The lawn's / a hundred and ninety-five square metres.").
+ */
 export function phrases(text) {
   const clauses = [];
   let cur = '';
@@ -169,11 +199,13 @@ export function phrases(text) {
   const split = (c) => {
     if (c.length <= MAX_CHARS) return [c];
     const words = c.split(' ');
+    const num = numberWords(words);
     let best = null;
     for (let i = 1; i < words.length; i++) {
       const a = words.slice(0, i).join(' ');
       const b = words.slice(i).join(' ');
-      const score = Math.max(a.length, b.length) + (/^(and|or|the|a|to|of|in|on|for)$/i.test(words[i - 1]) ? 6 : 0);
+      const inNumber = num[i - 1] >= 0 && (num[i] === num[i - 1] || !/[,;:.?!]$/.test(words[i - 1]));
+      const score = Math.max(a.length, b.length) + (/^(and|or|the|a|to|of|in|on|for)$/i.test(words[i - 1]) ? 6 : 0) + (inNumber ? 100 : 0);
       if (!best || score < best.score) best = {a, b, score};
     }
     return [...split(best.a), ...split(best.b)];
@@ -202,6 +234,17 @@ export function captions() {
   const chunks = [];
   for (const v of V2.voice) {
     const ps = phrases(v.text);
+    if (v.fixed) {
+      for (const [text, start, end] of v.fixed) chunks.push({n: v.n, text, start, end});
+      continue;
+    }
+    if (v.cuts) {
+      // Eric's phrases at the pauses heard in his take (B-cut seconds where each phrase after the first begins)
+      const starts = [v.spans[0][0], ...v.cuts].map((x) => x - B_OFFSET);
+      const last = v.spans[v.spans.length - 1][1] - B_OFFSET;
+      ps.forEach((p, i) => chunks.push({n: v.n, text: p, start: starts[i], end: starts[i + 1] ?? last}));
+      continue;
+    }
     if (v.spans) {
       // Eric: spread the phrases over his spoken spans, by their share of the words
       const spans = v.spans.map(([a, b]) => [a - B_OFFSET, b - B_OFFSET]);
@@ -227,6 +270,22 @@ export function captions() {
         chunks.push({n: v.n, text: p, start: s, end: e});
       });
       // after "I'm Eric." the remaining phrases share the remaining span
+      continue;
+    }
+    const al = aligned[String(v.n)];
+    if (al && al.text === v.text) {
+      // timed to the words as spoken: a phrase shows from its first letter to its last
+      let from = 0;
+      for (const p of ps) {
+        const i = v.text.indexOf(p, from);
+        const j = i + p.length - 1;
+        from = j + 1;
+        let a = i;
+        while (a < j && !/[A-Za-z0-9]/.test(v.text[a])) a++;
+        let b = j;
+        while (b > a && !/[A-Za-z0-9]/.test(v.text[b])) b--;
+        chunks.push({n: v.n, text: p, start: al.st[a], end: al.en[b] + 0.12});
+      }
       continue;
     }
     let t = v.at;

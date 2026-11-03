@@ -53,5 +53,6 @@ copy(cap, join(V2, 'try.mp4'));
 proxy(cap, join(V2, 'try-1080.mp4'), ['-vf', 'scale=1920:1080:flags=lanczos']);
 writeFileSync(join(HERE, 'src', 'scenes', 'try-v2-cues.json'), JSON.stringify(JSON.parse(readFileSync(join(HERE, 'captures', 'try-cues.json'), 'utf8')), null, 1) + '\n');
 copy(join(REPO, 'frontend', 'public', 'brand', 'lockup-dark.svg'), join(V2, 'logo-lockup-dark.svg'));
+copy(join(REPO, 'frontend', 'public', 'brand', 'lockup-light.svg'), join(V2, 'logo-lockup-light.svg')); // the v3 restyle ends on white
 if (!existsSync(join(V2, 'l6-border.json'))) console.warn('missing public/v2/l6-border.json: run uv run python demo/film/scripts/stage-v2-sheets.py');
 else copyFileSync(join(V2, 'l6-border.json'), join(HERE, 'src', 'scenes', 'l6-border.json'));

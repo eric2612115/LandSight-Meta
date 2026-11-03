@@ -1,6 +1,6 @@
 import {AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, FONT} from '../theme';
-import {B, CAP, CLOSE_AT, END, LIVE, LOGO_AT, PART2_AT, PUSH, SEGMENTS, V2, B_OFFSET, captions} from './film-v2-cues.js';
+import {B, BIG, CAP, CLOSE_AT, END, LIVE, LOGO_AT, PART2_AT, PUSH, SEGMENTS, V2, captions} from './film-v2-cues.js';
 import {FIRST, FOOT, HEDGE, L1, PAL, PT, ROW, SEVEN, SHAFT, T8, WorldV2, corridorAt, countedAt, drawerAt, firstBorderAt, hedgeGrow, personAt, personWorld, pieceEnds, pieceHeight, pitShrink, plantersOut, planterSlide, plateAt, projectAt, riseAt, sevenAt} from './WorldV2';
 import type {WorldSheet} from './WorldV2';
 import t08 from './t08.json';
@@ -13,9 +13,10 @@ import l6 from './l6-border.json';
  * corrected so the drawn border of L-6 lands exactly on the 3D sheet), holds 0.3 s and pulls back into the world
  * (WorldV2). Every card is one style (ink panel, a status dot, Inter); a fix is worded as the fix Landsight asks for.
  * Captions are one line at a time, phrase by phrase. Part 2 is the /try capture full-bleed, its holds cut. The end at dusk.
- * `proxy` reads the 1080p proxies (the review cut); `timecode` stamps the frame for notes.
+ * `proxy` reads the 1080p proxies (the review cut); `timecode` stamps the frame for notes; `sound` plays the mix
+ * (public/v2/audio/mix.wav from scripts/audio-v2.py: Eric's voice, the narration, the music, the effects).
  */
-export type FilmV2Props = {sheets?: WorldSheet[]; proxy?: boolean; timecode?: boolean; voice?: boolean};
+export type FilmV2Props = {sheets?: WorldSheet[]; proxy?: boolean; timecode?: boolean; sound?: boolean};
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const lerp = (a: number, b: number, u: number) => a + (b - a) * u;
@@ -375,14 +376,16 @@ const Part2: React.FC<{fps: number; proxy: boolean}> = ({fps, proxy}) => {
 const Caption: React.FC<{t: number}> = ({t}) => {
   const c = CAPS.find((x) => t >= x.start && t < x.end);
   if (!c) return null;
+  const dip = 1 - ov(t, LOGO_AT - 0.35, LOGO_AT - 0.05);
+  if (dip <= 0.002) return null;
   return (
-    <div style={{position: 'absolute', left: 0, right: 0, bottom: 42, textAlign: 'center'}}>
+    <div style={{position: 'absolute', left: 0, right: 0, bottom: 42, textAlign: 'center', opacity: dip}}>
       <span style={{display: 'inline-block', fontFamily: FONT.sans, fontSize: 44, fontWeight: 500, lineHeight: 1.2, letterSpacing: -0.3, color: '#fff', background: 'rgba(14,16,20,0.74)', padding: '9px 24px 11px', borderRadius: 12, whiteSpace: 'nowrap', ...NUM}}>{c.text}</span>
     </div>
   );
 };
 
-export const FilmV2: React.FC<FilmV2Props> = ({sheets, proxy = false, timecode = false, voice = true}) => {
+export const FilmV2: React.FC<FilmV2Props> = ({sheets, proxy = false, timecode = false, sound = true}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const t = frame / fps;
@@ -396,7 +399,7 @@ export const FilmV2: React.FC<FilmV2Props> = ({sheets, proxy = false, timecode =
 
       {/* the opening: Eric's footage, his voice; the push into his monitor */}
       <Opening t={t} fps={fps} proxy={proxy} />
-      {voice ? <Audio src={staticFile('v2/audio/eric.wav')} startFrom={Math.round(B_OFFSET * fps)} /> : null}
+      {sound ? <Audio src={staticFile('v2/audio/mix.wav')} /> : null}
 
       {/* the stack: the first sheet, then the footprint the tower lands on */}
       {t >= 15.4 && t < 17.2 ? (() => {
@@ -575,23 +578,35 @@ export const FilmV2: React.FC<FilmV2Props> = ({sheets, proxy = false, timecode =
       {/* Part 2: the capture, its holds cut, full-bleed */}
       {t >= PART2_AT - 0.1 && t < CLOSE_AT + 0.1 ? <Part2 fps={fps} proxy={proxy} /> : null}
 
-      {/* the end: at dusk, the four bullets, the line, the logo */}
+      {/* large type over the end of Part 2, one card at a time */}
+      {BIG.map((b) => {
+        const a = win(t, b.at, b.until, 0.3);
+        return a > 0.002 ? (
+          <AbsoluteFill key={b.text} style={{opacity: a, background: 'rgba(8,9,12,0.66)', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{fontFamily: FONT.sans, fontSize: 76, fontWeight: 700, letterSpacing: -2, color: '#fff', textAlign: 'center', transform: `translateY(${(1 - a) * 8}px)`}}>{b.text}</div>
+          </AbsoluteFill>
+        ) : null;
+      })}
+
+      {/* the end: the finished project, the four bullets, the line, the logo */}
       {t >= CLOSE_AT ? (() => {
           const u = t - CLOSE_AT;
-          const veil = ov(u, END.logo - 0.2, END.logo + 0.4);
+          // the end frame (and its caption) dips out first, then the logo comes in: never text over text
+          const veil = ov(u, END.logo - 0.35, END.logo - 0.05);
+          const logoIn = ov(u, END.logo, END.logo + 0.4);
           return (
             <>
               <AbsoluteFill style={{background: '#000', opacity: 1 - ov(u, 0, 0.45)}} />
-              <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(12,14,20,0.84) 0%, rgba(12,14,20,0.58) 55%, rgba(12,14,20,0) 82%)', opacity: 1 - veil}} />
-              <div style={{position: 'absolute', left: 110, top: 200, opacity: 1 - veil, fontFamily: FONT.sans, color: '#fff', ...NUM}}>
+              <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(247,245,240,0.95) 0%, rgba(247,245,240,0.86) 46%, rgba(247,245,240,0) 80%)', opacity: 1 - veil}} />
+              <div style={{position: 'absolute', left: 110, top: 200, opacity: 1 - veil, fontFamily: FONT.sans, color: PAL.ink, ...NUM}}>
                 {END.bullets.map((b, k) => {
                   const a = ov(u, b.at, b.at + 0.35);
                   return (
                     <div key={k} style={{display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 30, opacity: a, transform: `translateX(${(1 - a) * -18}px)`}}>
-                      <div style={{width: 14, height: 14, borderRadius: 7, background: k === 3 ? C.greenLt : C.cobaltLt, flex: 'none', transform: 'translateY(-8px)'}} />
+                      <div style={{width: 14, height: 14, borderRadius: 7, background: k === 3 ? C.green : C.cobalt, flex: 'none', transform: 'translateY(-8px)'}} />
                       <div style={{fontSize: 46, fontWeight: 600, letterSpacing: -0.6}}>
                         {b.text}
-                        {b.by ? <span style={{fontWeight: 400, opacity: 0.66}}>{` — ${b.by}`}</span> : null}
+                        {b.by ? <span style={{fontWeight: 400, opacity: 0.6}}>{` — ${b.by}`}</span> : null}
                       </div>
                     </div>
                   );
@@ -599,9 +614,9 @@ export const FilmV2: React.FC<FilmV2Props> = ({sheets, proxy = false, timecode =
                 <div style={{marginTop: 44, fontSize: 76, fontWeight: 700, letterSpacing: -2, opacity: ov(u, END.line, END.line + 0.4)}}>Every number, traced to the drawing.</div>
               </div>
               <AbsoluteFill style={{background: '#0b0c0f', opacity: veil, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                <Img src={staticFile('v2/logo-lockup-dark.svg')} style={{height: 160, transform: `scale(${lerp(0.95, 1, veil)})`}} />
-                <div style={{fontFamily: FONT.sans, fontSize: 36, fontWeight: 500, marginTop: 48, color: '#fff', opacity: 0.88}}>github.com/eric2612115/landsight</div>
-                <div style={{fontFamily: FONT.sans, fontSize: 30, marginTop: 14, color: '#fff', opacity: 0.6}}>Built with Muse Spark 1.3 and SAM 3.1</div>
+                <Img src={staticFile('v2/logo-lockup-dark.svg')} style={{height: 160, opacity: logoIn, transform: `scale(${lerp(0.95, 1, logoIn)})`}} />
+                <div style={{fontFamily: FONT.sans, fontSize: 36, fontWeight: 500, marginTop: 48, color: '#fff', opacity: 0.88 * logoIn}}>github.com/eric2612115/landsight</div>
+                <div style={{fontFamily: FONT.sans, fontSize: 30, marginTop: 14, color: '#fff', opacity: 0.6 * logoIn}}>Built with Muse Spark 1.3 and SAM 3.1</div>
               </AbsoluteFill>
             </>
           );
