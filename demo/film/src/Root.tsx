@@ -19,6 +19,9 @@ import {ANIM} from './scenes/animatic-v7-cues.js';
 import {AnimaticV8} from './scenes/AnimaticV8';
 import type {AnimaticV8Data, AnimaticV8Props} from './scenes/AnimaticV8';
 import {V8} from './scenes/animatic-v8-cues.js';
+import {AnimaticV9} from './scenes/AnimaticV9';
+import type {AnimaticV9Props} from './scenes/AnimaticV9';
+import {V9} from './scenes/animatic-v9-cues.js';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -142,6 +145,16 @@ export const Root: React.FC = () => (
       const data: AnimaticV8Data = {sheets: story.sheets.map((s) => ({id: s.id, png: s.png}))};
       return {props: {...props, data}};
     }}
+  />
+  {/* Film v9 animatic (demo/SCRIPT-V9.md): the sheet textures in public/v9/sheets (the greenfield renders and the tower's L-101…L-501), the capture in public/v9; render with --gl=angle */}
+  <Composition
+    id="AnimaticV9"
+    component={AnimaticV9}
+    durationInFrames={V9.duration * V9.fps}
+    fps={V9.fps}
+    width={V9.width}
+    height={V9.height}
+    defaultProps={{data: {sheets: ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'].map((id) => ({id, png: `v9/sheets/${id}.png`}))}} satisfies AnimaticV9Props}
   />
   </>
 );

@@ -1,0 +1,416 @@
+{
+ "url": "http://localhost:5195/try?director=1&sample=greenfield&scale=1&wait=1&mute=1&source=live",
+ "fps": 30,
+ "dpr": 1,
+ "duration_s": 88,
+ "director": {
+  "done": false,
+  "t": 87900
+ },
+ "page_errors": [
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ],
+ "cues": [
+  {
+   "t": 2,
+   "name": "click"
+  },
+  {
+   "t": 2,
+   "name": "whoosh"
+  },
+  {
+   "t": 2.24,
+   "name": "stamp"
+  },
+  {
+   "t": 2.31,
+   "name": "stamp"
+  },
+  {
+   "t": 2.38,
+   "name": "stamp"
+  },
+  {
+   "t": 2.45,
+   "name": "stamp"
+  },
+  {
+   "t": 2.52,
+   "name": "stamp"
+  },
+  {
+   "t": 2.59,
+   "name": "stamp"
+  },
+  {
+   "t": 2.66,
+   "name": "stamp"
+  },
+  {
+   "t": 2.73,
+   "name": "stamp"
+  },
+  {
+   "t": 2.8,
+   "name": "stamp"
+  },
+  {
+   "t": 2.87,
+   "name": "stamp"
+  },
+  {
+   "t": 2.94,
+   "name": "stamp"
+  },
+  {
+   "t": 3.01,
+   "name": "stamp"
+  },
+  {
+   "t": 3.08,
+   "name": "stamp"
+  },
+  {
+   "t": 3.15,
+   "name": "stamp"
+  },
+  {
+   "t": 3.22,
+   "name": "stamp"
+  },
+  {
+   "t": 3.29,
+   "name": "stamp"
+  },
+  {
+   "t": 3.36,
+   "name": "stamp"
+  },
+  {
+   "t": 3.43,
+   "name": "stamp"
+  },
+  {
+   "t": 3.5,
+   "name": "stamp"
+  },
+  {
+   "t": 3.57,
+   "name": "stamp"
+  },
+  {
+   "t": 3.64,
+   "name": "stamp"
+  },
+  {
+   "t": 3.71,
+   "name": "stamp"
+  },
+  {
+   "t": 3.78,
+   "name": "stamp"
+  },
+  {
+   "t": 3.85,
+   "name": "stamp"
+  },
+  {
+   "t": 3.92,
+   "name": "stamp"
+  },
+  {
+   "t": 3.99,
+   "name": "stamp"
+  },
+  {
+   "t": 4.06,
+   "name": "stamp"
+  },
+  {
+   "t": 4.13,
+   "name": "stamp"
+  },
+  {
+   "t": 4.2,
+   "name": "stamp"
+  },
+  {
+   "t": 4.27,
+   "name": "stamp"
+  },
+  {
+   "t": 9.257,
+   "name": "click"
+  },
+  {
+   "t": 9.367,
+   "name": "whoosh"
+  },
+  {
+   "t": 16.957,
+   "name": "click"
+  },
+  {
+   "t": 17.067,
+   "name": "whoosh"
+  },
+  {
+   "t": 24.957,
+   "name": "stamp"
+  },
+  {
+   "t": 26.823,
+   "name": "click"
+  },
+  {
+   "t": 26.933,
+   "name": "whoosh"
+  },
+  {
+   "t": 30.89,
+   "name": "click"
+  },
+  {
+   "t": 35.523,
+   "name": "click"
+  },
+  {
+   "t": 38.123,
+   "name": "click"
+  },
+  {
+   "t": 43.9,
+   "name": "click"
+  },
+  {
+   "t": 44.01,
+   "name": "stamp"
+  },
+  {
+   "t": 47.357,
+   "name": "click"
+  },
+  {
+   "t": 53.057,
+   "name": "click"
+  },
+  {
+   "t": 54.623,
+   "name": "click"
+  },
+  {
+   "t": 59.257,
+   "name": "click"
+  },
+  {
+   "t": 59.367,
+   "name": "whoosh"
+  },
+  {
+   "t": 71.157,
+   "name": "click"
+  },
+  {
+   "t": 71.957,
+   "name": "click"
+  },
+  {
+   "t": 73.3,
+   "name": "click"
+  },
+  {
+   "t": 74.057,
+   "name": "click"
+  },
+  {
+   "t": 74.167,
+   "name": "type"
+  },
+  {
+   "t": 74.222,
+   "name": "type"
+  },
+  {
+   "t": 74.278,
+   "name": "type"
+  },
+  {
+   "t": 74.333,
+   "name": "type"
+  },
+  {
+   "t": 74.444,
+   "name": "type"
+  },
+  {
+   "t": 74.5,
+   "name": "type"
+  },
+  {
+   "t": 74.556,
+   "name": "type"
+  },
+  {
+   "t": 74.611,
+   "name": "type"
+  },
+  {
+   "t": 74.722,
+   "name": "type"
+  },
+  {
+   "t": 74.778,
+   "name": "type"
+  },
+  {
+   "t": 74.889,
+   "name": "type"
+  },
+  {
+   "t": 74.944,
+   "name": "type"
+  },
+  {
+   "t": 75,
+   "name": "type"
+  },
+  {
+   "t": 75.056,
+   "name": "type"
+  },
+  {
+   "t": 75.111,
+   "name": "type"
+  },
+  {
+   "t": 75.167,
+   "name": "type"
+  },
+  {
+   "t": 75.222,
+   "name": "type"
+  },
+  {
+   "t": 75.333,
+   "name": "type"
+  },
+  {
+   "t": 75.389,
+   "name": "type"
+  },
+  {
+   "t": 75.444,
+   "name": "type"
+  },
+  {
+   "t": 75.556,
+   "name": "type"
+  },
+  {
+   "t": 75.611,
+   "name": "type"
+  },
+  {
+   "t": 75.667,
+   "name": "type"
+  },
+  {
+   "t": 75.722,
+   "name": "type"
+  },
+  {
+   "t": 75.778,
+   "name": "type"
+  },
+  {
+   "t": 75.889,
+   "name": "type"
+  },
+  {
+   "t": 75.944,
+   "name": "type"
+  },
+  {
+   "t": 76,
+   "name": "type"
+  },
+  {
+   "t": 76.056,
+   "name": "type"
+  },
+  {
+   "t": 76.167,
+   "name": "type"
+  },
+  {
+   "t": 76.222,
+   "name": "type"
+  },
+  {
+   "t": 76.333,
+   "name": "type"
+  },
+  {
+   "t": 76.389,
+   "name": "type"
+  },
+  {
+   "t": 76.444,
+   "name": "type"
+  },
+  {
+   "t": 76.556,
+   "name": "type"
+  },
+  {
+   "t": 76.611,
+   "name": "type"
+  },
+  {
+   "t": 76.667,
+   "name": "type"
+  },
+  {
+   "t": 76.722,
+   "name": "type"
+  },
+  {
+   "t": 76.778,
+   "name": "type"
+  },
+  {
+   "t": 76.833,
+   "name": "type"
+  },
+  {
+   "t": 76.889,
+   "name": "type"
+  },
+  {
+   "t": 76.944,
+   "name": "type"
+  },
+  {
+   "t": 77,
+   "name": "click"
+  },
+  {
+   "t": 80.99,
+   "name": "click"
+  },
+  {
+   "t": 81.1,
+   "name": "stamp"
+  }
+ ]
+}
