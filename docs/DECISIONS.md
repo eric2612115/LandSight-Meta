@@ -1000,3 +1000,139 @@ quick review's total includes the two under-billed rows (camphor rate, azaleas) 
 Statement, which keeps its split (Queried $17,788 · Under-billed $1,460). The tower's ten planted errors get plain
 titles (EN, zh-TW) in the sample's table style, pinned to the tower's review by tests/test_tower.py. The `serve`
 banner points at the URL Vite prints instead of a fixed port.
+
+## D-91 The film's look borrows the teardown skill's rules, not the skill — Proposed (2026-11-03 23:10)
+
+Eric pointed at two light-studio references (a product film with an exploded model, and a 60 fps robot film made
+with the MIT "teardown" Claude skill: three.js parts built from code, one timeline driving the model, the panels
+and the sound, captured frame by frame). Our pipeline already works the same way (Remotion + three.js, frame-exact
+capture, 60 fps master), so the skill is not installed: installing runs third-party code, its procedural score
+conflicts with D-83 (sound only through ElevenLabs), and a new pipeline thirty-five hours before the deadline is
+the wrong risk. What is borrowed is its art direction, which is where our white style frames fell short: ink edges
+on near-white parts, matte white with a darker ground, visible ambient occlusion and contact shadow, one accent on
+the part being examined, labels the viewer must read at 34 px or more on a 1080 canvas, short leader lines, its
+easing curves, and its beat-sheet review loop. A sparse "review console" variant is mocked on two beats for Eric to
+compare. Safety: the current dark cut renders at 1080p60 first as the submittable fallback; nothing in V3 renders
+as a master until Eric picks the look. Trade-off: agent hours spent on a look Eric may reject, against a film whose
+3D frames otherwise read as washed out next to the references he keeps sending.
+
+## D-92 A full redesign with the teardown skill itself, after a complete backup — Decided by Eric (2026-11-03 23:25)
+
+Eric: secure a complete, submittable film first, in case the token budget runs out; then redesign the whole film
+with the teardown skill to compare. Supersedes D-91's "not installed". The backup is FilmV2 at 1080p60 with the
+opening caption matched to Eric's own words and the end dipping to dark before the logo; the V3 restyle stops where
+it is and stays as a reference. The skill was cloned (not installed through the skills CLI) and read before running:
+its code calls only the local ffmpeg, ffprobe and Python, makes no network request, and deletes only its own
+temporary outputs; its dependencies are pinned (three, playwright, esbuild, two font packages). It runs on the local
+Playwright Chromium with the real GPU. The new composition (FilmV4) replaces Part 1's 3D with a teardown-style
+simulator of the sample package (the tower on the site, operator moves following the narration, a sparse console in
+the product's blue) and keeps the opening footage, Part 2's real capture, the captions and the ElevenLabs mix (D-83:
+the skill's procedural score is not used). Trade-off: a second full build competes for the remaining budget; the
+backup makes that a risk to the upgrade, not to the submission.
+
+## D-93 The narration is rewritten for speech and re-voiced, without fillers — Decided by Eric (2026-11-03 23:50)
+
+Eric found the narration and captions too "AI". The causes: lines written for the eye (nine em-dash pivots, six
+semicolons, headline fragments such as "On the roof: …"), pauses flattened to a uniform 0.2 s to fit the picture,
+every line generated on its own, and the cut from Eric's real voice to a very even clone. Fillers ("um", "ah") were
+rejected: on a cloned voice they sound staged, each costs half a second in a cut timed to picture, and subtitles
+drop them anyway. Instead (demo/film/narration-v3.json): the same 24 lines in spoken English (contractions, short
+sentences, a few questions, no em-dashes or semicolons), the same figures and the same start times, re-voiced with
+the clone at lower stability and some style, each line generated with its neighbours as context, and pauses kept
+where the meaning breaks. Trade-off: a new voice pass, mix and backup render, against a film the owner hears as
+written by a machine.
+
+Addendum to D-93 (2026-11-04 00:50). The re-voice landed with captions within 0.13 s of the speech (median
++0.02 s) at −14.0 LUFS. Trade-offs taken: two filler words dropped to fit ("just" in line 5, "Just" in line 13);
+lines 7 and 21 sit at the 1.05 tempo cap, 0.16 s and 0.12 s before the next line (line 7 is shortened to "Two
+sheets? …" to win back a pause; line 21 keeps its wording); "hedge note" was heard as "hedge node" in every take, so
+line 15 says "hedge label"; numbers are never split across two captions. eleven_v4 ignores style and speaker boost,
+so the change in delivery comes from the lower stability, the neighbouring-line context and the restored pauses.
+The old-voice backup is kept beside the new one.
+
+## D-94 FilmV4, the teardown-style cut, and where it departs from the approved cut — Proposed (2026-11-04 03:00)
+
+FilmV4 (src/scenes/FilmV4.tsx; simulator in demo/film/teardown-v4/, credited and with LICENSE-teardown because the
+ink shader is adapted from the kit's Strandbeest example) keeps the opening footage and push, Part 2's real
+capture, the captions and the re-voiced mix, and replaces Part 1 and the end with a review-console simulator of the
+sample package: a matte white study model with ink edges, one blue accent, a findings card, the four check groups,
+an operator cursor that presses the chip it uses, and no runtime counter. Beats come from line start times only, so
+the re-voice cannot knock them out of sync; dimensions come from landsight/synth and are checked against the
+approved cards. Departures, all illustrative: the findings board follows the product's four groups, so T08 (two
+sheets alike) moves from "Send back" to "Ask the architect", and "A tree stands in the fire lane" (E09) is added
+there; storey heights (4.5 m podium, 3.4 m tower) and the positions of the seven new trees are the approved cut's,
+since the package draws plans only; Part 2 sits at 94% under the console's top bar; the upper floors stay lifted out
+of frame between the corridor and the colour plan so the camera never flies through the tower. Trade-off: a more
+consistent, instrument-like look and a board that matches the product, against busier side cards than the
+approved cut.
+
+## D-95 FilmV4 is dropped; FilmV5 is the approved cut with real materials on a white or black stage — Decided by Eric (2026-11-04 04:00)
+
+Eric's review of FilmV4: the bleached all-white building on a greige stage reads as neither white nor black and
+ignores the brand colour; the top info bar and progress bar mean nothing; several beats are unclear (the 0:18
+transition, the explode at 0:25–0:28, flicker and unreadable objects at 0:30, the sheet overlay at 0:35, the tree at
+0:53 that never tilts to show why a computer cannot read it, a glaring list at 1:32); the end has no texture; overall
+worse than the backup. FilmV5 starts from FilmV2, whose beats, camera, captions and mix he approved, and changes only
+the look: a decisive stage (white or near-black, both rendered for him to choose), real PBR materials from CC0 texture
+sets (glass, brushed aluminium, concrete, timber, soil, stone, bark, foliage), environment light with soft shadows and
+ambient occlusion, and accents in the brand's cobalt (#2F5FE8 on white, #4D7CFF on dark) with ink #1D2026. No top
+bar, no progress bar, no timecode. The FilmV2 render stays the submittable backup.
+
+## D-96 One hybrid cut: V2's opening and story beats, V4's explode, lift shaft and corridor, day into night — Decided by Eric (2026-11-04 03:00)
+
+Eric, on the four style series: the point was never a palette over V2. Integrate the camera work of both cuts and
+take the best presentation of each beat: V2's opening (the screen into the drawing, the sheets stacking into the
+tower) and its ground, tree, measurement, bill and findings beats; V4's exploded floors, lift-shaft section and
+escape corridor. Part 1 is lit by day, the end at night. The real problem is the building: a glass box with
+stripes, a leaning wide-angle tower and striped night lights read as no quality at all. The tower is remodelled for
+architectural-visualisation quality (stone podium with lobby glazing, fins, spandrels and recessed glass, sky-garden
+terraces at 8F/12F/16F/20F, a roof garden and crown), with a daytime sky HDRI, sun and soft shadows, ambient
+occlusion, a night sky with rooms lit at random and garden light with a subtle bloom, architectural lenses with
+straight verticals, and brand cobalt for UI and highlights. Two checkpoints of stills (hero frames, then a
+storyboard with every transition) come before any video.
+
+## D-97 FilmV6 storyboard approved: a visual cold open over Eric's voice, drawing mode for every explanation — Decided by Eric (2026-11-04 06:20)
+
+Opening against the 3 / 5 / 10 / 15 s retention gates, with Eric's recorded voice unchanged: a warm oblique glide
+over a drawing (0–3 s), thirty sheets in the air with "30 files" (5 s), a pile with reviewer marks and "2 weeks"
+(8 s), his over-the-shoulder shot with "10 minutes" (13 s), then the push into his screen; his on-camera talking
+shot is dropped. The sheets stack into the tower as cobalt wireframe, then white with ink, then a material sweep.
+Every explanation beat is in drawing mode (white, ink edges, plants always sage green, cobalt only for annotation);
+on-screen text follows Eric's pitch-deck grammar (cobalt eyebrow, short bold headline, a large cobalt number, thin
+rules, no cards, no em-dashes); the lift shaft returns to V2's on-drawing presentation; the corridor's planters
+shrink in place; the end is a blue-hour night shot on wet paving. The plaza is upgraded (stone pavers, planted
+beds, benches, a water feature, bollard lights) before the 1080p60 render, at the author's call.
+
+## D-98 Two opt-in Meta modes: the open reader (Muse Spark Open on Baseten) and firm memory (Muse Wonder) — Proposed (2026-11-04 06:30)
+
+The question was how to use more of Meta's stack on the last day without moving the default path. Both modes are
+switched off unless asked for, and each keeps its own recordings. Facts, commands and the parity table are in
+docs/NEW-MODES.md.
+
+**The open reader.** `LANDSIGHT_READER=open`, `--reader open` or `?reader=open` sends every Muse Spark call type to Muse
+Spark Open over an OpenAI-compatible endpoint:
+
+- by default Baseten's `meta-models/muse-spark-open-1026`, which takes images and honoured the JSON schemas
+- or a firm's own vLLM or SGLang server, set with `LANDSIGHT_OPEN_BASE_URL`
+
+The prompts and schemas are the same. Recordings go to tests/fixtures/open/, and each key ends in the model id. SAM 3.1
+is not routed.
+
+Trade-offs, from one live pass on the sample:
+
+- The scoreboard is the same, 30 · 28 · 2 · 0 · 0, but the substance is weaker. T-08 is typed as a planter edge, so the
+  run carries an unresolved item and the run-shape check reports one problem.
+- The pass was slower: 141.8 s wall against 106.2 s.
+- It cost a little less: $0.2253 against $0.2324–0.2735.
+
+**Firm memory.** The Meta Model API has no memory store: "active memory" is a trait of Muse Wonder, and
+`previous_response_id` carries conversation turns only. So the store is ours, the `firm_memory` table, one row per firm,
+deletable. Muse Wonder makes two recorded calls: it distils the habits (`firm_habits`) and drafts the reply in the
+firm's voice (`firm_reply`). Grouping and ordering use no model.
+
+Trade-offs:
+
+- Matching on categories, scenarios, severities and keywords is literal. A kind of finding the firm never decided on
+  goes to "Other … points", placed in the firm's scenario order, rather than to a named group.
+- The sample firm's 16 decisions are invented.
+- No screen change was made tonight.
