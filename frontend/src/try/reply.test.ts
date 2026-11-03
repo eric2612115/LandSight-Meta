@@ -9,7 +9,7 @@ import { formatMoney } from '../lib/money'
 import type { Run } from '../lib/types'
 import { cloudBox, mergeClouds } from './cloud'
 import { findingsOf, isMoney, type Finding } from './model'
-import { changeLines, developerOf, emailText, mailtoOf, replyEmail, replyLine } from './reply'
+import { changeLines, developerOf, emailText, mailtoOf, packagePart, replyEmail, replyLine } from './reply'
 import type { Mark } from './store'
 
 const run = normalise(JSON.parse(readFileSync(join(import.meta.dirname, '..', '..', '..', 'frontend-mock', 'run.json'), 'utf8')) as Run, 'repo')
@@ -53,9 +53,14 @@ describe('the reply to the developer', () => {
   const body = reply.body.split('\n')
   it('has the developer, the subject with project and package, the attachment line last', () => {
     expect(reply.to).toBe('Greenfield Development Co. (Sample)')
-    expect(reply.subject).toBe('Change request — Greenfield Residences — Greenfield Residences — Landscape Package')
+    expect(reply.subject).toBe('Change request — Greenfield Residences — Landscape Package')
     expect(body[0]).toBe('Dear Greenfield Development Co. (Sample),')
     expect(body[body.length - 1]).toBe('Attached: change-request.pdf')
+  })
+  it('names the project once: the package keeps its own name when it does not start with the project', () => {
+    expect(packagePart('Greenfield Residences', 'Greenfield Residences — Tower Landscape Package')).toBe('Tower Landscape Package')
+    expect(packagePart('Greenfield Judge Test', 'Greenfield Residences — Landscape Package')).toBe('Greenfield Residences — Landscape Package')
+    expect(packagePart('Greenfield Residences', 'Greenfield Residences')).toBe('Greenfield Residences')
   })
   it('lists only the selected changes, by their cloud numbers, each with its money formatted', () => {
     const numbered = body.filter((s) => /^\d+\. /.test(s))

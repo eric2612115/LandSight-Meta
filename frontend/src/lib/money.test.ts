@@ -33,6 +33,9 @@ describe('money', () => {
     expect(readCurrency('', false)).toBe('twd')
     expect(readCurrency('?currency=TWD&director=1', true)).toBe('twd')
     expect(readCurrency('?currency=usd', false)).toBe('usd')
+    expect(readCurrency('', false, '/try')).toBe('usd')
+    expect(readCurrency('?currency=twd', false, '/try')).toBe('twd')
+    expect(readCurrency('', false, '/review')).toBe('twd')
   })
 
   it('sums what the bill asks over the top of the list, from the price flags only', () => {

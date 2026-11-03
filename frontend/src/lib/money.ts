@@ -48,11 +48,12 @@ export function formatTimes(n: number, twd: number | undefined | null, cur: Curr
 
 export const symbolOf = (cur: Currency, rate?: Rate | null) => (cur === 'usd' && rate?.usd_per_twd ? '$' : 'NT$')
 
-/** `?currency=usd|twd`; director mode defaults to USD (the film), plain mode to TWD. */
-export function readCurrency(search: string, director: boolean): Currency {
+/** `?currency=usd|twd`; director mode (the film) and the quick review /try (its visitors are international) default to
+ * USD, the review desk to TWD. TWD stays one click away on every screen. */
+export function readCurrency(search: string, director: boolean, path = ''): Currency {
   const q = new URLSearchParams(search).get('currency')?.toLowerCase()
   if (q === 'usd' || q === 'twd') return q
-  return director ? 'usd' : 'twd'
+  return director || path === '/try' || path.startsWith('/try/') ? 'usd' : 'twd'
 }
 
 const isDirector = () => {
@@ -66,7 +67,7 @@ const isDirector = () => {
 type CurrencyState = { cur: Currency; setCur: (c: Currency) => void }
 
 export const useCurrency = create<CurrencyState>((set) => ({
-  cur: typeof window === 'undefined' ? 'twd' : readCurrency(window.location.search, isDirector()),
+  cur: typeof window === 'undefined' ? 'twd' : readCurrency(window.location.search, isDirector(), window.location.pathname),
   setCur: (cur) => {
     try {
       const u = new URL(window.location.href)

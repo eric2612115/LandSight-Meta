@@ -37,11 +37,20 @@ export function replyLine(l: Pick<ChangeLine, 'n' | 'sheet' | 'what' | 'change' 
   return `${l.n}. ${l.sheet ? `[${l.sheet}] ` : ''}${l.what} — ${l.change}${money}`
 }
 
+/** The package name without the project's name in front ("Greenfield Residences — Landscape Package" under the project
+ * "Greenfield Residences" is "Landscape Package"), so the subject names the project once. */
+export function packagePart(project: string, pkg: string): string {
+  const p = project.trim()
+  const rest = p && pkg.startsWith(p) ? pkg.slice(p.length).replace(/^\s*[—–-]\s*/, '').trim() : ''
+  return rest || pkg
+}
+
 /** The reply to the developer: To (the developer the cover names, else blank), Subject "Change request — <project> —
- * <package>", a short body with the numbered changes and their money, and the attachment line last. */
+ * <package without the project's name>", a short body with the numbered changes and their money, and the attachment
+ * line last. */
 export function replyEmail(o: { to?: string; project: string; pkg: string; lines: Pick<ChangeLine, 'n' | 'sheet' | 'what' | 'change' | 'money'>[]; total: string }, tr: Tr = english): Reply {
   const to = o.to?.trim() ?? ''
-  const subject = tr('Change request — {0} — {1}', o.project, o.pkg)
+  const subject = tr('Change request — {0} — {1}', o.project, packagePart(o.project, o.pkg))
   const body = [
     to ? tr('Dear {0},', to) : tr('Dear developer,'), '',
     tr('We reviewed {0}. Please revise these {1} points before we price the job:', o.pkg, o.lines.length), '',
