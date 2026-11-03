@@ -1,47 +1,65 @@
 /** Step 6, Export: the change request — a cover (project, N changes, $X, sheets affected), one page per affected
- * sheet with numbered red revision clouds and a legend, the change list; Download PDF (the print stylesheet) and
- * "Copy email to the developer". */
+ * sheet with numbered red revision clouds and a legend, the change list; Download PDF (the print stylesheet) and the
+ * reply to the developer (an email preview, the mail app, the clipboard; reply.ts writes it). */
 import { motion } from 'framer-motion'
-import { Copy, Download, X } from 'lucide-react'
-import { useState } from 'react'
+import { Copy, Download, Mail, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { SheetView } from '../components/SheetView'
 import { objectsOn } from '../lib/flags'
 import { isRasterSheet } from '../lib/model'
-import type { Sheet } from '../lib/types'
+import type { Run, Sheet } from '../lib/types'
+import { sheetTexts, useProjectName } from './Choose'
 import { cloudBox, mergeClouds } from './cloud'
 import { Cloud } from './Drawing'
 import { t, td, useLang } from './i18n'
-import { changeOf, type Finding } from './model'
+import { changeOf } from './model'
 import { plainTitle } from './plain'
-import { useTry, type Mark } from './store'
+import { changeLines, developerOf, emailText, mailtoOf, replyEmail, type Reply } from './reply'
+import { isTryDirector, useTry } from './store'
 import type { useReview } from './view'
 
 type V = ReturnType<typeof useReview>
-type Line = { n: number; sheet?: Sheet; what: string; change: string; money: string; evidence: string; f?: Finding; m?: Mark }
+
+/** The developer the package's cover names (its print text), once read; undefined when no cover names one. */
+export function useDeveloper(run: Run) {
+  const [dev, setDev] = useState<{ id: string; name?: string } | null>(null)
+  const { run_id: id, sheets } = run
+  useEffect(() => {
+    let alive = true
+    void (async () => {
+      for (const s of sheets.filter((x) => x.kind === 'cover' && x.svg_url)) {
+        const name = developerOf(await sheetTexts(s.svg_url).catch(() => []))
+        if (name) return alive && setDev({ id, name })
+      }
+      if (alive) setDev({ id })
+    })()
+    return () => {
+      alive = false
+    }
+  }, [id, sheets])
+  return dev?.id === id ? dev.name : undefined
+}
 
 export function Export({ v }: { v: V }) {
   const { checked, marks, set } = useTry()
   const lang = useLang((s) => s.lang)
-  const [copied, setCopied] = useState(false)
-  const picked = v.findings.filter((f) => checked[f.id])
   const sheetOf = (id?: string) => v.run.sheets.find((s) => s.sheet_id === id)
-  const lines: Line[] = [
-    ...picked.map((f, i) => ({ n: i + 1, sheet: sheetOf(f.sheetId), what: plainTitle(f.check, lang, (s) => td(s)), change: v.m.text(t(td(changeOf(f, (twd) => v.m.money(twd), v.chip(f))))), money: v.chip(f) ?? '', evidence: v.evidence(f), f })),
-    ...marks.map((m, i) => ({ n: picked.length + i + 1, sheet: sheetOf(m.sheetId), what: m.note, change: t('Asked: {0}', m.question), money: '', evidence: m.objectIds.join(', '), m })),
-  ]
-  const total = v.moneyText(v.queried(picked))
-  const sheets = [...new Map(lines.filter((l) => l.sheet && (l.m || (l.f && objectsOn(l.sheet, l.f.check).length))).map((l) => [l.sheet!.sheet_id, l.sheet!])).values()]
+  const lines = changeLines<Sheet>(v.findings, checked, marks, {
+    finding: (f) => {
+      const sheet = sheetOf(f.sheetId)
+      return { sheetRef: sheet, sheet: sheet?.number ?? v.where(f), what: plainTitle(f.check, lang, (s) => td(s)), change: v.m.text(t(td(changeOf(f, (twd) => v.m.money(twd), v.chip(f))))), money: v.chip(f) ?? '', evidence: v.evidence(f) }
+    },
+    mark: (m) => {
+      const sheet = sheetOf(m.sheetId)
+      return { sheetRef: sheet, sheet: sheet?.number, what: m.note, change: t('Asked: {0}', m.question), money: '', evidence: m.objectIds.join(', ') }
+    },
+  })
+  const total = v.moneyText(v.queried(v.findings.filter((f) => checked[f.id])))
+  const sheets = [...new Map(lines.filter((l) => l.sheetRef && (l.m || (l.f && objectsOn(l.sheetRef, l.f.check).length))).map((l) => [l.sheetRef!.sheet_id, l.sheetRef!])).values()]
   const project = v.run.package.name
-  const email = [
-    t('Subject: Change request — {0}', project), '',
-    t('Dear developer,'), '',
-    t('We reviewed {0}. Please revise these {1} points before we price the job:', project, lines.length), '',
-    ...lines.map((l) => `${l.n}. [${l.sheet?.number ?? l.f?.check.check_id ?? ''}] ${l.what} — ${l.change}${l.money ? ` (${l.money})` : ''}`), '',
-    t('Queried: {0}.', total), '', t('Regards'),
-  ].join('\n')
-  const copy = () => {
-    void navigator.clipboard?.writeText(email).then(() => setCopied(true), () => setCopied(false))
-  }
+  const name = useProjectName(v.run)
+  const developer = useDeveloper(v.run)
+  const reply = replyEmail({ to: developer, project: name, pkg: project, lines, total }, t)
   return (
     <motion.div initial={{ x: 80, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 80, opacity: 0 }} transition={{ duration: 0.35, ease: [0.2, 0.7, 0.3, 1] }}
       className="try-report scroll" data-dir="report"
@@ -50,7 +68,6 @@ export function Export({ v }: { v: V }) {
         <span style={{ fontSize: 20, fontWeight: 650 }}>{t('Change request')}</span>
         <span className="ink2">{t('{0} changes · {1}', lines.length, total)}</span>
         <span style={{ marginLeft: 'auto' }} />
-        <button className="btn-s" data-dir="copy-email" onClick={copy}><Copy size={16} />{copied ? t('Copied') : t('Copy email to the developer')}</button>
         <button className="btn-p" data-dir="pdf" onClick={() => window.print()}><Download size={18} />{t('Download PDF')}</button>
         <button className="btn-g" data-dir="close-report" onClick={() => set({ drawer: false })}><X size={20} /></button>
       </div>
@@ -66,7 +83,7 @@ export function Export({ v }: { v: V }) {
           </div>
         </section>
         {sheets.map((s) => {
-          const here = lines.filter((l) => l.sheet?.sheet_id === s.sheet_id)
+          const here = lines.filter((l) => l.sheetRef?.sheet_id === s.sheet_id)
           return (
             <section key={s.sheet_id} className="page surface" data-dir={`page-${s.sheet_id}`} style={{ padding: 24, display: 'grid', gridTemplateColumns: '920px 1fr', gap: 24 }}>
               <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid var(--t-line)' }}>
@@ -112,7 +129,7 @@ export function Export({ v }: { v: V }) {
               {lines.map((l) => (
                 <tr key={l.n}>
                   <td style={cell}>{l.n}</td>
-                  <td style={cell}>{l.sheet?.number ?? (l.f ? v.where(l.f) : '')}</td>
+                  <td style={cell}>{l.sheet ?? ''}</td>
                   <td style={{ ...cell, fontWeight: 600 }}>{l.what}</td>
                   <td style={cell}>{l.change}</td>
                   <td style={{ ...cell, fontWeight: 600, whiteSpace: 'nowrap' }}>{l.money}</td>
@@ -122,8 +139,41 @@ export function Export({ v }: { v: V }) {
             </tbody>
           </table>
         </section>
+        <ReplyPanel reply={reply} />
       </div>
     </motion.div>
+  )
+}
+
+/** Reply to the developer: the email as it will read, Download PDF, the mail app (a `mailto:`; the PDF is attached by
+ * hand), the clipboard. Not printed. In director mode the mail link never navigates. */
+function ReplyPanel({ reply }: { reply: Reply }) {
+  const hot = useTry((s) => s.hot)
+  const [copied, setCopied] = useState(false)
+  const copy = () => {
+    void navigator.clipboard?.writeText(emailText(reply, t)).then(() => setCopied(true), () => setCopied(false))
+  }
+  const director = isTryDirector()
+  return (
+    <section className="surface noprint" data-dir="reply" style={{ padding: '24px 28px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+        <span style={{ fontSize: 20, fontWeight: 650 }}>{t('Reply to the developer')}</span>
+        <span style={{ marginLeft: 'auto' }} />
+        <button className="btn-s" data-dir="reply-pdf" onClick={() => window.print()}><Download size={16} />{t('Download PDF')}</button>
+        <a className={`btn-s ${hot === 'mailto' ? 'hot' : ''}`} data-dir="mailto" href={mailtoOf(reply)} style={{ textDecoration: 'none' }}
+          onClick={director ? (e) => e.preventDefault() : undefined}><Mail size={16} />{t('Open in your mail app')}</a>
+        <button className="btn-s" data-dir="copy-email" onClick={copy}><Copy size={16} />{copied ? t('Copied') : t('Copy email')}</button>
+      </div>
+      <div className="ink3" style={{ fontSize: 13, marginTop: 8, textAlign: 'right' }}>{t('The PDF is not attached automatically: download it, then attach it to the email.')}</div>
+      <div className="surface2" style={{ marginTop: 14, padding: '16px 20px', fontSize: 14.5 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', rowGap: 6 }}>
+          <span className="ink3">{t('To')}</span><span data-dir="reply-to" style={{ fontWeight: 600 }}>{reply.to}</span>
+          <span className="ink3">{t('Subject')}</span><span style={{ fontWeight: 600 }}>{reply.subject}</span>
+        </div>
+        <div style={{ borderTop: '1px solid var(--t-line)', margin: '12px 0' }} />
+        <div style={{ whiteSpace: 'pre-wrap', lineHeight: 1.5 }}>{reply.body}</div>
+      </div>
+    </section>
   )
 }
 

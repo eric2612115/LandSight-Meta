@@ -1,7 +1,7 @@
 /** The film's Part 2 (demo/SCRIPT-V7.md, 1:30–2:58) played on /try: `?director=1&sample=greenfield`. Every beat sits
  * at an absolute time from t0 (`until`), so the take is the same however long a frame takes; everything the take
- * needs (the run, the sheets, the price list, the thumbnails, the crop, the recorded answer, the fonts) is loaded
- * before t0, and the only waits after it are for an element the screen has just drawn. An in-page
+ * needs (the run, the sheets, the cover's text, the price list, the thumbnails, the crop, the recorded answer, the
+ * fonts) is loaded before t0, and the only waits after it are for an element the screen has just drawn. An in-page
  * cursor (above the camera, constant size) moves in ~0.35 s eased, ripples on a click; the camera zooms 1.4–1.8× to
  * its target and back (0.6 s ease in-out). Sound cues go to `window.__cues` ({t, name}, seconds from t0); `window.__director` = {duration, ready,
  * done, start}. `&wait=1` holds t0 until `__director.start()` (the capture calls it). No randomness anywhere. */
@@ -163,7 +163,8 @@ async function prepare(sample: Sample, src: SourceKind, qc: QueryClient): Promis
   await Promise.all([
     ...drawn.map((u) => loadSvg(u)),
     plan ? sheetTexts(plan.svg_url) : null,
-    // the price list's rows are counted on Choose
+    // the cover names the developer the reply goes to; the price list's rows are counted on Choose
+    ...run.sheets.filter((s) => s.kind === 'cover').map((s) => sheetTexts(s.svg_url).catch(() => null)),
     live ? qc.prefetchQuery({ queryKey: PRICE_LIST_KEY, queryFn: fetchPriceList }) : null,
     ...run.sheets.map((s) => (s.png_url ? img(s.png_url) : null)),
     ...run.items.map((it) => (it.spark?.crop_url ? img(it.spark.crop_url) : null)),
@@ -293,7 +294,8 @@ async function play(run: Run, t0: number) {
   await until(57600)
   await out()
 
-  // 2:29 Export — the change request, its clouds and notes
+  // 2:29 Export — the change request, its clouds and notes, the change list, the reply to the developer (the cursor
+  // rests on "Open in your mail app"; the link never navigates in director mode)
   await until(58800)
   await click('create')
   cue('whoosh')
@@ -301,13 +303,16 @@ async function play(run: Run, t0: number) {
   const cloud = stageRect(await need('cloud-r-E02.2'))
   const note = stageRect(await need('note-E02.2'))
   await zoom(union(cloud, note), 1.8)
-  await until(65000)
+  await until(64300)
   await out()
-  await until(65800)
-  await scrollTo('report', 'change-list', 120, 900)
-  await until(67400)
-  await moveTo('pdf', 0.5, 0.5, 450)
+  await until(65000)
+  await scrollTo('report', 'change-list', 120, 800)
+  await until(66600)
+  await scrollTo('report', 'reply', 100, 600)
+  await moveTo('mailto', 0.5, 0.5, 400)
+  set({ hot: 'mailto' })
   await until(70700)
+  set({ hot: undefined })
   await click('close-report')
 
   // 2:42 Ask — point at T-10, ask, the recorded answer, mark the drawing
