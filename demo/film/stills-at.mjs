@@ -16,6 +16,6 @@ const composition = await selectComposition({serveUrl, id, chromiumOptions: {gl:
 for (const s of times) {
   const frame = Math.min(composition.durationInFrames - 1, Math.round(Number(s) * composition.fps));
   const output = join(out, `${String(s).padStart(6, '0')}.png`);
-  await renderStill({serveUrl, composition, frame, output, chromiumOptions: {gl: 'angle'}, scale: 0.5});
+  await renderStill({serveUrl, composition, frame, output, chromiumOptions: {gl: 'angle'}, scale: Number(process.env.SCALE ?? 0.5)});
   console.log(output);
 }

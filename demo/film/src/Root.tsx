@@ -28,6 +28,9 @@ import {V10} from './scenes/animatic-v10-cues.js';
 import {AnimaticV11} from './scenes/AnimaticV11';
 import type {AnimaticV11Props} from './scenes/AnimaticV11';
 import {V11} from './scenes/animatic-v11-cues.js';
+import {FILM_V2_SHEETS, FilmV2} from './scenes/FilmV2';
+import type {FilmV2Props} from './scenes/FilmV2';
+import {V2 as FV2} from './scenes/film-v2-cues.js';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -181,6 +184,27 @@ export const Root: React.FC = () => (
     width={V11.width}
     height={V11.height}
     defaultProps={{sheets: ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'].map((id) => ({id, png: `v11/sheets/${id}.png`}))} satisfies AnimaticV11Props}
+  />
+  {/* Film v2 (demo/SCRIPT-V11.md as built in v11, with Eric's footage and the final look): node film-v2-prepare.mjs and
+      scripts/stage-v2-sheets.py first; render with --gl=angle. FilmV2 is the 60 fps master (1920×1080 composition, render
+      at --scale=2 for 4K); FilmV2Review is the review cut (30 fps, the 1080p proxies, a timecode). */}
+  <Composition
+    id="FilmV2"
+    component={FilmV2}
+    durationInFrames={Math.round(FV2.duration * 60)}
+    fps={60}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V2_SHEETS, proxy: false, timecode: false, voice: true} satisfies FilmV2Props}
+  />
+  <Composition
+    id="FilmV2Review"
+    component={FilmV2}
+    durationInFrames={Math.round(FV2.duration * 30)}
+    fps={30}
+    width={FV2.width}
+    height={FV2.height}
+    defaultProps={{sheets: FILM_V2_SHEETS, proxy: true, timecode: true, voice: true} satisfies FilmV2Props}
   />
   </>
 );
