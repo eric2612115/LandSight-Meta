@@ -534,11 +534,26 @@ def bind(host: str = "127.0.0.1", port: int = PORT):
     return sock
 
 
+def seed_db(db_path: str | Path | None = None) -> dict:
+    """Register the bundled samples (samples/greenfield, heldout, tower) in landsight.db, as `landsight db init` does
+    (idempotent): on a fresh clone the screen's "Try a sample" finds them without a separate init step."""
+    from landsight.store import connect
+    from landsight.store.service import seed_samples
+
+    c = connect(db_path)
+    try:
+        return seed_samples(c)
+    finally:
+        c.close()
+
+
 def serve(host: str = "127.0.0.1", port: int = PORT, sock=None, on_ready=None) -> None:
-    """Serve the API. `sock` is a socket from bind() (bound here when None); `on_ready` runs once it is listening."""
+    """Serve the API. `sock` is a socket from bind() (bound here when None); `on_ready` runs once it is listening.
+    The bundled samples are registered in landsight.db first (seed_db)."""
     import uvicorn
 
     sock = sock or bind(host, port)
+    seed_db()
     config = uvicorn.Config(create_app(), host=host, port=port, log_level="info")
     server = uvicorn.Server(config)
     if on_ready is not None:

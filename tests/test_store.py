@@ -121,3 +121,16 @@ def test_the_call_table_of_a_run(sample_db):
     assert t["sam-3.1 segment"]["cost_usd"] == pytest.approx(12 * 2.5 / 1000)
     assert 0.1 < sum(r["cost_usd"] for r in t.values()) < 1.0
     assert "| **all** | | **51** |" in costs.markdown(rows)
+
+
+def test_serve_registers_the_samples_on_a_fresh_database(tmp_path):
+    """A fresh clone has no landsight.db: `landsight serve` registers the bundled samples before it listens, so the
+    screen's "Try a sample" finds samples/greenfield without `landsight db init` (seed_db is idempotent)."""
+    from landsight.app.server import seed_db
+
+    db = tmp_path / "fresh.db"
+    assert TestClient(create_app(db_path=db)).get("/api/projects").json() == []
+    seed_db(db)
+    seed_db(db)
+    folders = [p["folder"] for pr in TestClient(create_app(db_path=db)).get("/api/projects").json() for p in pr["packages"]]
+    assert folders.count("samples/greenfield") == 1 and "samples/tower" in folders
