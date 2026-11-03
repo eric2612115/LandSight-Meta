@@ -55,6 +55,7 @@ OVER, KEEP = 0.6, 0.45  # a pause longer than OVER is shortened to KEEP; every s
 MAX_TEMPO = 1.05
 GAP = 0.2  # a line ends at least this long before the next one starts
 GAPS = {7: 0.25}  # lines that need a longer breath before the next one
+INSERT_AT, INSERT_S = 92.3, 6.0  # the private-mode beat (scripts/private-v3.py): every line from INSERT_AT on is 6 s later
 PREFER = {7: 1.03}  # lines whose tempo should stay lower if a take allows (else MAX_TEMPO)
 TAKES = ['', 'b', 'c']
 EDIT_TAKES = ['d', 'e', 'f']  # the takes of a line after one filler word was dropped (EDITS)
@@ -414,7 +415,16 @@ def windows() -> dict[int, dict]:
                 t = v2[str(n)]['text']
                 w[n]['split_at'] = v2[str(n)]['st'][t.index(SPLIT[n])]  # where v2 placed "and drafts …"
         f.write_text(json.dumps(w, indent=1) + '\n')
-    return {int(k): v for k, v in json.loads(f.read_text()).items()}
+    w = {int(k): v for k, v in json.loads(f.read_text()).items()}
+    for n, x in w.items():  # the frozen v2 times, moved for the private-mode beat
+        if x['start'] >= INSERT_AT:
+            x['start'] = round(x['start'] + INSERT_S, 3)
+            x['limit'] = round(x['limit'] + INSERT_S, 3)
+            if 'split_at' in x:
+                x['split_at'] = round(x['split_at'] + INSERT_S, 3)
+        elif x['limit'] > INSERT_AT - GAP:
+            x['limit'] = round(INSERT_AT - GAP, 3)  # the line before the beat ends before it
+    return w
 
 
 def choose(n: int, text: str, w: dict, ctx) -> dict:
@@ -480,7 +490,7 @@ def main() -> None:
     ns = sorted(s)
     tl = json.loads((HERE / 'audio' / 'voice-v2' / 'timeline.json').read_text())
     ref = active_rms(load(HERE / 'audio' / 'eric-live' / 'b-voice.wav'))
-    stem = np.zeros(int(tl['duration'] * SR) + SR, np.float32)
+    stem = np.zeros(int((tl['duration'] + INSERT_S) * SR) + SR, np.float32)  # the film is INSERT_S longer than V2's
     timing, picks = {}, {}
     for i, n in enumerate(ns):
         ctx = (s[ns[i - 1]] if i else ERIC_3, s[ns[i + 1]] if i + 1 < len(ns) else None)

@@ -36,6 +36,8 @@ PIECES = {
     'product': (94.1, 155.3, 4.3, [('Product', 94.1, 159.6)]),
     'swell': (155.3, LOGO, 0.55, [('Night end', 155.3, LOGO + 0.55)]),
     'logo': (LOGO, END, 0.68, [('Logo', LOGO, END + 0.68)]),
+    # the private-mode beat (C2 only), 6 s from 92.3, before the type card: asked 8 s so its own ending falls after the cut
+    'private': (92.3, 98.3, 2.0, [('Private', 92.3, 100.3)]),
 }
 # take 1 of product and night (…-take1.mp3) ended 4 s early or went silent before the logo, so Part 2 asks for 4 s more and
 # the end is two pieces: a swell cut at the logo, and the final chord placed on the logo as it fades in
@@ -43,7 +45,7 @@ PIECES = {
 # take 2 of C2's cold open, Part 2 and night swell (take 1: …-take1.mp3) faded 1–3 s before their cuts: asked longer, so
 # their own endings fall after the cut (seconds added to the piece's last section). Take 2 of the cold open still peaked
 # near 12 s, so take 3 is longer again (its climax lands later); take 2 of Part 2 opened on 8 s of silence: take 3, same ask.
-LONGER = {'C2': {'cold': 4.8, 'product': 3.2, 'swell': 2.95}}
+LONGER = {'C2': {'cold': 4.8, 'product': 3.2, 'swell': 2.95, 'private': 3.0}}  # private take 1 faded by 4.75 s of its 6
 
 NEG = ['vocals', 'singing', 'choir', 'spoken word', 'busy lead melody', 'distortion', 'aggressive EDM drop', 'dubstep', 'cheesy', 'lo-fi']
 GLOBAL = {
@@ -67,6 +69,9 @@ SECTIONS = {
                           'a short clap fill every eight bars', 'a simple, sparse synth motif', 'leaves room for a voice-over', 'mid-range kept clear'],
                          ['busy', 'lead melody', 'loud', 'big build-ups', 'risers', 'breakdown', 'silence']),
         'Card': (['the beat stops', 'one sustained synth note', 'a breath'], ['claps', 'kick', 'snaps', 'drums']),
+        'Private': (['starts at once on the downbeat', 'the same light groove carries on, calmer and confident', 'a low warm pulse',
+                     'claps thinned out, only on beat 4', 'a soft synth pad', 'steady, keeps going to the very end'],
+                    ['intro', 'fade in', 'busy', 'drop', 'build-up', 'risers', 'ending', 'fade out', 'silence']),
         'Product': (['starts at once', 'lighter', 'claps on beats 2 and 4 and finger snaps', 'soft plucked synths', 'no kick', 'bright and clean',
                      'keeps going to the very end'], ['intro', 'ending', 'fade out', 'heavy bass', 'busy lead', 'silence']),
         'Night end': (['starts softly at once', 'no claps, no snaps, no kick', 'an emotional swell of warm pads and synth strings that keeps rising to the very end',
@@ -125,6 +130,7 @@ EFFECTS = {
     'stomp': ('A short silence, then one loud single foot stomp thump on a wooden floor, close microphone, dry, punchy low end', 1.0, 0.9),
     'clapfill': ('A short silence, then a quick hand clap fill: four fast tight claps accelerating, dry', 1.0, 0.8),
     'bigclap': ('One huge group hand clap with a bright shimmering reverb tail', 1.5, 0.6),
+    'lock': ('A short silence, then one soft clean click of a small switch or padlock locking into place, close and dry', 1.0, 0.8),
 }
 
 
@@ -153,6 +159,8 @@ def plan(v: str, piece: str) -> dict:
 def music(v: str) -> None:
     MUSIC.mkdir(parents=True, exist_ok=True)
     for piece in PIECES:
+        if any(name not in SECTIONS[v] for name, _, _ in PIECES[piece][3]):
+            continue  # a piece this variant has no sections for (the private beat is C2's only)
         body = {'composition_plan': plan(v, piece), 'model_id': 'music_v1', 'respect_sections_durations': True}
         meta = MUSIC / f'{v}-{piece}.json'
         if meta.exists() and json.loads(meta.read_text()) == body and (MUSIC / f'{v}-{piece}.mp3').exists():

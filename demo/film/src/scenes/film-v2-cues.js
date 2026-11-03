@@ -12,12 +12,20 @@ import aligned from './voice-v2.json' with {type: 'json'};
 
 export const WPS = 155 / 60;
 
-/** Part 1: the starts of the beats (as v11). */
+/**
+ * v6: the private-mode beat (the clone: "Confidential drawings? Run it on Meta's open weights, in a deployment you control.
+ * Same result."), inserted before the type card: every cue from INSERT_AT on is INSERT_S later than in V2 (the type card
+ * and its hit, Part 2, the night end, the closing lines, the logo, the end hold).
+ */
+export const INSERT_AT = 92.3;
+export const INSERT_S = 6.0;
+
+/** Part 1: the starts of the beats (as v11); the type card moves with the private-mode beat. */
 export const B = {
   push: 14.0, land: 15.0, pull: 15.3, drawer103: 21.4, roof: 27.4, alike: 32.2, lift: 35.1, corridor: 39.3, ground: 45.6,
-  tree: 48.6, confirm: 52.8, raster: 57.4, bills: 65.8, hedge: 68.8, pavers: 74.2, pit: 77.6, findings: 87.0, type: 92.6,
+  tree: 48.6, confirm: 52.8, raster: 57.4, bills: 65.8, hedge: 68.8, pavers: 74.2, pit: 77.6, findings: 87.0, type: 92.6 + INSERT_S,
 };
-export const PART2_AT = 94.1;
+export const PART2_AT = 94.1 + INSERT_S;
 
 /**
  * The opening (Eric's footage; film = B-cut − 0.9 for his voice). `src` time runs at `rate` from `from`.
@@ -148,7 +156,9 @@ export const V2 = {
     {n: 15, at: B.hedge + 0.1, pictureUntil: B.pavers, text: "One hedge label means a hundred and eighty-two plants. The bill's in metres."},
     {n: 16, at: B.pavers + 0.1, pictureUntil: B.pit, text: 'The pavers? Ten thousand over your price list.'},
     {n: 17, at: B.pit + 0.2, pictureUntil: B.findings, text: 'On the slab, the pits are too small. So big trees count as small, and the greenery falls short. Seven more trees fix it.'},
-    {n: 18, at: B.findings - 0.3, pictureUntil: B.type, text: 'A developer told us: send the nonsense straight back, and flag the rest one by one.'},
+    {n: 18, at: B.findings - 0.3, pictureUntil: INSERT_AT, text: 'A developer told us: send the nonsense straight back, and flag the rest one by one.'},
+    // the private-mode beat (scripts/private-v3.py), between Part 1 and the type card
+    {n: 28, at: 92.424, pictureUntil: INSERT_AT + INSERT_S, text: "Confidential drawings? Run it on Meta's open weights, in a deployment you control. Same result."},
     {n: 19, at: PART2_AT + 0.15, pictureUntil: capToFilm(CAP.continue), text: 'Drop in the folder, as is. Every file gets a verdict, and it names the bill that counts.'},
     {n: 20, at: capToFilm(CAP.continue) + 0.3, pictureUntil: capToFilm(CAP.analyze), text: 'It reads the project straight off the title block. Your price list, your local rules. Hit analyze.'},
     {n: 21, at: capToFilm(CAP.analyze) + 0.2, pictureUntil: capToFilm(CAP.review), text: 'Muse Spark reads every sheet. SAM 3.1 measures the colour plans. Geometry counts. All in about two minutes.'},

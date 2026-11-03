@@ -13,6 +13,10 @@ claps and finger snaps), and clap accents placed exactly on the cuts. Mixed in o
     swell into the night, the logo's shimmer.
   · Under the voice: the music and the claps duck about 8 dB (120 ms look-ahead, as before), and the music's speech band
     (1–5 kHz) dips 4 dB more, so a clap never sits on a word.
+  · The private-mode beat: 6 s inserted at 92.3 (scripts/private-v3.py), before the type card. The groove carries on calmer
+    (C2-private: claps thinned, a low pulse) and fades just before the card; a lock click sits in the pause after
+    "drawings?". Everything from 92.3 on is 6 s later than in V2: the card's hit (98.58), Part 2 (100.1), the night (161.32),
+    the logo chord (169.3); the film is 172.322 s. (The 166 s mix before the beat is kept as mix-166s.wav.)
   · Mix: −14 LUFS integrated, true peak ≤ −1 dBTP.
 Writes audio/mix-final/: mix.wav (48 kHz, 24-bit stereo), the stems before the mix gain (voice, music, claps, sfx; float),
 levels.json and previewC2.mp3 (the opening's first 40 s). The film's public/v2/audio/mix.wav is not touched.
@@ -36,6 +40,22 @@ CARDS = [5.1, 8.4, 13.0]  # the cold open's numbers
 PUSH, SWEEP = 14.9, 20.0
 BEATS = [21.6, 28.2, 32.4, 35.3, 39.5, 46.7, 50.1, 54.0, 57.4, 65.4, 68.6, 74.4, 77.6, 87.0]  # each explanation beat's first frame
 SPEECH_BAND = (1000.0, 5000.0)
+# the private-mode beat (scripts/private-v3.py), 6 s before the type card: every cue from INSERT_AT on is INSERT_S later
+INSERT_AT, INSERT_S = 92.3, 6.0
+sh = lambda t: t + INSERT_S if t >= INSERT_AT else t
+DUR = v4.DUR + INSERT_S
+# the music on the cuts (audio-v4.py's placement: at, trimmed at, align the first hit, level vs V2's music in dB): the build
+# runs into the beat, where the light groove carries on calmer for 6 s (C2-private), fading just before the type card
+v4.PIECES = {
+    'cold': (0.0, 14.9, False, 0.0),
+    'build': (14.9, INSERT_AT, True, 1.0),
+    'private': (INSERT_AT, INSERT_AT + INSERT_S, True, -1.0),
+    'product': (sh(94.1), sh(155.3), False, 1.0),
+    'swell': (sh(155.3), sh(163.3), False, 5.0),
+    'logo': (sh(163.3), DUR, True, 3.0),
+}
+v4.V2_WINDOWS['private'] = (21.0, 92.0)  # levelled like the explanations' groove (then 2 dB under the build)
+LOCK = INSERT_AT + 2.0  # the switch or lock click; it goes in the pause after "drawings?" when that pause is near, to stay off the words
 
 
 def onsets(x, thr=-30.0):
@@ -165,23 +185,24 @@ def other_effects(N):
     place(sfx, S('shimmer'), SWEEP - 0.1, db(-17))
     for a, b in v4.CROSS:
         place(sfx, S('whoosh'), (a + b) / 2 - 0.07, db(-14))
-    place(sfx, V2S('hit'), TL['type']['at'] - 0.02, db(-6))
-    place(sfx, V2S('hit2'), TL['type']['cut'] - 0.02, db(-11))
+    place(sfx, V2S('hit'), sh(TL['type']['at']) - 0.02, db(-6))
+    place(sfx, V2S('hit2'), sh(TL['type']['cut']) - 0.02, db(-11))
     for c in TL['clicks']:
-        place(sfx, V2S('click'), c - 0.01, db(-17))
+        place(sfx, V2S('click'), sh(c) - 0.01, db(-17))
     for b in TL['big']:
-        place(sfx, V2S('hit2'), b - 0.05, db(-10))
-    place(sfx, swell, TL['close'] - len(swell) / SR, db(-11))
-    place(sfx, S('shimmer'), 162.95 - 0.1, db(-19))
+        place(sfx, V2S('hit2'), sh(b) - 0.05, db(-10))
+    place(sfx, swell, sh(TL['close']) - len(swell) / SR, db(-11))
+    place(sfx, S('shimmer'), sh(162.95) - 0.1, db(-19))
     return sfx
 
 
 def main():
     OUT.mkdir(exist_ok=True)
-    N = int(v4.DUR * SR)
+    N = int(DUR * SR)
     voice = np.zeros((N, 2), np.float32)
     place(voice, mono(A / 'voice-v3' / 'opening.wav'), 0.0)
     place(voice, mono(A / 'voice-v3' / 'narration.wav'), 0.0)
+    place(voice, mono(A / 'voice-v3' / 'private.wav'), 0.0)
     env = v4.v3.envelope(voice)
     duck = (1 - (1 - db(-8)) * env)[:, None]
     m2 = v4.v2_music()
@@ -191,6 +212,14 @@ def main():
     build = mono(A / 'music-v4' / f'{VARIANT}-build.mp3')
     period = beat_period(build[: int(20 * SR)])
     cards, rest = claps_layer(N, voice, period, report)
+    words = json.loads((A / 'voice-v3' / 'private.json').read_text())['words']
+    i = next(k for k, w in enumerate(words) if w['text'].startswith('drawings'))
+    a, b = words[i]['end'], words[i + 1]['start']
+    lock_at = a + 0.15 if b - a >= 0.35 and abs((a + b) / 2 - LOCK) <= 0.6 else LOCK  # its click-clack spans ~0.15 s
+    lock = v4.peak_norm(mono(A / 'sfx-v4' / 'lock.mp3'))
+    place(rest, lock, lock_at - (onsets(lock, -20)[0] if onsets(lock, -20) else 0.0), db(-8))  # ducked and kept under any word
+    report['private'] = {'insert_at': INSERT_AT, 'seconds': INSERT_S, 'lock_click': round(lock_at, 3), 'type_card_hit': round(sh(TL['type']['at']) - 0.02, 3),
+                         'part2': sh(TL['type']['cut']), 'night': round(sh(TL['close']), 3), 'logo_chord': sh(163.3), 'duration': round(DUR, 3)}
     rest, most = keep_under(rest * duck, voice)
     claps = cards * duck + rest
     report['claps_kept_under_words'] = {'margin_db': 6.0, 'most_turned_down_db': round(most, 1)}
