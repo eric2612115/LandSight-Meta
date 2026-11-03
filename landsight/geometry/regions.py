@@ -1,6 +1,8 @@
 """Sheet furniture that must not be counted: the legend box (圖例 / LEGEND), the title block (圖名 / 工程名稱 / 圖號 /
 比例) and the plant schedule (植栽表 / 數量表 / SCHEDULE). A region is the smallest connected group of line work,
-holes filled, that contains the keyword text and covers at most 30% of the sheet (so the sheet frame never is)."""
+holes filled, that contains the keyword text and covers at most 30% of the sheet (so the sheet frame never is).
+A building outline (every layer of the shape a building layer, such as A-BLDG) is not landscape either: a plan may
+show the building over the site for reference, and its outline and hatch are never counted as an area."""
 
 from __future__ import annotations
 
@@ -18,6 +20,15 @@ KEYWORDS = {
     "schedule": ("植栽表", "數量表", "SCHEDULE"),
     "title": ("圖名", "工程名稱", "圖號", "比例", "TITLE"),
 }
+
+
+BUILDING_LAYER = re.compile(r"(^|[-_ ])(BLDG|BUILDING)($|[-_ ])", re.IGNORECASE)
+
+
+def is_building(item) -> bool:
+    """A shape drawn on building layers only (A-BLDG, A-BLDG-OUTL, BUILDING ...)."""
+    layers = getattr(item, "layers", None)
+    return bool(layers) and all(BUILDING_LAYER.search(name or "") for name in layers)
 
 
 @dataclass
@@ -52,10 +63,13 @@ def find_regions(model: Model) -> list[Region]:
 
 def exclude(model: Model, items, regions: list[Region] | None = None) -> list[Region]:
     """Mark every item (shape or candidate, anything with .footprint and .excluded) lying inside a legend, title
-    block or schedule region; return the regions found."""
+    block or schedule region, and every building outline ("building"); return the regions found."""
     regions = find_regions(model) if regions is None else regions
     grown = [(r, r.polygon.buffer(0.05)) for r in regions]
     for item in items:
+        if is_building(item):
+            item.excluded = "building"
+            continue
         fp = item.footprint
         for r, g in grown:
             if g.contains(fp):

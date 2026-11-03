@@ -10,8 +10,8 @@ export type Step = 'upload' | 'choose' | 'analyze' | 'review'
 export const STEPS: Step[] = ['upload', 'choose', 'analyze', 'review']
 export type Sample = 'greenfield' | 'tower'
 
-/** The stored runs of the two samples on the live API (landsight.db), and what the recorded source holds. */
-export const SAMPLE_RUN: Record<Sample, string> = { greenfield: '0a45e5bfc345', tower: '97e35639fb8d' }
+/** The sample packages' folders as the API lists them (GET /api/projects). */
+export const SAMPLE_FOLDER: Record<Sample, string> = { greenfield: 'samples/greenfield', tower: 'samples/tower' }
 
 export type Chip = { sheetId: string; objectId: string; kind: string; sheetNo: string }
 export type Turn = { id: number; q: string; shown: string; chip?: Chip; a?: Answer; error?: string; marked?: boolean; added?: boolean }

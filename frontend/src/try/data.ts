@@ -1,22 +1,36 @@
-/** Where the quick review's data comes from: a sample's stored run (GET /api/runs/{id} on the live API; the recorded
- * greenfield run on ?source=repo), an uploaded folder (lib/upload.ts), the ask (POST /api/ask with `lang`) and a
+/** Where the quick review's data comes from: a sample's latest stored run on the live API (reviewed from the
+ * recordings first when the package has none; the recorded greenfield run on ?source=repo), an uploaded folder (lib/upload.ts), the ask (POST /api/ask with `lang`) and a
  * person's decisions (POST …/decision, live only, D-78). */
 import { fetchRun, postDecision } from '../lib/api'
 import { ask as askRecorded, type Answer } from '../lib/ask'
 import type { SourceKind } from '../lib/source'
 import type { Run } from '../lib/types'
 import { capMessage, detailOf, formOf, NEEDS_LIVE, runOfUpload, uploadingLine, type Picked, type UploadResponse } from '../lib/upload'
-import { SAMPLE_RUN, type Sample } from './store'
+import { SAMPLE_FOLDER, type Sample } from './store'
 
-/** Muse Spark's answer to the film's question, as the API recorded it (tests/fixtures/ask/ask_package__f43d079dd4347e70.json,
- * recorded on the greenfield sample, replayed by POST /api/ask on run 0a45e5bfc345). */
+/** Muse Spark's answer to the film's question, as the API recorded it (tests/fixtures/ask/ask_package__89f6e3abb36bb298.json,
+ * recorded on the greenfield sample, replayed by POST /api/ask on the sample's run). */
 export const RECORDED_T10 = Object.values(import.meta.glob<Answer>('./recorded-ask.json', { eager: true, import: 'default' }))[0]
 
 export async function loadSample(sample: Sample, src: SourceKind): Promise<Run> {
   if (src !== 'live' && sample === 'tower') throw new Error('The tower’s run is stored in landsight.db: start the API (landsight serve) to open it.')
-  const run = await fetchRun(src, src === 'live' ? SAMPLE_RUN[sample] : undefined)
+  const run = await fetchRun(src, src === 'live' ? await sampleRunId(sample) : undefined)
   if (!run) throw new Error('No run')
   return run
+}
+
+/** The live API's run of a sample: its package's latest run, or a first review from the recordings (offline, about
+ * 10 s) when a fresh landsight.db has none. */
+async function sampleRunId(sample: Sample): Promise<string> {
+  const r = await fetch('/api/projects', { cache: 'no-store' })
+  if (!r.ok) throw new Error(`GET /api/projects → ${r.status}`)
+  const projects = (await r.json()) as { packages: { package_id: number; folder: string; latest_run?: { id?: string } | null }[] }[]
+  const pkg = projects.flatMap((p) => p.packages).find((k) => k.folder === SAMPLE_FOLDER[sample])
+  if (!pkg) throw new Error(`the API lists no ${SAMPLE_FOLDER[sample]} package`)
+  if (pkg.latest_run?.id) return pkg.latest_run.id
+  const made = await fetch(`/api/packages/${pkg.package_id}/review`, { method: 'POST' })
+  if (!made.ok) throw new Error(`POST /api/packages/${pkg.package_id}/review → ${made.status}`)
+  return ((await made.json()) as Run).run_id
 }
 
 /** An uploaded folder: the caps, the project (the first, else a new "Quick review"), the multipart POST, the run. */

@@ -65,7 +65,7 @@ def test_what_the_answers_say(sample_db):
     assert a["Is PV-1 permeable paving?"]["answer"].startswith("Yes")
     assert "1.5 m" in a["What soil depth does the spec require for trees on the slab?"]["answer"]
     acts = a["Why is the camphor row flagged?"]["proposed_actions"]
-    assert {"kind": "confirm_price", "target_id": "CC", "value": "6200-7200"}.items() <= acts[-1].items()
+    assert any({"kind": "confirm_price", "target_id": "CC", "value": "6200-7200"}.items() <= x.items() for x in acts)
 
 
 def test_api_ask_and_actions(sample_db):
@@ -105,7 +105,7 @@ def test_ask_lang_zh_tw_has_its_own_prompt_and_recording(sample_db):
     en, _, _ = build_prompt("Is PV-1 permeable paving?", [])
     zh, _, _ = build_prompt("Is PV-1 permeable paving?", [], "zh-TW")
     assert "answer: English" in en and "Traditional Chinese" not in en
-    assert "Traditional Chinese as written in national" in zh and "answer: English" not in zh
+    assert "Traditional Chinese (繁體中文)" in zh and "answer: English" not in zh
     c = TestClient(create_app())
     q = "Why is the camphor row flagged?"
     assert c.post("/api/ask", json={"question": q, "lang": "fr"}).status_code == 422

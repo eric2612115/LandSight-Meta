@@ -26,13 +26,15 @@ plt.rcParams["svg.fonttype"] = "none"
 
 DASHES = {"DASHED": "--", "HIDDEN": "--", "CENTER": "-.", "PHANTOM": (0, (8, 2, 1, 2, 1, 2)), "DASHDOT": "-.", "DOT": ":"}
 HATCH_MARKS = {"ANSI31": "///", "GRASS": "..", "DOTS": "..", "BRICK": "++", "AR-SAND": "...", "AR-B816": "xx",
-               "AR-CONC": "oo", "EARTH": "\\\\", "ANSI35": "\\\\", "ANSI36": "--", "ANSI37": "||", "HONEY": "oo"}
+               "AR-CONC": "oo", "NET": "+", "EARTH": "\\\\", "ANSI35": "\\\\", "ANSI36": "--", "ANSI37": "||", "HONEY": "oo"}
 # filled=True colours, by hatch pattern (the synthetic site's conventions; unknown patterns fall back to grey)
 FILL_COLOURS = {"ANSI31": "#9ccc8a", "GRASS": "#d9efc2", "DOTS": "#d9efc2", "BRICK": "#e4d2b0", "AR-SAND": "#d8d6cf",
                 "AR-B816": "#b9bcb4", "AR-CONC": "#cfcfcf", "SOLID": "#000000",
+                "NET": "#ffffff",  # a building (L-1's tower above): left white, as a coloured plan leaves buildings
                 # the tower's planters and roof lawn (landsight.synth.tower)
                 "ANSI35": "#c9df8a", "ANSI36": "#a8d5ba", "ANSI37": "#e3c98a", "HONEY": "#cfe8b0"}
 CANOPY_FILL, CANOPY_EDGE, HEDGE_FILL = "#8fbf7f", "#2f6b2f", "#2e6b3a"
+HATCH_COLOURS = {"NET": "#c4c4c4"}  # line hatch colour by pattern ("#777777" otherwise): a building's hatch stays light
 
 
 def _linestyle(linetype: str):
@@ -109,7 +111,8 @@ def render_png(model: Model, path: str | Path | None = None, filled: bool = Fals
                                    hatchcolor="#3f7f3f"))
         else:
             ax.add_patch(PathPatch(_poly_path(hatch.polygon), facecolor="none", edgecolor="none", lw=0,
-                                   hatch=HATCH_MARKS.get(pattern, "//"), hatchcolor="#777777"))
+                                   hatch=HATCH_MARKS.get(pattern, "//"),
+                                   hatchcolor=HATCH_COLOURS.get(pattern, "#777777")))
     if filled:
         from landsight.geometry import canopy_shapes, hedge_bands
 

@@ -49,7 +49,7 @@ VERSION = "review-0.1"
 UNIT = {"\u682a": "plant", "\u68f5": "plant",  # the take-off's Chinese plant units
         "EA": "plant", "m²": "m2", "m2": "m2", "m": "m"}
 CJK = re.compile(r"[\u2e80-\u9fff\uf900-\ufaff\u3000-\u303f\uff00-\uffef\uac00-\ud7af]+")
-CITY_EN = ["municipal", "New municipal", "municipal", "local", "municipal", "municipal", "municipal", "municipal", "municipal"]
+CITY_EN = ["municipal", "New municipal", "municipal", "municipal", "municipal", "municipal", "municipal", "municipal"]
 
 
 # --------------------------------------------------------------------------------------------- context
@@ -634,6 +634,12 @@ def _furniture(d, regions, shapes) -> list[dict]:
                         "centre": [_r(v) for v in s.centre], "area_m2": round(s.area, 2),
                         "outline": _ring(s.polygon.exterior.coords), "closed": True, "by": "geometry",
                         "excluded": {"reason": "inside the legend box: a key, not a plant", "rule": "geometry: legend region"}})
+        elif s.excluded == "building":
+            out.append({"object_id": f"X-{len(out) + 1:02d}", "kind": "building", "label": "building outline",
+                        "centre": [_r(v) for v in s.centre], "area_m2": round(s.area, 2),
+                        "outline": _ring(s.polygon.exterior.coords), "closed": True, "by": "geometry",
+                        "excluded": {"reason": "a building outline drawn for reference: not landscape, not counted",
+                                     "rule": "geometry: building layer"}})
     if d.match_line:
         out.append({"object_id": f"X-{len(out) + 1:02d}", "kind": "match_line", "label": d.match_line["text"],
                     "centre": list(d.match_line["centre"]), "outline": _ring(d.match_line["line"]) if d.match_line["line"] else [],

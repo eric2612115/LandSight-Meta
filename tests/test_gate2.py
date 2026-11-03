@@ -27,8 +27,8 @@ def test_sam_measures_the_raster_presentation_plan(sample_db):
     _, run = sample_db
     sam = {i["label"]: i for i in run["items"] if i.get("source") == "sam"}
     assert set(sam) == {"Camphor", "Lawn", "Azalea", "Fire truck access lane — keep clear"}
-    assert (sam["Lawn"]["proposed_count"], sam["Lawn"]["against"]["diff_pct"]) == (195.0, -2.5)
-    assert (sam["Azalea"]["proposed_count"], sam["Azalea"]["against"]["diff_pct"]) == (146.0, -2.7)
+    assert (sam["Lawn"]["proposed_count"], sam["Lawn"]["against"]["diff_pct"]) == (195.7, -2.2)
+    assert (sam["Azalea"]["proposed_count"], sam["Azalea"]["against"]["diff_pct"]) == (146.4, -2.4)
     assert sam["Camphor"]["proposed_count"] == 11 == sam["Camphor"]["against"]["symbols"]["drawn"]
     assert all(not i["agreed"] and i["quote_count"] is None and i["sam"]["prompt_source"] == "spark_raster_plan"
                for i in sam.values())

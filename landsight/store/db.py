@@ -84,7 +84,7 @@ TABLES = ("projects", "packages", "runs", "checks", "decisions", "confirmations"
 PRICE_SEED = [
     # code, name, spec, unit, low, high, basis, source
     ("CC", "Camphor (Cinnamomum camphora)", "cal. 10 cm, H3.0-3.5 m, installed", "EA", 6200, 7200, "published_budget",
-     "P006 local 6,149 (2021); P002 municipal 7,036 (2022)"),
+     "P006 municipal budget 6,149 (2021); P002 municipal budget 7,036 (2022)"),
     ("DU", "Duranta (Duranta erecta)", "H0.6 m, installed", "plant", 130, 160, "published_budget", "P024 shrub planted 146"),
     ("AZ", "Azalea (Rhododendron spp.)", "4-5 in. pot, installed", "plant", 140, 170, "published_budget",
      "P026 150; P027 140"),
@@ -134,16 +134,20 @@ def connect(path: str | Path | None = None, create: bool = True) -> sqlite3.Conn
 
 
 def init(conn: sqlite3.Connection) -> dict:
-    """Create the tables and seed price_list, species and rules where empty. Returns the row counts."""
+    """Create the tables, seed price_list where empty (the firm edits it), and load species and rules again from
+    landsight/data (reference data, never edited in the database). Returns the row counts."""
     conn.executescript(SCHEMA)
     with conn:
         if not conn.execute("SELECT 1 FROM price_list LIMIT 1").fetchone():
             conn.executemany("INSERT INTO price_list VALUES (?,?,?,?,?,?,?,?,?)",
                              [(*r, now()) for r in PRICE_SEED])
-        if not conn.execute("SELECT 1 FROM species LIMIT 1").fetchone():
-            conn.executemany("INSERT INTO species VALUES (?,?,?,?,?,?,?,?,?)", species_rows())
-        if not conn.execute("SELECT 1 FROM rules LIMIT 1").fetchone():
-            conn.executemany("INSERT INTO rules VALUES (?,?,?,?,?,?,?,?)", rule_rows())
+        species, rules = species_rows(), rule_rows()
+        if [tuple(r) for r in conn.execute("SELECT * FROM species ORDER BY rowid")] != [tuple(r) for r in species]:
+            conn.execute("DELETE FROM species")
+            conn.executemany("INSERT INTO species VALUES (?,?,?,?,?,?,?,?,?)", species)
+        if [tuple(r) for r in conn.execute("SELECT * FROM rules ORDER BY rowid")] != [tuple(r) for r in rules]:
+            conn.execute("DELETE FROM rules")
+            conn.executemany("INSERT INTO rules VALUES (?,?,?,?,?,?,?,?)", rules)
     return stats(conn)
 
 
@@ -166,7 +170,7 @@ def species_rows() -> list[tuple]:
     out = []
     with (DATA / "species.csv").open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            native = {"true": 1, "false": 0}.get((r.get("native_to_national") or "").lower())
+            native = {"true": 1, "false": 0}.get((r.get("native") or "").lower())
             try:
                 gi = float(r.get("gi_class") or "")
             except ValueError:
@@ -212,7 +216,7 @@ def rule_rows() -> list[tuple]:
                 node = node[p]
         except (KeyError, IndexError, TypeError):
             node = {}
-        put(key, "article", "local" if key.startswith("TC") else "national", article, article, gloss,
+        put(key, "article", "municipal" if key.startswith("TC") else "national", article, article, gloss,
             citation(key)["url"], node)
 
     def cite_of(node):
@@ -237,7 +241,7 @@ def rule_rows() -> list[tuple]:
                     parts.append(f"{k.replace('_', ' ')}: {inner}")
         return "; ".join(parts)[:900]
 
-    for jur in ("national", "municipal", "local"):
+    for jur in ("national", "municipal", "municipal"):
         sec = data.get(jur) or {}
         if not isinstance(sec, dict):
             continue

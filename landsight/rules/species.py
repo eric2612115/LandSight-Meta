@@ -1,5 +1,5 @@
 """The plant data the greening rule needs, read from landsight/data/species.csv (60 sourced species: the 技術規範 表1 Gi
-class, native to national, bird- or butterfly-attracting, names and codes, each with its source) plus the 表1 Gi classes.
+class, native, bird- or butterfly-attracting, names and codes, each with its source) plus the 表1 Gi classes.
 
 A tree counts toward ra (formula (6)) when it is native OR bird- or butterfly-attracting. Species not in the table are
 counted conservatively (small tree, Gi 1.0, not counted toward ra) and the greening check says "needs review: species
@@ -29,7 +29,7 @@ TREE_CLASSES = ("eco_multilayer", "broadleaf_large", "small_tree", "palm")
 GI_BY_VALUE = {v[0]: k for k, v in GI.items()}
 
 # The short English name the product already uses on screen for a few species (the CSV's own name_en otherwise).
-SHORT_EN = {"CC": "Camphor", "BJ": "Bischofia", "KF": "national golden-rain tree", "DE": "Duranta", "AZ": "Azalea"}
+SHORT_EN = {"CC": "Camphor", "BJ": "Bischofia", "KF": "Flamegold", "DE": "Duranta", "AZ": "Azalea"}
 NOT_IN_TABLE = "needs review: species not in table"
 
 
@@ -39,7 +39,7 @@ class Species:
     en: str
     botanical: str
     gi_class: str
-    native: bool | None  # native to national (species.csv native_to_national); None: not a species
+    native: bool | None  # native (species.csv native); None: not a species
     attracting: bool | None = None  # bird or butterfly attracting (species.csv); None: unknown
     code: str = ""
     aliases_zh: tuple[str, ...] = ()
@@ -90,7 +90,7 @@ def table() -> tuple[Species, ...]:
         aliases = tuple(a.strip() for a in re.split(r"[,，]", r.get("aliases_zh") or "") if a.strip()
                         and "(" not in a)
         out.append(Species(r["name_zh"].strip(), en, r["scientific"].strip(), _gi_class(r),
-                           _flag(r["native_to_national"]), _flag(r["bird_or_butterfly_attracting"]), code, aliases, names))
+                           _flag(r["native"]), _flag(r["bird_or_butterfly_attracting"]), code, aliases, names))
     return tuple(out + GENERIC)
 
 

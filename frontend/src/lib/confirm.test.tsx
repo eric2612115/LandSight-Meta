@@ -47,7 +47,7 @@ describe('confirm on the live backend', () => {
     expect(next.tally[0].status).toBe('confirmed')
     const { obj } = askedObject(next, it)
     const { host } = render(createElement(SparkCrop, { spark: it.spark!, obj, showPoints: true }))
-    expect(host.querySelector('img')?.getAttribute('src')).toBe('/api/crops/I-01.png')
+    expect(host.querySelector('img')?.getAttribute('src')).toMatch(/^\/api\/crops\/I-01\.png\?run=\w+$/) // the crop of this run
     expect(host.querySelector('[role="alert"]')).toBeNull()
   })
 

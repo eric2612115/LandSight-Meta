@@ -221,7 +221,7 @@ function sheetLooks(run: Run, sheet: Sheet, sel: Flag | undefined, item: Item | 
 
 /** Rev A under Rev B: its outlines dashed, and an arrow for every object that moved. */
 function Ghost({ twin, moved, k }: { twin: Sheet; moved: ReturnType<typeof movedBetween>; k: number }) {
-  const quiet = new Set(['legend', 'title_block', 'schedule', 'match_line'])
+  const quiet = new Set(['legend', 'title_block', 'schedule', 'match_line', 'building'])
   return (
     <g pointerEvents="none">
       {twin.objects.filter((o) => !quiet.has(o.kind)).map((o) => (

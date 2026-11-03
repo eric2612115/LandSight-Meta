@@ -63,9 +63,9 @@ def _dims(sh: _Sheet, a, b, text: str, h: float, tick: float, offset_text: float
 # --------------------------------------------------------------------------------------------- L-1 Rev B
 
 
-def sheet_l1_rev_b(m: Messiness, opts: SiteOptions, seed: int = 0) -> _Sheet:
+def sheet_l1_rev_b(m: Messiness, opts: SiteOptions, seed: int = 0, tower_above: bool = False) -> _Sheet:
     """Rev B of L-1. It uses the same random layer assignment as Rev A, as a revision saved from Rev A would."""
-    return _sheet_l1(m, random.Random(7 + seed), opts, revision=REV_B, name="L-1 Rev B")
+    return _sheet_l1(m, random.Random(7 + seed), opts, revision=REV_B, name="L-1 Rev B", tower_above=tower_above)
 
 
 # --------------------------------------------------------------------------------------------- L-0
@@ -77,7 +77,7 @@ def sheet_l0(opts: SiteOptions) -> _Sheet:
     _title_block(sh, 54, -7.5, "L-0")  # first, so a reader looking for the title block finds this one first
     sh.text("GREENFIELD RESIDENCES", 2.0, 27.5, 2.4)
     sh.text("LANDSCAPE PACKAGE", 2.0, 24.6, 1.4)
-    sh.text("local, national — landscape over basement slab", 2.0, 22.8, 0.8)
+    sh.text("Landscape over basement slab", 2.0, 22.8, 0.8)
     sh.text(f"{opts.revision.note} · REV {opts.revision.letter} · {opts.revision.date}", 2.0, 21.4, 0.7)
     sh.text("DEVELOPER: GREENFIELD DEVELOPMENT CO. (SAMPLE)", 40.0, 24.6, 0.6)
     sh.text("LANDSCAPE CONSULTANT: SAMPLE LANDSCAPE STUDIO", 40.0, 23.4, 0.6)

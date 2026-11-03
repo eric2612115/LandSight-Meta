@@ -89,8 +89,8 @@ CITATIONS = [
 
 def jurisdiction(site: SiteFacts) -> str:
     if site.is_municipal and site.municipal_class:
-        return f"national rule + municipal β (Art. 6) · {site.city_en}"
-    return f"national rule · {site.city_en}"
+        return "local building code + municipal β (Art. 6)"
+    return "local building code"
 
 
 def tree_ai(site: SiteFacts) -> float:
@@ -406,7 +406,7 @@ def check(site: SiteFacts, items: list[Planting], tree_ai_m2: float | None = Non
         Term("ΣGi·Ai", "綠化固碳量合計", "sum of Gi × Ai", round(sigma, 2), UNIT,
              " + ".join(f"{ln.gi * ln.area:.1f}" for ln in lines) + f" = {sigma:.1f}", "", "式(2)"),
         Term("ra", "原生或誘鳥誘蝶樹種比例", "share of native or bird/butterfly-attracting trees", round(ra, 3), "",
-             ra_formula, "species.csv (native_to_national, bird_or_butterfly_attracting)", "式(6)"),
+             ra_formula, "species.csv (native, bird_or_butterfly_attracting)", "式(6)"),
         Term("α", "生態綠化優待係數", "native-tree bonus", round(alpha, 3), "", f"0.8 + 0.5 × {ra:.2f} = {alpha:.2f}", "",
              "式(5)"),
         Term("TCO2", "綠化總固碳當量", "provided carbon fixation", round(tco2, 2), UNIT,

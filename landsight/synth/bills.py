@@ -86,7 +86,7 @@ IRRIGATION_QUOTE_NO, IRRIGATION_DATE = "IQ-417", "2026-09-09"
 # "published_budget" where city budget rows bracket the range, "sample" where no direct source exists.
 PRICE_LIST = [  # item, spec, unit, low, high, basis, source
     ("Camphor (Cinnamomum camphora)", "cal. 10 cm, H3.0-3.5 m, installed", "EA", 6200, 7200, "published_budget",
-     "P006 local 6,149 (2021); P002 municipal 7,036 (2022)"),
+     "P006 municipal budget 6,149 (2021); P002 municipal budget 7,036 (2022)"),
     ("Duranta (Duranta erecta)", "H0.6 m, installed", "plant", 130, 160, "published_budget", "P024 shrub planted 146"),
     ("Azalea (Rhododendron spp.)", "4-5 in. pot, installed", "plant", 140, 170, "published_budget",
      "P026 150; P027 140"),

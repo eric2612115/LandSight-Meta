@@ -107,8 +107,8 @@ def package_sheets(opts: SiteOptions = PACKAGE_OPTIONS, m: Messiness = PACKAGE_M
     import random
 
     rng = random.Random(7 + seed)
-    sheets = {"L-1": _sheet_l1(m, rng, opts), "L-2": _sheet_l2(m, rng, opts), "L-3": _sheet_l3(m, rng, opts),
-              "L-4": _sheet_l4(m, opts), "L-1 Rev B": S.sheet_l1_rev_b(m, opts, seed), "L-0": S.sheet_l0(opts),
+    sheets = {"L-1": _sheet_l1(m, rng, opts, tower_above=True), "L-2": _sheet_l2(m, rng, opts), "L-3": _sheet_l3(m, rng, opts),
+              "L-4": _sheet_l4(m, opts), "L-1 Rev B": S.sheet_l1_rev_b(m, opts, seed, tower_above=True), "L-0": S.sheet_l0(opts),
               "L-5": S.sheet_l5(opts), "L-6": S.sheet_l6(opts), "L-7": S.sheet_l7(opts), "L-8": S.sheet_l8(opts),
               "D-01": S.drain_cover_detail()}
     return sheets

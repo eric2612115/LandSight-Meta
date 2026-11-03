@@ -247,7 +247,7 @@ def test_answer_key_is_deterministic(pkg):
 
 def test_english_site_from_generate(tmp_path):
     key = generate(tmp_path, options=SiteOptions(lang="en"))
-    assert key["site"]["name"].startswith("Greenfield Residences")
+    assert key["site"]["name"].startswith("Greenfield Residences — landscape")
     assert key["totals"]["tree"] == {"CAMPHOR": 8} and key["totals"]["lawn"] == {"LAWN": 200.0}
     assert "odd_objects" in key and key["odd_objects"] == []
     texts = [t.content for t in load(key["paths"]["L-1"]).texts]
@@ -256,3 +256,24 @@ def test_english_site_from_generate(tmp_path):
     assert odd["totals"] == key["totals"] and len(odd["odd_objects"]) == 5
     with pytest.raises(ValueError):
         SiteOptions(tree_in_fire_lane=True)  # the odd objects are English only
+
+
+def test_l1_shows_the_tower_above_and_never_counts_it(tmp_path):
+    """L-1 (Rev A and B) draws the tower's 28 x 18 m footprint north of the site on A-BLDG, hatched and labelled; the
+    sheet frame grows north to hold it while the site, legend and title block stay put. The take-off excludes it."""
+    from landsight.geometry import close, exclude
+    from landsight.synth import site as S
+
+    sheets = package_sheets()
+    for name in ("L-1", "L-1 Rev B"):
+        model = load(sheets[name].save(tmp_path, f"{name}.dxf"))
+        bldg = [e for e in model.entities if e.layer == "A-BLDG"]
+        assert len(bldg) == 1 and bldg[0].geometry.bounds == S.TOWER_ABOVE
+        assert [h.pattern for h in model.hatches if h.layer == "A-BLDG"] == ["NET"]
+        assert any(t.content == "TOWER ABOVE — see the tower package" for t in model.texts)
+        assert S.TOWER_ABOVE[1] > S.SITE_H and model.bounds[3] == pytest.approx(S.FRAME_TOP_TOWER, abs=0.01)
+        closed = close(model)
+        exclude(model, closed.shapes + closed.candidates)
+        tower = [s for s in closed.shapes if s.polygon.bounds == S.TOWER_ABOVE]
+        assert tower and all(s.excluded == "building" for s in tower)
+    assert not any(e.layer == "A-BLDG" for e in load(sheets["L-3"].save(tmp_path, "L-3.dxf")).entities)

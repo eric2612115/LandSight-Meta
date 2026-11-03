@@ -93,7 +93,7 @@ function Cite({ run, c }: { run: Run; c: Check }) {
     return (
       <div className="cite min-w-0 overflow-hidden">
         <div className="h">{c.citation.article.replace(/, Design and Construction Part/, '')}</div>
-        <p className="line-clamp-5">{c.citation.gloss} <a href={c.citation.url} target="_blank" rel="noreferrer">{host}</a></p>
+        <p className="line-clamp-5">{c.citation.gloss}{c.citation.url && <> <a href={c.citation.url} target="_blank" rel="noreferrer">{host}</a></>}</p>
       </div>
     )
   }

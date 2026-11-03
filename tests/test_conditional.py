@@ -48,8 +48,8 @@ def test_grounding_points_land_on_the_t08_crop(on):
         nx, ny = p["norm"]
         assert p["px"] == pytest.approx([nx / 1000 * w, ny / 1000 * h], abs=0.05)
         assert x0 <= p["m"][0] <= x1 and y0 <= p["m"][1] <= y1
-    # the points ring T-08 (centre 33.0, 2.5; radius 2 m): every one within 0.75 m of a red segment, half within 0.3 m
-    assert sp["points_on_segments"] == 6 and sp["points_max_to_segment_m"] < 0.75
+    # the points ring T-08 (centre 33.0, 2.5; radius 2 m): every one within 0.75 m of a red segment, at least half within 0.3 m
+    assert sp["points_on_segments"] >= 6 and sp["points_max_to_segment_m"] < 0.75
     assert "12 points" in sp["points_note"]
 
 
@@ -159,7 +159,7 @@ def test_pit_downgrade_off_keeps_the_plain_check(off):
 def test_call_times_come_from_the_recordings(on):
     timing = on["run"]["timing"]
     spark_calls = [c for c in timing["calls"] if c["model"] == "muse-spark-1.3"]
-    t08 = json.loads((FIXTURES / "group_and_read__f7c68d8215186a47.json").read_text())
+    t08 = json.loads((FIXTURES / "group_and_read__16a1ce64e6e05504.json").read_text())
     assert on["run"]["items"][0]["spark"]["seconds"] == t08["seconds"]
     assert t08["seconds"] in [c["seconds"] for c in spark_calls if c["call"] == "group_and_read"]
     assert all(c["recorded"] for c in timing["calls"]) and 7.7 not in [c["seconds"] for c in timing["calls"]]

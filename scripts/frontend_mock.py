@@ -44,7 +44,8 @@ def main() -> int:
         print(f"frontend-mock/{name}: {len(json.dumps(data)) // 1024} KB")
     urls = [s[k] for s in run["sheets"] for k in ("svg_url", "png_url", "filled_png_url") if s.get(k)]
     urls += [i["spark"]["crop_url"] for i in run["items"] if i.get("spark")]
-    wanted = {OUT / u.lstrip("/") for u in urls}
+    # stored at the URL's path: the dev server serves /frontend-mock/<path> and drops the query (?run=<run_id>)
+    wanted = {OUT / u.split("?")[0].lstrip("/") for u in urls}
     for stale in (OUT / "api").rglob("*") if (OUT / "api").is_dir() else []:
         if stale.is_file() and stale not in wanted:
             stale.unlink()
@@ -53,7 +54,7 @@ def main() -> int:
         r = c.get(url)
         if r.status_code != 200:
             raise SystemExit(f"{url}: HTTP {r.status_code}")
-        target = OUT / url.lstrip("/")
+        target = OUT / url.split("?")[0].lstrip("/")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(r.content)
         total += len(r.content)

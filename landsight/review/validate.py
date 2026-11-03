@@ -9,7 +9,7 @@ VERDICTS = {"drawing_vector", "drawing_raster", "drawing_image", "bill", "quote"
 DECIDED_BY = {"ext", "content", "spark"}
 SHEET_KINDS = {"plan", "elevation", "detail", "schedule", "legend", "cover", "background"}
 OBJECT_KINDS = {"tree", "existing_tree", "hedge", "shrub_bed", "lawn", "paving", "planter_edge", "legend", "title_block",
-                "schedule", "fire_lane", "boundary", "match_line"} | {"scale_bar", "tree_pit", "revision_cloud"}
+                "schedule", "fire_lane", "boundary", "match_line"} | {"scale_bar", "tree_pit", "revision_cloud", "building"}
 OBJECT_BY = {"geometry", "spark", "sam"}
 UNITS = {"plant", "m2", "m"}
 CATEGORIES = {"quantity", "revision", "sheet", "area", "scale", "bill", "price", "arithmetic", "units", "regulation",

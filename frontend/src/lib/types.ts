@@ -25,6 +25,7 @@ export type FileVerdict = {
 export type ObjectKind =
   | 'tree' | 'existing_tree' | 'hedge' | 'shrub_bed' | 'lawn' | 'paving' | 'planter_edge' | 'legend'
   | 'title_block' | 'schedule' | 'fire_lane' | 'boundary' | 'match_line' | 'scale_bar' | 'tree_pit' | 'revision_cloud'
+  | 'building'
 
 export type DrawingObject = {
   object_id: string

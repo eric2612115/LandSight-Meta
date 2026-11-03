@@ -94,7 +94,7 @@ def _cover(planted: set) -> S._Sheet:
     S._title_block(sh, 54, -7.5, "L-0")
     sh.text("RIVERSIDE COURT", 2.0, 27.5, 2.4)
     sh.text("LANDSCAPE PACKAGE", 2.0, 24.6, 1.4)
-    sh.text("local, national — landscape over basement slab", 2.0, 22.8, 0.8)
+    sh.text("Landscape over basement slab", 2.0, 22.8, 0.8)
     index = INDEX_B if "index_missing" in planted else [r for r in INDEX_B if r[0] != "L-5"]
     rows = [["DRAWING INDEX"], ["SHEET NO.", "TITLE", "SCALE", "REV"]] + [[n, t, sc, "A"] for n, t, sc in index]
     box = S._table(sh, 2.0, 19.0, [4.5, 14.0, 4.0, 2.5], rows, 1.0, h=0.5)

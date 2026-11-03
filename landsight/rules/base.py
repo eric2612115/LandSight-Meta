@@ -8,8 +8,8 @@ from dataclasses import asdict, dataclass, field
 
 PASS, FAIL, NEEDS_REVIEW, NOT_APPLICABLE, SKIPPED = "pass", "fail", "needs_review", "not_applicable", "skipped"
 
-CITY_EN = {"本市": "municipal", "本市": "municipal", "鄰市市": "New municipal", "本市市": "municipal", "本市": "local",
-           "本市": "local", "本市市": "municipal", "本市市": "municipal", "本市市": "municipal", "本市市": "municipal",
+CITY_EN = {"本市": "municipal", "本市": "municipal", "鄰市市": "New municipal", "本市市": "municipal",
+           "本市市": "municipal", "本市市": "municipal", "本市市": "municipal", "本市市": "municipal",
            "本市市": "municipal", "本市市": "municipal"}
 SITE_CLASSES = ("ordinary", "school_park", "commercial_industrial")
 
@@ -21,7 +21,7 @@ class SiteFacts:
     site_area_m2: float | None  # A0 基地面積
     coverage_ratio: float | None  # r 建蔽率, as a fraction
     hard_to_green_m2: float = 0.0  # Ap 執行綠化有困難之面積 (0 unless given)
-    city: str = ""  # as written, e.g. 本市
+    city: str = ""  # as written, e.g. 本市; empty when the title block names none
     site_class: str = "ordinary"  # ordinary | school_park | commercial_industrial (sets β and tree Ai)
     municipal_class: int | None = None  # 本市新建建築物綠化實施規則 Art. 4 class 1-5, when known
     new_building: bool = True  # §298: the rule applies to new buildings
@@ -108,7 +108,7 @@ class Fix:
 class RuleResult:
     rule: str  # greening | protected_trees | municipal_green_cover
     title: str
-    jurisdiction: str  # e.g. "national rule · local"
+    jurisdiction: str  # e.g. "local building code"
     status: str  # pass | fail | needs_review | not_applicable | skipped
     required: float | None = None
     provided: float | None = None
@@ -146,7 +146,7 @@ def parse_ratio(text: str) -> float | None:
 
 
 def city_of(project: str) -> str:
-    """The city named at the start of a project title (本市綠邑社區景觀工程 -> 本市)."""
+    """The city named at the start of a project title (本市綠邑社區景觀工程 -> 本市); empty when none is named."""
     return next((c for c in CITY_EN if c in (project or "")), "")
 
 

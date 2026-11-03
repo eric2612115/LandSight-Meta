@@ -2,7 +2,7 @@
 
 Sheets (DXF R2010, units metres, origin at the site's south-west corner, x east, y north):
 
-- L-1 植栽配置平面圖 (1:200): a 50 x 30 m site (1,500 m2) in 本市. Eight 樟樹 in a frontage row along the south
+- L-1 植栽配置平面圖 (1:200): a 50 x 30 m site (1,500 m2). Eight 樟樹 in a frontage row along the south
   road edge at 4 m spacing, each a canopy of radius 2.0 m drawn as 12 straight pieces plus a "+" centre; a double
   hedge of 金露花 (two parallel lines 0.4 m apart, 27.0 m long) along the east boundary; a hatched shrub bed of 杜鵑
   (150 m2); a hatched lawn of 草皮 (200 m2); a legend box (圖例) with one tree symbol, one shrub swatch and one hedge
@@ -29,7 +29,8 @@ Conventions the answer key depends on:
 - `schedule_on_own_sheet` moves the 植栽表 off L-1 onto a separate sheet L-4 (植栽表, with its own title block), as
   in packages where the schedule is a sheet of its own; the answer key is unchanged.
 
-SiteOptions (D-16, docs/PACKAGE.md "The site"): `lang="en"` writes the same site in English ("Greenfield Residences — landscape over basement slab": CAMPHOR, DURANTA, AZALEA, LAWN; a title block with SITE AREA,
+SiteOptions (D-16, docs/PACKAGE.md "The site"): `lang="en"` writes the same site in English ("Greenfield Residences —
+landscape over basement slab": CAMPHOR, DURANTA, AZALEA, LAWN; a title block with SITE AREA,
 BUILDING COVERAGE, ARTIFICIAL GROUND, REV and DATE; an English plant schedule with botanical names). The default
 `lang="zh"` output is unchanged and exists for the original tests. The odd objects are English-only options, each
 off by default, and none of them changes what is counted:
@@ -78,7 +79,7 @@ PAVING = {  # label -> (box, hatch pattern); 212 / 48 / 36 m2
 }
 PLANTER_BOX = (6.0, 16.0, 14.0, 19.0)  # perimeter 22 m
 SHRUB_PATTERN, LAWN_PATTERN = "ANSI31", "GRASS"
-PROJECT = "本市綠邑社區景觀工程"
+PROJECT = "綠邑社區景觀工程"
 DATE = "2026-11-01"
 TEXT_H = 0.6
 
@@ -99,11 +100,17 @@ RPZ_FACTOR = 1.5  # root protection zone radius = 1.5 x the canopy radius (dashe
 ROAD_TREE = (39.0, -2.6)  # in the road reserve, south of the boundary
 FIRE_LANE_BOX = (0.0, 6.0, 4.0, 29.0)  # 4.0 m wide along the west edge, 92 m2
 FIRE_LANE_PATTERN = "EARTH"
+# the tower over the basement (landsight.synth.tower's 28 x 18 m floor plate), drawn north of the site on L-1 as a
+# reference outline: outside the landscape scope, not planting, not counted
+TOWER_ABOVE = (6.0, 32.5, 34.0, 50.5)
+TOWER_ABOVE_LABEL = "TOWER ABOVE — see the tower package"
+TOWER_ABOVE_LAYER, TOWER_ABOVE_PATTERN = "A-BLDG", "NET"
+FRAME_TOP, FRAME_TOP_TOWER = 33.0, 52.5
 LANE_TREE = (2.0, 17.0)
 
 TEXT = {
     "zh": {
-        "city": "本市", "tree": TREE.name_zh, "hedge": HEDGE.name_zh, "shrub": SHRUB.name_zh, "lawn": LAWN.name_zh,
+        "tree": TREE.name_zh, "hedge": HEDGE.name_zh, "shrub": SHRUB.name_zh, "lawn": LAWN.name_zh,
         "planter": "花台", "ea": "株", "spec": TREE_SPEC, "road": "計畫道路 8M", "typ": "樟樹 typ.", "group": "{n}-樟樹",
         "hedge_label": "金露花 H0.6 @0.3m 雙排", "hedge_label_x": 38.0, "hedge_note": "H0.6 @0.3m 雙排",
         "shrub_label": SHRUB.name_zh, "lawn_label": LAWN.name_zh, "legend_tree": TREE.name_zh,
@@ -113,7 +120,7 @@ TEXT = {
         "style": ("CJK", "msjh.ttc"),
     },
     "en": {  # objects in the answer key carry the common name; the drawing labels plants by code
-        "city": "local", "tree": TREE.label("en"), "hedge": HEDGE.label("en"), "shrub": SHRUB.label("en"),
+        "tree": TREE.label("en"), "hedge": HEDGE.label("en"), "shrub": SHRUB.label("en"),
         "lawn": LAWN.label("en"), "planter": "PLANTER", "ea": "EA", "spec": "H3.5 W1.5 cal. 10 cm",
         "road": "PLANNED ROAD 8 M", "typ": f"{TREE.code} typ.", "group": f"{{n}} {TREE.code}",
         "hedge_label": f"{HEDGE.code} H0.6 @0.3m o.c. DOUBLE ROW", "hedge_label_x": 34.5,
@@ -516,7 +523,9 @@ def _legend_y0(n_extra: int) -> float:
 
 
 def _sheet_l1(m: Messiness, rng: random.Random, opts: SiteOptions | None = None, revision: Revision | None = None,
-              name: str = "L-1") -> _Sheet:
+              name: str = "L-1", tower_above: bool = False) -> _Sheet:
+    """tower_above: the tower's outline north of the site, on a sheet frame grown north to hold it (the title block,
+    legend and site keep their places)."""
     opts = opts or SiteOptions()
     T = TEXT[opts.lang]
     rev = revision or opts.revision
@@ -524,9 +533,11 @@ def _sheet_l1(m: Messiness, rng: random.Random, opts: SiteOptions | None = None,
     tree_layers = TREE_LAYERS if m.layer_chaos else TREE_LAYERS[:1]
     hatch_layer = (lambda: rng.choice(HATCH_LAYERS)) if m.layer_chaos else (lambda: "HATCH")
 
-    sh.rect(-3, -9, 77, 33, layer="FRAME")
+    sh.rect(-3, -9, 77, FRAME_TOP_TOWER if tower_above else FRAME_TOP, layer="FRAME")
     sh.poly(_box_pts((0, 0, SITE_W, SITE_H)), layer="SITE", close=True, linetype="PHANTOM")
     sh.text(T["road"], 20.0, -2.2, 0.8)
+    if tower_above:
+        _tower_above(sh)
 
     centres = tree_centres()
     moved = {i: (dx, dy) for i, dx, dy in rev.moves}
@@ -587,6 +598,16 @@ def _sheet_l1(m: Messiness, rng: random.Random, opts: SiteOptions | None = None,
     _title_block(sh, 54, -7.5, "L-1")
     _scale_bar_and_north(sh, 0.0, -5.0, 44.0)
     return sh
+
+
+def _tower_above(sh: _Sheet) -> None:
+    """The tower's footprint as a closed outline on the building layer with a light hatch and one label."""
+    layer = sh.layer(TOWER_ABOVE_LAYER)
+    pts = _box_pts(TOWER_ABOVE)
+    sh.poly(pts, layer=layer, close=True)
+    sh.hatch(pts, TOWER_ABOVE_PATTERN, layer=layer, scale=0.5)
+    cx, cy = _box_centre(TOWER_ABOVE)
+    sh.text(TOWER_ABOVE_LABEL, cx - text_width(TOWER_ABOVE_LABEL, 0.8) / 2, cy - 0.4, 0.8)
 
 
 def _revision_cloud(sh: _Sheet, centre, r: float, letter: str, arc: float = 0.5, bulge: float = 0.8):
@@ -931,7 +952,7 @@ def site_key(sheets: list[_Sheet], m: Messiness, opts: SiteOptions | None = None
     objects = [o for sh in sheets for o in sh.objects]
     naive = sum(1 for o in objects if (o.sheet, o.kind) in (("L-1", "tree"), ("L-1", "existing_tree"), ("L-2", "elevation_tree")))
     key = {
-        "site": {"name": PROJECT if zh else PROJECT_EN, "city": T["city"], "width_m": SITE_W, "depth_m": SITE_H,
+        "site": {"name": PROJECT if zh else PROJECT_EN, "width_m": SITE_W, "depth_m": SITE_H,
                  "area_m2": SITE_W * SITE_H, "units": "m", "sheets": {sh.name: sh.title for sh in sheets}},
         "messiness": asdict(m) | {"tag": m.tag, "tree_gaps_cm": [round(g * 100) for g in m.tree_gaps_m()]},
         "schedule": {T["tree"]: 12 if m.schedule_mismatch else TREE_N, T["hedge"]: hedge_count(), T["shrub"]: 150.0,
@@ -942,7 +963,7 @@ def site_key(sheets: list[_Sheet], m: Messiness, opts: SiteOptions | None = None
     }
     if opts != SiteOptions():
         key["site"] |= {"building_coverage": 0.4, "ground": "artificial (landscape over basement slab)",
-                        "jurisdiction": "national rule (local)"}
+                        "jurisdiction": "local building code"}
         key["options"] = asdict(opts)
         key["species"] = [{k: v for k, v in s.items() if k != "name_zh"} for s in species_table()]
         key["counted_trees"] = {sh.name: sum(o.quote_count for o in sh.objects if o.kind == "tree")

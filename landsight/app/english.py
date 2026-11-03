@@ -7,20 +7,20 @@ from __future__ import annotations
 import re
 
 GLOSSARY = {  # longest first at use time
-    "本市綠邑社區景觀工程": "Greenfield Residences landscape works, local",
+    "綠邑社區景觀工程": "Greenfield Residences landscape works",
     "植栽配置平面圖": "Planting Plan", "南向立面圖": "South Elevation", "鋪面計畫圖": "Paving Plan",
     "植栽表合計": "plant schedule total", "植栽表": "plant schedule", "數量表": "quantity schedule", "圖例": "legend",
     "計畫道路": "planned road", "工程名稱": "project", "圖名": "title", "圖號": "drawing no.", "比例": "scale",
     "基地面積": "site area", "建蔽率": "building coverage", "日期": "date",
-    "樟樹": "Camphor", "茄苳": "Bischofia", "茄冬": "Bischofia", "國內欒樹": "national golden-rain tree",
-    "國內欒樹": "national golden-rain tree", "小葉欖仁": "Madagascar almond", "金露花": "Duranta", "杜鵑": "Azalea",
+    "樟樹": "Camphor", "茄苳": "Bischofia", "茄冬": "Bischofia", "欒樹": "Flamegold (golden-rain tree)",
+    "小葉欖仁": "Madagascar almond", "金露花": "Duranta", "杜鵑": "Azalea",
     "草皮": "Lawn", "草坪": "Lawn", "透水磚": "Permeable pavers", "洗石子": "Exposed aggregate", "植草磚": "Grass pavers",
     "花台": "Planter edge", "花臺": "Planter edge",
     "生態複層": "multilayer planting", "闊葉大喬木": "broadleaf large tree", "闊葉小喬木": "small broadleaf tree",
     "針葉喬木": "conifer", "疏葉喬木": "sparse-leaf tree", "棕櫚類": "palm", "灌木": "shrub", "多年生蔓藤": "perennial vine",
     "草花花圃": "flower bed", "喬木": "trees", "圖面": "drawing",
     "雙排": "2 rows", "米高徑": "cal.", "米徑": "cal.", "株/m²": "plants/m²", "株": "plants",
-    "本市": "local", "本市": "local", "本市": "municipal", "本市": "municipal",
+    "本市": "municipal", "本市": "municipal",
 }
 _KEYS = sorted(GLOSSARY, key=len, reverse=True)
 _CJK = re.compile(r"[⺀-鿿豈-﫿　-〿＀-￯]+")

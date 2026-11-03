@@ -259,7 +259,7 @@ const PAVING: { id: string; label: string; box: Box; code: string }[] = [
   { id: 'P-03', label: 'Grass pavers', box: [31, 9, 37, 15], code: 'GP' },
 ]
 const L1_BOUNDS: Box = [-3, -9, 77, 33]
-const PROJECT = 'GREENFIELD RESIDENCES, local'
+const PROJECT = 'GREENFIELD RESIDENCES'
 
 type Obj = Record<string, unknown> & { object_id: string; kind: string; outline: number[][] }
 
@@ -538,8 +538,9 @@ function sheetL0() {
   const dr = new Drawing()
   frame(dr, L1_BOUNDS)
   dr.text('GREENFIELD RESIDENCES', 4, 25.5, 2.6, { bold: true })
-  dr.text('LANDSCAPE PACKAGE · local, national', 4, 22.6, 1.1)
+  dr.text('LANDSCAPE PACKAGE', 4, 22.6, 1.1)
   dr.text('LANDSCAPE OVER BASEMENT SLAB', 4, 20.8, 0.8, { colour: '#5b616b' })
+  dr.text('DEVELOPER: GREENFIELD DEVELOPMENT CO. (SAMPLE)', 4, 19.4, 0.7, { colour: '#5b616b' })
   const rows: (string | null)[][] = [
     ['DRAWING INDEX'],
     ['L-0', 'COVER AND INDEX'], ['L-1', 'PLANTING PLAN'], ['L-2', 'SOUTH ELEVATION'], ['L-3', 'PAVING PLAN'],
@@ -949,7 +950,7 @@ function main() {
     why: 'One tree species gives no native-tree bonus (α 0.8). Σ Gi × Ai = 335.1, × 0.8 = 268.1, below the 297.0 required for a 1,500 m² ordinary site at 40% coverage.',
     evidence: { sheet_ids: ['L-1'], object_ids: [...trees8, 'H-01', 'B-01', 'L-01'] },
     citation: { article: 'Building Technical Regulations §302 — greening carbon-fixation requirement', url: `${BTR}302`, gloss: 'The planting’s total carbon fixation must exceed ½ × the minimum greening area × β (β 0.66 on an ordinary site).' },
-    numbers: { required: 297.0, A0: 1500, Ap: 0, r: 0.4, A_prime: 900, beta: 0.66, provided: 268.1, sigma: 335.1, alpha: 0.8, ra: 0, unit: 'kgCO₂e/yr', jurisdiction: 'national rule · local', terms } as Record<string, unknown>,
+    numbers: { required: 297.0, A0: 1500, Ap: 0, r: 0.4, A_prime: 900, beta: 0.66, provided: 268.1, sigma: 335.1, alpha: 0.8, ra: 0, unit: 'kgCO₂e/yr', jurisdiction: 'local building code', terms } as Record<string, unknown>,
     fixes: [
       { label: '+2 Camphor, the same species', result: 306.5, passes: true },
       { label: 'swap 2 of 8 Camphor for Bischofia (Bischofia javanica), a second native species — α 0.8 → 1.3, no extra trees', result: 435.6, passes: true },
@@ -972,7 +973,7 @@ function main() {
     ck('E12', 'regulation', 'flag', ['spark', 'rule'], 'Tree pits on the slab are too shallow for large trees', 'L-6: pit 1.2 × 1.2 m (1.44 m²), soil 0.8 m on the basement slab. Large trees then count as small: Gi 1.5 → 1.0.', { sheet_ids: ['L-6'] }, { citation: { article: 'Greening Design Technical Specification, Table 1 — carbon fixation by planting type', url: 'https://www.nlma.gov.tw/', gloss: 'On artificial ground, soil depth and pit size set which Gi class a tree may claim.' }, numbers: { pit_m2: 1.44, soil_m: 0.8, gi_from: 1.5, gi_to: 1.0 } }),
     ck('E13', 'bill', 'flag', ['bill', 'spark'], 'Azalea: 450 plants for 150 m² is 3 per m²; the schedule asks 4', 'At 4 plants per m² the bed needs 600. The bill is 150 plants short.', { cells: ['BOQ rev2!C7'], object_ids: ['B-01'], sheet_ids: ['L-1'] }, { numbers: { row: 7, bill_text: 'Azalea, H0.4', bill_qty: 450, bill_unit: 'EA', unit_price: 120, drawn_qty: 600, item_id: 'I-03', align_confidence: 0.94 } }),
     greening,
-    ck('E15', 'protected_tree', 'review', ['spark', 'rule'], 'Existing camphor DBH 95 cm marked "to be removed"', 'A trunk of this size may be a protected tree under the city’s rule. Removal needs a review before the permit.', { sheet_ids: ['L-1'], object_ids: ['X-01'] }, { citation: { article: 'local City Tree Protection Ordinance — trees of protected size', url: 'https://lawsearch.local.gov.tw/', gloss: 'Trees above a set trunk size may not be removed without approval.' }, numbers: { dbh_cm: 95 } }),
+    ck('E15', 'protected_tree', 'review', ['spark', 'rule'], 'Existing camphor DBH 95 cm marked "to be removed"', 'A trunk of this size may be a protected tree under the local tree protection rule. Removal needs a review before the permit.', { sheet_ids: ['L-1'], object_ids: ['X-01'] }, { citation: { article: 'Local tree protection rule — trees of protected size', url: '', gloss: 'Trees above a set trunk size may not be removed without approval.' }, numbers: { dbh_cm: 95 } }),
     ck('E16', 'scale', 'flag', ['geometry', 'spark'], 'L-5: the title block says 1:200, the scale bar measures 1:100', 'Areas measured on this sheet at the title-block scale would be four times too large.', { sheet_ids: ['L-5'], object_ids: ['TB-01'] }, { numbers: { title: '1:200', measured: '1:100' } }),
     ck('E17', 'bill', 'flag', ['bill', 'geometry'], 'Hedge: bill 150 plants, drawing 182', '27.0 m at 0.3 m in two rows is 182 plants. The bill prices 150 — 32 short.', { cells: ['BOQ rev2!C6'], object_ids: ['H-01'], sheet_ids: ['L-1'] }, { numbers: { row: 6, bill_text: 'Duranta hedge, H0.6, 2 rows', bill_qty: 150, bill_unit: 'EA', unit_price: 180, drawn_qty: 182, item_id: 'I-02', align_confidence: 0.93 } }),
     ck('E18', 'bill', 'info', ['spark'], '"Camphore tree" aligned to Camphor at lower confidence', 'BOQ rev1a spells it "Camphore tree"; Muse Spark aligned it to CC Camphor at 0.81.', { file_ids: ['f23'], cells: ['BOQ rev1a!B5'] }, { numbers: { align_confidence: 0.81 } }),

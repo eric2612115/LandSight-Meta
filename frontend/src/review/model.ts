@@ -42,7 +42,7 @@ export function twinOf(run: Run, sheet: Sheet): Sheet | undefined {
  * one of the same kind on the other revision: a match 0.3–6 m away has moved. */
 export function movedBetween(a: Sheet, b: Sheet) {
   const out: { id: string; from: [number, number]; to: [number, number]; d: number }[] = []
-  const quiet = new Set(['legend', 'title_block', 'schedule', 'scale_bar', 'boundary', 'match_line'])
+  const quiet = new Set(['legend', 'title_block', 'schedule', 'scale_bar', 'boundary', 'match_line', 'building'])
   for (const o of b.objects) {
     if (!o.centre || quiet.has(o.kind)) continue
     let best: { c: [number, number]; d: number } | undefined

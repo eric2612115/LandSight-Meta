@@ -12,7 +12,7 @@ from landsight.rules import Planting, SiteFacts, check_all, format_rules, greeni
 from landsight.rules.base import parse_area, parse_ratio
 from landsight.takeoff import run
 
-local = dict(site_area_m2=1500.0, coverage_ratio=0.4, city="本市")
+SITE = dict(site_area_m2=1500.0, coverage_ratio=0.4)
 
 
 def plantings(trees: dict[str, int] | None = None, hedge_m2: float = 10.8, confirmed: bool = True,
@@ -40,14 +40,14 @@ def m4(tmp_path_factory):
 def test_title_block_gives_site_area_coverage_and_city(m4):
     fields = title_block(load(m4.sheets[0].model.path))
     assert fields["基地面積"] == "1,500 m²" and fields["建蔽率"] == "40%" and fields["圖號"] == "L-1"
-    assert (m4.site.site_area_m2, m4.site.coverage_ratio, m4.site.city_en) == (1500.0, 0.4, "local")
+    assert (m4.site.site_area_m2, m4.site.coverage_ratio, m4.site.city_en) == (1500.0, 0.4, "unknown city")
     assert m4.site.sources["site_area_m2"].startswith("title block L-1")
     assert parse_area("0.15 ha") == 1500 and parse_ratio("0.4") == 0.4 and parse_ratio("40 %") == 0.4
 
 
 def test_m4_site_fails_302_with_the_measured_numbers(m4):
     res = m4.rules[0]
-    assert res.rule == "greening" and res.jurisdiction == "national rule · local"
+    assert res.rule == "greening" and res.jurisdiction == "local building code"
     assert res.status == "fail" and res.required == 297.0 and res.provided == 265.9
     assert term(res, "A′").value == 900 and term(res, "β").value == 0.66
     assert term(res, "Gi·Ai", "樟樹").value == 192.0
@@ -72,7 +72,7 @@ def test_m4_fixes_more_trees_or_one_second_native_species(m4):
 
 
 def test_plan_md_arithmetic_with_a_16_m2_hedge():
-    res = greening.check(SiteFacts(**local), plantings(hedge_m2=16.0))
+    res = greening.check(SiteFacts(**SITE), plantings(hedge_m2=16.0))
     assert res.provided == 268.0 and res.status == "fail"
     fixes = {f.id: f for f in res.fixes}
     assert fixes["a"].provided == pytest.approx(306.4) and fixes["b"].provided == pytest.approx(435.5)
@@ -80,14 +80,14 @@ def test_plan_md_arithmetic_with_a_16_m2_hedge():
 
 def test_two_species_with_one_native_gets_half_the_bonus():
     # 小葉欖仁: not native, no bird/butterfly source, and a sparse-leaf tree (疏葉喬木, Gi 1.0) per species.csv
-    res = greening.check(SiteFacts(**local), plantings({"樟樹": 4, "小葉欖仁": 4}))
+    res = greening.check(SiteFacts(**SITE), plantings({"樟樹": 4, "小葉欖仁": 4}))
     assert term(res, "ra").value == 0.5 and term(res, "α").value == 1.05
     assert term(res, "Gi·Ai", "小葉欖仁").value == 64.0 and term(res, "Gi·Ai", "樟樹").value == 96.0
     assert res.status == "pass" and res.provided == pytest.approx(315.4, abs=0.05) and not res.fixes
 
 
 def test_sparse_leaf_row_counts_gi_1_and_the_swap_picks_a_native_from_the_table():
-    res = greening.check(SiteFacts(**local), plantings({"小葉欖仁": 8}))
+    res = greening.check(SiteFacts(**SITE), plantings({"小葉欖仁": 8}))
     assert term(res, "Gi·Ai", "小葉欖仁").value == 128.0 and res.provided == pytest.approx(214.7)
     b = next(f for f in res.fixes if f.id == "b")
     assert b.change["swap"]["to"] == "樟樹" and b.change["swap"]["to_native"] is True  # the fewest swaps, natives first
@@ -108,15 +108,15 @@ def test_species_come_from_the_csv():
 
 def test_ra_counts_bird_or_butterfly_attracting_trees():
     # 阿勃勒 (Cassia fistula) is not native but attracts birds and butterflies: formula (6) counts it
-    res = greening.check(SiteFacts(**local), plantings({"樟樹": 4, "阿勃勒": 4}))
+    res = greening.check(SiteFacts(**SITE), plantings({"樟樹": 4, "阿勃勒": 4}))
     assert term(res, "ra").value == 1.0 and term(res, "α").value == 1.3
     assert "native or bird/butterfly-attracting of 8 trees" in term(res, "ra").formula
-    kapok = greening.check(SiteFacts(**local), plantings({"小葉欖仁": 4, "木棉": 4}))
+    kapok = greening.check(SiteFacts(**SITE), plantings({"小葉欖仁": 4, "木棉": 4}))
     assert term(kapok, "ra").value == 0.5
 
 
 def test_a_species_not_in_the_table_needs_review():
-    res = greening.check(SiteFacts(**local), plantings({"樟樹": 4, "Ficus foo": 4}))
+    res = greening.check(SiteFacts(**SITE), plantings({"樟樹": 4, "Ficus foo": 4}))
     assert res.status == "needs_review" and not res.fixes  # it would pass, but its class is a guess
     assert any(n.startswith("Ficus foo: needs review: species not in table") for n in res.notes)
     assert term(res, "Gi·Ai", "Ficus foo").value == 64.0 and term(res, "ra").value == 0.5
@@ -125,8 +125,8 @@ def test_a_species_not_in_the_table_needs_review():
 def test_municipal_site_runs_the_municipal_rules():
     site = SiteFacts(site_area_m2=1500.0, coverage_ratio=0.4, city="本市", municipal_class=4)
     green, prot, cover = check_all(site, plantings())
-    assert green.jurisdiction == "national rule + municipal β (Art. 6) · municipal" and green.required == 297.0
-    assert prot.jurisdiction == "municipal · municipal" and prot.notes == ["no existing trees on the plan"]
+    assert green.jurisdiction == "local building code + municipal β (Art. 6)" and green.required == 297.0
+    assert prot.jurisdiction == "local tree protection rule" and prot.notes == ["no existing trees on the plan"]
     assert cover.status == "needs_review" and cover.required == 60.0 and cover.provided == pytest.approx(54.3)
     class1 = greening.check(SiteFacts(site_area_m2=1500.0, coverage_ratio=0.4, city="本市", municipal_class=1), plantings())
     assert term(class1, "β").value == 0.99 and class1.required == pytest.approx(445.5)
@@ -134,7 +134,7 @@ def test_municipal_site_runs_the_municipal_rules():
 
 def test_municipal_rule_is_skipped_outside_municipal(m4):
     cover = m4.rules[2]
-    assert cover.rule == "municipal_green_cover" and cover.status == "skipped" and "local" in cover.notes[0]
+    assert cover.rule == "municipal_green_cover" and cover.status == "skipped" and "does not apply" in cover.notes[0]
 
 
 def test_protected_trees_only_flags_big_existing_trees():
@@ -148,14 +148,14 @@ def test_protected_trees_only_flags_big_existing_trees():
 
 
 def test_small_sites_are_exempt_and_the_open_space_floor_holds():
-    assert greening.check(SiteFacts(site_area_m2=250.0, coverage_ratio=0.4, city="本市"), plantings()).status == \
+    assert greening.check(SiteFacts(site_area_m2=250.0, coverage_ratio=0.4), plantings()).status == \
         "not_applicable"
-    dense = greening.check(SiteFacts(site_area_m2=1500.0, coverage_ratio=0.9, city="本市"), plantings())
+    dense = greening.check(SiteFacts(site_area_m2=1500.0, coverage_ratio=0.9), plantings())
     assert term(dense, "A′").value == 225.0 and "capped at 0.85" in term(dense, "A′").formula
 
 
 def test_an_unconfirmed_count_that_would_flip_the_result_needs_review():
-    res = greening.check(SiteFacts(**local), plantings({"樟樹": 10}, confirmed=False, low=7))
+    res = greening.check(SiteFacts(**SITE), plantings({"樟樹": 10}, confirmed=False, low=7))
     assert res.status == "needs_review" and any("would change" in n for n in res.notes)
 
 
@@ -172,7 +172,7 @@ SLAB_PIT = dict(soil_depth_m=1.0, from_sheet="L-6", on_slab=True, width_m=1.5, l
 def test_pit_of_1_5_to_4_m2_on_a_slab_counts_large_trees_as_small():
     from landsight.rules import PitFacts
 
-    res = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(2.25, **SLAB_PIT))
+    res = greening.check(SiteFacts(**SITE), plantings(), pit=PitFacts(2.25, **SLAB_PIT))
     before, after = res.before_downgrade, res.after_downgrade
     assert before["provided"] == 265.9 and [f["extra_trees"] for f in before["fixes"][:1]] == [2]
     assert term(res, "Gi·Ai", "樟樹").value == 128.0 and "counts as a small tree (Gi 1.5 → 1.0)" in \
@@ -187,7 +187,7 @@ def test_pit_of_1_5_to_4_m2_on_a_slab_counts_large_trees_as_small():
 def test_a_pit_under_1_5_m2_fails_the_small_tree_minimum_and_needs_review():
     from landsight.rules import PitFacts
 
-    res = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(1.44, **SLAB_PIT | {"width_m": 1.2,
+    res = greening.check(SiteFacts(**SITE), plantings(), pit=PitFacts(1.44, **SLAB_PIT | {"width_m": 1.2,
                                                                                               "length_m": 1.2}))
     assert res.status == "needs_review" and res.after_downgrade["review"]
     assert not [t for t in res.terms if t.symbol == "Gi·Ai" and t.zh.startswith("樟樹")]  # not counted
@@ -198,28 +198,28 @@ def test_a_4_m2_pit_keeps_large_trees_and_soil_minimums_are_checked():
     from landsight.rules import PitFacts
     from landsight.rules.greening import pit_class, soil_minimum
 
-    big = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(4.0, **SLAB_PIT))
+    big = greening.check(SiteFacts(**SITE), plantings(), pit=PitFacts(4.0, **SLAB_PIT))
     assert big.after_downgrade["provided"] == big.before_downgrade["provided"] == 265.9
     assert [soil_minimum(c) for c in ("broadleaf_large", "small_tree", "shrub", "lawn")] == [1.0, 0.7, 0.4, 0.1]
     shallow = PitFacts(2.25, **SLAB_PIT | {"soil_depth_m": 0.6})
     assert pit_class("broadleaf_large", shallow)[:2] == ("small_tree", False)  # 0.6 m < the 0.7 m small-tree minimum
     assert pit_class("broadleaf_large", PitFacts(4.0, **SLAB_PIT | {"soil_depth_m": 0.9}))[1] is False  # < 1.0 m
     assert pit_class("small_tree", PitFacts(1.5, **SLAB_PIT | {"soil_depth_m": 0.7}))[:2] == ("small_tree", True)
-    res = greening.check(SiteFacts(**local), plantings(), pit=shallow)
+    res = greening.check(SiteFacts(**SITE), plantings(), pit=shallow)
     assert res.status == "needs_review" and any("below the 0.7 m minimum" in n for n in res.notes)
 
 
 def test_no_downgrade_off_artificial_ground_and_title_block_says_artificial_ground():
     from landsight.rules import PitFacts, site_facts
 
-    ground = greening.check(SiteFacts(**local), plantings(), pit=PitFacts(2.25, 1.0, "L-6", on_slab=False))
+    ground = greening.check(SiteFacts(**SITE), plantings(), pit=PitFacts(2.25, 1.0, "L-6", on_slab=False))
     assert ground.provided == 265.9 and ground.after_downgrade is None
     assert any("not applied" in n for n in ground.notes)
     site = site_facts({"L-1": {"SITE AREA": "1,500 m²", "BUILDING COVERAGE": "40%", "GROUND": "ARTIFICIAL GROUND"}})
     assert site.artificial_ground and site.sources["artificial_ground"] == "title block L-1: GROUND ARTIFICIAL GROUND"
     by_title = greening.check(site, plantings(), pit=PitFacts(2.25, 1.0, "L-6", on_slab=None))
     assert by_title.provided == 214.7 and by_title.after_downgrade["artificial_ground"].startswith("title block L-1")
-    given = greening.check(SiteFacts(**local, artificial_ground=True), plantings(), pit=PitFacts(2.25, 1.0, "given"))
+    given = greening.check(SiteFacts(**SITE, artificial_ground=True), plantings(), pit=PitFacts(2.25, 1.0, "given"))
     assert given.provided == 214.7
 
 
@@ -261,4 +261,6 @@ def test_every_btr_citation_links_its_own_article():
                 walk(v)
 
     walk(rules)
-    assert seen >= 7 and all(citation(k)["url"] for k in CITES)
+    # the municipal tree protection ordinance is cited by name and article only (no city-named address)
+    assert seen >= 7 and all(citation(k)["url"] for k in CITES if not k.startswith("TC-"))
+    assert not citation("TC-TREE-3")["url"] and citation("TC-TREE-3")["article"].startswith("Municipal tree protection")

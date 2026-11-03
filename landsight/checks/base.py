@@ -116,14 +116,14 @@ CITES = {
                "Building Technical Regulations, Design and Construction Part, Art. 92",
                "A corridor in a building whose rooms on one floor total 200 m² or more (100 m² below ground) needs a "
                "clear width of at least 1.2 m, or 1.6 m where rooms open on both sides."),
-    "TC-TREE-3": (["local", "protected_trees", "cite", 0],
-                  "local City Tree Protection Self-Government Ordinance, Art. 3",
+    "TC-TREE-3": (["municipal", "protected_trees", "cite", 0],
+                  "Municipal tree protection ordinance, Art. 3",
                   "A tree outside forestry land is protected if its diameter at 1.3 m is at least 0.8 m, its girth at "
                   "least 2.5 m, or it is at least 50 years old, or rare, or of ecological or cultural value."),
-    "TC-TREE-11": (["local", "protected_trees", "cite", 0],
-                   "local City Tree Protection Self-Government Ordinance, Art. 11",
+    "TC-TREE-11": (["municipal", "protected_trees", "cite", 0],
+                   "Municipal tree protection ordinance, Art. 11",
                    "Development projects must submit tree records and a protection or transplant plan to the "
-                   "Agriculture Bureau and have it approved before work starts; protected trees stay in place as a rule."),
+                   "city's agriculture bureau and have it approved before work starts; protected trees stay in place as a rule."),
 }
 
 
@@ -136,6 +136,6 @@ def citation(key: str) -> dict:
     return {"article": article, "url": url, "gloss": gloss}
 
 
-def local_dbh_threshold() -> tuple[float, float]:
-    t = _get(["local", "protected_trees"])
+def municipal_dbh_threshold() -> tuple[float, float]:
+    t = _get(["municipal", "protected_trees"])
     return float(t["dbh_min_m"]), float(t["girth_min_m"])

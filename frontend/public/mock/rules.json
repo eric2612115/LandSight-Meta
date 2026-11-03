@@ -97,7 +97,7 @@
    "alpha": 0.8,
    "ra": 0,
    "unit": "kgCO₂e/yr",
-   "jurisdiction": "national rule · local",
+   "jurisdiction": "local building code",
    "terms": [
     {
      "label": "Camphor · 8 trees × 16 m²",
@@ -151,7 +151,7 @@
    "spark",
    "rule"
   ],
-  "why": "A trunk of this size may be a protected tree under the city’s rule. Removal needs a review before the permit.",
+  "why": "A trunk of this size may be a protected tree under the local tree protection rule. Removal needs a review before the permit.",
   "evidence": {
    "sheet_ids": [
     "L-1"
@@ -161,8 +161,8 @@
    ]
   },
   "citation": {
-   "article": "local City Tree Protection Ordinance — trees of protected size",
-   "url": "https://lawsearch.local.gov.tw/",
+   "article": "Local tree protection rule — trees of protected size",
+   "url": "",
    "gloss": "Trees above a set trunk size may not be removed without approval."
   },
   "numbers": {

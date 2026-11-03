@@ -88,7 +88,9 @@ def test_scoreboard(run):
 
 def test_regulation_checks_cite_and_e30_names_the_greening_report(run):
     regs = [c for c in run["checks"] if c["category"] in ("regulation", "protected_tree")]
-    assert regs and all(c.get("citation", {}).get("url", "").startswith("https://") for c in regs)
+    assert regs and all(c.get("citation", {}).get("url", "").startswith("https://") for c in regs
+                        if c["category"] != "protected_tree")  # the municipal ordinance: by name and article
+    assert all(c.get("citation", {}).get("article") for c in regs)
     e30 = [c for c in run["checks"] if c["check_id"].startswith("E30")]
     assert e30 and re.search(r"greening quantity report.*TCO2", e30[0]["title"], re.I)
 

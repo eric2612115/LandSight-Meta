@@ -11,7 +11,7 @@ export const sceneSheet = (run: Run, scene: Scene): Sheet | undefined => sheetBy
 
 export const isOpen = (o: DrawingObject) => !o.closed && (o.gaps?.length ?? 0) > 0
 
-const QUIET = new Set(['legend', 'title_block', 'schedule', 'boundary', 'fire_lane', 'match_line'])
+const QUIET = new Set(['legend', 'title_block', 'schedule', 'boundary', 'fire_lane', 'match_line', 'building'])
 
 /** Items whose objects sit on the sheet, in run order. */
 export function itemsOnSheet(run: Run, sheet: Sheet): Item[] {

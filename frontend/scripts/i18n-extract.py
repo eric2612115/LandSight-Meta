@@ -2,7 +2,7 @@
 """i18n-extract.py — every user-visible English string the screen draws from the data, as a template.
 
 Reads the recorded mock (frontend-mock/run.json, run_confirmed.json, package_runs.json, rules.json), the live runs
-(GET /api/runs/{id}: the sample run and the latest run of the tower and held-out packages, from GET /api/projects) and
+(GET /api/runs/{id}: the latest run of the greenfield, tower and held-out packages, from GET /api/projects) and
 the recorded ask answers (tests/fixtures/ask/*.json); takes the fields the screen prints; turns each string into a
 template by replacing every number, id, file name, run id, date and verbatim span (quoted drawing or bill text, Muse
 Spark's own sentences) with ordered placeholders {0}, {1} …; dedupes; writes frontend/src/i18n/zh-TW.data.source.json
@@ -35,8 +35,7 @@ OUT = ROOT / 'frontend' / 'src' / 'i18n' / 'zh-TW.data.source.json'
 DICT = ROOT / 'frontend' / 'src' / 'i18n' / 'zh-TW.data.json'
 ASK_FIXTURES = ROOT / 'tests' / 'fixtures' / 'ask'
 
-SAMPLE_RUN_ID = '0a45e5bfc345'  # package 1, greenfield, the recorded sample
-LIVE_PACKAGE_FOLDERS = ('samples/tower', 'samples/heldout')  # their latest run, from /api/projects
+LIVE_PACKAGE_FOLDERS = ('samples/greenfield', 'samples/tower', 'samples/heldout')  # their latest run, from /api/projects
 
 FILE_EXT = r'(?:dxf|pdf|xlsx|xls|zip|bak|pptx|png)'
 
@@ -193,11 +192,11 @@ def fetch(url: str, timeout: float = 20):
 def live_run_ids(api: str, explicit: list[str]) -> list[str]:
     if explicit:
         return explicit
-    ids = [SAMPLE_RUN_ID]
+    ids: list[str] = []
     try:
         projects = fetch(f'{api}/api/projects')
     except (urllib.error.URLError, OSError, ValueError) as e:
-        print(f'warning: {api}/api/projects not read ({e}); only the sample run id is asked for', file=sys.stderr)
+        print(f'warning: {api}/api/projects not read ({e}); only the files on disk are read', file=sys.stderr)
         return ids
     for p in projects:
         for k in p.get('packages', []):

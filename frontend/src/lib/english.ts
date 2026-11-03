@@ -19,7 +19,7 @@ const BY_CODE: Record<string, Species> = {
   LN: { common: 'Lawn', botanical: 'Axonopus compressus' },
   RH: { common: 'Azalea', botanical: 'Rhododendron simsii' },
   LW: { common: 'Lawn', botanical: 'Axonopus compressus' },
-  KE: { common: 'national golden-rain tree', botanical: 'Koelreuteria elegans' },
+  KE: { common: 'Flamegold (golden-rain tree)', botanical: 'Koelreuteria elegans' },
   TM: { common: 'Madagascar almond', botanical: 'Terminalia mantaly' },
 }
 
@@ -29,7 +29,7 @@ const BY_COMMON: Record<string, Species> = Object.fromEntries(
 
 /** Phrase table for drawing text and labels from Chinese drawings (longest first). */
 const PHRASES: [string, string][] = [
-  ['\u81fa\u4e2d\u5e02\u7da0\u9091\u793e\u5340\u666f\u89c0\u5de5\u7a0b', 'Greenfield Residences Landscape Works'],
+  ['\u7da0\u9091\u793e\u5340\u666f\u89c0\u5de5\u7a0b', 'Greenfield Residences Landscape Works'],
   ['\u690d\u683d\u914d\u7f6e\u5e73\u9762\u5716', 'Planting Plan'],
   ['\u5357\u5411\u7acb\u9762\u5716', 'South Elevation'],
   ['\u92ea\u9762\u8a08\u756b\u5716', 'Paving Plan'],
@@ -38,8 +38,6 @@ const PHRASES: [string, string][] = [
   ['\u8a08\u756b\u9053\u8def', 'road'],
   ['\u5de5\u7a0b\u540d\u7a31', 'project'],
   ['\u57fa\u5730\u9762\u7a4d', 'site area'],
-  ['\u53f0\u7063\u6b12\u6a39', 'national golden-rain tree'],
-  ['\u81fa\u7063\u6b12\u6a39', 'national golden-rain tree'],
   ['\u5c0f\u8449\u6b16\u4ec1', 'Madagascar almond'],
   ['\u690d\u683d\u8868', 'Plant Schedule'],
   ['\u7c73\u9ad8\u5f91', 'cal.'],
@@ -48,10 +46,7 @@ const PHRASES: [string, string][] = [
   ['\u900f\u6c34\u78da', 'permeable pavers'],
   ['\u6d17\u77f3\u5b50', 'exposed aggregate'],
   ['\u690d\u8349\u78da', 'grass pavers'],
-  ['\u81fa\u4e2d\u5e02', 'local'],
-  ['\u53f0\u4e2d\u5e02', 'local'],
-  ['\u81fa\u5317\u5e02', 'municipal'],
-  ['\u53f0\u5317\u5e02', 'municipal'],
+  ['\u6b12\u6a39', 'Flamegold (golden-rain tree)'],
   ['\u6a1f\u6a39', 'Camphor'],
   ['\u675c\u9d51', 'Azalea'],
   ['\u8349\u76ae', 'lawn'],
@@ -104,7 +99,7 @@ export function plantName(label?: string, code?: string, fallback = '', botanica
 const KIND: Record<string, string> = {
   tree: 'tree', existing_tree: 'existing tree', hedge: 'hedge', shrub_bed: 'shrub bed', lawn: 'lawn', paving: 'paving',
   planter_edge: 'planter edge', legend: 'legend', title_block: 'title block', schedule: 'schedule', fire_lane: 'fire lane',
-  boundary: 'boundary', match_line: 'match line',
+  boundary: 'boundary', match_line: 'match line', building: 'building outline',
 }
 export const kindName = (k: string) => KIND[k] ?? en(k.replace(/_/g, ' '), 'object')
 

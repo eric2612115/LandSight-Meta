@@ -20,20 +20,20 @@ CLASSES = {  # class: (綠覆率, 綠容率, β of Art. 6)
 TREE_PLACEHOLDER_M2 = 16.0
 
 URL = "https://laws.gov.municipal/law/LawSearch/LawPrint/FL080927?type=0"
-RULES_EN = "municipal City New Building Greening Rules"
+RULES_EN = "Local greening rule for new buildings"
 CITATIONS = [
-    Citation("Art. 3", "本市新建建築物綠化實施規則 第3條",
+    Citation("Art. 3", "新建建築物綠化實施規則 第3條",
              "Green-cover ratio = green-cover area ÷ legal open-space area; green-volume ratio = equivalent green-cover "
              "area ÷ site area.", f"{RULES_EN}, Art. 3", URL),
-    Citation("Art. 4", "本市新建建築物綠化實施規則 第4條",
+    Citation("Art. 4", "新建建築物綠化實施規則 第4條",
              "Site classes 1–5, e.g. Class 1 new park land ≥ 1 ha; Class 4 sites of 500–1,000 m² or residential "
              "sites ≥ 300 m².", f"{RULES_EN}, Art. 4", URL),
-    Citation("Art. 5", "本市新建建築物綠化實施規則 第5條",
+    Citation("Art. 5", "新建建築物綠化實施規則 第5條",
              "Minimum green-cover ratio / green-volume ratio by class: 1: 90% / 2.0 · 2: 80% / 1.9 · 3: 70% / 1.8 · "
              "4: 60% / 1.6 · 5: 50% / 1.4.", f"{RULES_EN}, Art. 5", URL),
-    Citation("Art. 6", "本市新建建築物綠化實施規則 第6條", "Stricter β: 0.99 (Class 1), 0.83 (Classes 2–3), 0.66 (Classes 4–5).",
+    Citation("Art. 6", "新建建築物綠化實施規則 第6條", "Stricter β: 0.99 (Class 1), 0.83 (Classes 2–3), 0.66 (Classes 4–5).",
              f"{RULES_EN}, Art. 6", URL),
-    Citation("Art. 10", "本市新建建築物綠化實施規則 第10條",
+    Citation("Art. 10", "新建建築物綠化實施規則 第10條",
              "Shrubs at ≥ 4 plants per m²; trees counted by trunk diameter and spacing with a formula of the Urban "
              "Development Department.", f"{RULES_EN}, Art. 10", URL),
 ]
@@ -47,10 +47,10 @@ def site_class(site: SiteFacts) -> int | None:
 
 
 def check(site: SiteFacts, items: list[Planting]) -> RuleResult:
-    res = RuleResult("municipal_green_cover", "municipal green-cover ratio (綠覆率)", f"municipal · municipal", SKIPPED,
+    res = RuleResult("municipal_green_cover", "Green-cover ratio (綠覆率)", "local greening rule", SKIPPED,
                      unit="%", citations=list(CITATIONS))
     if not site.is_municipal:
-        res.notes.append(f"municipal rule (本市新建建築物綠化實施規則); the site is in {site.city_en}, so it does not apply")
+        res.notes.append("a municipal rule (新建建築物綠化實施規則) of a city other than the site's, so it does not apply")
         return res
     cls = site_class(site)
     res.status = NEEDS_REVIEW

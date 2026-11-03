@@ -21,7 +21,7 @@ const row = (code: string, name: string, spec: string, unit: string, low: number
   ({ code, name, spec, unit, low, high, basis, source, updated_at: SEEDED })
 
 export const PRICE_SEED: PriceRow[] = [
-  row('CC', 'Camphor (Cinnamomum camphora)', 'cal. 10 cm, H3.0-3.5 m, installed', 'EA', 6200, 7200, 'published_budget', 'P006 local 6,149 (2021); P002 municipal 7,036 (2022)'),
+  row('CC', 'Camphor (Cinnamomum camphora)', 'cal. 10 cm, H3.0-3.5 m, installed', 'EA', 6200, 7200, 'published_budget', 'P006 municipal budget 6,149 (2021); P002 municipal budget 7,036 (2022)'),
   row('DU', 'Duranta (Duranta erecta)', 'H0.6 m, installed', 'plant', 130, 160, 'published_budget', 'P024 shrub planted 146'),
   row('AZ', 'Azalea (Rhododendron spp.)', '4-5 in. pot, installed', 'plant', 140, 170, 'published_budget', 'P026 150; P027 140'),
   row('LA', 'Lawn (Zoysia matrella)', 'sod, installed', 'm²', 250, 300, 'published_budget', 'P030 sod installed 273'),

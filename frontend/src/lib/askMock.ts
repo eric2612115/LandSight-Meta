@@ -29,12 +29,12 @@ export const RECORDED: Seed[] = [
   {
     question: "Does Article 302 apply to this 1,500 m² site?",
     answer:
-      "Yes. The drawings show SITE AREA 1,500 m², which exceeds the 300 m2 exemption maximum for new buildings, and no local-specific greening rule was found so national Art. 302 with β 0.66 applies. The sources do not explicitly confirm this is a new building, which Art. 298 lists as the applicability trigger.",
+      "Yes. The drawings show SITE AREA 1,500 m², which exceeds the 300 m2 exemption maximum for new buildings, and no local greening rule was found so national Art. 302 with β 0.66 applies. The sources do not explicitly confirm this is a new building, which Art. 298 lists as the applicability trigger.",
     confidence: 0.85,
     citations: [
       { file_id: "F-19", page: 0, quote: "SITE AREA | 1,500 m² | BUILDING COVERAGE | 40% | GROUND | ARTIFICIAL GROUND", verified: true, source: "L-6 Tree Pit Detail.dxf", chunk_id: "sheet:L-6" },
       { file_id: "rules", page: 0, quote: "Art. 298 item 1: applicability: applies to: new buildings ; site area exempt max m2: 300", verified: true, source: "Regulation table (rules.json)", chunk_id: "rule:national.applicability" },
-      { file_id: "rules", page: 0, quote: "No local-specific greening rule found (one search 2026-11-02); national Art. 302 and the apply (β 0.66 for an ordinary site).", verified: true, source: "Regulation table (rules.json)", chunk_id: "rule:local.greening" },
+      { file_id: "rules", page: 0, quote: "No local greening rule found (one search 2026-11-02); national Art. 302 and the apply (β 0.66 for an ordinary site).", verified: true, source: "Regulation table (rules.json)", chunk_id: "rule:local.greening" },
     ],
     proposed_actions: [],
     call: call(8.61, "ask_package__a7718b8c0f4599b0.json"),

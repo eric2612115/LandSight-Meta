@@ -91,13 +91,13 @@ def _image(ch: Chunk) -> bytes | None:
 
 LANGS = ("en", "zh-TW")
 ANSWER_EN = "- answer: English, one to four sentences"
-ANSWER_ZH = ("- answer: Traditional Chinese as written in national (繁體中文), one to four sentences; ids, file names and "
+ANSWER_ZH = ("- answer: Traditional Chinese (繁體中文), one to four sentences; ids, file names and "
              "quoted drawing text stay as written")
 
 
 def build_prompt(question: str, top: list[tuple[float, Chunk]], lang: str = "en") -> tuple[str, list[Chunk], list[Chunk]]:
     """(prompt, the chunks in order, the chunks whose page image is attached). `lang` "zh-TW" asks for the answer in
-    Traditional Chinese (national); the citations' quotes stay verbatim."""
+    Traditional Chinese; the citations' quotes stay verbatim."""
     chunks = [c for _, c in top]
     shown: list[Chunk] = []
     seen_renders = set()

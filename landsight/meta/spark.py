@@ -34,7 +34,7 @@ MODEL = "muse-spark-1.3"
 FIXTURES = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "spark"
 
 SYSTEM = (
-    "You read landscape construction drawings (local practice, labels in Traditional Chinese) for quantity "
+    "You read landscape construction drawings (labels in Traditional Chinese) for quantity "
     "take-off. Answer only from what is drawn. Conventions: 'typ.' on one symbol means every identical symbol is the "
     "same item; it never multiplies. 'N-name' on a leader (for example 8-樟樹) is the size of the group the leader "
     "points into. '×N' at a single symbol means N plants at that symbol. '@S m' along a line of length L means "

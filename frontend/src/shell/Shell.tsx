@@ -119,7 +119,7 @@ export function StatusBar({ run }: { run?: Run }) {
       </div>
       <div className="flex items-center gap-3">
         {rate && <span>1 USD = NT${fmt(rate, 3)} ({run?.currency?.as_of})</span>}
-        <span>· rules: Art. 299 and 302 · greening spec · local tree ordinance ·</span>
+        <span>· rules: local building code, Art. 299 and 302 · local greening rule · local tree protection rule ·</span>
         <span className="text-ink-3">data: {src === 'live' ? 'live API' : src === 'repo' ? 'recorded run (frontend-mock)' : src === 'mock' ? 'built-in mock' : '…'}</span>
         <div className="seg sm" role="group" aria-label="Currency">
           <button className={m.wanted === 'usd' ? 'on' : ''} onClick={() => setCur('usd')}>USD</button>
