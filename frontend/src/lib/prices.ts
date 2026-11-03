@@ -59,18 +59,21 @@ export function applyEdit(rows: PriceRow[], e: PriceEdit): PriceRow[] {
   return rows.map((r, j) => (j === i ? { ...r, ...e, updated_at: now } : r))
 }
 
+/** The list's name as /prices titles it (the API keeps one list per firm and gives it no name of its own). */
+export const PRICE_LIST_NAME = 'Your price list'
+
+export const PRICE_LIST_KEY = ['price-list']
+
+export async function fetchPriceList(): Promise<PriceRow[]> {
+  const r = await fetch('/api/price-list', { cache: 'no-store' })
+  if (!r.ok) throw new Error(`GET /api/price-list → ${r.status}`)
+  return (await r.json()) as PriceRow[]
+}
+
 export function usePriceList() {
   const src = useResolvedSource()
   const mock = useMockPrices((s) => s.rows)
-  const live = useQuery({
-    queryKey: ['price-list'],
-    enabled: src === 'live',
-    queryFn: async () => {
-      const r = await fetch('/api/price-list', { cache: 'no-store' })
-      if (!r.ok) throw new Error(`GET /api/price-list → ${r.status}`)
-      return (await r.json()) as PriceRow[]
-    },
-  })
+  const live = useQuery({ queryKey: PRICE_LIST_KEY, enabled: src === 'live', queryFn: fetchPriceList })
   if (src === 'live') return { rows: live.data ?? [], loading: live.isLoading, error: live.error ? String(live.error) : null, live: true }
   return { rows: mock, loading: false, error: null, live: false }
 }
@@ -106,7 +109,7 @@ export function useSavePrice() {
     },
     onSuccess: (row) => {
       if (src === 'live') {
-        qc.setQueryData<PriceRow[]>(['price-list'], (prev) => (prev ? applyEdit(prev, row) : prev))
+        qc.setQueryData<PriceRow[]>(PRICE_LIST_KEY, (prev) => (prev ? applyEdit(prev, row) : prev))
         useMockPrices.setState((s) => ({ edited: { ...s.edited, [row.code]: row.updated_at } }))
       }
     },

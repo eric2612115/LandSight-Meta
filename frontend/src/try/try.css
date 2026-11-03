@@ -65,6 +65,9 @@
   display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px;
   background: var(--t-s3); color: var(--t-ink-2); font-size: 13px; font-weight: 500; white-space: nowrap;
 }
+.try a.chip { cursor: pointer; }
+.try a.chip:hover, .try .chip.hot { color: var(--t-ink); box-shadow: inset 0 0 0 1px var(--t-accent); }
+.try .btn-s:hover, .try .btn-s.hot { border-color: var(--t-accent); }
 .try .dot { width: 10px; height: 10px; border-radius: 999px; flex: none; }
 .try .g-send { --g: var(--t-red); }
 .try .g-fix { --g: var(--t-amber); }

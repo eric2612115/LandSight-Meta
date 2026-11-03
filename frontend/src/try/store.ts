@@ -27,6 +27,8 @@ export type TryState = {
   /** rows of the file cascade on screen (Infinity: all) */
   rows: number
   topics: Record<Topic, boolean>
+  /** the project's name as a person edited it on Choose, for that run (else the title block's) */
+  projectName?: { runId: string; name: string }
   /** analyze: ms of the replay played so far */
   played: number
   focus?: string
@@ -45,6 +47,8 @@ export type TryState = {
   chat: Turn[]
   marks: Mark[]
   drawer: boolean
+  /** the control the director's cursor rests on (its data-dir), drawn as hovered */
+  hot?: string
   set: (p: Partial<TryState>) => void
   reset: () => void
 }
@@ -53,7 +57,7 @@ const FRESH = {
   step: 'upload' as Step, sample: undefined, run: undefined, busy: undefined, error: undefined, rows: 0,
   topics: { quote: true, code: true, logic: true, files: true }, played: 0, focus: undefined, expanded: undefined, hover: undefined,
   sheetId: undefined, checked: {}, decisions: {}, confirmed: [], tab: 'findings' as const, hoverObj: undefined, chip: undefined,
-  draft: '', chat: [], marks: [], drawer: false,
+  draft: '', chat: [], marks: [], drawer: false, projectName: undefined, hot: undefined,
 }
 
 export const useTry = create<TryState>((set) => ({ ...FRESH, set: (p) => set(p), reset: () => set({ ...FRESH }) }))

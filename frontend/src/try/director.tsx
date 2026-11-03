@@ -1,14 +1,16 @@
 /** The film's Part 2 (demo/SCRIPT-V7.md, 1:30–2:58) played on /try: `?director=1&sample=greenfield`. Every beat sits
  * at an absolute time from t0 (`until`), so the take is the same however long a frame takes; everything the take
- * needs (the run, the sheets, the thumbnails, the crop, the recorded answer, the fonts) is loaded before t0, and the
- * only waits after it are for an element the screen has just drawn. An in-page cursor (above the camera, constant
- * size) moves in ~0.35 s eased, ripples on a click; the camera zooms 1.4–1.8× to its target and back (0.6 s ease
- * in-out). Sound cues go to `window.__cues` ({t, name}, seconds from t0); `window.__director` = {duration, ready,
+ * needs (the run, the sheets, the price list, the thumbnails, the crop, the recorded answer, the fonts) is loaded
+ * before t0, and the only waits after it are for an element the screen has just drawn. An in-page
+ * cursor (above the camera, constant size) moves in ~0.35 s eased, ripples on a click; the camera zooms 1.4–1.8× to
+ * its target and back (0.6 s ease in-out). Sound cues go to `window.__cues` ({t, name}, seconds from t0); `window.__director` = {duration, ready,
  * done, start}. `&wait=1` holds t0 until `__director.start()` (the capture calls it). No randomness anywhere. */
+import { useQueryClient, type QueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { loadSvg } from '../components/SheetView'
 import { useResolvedSource } from '../lib/api'
 import { useCurrency } from '../lib/money'
+import { fetchPriceList, PRICE_LIST_KEY } from '../lib/prices'
 import type { Answer } from '../lib/ask'
 import type { SourceKind } from '../lib/source'
 import type { Run } from '../lib/types'
@@ -153,7 +155,7 @@ const img = (src: string) => new Promise<void>((r) => {
   void i.decode?.().catch(() => undefined)
 })
 
-async function prepare(sample: Sample, src: SourceKind): Promise<{ run: Run; answer: Answer }> {
+async function prepare(sample: Sample, src: SourceKind, qc: QueryClient): Promise<{ run: Run; answer: Answer }> {
   const live = src === 'live'
   const run = await loadSample(sample, src)
   const plan = governingPlan(run)
@@ -161,6 +163,8 @@ async function prepare(sample: Sample, src: SourceKind): Promise<{ run: Run; ans
   await Promise.all([
     ...drawn.map((u) => loadSvg(u)),
     plan ? sheetTexts(plan.svg_url) : null,
+    // the price list's rows are counted on Choose
+    live ? qc.prefetchQuery({ queryKey: PRICE_LIST_KEY, queryFn: fetchPriceList }) : null,
     ...run.sheets.map((s) => (s.png_url ? img(s.png_url) : null)),
     ...run.items.map((it) => (it.spark?.crop_url ? img(it.spark.crop_url) : null)),
     document.fonts.ready,
@@ -208,9 +212,14 @@ async function play(run: Run, t0: number) {
   await click('continue')
   cue('whoosh')
 
-  // 1:40 Choose — the project from the title block; four switches; Analyze
+  // 1:40 Choose — the project from the title block, whose prices and which rules; four switches; Analyze
   await until(11600)
   await zoom('project', 1.5)
+  await until(12300)
+  await moveTo('price-chip', 0.5, 0.5, 350)
+  set({ hot: 'price-chip' })
+  await until(13200)
+  set({ hot: undefined })
   await until(13400)
   await out()
   await until(14000)
@@ -354,6 +363,7 @@ function centreOf(run: Run, sheetId: string, objectId: string): [number, number]
 
 export default function TryDirector() {
   const src = useResolvedSource()
+  const qc = useQueryClient()
   useEffect(() => {
     if (!src) return
     let alive = true
@@ -364,7 +374,7 @@ export default function TryDirector() {
     useCurrency.getState().setCur('usd')
     const sample = (new URLSearchParams(window.location.search).get('sample') ?? 'greenfield') as Sample
     const wait = new URLSearchParams(window.location.search).get('wait') === '1'
-    void prepare(sample, src).then(async ({ run, answer }) => {
+    void prepare(sample, src, qc).then(async ({ run, answer }) => {
       if (!alive) return
       // the recorded answer the API holds (identical to the bundled copy) is the one the film plays
       Object.assign(RECORDED_T10, answer)
@@ -390,6 +400,6 @@ export default function TryDirector() {
     return () => {
       alive = false
     }
-  }, [src])
+  }, [src, qc])
   return null
 }

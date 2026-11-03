@@ -5,7 +5,7 @@ import { useFlags } from '../app/derive'
 import { useNav, useUI } from '../app/state'
 import { shownMoney, shownText } from '../lib/flags'
 import { useMoney } from '../lib/money'
-import { usePriceList, useSavePrice, validate, type PriceRow } from '../lib/prices'
+import { PRICE_LIST_NAME, usePriceList, useSavePrice, validate, type PriceRow } from '../lib/prices'
 import type { Run } from '../lib/types'
 
 const FIELDS = ['code', 'name', 'spec', 'unit', 'low', 'high', 'basis', 'source'] as const
@@ -50,7 +50,7 @@ export function Prices({ run }: { run?: Run }) {
       <section className="flex min-h-0 flex-col bg-pane">
         <div className="flex items-baseline justify-between border-b border-line px-6 pb-3 pt-5">
           <div>
-            <h1 className="text-[22px] font-semibold tracking-[-0.01em]">Your price list</h1>
+            <h1 className="text-[22px] font-semibold tracking-[-0.01em]">{PRICE_LIST_NAME}</h1>
             <div className="mt-1 text-ink-2">Installed rates in NT$, excluding tax{m.cur === 'usd' ? `; USD beside them at NT$${run?.currency?.twd_per_usd ?? ''}` : ''}. Click a cell to edit; Enter or leaving the cell saves it.</div>
           </div>
           <span className="text-ink-3">{list.live ? 'landsight.db · GET /api/price-list' : 'recorded mock · edits stay in this browser tab'}</span>
