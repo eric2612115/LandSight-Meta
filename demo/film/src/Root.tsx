@@ -25,6 +25,9 @@ import {V9} from './scenes/animatic-v9-cues.js';
 import {AnimaticV10} from './scenes/AnimaticV10';
 import type {AnimaticV10Props} from './scenes/AnimaticV10';
 import {V10} from './scenes/animatic-v10-cues.js';
+import {AnimaticV11} from './scenes/AnimaticV11';
+import type {AnimaticV11Props} from './scenes/AnimaticV11';
+import {V11} from './scenes/animatic-v11-cues.js';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -168,6 +171,16 @@ export const Root: React.FC = () => (
     width={V10.width}
     height={V10.height}
     defaultProps={{data: {sheets: ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'].map((id) => ({id, png: `v9/sheets/${id}.png`}))}} satisfies AnimaticV10Props}
+  />
+  {/* Film v11 animatic (demo/SCRIPT-V11.md): node animatic-v11-prepare.mjs and scripts/sam-v11-prepare.py first (public/v11: the capture, the staged sheets; the footprint; the SAM masks); render with --gl=angle */}
+  <Composition
+    id="AnimaticV11"
+    component={AnimaticV11}
+    durationInFrames={Math.round(V11.duration * V11.fps)}
+    fps={V11.fps}
+    width={V11.width}
+    height={V11.height}
+    defaultProps={{sheets: ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'].map((id) => ({id, png: `v11/sheets/${id}.png`}))} satisfies AnimaticV11Props}
   />
   </>
 );

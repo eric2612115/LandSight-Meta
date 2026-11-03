@@ -534,7 +534,7 @@ const Screen: React.FC<{t: number}> = ({t}) => {
         return (
           <>
             <Pane x={60} y={80} w={880} h={500} label="project card · read from the title block · Muse Spark">
-              {['Greenfield Residences', 'local · landscape over a basement slab', 'site area 1,500 m²', 'read from the title block · Muse Spark'].map((l, i) => (
+              {['Greenfield Residences', 'landscape over a basement slab', 'site area 1,500 m²', 'read from the title block · Muse Spark'].map((l, i) => (
                 <Row key={l} y={60 + i * 60} w={820} text={l} a={ov(t, 100.2 + i * 0.3, 100.5 + i * 0.3)} />
               ))}
             </Pane>

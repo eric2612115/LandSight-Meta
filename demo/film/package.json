@@ -20,7 +20,8 @@
     "render:animatic9": "remotion render src/index.ts AnimaticV9 animatic-v9.mp4 --codec h264 --crf 23 --gl=angle",
     "render:animatic10": "remotion render src/index.ts AnimaticV10 animatic-v10.mp4 --codec h264 --crf 23 --gl=angle",
     "stills": "node stills.mjs landsight-v1.mp4 12",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "render:animatic11": "node animatic-v11-prepare.mjs && remotion render src/index.ts AnimaticV11 animatic-v11.mp4 --codec h264 --crf 23 --gl=angle"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",

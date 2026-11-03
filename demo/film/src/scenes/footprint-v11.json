@@ -1,0 +1,127 @@
+{
+ "what": "The tower's footprint on L-1 (Rev A and Rev B draw it alike): a closed outline on layer A-BLDG with a light NET hatch, labelled 'TOWER ABOVE — see the tower package', north of the landscape scope. Sheet coordinates are the DXF's metres (x east, y north, origin at the site's south-west corner); pixel coordinates are in the PNG the API serves for the sheet (/api/sheets/L-1-revB.png = landsight.dxf.render_png(model), origin top-left, y down).",
+ "files": [
+  "samples/greenfield/Greenfield Residences — Landscape Package/Drawings/CAD/L-1 Planting Plan.dxf",
+  "samples/greenfield/Greenfield Residences — Landscape Package/Drawings/CAD/L-1 Planting Plan (Rev B).dxf"
+ ],
+ "label": "TOWER ABOVE — see the tower package",
+ "layer": "A-BLDG",
+ "hatch": "NET",
+ "size_m": {
+  "width": 28.0,
+  "depth": 18.0,
+  "area_m2": 504.0
+ },
+ "sheet": {
+  "units": "m",
+  "outline": [
+   [
+    6.0,
+    32.5
+   ],
+   [
+    34.0,
+    32.5
+   ],
+   [
+    34.0,
+    50.5
+   ],
+   [
+    6.0,
+    50.5
+   ]
+  ],
+  "centre": [
+   20.0,
+   41.5
+  ],
+  "site_boundary": [
+   [
+    0,
+    0
+   ],
+   [
+    50.0,
+    0
+   ],
+   [
+    50.0,
+    30.0
+   ],
+   [
+    0,
+    30.0
+   ]
+  ],
+  "sheet_frame": [
+   [
+    -3,
+    -9
+   ],
+   [
+    77,
+    -9
+   ],
+   [
+    77,
+    52.5
+   ],
+   [
+    -3,
+    52.5
+   ]
+  ]
+ },
+ "render": {
+  "width_px": 2100,
+  "height_px": 1633,
+  "dpi": 150,
+  "window_m": [
+   -4.6,
+   -10.6,
+   78.6,
+   54.1
+  ],
+  "outline": [
+   [
+    267.5,
+    545.2
+   ],
+   [
+    974.3,
+    545.2
+   ],
+   [
+    974.3,
+    90.9
+   ],
+   [
+    267.5,
+    90.9
+   ]
+  ],
+  "centre": [
+   620.9,
+   318.0
+  ],
+  "site_boundary": [
+   [
+    116.1,
+    1365.5
+   ],
+   [
+    1378.1,
+    1365.5
+   ],
+   [
+    1378.1,
+    608.3
+   ],
+   [
+    116.1,
+    608.3
+   ]
+  ]
+ }
+}
