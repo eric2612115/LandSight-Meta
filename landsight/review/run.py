@@ -49,7 +49,6 @@ VERSION = "review-0.1"
 UNIT = {"\u682a": "plant", "\u68f5": "plant",  # the take-off's Chinese plant units
         "EA": "plant", "m²": "m2", "m2": "m2", "m": "m"}
 CJK = re.compile(r"[\u2e80-\u9fff\uf900-\ufaff\u3000-\u303f\uff00-\uffef\uac00-\ud7af]+")
-CITY_EN = ["municipal", "New municipal", "municipal", "municipal", "municipal", "municipal", "municipal", "municipal"]
 
 
 # --------------------------------------------------------------------------------------------- context
@@ -70,7 +69,6 @@ class Context:
     greening: object = None
     pit: object = None
     site: object = None
-    city: str = ""
     details: dict = field(default_factory=dict)  # detail sheet_id -> Spark's read_detail answer
     tree_counts: dict = field(default_factory=dict)
     paved_lawn: dict = field(default_factory=dict)  # lawn item_id -> {m2, why}: paving drawn over it on another sheet
@@ -790,7 +788,6 @@ def _greening(ctx: Context, notes: list[str]) -> None:
     try:
         from landsight.rules import greening as G
         from landsight.rules import site_facts
-        from landsight.rules.base import CITY_EN as RULE_CITIES
 
         counted = [d for d in ctx.sheets if d.counted]
         fields = {d.sheet_id: {"SITE AREA": d.fields.get("site_area", ""), "BUILDING COVERAGE": d.fields.get("coverage", ""),
@@ -798,10 +795,6 @@ def _greening(ctx: Context, notes: list[str]) -> None:
                   for d in counted}
         fields = {s: {k: v for k, v in f.items() if v} for s, f in fields.items()}
         site = site_facts(fields)
-        project = next((d.fields.get("project", "") for d in counted if d.fields.get("project")), "")
-        ctx.city = next((c for c in CITY_EN if c.upper() in project.upper()), "")
-        if not site.city and ctx.city:
-            site.city = next((zh for zh, en in RULE_CITIES.items() if en == ctx.city), "")
         ctx.site = site
         from landsight.checks.area import paved_lawn
         from landsight.checks.regulation import greening_plantings

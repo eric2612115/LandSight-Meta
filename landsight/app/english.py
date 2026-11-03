@@ -20,7 +20,6 @@ GLOSSARY = {  # longest first at use time
     "針葉喬木": "conifer", "疏葉喬木": "sparse-leaf tree", "棕櫚類": "palm", "灌木": "shrub", "多年生蔓藤": "perennial vine",
     "草花花圃": "flower bed", "喬木": "trees", "圖面": "drawing",
     "雙排": "2 rows", "米高徑": "cal.", "米徑": "cal.", "株/m²": "plants/m²", "株": "plants",
-    "本市": "municipal", "本市": "municipal",
 }
 _KEYS = sorted(GLOSSARY, key=len, reverse=True)
 _CJK = re.compile(r"[⺀-鿿豈-﫿　-〿＀-￯]+")

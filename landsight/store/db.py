@@ -241,7 +241,7 @@ def rule_rows() -> list[tuple]:
                     parts.append(f"{k.replace('_', ' ')}: {inner}")
         return "; ".join(parts)[:900]
 
-    for jur in ("national", "municipal", "municipal"):
+    for jur in ("national", "municipal_reference", "municipal"):
         sec = data.get(jur) or {}
         if not isinstance(sec, dict):
             continue

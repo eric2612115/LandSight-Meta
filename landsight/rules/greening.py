@@ -10,7 +10,7 @@ carbon fixation must exceed the legal minimum.
         species (native and attracting flags from landsight/data/species.csv)
 
 Gi from 表1 by planting type, tree Ai from 表2 (16 m² per tree on an urban site; 25 / 36 m² on larger or park
-sites; closer planting uses spacing²), β from §302 by site class. Sources: docs/research/regs.md (read 2026-11-01).
+sites; closer planting uses spacing²), β from §302 by site class (the articles read 2026-11-01).
 
 On artificial ground (人工地盤: the title block says ARTIFICIAL GROUND / ON SLAB, the detail sheet shows the pit on a
 slab, or it is given) the 技術規範 §5 表1 minimums apply to the tree pit read from the detail sheet (PitFacts): a large
@@ -33,7 +33,7 @@ UNIT = "kgCO2e/yr"
 BETA = {"ordinary": 0.66, "school_park": 0.83, "commercial_industrial": 0.50}
 BETA_EN = {"ordinary": "ordinary site", "school_park": "school or park land",
            "commercial_industrial": "commercial or industrial zone"}
-municipal_BETA = {1: 0.99, 2: 0.83, 3: 0.83, 4: 0.66, 5: 0.66}  # 本市新建建築物綠化實施規則 Art. 6
+MUNICIPAL_BETA = {1: 0.99, 2: 0.83, 3: 0.83, 4: 0.66, 5: 0.66}  # the municipal greening rule, Art. 6
 MIN_SITE_M2 = 300.0  # §298: sites of 300 m² or less are exempt
 R_CAP = 0.85
 # 技術規範 §5 表1 and its note, artificial ground (屋頂、陽臺、露臺 column): pit areas and soil depths
@@ -88,7 +88,7 @@ CITATIONS = [
 
 
 def jurisdiction(site: SiteFacts) -> str:
-    if site.is_municipal and site.municipal_class:
+    if site.in_municipality and site.municipal_class:
         return "local building code + municipal β (Art. 6)"
     return "local building code"
 
@@ -103,8 +103,9 @@ def tree_ai(site: SiteFacts) -> float:
 
 
 def beta(site: SiteFacts) -> tuple[float, str]:
-    if site.is_municipal and site.municipal_class in municipal_BETA:
-        return municipal_BETA[site.municipal_class], f"municipal Class {site.municipal_class} (本市新建建築物綠化實施規則 Art. 6)"
+    if site.in_municipality and site.municipal_class in MUNICIPAL_BETA:
+        return (MUNICIPAL_BETA[site.municipal_class],
+                f"municipal Class {site.municipal_class} (municipal greening rule 新建建築物綠化實施規則 Art. 6)")
     return BETA[site.site_class], f"§302, {BETA_EN[site.site_class]}"
 
 

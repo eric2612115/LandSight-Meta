@@ -8,9 +8,6 @@ from dataclasses import asdict, dataclass, field
 
 PASS, FAIL, NEEDS_REVIEW, NOT_APPLICABLE, SKIPPED = "pass", "fail", "needs_review", "not_applicable", "skipped"
 
-CITY_EN = {"本市": "municipal", "本市": "municipal", "鄰市市": "New municipal", "本市市": "municipal",
-           "本市市": "municipal", "本市市": "municipal", "本市市": "municipal", "本市市": "municipal",
-           "本市市": "municipal", "本市市": "municipal"}
 SITE_CLASSES = ("ordinary", "school_park", "commercial_industrial")
 
 
@@ -21,9 +18,10 @@ class SiteFacts:
     site_area_m2: float | None  # A0 基地面積
     coverage_ratio: float | None  # r 建蔽率, as a fraction
     hard_to_green_m2: float = 0.0  # Ap 執行綠化有困難之面積 (0 unless given)
-    city: str = ""  # as written, e.g. 本市; empty when the title block names none
+    city: str = ""  # as given; the title block is not read for it
     site_class: str = "ordinary"  # ordinary | school_park | commercial_industrial (sets β and tree Ai)
-    municipal_class: int | None = None  # 本市新建建築物綠化實施規則 Art. 4 class 1-5, when known
+    municipal_class: int | None = None  # the municipal greening rule's Art. 4 class 1-5, when known
+    in_municipality: bool = False  # given: the site lies where the municipal greening rule and tree ordinance apply
     new_building: bool = True  # §298: the rule applies to new buildings
     project: str = ""
     artificial_ground: bool | None = None  # 人工地盤: planting on a slab (title block "ARTIFICIAL GROUND" / "ON SLAB")
@@ -31,11 +29,7 @@ class SiteFacts:
 
     @property
     def city_en(self) -> str:
-        return CITY_EN.get(self.city, self.city or "unknown city")
-
-    @property
-    def is_municipal(self) -> bool:
-        return self.city_en == "municipal"
+        return self.city or "unknown city"
 
 
 @dataclass
@@ -145,11 +139,6 @@ def parse_ratio(text: str) -> float | None:
     return v / 100 if "%" in text or v > 1 else v
 
 
-def city_of(project: str) -> str:
-    """The city named at the start of a project title (本市綠邑社區景觀工程 -> 本市); empty when none is named."""
-    return next((c for c in CITY_EN if c in (project or "")), "")
-
-
 SITE_AREA_FIELDS = ("基地面積", "SITE AREA")
 COVERAGE_FIELDS = ("建蔽率", "BUILDING COVERAGE", "COVERAGE")
 PROJECT_FIELDS = ("工程名稱", "PROJECT")
@@ -168,16 +157,14 @@ def site_facts(fields_by_sheet: dict[str, dict[str, str]], **overrides) -> SiteF
 
     area, a_sheet, a_key = pick(SITE_AREA_FIELDS)
     cov, c_sheet, c_key = pick(COVERAGE_FIELDS)
-    project, p_sheet, _ = pick(PROJECT_FIELDS)
+    project, _, _ = pick(PROJECT_FIELDS)
     sources = {}
     if area:
         sources["site_area_m2"] = f"title block {a_sheet}: {a_key} {area}"
     if cov:
         sources["coverage_ratio"] = f"title block {c_sheet}: {c_key} {cov}"
     facts = SiteFacts(parse_area(area) if area else None, parse_ratio(cov) if cov else None,
-                      city=city_of(project or ""), project=project or "", sources=sources)
-    if project:
-        sources["city"] = f"title block {p_sheet}: {project}"
+                      project=project or "", sources=sources)
     ground = next(((sheet, k, v) for sheet, fields in fields_by_sheet.items() for k, v in fields.items()
                    if any(n in k.upper() for n in GROUND_FIELDS) or any(w in f"{k} {v}".upper() for w in ARTIFICIAL_WORDS)),
                   None)

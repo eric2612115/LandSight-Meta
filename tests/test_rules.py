@@ -1,5 +1,5 @@
 """The regulation check: the §302 numbers on the m4 site (the film's beat 8), the fixes, the two-species and
-non-native variants, a municipal site, the protected-tree ordinance, and the title-block reading."""
+non-native variants, a site under the municipal rules, the protected-tree ordinance, and the title-block reading."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import pytest
 from landsight.dxf import load
 from landsight.geometry import title_block
 from landsight.meta import FixtureSpark
-from landsight.rules import Planting, SiteFacts, check_all, format_rules, greening, protected, municipal
+from landsight.rules import Planting, SiteFacts, check_all, format_rules, greening, municipal, protected
 from landsight.rules.base import parse_area, parse_ratio
 from landsight.takeoff import run
 
@@ -123,16 +123,17 @@ def test_a_species_not_in_the_table_needs_review():
 
 
 def test_municipal_site_runs_the_municipal_rules():
-    site = SiteFacts(site_area_m2=1500.0, coverage_ratio=0.4, city="本市", municipal_class=4)
+    site = SiteFacts(site_area_m2=1500.0, coverage_ratio=0.4, in_municipality=True, municipal_class=4)
     green, prot, cover = check_all(site, plantings())
     assert green.jurisdiction == "local building code + municipal β (Art. 6)" and green.required == 297.0
     assert prot.jurisdiction == "local tree protection rule" and prot.notes == ["no existing trees on the plan"]
     assert cover.status == "needs_review" and cover.required == 60.0 and cover.provided == pytest.approx(54.3)
-    class1 = greening.check(SiteFacts(site_area_m2=1500.0, coverage_ratio=0.4, city="本市", municipal_class=1), plantings())
+    class1 = greening.check(SiteFacts(site_area_m2=1500.0, coverage_ratio=0.4, in_municipality=True, municipal_class=1),
+                            plantings())
     assert term(class1, "β").value == 0.99 and class1.required == pytest.approx(445.5)
 
 
-def test_municipal_rule_is_skipped_outside_municipal(m4):
+def test_municipal_rule_is_skipped_outside_the_municipality(m4):
     cover = m4.rules[2]
     assert cover.rule == "municipal_green_cover" and cover.status == "skipped" and "does not apply" in cover.notes[0]
 

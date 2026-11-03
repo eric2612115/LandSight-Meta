@@ -731,8 +731,8 @@ class RunState:
     def _rule_check(self, r) -> dict:
         sev = {"fail": "fail", "needs_review": "review", "pass": "info", "skipped": "info", "not_applicable": "info"}
         names = {"greening": "Building Technical Regulations §302 — greening carbon-fixation requirement",
-                 "protected_trees": "municipal Tree Protection Ordinance §3 — protected existing trees",
-                 "municipal_green_cover": "municipal New Building Greening Rules Art. 5 — green-cover ratio"}
+                 "protected_trees": "Municipal tree protection ordinance §3 — protected existing trees",
+                 "municipal_green_cover": "Municipal greening rule Art. 5 — green-cover ratio"}
         lead = {"greening": "§302", "protected_trees": "§3", "municipal_green_cover": "Art. 5"}[r.rule]
         c = next((c for c in r.citations if c.key == lead), r.citations[0])
         status = r.status.replace("_", " ")

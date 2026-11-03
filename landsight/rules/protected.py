@@ -1,4 +1,4 @@
-"""本市樹木保護自治條例 §3: an existing tree is protected if its trunk at 1.3 m reaches the size thresholds (or it is
+"""The municipal tree protection ordinance (樹木保護自治條例, a reference municipal rule set) §3: an existing tree is protected if its trunk at 1.3 m reaches the size thresholds (or it is
 50 years old, rare, or of ecological or cultural value); §6: the developer needs an approved protection or
 transplant plan before the building permit. Only existing trees on the plan are checked (new planting never is)."""
 
@@ -11,7 +11,7 @@ GIRTH_M = {"broadleaf": 2.5, "conifer": 1.8, "ficus": 3.4}
 CONIFER_WORDS = ("松", "杉", "柏", "PINE", "CEDAR", "CYPRESS")
 FICUS_WORDS = ("榕", "FICUS")
 
-URL = "https://laws.gov.municipal/law/LawSearch/LawPrint/FL024478?type=0"
+URL = ""  # cited by name and article only
 CITATIONS = [
     Citation("§3", "樹木保護自治條例 第3條",
              "Protected tree: diameter at 1.3 m ≥ 0.8 m broadleaf, 0.6 m conifer, 1.1 m Ficus (or girth 2.5 / 1.8 / "
@@ -35,7 +35,7 @@ def _group(species: str) -> str:
 def check(items: list[Planting], site: SiteFacts | None = None) -> RuleResult:
     res = RuleResult("protected_trees", "Protected existing trees (受保護樹木)", "local tree protection rule", PASS,
                      citations=list(CITATIONS))
-    if site is not None and not site.is_municipal:
+    if site is not None and not site.in_municipality:
         res.jurisdiction = "local tree protection rule (reference)"
     existing = [p for p in items if p.kind == "existing_tree"]
     if not existing:

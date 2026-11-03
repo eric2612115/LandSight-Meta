@@ -1,7 +1,8 @@
 """Regulation check with article citations (法規檢核, not legal advice): the national greening rule (§302 via the
-技術規範), municipal's protected-tree ordinance (§3) and municipal's green-cover ratio (municipal, skipped elsewhere)."""
+技術規範), the municipal tree protection ordinance (§3) and the municipal greening rule's green-cover ratio (skipped
+outside that municipality)."""
 
-from landsight.rules import greening, protected, municipal
+from landsight.rules import greening, municipal, protected
 from landsight.rules.base import Citation, Fix, PitFacts, Planting, RuleResult, SiteFacts, Term, site_facts
 from landsight.rules.inputs import plantings_from_takeoff, site_from_takeoff
 from landsight.rules.table import format_rules
@@ -18,5 +19,5 @@ def check_takeoff(takeoff, **site_overrides) -> tuple[SiteFacts, list[RuleResult
 
 
 __all__ = ["Citation", "Fix", "PitFacts", "Planting", "RuleResult", "SiteFacts", "Term", "check_all", "check_takeoff",
-           "format_rules", "greening", "plantings_from_takeoff", "protected", "site_facts", "site_from_takeoff",
-           "municipal"]
+           "format_rules", "greening", "municipal", "plantings_from_takeoff", "protected", "site_facts",
+           "site_from_takeoff"]

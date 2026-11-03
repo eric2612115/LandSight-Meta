@@ -97,7 +97,7 @@ PRICE_LIST = [  # item, spec, unit, low, high, basis, source
      "no direct source; nearest P060 washed-pebble permeable paver 2,020"),
     ("Grass pavers", "concrete grid, 80 mm", "m²", 1150, 1350, "published_budget", "P063 1,150; P064 1,280; P065 1,320"),
 ]
-NURSERY_CAMPHOR = ("P001", 4505)  # the tree alone (material only), municipal 2022
+NURSERY_CAMPHOR = ("P001", 4505)  # the tree alone (material only), a municipal unit-price book, 2022
 
 
 def _base_sections() -> list[Section]:
