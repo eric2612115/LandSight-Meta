@@ -6,6 +6,7 @@ import { ArrowUp, X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { useResolvedSource } from '../lib/api'
 import { sourceName } from '../lib/ask'
+import { RECORDED } from '../lib/askMock'
 import { kindName } from '../lib/english'
 import type { Run } from '../lib/types'
 import { askTry, RECORDED_T10 } from './data'
@@ -13,6 +14,9 @@ import { t, useLang } from './i18n'
 import { isTryDirector, useTry, type Chip, type Turn } from './store'
 
 let seq = 0
+
+/** The package the six recorded questions (lib/askMock.ts) were asked on: the greenfield sample, or its folder dropped. */
+const RECORDED_PACKAGE = 'Greenfield Residences — Landscape Package'
 
 /** "About T-10, a tree on L-1: …" — the object's context the question carries. */
 export const withContext = (q: string, chip?: Chip) => (chip ? `About ${chip.objectId}, a ${kindName(chip.kind)} on ${chip.sheetNo}: ${q.trim()}` : q.trim())
@@ -40,6 +44,8 @@ export function AskPanel({ run }: { run: Run }) {
   const live = useResolvedSource() === 'live'
   const lang = useLang((s) => s.lang)
   const end = useRef<HTMLDivElement>(null)
+  // the recorded questions, offered in English on the package they were recorded on (not in the film)
+  const suggest = !chat.length && lang === 'en' && !isTryDirector() && run.package.name === RECORDED_PACKAGE
   useEffect(() => {
     end.current?.scrollIntoView({ block: 'end' })
   }, [chat])
@@ -49,6 +55,17 @@ export function AskPanel({ run }: { run: Run }) {
         {!chat.length && (
           <div className="ink2" style={{ fontSize: 15, lineHeight: 1.55, marginTop: 20 }}>
             {t('Point at anything on the drawing and say what is wrong. Hover an object to see what it is; click it to ask about it. The answer comes from the package, with its sources.')}
+          </div>
+        )}
+        {suggest && (
+          <div data-dir="ask-suggestions" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div className="ink3" style={{ fontSize: 13 }}>{t('Recorded on this package (no key needed):')}</div>
+            {RECORDED.map((r) => (
+              <button key={r.question} className="btn-s" data-dir="ask-suggestion" onClick={() => { set({ draft: r.question }); void send(run, live, lang) }}
+                style={{ justifyContent: 'flex-start', textAlign: 'left', height: 'auto', minHeight: 40, padding: '9px 14px', lineHeight: 1.35, whiteSpace: 'normal' }}>
+                {r.question}
+              </button>
+            ))}
           </div>
         )}
         {chat.map((x) => <TurnView key={x.id} x={x} run={run} />)}

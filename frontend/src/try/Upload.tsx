@@ -76,7 +76,7 @@ function Landing() {
       <div style={{ marginTop: 34, display: 'flex', alignItems: 'center', gap: 16 }}>
         <span className="ink2" style={{ fontSize: 16 }}>{t('Try a sample:')}</span>
         <SampleCard sample="greenfield" name="Greenfield Residences" meta={t('site, 30 files')} />
-        <SampleCard sample="tower" name="Greenfield Tower" meta={t('21 floors')} disabled={src !== 'live'} />
+        <SampleCard sample="tower" name="Greenfield Tower" meta={t('20 floors')} disabled={src !== 'live'} />
       </div>
     </div>
   )

@@ -90,7 +90,7 @@ export function Choose() {
           )}
         </section>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, padding: '0 4px' }}>
-          <a className={`chip ${hot === 'price-chip' ? 'hot' : ''}`} data-dir="price-chip" href="/prices" title={t('Open the price list')}
+          <a className={`chip ${hot === 'price-chip' ? 'hot' : ''}`} data-dir="price-chip" href="/prices" target="_blank" rel="noreferrer" title={t('Open the price list')}
             style={{ height: 32, fontSize: 14, textDecoration: 'none' }} onClick={isTryDirector() ? (e) => e.preventDefault() : undefined}>
             <Tags size={15} />{t('Price list: {0} · {1} items', t(PRICE_LIST_NAME), prices.loading ? '…' : prices.rows.length)}
           </a>

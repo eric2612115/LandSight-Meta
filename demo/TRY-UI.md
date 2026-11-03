@@ -9,7 +9,7 @@ desk →"). It reuses the API, the recorded runs and the components; it adds no 
 ## The seven steps (a stepper on top: Upload · Choose · Analyze · Review)
 
 1. **Upload.** A large drop zone ("Drop the developer's package") and "Try a sample: Greenfield Residences (site, 30
-   files) · Greenfield Tower (21 floors)". A real drop or folder pick uses `lib/upload.ts` and the upload endpoint; a
+   files) · Greenfield Tower (20 floors)". A real drop or folder pick uses `lib/upload.ts` and the upload endpoint; a
    sample uses its stored run. The file list cascades from the run's `files[]` (rows ~70 ms apart, the verdict chip
    stamps in, groups: Drawings · Bills · Documents · Scans & photos · Not read; the governing bill lit; junk grey) with
    a summary line. Continue.

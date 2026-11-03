@@ -87,12 +87,29 @@
 .try .seg button { border: 0; background: transparent; color: var(--t-ink-2); font: 600 13px Inter, sans-serif; height: 30px; padding: 0 12px; border-radius: 9px; cursor: pointer; }
 .try .seg button.on { background: var(--t-s1); color: var(--t-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
 
-/* the report: a print stylesheet so Download PDF prints only the change request */
+/* the report: a print stylesheet so Download PDF prints only the change request, one section a page, on A4 landscape:
+   everything but the report and the elements that hold it is left out, those holders lose the 1920 × 1080 stage's
+   fixed size, position and clipping so the report flows over as many pages as it needs, the colours are the light
+   theme's (dark text on white paper whichever theme is on screen), and the 1360 px report is scaled to the page. */
 @media print {
-  body * { visibility: hidden !important; }
-  .try-report, .try-report * { visibility: visible !important; }
-  .try-report { position: fixed !important; inset: 0 !important; overflow: visible !important; background: #fff !important; color: #111 !important; }
-  .try-report .page { break-after: page; }
+  @page { size: A4 landscape; margin: 10mm; }
+  html, body, #root { height: auto !important; overflow: visible !important; background: #fff !important; }
+  body *:not(:has(.try-report)):not(.try-report):not(.try-report *) { display: none !important; }
+  body *:has(.try-report) {
+    display: block !important; position: static !important; width: auto !important; height: auto !important; min-height: 0 !important;
+    overflow: visible !important; transform: none !important; background: #fff !important;
+  }
+  .try {
+    --t-bg: #fff; --t-s1: #fff; --t-s2: #f7f8fa; --t-s3: #eef1f5; --t-line: #dfe3e8;
+    --t-ink: #12161b; --t-ink-2: #5a6470; --t-ink-3: #8a939e; --t-accent: #2f5fe8; --t-red: #e5483d;
+  }
+  .try-report {
+    position: static !important; width: auto !important; overflow: visible !important; transform: none !important; opacity: 1 !important;
+    border: 0 !important; box-shadow: none !important; background: #fff !important; color: #12161b !important;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  .try-report > div:not(.noprint) { zoom: 0.76; padding: 0 !important; }
+  .try-report .page { break-after: page; break-inside: avoid; }
   .try-report .noprint { display: none !important; }
 }
 
