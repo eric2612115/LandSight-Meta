@@ -988,3 +988,15 @@ the Greenfield package (English, not in the film), so a judge without a key has 
 still answers "live mode needs MODEL_API_KEY". Also: the price-list chip opens in a new tab (the quick review keeps its
 place), the tower sample says 20 floors as the generator does, and the README's call times match the recordings
 (267.9 s Muse Spark, 23.2 s SAM 3.1). Trade-off: `serve` writes three package rows into a fresh database on start.
+
+## D-90 The quick review for international reviewers: USD first, every priced row queried, the tower in plain words — Proposed (2026-11-03)
+
+/try opens in USD (the film already did; TWD is one click away, `?currency=twd` keeps it); the review desk stays
+TWD. The email subject names the project once ("Change request — Greenfield Residences — Landscape Package"). The
+quick review's "queried" is now the money its findings put in question either way, over-billed, left out of a
+subtotal, or under-billed (a rate under the firm's list; fewer billed than drawn or needed), for any package: the
+tower's bill is only short, and it read "0 queried" beside a priced row. Trade-off: on the Greenfield sample the
+quick review's total includes the two under-billed rows (camphor rate, azaleas) and so is larger than the desk's
+Statement, which keeps its split (Queried $17,788 · Under-billed $1,460). The tower's ten planted errors get plain
+titles (EN, zh-TW) in the sample's table style, pinned to the tower's review by tests/test_tower.py. The `serve`
+banner points at the URL Vite prints instead of a fixed port.

@@ -136,7 +136,8 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         proxy = "" if args.port == PORT else f"VITE_API_PORT={args.port} "
         banner = (f"Landsight API on http://{args.host}:{args.port}/api/health (docs/API.md). The screen, in a second "
-                  f"terminal: cd frontend && {proxy}npm run dev, then http://localhost:5195 (film: /?director=1&auto=1)")
+                  f"terminal: cd frontend && {proxy}npm run dev, then open the URL Vite prints (5195 by default) at /try "
+                  f"(film: /?director=1&auto=1)")
         serve(args.host, args.port, sock=sock, on_ready=lambda: print(banner, flush=True))
         return 0
 
