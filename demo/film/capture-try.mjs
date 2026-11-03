@@ -81,7 +81,8 @@ try {
     '-pix_fmt', 'yuv420p', '-r', String(FPS), '-movflags', '+faststart', file], (stdin) => { feed = stdin })
   const started = Date.now()
   for (let i = 0; i < total; i++) {
-    const shot = await cdp.send('Page.captureScreenshot', { format: 'png', optimizeForSpeed: true })
+    // the clip's scale sets the pixel size: without it this Chromium returns CSS pixels (1920 × 1080) at any dpr
+    const shot = await cdp.send('Page.captureScreenshot', { format: 'png', optimizeForSpeed: true, clip: { x: 0, y: 0, width: W, height: H, scale: DPR } })
     const buf = Buffer.from(shot.data, 'base64')
     if (!feed.write(buf)) await new Promise((r) => feed.once('drain', r))
     await page.evaluate((ms) => window.__vclock.step(ms), 1000 / FPS)
