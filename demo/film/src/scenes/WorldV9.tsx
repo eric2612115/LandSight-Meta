@@ -56,24 +56,28 @@ const KEYS: Key[] = [
   {t: 25.2, pos: V(TX + 98, 86, TZ + 58), look: V(TX + 22, 72, TZ), fov: 42},
   {t: 27.5, pos: V(TX + 100, 50, TZ + 62), look: V(TX + 24, 26, TZ), fov: 42},
   {t: 31.0, pos: V(TX + 96, 46, TZ + 70), look: V(TX + 22, 24, TZ), fov: 42},
-  {t: 35.0, pos: V(TX + 20, 60, TZ + 120), look: V(TX, 36, TZ), fov: 42},
-  {t: 38.0, pos: V(TX + 40, 50, TZ + 110), look: V(TX, 30, TZ + 10), fov: 42},
-  {t: 41.0, pos: V(10, 7, 46), look: V(18, 1, 32), fov: 45},
-  {t: 43.0, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
-  {t: 44.5, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
-  {t: 46.5, pos: V(T8.x + 7.5, 5.5, T8.z + 7.5), look: V(T8.x - 2.1, 1.2, T8.z + 2.1), fov: 45},
-  {t: 50.0, pos: V(T8.x + 8.5, 5.6, T8.z + 6.5), look: V(T8.x - 2.1, 1.2, T8.z + 2.1), fov: 45},
-  {t: 52.0, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
-  {t: 53.2, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
-  {t: 55.0, pos: V(24, 17, 50), look: V(23, 0, 32), fov: 45},
-  {t: 57.0, pos: V(24, 17, 50), look: V(23, 0, 32), fov: 45},
-  {t: 59.0, pos: V(66, 20, 34), look: V(53.4, 0, 20), fov: 45},
-  {t: 60.6, pos: V(66, 20, 34), look: V(53.4, 0, 20), fov: 45},
-  {t: 62.5, pos: V(30, 20, 56), look: V(24, 0, 38), fov: 45},
-  {t: 64.0, pos: V(30, 20, 56), look: V(24, 0, 38), fov: 45},
-  {t: 75.0, pos: V(28, 22, 58), look: V(24, 0, 36), fov: 45},
-  {t: 78.5, pos: V(40, 120, 90), look: V(32, 0, 8), fov: 42},
-  {t: 90.0, pos: V(38, 125, 92), look: V(32, 0, 8), fov: 42},
+  {t: 32.4, pos: V(TX + DRAWER + 12, floorY('5') + 9, TZ + 16), look: V(TX + DRAWER + 3, floorY('5') - 2, TZ + 2), fov: 42},
+  {t: 34.2, pos: V(TX + DRAWER + 12, floorY('5') + 9, TZ + 16), look: V(TX + DRAWER + 3, floorY('5') - 2, TZ + 2), fov: 42},
+  {t: 35.6, pos: V(TX + DRAWER + 4.5, floorY('8') + 4.5, TZ + 6), look: V(TX + DRAWER + 0.3, floorY('8') + 0.3, TZ), fov: 42},
+  {t: 37.4, pos: V(TX + DRAWER + 4.5, floorY('8') + 4.5, TZ + 6), look: V(TX + DRAWER + 0.3, floorY('8') + 0.3, TZ), fov: 42},
+  {t: 38.6, pos: V(TX + 20, 60, TZ + 120), look: V(TX, 36, TZ), fov: 42},
+  {t: 41.0, pos: V(TX + 40, 50, TZ + 110), look: V(TX, 30, TZ + 10), fov: 42},
+  {t: 44.0, pos: V(10, 7, 46), look: V(18, 1, 32), fov: 45},
+  {t: 46.0, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
+  {t: 47.5, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
+  {t: 49.5, pos: V(T8.x + 7.5, 5.5, T8.z + 7.5), look: V(T8.x - 2.1, 1.2, T8.z + 2.1), fov: 45},
+  {t: 53.0, pos: V(T8.x + 8.5, 5.6, T8.z + 6.5), look: V(T8.x - 2.1, 1.2, T8.z + 2.1), fov: 45},
+  {t: 55.0, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
+  {t: 56.2, pos: V(T8.x, 14, T8.z + 0.02), look: V(T8.x, 0, T8.z), fov: 45},
+  {t: 58.0, pos: V(24, 17, 50), look: V(23, 0, 32), fov: 45},
+  {t: 60.0, pos: V(24, 17, 50), look: V(23, 0, 32), fov: 45},
+  {t: 62.0, pos: V(66, 20, 34), look: V(53.4, 0, 20), fov: 45},
+  {t: 63.6, pos: V(66, 20, 34), look: V(53.4, 0, 20), fov: 45},
+  {t: 65.5, pos: V(30, 20, 56), look: V(24, 0, 38), fov: 45},
+  {t: 67.0, pos: V(30, 20, 56), look: V(24, 0, 38), fov: 45},
+  {t: 78.0, pos: V(28, 22, 58), look: V(24, 0, 36), fov: 45},
+  {t: 81.5, pos: V(40, 120, 90), look: V(32, 0, 8), fov: 42},
+  {t: 93.0, pos: V(38, 125, 92), look: V(32, 0, 8), fov: 42},
 ];
 const posCurve = new THREE.CatmullRomCurve3(KEYS.map((k) => k.pos), false, 'centripetal');
 const lookCurve = new THREE.CatmullRomCurve3(KEYS.map((k) => k.look), false, 'centripetal');
@@ -116,11 +120,11 @@ export function drawerAt(t: number, floor: string): {out: number; dx: number; dy
   let out = 0;
   let dy = 0;
   if (floor === '8') {
-    out = Math.max(ov(t, 14.6, 16.0) * (1 - ov(t, 20.3, 21.3)), ov(t, 26.4, 27.6) * (1 - ov(t, 30.4, 31.4)));
+    out = Math.max(ov(t, 14.6, 16.0) * (1 - ov(t, 20.3, 21.3)), ov(t, 26.4, 27.6) * (1 - ov(t, 30.4, 31.4)), ov(t, 34.4, 35.4) * (1 - ov(t, 37.6, 38.4)));
   } else if (floor === 'R') {
     out = ov(t, 21.4, 22.4) * (1 - ov(t, 25.3, 26.2));
   } else if (floor === '5') {
-    out = ov(t, 26.6, 27.8) * (1 - ov(t, 30.4, 31.4));
+    out = Math.max(ov(t, 26.6, 27.8) * (1 - ov(t, 30.4, 31.4)), ov(t, 31.2, 32.2) * (1 - ov(t, 34.2, 34.9)));
     dy = (floorY('8') - floorY('5') + 0.5) * ov(t, 28.2, 29.6) * (1 - ov(t, 30.4, 31.0)); // rises onto 8F: the same drawing
   }
   return {out, dx: out * DRAWER, dy};
@@ -132,7 +136,7 @@ function ghostAt(t: number, floor: string) {
   return ov(t, 16.6 + k * 0.35, 17.0 + k * 0.35) * (1 - ov(t, 20.3, 20.9));
 }
 function glowAt(t: number, floor: string) {
-  const at = floor === '5' ? 35.5 : floor === '8' ? 36.0 : floor === 'R' ? 36.5 : -1;
+  const at = floor === '5' ? 38.5 : floor === '8' ? 39.0 : floor === 'R' ? 39.5 : -1;
   if (at < 0) return 0;
   const u = (t - at) / 0.9;
   return u > 0 && u < 1 ? Math.sin(u * Math.PI) : 0;
@@ -183,7 +187,7 @@ const CameraRig: React.FC<{t: number}> = ({t}) => {
 /** Each piece's own height once lifted (0.4 … 5.4 m), the same for the overlay's tags. */
 export const pieceHeight = (i: number) => 0.4 + ((i * 5) % 12) * 0.45;
 /** T-08's rise: 0 on the paper, 1 fully lifted. */
-export const riseAt = (t: number) => ov(t, 43.0, 45.2) * (1 - ov(t, 50.2, 51.6));
+export const riseAt = (t: number) => ov(t, 46.0, 48.2) * (1 - ov(t, 53.2, 54.6));
 export const pieceEnds = (i: number): [[number, number], [number, number]] => {
   const seg = t08.canopy[i];
   return [
@@ -201,15 +205,15 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
   const used = new Set([...Object.values(fixed), first]);
   const rest = sheets.map((_, i) => i).filter((i) => !used.has(i));
   const sheetOfSlab = SLABS.map((s) => (fixed[s.floor] !== undefined ? fixed[s.floor] : s.floor === '2' ? first : rest.shift()!));
-  const groundA = ov(t, 38.0, 41.0);
+  const groundA = ov(t, 41.0, 44.0);
   const rise = riseAt(t);
-  const ringP = ov(t, 51.6, 52.4, (u) => u);
-  const counted = t >= 53.4 ? Math.min(8, Math.floor((t - 53.4) / 0.3) + 1) : 0;
-  const hedgeFill = ov(t, 57.4, 60.0, (u) => u);
-  const hedgeA = Math.min(ov(t, 57.2, 57.6), 1 - ov(t, 64, 65));
-  const pavA = Math.min(ov(t, 61.0, 61.6), 1 - ov(t, 64, 65));
-  const t10 = ov(t, 76.0, 76.6);
-  const cloud = ov(t, 76.6, 78.0, (u) => u);
+  const ringP = ov(t, 54.6, 55.4, (u) => u);
+  const counted = t >= 56.4 ? Math.min(8, Math.floor((t - 56.4) / 0.3) + 1) : 0;
+  const hedgeFill = ov(t, 60.4, 63.0, (u) => u);
+  const hedgeA = Math.min(ov(t, 60.2, 60.6), 1 - ov(t, 67, 68));
+  const pavA = Math.min(ov(t, 64.0, 64.6), 1 - ov(t, 67, 68));
+  const t10 = ov(t, 79.0, 79.6);
+  const cloud = ov(t, 79.6, 81.0, (u) => u);
   return (
     <>
       <CameraRig t={t} />
@@ -228,18 +232,18 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
       </mesh>
       {/* the site boundary, traced for the high view */}
       {[[4.6, 4.6, 54.6, 4.6], [54.6, 4.6, 54.6, 34.6], [54.6, 34.6, 4.6, 34.6], [4.6, 34.6, 4.6, 4.6]].map(([x1, z1, x2, z2], k) => (
-        <Bar key={k} a={[x1, z1]} b={[x2, z2]} y={0.05} colour="#2457ff" th={0.14} op={0.7 * ov(t, 75.5, 77)} />
+        <Bar key={k} a={[x1, z1]} b={[x2, z2]} y={0.05} colour="#2457ff" th={0.14} op={0.7 * ov(t, 78.5, 80)} />
       ))}
 
       {/* the eight canopies: rings; T-08 is its twelve real LINE segments, rising off the paper */}
       {ROW.map((r, i) => {
         const is8 = r.id === t08.object_id;
-        const col = i < counted && t < 64 ? (is8 ? '#e5484d' : '#2457ff') : '#1d2026';
+        const col = i < counted && t < 67 ? (is8 ? '#e5484d' : '#2457ff') : '#1d2026';
         return is8 ? null : <Ring key={r.id} x={r.x} z={r.z} r={r.r} colour={col} th={0.07} op={groundA} />;
       })}
       {t08.canopy.map((seg, i) => {
         const [a, b] = pieceEnds(i);
-        return <Bar key={seg.handle} a={a} b={b} y={0.06 + pieceHeight(i) * rise} colour={rise > 0.02 ? '#6d8dff' : t >= 43 && t < 64 ? '#2457ff' : '#1d2026'} th={0.09} op={groundA} />;
+        return <Bar key={seg.handle} a={a} b={b} y={0.06 + pieceHeight(i) * rise} colour={rise > 0.02 ? '#6d8dff' : t >= 46 && t < 67 ? '#2457ff' : '#1d2026'} th={0.09} op={groundA} />;
       })}
       {t08.cross.map((seg) => (
         <Bar key={seg.handle} a={[SX(seg.points[0][0]), SZ(seg.points[0][1])]} b={[SX(seg.points[1][0]), SZ(seg.points[1][1])]} y={0.06} colour="#1d2026" th={0.06} op={groundA * (1 - rise)} />
@@ -332,6 +336,65 @@ const Scene: React.FC<{t: number; sheets: WorldSheet[]; tex: THREE.Texture[]; l1
         );
       })}
 
+      {/* L-102's drawer: the lift shaft as a dark void through the podium, planter B-10 hanging over it (T09) */}
+      {(() => {
+        const d = drawerAt(t, '5');
+        if (d.out <= 0.02 || t < 31 || t > 35) return null;
+        const y = floorY('5') + d.dy;
+        return (
+          <group position={[TX + d.dx + 3, y, TZ + 2]}>
+            <mesh position={[0, -9.5, 0]}>
+              <boxGeometry args={[2.5, 19.4, 2.5]} />
+              <meshStandardMaterial color="#15171c" />
+            </mesh>
+            <mesh position={[0, 0.55, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+              <planeGeometry args={[2.5, 2.5]} />
+              <meshBasicMaterial color="#15171c" toneMapped={false} />
+            </mesh>
+            {[[-1.25, 0, 2.5, 0.12], [1.25, 0, 2.5, 0.12]].map(([x, z, l, w], k) => (
+              <mesh key={k} position={[x, 0.62, z]}>
+                <boxGeometry args={[w, 0.12, l]} />
+                <meshBasicMaterial color="#e5484d" toneMapped={false} />
+              </mesh>
+            ))}
+            {[-1.25, 1.25].map((z) => (
+              <mesh key={z} position={[0, 0.62, z]}>
+                <boxGeometry args={[2.5, 0.12, 0.12]} />
+                <meshBasicMaterial color="#e5484d" toneMapped={false} />
+              </mesh>
+            ))}
+            <mesh position={[1.0, 0.95, 0]}>
+              <boxGeometry args={[3, 0.7, 2.5]} />
+              <meshStandardMaterial color="#2f7d44" transparent opacity={0.9} />
+            </mesh>
+          </group>
+        );
+      })()}
+      {/* L-103's drawer: the escape corridor, 1.5 m between the walls, two planters leave 0.9 m (T10) */}
+      {(() => {
+        const d = drawerAt(t, '8');
+        if (d.out <= 0.02 || t < 34 || t > 38.6) return null;
+        const y = floorY('8') + 0.5;
+        return (
+          <group position={[TX + d.dx, y, TZ]}>
+            <mesh position={[0, 0.6, -0.75]}>
+              <boxGeometry args={[9, 1.2, 0.15]} />
+              <meshStandardMaterial color="#cfcfcf" />
+            </mesh>
+            <mesh position={[0, 0.6, 0.75]}>
+              <boxGeometry args={[9, 1.2, 0.15]} />
+              <meshStandardMaterial color="#cfcfcf" />
+            </mesh>
+            {[-1.6, 1.6].map((px) => (
+              <mesh key={px} position={[px, 0.3, 0.38]}>
+                <boxGeometry args={[1.4, 0.6, 0.6]} />
+                <meshStandardMaterial color="#2f7d44" />
+              </mesh>
+            ))}
+            <Bar a={[0, -0.67]} b={[0, 0.08]} y={0.9} colour="#6d8dff" th={0.08} />
+          </group>
+        );
+      })()}
       {/* the tower: grey boxes, a floor per sheet; a drawer's slab rides out with its sheet */}
       {SLABS.map((s) => {
         const d = drawerAt(t, s.floor);
@@ -371,6 +434,12 @@ export const WorldV9: React.FC<WorldV9Props> = ({sheets, l1}) => {
     </AbsoluteFill>
   );
 };
+/** The escape corridor's dimension line ends on L-103's drawer, for the overlay. */
+export function corridorAt(t: number): {a: [number, number, number]; b: [number, number, number]; wall: [number, number, number]} {
+  const d = drawerAt(t, '8');
+  const y = floorY('8') + 1.4;
+  return {a: [TX + d.dx, y, TZ - 0.67], b: [TX + d.dx, y, TZ + 0.08], wall: [TX + d.dx, y, TZ + 0.75]};
+}
 /** The floor plate's world position for the overlay (the drawer cards point at it). */
 export function plateAt(t: number, floor: string): [number, number, number] {
   const s = SLABS.find((x) => x.floor === floor)!;

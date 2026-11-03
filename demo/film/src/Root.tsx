@@ -22,6 +22,9 @@ import {V8} from './scenes/animatic-v8-cues.js';
 import {AnimaticV9} from './scenes/AnimaticV9';
 import type {AnimaticV9Props} from './scenes/AnimaticV9';
 import {V9} from './scenes/animatic-v9-cues.js';
+import {AnimaticV10} from './scenes/AnimaticV10';
+import type {AnimaticV10Props} from './scenes/AnimaticV10';
+import {V10} from './scenes/animatic-v10-cues.js';
 import type {OpeningV6Props} from './OpeningV6';
 import type {FilmData, FilmProps} from './data';
 import beats from '../beats.json';
@@ -155,6 +158,16 @@ export const Root: React.FC = () => (
     width={V9.width}
     height={V9.height}
     defaultProps={{data: {sheets: ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'].map((id) => ({id, png: `v9/sheets/${id}.png`}))}} satisfies AnimaticV9Props}
+  />
+  {/* Film v10 animatic: Eric's opening, the world with every problem fixed in place, the folder match into /try; the same textures and capture as v9; render with --gl=angle */}
+  <Composition
+    id="AnimaticV10"
+    component={AnimaticV10}
+    durationInFrames={V10.duration * V10.fps}
+    fps={V10.fps}
+    width={V10.width}
+    height={V10.height}
+    defaultProps={{data: {sheets: ['L-101', 'L-102', 'L-103', 'L-104', 'L-301', 'L-501', 'L-0', 'L-1-revB', 'L-1-revA', 'L-2', 'L-3', 'L-4', 'L-5', 'L-6', 'L-7', 'L-8', 'D-01', 'F-24-p1', 'F-25-p1', 'F-25-p2', 'F-25-p3', 'F-25-p4', 'F-25-p5', 'F-25-p6', 'F-25-p7', 'F-25-p8', 'F-25-p9', 'F-26-p1', 'L-3.filled', 'L-1-revB.filled'].map((id) => ({id, png: `v9/sheets/${id}.png`}))}} satisfies AnimaticV10Props}
   />
   </>
 );

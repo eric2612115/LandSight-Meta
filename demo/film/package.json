@@ -18,6 +18,7 @@
     "render:animatic": "node animatic-v7-prepare.mjs && remotion render src/index.ts AnimaticV7 animatic-v7.mp4 --codec h264 --crf 23 --audio-codec aac",
     "render:animatic8": "remotion render src/index.ts AnimaticV8 animatic-v8.mp4 --codec h264 --crf 23 --gl=angle",
     "render:animatic9": "remotion render src/index.ts AnimaticV9 animatic-v9.mp4 --codec h264 --crf 23 --gl=angle",
+    "render:animatic10": "remotion render src/index.ts AnimaticV10 animatic-v10.mp4 --codec h264 --crf 23 --gl=angle",
     "stills": "node stills.mjs landsight-v1.mp4 12",
     "typecheck": "tsc --noEmit"
   },

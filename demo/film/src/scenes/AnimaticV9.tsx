@@ -1,7 +1,7 @@
 import {AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, FONT} from '../theme';
 import {CLOSE_AT, LOCKUP_AT, PART2_AT, SEGMENTS, V9, timed} from './animatic-v9-cues.js';
-import {HEDGE, ROW, T8, WorldV9, pieceEnds, pieceHeight, plateAt, projectAt, riseAt} from './WorldV9';
+import {HEDGE, ROW, T8, WorldV9, corridorAt, pieceEnds, pieceHeight, plateAt, projectAt, riseAt} from './WorldV9';
 import type {WorldSheet} from './WorldV9';
 import t08 from './t08.json';
 
@@ -70,16 +70,16 @@ const RoofPlanter: React.FC<{a: number}> = ({a}) => (
 
 /** The tree-pit section (1:04–1:15): soil over the slab, a 1.5 × 1.5 m pit, the big tree shrinking; the gauge. */
 const Section: React.FC<{t: number}> = ({t}) => {
-  const a = Math.min(ov(t, 64.3, 64.9), 1 - ov(t, 75.0, 75.6));
-  const shrink = ov(t, 67.0, 68.6);
+  const a = Math.min(ov(t, 67.3, 67.9), 1 - ov(t, 78.0, 78.6));
+  const shrink = ov(t, 70.0, 71.6);
   const r = lerp(120, 72, shrink);
-  const fall = ov(t, 69.2, 71.2);
+  const fall = ov(t, 72.2, 74.2);
   const v = lerp(261.1, 209.9, fall);
   const gx = 1080;
   const gw = 720;
   const px = (n: number) => gx + (n / 360) * gw;
-  const fixA = ov(t, 72.0, 72.5);
-  const fixB = ov(t, 73.4, 73.9);
+  const fixA = ov(t, 75.0, 75.5);
+  const fixB = ov(t, 76.4, 76.9);
   return (
     <AbsoluteFill style={{opacity: a}}>
       <AbsoluteFill style={{background: 'rgba(20,22,26,0.82)'}} />
@@ -116,14 +116,14 @@ const Section: React.FC<{t: number}> = ({t}) => {
 /** The findings on the frame, the developer's way: two groups, then the total. */
 const Findings: React.FC<{t: number}> = ({t}) => {
   const F = V9.findings;
-  const a = Math.min(ov(t, F.at, F.at + 0.4), 1 - ov(t, 82.0, 82.5));
+  const a = Math.min(ov(t, F.at, F.at + 0.4), 1 - ov(t, 85.0, 85.5));
   if (a <= 0) return null;
   const group = (title: string, dot: string, items: string[], x: number, delay: number) => (
-    <div style={{position: 'absolute', left: x, top: 150, width: 820}}>
-      <div style={{fontFamily: FONT.sans, fontSize: 44, fontWeight: 600, color: DOT[dot], marginBottom: 16, opacity: ov(t, F.at + delay, F.at + delay + 0.3)}}>{title}</div>
+    <div style={{position: 'absolute', left: x, top: 130, width: 590}}>
+      <div style={{fontFamily: FONT.sans, fontSize: 40, fontWeight: 600, color: DOT[dot], marginBottom: 14, opacity: ov(t, F.at + delay, F.at + delay + 0.3)}}>{title}</div>
       {items.map((it, i) => (
-        <div key={it} style={{marginBottom: 14}}>
-          <Card dot={dot} title={it} a={ov(t, F.at + delay + 0.35 + i * 0.3, F.at + delay + 0.65 + i * 0.3)} w={820} size={34} inline />
+        <div key={it} style={{marginBottom: 12}}>
+          <Card dot={dot} title={it} a={ov(t, F.at + delay + 0.35 + i * 0.3, F.at + delay + 0.65 + i * 0.3)} w={590} size={27} inline />
         </div>
       ))}
     </div>
@@ -131,9 +131,10 @@ const Findings: React.FC<{t: number}> = ({t}) => {
   return (
     <AbsoluteFill style={{opacity: a}}>
       <AbsoluteFill style={{background: 'rgba(20,22,26,0.6)'}} />
-      {group('Send back', 'red', F.sendBack, 100, 0)}
-      {group('Fix before pricing', 'amber', F.fix, 1000, 1.6)}
-      <div style={{position: 'absolute', left: 0, right: 0, bottom: 110, textAlign: 'center', opacity: ov(t, F.at + 3.8, F.at + 4.2)}}>
+      {group('Send back', 'red', F.sendBack, 60, 0)}
+      {group('Fix before pricing', 'amber', F.fix, 665, 1.6)}
+      {group('Building code', 'blue', F.code, 1270, 2.9)}
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 110, textAlign: 'center', opacity: ov(t, F.at + 4.4, F.at + 4.8)}}>
         <span style={{fontFamily: FONT.sans, fontSize: 64, fontWeight: 700, color: '#fff', background: PANEL, padding: '14px 40px', borderRadius: 24, border: '1.5px solid rgba(255,255,255,0.28)'}}>{F.total}</span>
       </div>
     </AbsoluteFill>
@@ -143,7 +144,7 @@ const Findings: React.FC<{t: number}> = ({t}) => {
 /** The bridge: the pipeline, left to right. */
 const Pipeline: React.FC<{t: number}> = ({t}) => {
   const P = V9.pipeline;
-  const a = Math.min(ov(t, P.at, P.at + 0.3), 1 - ov(t, 87.0, 87.4));
+  const a = Math.min(ov(t, P.at, P.at + 0.3), 1 - ov(t, 90.0, 90.4));
   if (a <= 0) return null;
   const n = P.nodes.length;
   const w = 268;
@@ -177,12 +178,12 @@ export const AnimaticV9: React.FC<AnimaticV9Props> = ({data}) => {
   const monW = lerp(820, 1920, push);
   const monH = lerp(461, 1080, push);
   const pp = ov(t, V9.push.product.from, V9.push.product.to);
-  const split = Math.min(ov(t, 45.5, 46.0), 1 - ov(t, 49.8, 50.3));
+  const split = Math.min(ov(t, 48.5, 49.0), 1 - ov(t, 52.8, 53.3));
   const rise = riseAt(t);
-  const counted = t >= 53.4 && t < 57.2 ? Math.min(8, Math.floor((t - 53.4) / 0.3) + 1) : 0;
-  const hedgeN = t >= 57.4 && t < 60.8 ? Math.round(182 * clamp01((t - 57.4) / 2.6)) : -1;
-  const drawerCard = t >= 15 && t < 31 ? (t < 21 ? '8' : t < 26 ? 'R' : '5') : null;
-  const click = ov(t, 52.6, 53.1);
+  const counted = t >= 56.4 && t < 60.2 ? Math.min(8, Math.floor((t - 56.4) / 0.3) + 1) : 0;
+  const hedgeN = t >= 60.4 && t < 63.8 ? Math.round(182 * clamp01((t - 60.4) / 2.6)) : -1;
+  const drawerCard = t >= 15 && t < 38 ? (t < 21 ? '8' : t < 26 ? 'R' : t < 31 ? '5' : t < 34.5 ? '5' : '8') : null;
+  const click = ov(t, 55.6, 56.1);
   return (
     <AbsoluteFill style={{background: GREY, overflow: 'hidden'}}>
       {/* Part 1: the world (5–90) */}
@@ -220,15 +221,15 @@ export const AnimaticV9: React.FC<AnimaticV9Props> = ({data}) => {
           <div style={{position: 'absolute', left: 1040, top: 80, fontFamily: FONT.sans, fontSize: 56, fontWeight: 600, color: '#fff', textShadow: '0 2px 20px rgba(0,0,0,0.6)', opacity: split}}>What a computer sees<div style={{fontSize: 30, opacity: 0.8, fontWeight: 400}}>twelve LINE entities, no tree</div></div>
         </>
       ) : null}
-      {rise > 0.3 && t < 50.5
+      {rise > 0.3 && t < 53.5
         ? t08.canopy.map((seg, i) => {
             const [a, b] = pieceEnds(i);
             const p = projectAt(t, [(a[0] + b[0]) / 2, 0.06 + pieceHeight(i) * rise, (a[1] + b[1]) / 2]);
             if (!p.visible || (split > 0.5 && p.x < 980)) return null;
-            return <Tag key={seg.handle} x={p.x + 60} y={p.y - 22} text={`LINE ${seg.handle}`} size={22} a={Math.min(ov(t, 45.0 + i * 0.12, 45.3 + i * 0.12), 1)} />;
+            return <Tag key={seg.handle} x={p.x + 60} y={p.y - 22} text={`LINE ${seg.handle}`} size={22} a={Math.min(ov(t, 48.0 + i * 0.12, 48.3 + i * 0.12), 1)} />;
           })
         : null}
-      {click > 0 && t < 53.6 ? (
+      {click > 0 && t < 56.6 ? (
         (() => {
           const p = projectAt(t, [T8.x + 2.6, 0, T8.z + 1.4]);
           return (
@@ -240,6 +241,19 @@ export const AnimaticV9: React.FC<AnimaticV9Props> = ({data}) => {
         })()
       ) : null}
 
+      {/* the escape corridor's dimension: 0.9 m clear against the 1.2 m minimum (T10) */}
+      {t >= 35.6 && t < 38.2 ? (() => {
+          const c = corridorAt(t);
+          const p = projectAt(t, [(c.a[0] + c.b[0]) / 2, c.a[1], (c.a[2] + c.b[2]) / 2]);
+          const w = projectAt(t, c.wall);
+          const a = ov(t, 35.8, 36.3);
+          return p.visible ? (
+            <>
+              <Tag x={p.x - 150} y={p.y - 10} text="0.9 m clear" colour="#9ab4ff" size={32} a={a} />
+              <Tag x={w.x + 170} y={w.y + 30} text="min 1.2 m · Art. 92" colour="#ff8a8a" size={28} a={a} />
+            </>
+          ) : null;
+        })() : null}
       {/* the three beats on the plan: the count, the hedge counter */}
       {counted > 0
         ? ROW.slice(0, counted).map((r, i) => {
@@ -253,9 +267,9 @@ export const AnimaticV9: React.FC<AnimaticV9Props> = ({data}) => {
         })() : null}
 
       {/* the section, the findings, the bridge */}
-      {t >= 64.3 && t < 75.6 ? <Section t={t} /> : null}
-      {t >= V9.findings.at && t < 82.5 ? <Findings t={t} /> : null}
-      {t >= V9.pipeline.at && t < 87.4 ? <Pipeline t={t} /> : null}
+      {t >= 67.3 && t < 78.6 ? <Section t={t} /> : null}
+      {t >= V9.findings.at && t < 85.5 ? <Findings t={t} /> : null}
+      {t >= V9.pipeline.at && t < 90.4 ? <Pipeline t={t} /> : null}
 
       {/* the cards */}
       {V9.cards.map((c) => {
