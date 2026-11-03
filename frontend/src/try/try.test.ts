@@ -56,6 +56,21 @@ describe('the tower table', () => {
     expect(plainTitle(t10, 'en')).toBe('Planters narrow the escape corridor to 0.9 m')
     expect(plainTitle(t10, 'zh-TW')).toBe(TOWER.T10.zh)
   })
+  it('gives every tower error a plain title, grouped as the rule groups the check (the group from the rule, the title from the table)', () => {
+    const tower: Record<string, [Check['category'], string, Check['severity']]> = {
+      T01: ['quantity', 'regulation', 'flag'], T02: ['regulation', 'regulation', 'fail'], T03: ['sheet', 'design', 'info'],
+      T04: ['sheet', 'design', 'review'], T05: ['quantity', 'design', 'info'], T06: ['quantity', 'quote', 'flag'],
+      T07: ['price', 'quote', 'flag'], T08: ['sheet', 'design', 'review'], T09: ['area', 'design', 'fail'], T10: ['regulation', 'regulation', 'fail'],
+    }
+    expect(Object.keys(TOWER).sort()).toEqual(Object.keys(tower))
+    for (const [id, [category, scenario, severity]] of Object.entries(tower)) {
+      const c = check({ check_id: id, category, scenario, severity, title: 'the backend title' })
+      expect(TOWER[id].category, id).toBe(category)
+      expect(plainTitle(c, 'en'), id).toBe(TOWER[id].en)
+      expect(plainTitle(c, 'zh-TW'), id).toBe(TOWER[id].zh)
+      expect(groupOf(c), id).toBe(TOWER[id].group)
+    }
+  })
   it('keeps its titles short and leaves another category alone', () => {
     for (const [id, row] of Object.entries(TOWER)) expect(row.en.split(/\s+/).length, id).toBeLessThanOrEqual(9)
     expect(plainTitle(check({ category: 'quantity', title: 'something else' }), 'en')).toBe('something else')

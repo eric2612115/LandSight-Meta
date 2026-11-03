@@ -1,6 +1,5 @@
 /** What the review screens share: the run as confirmed here, its findings as the switches show them, money. */
 import { useMemo } from 'react'
-import { useTotals } from '../app/derive'
 import { nums, shownMoney, shownText, whereOf } from '../lib/flags'
 import { useMoney } from '../lib/money'
 import type { Run } from '../lib/types'
@@ -15,7 +14,6 @@ export function useReview(base: Run) {
   const all = useMemo(() => findingsOf(run), [run])
   const findings = useMemo(() => all.filter((f) => topics[f.topic]), [all, topics])
   const m = useMoney(run.currency)
-  const totals = useTotals(run)
   const moneyOf = (f: Finding) => (isMoney(f.money) ? shownMoney(f.money, m.cur, m.rate) : 0)
   const chip = (f: Finding): string | null => {
     if (isMoney(f.money)) return shownText(moneyOf(f), m.cur, m.rate)
@@ -35,6 +33,9 @@ export function useReview(base: Run) {
     const s = run.sheets.find((x) => x.sheet_id === f.sheetId)
     return s ? s.number : whereOf(run, f.check)
   }
-  const queried = (fs: Finding[]) => fs.filter((f) => f.money.kind === 'over' || f.money.kind === 'left_out').reduce((a, f) => a + moneyOf(f), 0)
-  return { run, findings, m, totals, chip, evidence, where, queried, moneyText: (v: number) => shownText(v, m.cur, m.rate) }
+  /** The money the findings put in question, either way: over-billed, left out of a subtotal, under-billed (a rate
+   * under the firm's list, fewer billed than drawn or needed) — for any package, so a bill that is only short (the
+   * tower's) is not "0 queried". The desk's Statement keeps its own split (over vs under, app/derive.ts). */
+  const queried = (fs: Finding[]) => fs.filter((f) => isMoney(f.money)).reduce((a, f) => a + moneyOf(f), 0)
+  return { run, findings, m, chip, evidence, where, queried, moneyText: (v: number) => shownText(v, m.cur, m.rate) }
 }

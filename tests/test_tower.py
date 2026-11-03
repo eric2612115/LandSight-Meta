@@ -132,3 +132,22 @@ def test_heldout_is_seeded_and_replays_its_live_scoreboard(tmp_path):
     e = run["errors"]
     assert (e["planted"], len(e["found"]), len(e["flagged"]), len(e["missed"]), len(e["false_alarms"])) == (11, 10, 1, 0, 0)
     assert e["flagged"] == ["H04"] and run["timing"]["recorded"] is True
+
+
+def test_the_quick_reviews_tower_titles_name_the_checks_the_review_raises(tower):
+    """frontend/src/try/plain.ts TOWER gives each of the ten planted errors a plain title, used only when the check on
+    screen has that id and that category: every row's id and category is a check of the tower's review, and every
+    alarm T-check the review raises has a row."""
+    import re
+
+    _, run = tower
+    src = (REPO / "frontend" / "src" / "try" / "plain.ts").read_text(encoding="utf-8")
+    table = src[src.index("export const TOWER"):]
+    table = table[:table.index("\n}\n")]
+    rows = dict(re.findall(r"^\s+(T\d\d): \{ group: '\w+', category: '(\w+)'", table, re.M))
+    assert sorted(rows) == [f"T{i:02d}" for i in range(1, 11)]
+    for cid, category in rows.items():
+        assert by_id(run, cid)["category"] == category, cid
+    alarms = {c["check_id"] for c in run["checks"] if re.fullmatch(r"T\d\d", c["check_id"])
+              and c["severity"] in ("fail", "flag", "review") and not c.get("ok")}
+    assert alarms <= set(rows)

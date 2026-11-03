@@ -1,7 +1,7 @@
 /** The quick review's groups and plain titles. For the sample package (Greenfield Residences, the 30 planted errors)
- * an explicit table, checked against frontend-mock/run.json, and a second one for the tower's two drawing checks
- * (T09, T10): each row names the check's category, and is used only when the check on screen has that id *and* that
- * category, so another package's "E08" never borrows it. Every other check falls back to a rule on its scenario,
+ * an explicit table, checked against frontend-mock/run.json, and a second one for the tower's ten planted errors
+ * (T01–T10, checked against the tower's review in tests/test_tower.py): each row names the check's category, and is
+ * used only when the check on screen has that id *and* that category, so another package's "E08" never borrows it. Every other check falls back to a rule on its scenario,
  * category and severity, and to the backend's own title. */
 import { scenarioOf } from '../lib/scenario'
 import type { Check, Run } from '../lib/types'
@@ -39,10 +39,19 @@ export const SAMPLE: Record<string, Row> = {
   E15: { group: 'ask', category: 'protected_tree', en: 'A possibly protected tree marked for removal', zh: '可能受保護的老樹標示移除' },
 }
 
-/** The tower's (samples/tower) planter over the lift shaft and planters in the escape corridor. */
+/** The tower's (samples/tower) ten planted errors, id → group and plain title, EN and zh-TW. T03 and T05 are found as
+ * information (not alarms), so the review shows them only when they become one; their rows keep the rule's group. */
 export const TOWER: Record<string, Row> = {
   T09: { group: 'send', category: 'area', en: 'A planter drawn over the lift shaft', zh: '花台畫在電梯井上' },
+  T03: { group: 'send', category: 'sheet', en: 'A section sheet, not counted', zh: '剖面圖不列入數量計算' },
+  T05: { group: 'send', category: 'quantity', en: 'The same hedge on two floors, counted on each', zh: '兩層樓的同一綠籬，各層分別計算' },
+  T06: { group: 'fix', category: 'quantity', en: 'Sky-garden shrubs billed for one floor, not four', zh: '空中花園灌木只計一層、應為四層' },
+  T07: { group: 'fix', category: 'price', en: 'Roof lawn priced 57% under your list', zh: '屋頂草坪單價低於單價表 57%' },
+  T01: { group: 'code', category: 'quantity', en: 'One sheet drawn for four floors', zh: '一張圖代表四個樓層' },
+  T02: { group: 'code', category: 'regulation', en: 'Roof soil too thin for orange jasmine', zh: '屋頂月橘覆土太薄' },
   T10: { group: 'code', category: 'regulation', en: 'Planters narrow the escape corridor to 0.9 m', zh: '花台使逃生走廊淨寬縮至 0.9 m' },
+  T04: { group: 'ask', category: 'sheet', en: 'Roof soil depth: two sheets disagree', zh: '屋頂覆土深度：兩張圖不一致' },
+  T08: { group: 'ask', category: 'sheet', en: 'Two floor plans are 91% the same', zh: '兩張樓層平面圖有 91% 相同' },
 }
 
 const sampleRow = (c: Check): Row | undefined => {

@@ -46,7 +46,7 @@ function ReviewOf({ base }: { base: Run }) {
           </div>
           <div data-dir="summary-chips" style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
             <span className="chip" style={{ height: 30, fontSize: 14 }}>{t('{0} issues', v.findings.length)}</span>
-            <span className="chip" style={{ height: 30, fontSize: 14, color: 'var(--t-ink)' }}>{t('{0} queried', v.moneyText(v.totals.queried))}</span>
+            <span className="chip" style={{ height: 30, fontSize: 14, color: 'var(--t-ink)' }}>{t('{0} queried', v.moneyText(v.queried(v.findings)))}</span>
           </div>
         </div>
         {tab === 'findings' ? <FindingList v={v} focus={focus} /> : <AskPanel run={v.run} />}

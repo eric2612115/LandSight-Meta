@@ -45,6 +45,7 @@ export function moneyOf(c: Check): FlagMoney {
     if (needed !== undefined && needed > billQty) return { kind: 'under', twd: (needed - billQty) * price, n: needed - billQty, unit: price, group: 'quantity' }
     const drawn = v('drawn_qty')
     if (drawn !== undefined && billQty > drawn) return { kind: 'over', twd: (billQty - drawn) * price, n: billQty - drawn, unit: price, group: 'quantity' }
+    if (drawn !== undefined && drawn > billQty) return { kind: 'under', twd: (drawn - billQty) * price, n: drawn - billQty, unit: price, group: 'quantity' }
   }
   if (c.category === 'bill' && c.severity === 'review') return { kind: 'confirm', twd: 0, label: 'confirm' }
   if (c.category === 'bill' && v('hidden_total') !== undefined) return { kind: 'which', twd: 0, label: 'which?' }
