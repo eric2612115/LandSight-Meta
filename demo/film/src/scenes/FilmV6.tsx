@@ -27,7 +27,7 @@ import l6 from './l6-border.json';
  * `proxy` reads the 1080p proxies (the review cut); `timecode` stamps the frame for notes; `sound` plays the mix
  * (public/v2/audio/mix.wav from scripts/audio-v2.py: Eric's voice, the narration, the music, the effects).
  */
-export type FilmV6Props = {sheets?: WorldSheet[]; proxy?: boolean; timecode?: boolean; sound?: boolean; endCard?: 'default' | 'extended'};
+export type FilmV6Props = {sheets?: WorldSheet[]; proxy?: boolean; timecode?: boolean; sound?: boolean; endCard?: 'default' | 'extended'; previewBeat?: boolean};
 /** The look's cards (one look per render). */
 let U: LookSpec['ui'] = LOOKS.ink.ui;
 const INK = '#1D2026';
@@ -264,9 +264,11 @@ const LIVE6 = [
 const Opening: React.FC<{t: number; fps: number; proxy: boolean}> = ({t, fps, proxy}) => {
   if (t < 10.0 || t >= B.land + 0.1) return null;
   const pushing = t >= PUSH.warp[0];
-  const fade = 1 - ov(t, PUSH.fade[0], PUSH.fade[1]);
+  // v6.10: no brightness step at the landing: a 0.34 s linear cross-fade, and the photo brightened toward the sheet's white
+  const fade = 1 - clamp01((t - 14.72) / 0.34);
+  const lift = ov(t, 14.3, 14.95);
   const xf = pushing ? pushMatrix(t) : undefined;
-  const big = {position: 'absolute' as const, left: 0, top: 0, width: PUSH.size[0], height: PUSH.size[1], transformOrigin: '0 0', transform: xf};
+  const big = {position: 'absolute' as const, left: 0, top: 0, width: PUSH.size[0], height: PUSH.size[1], transformOrigin: '0 0', transform: xf, filter: lift > 0.001 ? `brightness(${(1 + 0.2 * lift).toFixed(3)}) contrast(${(1 - 0.08 * lift).toFixed(3)})` : undefined};
   // the margins outside the drawn border turn to paper as the push lands, so the hand-over to the 3D sheet is clean
   const pm = ov(t, B.land - 0.35, B.land - 0.08);
   const [tl, , br] = LAND_QUAD;
@@ -386,7 +388,7 @@ const PILE = FILES.map((_, i) => {
   const b = Math.sin(i * 78.233) * 12345.678;
   const r2 = b - Math.floor(b);
   const top = i === FILES.length - 1;
-  return {x: top ? 1010 : 940 + (r1 - 0.5) * 300, y: top ? 420 : 470 + (r2 - 0.5) * 200, rot: top ? -4 : (r1 - 0.5) * 50, s: top ? 1.9 : 1.15};
+  return {x: top ? 1330 : 1290 + (r1 - 0.5) * 300, y: top ? 400 : 470 + (r2 - 0.5) * 200, rot: top ? -4 : (r1 - 0.5) * 50, s: top ? 2.3 : 1.35};
 });
 const FileGlyph: React.FC<{f: (typeof FILES)[number]}> = ({f}) => {
   if (f.img) return <Img src={staticFile(`v2/sheets/${f.img}.png`)} style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: '30% 40%', filter: 'url(#v5-neutral) contrast(1.3)'}} />;
@@ -452,9 +454,9 @@ const ColdFiles: React.FC<{t: number}> = ({t}) => {
             const fall = clamp01((t - (6.0 + (top ? 0.9 : (i % 15) * 0.04))) / 0.65);
             const pf = smooth(fall);
             const P = PILE[i];
-            let x = top ? lerp(760, centre.x, pop) : lerp(centre.x, c.x, pop);
-            let y = top ? lerp(330, centre.y, pop) : lerp(centre.y, c.y, pop);
-            let sc = top ? lerp(4.2, 1, pop) : lerp(0.35, 1, pop);
+            let x = top ? lerp(850, centre.x, pop) : lerp(centre.x, c.x, pop);
+            let y = top ? lerp(420, centre.y, pop) : lerp(centre.y, c.y, pop);
+            let sc = top ? lerp(6.5, 1, pop) : lerp(0.35, 1, pop);
             let rot = 0;
             x = lerp(x, P.x, pf);
             y = lerp(y, P.y, pf) - Math.sin(fall * Math.PI) * 40;
@@ -479,7 +481,8 @@ const INSERT_AT = 92.3;
 const PrivateMode: React.FC<{t: number}> = ({t}) => {
   const u = t - INSERT_AT;
   if (u < 0 || u >= 6.3) return null;
-  const inA = ov(u, 0.0, 0.45);
+  const inA = clamp01(u / 0.4);
+  const words = 1;
   const dim = ov(u, 0.7, 2.6);
   const out = 1;
   const mixc = (a: string, b: string, k: number) => {
@@ -497,12 +500,12 @@ const PrivateMode: React.FC<{t: number}> = ({t}) => {
     <AbsoluteFill style={{opacity: inA * out}}>
       <AbsoluteFill style={{background: '#FFFFFF'}} />
       <AbsoluteFill style={{background: '#0A0E18', opacity: dim}} />
-      <div style={{position: 'absolute', left: 110, top: 120, fontFamily: FONT.sans, ...NUM}}>
+      <div style={{position: 'absolute', left: 110, top: 120, fontFamily: FONT.sans, opacity: words, ...NUM}}>
         <div style={{...EYEBROW, fontSize: 28, color: acc}}>Private mode · Muse Spark Open</div>
         <div style={{marginTop: 16, fontSize: 70, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.06, color: ink}}>Your drawings stay with you</div>
       </div>
       {/* the switch: Meta Model API → Muse Spark Open (open weights) */}
-      <div style={{position: 'absolute', left: 110, top: 360, display: 'flex', alignItems: 'center', gap: 26, fontFamily: FONT.sans, fontSize: 34, ...NUM}}>
+      <div style={{position: 'absolute', left: 110, top: 360, display: 'flex', alignItems: 'center', gap: 26, fontFamily: FONT.sans, fontSize: 34, opacity: words, ...NUM}}>
         <div style={{color: ink, opacity: lerp(1, 0.45, flip), fontWeight: flip < 0.5 ? 700 : 500}}>Meta Model API</div>
         <div style={{position: 'relative', width: 104, height: 54, borderRadius: 27, background: flip > 0.5 ? acc : mixc('#C9CDD3', '#3A4152', dim), transition: 'none'}}>
           <div style={{position: 'absolute', top: 5, left: lerp(5, 55, flip), width: 44, height: 44, borderRadius: 22, background: '#FFFFFF', boxShadow: '0 2px 6px rgba(0,0,0,0.25)'}} />
@@ -510,7 +513,7 @@ const PrivateMode: React.FC<{t: number}> = ({t}) => {
         <div style={{color: ink, opacity: lerp(0.45, 1, flip), fontWeight: flip > 0.5 ? 700 : 500}}>Muse Spark Open (open weights)</div>
       </div>
       {/* the drawings slide into the firm's box; the lock closes */}
-      <div style={{position: 'absolute', left: box.x, top: box.y, width: box.w, height: box.h, borderRadius: 28, border: `2.5px solid ${ink}`, boxSizing: 'border-box', opacity: ov(u, 0.4, 0.8)}}>
+      <div style={{position: 'absolute', left: box.x, top: box.y, width: box.w, height: box.h, borderRadius: 28, border: `2.5px solid ${ink}`, boxSizing: 'border-box'}}>
         <div style={{position: 'absolute', left: 28, bottom: 22, display: 'flex', alignItems: 'center', gap: 12, fontFamily: FONT.sans, fontSize: 32, fontWeight: 700, color: ink}}>
           <svg width={30} height={36} viewBox="0 0 30 36">
             <path d={`M8 ${16 - 4 * (1 - lock)} v-5 a7 7 0 0 1 14 0 v${5 + 4 * (1 - lock)}`} fill="none" stroke={ink} strokeWidth={3} transform={`translate(0 ${-3 * (1 - lock)})`} />
@@ -524,7 +527,7 @@ const PrivateMode: React.FC<{t: number}> = ({t}) => {
         const x = lerp(560 + k * 30, box.x + 120 + k * 14, v);
         const y = lerp(560 + k * 26, box.y + 70 + k * 16, v);
         return (
-          <div key={k} style={{position: 'absolute', left: x, top: y, width: 300, height: 180, background: '#FFFFFF', borderRadius: 8, boxShadow: '0 6px 16px rgba(0,0,0,0.22)', overflow: 'hidden', opacity: ov(u, 0.6 + k * 0.32, 0.9 + k * 0.32), transform: `rotate(${(k - 2) * 2}deg)`}}>
+          <div key={k} style={{position: 'absolute', left: x, top: y, width: 300, height: 180, background: '#FFFFFF', borderRadius: 8, boxShadow: '0 6px 16px rgba(0,0,0,0.22)', overflow: 'hidden', opacity: k === 0 ? 1 : ov(u, 0.6 + k * 0.32, 0.9 + k * 0.32), transform: `rotate(${(k - 2) * 2}deg)`}}>
             <Img src={staticFile(`v2/sheets/${['L-1', 'L-3', 'L-6', 'L-102', 'L-103'][k]}.png`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: 'url(#v5-neutral) contrast(1.25)'}} />
           </div>
         );
@@ -704,7 +707,7 @@ const Raster: React.FC<{t: number}> = ({t}) => {
 
 const Findings: React.FC<{t: number}> = ({t}) => {
   const F = V2.findings;
-  const a = win(t, F.at, Math.min(B.type, INSERT_AT + 0.45), 0.4);
+  const a = win(t, F.at, Math.min(B.type, INSERT_AT + 0.4), 0.4);
   if (a <= 0) return null;
   // v6.2: a short three-group table (thin rules, accent left, ink right) and the total as the hero number
   const rows: [string, string, string, number][] = [
@@ -861,7 +864,7 @@ const AlikeSheets: React.FC<{t: number}> = ({t}) => {
   return (
     <AbsoluteFill style={{opacity: a}}>
       <AbsoluteFill style={{background: '#FFFFFF'}} />
-      <AbsoluteFill style={{transform: `translate(${lerp(0, -330, grow)}px, ${lerp(0, -40, grow)}px) scale(${lerp(1, 1.36, grow)})`, transformOrigin: `${A.xR + A.w / 2}px ${A.y + A.h / 2}px`}}>
+      <AbsoluteFill style={{transform: `translate(${lerp(0, -140, grow)}px, ${lerp(0, 40, grow)}px) scale(${lerp(1, 1.22, grow)})`, transformOrigin: `${A.xR + A.w / 2}px ${A.y + A.h / 2}px`}}>
       {/* L-103 stays; L-102 slides over it (multiply: both drawings show; where they match the lines coincide) */}
       <div style={{...box, left: A.xR, background: '#fff', border: `1.5px solid ${DAYC.rule}`, boxShadow: '0 10px 28px rgba(29,32,38,0.10)', overflow: 'hidden', isolation: 'isolate'}}>
         <Img src={staticFile('v2/sheets/L-103.png')} style={{...img(''), opacity: 1 - 0.75 * lit}} />
@@ -952,12 +955,14 @@ const Caption: React.FC<{t: number}> = ({t}) => {
   );
 };
 
-export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode = false, sound = true, endCard = 'default'}) => {
+export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode = false, sound = true, endCard = 'default', previewBeat = false}) => {
   const ext = endCard === 'extended';
   U = DAY.ui;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const t = frame / fps;
+  // check stills only: before the cues move +6 s (READY2), hide what the old timing puts over the new beat
+  const beatOnly = previewBeat && t >= INSERT_AT && t < INSERT_AT + 6.3;
   const part1World = t >= B.land - 0.45 && t < Math.min(B.type, INSERT_AT + 0.6) && !(t > B.raster + 0.5 && t < B.bills - 0.45);
   const endWorld = t >= CLOSE_AT;
   const duskU = clamp01((t - CLOSE_AT) / (LOGO_AT + END.hold - CLOSE_AT));
@@ -1009,12 +1014,20 @@ export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode =
           const col = DAYC.accent;
           return (
             <>
-              {p.visible ? (
-                <div style={{position: 'absolute', left: p.x - 26, top: p.y - 26, opacity: pa}}>
-                  <div style={{position: 'absolute', left: -16, top: 6, width: 84, height: 40, borderRadius: 20, background: '#fff', border: `5px solid ${PAL.ink}`, boxSizing: 'border-box'}} />
-                  <div style={{position: 'absolute', left: 0, top: 0, width: 52, height: 52, borderRadius: 26, background: '#fff', border: `5px solid ${PAL.ink}`, boxSizing: 'border-box'}} />
-                </div>
-              ) : null}
+              {p.visible ? (() => {
+                // v6.11: seen from above the person faces the way they walk (east, along the corridor): the shoulders across
+                // the path, the head a little forward with a nose; the heading is the path's direction on screen, also when stopped
+                const w = personWorld(t);
+                const q = projectAt(t, [w[0] + 1, w[1], w[2]]);
+                const ang = (Math.atan2(q.y - p.y, q.x - p.x) * 180) / Math.PI;
+                return (
+                  <div style={{position: 'absolute', left: p.x, top: p.y, width: 0, height: 0, opacity: pa, transform: `rotate(${ang.toFixed(2)}deg)`}}>
+                    <div style={{position: 'absolute', left: -20, top: -42, width: 40, height: 84, borderRadius: 20, background: '#fff', border: `5px solid ${PAL.ink}`, boxSizing: 'border-box'}} />
+                    <div style={{position: 'absolute', left: -20, top: -26, width: 52, height: 52, borderRadius: 26, background: '#fff', border: `5px solid ${PAL.ink}`, boxSizing: 'border-box'}} />
+                    <div style={{position: 'absolute', left: 30, top: -7, width: 0, height: 0, borderTop: '7px solid transparent', borderBottom: '7px solid transparent', borderLeft: `11px solid ${PAL.ink}`}} />
+                  </div>
+                );
+              })() : null}
               {ea.visible && eb.visible && dimA > 0 ? (
                 <svg width={1920} height={1080} style={{position: 'absolute', inset: 0, opacity: dimA}}>
                   <line x1={ea.x} y1={ea.y} x2={eb.x} y2={eb.y} stroke={col} strokeWidth={6} />
@@ -1088,7 +1101,7 @@ export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode =
       {/* the findings; the private-mode beat (the day-to-night bridge); the big type on black; the hard cut */}
       <Findings t={t} />
       <PrivateMode t={t} />
-      {t >= B.type - 0.2 && t < PART2_AT ? <DeckCard eyebrow="1 landscape package" a={ov(t, B.type - 0.2, B.type)} solid>
+      {!beatOnly && t >= B.type - 0.2 && t < PART2_AT ? <DeckCard eyebrow="1 landscape package" a={ov(t, B.type - 0.2, B.type)} solid>
           <span style={{color: NIGHTC.accent}}>2</span> weeks → <span style={{color: NIGHTC.accent}}>10</span> min
         </DeckCard> : null}
 
@@ -1111,7 +1124,7 @@ export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode =
       {t >= 35.6 && t < 39.3 ? <LiftPins t={t} /> : null}
 
       {/* Part 2: the capture, its holds cut, full-bleed */}
-      {t >= PART2_AT - 0.1 && t < CLOSE_AT + 0.1 ? <Part2 fps={fps} proxy={proxy} /> : null}
+      {!beatOnly && t >= PART2_AT - 0.1 && t < CLOSE_AT + 0.1 ? <Part2 fps={fps} proxy={proxy} /> : null}
 
       {/* large type over the end of Part 2, one card at a time */}
       {BIG.map((b) => {
@@ -1151,14 +1164,14 @@ export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode =
               </div>
               <AbsoluteFill style={{background: U.logoBg, opacity: veil, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                 <Img src={staticFile(`v2/logo-lockup-${U.logo}.svg`)} style={{height: 160, opacity: logoIn, transform: `scale(${lerp(0.95, 1, logoIn)})`}} />
-                <div style={{fontFamily: FONT.sans, fontSize: 36, fontWeight: 500, marginTop: 48, color: U.endText, opacity: 0.88 * logoIn}}>github.com/eric2612115/landsight</div>
+                <div style={{fontFamily: FONT.sans, fontSize: 36, fontWeight: 500, marginTop: 48, color: U.endText, opacity: 0.88 * logoIn}}>github.com/eric2612115/landsight-meta</div>
                 <div style={{fontFamily: FONT.sans, fontSize: 34, marginTop: 14, color: U.endText, opacity: 0.6 * logoIn}}>{ext ? "Built with Meta's Muse Spark 1.3, SAM 3.1, Muse Wonder and Muse Spark Open" : 'Built with Muse Spark 1.3 and SAM 3.1'}</div>
               </AbsoluteFill>
             </>
           );
         })() : null}
 
-      <Caption t={t} />
+      {!beatOnly ? <Caption t={t} /> : null}
       {timecode ? (
         <div style={{position: 'absolute', right: 18, top: 14, fontFamily: FONT.sans, fontSize: 18, fontWeight: 500, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '3px 9px', borderRadius: 6, ...NUM}}>
           {`${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}.${String(Math.floor((t % 1) * 100)).padStart(2, '0')}`}

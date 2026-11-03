@@ -94,7 +94,7 @@ npm run studio              # scrub the cut in the browser
 npx remotion still src/index.ts Film still.png --frame=1680
 ```
 
-Props: `narrator` (`brian` | `alice`), `repoUrl` (the end card; default `https://github.com/eric2612115/landsight`, to be confirmed),
+Props: `narrator` (`brian` | `alice`), `repoUrl` (the end card; default `https://github.com/eric2612115/landsight-meta`, to be confirmed),
 `showSourceTag` (the mock stamp).
 
 ## State of v1 (2026-11-02)

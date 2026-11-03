@@ -108,7 +108,7 @@ Opt-in: a private mode on Muse Spark Open, Meta's open weights (the same scorebo
 where Muse Wonder learns a firm's habits from its decisions and drafts its reply to the developer.
 
 ## Public GitHub Repository
-`https://github.com/eric2612115/landsight` (make public before submitting; AGPL-3.0; the README opens with the
+`https://github.com/eric2612115/landsight-meta` (make public before submitting; AGPL-3.0; the README opens with the
 results, the Meta engineering and a two-terminal quick start)
 
 ## 3-Minute Demo Video
