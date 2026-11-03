@@ -1,0 +1,274 @@
+{
+ "image": "L-1_filled.png",
+ "sheet": "L-1",
+ "prompt": "green circle",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:39:52+00:00",
+ "seconds": 2.06,
+ "image_sha256": "8891cb17a561b9ddae6a09a6a343075c1f1491cf5b9f4f526dda5fa90d9dd16c",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 9,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    496,
+    759,
+    594,
+    859
+   ],
+   "score": 0.9139785170555115,
+   "area_px": 7843,
+   "area_m2": 12.32,
+   "centroid_m": [
+    17.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-04",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.968
+   },
+   "touches": [
+    "L-1/tree-04"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    192,
+    759,
+    292,
+    859
+   ],
+   "score": 0.921951174736023,
+   "area_px": 7957,
+   "area_m2": 12.5,
+   "centroid_m": [
+    4.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-01",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.954
+   },
+   "touches": [
+    "L-1/tree-01"
+   ]
+  },
+  {
+   "object_id": "2",
+   "box_px": [
+    698,
+    759,
+    797,
+    859
+   ],
+   "score": 0.9179486632347107,
+   "area_px": 7952,
+   "area_m2": 12.49,
+   "centroid_m": [
+    25.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-06",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 12.0,
+    "iou": 0.96
+   },
+   "touches": [
+    "L-1/tree-06"
+   ]
+  },
+  {
+   "object_id": "3",
+   "box_px": [
+    293,
+    759,
+    393,
+    859
+   ],
+   "score": 0.9139785170555115,
+   "area_px": 7904,
+   "area_m2": 12.42,
+   "centroid_m": [
+    9.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-02",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.96
+   },
+   "touches": [
+    "L-1/tree-02"
+   ]
+  },
+  {
+   "object_id": "4",
+   "box_px": [
+    597,
+    759,
+    695,
+    859
+   ],
+   "score": 0.9139785170555115,
+   "area_px": 7855,
+   "area_m2": 12.34,
+   "centroid_m": [
+    20.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-05",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.94,
+    "iou": 0.964
+   },
+   "touches": [
+    "L-1/tree-05"
+   ]
+  },
+  {
+   "object_id": "5",
+   "box_px": [
+    395,
+    759,
+    494,
+    859
+   ],
+   "score": 0.9179486632347107,
+   "area_px": 7906,
+   "area_m2": 12.42,
+   "centroid_m": [
+    13.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-03",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.964
+   },
+   "touches": [
+    "L-1/tree-03"
+   ]
+  },
+  {
+   "object_id": "6",
+   "box_px": [
+    1517,
+    138,
+    1617,
+    238
+   ],
+   "score": 0.8827838897705078,
+   "area_px": 7999,
+   "area_m2": 12.57,
+   "centroid_m": [
+    57.49,
+    27.14
+   ],
+   "match": {
+    "id": "L-1/legend-02",
+    "kind": "legend",
+    "label": "legend: symbol 樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.954
+   },
+   "touches": [
+    "L-1/legend-02"
+   ]
+  },
+  {
+   "object_id": "7",
+   "box_px": [
+    798,
+    759,
+    897,
+    859
+   ],
+   "score": 0.9139785170555115,
+   "area_px": 7830,
+   "area_m2": 12.3,
+   "centroid_m": [
+    28.99,
+    2.51
+   ],
+   "match": {
+    "id": "L-1/tree-07",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.97,
+    "iou": 0.971
+   },
+   "touches": [
+    "L-1/tree-07"
+   ]
+  },
+  {
+   "object_id": "8",
+   "box_px": [
+    900,
+    759,
+    999,
+    859
+   ],
+   "score": 0.921951174736023,
+   "area_px": 7884,
+   "area_m2": 12.38,
+   "centroid_m": [
+    33.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-08",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.968
+   },
+   "touches": [
+    "L-1/tree-08"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 1909,
+ "raw_output": "<0f>0<|box;x1=496;y1=759;x2=593;y2=858;w=2100;h=1140;c=0.9139785170555115|><|mask;x=0;y=0;c=0.9139785170555115;data=100,98,!!!!!jDg3rHO$K.3:]FQele5YJ`4NJcej?/v'imD_k2o:dPxr6?BpRIBB7FWMalT9-cn[V9M)GO6#0vzu3XIy+5xl8|>,1<|box;x1=192;y1=759;x2=291;y2=858;w=2100;h=1140;c=0.921951174736023|><|mask;x=0;y=0;c=0.921951174736023;data=100,100,!!!!!gDg5+8MBV3K=bpVF!@JyolhyJBb{!mIj1#&:NtFGJ(8CLYm8Mjy%._oDp9$BO^MCDjG3xmRHwlqEIyt:A|>,2<|box;x1=698;y1=759;x2=796;y2=858;w=2100;h=1140;c=0.9179486632347107|><|mask;x=0;y=0;c=0.9179486632347107;data=100,99,!!!!!jDbL$]B)7w=5v*m9Za{{C6w2DJ'8lrGXH+Xu@pON`f76xZcq(?YqKAkHm8z5{a=a:7Ym3i#_e{HOQ7[_mcEs7|>,3<|box;x1=293;y1=759;x2=392;y2=858;w=2100;h=1140;c=0.9139785170555115|><|mask;x=0;y=0;c=0.9139785170555115;data=100,100,!!!!!gDl)x$*+kQ{+V'^tc!O*E1#EKuFcX1]wVE7jX]%:1?T]O.Jdibq9IW65J*nRTv4QSm`TE6K0vz[AO^(EA|>,4<|box;x1=597;y1=759;x2=694;y2=858;w=2100;h=1140;c=0.9139785170555115|><|mask;x=0;y=0;c=0.9139785170555115;data=100,98,!!!!!lDg4mP@sq!OOjDWs`Vv`pc!w'G7ejx['RL^x_]+OHq15SmMK8!cXGWl]6lN2{BcOx-SF&)o7vtkh6'a].m8P8V!!|>,5<|box;x1=395;y1=759;x2=493;y2=858;w=2100;h=1140;c=0.9179486632347107|><|mask;x=0;y=0;c=0.9179486632347107;data=100,99,!!!!!gDg4mM#Z=4v:(N$JWgU*{fgHr'9]disctp(]w$#X^LofS3neO8]mgabx]Q!f*O)Ke:!vfhroA:QR8X'5@|>,6<|box;x1=1517;y1=138;x2=1616;y2=237;w=2100;h=1140;c=0.8827838897705078|><|mask;x=0;y=0;c=0.8827838897705078;data=100,100,!!!!!lDl*6BY/nx+3LxpsLP$cFnJZ]m!X(ThIAK4USL^s4oPqu#!Ny.$f+B!=aHa$QXOX%DbU&'a/t{e_PHD^ik[M%d!!|>,7<|box;x1=798;y1=759;x2=896;y2=858;w=2100;h=1140;c=0.9139785170555115|><|mask;x=0;y=0;c=0.9139785170555115;data=100,99,!!!!!kDXAWXqp4aTkbB.(Um!exd{X+335PyB(6FkOO.nsVE(:`U)7OaS`P#em4HL`6xME0C*-R.hjuO63qa78U3z4Q+|>,8<|box;x1=900;y1=759;x2=998;y2=858;w=2100;h=1140;c=0.921951174736023|><|mask;x=0;y=0;c=0.921951174736023;data=100,99,!!!!!kD]lpar/JI@4X7Q9N)uF?:@=O(!Hr'tH1aw)_u%lME@o5$Z^R?`G#L#hUw0Fu)`od5)LUAA)rt'KguR*C3WC.8|>\n",
+ "prompt_source": "manual"
+}

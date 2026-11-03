@@ -1,0 +1,71 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "6f8b34b407cf2b65d0c7d8aa8799954f5cdd3c0c462ae2ba5a84f2f2a1403ebb",
+ "content_key": "dxf:14a8aae7cce8939dfaed8e1ed79a6b354ab5c3b2d39a664589d8419707d60e52|p=ace754ed",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:24:10+00:00",
+ "seconds": 4.38,
+ "usage": {
+  "completion_tokens": 495,
+  "prompt_tokens": 3640,
+  "total_tokens": 4135,
+  "completion_tokens_details": {
+   "reasoning_tokens": 357
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 497
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "confidence": 0.99,
+  "discipline": "general",
+  "enlarged_partial": false,
+  "index": [
+   "L-1",
+   "L-3",
+   "L-5",
+   "L-6"
+  ],
+  "kind": "cover",
+  "match_line": false,
+  "title_block": {
+   "date": "2026-09-18",
+   "number": "L-0",
+   "revision": "A",
+   "scale": "NTS",
+   "title": "Cover and Index"
+  },
+  "why": "The sheet is titled Cover and Index and contains a drawing index table with no plan, detail, or schedule graphics."
+ },
+ "response_id": "chatcmpl-01a1a0f0-1407-75dd-9021-caacae4553a0",
+ "raw": {
+  "id": "chatcmpl-01a1a0f0-1407-75dd-9021-caacae4553a0",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"confidence\": 0.99, \"discipline\": \"general\", \"enlarged_partial\": false, \"index\": [\"L-1\", \"L-3\", \"L-5\", \"L-6\"], \"kind\": \"cover\", \"match_line\": false, \"title_block\": {\"date\": \"2026-09-18\", \"number\": \"L-0\", \"revision\": \"A\", \"scale\": \"NTS\", \"title\": \"Cover and Index\"}, \"why\": \"The sheet is titled Cover and Index and contains a drawing index table with no plan, detail, or schedule graphics.\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701450,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 495,
+   "prompt_tokens": 3640,
+   "total_tokens": 4135,
+   "completion_tokens_details": {
+    "reasoning_tokens": 357
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 497
+   }
+  }
+ }
+}

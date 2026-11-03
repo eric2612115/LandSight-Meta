@@ -1,0 +1,139 @@
+{
+ "image": "L-1_filled.png",
+ "sheet": "L-1",
+ "prompt": "green rectangle",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:01+00:00",
+ "seconds": 2.39,
+ "image_sha256": "8891cb17a561b9ddae6a09a6a343075c1f1491cf5b9f4f526dda5fa90d9dd16c",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 4,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    1515,
+    328,
+    1619,
+    342
+   ],
+   "score": 0.7968254089355469,
+   "area_px": 1249,
+   "area_m2": 1.96,
+   "centroid_m": [
+    57.48,
+    21.32
+   ],
+   "match": {
+    "id": "L-1/legend-04",
+    "kind": "legend",
+    "label": "legend: line 金露花",
+    "truth_m2": 1.6,
+    "overlap_m2": 1.59,
+    "iou": 0.803
+   },
+   "touches": [
+    "L-1/legend-04"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    722,
+    317,
+    1227,
+    570
+   ],
+   "score": 0.9336099624633789,
+   "area_px": 127119,
+   "area_m2": 199.69,
+   "centroid_m": [
+    34.0,
+    17.03
+   ],
+   "match": {
+    "id": "L-1/lawn-01",
+    "kind": "lawn",
+    "label": "草皮",
+    "truth_m2": 200.0,
+    "overlap_m2": 198.9,
+    "iou": 0.991
+   },
+   "touches": [
+    "L-1/lawn-01"
+   ]
+  },
+  {
+   "object_id": "2",
+   "box_px": [
+    1516,
+    258,
+    1619,
+    295
+   ],
+   "score": 0.8518518805503845,
+   "area_px": 3763,
+   "area_m2": 5.91,
+   "centroid_m": [
+    57.49,
+    23.63
+   ],
+   "match": {
+    "id": "L-1/legend-03",
+    "kind": "legend",
+    "label": "legend: swatch 杜鵑",
+    "truth_m2": 5.6,
+    "overlap_m2": 5.55,
+    "iou": 0.929
+   },
+   "touches": [
+    "L-1/legend-03"
+   ]
+  },
+  {
+   "object_id": "3",
+   "box_px": [
+    267,
+    317,
+    646,
+    570
+   ],
+   "score": 0.9336099624633789,
+   "area_px": 95186,
+   "area_m2": 149.52,
+   "centroid_m": [
+    13.49,
+    17.03
+   ],
+   "match": {
+    "id": "L-1/shrub_bed-01",
+    "kind": "shrub_bed",
+    "label": "杜鵑",
+    "truth_m2": 150.0,
+    "overlap_m2": 148.93,
+    "iou": 0.989
+   },
+   "touches": [
+    "L-1/shrub_bed-01"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 708,
+ "raw_output": "<0f>0<|box;x1=1515;y1=328;x2=1618;y2=341;w=2100;h=1140;c=0.7968254089355469|><|mask;x=0;y=0;c=0.7968254089355469;data=14,104,!!!!!8J?/p*Db`CU[$w%rU':38lca:X!!|>,1<|box;x1=722;y1=317;x2=1226;y2=569;w=2100;h=1140;c=0.9336099624633789|><|mask;x=0;y=0;c=0.9336099624633789;data=253,505,!!!!!YK00`eh/2Rk37)0CjICaddCy7Z&UKiYL*?_rtL2n'S9ipbE)/PG]Qy/{]6:F[CVBg|>,2<|box;x1=1516;y1=258;x2=1618;y2=294;w=2100;h=1140;c=0.8518518805503845|><|mask;x=0;y=0;c=0.8518518805503845;data=37,103,!!!!!6K-_Sfu/+HD+[G2sm=Oed)#ay|>,3<|box;x1=267;y1=317;x2=645;y2=569;w=2100;h=1140;c=0.9336099624633789|><|mask;x=0;y=0;c=0.9336099624633789;data=253,379,!!!!!_I7l7R9$XHCj%Z{eq?J0_v@fuUnM[JzF6n*Cy4dGscDN&X$7$C#ltTp1x*PTA%Q7E/'*jPm|>\n",
+ "prompt_source": "manual"
+}

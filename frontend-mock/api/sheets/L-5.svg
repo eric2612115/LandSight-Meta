@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.200 45.200" width="998" height="542" font-family="Heiti TC, PingFang TC, Noto Sans CJK TC, sans-serif">
+<defs><pattern id="hatch" width="0.6" height="0.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6" stroke="#888" stroke-width="0.05"/></pattern></defs>
+<rect width="83.200" height="45.200" fill="#f7f5f0"/>
+<path d="M4.600,39.600 L4.600,39.200 L6.600,39.200 L6.600,39.600 L4.600,39.600 Z" fill="#000" fill-rule="evenodd" data-handle="BA" data-layer="FRAME"/>
+<path d="M8.600,39.600 L8.600,39.200 L10.600,39.200 L10.600,39.600 L8.600,39.600 Z" fill="#000" fill-rule="evenodd" data-handle="BD" data-layer="FRAME"/>
+<path d="M12.600,39.600 L12.600,39.200 L14.600,39.200 L14.600,39.600 L12.600,39.600 Z" fill="#000" fill-rule="evenodd" data-handle="C0" data-layer="FRAME"/>
+<polyline points="1.600,43.600 81.600,43.600 81.600,1.600 1.600,1.600 1.600,43.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="99" data-layer="FRAME"/>
+<polyline points="42.600,26.600 4.600,26.600 4.600,15.600" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="9A" data-layer="SITE"/>
+<polyline points="18.464,20.565 17.428,18.772 15.635,17.736 13.565,17.736 11.772,18.772 10.736,20.565 10.736,22.635 11.772,24.428 13.565,25.464 15.635,25.464 17.428,24.428 18.464,22.635 18.464,20.565" fill="none" stroke="#000" stroke-width="0.06" data-handle="9C" data-layer="TREES"/>
+<polyline points="13.800,21.600 15.400,21.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="9D" data-layer="TREES"/>
+<polyline points="14.600,22.400 14.600,20.800" fill="none" stroke="#000" stroke-width="0.06" data-handle="9E" data-layer="TREES"/>
+<polyline points="13.100,23.100 16.100,23.100 16.100,20.100 13.100,20.100 13.100,23.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="9F" data-layer="PLANT"/>
+<polyline points="26.464,20.565 25.428,18.772 23.635,17.736 21.565,17.736 19.772,18.772 18.736,20.565 18.736,22.635 19.772,24.428 21.565,25.464 23.635,25.464 25.428,24.428 26.464,22.635 26.464,20.565" fill="none" stroke="#000" stroke-width="0.06" data-handle="A0" data-layer="TREES"/>
+<polyline points="21.800,21.600 23.400,21.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="A1" data-layer="TREES"/>
+<polyline points="22.600,22.400 22.600,20.800" fill="none" stroke="#000" stroke-width="0.06" data-handle="A2" data-layer="TREES"/>
+<polyline points="21.100,23.100 24.100,23.100 24.100,20.100 21.100,20.100 21.100,23.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="A3" data-layer="PLANT"/>
+<polyline points="34.464,20.565 33.428,18.772 31.635,17.736 29.565,17.736 27.772,18.772 26.736,20.565 26.736,22.635 27.772,24.428 29.565,25.464 31.635,25.464 33.428,24.428 34.464,22.635 34.464,20.565" fill="none" stroke="#000" stroke-width="0.06" data-handle="A4" data-layer="TREES"/>
+<polyline points="29.800,21.600 31.400,21.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="A5" data-layer="TREES"/>
+<polyline points="30.600,22.400 30.600,20.800" fill="none" stroke="#000" stroke-width="0.06" data-handle="A6" data-layer="TREES"/>
+<polyline points="29.100,23.100 32.100,23.100 32.100,20.100 29.100,20.100 29.100,23.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="A7" data-layer="PLANT"/>
+<polyline points="42.464,20.565 41.428,18.772 39.635,17.736 37.565,17.736 35.772,18.772 34.736,20.565 34.736,22.635 35.772,24.428 37.565,25.464 39.635,25.464 41.428,24.428 42.464,22.635 42.464,20.565" fill="none" stroke="#000" stroke-width="0.06" data-handle="A8" data-layer="TREES"/>
+<polyline points="37.800,21.600 39.400,21.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="A9" data-layer="TREES"/>
+<polyline points="38.600,22.400 38.600,20.800" fill="none" stroke="#000" stroke-width="0.06" data-handle="AA" data-layer="TREES"/>
+<polyline points="37.100,23.100 40.100,23.100 40.100,20.100 37.100,20.100 37.100,23.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="AB" data-layer="PLANT"/>
+<polyline points="34.680,14.750 24.600,14.750 24.100,17.900" fill="none" stroke="#000" stroke-width="0.06" data-handle="AD" data-layer="LEADER"/>
+<polyline points="5.600,29.150 16.040,29.150 13.100,23.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="AF" data-layer="LEADER"/>
+<polyline points="14.600,16.000 22.600,16.000" fill="none" stroke="#000" stroke-width="0.06" data-handle="B0" data-layer="TEXT"/>
+<polyline points="14.600,16.300 14.600,15.700" fill="none" stroke="#000" stroke-width="0.06" data-handle="B1" data-layer="TEXT"/>
+<polyline points="22.600,16.300 22.600,15.700" fill="none" stroke="#000" stroke-width="0.06" data-handle="B2" data-layer="TEXT"/>
+<polyline points="42.600,33.600 42.600,8.600" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="B5" data-layer="MATCHLINE"/>
+<polyline points="4.600,39.600 6.600,39.600 6.600,39.200 4.600,39.200 4.600,39.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="B9" data-layer="FRAME"/>
+<polyline points="6.600,39.600 8.600,39.600 8.600,39.200 6.600,39.200 6.600,39.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BB" data-layer="FRAME"/>
+<polyline points="8.600,39.600 10.600,39.600 10.600,39.200 8.600,39.200 8.600,39.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BC" data-layer="FRAME"/>
+<polyline points="10.600,39.600 12.600,39.600 12.600,39.200 10.600,39.200 10.600,39.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BE" data-layer="FRAME"/>
+<polyline points="12.600,39.600 14.600,39.600 14.600,39.200 12.600,39.200 12.600,39.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BF" data-layer="FRAME"/>
+<polyline points="48.600,40.600 49.600,37.600 50.600,40.600 49.600,39.700 48.600,40.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="C8" data-layer="FRAME"/>
+<polyline points="60.600,19.100 75.600,19.100 75.600,10.100 60.600,10.100 60.600,19.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CB" data-layer="FRAME"/>
+<polyline points="60.600,19.100 66.300,19.100 66.300,17.450 60.600,17.450 60.600,19.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CC" data-layer="FRAME"/>
+<polyline points="58.600,27.600 79.600,27.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="CE" data-layer="FRAME"/>
+<polyline points="58.600,28.715 79.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="CF" data-layer="FRAME"/>
+<polyline points="58.600,27.600 58.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="D0" data-layer="FRAME"/>
+<polyline points="79.600,27.600 79.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="D1" data-layer="FRAME"/>
+<polyline points="64.600,27.600 64.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="D3" data-layer="FRAME"/>
+<polyline points="58.600,29.831 79.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="D5" data-layer="FRAME"/>
+<polyline points="58.600,28.715 58.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="D6" data-layer="FRAME"/>
+<polyline points="79.600,28.715 79.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="D7" data-layer="FRAME"/>
+<polyline points="64.600,28.715 64.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="D9" data-layer="FRAME"/>
+<polyline points="58.600,30.946 79.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="DB" data-layer="FRAME"/>
+<polyline points="58.600,29.831 58.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="DC" data-layer="FRAME"/>
+<polyline points="79.600,29.831 79.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="DD" data-layer="FRAME"/>
+<polyline points="64.600,29.831 64.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="DF" data-layer="FRAME"/>
+<polyline points="58.600,32.062 79.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="E1" data-layer="FRAME"/>
+<polyline points="58.600,30.946 58.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="E2" data-layer="FRAME"/>
+<polyline points="79.600,30.946 79.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="E3" data-layer="FRAME"/>
+<polyline points="64.600,30.946 64.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="E5" data-layer="FRAME"/>
+<polyline points="58.600,33.177 79.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="E7" data-layer="FRAME"/>
+<polyline points="58.600,32.062 58.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="E8" data-layer="FRAME"/>
+<polyline points="79.600,32.062 79.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="E9" data-layer="FRAME"/>
+<polyline points="64.600,32.062 64.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="EB" data-layer="FRAME"/>
+<polyline points="58.600,34.292 79.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="ED" data-layer="FRAME"/>
+<polyline points="58.600,33.177 58.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="EE" data-layer="FRAME"/>
+<polyline points="79.600,33.177 79.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="EF" data-layer="FRAME"/>
+<polyline points="64.600,33.177 64.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="F1" data-layer="FRAME"/>
+<polyline points="58.600,35.408 79.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="F3" data-layer="FRAME"/>
+<polyline points="58.600,34.292 58.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="F4" data-layer="FRAME"/>
+<polyline points="79.600,34.292 79.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="F5" data-layer="FRAME"/>
+<polyline points="64.600,34.292 64.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="F7" data-layer="FRAME"/>
+<polyline points="58.600,36.523 79.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="F9" data-layer="FRAME"/>
+<polyline points="58.600,35.408 58.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="FA" data-layer="FRAME"/>
+<polyline points="79.600,35.408 79.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="FB" data-layer="FRAME"/>
+<polyline points="64.600,35.408 64.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="FD" data-layer="FRAME"/>
+<polyline points="58.600,37.638 79.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="FF" data-layer="FRAME"/>
+<polyline points="58.600,36.523 58.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="100" data-layer="FRAME"/>
+<polyline points="79.600,36.523 79.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="101" data-layer="FRAME"/>
+<polyline points="64.600,36.523 64.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="103" data-layer="FRAME"/>
+<polyline points="58.600,38.754 79.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="105" data-layer="FRAME"/>
+<polyline points="58.600,37.638 58.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="106" data-layer="FRAME"/>
+<polyline points="79.600,37.638 79.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="107" data-layer="FRAME"/>
+<polyline points="64.600,37.638 64.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="109" data-layer="FRAME"/>
+<polyline points="58.600,38.754 79.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="10B" data-layer="FRAME"/>
+<polyline points="58.600,39.869 79.600,39.869" fill="none" stroke="#000" stroke-width="0.06" data-handle="10C" data-layer="FRAME"/>
+<polyline points="58.600,38.754 58.600,39.869" fill="none" stroke="#000" stroke-width="0.06" data-handle="10D" data-layer="FRAME"/>
+<polyline points="79.600,38.754 79.600,39.869" fill="none" stroke="#000" stroke-width="0.06" data-handle="10E" data-layer="FRAME"/>
+<polyline points="58.600,40.985 79.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="110" data-layer="FRAME"/>
+<polyline points="58.600,39.869 58.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="111" data-layer="FRAME"/>
+<polyline points="79.600,39.869 79.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="112" data-layer="FRAME"/>
+<polyline points="60.600,39.869 60.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="114" data-layer="FRAME"/>
+<polyline points="64.600,39.869 64.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="116" data-layer="FRAME"/>
+<polyline points="58.600,42.100 79.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="118" data-layer="FRAME"/>
+<polyline points="58.600,40.985 58.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="119" data-layer="FRAME"/>
+<polyline points="79.600,40.985 79.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="11A" data-layer="FRAME"/>
+<polyline points="60.600,40.985 60.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="11B" data-layer="FRAME"/>
+<polyline points="64.600,40.985 64.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="11C" data-layer="FRAME"/>
+<text x="16.600" y="31.600" font-size="0.800">PLANNED ROAD 8 M</text>
+<text x="24.600" y="14.600" font-size="0.600">CC typ. H3.5 W1.5 CAL. 10 cm</text>
+<text x="5.600" y="29.000" font-size="0.600">TREE PIT 1.5 × 1.5 M, SEE L-6</text>
+<text x="15.540" y="15.700" font-size="0.600">4.0 M O.C. (TYP.)</text>
+<text x="42.300" y="16.600" font-size="0.700" transform="rotate(-90.00 42.300 16.600)">MATCH LINE — SEE L-1</text>
+<text x="5.600" y="5.100" font-size="1.000">ENLARGED PLAN — WEST</text>
+<text x="5.600" y="6.600" font-size="0.600">SCALE 1:100</text>
+<text x="4.450" y="40.500" font-size="0.500">0</text>
+<text x="6.450" y="40.500" font-size="0.500">1</text>
+<text x="8.450" y="40.500" font-size="0.500">2</text>
+<text x="10.450" y="40.500" font-size="0.500">3</text>
+<text x="12.450" y="40.500" font-size="0.500">4</text>
+<text x="14.450" y="40.500" font-size="0.500">5 m</text>
+<text x="15.600" y="39.600" font-size="0.500">1:100</text>
+<text x="49.300" y="37.200" font-size="0.800">N</text>
+<text x="60.600" y="9.300" font-size="0.600">KEY PLAN</text>
+<text x="60.900" y="18.800" font-size="0.500">L-5</text>
+<text x="58.800" y="28.383" font-size="0.450">PROJECT</text>
+<text x="64.800" y="28.383" font-size="0.450">Greenfield Residences</text>
+<text x="58.800" y="29.498" font-size="0.450">WORKS</text>
+<text x="64.800" y="29.498" font-size="0.450">Landscape over basement slab</text>
+<text x="58.800" y="30.613" font-size="0.450">TITLE</text>
+<text x="64.800" y="30.613" font-size="0.450">Enlarged Plan - West</text>
+<text x="58.800" y="31.729" font-size="0.450">DRAWING NO.</text>
+<text x="64.800" y="31.729" font-size="0.450">L-5</text>
+<text x="58.800" y="32.844" font-size="0.450">SCALE</text>
+<text x="64.800" y="32.844" font-size="0.450">1:200</text>
+<text x="58.800" y="33.960" font-size="0.450">SITE AREA</text>
+<text x="64.800" y="33.960" font-size="0.450">1,500 m²</text>
+<text x="58.800" y="35.075" font-size="0.450">BUILDING COVERAGE</text>
+<text x="64.800" y="35.075" font-size="0.450">40%</text>
+<text x="58.800" y="36.190" font-size="0.450">GROUND</text>
+<text x="64.800" y="36.190" font-size="0.450">ARTIFICIAL GROUND</text>
+<text x="58.800" y="37.306" font-size="0.450">REV</text>
+<text x="64.800" y="37.306" font-size="0.450">A</text>
+<text x="58.800" y="38.421" font-size="0.450">DATE</text>
+<text x="64.800" y="38.421" font-size="0.450">2026-09-18</text>
+<text x="58.900" y="39.537" font-size="0.450">REVISIONS</text>
+<text x="58.800" y="40.652" font-size="0.450">A</text>
+<text x="60.800" y="40.652" font-size="0.450">2026-09-18</text>
+<text x="64.800" y="40.652" font-size="0.450">ISSUED FOR REVIEW</text>
+</svg>

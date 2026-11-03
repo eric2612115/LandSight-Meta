@@ -1,0 +1,77 @@
+{
+ "image": "L-102 filled",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:23:45+00:00",
+ "seconds": 2.41,
+ "image_sha256": "4c2df638b40988fb08eb6a7b5702f2556b4b1f839e112a78fd1f04e3e36bec7c",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 994,
+ "raw_output": "<0f>0<|box;x1=279;y1=657;x2=432;y2=696;w=2100;h=1140;c=0.859649121761322|><|mask;x=0;y=0;c=0.859649121761322;data=40,154,!!!!!GIbbKf@AxM+=lVlCt(8f@KK4p=`=?0*Ph(s{H.&d0!!|>,1<|box;x1=456;y1=657;x2=608;y2=696;w=2100;h=1140;c=0.859649121761322|><|mask;x=0;y=0;c=0.859649121761322;data=40,153,!!!!!GJ@[N[lk#)WEtg@wehh9ycb@RT4J+&dfzrveT'Aqa!!|>,2<|box;x1=494;y1=480;x2=572;y2=544;w=2100;h=1140;c=0.7928802371025085|><|mask;x=0;y=0;c=0.7928802371025085;data=65,79,!!!!!LIV8bKB3eWGvh6m%_mXPJ$kNkcC(e_#6{qA$+f5Bt(&l])Zc?|>,3<|box;x1=1516;y1=137;x2=1618;y2=173;w=2100;h=1140;c=0.8476190567016602|><|mask;x=0;y=0;c=0.8476190567016602;data=37,103,!!!!!?K.BCkoA@$$)ick_Zw8L`xiy71)en`)!!|>,4<|box;x1=809;y1=657;x2=962;y2=696;w=2100;h=1140;c=0.8632478713989258|><|mask;x=0;y=0;c=0.8632478713989258;data=40,154,!!!!!:J@LIO.7T3Aj)@rh:a1A5W:[)#Rb$p|>,5<|box;x1=633;y1=657;x2=785;y2=696;w=2100;h=1140;c=0.8632478713989258|><|mask;x=0;y=0;c=0.8632478713989258;data=40,153,!!!!!?J@07Q[saDHgL2c10N_(QeiU*ic@RC'!!|>\n",
+ "response_id": "resp_6ae9b63096b351df63524bd4",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b63096b351df63524bd4",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701424.0,
+  "completed_at": 1793701424.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_2578ec64-453f-402a-b394-d4c184397e40",
+    "status": "completed",
+    "content_chars": 994
+   }
+  ]
+ },
+ "sheet": "L-102",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "area",
+  "labels": [
+   "RI YEDDO HAWTHORN"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   336
+  ],
+  "spark_call": "read_legend"
+ }
+}

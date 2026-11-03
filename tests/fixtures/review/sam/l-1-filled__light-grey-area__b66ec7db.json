@@ -1,0 +1,77 @@
+{
+ "image": "L-1 filled",
+ "prompt": "light grey area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:25:33+00:00",
+ "seconds": 1.71,
+ "image_sha256": "b66ec7db414dbef83842d13b58f4457435179ccffdaab0999493cbde49be943a",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 451,
+ "raw_output": "<0f>0<|box;x1=1516;y1=806;x2=1618;y2=843;w=2100;h=1633;c=0.8709677457809448|><|mask;x=0;y=0;c=0.8709677457809448;data=38,103,!!!!!4EIVHH.Ba2mV_ws59bQHu!!|>,1<|box;x1=115;y1=632;x2=218;y2=1214;w=2100;h=1633;c=0.9024390578269958|><|mask;x=0;y=0;c=0.9024390578269958;data=583,104,!!!!#UCfdM_hX*A9@t=fWoJ+!S]5/VOH#Lq]lv$k_ewy.cTo#_Wp)[4_8--XG$'y=75hL@@B6!.Prtm^D$t/-wwy5PX$05C3pY^.JuSGqY9g4Whb3DTph]38axAbTB'HmI&jP@996$`2KsxFU5[3Yg.!aQ00RRU5F_v4'K!!!!!|>\n",
+ "response_id": "resp_6ae9b69c97f2eafc97e94a82",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b69c97f2eafc97e94a82",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701532.0,
+  "completed_at": 1793701532.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_659c7e3b-716d-40b5-8643-e09d4ea824a8",
+    "status": "completed",
+    "content_chars": 451
+   }
+  ]
+ },
+ "sheet": "L-1-revB",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light grey",
+  "kind": "area",
+  "labels": [
+   "FIRE TRUCK ACCESS LANE"
+  ],
+  "crop_px": [
+   1472,
+   563,
+   1965,
+   935
+  ],
+  "spark_call": "read_legend"
+ }
+}

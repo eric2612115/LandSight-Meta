@@ -1,0 +1,85 @@
+{
+ "image": "L-3_filled.png",
+ "sheet": "L-3",
+ "prompt": "beige area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:13+00:00",
+ "seconds": 2.15,
+ "image_sha256": "d57ce91f83e689015030204c909e64e1b93d0c67c2778746b5e43e7a9849e950",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 2,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    167,
+    595,
+    835,
+    797
+   ],
+   "score": 0.9532163739204407,
+   "area_px": 133617,
+   "area_m2": 209.89,
+   "centroid_m": [
+    15.24,
+    7.02
+   ],
+   "match": {
+    "id": "L-3/paving-01",
+    "kind": "paving",
+    "label": "透水磚",
+    "truth_m2": 212.0,
+    "overlap_m2": 209.89,
+    "iou": 0.99
+   },
+   "touches": [
+    "L-3/paving-01"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    1516,
+    137,
+    1619,
+    174
+   ],
+   "score": 0.8904109597206116,
+   "area_px": 3742,
+   "area_m2": 5.88,
+   "centroid_m": [
+    57.49,
+    28.44
+   ],
+   "match": {
+    "id": "L-3/legend-02",
+    "kind": "legend",
+    "label": "legend: swatch 透水磚",
+    "truth_m2": 5.6,
+    "overlap_m2": 5.5,
+    "iou": 0.919
+   },
+   "touches": [
+    "L-3/legend-02"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 416,
+ "raw_output": "<0f>0<|box;x1=167;y1=595;x2=834;y2=796;w=2100;h=1140;c=0.9532163739204407|><|mask;x=0;y=0;c=0.9532163739204407;data=202,668,!!!!#-JAe'HC.24wci(6weqBX@6l8'Wa9:EQHKXJ9)Vx`8RA1UbZtRNnN6defoLk!cwtRO4`y-_{Jg:X_G(zl6CHB$IN1nobxzx1VdPa?'F0%crvzUiEkjB1nG*nu|>,1<|box;x1=1516;y1=137;x2=1618;y2=173;w=2100;h=1140;c=0.8904109597206116|><|mask;x=0;y=0;c=0.8904109597206116;data=37,103,!!!!!AJA6yC3hgJNIAiv^pcD[R#)noJFZu&xrRvt|>\n",
+ "prompt_source": "manual"
+}

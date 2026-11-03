@@ -1,0 +1,33 @@
+{
+ "call": "naive_count",
+ "model": "muse-spark-1.3",
+ "prompt": "How many trees are on this site? Answer with a number and one sentence.",
+ "schema": null,
+ "site_level": "g40-x-chaos-typ-L4schedule",
+ "schedule_in_view": false,
+ "images": [
+  {
+   "sheet": "L-2",
+   "sha256": "6468a0223634e8194fb016140244c5d1c680b207b83b3561ff1022b9b9ddcd80",
+   "bytes": 54240
+  }
+ ],
+ "recorded_at": "2026-11-01T16:21:04+00:00",
+ "seconds": 2.78,
+ "usage": {
+  "completion_tokens": 390,
+  "prompt_tokens": 1751,
+  "total_tokens": 2141,
+  "completion_tokens_details": {
+   "reasoning_tokens": 365
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "answer": "8\nThe south elevation shows eight H3.5 camphor trees.",
+ "truth": {
+  "trees_on_site": 8,
+  "naive_double_count_l1_l2": 16
+ }
+}

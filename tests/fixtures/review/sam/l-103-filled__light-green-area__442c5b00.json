@@ -1,0 +1,77 @@
+{
+ "image": "L-103 filled",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:23:54+00:00",
+ "seconds": 1.94,
+ "image_sha256": "442c5b00b369449f193c937f101fd15a0723413788ef6d434695ca9cb7de72e8",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 1118,
+ "raw_output": "<0f>0<|box;x1=279;y1=657;x2=432;y2=696;w=2100;h=1140;c=0.8048780560493469|><|mask;x=0;y=0;c=0.8048780560493469;data=40,154,!!!!!FI6=2Ts$:e$8KdjZ&hSu!Qc?)^C-n@AFc7.LLKiLO|>,1<|box;x1=456;y1=657;x2=607;y2=696;w=2100;h=1140;c=0.8083832263946533|><|mask;x=0;y=0;c=0.8083832263946533;data=40,152,!!!!!DJ@jV89&q4`m)EltDg!&VA9:+(`yz*vajS(D!!!|>,2<|box;x1=1516;y1=137;x2=1618;y2=173;w=2100;h=1140;c=0.8012422323226929|><|mask;x=0;y=0;c=0.8012422323226929;data=37,103,!!!!!8K.@[&T!G&)d#tLbTX6i8KyyC[!!|>,3<|box;x1=707;y1=368;x2=760;y2=383;w=2100;h=1140;c=0.7655677795410156|><|mask;x=0;y=0;c=0.7655677795410156;data=16,54,!!!!!1LB00Jr'?vrxX6v+!!!|>,4<|box;x1=809;y1=657;x2=962;y2=696;w=2100;h=1140;c=0.8128654956817627|><|mask;x=0;y=0;c=0.8128654956817627;data=40,154,!!!!!@J@o0&%vF./m2w=8)[QA?PO?wc_8Ie?lf4|>,5<|box;x1=633;y1=657;x2=785;y2=696;w=2100;h=1140;c=0.8128654956817627|><|mask;x=0;y=0;c=0.8128654956817627;data=40,153,!!!!!DJ@pnB1R=2C+a%-Mi]^'PM[P2qU{SP?Q-:^eNP2|>,6<|box;x1=766;y1=367;x2=818;y2=383;w=2100;h=1140;c=0.7575758099555969|><|mask;x=0;y=0;c=0.7575758099555969;data=17,53,!!!!!6I6k8++QUw9Sc{0?/pIWiSxY0|>\n",
+ "response_id": "resp_6ae9b6396f93c4c98fae43f5",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6396f93c4c98fae43f5",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701433.0,
+  "completed_at": 1793701433.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_a5a52ef4-cf6f-4cfc-ba56-98c8079038d0",
+    "status": "completed",
+    "content_chars": 1118
+   }
+  ]
+ },
+ "sheet": "L-103",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "area",
+  "labels": [
+   "IC CHINESE IXORA"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   236
+  ],
+  "spark_call": "read_legend"
+ }
+}

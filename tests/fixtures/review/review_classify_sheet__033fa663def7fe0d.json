@@ -1,0 +1,66 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "ebd041675130868ef2cc1d842e05f1f915a21d55d5a4081f1a499cba98a18b7f",
+ "content_key": "dxf:99d68d6ab94d69edb2fc569d9c171e89568f295467b68a5673103906a6251272|p=ace754ed",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:20:23+00:00",
+ "seconds": 5.68,
+ "usage": {
+  "completion_tokens": 535,
+  "prompt_tokens": 4465,
+  "total_tokens": 5000,
+  "completion_tokens_details": {
+   "reasoning_tokens": 422
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 497
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "confidence": 0.98,
+  "discipline": "metalwork",
+  "enlarged_partial": false,
+  "index": [],
+  "kind": "detail",
+  "match_line": false,
+  "title_block": {
+   "date": "2026-09-05",
+   "number": "D-01",
+   "revision": "",
+   "scale": "1:10",
+   "title": "Drain Cover Detail"
+  },
+  "why": "Sheet shows PLAN and SECTION of a single drain cover element titled Drain Cover Detail."
+ },
+ "response_id": "chatcmpl-01a1a0ec-9c0e-75e3-8d62-34bf11415adf",
+ "raw": {
+  "id": "chatcmpl-01a1a0ec-9c0e-75e3-8d62-34bf11415adf",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"confidence\": 0.98, \"discipline\": \"metalwork\", \"enlarged_partial\": false, \"index\": [], \"kind\": \"detail\", \"match_line\": false, \"title_block\": {\"date\": \"2026-09-05\", \"number\": \"D-01\", \"revision\": \"\", \"scale\": \"1:10\", \"title\": \"Drain Cover Detail\"}, \"why\": \"Sheet shows PLAN and SECTION of a single drain cover element titled Drain Cover Detail.\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701223,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 535,
+   "prompt_tokens": 4465,
+   "total_tokens": 5000,
+   "completion_tokens_details": {
+    "reasoning_tokens": 422
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 497
+   }
+  }
+ }
+}

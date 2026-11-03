@@ -1,0 +1,38 @@
+{
+ "call": "naive_count",
+ "model": "muse-spark-1.3",
+ "prompt": "How many trees are on this site? Answer with a number and one sentence.",
+ "schema": null,
+ "site_level": "g40-x-chaos-typ-L4schedule",
+ "schedule_in_view": false,
+ "images": [
+  {
+   "sheet": "L-1",
+   "sha256": "59ef0168f7b68e575683d8001cc9746815d840d44f0fe0fdd7da40006f828d88",
+   "bytes": 89310
+  },
+  {
+   "sheet": "L-2",
+   "sha256": "6468a0223634e8194fb016140244c5d1c680b207b83b3561ff1022b9b9ddcd80",
+   "bytes": 54240
+  }
+ ],
+ "recorded_at": "2026-11-01T16:20:51+00:00",
+ "seconds": 4.14,
+ "usage": {
+  "completion_tokens": 678,
+  "prompt_tokens": 4828,
+  "total_tokens": 5506,
+  "completion_tokens_details": {
+   "reasoning_tokens": 639
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "answer": "8.\nThere are eight camphor trees (樟樹 H3.5) shown in a row along the south side of the site.",
+ "truth": {
+  "trees_on_site": 8,
+  "naive_double_count_l1_l2": 16
+ }
+}

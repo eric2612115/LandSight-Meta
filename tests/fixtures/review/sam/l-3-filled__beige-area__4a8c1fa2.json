@@ -1,0 +1,77 @@
+{
+ "image": "L-3 filled",
+ "prompt": "beige area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:22:09+00:00",
+ "seconds": 1.82,
+ "image_sha256": "4a8c1fa2e9199aeea372e92e4393c525a323129fc5e9b0844177597bced029ee",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 432,
+ "raw_output": "<0f>0<|box;x1=167;y1=595;x2=834;y2=796;w=2100;h=1140;c=0.9532163739204407|><|mask;x=0;y=0;c=0.9532163739204407;data=202,668,!!!!#AJ@_.$0+PMa5jWzO.KVcbi*S!rP+f?!amR.Qmz@5m+6#/$nJq_LJ+uGFa6@e+RwDDN=)kF/8/k+CS[]:B:u1ttX__{59%WewiKmI0MGdCc9T02RR$E//as2lo(dYFB5[G8ynD/kkQe`5Z|>,1<|box;x1=1516;y1=137;x2=1618;y2=173;w=2100;h=1140;c=0.8827838897705078|><|mask;x=0;y=0;c=0.8827838897705078;data=37,103,!!!!!:JA89?qpj:nj+)BRNq:xJO)@f-tToo|>\n",
+ "response_id": "resp_6ae9b5d130ed31a9f6234318",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b5d130ed31a9f6234318",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701329.0,
+  "completed_at": 1793701329.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_40587d3b-a9c9-46d3-84f7-17d5b5250894",
+    "status": "completed",
+    "content_chars": 432
+   }
+  ]
+ },
+ "sheet": "L-3",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "beige",
+  "kind": "area",
+  "labels": [
+   "PV-1 PERMEABLE PAVERS"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

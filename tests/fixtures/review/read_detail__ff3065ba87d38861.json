@@ -1,0 +1,57 @@
+{
+ "call": "read_detail",
+ "image_sha256": "467e31a656197709ba5598dea1d70679b1ba4a04f7e61d276b2925ed57aa3502",
+ "content_key": "17421037adb88d730b407689dcde195759abdcc7dae599fc2d5e59a985c4eae1:detail|p=35833438",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:24:36+00:00",
+ "seconds": 4.51,
+ "usage": {
+  "completion_tokens": 419,
+  "prompt_tokens": 3412,
+  "total_tokens": 3831,
+  "completion_tokens_details": {
+   "reasoning_tokens": 300
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 241
+  }
+ },
+ "prompt": "This is a construction detail sheet from a landscape drawing package. Read the tree pit: pit_w_m and pit_l_m, the plan dimensions of the tree pit in metres (a dimension written in millimetres, such as 1500, is 1.5 m); soil_depth_m, the depth of planting soil in the pit in metres; on_slab, true if the pit sits on a structural slab or artificial ground (a roof, a podium, a basement slab), false otherwise; why, one sentence naming the text or dimension each value was read from. Use 0 for a dimension that is not shown.",
+ "result": {
+  "on_slab": true,
+  "pit_l_m": 1.6,
+  "pit_w_m": 1.6,
+  "soil_depth_m": 1.0,
+  "why": "Values read from title TREE PIT 1600x1600 SOIL DEPTH 1000 ON SLAB with plan dimensions 1600, section callout PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB) and BASEMENT SLAB (ARTIFICIAL GROUND)."
+ },
+ "response_id": "chatcmpl-01a1a0f0-798f-7592-8f84-5b6cd7c08bfb",
+ "raw": {
+  "id": "chatcmpl-01a1a0f0-798f-7592-8f84-5b6cd7c08bfb",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"on_slab\": true, \"pit_l_m\": 1.6, \"pit_w_m\": 1.6, \"soil_depth_m\": 1.0, \"why\": \"Values read from title TREE PIT 1600x1600 SOIL DEPTH 1000 ON SLAB with plan dimensions 1600, section callout PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB) and BASEMENT SLAB (ARTIFICIAL GROUND).\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701476,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 419,
+   "prompt_tokens": 3412,
+   "total_tokens": 3831,
+   "completion_tokens_details": {
+    "reasoning_tokens": 300
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 241
+   }
+  }
+ }
+}

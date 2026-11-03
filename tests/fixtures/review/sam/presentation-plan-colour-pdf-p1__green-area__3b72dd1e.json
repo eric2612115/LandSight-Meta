@@ -1,0 +1,69 @@
+{
+ "image": "Presentation Plan (Colour).pdf p1",
+ "prompt": "green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:25:56+00:00",
+ "seconds": 2.34,
+ "image_sha256": "3b72dd1e0aef4836a8c21e945df16bb105c779c7a3794ad7de00a9b511a204c6",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 3407,
+ "raw_output": "<0f>0<|box;x1=117;y1=886;x2=215;y2=985;w=2100;h=1633;c=0.7104072570800781|><|mask;x=0;y=0;c=0.7104072570800781;data=100,99,!!!!!iDg45_8_YK(+do[iAE@]jv7)0@fRq_eq8PlCH+)JVle't$amVSJ(n5RgEd23Dkzq5en5xrqn:`[f5HlbBl*U|>,1<|box;x1=305;y1=605;x2=532;y2=803;w=2100;h=1633;c=0.7387754917144775|><|mask;x=0;y=0;c=0.7387754917144775;data=199,228,!!!!#JAWb&pLQoI&l.%9x=*_!yEHjWC$r/F-*tFN=O+v]MNJdAKEX+nhJ$gLT@/fZ+ek+l{(s5R7?-{pWm%/tInE_WmvHL97QN'Jg./73W2V's(uen8`XT!DG[Zfnh1vGo[`)JX['_Qu#MmgH8q#EB/pzodM!!|>,2<|box;x1=496;y1=1252;x2=594;y2=1351;w=2100;h=1633;c=0.6831682920455933|><|mask;x=0;y=0;c=0.6831682920455933;data=100,99,!!!!!jDSu.q_juhS9@!8H9H[P(85Kr4)*(k)Koe'_txZLaZ[tsXNpbw4NEV.rtoYaQ!)y{6wJ@OlNn*X]OJ0{dJ^@d|>,3<|box;x1=696;y1=1252;x2=796;y2=1351;w=2100;h=1633;c=0.7037037014961243|><|mask;x=0;y=0;c=0.7037037014961243;data=100,101,!!!!!lDXAWQUgiSB)ZXsrXWKd*TO]'gpcDJ?s(!z)#acNaSZ9)TE*k`q-{A]8w8Yq=W{wOEHE:(_0(S:[=J5-B]c$O2!!|>,4<|box;x1=1515;y1=876;x2=1619;y2=890;w=2100;h=1633;c=0.5540069937705994|><|mask;x=0;y=0;c=0.5540069937705994;data=15,105,!!!!!3K.FQ@4Dcp%m*=daIpCnV|>,5<|box;x1=722;y1=810;x2=1226;y2=1062;w=2100;h=1633;c=0.7655677795410156|><|mask;x=0;y=0;c=0.7655677795410156;data=253,505,!!!!!dHPa.Bw_NVdI$)fof=VNgp7NHPho]M'c'58M7V7]edj0t{s4EEwG:5JgB#z4)[ErzDvJ6D.YYMhi!!|>,6<|box;x1=192;y1=1252;x2=292;y2=1352;w=2100;h=1633;c=0.7064220309257507|><|mask;x=0;y=0;c=0.7064220309257507;data=101,101,!!!!!oDX@o_1w.5El7A?^M=H1+-Ls!E$f{v]`eS5x0dW`:Q^VYC+wH2m8_p1fr1q(G^z3n36d-RF?`#ewpXPDr9eyBBp7&cY|>,7<|box;x1=899;y1=1252;x2=998;y2=1352;w=2100;h=1633;c=0.7142857313156128|><|mask;x=0;y=0;c=0.7142857313156128;data=101,100,!!!!!nDO]rG3'B2Fp.%tT5wl{s8zLCe/aN^p_kK'$Uzb`Dwpp'wd@Di6rSoPCSvW{KlrN$9kox-'f8a13PFYuCSJ2Vbad`@|>,8<|box;x1=293;y1=1252;x2=392;y2=1351;w=2100;h=1633;c=0.6908212304115295|><|mask;x=0;y=0;c=0.6908212304115295;data=100,100,!!!!!kDO^[q*eL-wbGElPm.)d3_/n{Aj*'GCwGsHiPS(CNNhay$tJWNQm!tdPSx/JNQqs-ugY7U=iVr1HR*Mgj(@[x9|>,9<|box;x1=596;y1=1253;x2=694;y2=1352;w=2100;h=1633;c=0.6952381134033203|><|mask;x=0;y=0;c=0.6952381134033203;data=100,99,!!!!!mDg4mP@v]v.g9y4)]rlDb:kP^3cx5MmZdDPfP]-DYn%N(L1.otrIw7g5x-NxYj:Tt{=t*tu7vO]/0-AhH_o2@L!!!|>,10<|box;x1=395;y1=1252;x2=493;y2=1352;w=2100;h=1633;c=0.7064220309257507|><|mask;x=0;y=0;c=0.7064220309257507;data=101,99,!!!!!kD]l'3`&9W*eCluH(75253[VShCanyc%FMgZ'qfoZWLatdPItAgB/]V(gHz$qg1?N$N]ef{j/L$_hgI7mBXRpx|>,11<|box;x1=1517;y1=631;x2=1616;y2=731;w=2100;h=1633;c=0.6878048777580261|><|mask;x=0;y=0;c=0.6878048777580261;data=101,100,!!!!!lDg5Eo%$3PpJY#qi%AMH'BEKsd7QjK6&121q*KYA1u5SCnJkq(7xk4drU0U{ky!eWG#SvxyoC]_HN1EeC7xLUD!!|>,12<|box;x1=1516;y1=750;x2=1618;y2=787;w=2100;h=1633;c=0.6640419960021973|><|mask;x=0;y=0;c=0.6640419960021973;data=38,103,!!!!!5F^Iv_lZ0qgqruR:[q2x:Ic1|>,13<|box;x1=798;y1=1252;x2=896;y2=1352;w=2100;h=1633;c=0.7037037014961243|><|mask;x=0;y=0;c=0.7037037014961243;data=101,99,!!!!!lDOZuJliw4M!+iGz_T*X`9KvP#1HoQdtA-M-i_{S$HeuqyFwlfjLHgpCS_6kriQ!llQ!?.7Vzdf@1P/M20V^J9!!|>,14<|box;x1=1050;y1=1380;x2=1150;y2=1480;w=2100;h=1633;c=0.6995305418968201|><|mask;x=0;y=0;c=0.6995305418968201;data=101,101,!!!!!nDbLbExl$Li[H/12C5qqDXuQ8E==#$3r6u3lM6vbZi$d:rs0DokR6UN[5%qpJM%y@jICTp8=c]wKcP[{CMwtrB/op@|>,15<|box;x1=267;y1=810;x2=645;y2=1062;w=2100;h=1633;c=0.7697842121124268|><|mask;x=0;y=0;c=0.7697842121124268;data=253,379,!!!!!kGvDuJNl[@wF1A?r7yHmEKL%-B/gz6&`TR'`w*X2L2uTa!M8&wwGqkCe9mTQ{C8hyGmjd{cm'^l^GIY8J2.2{^|>\n",
+ "response_id": "resp_6ae9b6b4bd340dc5db7c49c5",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6b4bd340dc5db7c49c5",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701555.0,
+  "completed_at": 1793701556.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_b7d82393-4e91-4546-8657-b69fa37b924d",
+    "status": "completed",
+    "content_chars": 3407
+   }
+  ]
+ },
+ "sheet": "F-26-p1",
+ "prompt_source": "spark_raster_plan",
+ "legend": {
+  "labels": [
+   "AZ AZALEA"
+  ],
+  "kind": "area"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "call": "review_align",
+ "image_sha256": "",
+ "content_key": "81e97264801c8a11b73c3dc119b744a7c89e77029e3273ecd52d56057156a297|p=326d12a3",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-02T21:12:42+00:00",
+ "seconds": 9.02,
+ "usage": {
+  "completion_tokens": 1440,
+  "prompt_tokens": 685,
+  "total_tokens": 2125,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1032
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "Match each row of a developer's bill of quantities to the item on the drawings that it prices.\n\nDrawing items (code | name | botanical name | kind | unit on the drawing):\nCC | Camphor | Cinnamomum camphora | tree | plant\nDU | Duranta | Duranta erecta | hedge | plant\nAZ | Azalea | Rhododendron spp. | shrub_bed | m2\nIC | Chinese ixora | - | shrub_bed | m2\nMP | Orange jasmine | - | shrub_bed | m2\nRI | Yeddo hawthorn | - | shrub_bed | m2\nLA | Lawn | Zoysia matrella | lawn | m2\nRL | Roof lawn | - | lawn | m2\n\nBill rows (row id | description | spec | unit):\nR-01 | Camphor tree, cal. 10 cm | Cinnamomum camphora, H3.5 m, W1.5 m, root-balled | EA\nR-02 | Duranta (1F and 5F) | Duranta erecta, H0.6 m, @0.3 m o.c., double row | EA\nR-03 | Azalea | Rhododendron spp., 4-5 in. pot, 4 plants/m² | EA\nR-04 | Lawn | Zoysia matrella, sod | m²\nR-05 | Yeddo hawthorn, podium planters | Rhaphiolepis indica, 1 gal., 4 plants/m² | m²\nR-06 | Sky-garden planter shrubs, typ. floor x 1 | Chinese ixora, 1 gal., 4 plants/m² | m²\nR-07 | Roof lawn | Zoysia matrella, sod | m²\nR-08 | Orange jasmine, roof planters | Murraya paniculata, 1 gal., 4 plants/m² | m²\nR-09 | Tree pit on slab | 2 x 2 m, drainage layer 100 mm | EA\nR-10 | Planting soil | imported, 1.2 m deep in tree pits | m³\n\nFor every bill row return row_id, item_code (one code from the drawing items, or 'none' when the row prices something that is not a drawn item, such as tree pits, soil or irrigation), confidence from 0 to 1 (lower it when the description is misspelt, abbreviated or ambiguous), and why in one short sentence.",
+ "result": {
+  "rows": [
+   {
+    "confidence": 1.0,
+    "item_code": "CC",
+    "row_id": "R-01",
+    "why": "Common and botanical names match Camphor exactly."
+   },
+   {
+    "confidence": 0.95,
+    "item_code": "DU",
+    "row_id": "R-02",
+    "why": "Botanical Duranta erecta matches Duranta hedge."
+   },
+   {
+    "confidence": 0.9,
+    "item_code": "AZ",
+    "row_id": "R-03",
+    "why": "Names match Azalea despite EA vs m2 unit difference."
+   },
+   {
+    "confidence": 0.9,
+    "item_code": "LA",
+    "row_id": "R-04",
+    "why": "Lawn and Zoysia matrella match ground lawn."
+   },
+   {
+    "confidence": 0.9,
+    "item_code": "RI",
+    "row_id": "R-05",
+    "why": "Common name Yeddo hawthorn matches drawn item."
+   },
+   {
+    "confidence": 0.95,
+    "item_code": "IC",
+    "row_id": "R-06",
+    "why": "Chinese ixora matches sky-garden shrub item."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "RL",
+    "row_id": "R-07",
+    "why": "Roof lawn name matches roof lawn item."
+   },
+   {
+    "confidence": 0.9,
+    "item_code": "MP",
+    "row_id": "R-08",
+    "why": "Common name Orange jasmine matches drawn item."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "none",
+    "row_id": "R-09",
+    "why": "Tree pit structure is not a drawn planting item."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "none",
+    "row_id": "R-10",
+    "why": "Planting soil material is not a drawn planting item."
+   }
+  ]
+ },
+ "response_id": "chatcmpl-01a19e1b-7731-7268-9ece-0092b3687fa4",
+ "raw": {
+  "id": "chatcmpl-01a19e1b-7731-7268-9ece-0092b3687fa4",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"rows\": [{\"confidence\": 1.0, \"item_code\": \"CC\", \"row_id\": \"R-01\", \"why\": \"Common and botanical names match Camphor exactly.\"}, {\"confidence\": 0.95, \"item_code\": \"DU\", \"row_id\": \"R-02\", \"why\": \"Botanical Duranta erecta matches Duranta hedge.\"}, {\"confidence\": 0.9, \"item_code\": \"AZ\", \"row_id\": \"R-03\", \"why\": \"Names match Azalea despite EA vs m2 unit difference.\"}, {\"confidence\": 0.9, \"item_code\": \"LA\", \"row_id\": \"R-04\", \"why\": \"Lawn and Zoysia matrella match ground lawn.\"}, {\"confidence\": 0.9, \"item_code\": \"RI\", \"row_id\": \"R-05\", \"why\": \"Common name Yeddo hawthorn matches drawn item.\"}, {\"confidence\": 0.95, \"item_code\": \"IC\", \"row_id\": \"R-06\", \"why\": \"Chinese ixora matches sky-garden shrub item.\"}, {\"confidence\": 1.0, \"item_code\": \"RL\", \"row_id\": \"R-07\", \"why\": \"Roof lawn name matches roof lawn item.\"}, {\"confidence\": 0.9, \"item_code\": \"MP\", \"row_id\": \"R-08\", \"why\": \"Common name Orange jasmine matches drawn item.\"}, {\"confidence\": 1.0, \"item_code\": \"none\", \"row_id\": \"R-09\", \"why\": \"Tree pit structure is not a drawn planting item.\"}, {\"confidence\": 1.0, \"item_code\": \"none\", \"row_id\": \"R-10\", \"why\": \"Planting soil material is not a drawn planting item.\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793653962,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 1440,
+   "prompt_tokens": 685,
+   "total_tokens": 2125,
+   "completion_tokens_details": {
+    "reasoning_tokens": 1032
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "call": "read_detail",
+ "image_sha256": "06e84b3752cb4e1f2569dbe46a818c1e1b0b266621ef8d6a5d284df20a547bc1",
+ "content_key": "4fd3468b32bc192f00f42fe24e909929cb79f90411281e4b99cd4f00b43b63d3:detail",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-01T17:17:34+00:00",
+ "seconds": 5.14,
+ "usage": {
+  "completion_tokens": 324,
+  "prompt_tokens": 3866,
+  "total_tokens": 4190,
+  "completion_tokens_details": {
+   "reasoning_tokens": 232
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "This is a construction detail sheet from a landscape drawing package. Read the tree pit: pit_w_m and pit_l_m, the plan dimensions of the tree pit in metres (a dimension written in millimetres, such as 1500, is 1.5 m); soil_depth_m, the depth of planting soil in the pit in metres; on_slab, true if the pit sits on a structural slab or artificial ground (a roof, a podium, a basement slab), false otherwise; why, one sentence naming the text or dimension each value was read from. Use 0 for a dimension that is not shown.",
+ "result": {
+  "on_slab": true,
+  "pit_l_m": 1.5,
+  "pit_w_m": 1.5,
+  "soil_depth_m": 1.0,
+  "why": "Plan shows 1500 by 1500, section labels SOIL DEPTH 1000 PLANTING SOIL, and ON SLAB points to STRUCTURAL SLAB (BASEMENT ROOF)."
+ }
+}

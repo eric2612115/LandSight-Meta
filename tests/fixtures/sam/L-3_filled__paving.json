@@ -1,0 +1,30 @@
+{
+ "image": "L-3_filled.png",
+ "sheet": "L-3",
+ "prompt": "paving",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:09+00:00",
+ "seconds": 1.14,
+ "image_sha256": "d57ce91f83e689015030204c909e64e1b93d0c67c2778746b5e43e7a9849e950",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 0,
+ "masks": [],
+ "diagnostics": [],
+ "raw_output_chars": 0,
+ "raw_output": "",
+ "prompt_source": "manual"
+}

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2.080 1.430" width="25" height="17" font-family="Heiti TC, PingFang TC, Noto Sans CJK TC, sans-serif">
+<defs><pattern id="hatch" width="0.6" height="0.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6" stroke="#888" stroke-width="0.05"/></pattern></defs>
+<rect width="2.080" height="1.430" fill="#f7f5f0"/>
+<polyline points="0.040,1.390 2.040,1.390 2.040,0.040 0.040,0.040 0.040,1.390" fill="none" stroke="#000" stroke-width="0.06" data-handle="99" data-layer="FRAME"/>
+<polyline points="0.190,0.840 0.790,0.840 0.790,0.240 0.190,0.240 0.190,0.840" fill="none" stroke="#000" stroke-width="0.06" data-handle="9A" data-layer="0"/>
+<polyline points="0.240,0.790 0.740,0.790 0.740,0.290 0.240,0.290 0.240,0.790" fill="none" stroke="#000" stroke-width="0.06" data-handle="9B" data-layer="0"/>
+<polyline points="0.282,0.790 0.282,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="9C" data-layer="0"/>
+<polyline points="0.323,0.790 0.323,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="9D" data-layer="0"/>
+<polyline points="0.365,0.790 0.365,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="9E" data-layer="0"/>
+<polyline points="0.407,0.790 0.407,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="9F" data-layer="0"/>
+<polyline points="0.448,0.790 0.448,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A0" data-layer="0"/>
+<polyline points="0.490,0.790 0.490,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A1" data-layer="0"/>
+<polyline points="0.532,0.790 0.532,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A2" data-layer="0"/>
+<polyline points="0.573,0.790 0.573,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A3" data-layer="0"/>
+<polyline points="0.615,0.790 0.615,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A4" data-layer="0"/>
+<polyline points="0.657,0.790 0.657,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A5" data-layer="0"/>
+<polyline points="0.698,0.790 0.698,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A6" data-layer="0"/>
+<polyline points="1.140,0.290 1.140,0.790 1.640,0.790 1.640,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="A9" data-layer="0"/>
+<polyline points="1.190,0.290 1.190,0.740 1.590,0.740 1.590,0.290" fill="none" stroke="#000" stroke-width="0.06" data-handle="AA" data-layer="0"/>
+<polyline points="1.120,0.320 1.660,0.320 1.660,0.270 1.120,0.270 1.120,0.320" fill="none" stroke="#000" stroke-width="0.06" data-handle="AB" data-layer="0"/>
+<polyline points="0.140,0.990 1.990,0.990" fill="none" stroke="#000" stroke-width="0.06" data-handle="AE" data-layer="TEXT"/>
+<polyline points="0.140,1.055 1.990,1.055" fill="none" stroke="#000" stroke-width="0.06" data-handle="AF" data-layer="TEXT"/>
+<polyline points="0.140,0.990 0.140,1.055" fill="none" stroke="#000" stroke-width="0.06" data-handle="B0" data-layer="TEXT"/>
+<polyline points="1.990,0.990 1.990,1.055" fill="none" stroke="#000" stroke-width="0.06" data-handle="B1" data-layer="TEXT"/>
+<polyline points="0.140,1.120 1.990,1.120" fill="none" stroke="#000" stroke-width="0.06" data-handle="B3" data-layer="TEXT"/>
+<polyline points="0.140,1.055 0.140,1.120" fill="none" stroke="#000" stroke-width="0.06" data-handle="B4" data-layer="TEXT"/>
+<polyline points="1.990,1.055 1.990,1.120" fill="none" stroke="#000" stroke-width="0.06" data-handle="B5" data-layer="TEXT"/>
+<polyline points="0.390,1.055 0.390,1.120" fill="none" stroke="#000" stroke-width="0.06" data-handle="B7" data-layer="TEXT"/>
+<polyline points="0.140,1.185 1.990,1.185" fill="none" stroke="#000" stroke-width="0.06" data-handle="B9" data-layer="TEXT"/>
+<polyline points="0.140,1.120 0.140,1.185" fill="none" stroke="#000" stroke-width="0.06" data-handle="BA" data-layer="TEXT"/>
+<polyline points="1.990,1.120 1.990,1.185" fill="none" stroke="#000" stroke-width="0.06" data-handle="BB" data-layer="TEXT"/>
+<polyline points="0.390,1.120 0.390,1.185" fill="none" stroke="#000" stroke-width="0.06" data-handle="BD" data-layer="TEXT"/>
+<polyline points="0.140,1.250 1.990,1.250" fill="none" stroke="#000" stroke-width="0.06" data-handle="BF" data-layer="TEXT"/>
+<polyline points="0.140,1.185 0.140,1.250" fill="none" stroke="#000" stroke-width="0.06" data-handle="C0" data-layer="TEXT"/>
+<polyline points="1.990,1.185 1.990,1.250" fill="none" stroke="#000" stroke-width="0.06" data-handle="C1" data-layer="TEXT"/>
+<polyline points="0.390,1.185 0.390,1.250" fill="none" stroke="#000" stroke-width="0.06" data-handle="C3" data-layer="TEXT"/>
+<polyline points="0.140,1.315 1.990,1.315" fill="none" stroke="#000" stroke-width="0.06" data-handle="C5" data-layer="TEXT"/>
+<polyline points="0.140,1.250 0.140,1.315" fill="none" stroke="#000" stroke-width="0.06" data-handle="C6" data-layer="TEXT"/>
+<polyline points="1.990,1.250 1.990,1.315" fill="none" stroke="#000" stroke-width="0.06" data-handle="C7" data-layer="TEXT"/>
+<polyline points="0.390,1.250 0.390,1.315" fill="none" stroke="#000" stroke-width="0.06" data-handle="C9" data-layer="TEXT"/>
+<polyline points="0.140,1.380 1.990,1.380" fill="none" stroke="#000" stroke-width="0.06" data-handle="CB" data-layer="TEXT"/>
+<polyline points="0.140,1.315 0.140,1.380" fill="none" stroke="#000" stroke-width="0.06" data-handle="CC" data-layer="TEXT"/>
+<polyline points="1.990,1.315 1.990,1.380" fill="none" stroke="#000" stroke-width="0.06" data-handle="CD" data-layer="TEXT"/>
+<polyline points="0.390,1.315 0.390,1.380" fill="none" stroke="#000" stroke-width="0.06" data-handle="CF" data-layer="TEXT"/>
+<text x="0.190" y="0.190" font-size="0.030">GRATING 600 × 600, DUCTILE IRON, CLASS C250</text>
+<text x="0.190" y="0.920" font-size="0.040">PLAN 1:10</text>
+<text x="1.140" y="0.190" font-size="0.030">CHANNEL 500 W, PRECAST</text>
+<text x="1.140" y="0.920" font-size="0.040">SECTION 1:10</text>
+<text x="0.170" y="1.038" font-size="0.030">NORTHGATE METALWORK (SAMPLE)</text>
+<text x="0.160" y="1.103" font-size="0.030">PROJECT</text>
+<text x="0.410" y="1.103" font-size="0.030">Greenfield Residences</text>
+<text x="0.160" y="1.167" font-size="0.030">TITLE</text>
+<text x="0.410" y="1.167" font-size="0.030">Drain Cover Detail</text>
+<text x="0.160" y="1.232" font-size="0.030">DWG NO.</text>
+<text x="0.410" y="1.232" font-size="0.030">D-01</text>
+<text x="0.160" y="1.298" font-size="0.030">SCALE</text>
+<text x="0.410" y="1.298" font-size="0.030">1:10</text>
+<text x="0.160" y="1.363" font-size="0.030">DATE</text>
+<text x="0.410" y="1.363" font-size="0.030">2026-09-05</text>
+</svg>

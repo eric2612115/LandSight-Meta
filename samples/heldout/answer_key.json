@@ -1,0 +1,1746 @@
+{
+ "site": {
+  "name": "Riverside Court — landscape over basement slab",
+  "width_m": 46.0,
+  "depth_m": 32.0,
+  "area_m2": 1472.0,
+  "units": "m",
+  "sheets": {
+   "L-0": "Cover and Index",
+   "L-1": "Planting Plan",
+   "L-3": "Paving Plan",
+   "L-6": "Tree Pit Detail"
+  },
+  "building_coverage": 0.4,
+  "ground": "artificial (landscape over basement slab)",
+  "jurisdiction": "local building code"
+ },
+ "messiness": {
+  "gap_cm": 40,
+  "exploded": true,
+  "layer_chaos": false,
+  "label_style": "typ",
+  "schedule_mismatch": true,
+  "schedule_on_own_sheet": false,
+  "tag": "g40-x-clean-typ-mismatch",
+  "tree_gaps_cm": [
+   0,
+   0,
+   0,
+   40,
+   0,
+   0
+  ]
+ },
+ "schedule": {
+  "CAMPHOR": 12,
+  "DURANTA": 134,
+  "AZALEA": 150.0,
+  "LAWN": 200.0
+ },
+ "totals": {
+  "tree": {
+   "CAMPHOR": 6
+  },
+  "hedge": {
+   "DURANTA": 134
+  },
+  "shrub_bed": {
+   "AZALEA": 120.0
+  },
+  "lawn": {
+   "LAWN": 168.0
+  },
+  "paving": {
+   "PERMEABLE PAVERS": 120.0,
+   "EXPOSED AGGREGATE": 60.0,
+   "GRASS PAVERS": 40.0
+  },
+  "planter_edge": {
+   "PLANTER": 16.0
+  }
+ },
+ "naive_tree_count_l1_l2": 8,
+ "objects": [
+  {
+   "id": "L-0/title-01",
+   "sheet": "L-0",
+   "kind": "title",
+   "label": "Cover and Index",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-0; SCALE NTS; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-0/sheet_index-01",
+   "sheet": "L-0",
+   "kind": "sheet_index",
+   "label": "DRAWING INDEX",
+   "centre": [
+    14.5,
+    16.0
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-01",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-1 Planting Plan",
+   "centre": [
+    4.0,
+    16.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-02",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-3 Paving Plan",
+   "centre": [
+    4.0,
+    15.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-03",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-5 Planting Details",
+   "centre": [
+    4.0,
+    14.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, not in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-04",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-6 Tree Pit Detail",
+   "centre": [
+    4.0,
+    13.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-1/tree-01",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    14.0,
+    3.0
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     15.932,
+     3.518
+    ],
+    [
+     15.414,
+     4.414
+    ],
+    [
+     14.518,
+     4.932
+    ],
+    [
+     13.482,
+     4.932
+    ],
+    [
+     12.586,
+     4.414
+    ],
+    [
+     12.068,
+     3.518
+    ],
+    [
+     12.068,
+     2.482
+    ],
+    [
+     12.586,
+     1.586
+    ],
+    [
+     13.482,
+     1.068
+    ],
+    [
+     14.518,
+     1.068
+    ],
+    [
+     15.414,
+     1.586
+    ],
+    [
+     15.932,
+     2.482
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-02",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    19.0,
+    3.0
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     20.932,
+     3.518
+    ],
+    [
+     20.414,
+     4.414
+    ],
+    [
+     19.518,
+     4.932
+    ],
+    [
+     18.482,
+     4.932
+    ],
+    [
+     17.586,
+     4.414
+    ],
+    [
+     17.068,
+     3.518
+    ],
+    [
+     17.068,
+     2.482
+    ],
+    [
+     17.586,
+     1.586
+    ],
+    [
+     18.482,
+     1.068
+    ],
+    [
+     19.518,
+     1.068
+    ],
+    [
+     20.414,
+     1.586
+    ],
+    [
+     20.932,
+     2.482
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-03",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    24.0,
+    3.0
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     25.932,
+     3.518
+    ],
+    [
+     25.414,
+     4.414
+    ],
+    [
+     24.518,
+     4.932
+    ],
+    [
+     23.482,
+     4.932
+    ],
+    [
+     22.586,
+     4.414
+    ],
+    [
+     22.068,
+     3.518
+    ],
+    [
+     22.068,
+     2.482
+    ],
+    [
+     22.586,
+     1.586
+    ],
+    [
+     23.482,
+     1.068
+    ],
+    [
+     24.518,
+     1.068
+    ],
+    [
+     25.414,
+     1.586
+    ],
+    [
+     25.932,
+     2.482
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-04",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    3.0
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 40 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     30.932,
+     3.518
+    ],
+    [
+     30.414,
+     4.414
+    ],
+    [
+     29.518,
+     4.932
+    ],
+    [
+     28.482,
+     4.932
+    ],
+    [
+     27.586,
+     4.414
+    ],
+    [
+     27.068,
+     3.518
+    ],
+    [
+     27.068,
+     2.482
+    ],
+    [
+     27.586,
+     1.586
+    ],
+    [
+     28.482,
+     1.068
+    ],
+    [
+     29.518,
+     1.068
+    ],
+    [
+     30.414,
+     1.586
+    ],
+    [
+     30.932,
+     2.482
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-05",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    34.0,
+    3.0
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     35.932,
+     3.518
+    ],
+    [
+     35.414,
+     4.414
+    ],
+    [
+     34.518,
+     4.932
+    ],
+    [
+     33.482,
+     4.932
+    ],
+    [
+     32.586,
+     4.414
+    ],
+    [
+     32.068,
+     3.518
+    ],
+    [
+     32.068,
+     2.482
+    ],
+    [
+     32.586,
+     1.586
+    ],
+    [
+     33.482,
+     1.068
+    ],
+    [
+     34.518,
+     1.068
+    ],
+    [
+     35.414,
+     1.586
+    ],
+    [
+     35.932,
+     2.482
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-06",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    39.0,
+    3.0
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     40.932,
+     3.518
+    ],
+    [
+     40.414,
+     4.414
+    ],
+    [
+     39.518,
+     4.932
+    ],
+    [
+     38.482,
+     4.932
+    ],
+    [
+     37.586,
+     4.414
+    ],
+    [
+     37.068,
+     3.518
+    ],
+    [
+     37.068,
+     2.482
+    ],
+    [
+     37.586,
+     1.586
+    ],
+    [
+     38.482,
+     1.068
+    ],
+    [
+     39.518,
+     1.068
+    ],
+    [
+     40.414,
+     1.586
+    ],
+    [
+     40.932,
+     2.482
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-07",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    40.0,
+    -2.6
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "proposed camphor drawn in the road reserve",
+   "footprint": [
+    [
+     41.932,
+     -2.082
+    ],
+    [
+     41.414,
+     -1.186
+    ],
+    [
+     40.518,
+     -0.668
+    ],
+    [
+     39.482,
+     -0.668
+    ],
+    [
+     38.586,
+     -1.186
+    ],
+    [
+     38.068,
+     -2.082
+    ],
+    [
+     38.068,
+     -3.118
+    ],
+    [
+     38.586,
+     -4.014
+    ],
+    [
+     39.482,
+     -4.532
+    ],
+    [
+     40.518,
+     -4.532
+    ],
+    [
+     41.414,
+     -4.014
+    ],
+    [
+     41.932,
+     -3.118
+    ]
+   ],
+   "excluded": "outside the site boundary (road reserve): drawn, not counted toward greening"
+  },
+  {
+   "id": "L-1/existing_tree-01",
+   "sheet": "L-1",
+   "kind": "existing_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    12.0,
+    27.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "EX-01; dashed canopy r 2.4 m and dashed root protection zone r 3.6 m; DBH 88 cm; TO BE REMOVED",
+   "footprint": [
+    [
+     14.4,
+     27.0
+    ],
+    [
+     14.379,
+     27.313
+    ],
+    [
+     14.318,
+     27.621
+    ],
+    [
+     14.217,
+     27.918
+    ],
+    [
+     14.078,
+     28.2
+    ],
+    [
+     13.904,
+     28.461
+    ],
+    [
+     13.697,
+     28.697
+    ],
+    [
+     13.461,
+     28.904
+    ],
+    [
+     13.2,
+     29.078
+    ],
+    [
+     12.918,
+     29.217
+    ],
+    [
+     12.621,
+     29.318
+    ],
+    [
+     12.313,
+     29.379
+    ],
+    [
+     12.0,
+     29.4
+    ],
+    [
+     11.687,
+     29.379
+    ],
+    [
+     11.379,
+     29.318
+    ],
+    [
+     11.082,
+     29.217
+    ],
+    [
+     10.8,
+     29.078
+    ],
+    [
+     10.539,
+     28.904
+    ],
+    [
+     10.303,
+     28.697
+    ],
+    [
+     10.096,
+     28.461
+    ],
+    [
+     9.922,
+     28.2
+    ],
+    [
+     9.783,
+     27.918
+    ],
+    [
+     9.682,
+     27.621
+    ],
+    [
+     9.621,
+     27.313
+    ],
+    [
+     9.6,
+     27.0
+    ],
+    [
+     9.621,
+     26.687
+    ],
+    [
+     9.682,
+     26.379
+    ],
+    [
+     9.783,
+     26.082
+    ],
+    [
+     9.922,
+     25.8
+    ],
+    [
+     10.096,
+     25.539
+    ],
+    [
+     10.303,
+     25.303
+    ],
+    [
+     10.539,
+     25.096
+    ],
+    [
+     10.8,
+     24.922
+    ],
+    [
+     11.082,
+     24.783
+    ],
+    [
+     11.379,
+     24.682
+    ],
+    [
+     11.687,
+     24.621
+    ],
+    [
+     12.0,
+     24.6
+    ],
+    [
+     12.313,
+     24.621
+    ],
+    [
+     12.621,
+     24.682
+    ],
+    [
+     12.918,
+     24.783
+    ],
+    [
+     13.2,
+     24.922
+    ],
+    [
+     13.461,
+     25.096
+    ],
+    [
+     13.697,
+     25.303
+    ],
+    [
+     13.904,
+     25.539
+    ],
+    [
+     14.078,
+     25.8
+    ],
+    [
+     14.217,
+     26.082
+    ],
+    [
+     14.318,
+     26.379
+    ],
+    [
+     14.379,
+     26.687
+    ]
+   ],
+   "excluded": "existing tree marked to be removed: not a proposed quantity; DBH 88 cm is above the 80 cm broadleaf threshold of the municipal tree-protection rule, so removal needs a protection review"
+  },
+  {
+   "id": "L-1/hedge-01",
+   "sheet": "L-1",
+   "kind": "hedge",
+   "label": "DURANTA",
+   "centre": [
+    1.2,
+    15.0
+   ],
+   "quote_count": 134,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": 40.0,
+   "note": "H0.6 @0.3m o.c., double row: 2 x (floor(27.0/0.3)+1)",
+   "footprint": [
+    [
+     1.0,
+     5.0
+    ],
+    [
+     1.4,
+     5.0
+    ],
+    [
+     1.4,
+     25.0
+    ],
+    [
+     1.0,
+     25.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1/shrub_bed-01",
+   "sheet": "L-1",
+   "kind": "shrub_bed",
+   "label": "AZALEA",
+   "centre": [
+    32.0,
+    17.0
+   ],
+   "quote_count": 120.0,
+   "unit": "m²",
+   "area_m2": 120.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     26.0,
+     12.0
+    ],
+    [
+     38.0,
+     12.0
+    ],
+    [
+     38.0,
+     22.0
+    ],
+    [
+     26.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1/lawn-01",
+   "sheet": "L-1",
+   "kind": "lawn",
+   "label": "LAWN",
+   "centre": [
+    12.0,
+    16.0
+   ],
+   "quote_count": 168.0,
+   "unit": "m²",
+   "area_m2": 168.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     6.0,
+     9.0
+    ],
+    [
+     18.0,
+     9.0
+    ],
+    [
+     18.0,
+     23.0
+    ],
+    [
+     6.0,
+     23.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-01",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    25.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-1/legend-02",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend symbol CC CAMPHOR",
+   "centre": [
+    57.5,
+    27.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "tree symbol",
+   "footprint": [
+    [
+     59.432,
+     27.618
+    ],
+    [
+     58.914,
+     28.514
+    ],
+    [
+     58.018,
+     29.032
+    ],
+    [
+     56.982,
+     29.032
+    ],
+    [
+     56.086,
+     28.514
+    ],
+    [
+     55.568,
+     27.618
+    ],
+    [
+     55.568,
+     26.582
+    ],
+    [
+     56.086,
+     25.686
+    ],
+    [
+     56.982,
+     25.168
+    ],
+    [
+     58.018,
+     25.168
+    ],
+    [
+     58.914,
+     25.686
+    ],
+    [
+     59.432,
+     26.582
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-03",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend swatch AZ AZALEA",
+   "centre": [
+    57.5,
+    23.6
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     22.9
+    ],
+    [
+     59.5,
+     22.9
+    ],
+    [
+     59.5,
+     24.3
+    ],
+    [
+     55.5,
+     24.3
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-04",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend line DU DURANTA",
+   "centre": [
+    57.5,
+    21.3
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "hedge line",
+   "footprint": [
+    [
+     55.5,
+     21.1
+    ],
+    [
+     59.5,
+     21.1
+    ],
+    [
+     59.5,
+     21.5
+    ],
+    [
+     55.5,
+     21.5
+    ]
+   ]
+  },
+  {
+   "id": "L-1/schedule-01",
+   "sheet": "L-1",
+   "kind": "schedule",
+   "label": "PLANT SCHEDULE",
+   "centre": [
+    64.75,
+    14.65
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "schedule_mismatch",
+   "footprint": null
+  },
+  {
+   "id": "L-1/notes-01",
+   "sheet": "L-1",
+   "kind": "notes",
+   "label": "GENERAL NOTES",
+   "centre": [
+    21.0,
+    -7.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "1. PLANT QUANTITIES ON PLAN TAKE PRECEDENCE OVER THE SCHEDULE.",
+   "footprint": null
+  },
+  {
+   "id": "L-1/title-01",
+   "sheet": "L-1",
+   "kind": "title",
+   "label": "Planting Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-1; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-3/paving-01",
+   "sheet": "L-3",
+   "kind": "paving",
+   "label": "PERMEABLE PAVERS",
+   "centre": [
+    32.0,
+    8.5
+   ],
+   "quote_count": 120.0,
+   "unit": "m²",
+   "area_m2": 120.0,
+   "length_m": null,
+   "note": "finish code PV-1",
+   "footprint": [
+    [
+     20.0,
+     6.0
+    ],
+    [
+     44.0,
+     6.0
+    ],
+    [
+     44.0,
+     11.0
+    ],
+    [
+     20.0,
+     11.0
+    ]
+   ]
+  },
+  {
+   "id": "L-3/paving-02",
+   "sheet": "L-3",
+   "kind": "paving",
+   "label": "EXPOSED AGGREGATE",
+   "centre": [
+    42.0,
+    20.5
+   ],
+   "quote_count": 60.0,
+   "unit": "m²",
+   "area_m2": 60.0,
+   "length_m": null,
+   "note": "boxed code reads PV-1 (PERMEABLE PAVERS) but the hatch is AR-SAND, which the legend keys to PV-2 EXPOSED AGGREGATE: code and hatch disagree",
+   "footprint": [
+    [
+     40.0,
+     13.0
+    ],
+    [
+     44.0,
+     13.0
+    ],
+    [
+     44.0,
+     28.0
+    ],
+    [
+     40.0,
+     28.0
+    ]
+   ]
+  },
+  {
+   "id": "L-3/paving-03",
+   "sheet": "L-3",
+   "kind": "paving",
+   "label": "GRASS PAVERS",
+   "centre": [
+    33.0,
+    26.0
+   ],
+   "quote_count": 40.0,
+   "unit": "m²",
+   "area_m2": 40.0,
+   "length_m": null,
+   "note": "finish code PV-3",
+   "footprint": [
+    [
+     28.0,
+     24.0
+    ],
+    [
+     38.0,
+     24.0
+    ],
+    [
+     38.0,
+     28.0
+    ],
+    [
+     28.0,
+     28.0
+    ]
+   ]
+  },
+  {
+   "id": "L-3/planter_edge-01",
+   "sheet": "L-3",
+   "kind": "planter_edge",
+   "label": "PLANTER",
+   "centre": [
+    4.5,
+    28.5
+   ],
+   "quote_count": 16.0,
+   "unit": "m",
+   "area_m2": null,
+   "length_m": 16.0,
+   "note": "loose segments",
+   "footprint": null
+  },
+  {
+   "id": "L-3/legend-01",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    25.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-3/legend-02",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "legend swatch PV-1 PERMEABLE PAVERS",
+   "centre": [
+    57.5,
+    28.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     27.7
+    ],
+    [
+     59.5,
+     27.7
+    ],
+    [
+     59.5,
+     29.1
+    ],
+    [
+     55.5,
+     29.1
+    ]
+   ]
+  },
+  {
+   "id": "L-3/legend-03",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "legend swatch PV-2 EXPOSED AGGREGATE",
+   "centre": [
+    57.5,
+    26.2
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     25.5
+    ],
+    [
+     59.5,
+     25.5
+    ],
+    [
+     59.5,
+     26.9
+    ],
+    [
+     55.5,
+     26.9
+    ]
+   ]
+  },
+  {
+   "id": "L-3/legend-04",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "legend swatch PV-3 GRASS PAVERS",
+   "centre": [
+    57.5,
+    24.0
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     23.3
+    ],
+    [
+     59.5,
+     23.3
+    ],
+    [
+     59.5,
+     24.7
+    ],
+    [
+     55.5,
+     24.7
+    ]
+   ]
+  },
+  {
+   "id": "L-3/title-01",
+   "sheet": "L-3",
+   "kind": "title",
+   "label": "Paving Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-3; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-6/tree_pit-01",
+   "sheet": "L-6",
+   "kind": "tree_pit",
+   "label": "TREE PIT",
+   "centre": [
+    1.1,
+    2.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": 2.56,
+   "length_m": null,
+   "note": "TREE PIT 1600 × 1600 · SOIL DEPTH 1000 · ON SLAB: pit 1.6 x 1.6 m = 2.56 m2; planting soil 1.0 m on the basement slab; drainage 0.1 m",
+   "footprint": [
+    [
+     0.3,
+     1.2
+    ],
+    [
+     1.9,
+     1.2
+    ],
+    [
+     1.9,
+     2.8
+    ],
+    [
+     0.3,
+     2.8
+    ]
+   ]
+  },
+  {
+   "id": "L-6/section-01",
+   "sheet": "L-6",
+   "kind": "section",
+   "label": "SECTION A-A",
+   "centre": [
+    3.7,
+    0.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "soil depth 1.0 m, drainage 0.1 m, on slab",
+   "footprint": null
+  },
+  {
+   "id": "L-6/title-01",
+   "sheet": "L-6",
+   "kind": "title",
+   "label": "Tree Pit Detail",
+   "centre": [
+    6.45,
+    -0.025
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-6; SCALE 1:20; REV A 2026-09-18",
+   "footprint": null
+  }
+ ],
+ "options": {
+  "lang": "en",
+  "revision": {
+   "letter": "A",
+   "date": "2026-09-18",
+   "note": "ISSUED FOR REVIEW",
+   "moves": [],
+   "added": []
+  },
+  "existing_tree_dbh_cm": 88,
+  "tree_outside_boundary": true,
+  "tree_in_fire_lane": false,
+  "paving_overlaps_lawn_m2": 0.0,
+  "paving_label_hatch_mismatch": true,
+  "scale_mismatch": false
+ },
+ "species": [
+  {
+   "code": "CC",
+   "name_en": "Camphor",
+   "scientific": "Cinnamomum camphora",
+   "native": true,
+   "form": "tree"
+  },
+  {
+   "code": "BJ",
+   "name_en": "Bischofia",
+   "scientific": "Bischofia javanica",
+   "native": true,
+   "form": "tree"
+  },
+  {
+   "code": "DU",
+   "name_en": "Duranta",
+   "scientific": "Duranta erecta",
+   "native": null,
+   "form": "shrub"
+  },
+  {
+   "code": "AZ",
+   "name_en": "Azalea",
+   "scientific": "Rhododendron spp.",
+   "native": null,
+   "form": "shrub"
+  },
+  {
+   "code": "LA",
+   "name_en": "Lawn",
+   "scientific": "Zoysia matrella",
+   "native": null,
+   "form": "lawn"
+  }
+ ],
+ "counted_trees": {
+  "L-1": 6
+ },
+ "odd_objects": [
+  {
+   "kind": "tree_outside_boundary",
+   "sheet": "L-1",
+   "object_ids": [
+    "L-1/tree-07"
+   ],
+   "counted": false,
+   "reason": "outside the site boundary (road reserve): drawn, not counted toward greening"
+  },
+  {
+   "kind": "existing_tree",
+   "sheet": "L-1",
+   "object_ids": [
+    "L-1/existing_tree-01"
+   ],
+   "counted": false,
+   "reason": "existing tree marked to be removed: not a proposed quantity; DBH 88 cm is above the 80 cm broadleaf threshold of the municipal tree-protection rule, so removal needs a protection review"
+  },
+  {
+   "kind": "label_hatch_mismatch",
+   "sheet": "L-3",
+   "object_ids": [
+    "L-3/paving-02"
+   ],
+   "label": "PV-1 PERMEABLE PAVERS",
+   "hatch": "AR-SAND",
+   "legend_says": "PV-2 EXPOSED AGGREGATE",
+   "counted": true,
+   "reason": "the boxed code says PV-1 (permeable pavers), the hatch is PV-2's (exposed aggregate): which item, and which price? The key counts it as the hatch and legend say"
+  }
+ ],
+ "package": {
+  "name": "Riverside Court — Landscape Package",
+  "seed": 7,
+  "layout": "b",
+  "basis": "synthetic, held out",
+  "planted": [
+   "existing_tree",
+   "hedge_unit",
+   "index_missing",
+   "label_hatch",
+   "open_outline",
+   "outside_boundary",
+   "pit_downgrade",
+   "raster_scan",
+   "schedule_mismatch",
+   "subtotal_skip",
+   "one_species"
+  ]
+ },
+ "errors": [
+  {
+   "id": "H01",
+   "kind": "open_outline",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "open outline; Muse Spark: one tree",
+   "object_ids": [
+    "L-1/tree-04"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "H02",
+   "kind": "schedule_mismatch",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf",
+    "Bill/BOQ - Riverside Court - Landscape.xlsx"
+   ],
+   "category": "schedule",
+   "scenario": "quote",
+   "expected_verdict": "schedule and bill say 12 Camphor, the plan draws 6",
+   "object_ids": [
+    "L-1/tree-01",
+    "L-1/tree-02",
+    "L-1/tree-03",
+    "L-1/tree-04",
+    "L-1/tree-05",
+    "L-1/tree-06",
+    "L-1/schedule-01"
+   ],
+   "cells": [
+    {
+     "file": "Bill/BOQ - Riverside Court - Landscape.xlsx",
+     "sheet": "BOQ",
+     "cell": "E6"
+    }
+   ],
+   "planted": true
+  },
+  {
+   "id": "H03",
+   "kind": "outside_boundary",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "a tree outside the site boundary",
+   "object_ids": [
+    "L-1/tree-07"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "H04",
+   "kind": "existing_tree",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "existing camphor DBH 88 cm to be removed: may be protected",
+   "object_ids": [
+    "L-1/existing_tree-01"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "H05",
+   "kind": "label_hatch",
+   "files": [
+    "Drawings/CAD/L-3 Paving Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "boxed PV-1, hatched as PV-2",
+   "object_ids": [
+    "L-3/paving-02"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "H06",
+   "kind": "pit_downgrade",
+   "files": [
+    "Drawings/CAD/L-6 Tree Pit Detail.dxf",
+    "Bill/BOQ - Riverside Court - Landscape.xlsx"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "pit 1.6 × 1.6 m = 2.56 m² on slab: large trees count as small",
+   "object_ids": [
+    "L-6/tree_pit-01"
+   ],
+   "cells": [
+    {
+     "file": "Bill/BOQ - Riverside Court - Landscape.xlsx",
+     "sheet": "BOQ",
+     "cell": "B16"
+    }
+   ],
+   "planted": true
+  },
+  {
+   "id": "H07",
+   "kind": "hedge_unit",
+   "files": [
+    "Bill/BOQ - Riverside Court - Landscape.xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "hedge billed 20 m, drawn in plants",
+   "object_ids": [
+    "L-1/hedge-01"
+   ],
+   "cells": [
+    {
+     "file": "Bill/BOQ - Riverside Court - Landscape.xlsx",
+     "sheet": "BOQ",
+     "cell": "D7"
+    },
+    {
+     "file": "Bill/BOQ - Riverside Court - Landscape.xlsx",
+     "sheet": "BOQ",
+     "cell": "E7"
+    }
+   ],
+   "planted": true
+  },
+  {
+   "id": "H08",
+   "kind": "subtotal_skip",
+   "files": [
+    "Bill/BOQ - Riverside Court - Landscape.xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "the subtotal skips the last row",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bill/BOQ - Riverside Court - Landscape.xlsx",
+     "sheet": "BOQ",
+     "cell": "G20"
+    }
+   ],
+   "planted": true
+  },
+  {
+   "id": "H09",
+   "kind": "raster_scan",
+   "files": [
+    "Drawings/PDF/L-1 Planting Plan (scan).pdf"
+   ],
+   "category": "ingest",
+   "scenario": "format",
+   "expected_verdict": "raster PDF: no vectors, not measured",
+   "object_ids": [],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "H10",
+   "kind": "index_missing",
+   "files": [
+    "Drawings/CAD/L-0 Cover and Index.dxf"
+   ],
+   "category": "ingest",
+   "scenario": "design",
+   "expected_verdict": "L-5 Planting Details is on the index, not in the package",
+   "object_ids": [
+    "L-0/index_entry-03"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "H11",
+   "kind": "one_species",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "one tree species: α 0.8, §302 short",
+   "object_ids": [
+    "L-1/tree-01",
+    "L-1/tree-02",
+    "L-1/tree-03",
+    "L-1/tree-04",
+    "L-1/tree-05",
+    "L-1/tree-06"
+   ],
+   "cells": [],
+   "planted": true
+  }
+ ],
+ "eval_line": "planted 11 · found N · flagged M · missed K · false alarms F"
+}

@@ -1,0 +1,8 @@
+item,spec,unit,low_ntd,high_ntd,basis,source
+Camphor (Cinnamomum camphora),"cal. 10 cm, H3.0-3.5 m, installed",EA,6200,7200,published_budget,"P006 municipal budget 6,149 (2021); P002 municipal budget 7,036 (2022)"
+Duranta (Duranta erecta),"H0.6 m, installed",plant,130,160,published_budget,P024 shrub planted 146
+Azalea (Rhododendron spp.),"4-5 in. pot, installed",plant,140,170,published_budget,P026 150; P027 140
+Lawn (Zoysia matrella),"sod, installed",m²,250,300,published_budget,P030 sod installed 273
+Permeable pavers,paver + bedding + base,m²,1300,2300,published_budget,"P048-P051 1,210-1,410; P052 2,120-2,340"
+Exposed aggregate,"100 mm, washed-pebble finish",m²,1800,2200,sample,"no direct source; nearest P060 washed-pebble permeable paver 2,020"
+Grass pavers,"concrete grid, 80 mm",m²,1150,1350,published_budget,"P063 1,150; P064 1,280; P065 1,320"

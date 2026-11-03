@@ -1,0 +1,369 @@
+{
+ "image": "L-1_filled.png",
+ "sheet": "L-1",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:29+00:00",
+ "seconds": 1.97,
+ "image_sha256": "8891cb17a561b9ddae6a09a6a343075c1f1491cf5b9f4f526dda5fa90d9dd16c",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 12,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    697,
+    759,
+    797,
+    859
+   ],
+   "score": 0.7538461089134216,
+   "area_px": 7958,
+   "area_m2": 12.5,
+   "centroid_m": [
+    24.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-06",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 12.0,
+    "iou": 0.96
+   },
+   "touches": [
+    "L-1/tree-06"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    192,
+    759,
+    292,
+    859
+   ],
+   "score": 0.7655677795410156,
+   "area_px": 7943,
+   "area_m2": 12.48,
+   "centroid_m": [
+    4.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-01",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.955
+   },
+   "touches": [
+    "L-1/tree-01"
+   ]
+  },
+  {
+   "object_id": "2",
+   "box_px": [
+    900,
+    759,
+    999,
+    859
+   ],
+   "score": 0.7538461089134216,
+   "area_px": 7880,
+   "area_m2": 12.38,
+   "centroid_m": [
+    33.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-08",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.968
+   },
+   "touches": [
+    "L-1/tree-08"
+   ]
+  },
+  {
+   "object_id": "3",
+   "box_px": [
+    293,
+    759,
+    393,
+    859
+   ],
+   "score": 0.7500000596046448,
+   "area_px": 7904,
+   "area_m2": 12.42,
+   "centroid_m": [
+    9.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-02",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.96
+   },
+   "touches": [
+    "L-1/tree-02"
+   ]
+  },
+  {
+   "object_id": "4",
+   "box_px": [
+    597,
+    759,
+    695,
+    859
+   ],
+   "score": 0.7460317611694336,
+   "area_px": 7877,
+   "area_m2": 12.37,
+   "centroid_m": [
+    20.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-05",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.963
+   },
+   "touches": [
+    "L-1/tree-05"
+   ]
+  },
+  {
+   "object_id": "5",
+   "box_px": [
+    496,
+    759,
+    594,
+    859
+   ],
+   "score": 0.7229437232017517,
+   "area_px": 7849,
+   "area_m2": 12.33,
+   "centroid_m": [
+    17.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-04",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.97,
+    "iou": 0.969
+   },
+   "touches": [
+    "L-1/tree-04"
+   ]
+  },
+  {
+   "object_id": "6",
+   "box_px": [
+    395,
+    759,
+    494,
+    859
+   ],
+   "score": 0.7538461089134216,
+   "area_px": 7897,
+   "area_m2": 12.41,
+   "centroid_m": [
+    13.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-03",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.98,
+    "iou": 0.965
+   },
+   "touches": [
+    "L-1/tree-03"
+   ]
+  },
+  {
+   "object_id": "7",
+   "box_px": [
+    267,
+    317,
+    646,
+    570
+   ],
+   "score": 0.8128654956817627,
+   "area_px": 95012,
+   "area_m2": 149.25,
+   "centroid_m": [
+    13.48,
+    17.03
+   ],
+   "match": {
+    "id": "L-1/shrub_bed-01",
+    "kind": "shrub_bed",
+    "label": "杜鵑",
+    "truth_m2": 150.0,
+    "overlap_m2": 148.6,
+    "iou": 0.986
+   },
+   "touches": [
+    "L-1/shrub_bed-01"
+   ]
+  },
+  {
+   "object_id": "8",
+   "box_px": [
+    1517,
+    138,
+    1617,
+    238
+   ],
+   "score": 0.7229437232017517,
+   "area_px": 7990,
+   "area_m2": 12.55,
+   "centroid_m": [
+    57.49,
+    27.15
+   ],
+   "match": {
+    "id": "L-1/legend-02",
+    "kind": "legend",
+    "label": "legend: symbol 樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.955
+   },
+   "touches": [
+    "L-1/legend-02"
+   ]
+  },
+  {
+   "object_id": "9",
+   "box_px": [
+    799,
+    759,
+    897,
+    859
+   ],
+   "score": 0.7299578189849854,
+   "area_px": 7848,
+   "area_m2": 12.33,
+   "centroid_m": [
+    29.0,
+    2.51
+   ],
+   "match": {
+    "id": "L-1/tree-07",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.98,
+    "iou": 0.97
+   },
+   "touches": [
+    "L-1/tree-07"
+   ]
+  },
+  {
+   "object_id": "10",
+   "box_px": [
+    722,
+    317,
+    1227,
+    570
+   ],
+   "score": 0.859649121761322,
+   "area_px": 126865,
+   "area_m2": 199.29,
+   "centroid_m": [
+    34.01,
+    17.04
+   ],
+   "match": {
+    "id": "L-1/lawn-01",
+    "kind": "lawn",
+    "label": "草皮",
+    "truth_m2": 200.0,
+    "overlap_m2": 198.51,
+    "iou": 0.989
+   },
+   "touches": [
+    "L-1/lawn-01"
+   ]
+  },
+  {
+   "object_id": "11",
+   "box_px": [
+    1516,
+    258,
+    1619,
+    295
+   ],
+   "score": 0.7299578189849854,
+   "area_px": 3747,
+   "area_m2": 5.89,
+   "centroid_m": [
+    57.49,
+    23.63
+   ],
+   "match": {
+    "id": "L-1/legend-03",
+    "kind": "legend",
+    "label": "legend: swatch 杜鵑",
+    "truth_m2": 5.6,
+    "overlap_m2": 5.53,
+    "iou": 0.929
+   },
+   "touches": [
+    "L-1/legend-03"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 2486,
+ "raw_output": "<0f>0<|box;x1=697;y1=759;x2=796;y2=858;w=2100;h=1140;c=0.7538461089134216|><|mask;x=0;y=0;c=0.7538461089134216;data=100,100,!!!!!lD]m68JxD-#Z7$pV[1WmP*Q:w3UoZ`a`]:bCGqCCoRWij$mbM!X+N6X4KB{b@RE01IYP{:)0@Y+^BGhq-QdK-d!!|>,1<|box;x1=192;y1=759;x2=291;y2=858;w=2100;h=1140;c=0.7655677795410156|><|mask;x=0;y=0;c=0.7655677795410156;data=100,100,!!!!!jDg5+8MBV3K=bpoCSRKOM]ys6V81nuR3JM:NdV^VHnmL$Es_Htyk!*DGfl%jx0[S@W3i8$u-WA-0dcWemn]Kq|>,2<|box;x1=900;y1=759;x2=998;y2=858;w=2100;h=1140;c=0.7538461089134216|><|mask;x=0;y=0;c=0.7538461089134216;data=100,99,!!!!!jDXA6i1v{5PBdN#bcIl`HRdRf):w:a!U4vjTTFr7u.^ILRcp1uG2ioKYZ!d@vZznXgI@F`yoNa:a!mZ0Bu*Og|>,3<|box;x1=293;y1=759;x2=392;y2=858;w=2100;h=1140;c=0.7500000596046448|><|mask;x=0;y=0;c=0.7500000596046448;data=100,100,!!!!!iDg4S5qLxJRud6#lGY+o?-16YEtf9ax4b1dJX-BtvS[7'?lc1rK2/dF#4?yOOLhPNQVS$P)b7N_QLxn2{!!!|>,4<|box;x1=597;y1=759;x2=694;y2=858;w=2100;h=1140;c=0.7460317611694336|><|mask;x=0;y=0;c=0.7460317611694336;data=100,98,!!!!!kDbM!PO=239Cur'+NWxg$TA'TMg8[(8oFd0%7V_$6Dpd:2MY*W'q]5ZIph0Zy7si`KrDJnWRqzokm)j5-7B$:Q|>,5<|box;x1=496;y1=759;x2=593;y2=858;w=2100;h=1140;c=0.7229437232017517|><|mask;x=0;y=0;c=0.7229437232017517;data=100,98,!!!!!kDg3rHO!p@_he0GZZPkYIS@ZG-)[ej^AK4Bo$zrgZltp*N12^ozeo:F1SO{(q6A[(mvjl#y#dObod{R6cCD89X|>,6<|box;x1=395;y1=759;x2=493;y2=858;w=2100;h=1140;c=0.7538461089134216|><|mask;x=0;y=0;c=0.7538461089134216;data=100,99,!!!!!iDg4mM#Z=4v:(Mx%+$6+Z8xQ.9r*K+9[yli%jE@ZJ8o(*BW{ivZ1]AnyG2_6qh/ppYbGquqsSW5OW_xSM!!!|>,7<|box;x1=267;y1=317;x2=645;y2=569;w=2100;h=1140;c=0.8128654956817627|><|mask;x=0;y=0;c=0.8128654956817627;data=253,379,!!!!![I7l)+`qyIUUYwE(dZ3)rLSsm%OLgz!oFyuG`*C6'vT'PdZa?Q_aZvsC=P?Y9pe-.g!!|>,8<|box;x1=1517;y1=138;x2=1616;y2=237;w=2100;h=1140;c=0.7229437232017517|><|mask;x=0;y=0;c=0.7229437232017517;data=100,100,!!!!!kDg5+8MBV3QcL..rJF[+qt.yg)B4@!iFo0WTpvvPAejQIfwL]2p?Wl.2r_td'Cg@`.Wejo8$lTjAolj0QG]RM_|>,9<|box;x1=799;y1=759;x2=896;y2=858;w=2100;h=1140;c=0.7299578189849854|><|mask;x=0;y=0;c=0.7299578189849854;data=100,98,!!!!!iD]m6C%=q&Rt]%X83TJdtlxp`vb5QIXk4s/mIaWETJC@DlCm-7l)Yxc6(F-kS]U&Wbx`LG+vwKziG4B.p.rj|>,10<|box;x1=722;y1=317;x2=1226;y2=569;w=2100;h=1140;c=0.859649121761322|><|mask;x=0;y=0;c=0.859649121761322;data=253,505,!!!!!fHPofW[?j0O[33hoK5*7oV/pk-V{p6QjwRI36S['e?BY9?f=3:o(fa!ne8Qrv7RaTPYN+Z:&iWMm!!!!|>,11<|box;x1=1516;y1=258;x2=1618;y2=294;w=2100;h=1140;c=0.7299578189849854|><|mask;x=0;y=0;c=0.7299578189849854;data=37,103,!!!!!=JA!GM3rPn^%C8{(x3?RdL1r=e)5'QA|>\n",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "area",
+  "labels": [
+   "杜鵑"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

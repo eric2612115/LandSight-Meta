@@ -1,0 +1,6632 @@
+{
+ "site": {
+  "name": "Greenfield Residences — landscape over basement slab",
+  "width_m": 50.0,
+  "depth_m": 30.0,
+  "area_m2": 1500.0,
+  "units": "m",
+  "sheets": {
+   "L-1": {
+    "file": "Drawings/CAD/L-1 Planting Plan.dxf",
+    "title": "Planting Plan",
+    "scale": "1:200",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-2": {
+    "file": "Drawings/CAD/L-2 South Elevation.dxf",
+    "title": "South Elevation",
+    "scale": "1:100",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-3": {
+    "file": "Drawings/CAD/L-3 Paving Plan.dxf",
+    "title": "Paving Plan",
+    "scale": "1:200",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-4": {
+    "file": "Drawings/CAD/L-4 Plant Schedule.dxf",
+    "title": "Plant Schedule",
+    "scale": "NTS",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-1 Rev B": {
+    "file": "Drawings/CAD/L-1 Planting Plan (Rev B).dxf",
+    "title": "Planting Plan",
+    "scale": "1:200",
+    "revision": "B",
+    "date": "2026-10-14",
+    "model_units_per_metre": 1.0
+   },
+   "L-0": {
+    "file": "Drawings/CAD/L-0 Cover and Index.dxf",
+    "title": "Cover and Index",
+    "scale": "NTS",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-5": {
+    "file": "Drawings/CAD/L-5 Enlarged Plan - West.dxf",
+    "title": "Enlarged Plan - West",
+    "scale": "1:200",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 2.0
+   },
+   "L-6": {
+    "file": "Drawings/CAD/L-6 Tree Pit Detail.dxf",
+    "title": "Tree Pit Detail",
+    "scale": "1:20",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-7": {
+    "file": "Drawings/CAD/L-7 Irrigation Plan.dxf",
+    "title": "Irrigation Plan",
+    "scale": "1:200",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   },
+   "L-8": {
+    "file": "Drawings/CAD/L-8 Lighting Plan.dxf",
+    "title": "Lighting Plan",
+    "scale": "1:200",
+    "revision": "A",
+    "date": "2026-09-18",
+    "model_units_per_metre": 1.0
+   }
+  },
+  "building_coverage": 0.4,
+  "ground": "artificial (landscape over basement slab)",
+  "jurisdiction": "local building code",
+  "sheets_listed_not_in_package": [
+   "L-9"
+  ]
+ },
+ "messiness": {
+  "gap_cm": 40,
+  "exploded": true,
+  "layer_chaos": true,
+  "label_style": "typ",
+  "schedule_mismatch": true,
+  "schedule_on_own_sheet": true,
+  "tag": "g40-x-chaos-typ-mismatch-L4schedule",
+  "tree_gaps_cm": [
+   0,
+   0,
+   5,
+   5,
+   10,
+   10,
+   20,
+   40
+  ]
+ },
+ "schedule": {
+  "CAMPHOR": 12,
+  "DURANTA": 182,
+  "AZALEA": 150.0,
+  "LAWN": 200.0
+ },
+ "totals": {
+  "tree": {
+   "CAMPHOR": 8
+  },
+  "hedge": {
+   "DURANTA": 182
+  },
+  "shrub_bed": {
+   "AZALEA": 150.0
+  },
+  "lawn": {
+   "LAWN": 200.0
+  },
+  "paving": {
+   "PERMEABLE PAVERS": 212.0,
+   "EXPOSED AGGREGATE": 48.0,
+   "GRASS PAVERS": 36.0
+  },
+  "planter_edge": {
+   "PLANTER": 22.0
+  }
+ },
+ "naive_tree_count_l1_l2": 19,
+ "objects": [
+  {
+   "id": "L-0/title-01",
+   "sheet": "L-0",
+   "kind": "title",
+   "label": "Cover and Index",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-0; SCALE NTS; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-0/sheet_index-01",
+   "sheet": "L-0",
+   "kind": "sheet_index",
+   "label": "DRAWING INDEX",
+   "centre": [
+    14.5,
+    13.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "lists 9 sheets: L-1, L-2, L-3, L-4, L-5, L-6, L-7, L-8, L-9",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-01",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-1 Planting Plan",
+   "centre": [
+    4.0,
+    16.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-02",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-2 South Elevation",
+   "centre": [
+    4.0,
+    15.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-03",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-3 Paving Plan",
+   "centre": [
+    4.0,
+    14.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-04",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-4 Plant Schedule",
+   "centre": [
+    4.0,
+    13.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-05",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-5 Enlarged Plan - West",
+   "centre": [
+    4.0,
+    12.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-06",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-6 Tree Pit Detail",
+   "centre": [
+    4.0,
+    11.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-07",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-7 Irrigation Plan",
+   "centre": [
+    4.0,
+    10.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-08",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-8 Lighting Plan",
+   "centre": [
+    4.0,
+    9.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-0/index_entry-09",
+   "sheet": "L-0",
+   "kind": "index_entry",
+   "label": "L-9 Sections",
+   "centre": [
+    4.0,
+    8.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "listed, not in the package",
+   "footprint": null
+  },
+  {
+   "id": "L-1/tree-01",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    5.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     6.932,
+     3.018
+    ],
+    [
+     6.414,
+     3.914
+    ],
+    [
+     5.518,
+     4.432
+    ],
+    [
+     4.482,
+     4.432
+    ],
+    [
+     3.586,
+     3.914
+    ],
+    [
+     3.068,
+     3.018
+    ],
+    [
+     3.068,
+     1.982
+    ],
+    [
+     3.586,
+     1.086
+    ],
+    [
+     4.482,
+     0.568
+    ],
+    [
+     5.518,
+     0.568
+    ],
+    [
+     6.414,
+     1.086
+    ],
+    [
+     6.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-02",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    9.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     10.932,
+     3.018
+    ],
+    [
+     10.414,
+     3.914
+    ],
+    [
+     9.518,
+     4.432
+    ],
+    [
+     8.482,
+     4.432
+    ],
+    [
+     7.586,
+     3.914
+    ],
+    [
+     7.068,
+     3.018
+    ],
+    [
+     7.068,
+     1.982
+    ],
+    [
+     7.586,
+     1.086
+    ],
+    [
+     8.482,
+     0.568
+    ],
+    [
+     9.518,
+     0.568
+    ],
+    [
+     10.414,
+     1.086
+    ],
+    [
+     10.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-03",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    13.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 5 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     14.932,
+     3.018
+    ],
+    [
+     14.414,
+     3.914
+    ],
+    [
+     13.518,
+     4.432
+    ],
+    [
+     12.482,
+     4.432
+    ],
+    [
+     11.586,
+     3.914
+    ],
+    [
+     11.068,
+     3.018
+    ],
+    [
+     11.068,
+     1.982
+    ],
+    [
+     11.586,
+     1.086
+    ],
+    [
+     12.482,
+     0.568
+    ],
+    [
+     13.518,
+     0.568
+    ],
+    [
+     14.414,
+     1.086
+    ],
+    [
+     14.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-04",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    17.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 5 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     18.932,
+     3.018
+    ],
+    [
+     18.414,
+     3.914
+    ],
+    [
+     17.518,
+     4.432
+    ],
+    [
+     16.482,
+     4.432
+    ],
+    [
+     15.586,
+     3.914
+    ],
+    [
+     15.068,
+     3.018
+    ],
+    [
+     15.068,
+     1.982
+    ],
+    [
+     15.586,
+     1.086
+    ],
+    [
+     16.482,
+     0.568
+    ],
+    [
+     17.518,
+     0.568
+    ],
+    [
+     18.414,
+     1.086
+    ],
+    [
+     18.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-05",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    21.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 10 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     22.932,
+     3.018
+    ],
+    [
+     22.414,
+     3.914
+    ],
+    [
+     21.518,
+     4.432
+    ],
+    [
+     20.482,
+     4.432
+    ],
+    [
+     19.586,
+     3.914
+    ],
+    [
+     19.068,
+     3.018
+    ],
+    [
+     19.068,
+     1.982
+    ],
+    [
+     19.586,
+     1.086
+    ],
+    [
+     20.482,
+     0.568
+    ],
+    [
+     21.518,
+     0.568
+    ],
+    [
+     22.414,
+     1.086
+    ],
+    [
+     22.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-06",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    25.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 10 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     26.932,
+     3.018
+    ],
+    [
+     26.414,
+     3.914
+    ],
+    [
+     25.518,
+     4.432
+    ],
+    [
+     24.482,
+     4.432
+    ],
+    [
+     23.586,
+     3.914
+    ],
+    [
+     23.068,
+     3.018
+    ],
+    [
+     23.068,
+     1.982
+    ],
+    [
+     23.586,
+     1.086
+    ],
+    [
+     24.482,
+     0.568
+    ],
+    [
+     25.518,
+     0.568
+    ],
+    [
+     26.414,
+     1.086
+    ],
+    [
+     26.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-07",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 20 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     30.932,
+     3.018
+    ],
+    [
+     30.414,
+     3.914
+    ],
+    [
+     29.518,
+     4.432
+    ],
+    [
+     28.482,
+     4.432
+    ],
+    [
+     27.586,
+     3.914
+    ],
+    [
+     27.068,
+     3.018
+    ],
+    [
+     27.068,
+     1.982
+    ],
+    [
+     27.586,
+     1.086
+    ],
+    [
+     28.482,
+     0.568
+    ],
+    [
+     29.518,
+     0.568
+    ],
+    [
+     30.414,
+     1.086
+    ],
+    [
+     30.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-08",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    33.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 40 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     34.932,
+     3.018
+    ],
+    [
+     34.414,
+     3.914
+    ],
+    [
+     33.518,
+     4.432
+    ],
+    [
+     32.482,
+     4.432
+    ],
+    [
+     31.586,
+     3.914
+    ],
+    [
+     31.068,
+     3.018
+    ],
+    [
+     31.068,
+     1.982
+    ],
+    [
+     31.586,
+     1.086
+    ],
+    [
+     32.482,
+     0.568
+    ],
+    [
+     33.518,
+     0.568
+    ],
+    [
+     34.414,
+     1.086
+    ],
+    [
+     34.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1/tree-09",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    39.0,
+    -2.6
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "proposed camphor drawn in the road reserve",
+   "footprint": [
+    [
+     40.932,
+     -2.082
+    ],
+    [
+     40.414,
+     -1.186
+    ],
+    [
+     39.518,
+     -0.668
+    ],
+    [
+     38.482,
+     -0.668
+    ],
+    [
+     37.586,
+     -1.186
+    ],
+    [
+     37.068,
+     -2.082
+    ],
+    [
+     37.068,
+     -3.118
+    ],
+    [
+     37.586,
+     -4.014
+    ],
+    [
+     38.482,
+     -4.532
+    ],
+    [
+     39.518,
+     -4.532
+    ],
+    [
+     40.414,
+     -4.014
+    ],
+    [
+     40.932,
+     -3.118
+    ]
+   ],
+   "excluded": "outside the site boundary (road reserve): drawn, not counted toward greening"
+  },
+  {
+   "id": "L-1/tree-10",
+   "sheet": "L-1",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    2.0,
+    17.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "proposed camphor drawn inside the fire-truck access lane",
+   "footprint": [
+    [
+     3.932,
+     17.518
+    ],
+    [
+     3.414,
+     18.414
+    ],
+    [
+     2.518,
+     18.932
+    ],
+    [
+     1.482,
+     18.932
+    ],
+    [
+     0.586,
+     18.414
+    ],
+    [
+     0.068,
+     17.518
+    ],
+    [
+     0.068,
+     16.482
+    ],
+    [
+     0.586,
+     15.586
+    ],
+    [
+     1.482,
+     15.068
+    ],
+    [
+     2.518,
+     15.068
+    ],
+    [
+     3.414,
+     15.586
+    ],
+    [
+     3.932,
+     16.482
+    ]
+   ],
+   "excluded": "inside the fire-truck access lane: fire-truck space is hard-to-green area (Building Technical Regulations §299), so the tree cannot count toward greening"
+  },
+  {
+   "id": "L-1/existing_tree-01",
+   "sheet": "L-1",
+   "kind": "existing_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    12.0,
+    26.8
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "EX-01; dashed canopy r 3 m and dashed root protection zone r 4.5 m; DBH 95 cm; TO BE REMOVED",
+   "footprint": [
+    [
+     15.0,
+     26.8
+    ],
+    [
+     14.974,
+     27.192
+    ],
+    [
+     14.898,
+     27.576
+    ],
+    [
+     14.772,
+     27.948
+    ],
+    [
+     14.598,
+     28.3
+    ],
+    [
+     14.38,
+     28.626
+    ],
+    [
+     14.121,
+     28.921
+    ],
+    [
+     13.826,
+     29.18
+    ],
+    [
+     13.5,
+     29.398
+    ],
+    [
+     13.148,
+     29.572
+    ],
+    [
+     12.776,
+     29.698
+    ],
+    [
+     12.392,
+     29.774
+    ],
+    [
+     12.0,
+     29.8
+    ],
+    [
+     11.608,
+     29.774
+    ],
+    [
+     11.224,
+     29.698
+    ],
+    [
+     10.852,
+     29.572
+    ],
+    [
+     10.5,
+     29.398
+    ],
+    [
+     10.174,
+     29.18
+    ],
+    [
+     9.879,
+     28.921
+    ],
+    [
+     9.62,
+     28.626
+    ],
+    [
+     9.402,
+     28.3
+    ],
+    [
+     9.228,
+     27.948
+    ],
+    [
+     9.102,
+     27.576
+    ],
+    [
+     9.026,
+     27.192
+    ],
+    [
+     9.0,
+     26.8
+    ],
+    [
+     9.026,
+     26.408
+    ],
+    [
+     9.102,
+     26.024
+    ],
+    [
+     9.228,
+     25.652
+    ],
+    [
+     9.402,
+     25.3
+    ],
+    [
+     9.62,
+     24.974
+    ],
+    [
+     9.879,
+     24.679
+    ],
+    [
+     10.174,
+     24.42
+    ],
+    [
+     10.5,
+     24.202
+    ],
+    [
+     10.852,
+     24.028
+    ],
+    [
+     11.224,
+     23.902
+    ],
+    [
+     11.608,
+     23.826
+    ],
+    [
+     12.0,
+     23.8
+    ],
+    [
+     12.392,
+     23.826
+    ],
+    [
+     12.776,
+     23.902
+    ],
+    [
+     13.148,
+     24.028
+    ],
+    [
+     13.5,
+     24.202
+    ],
+    [
+     13.826,
+     24.42
+    ],
+    [
+     14.121,
+     24.679
+    ],
+    [
+     14.38,
+     24.974
+    ],
+    [
+     14.598,
+     25.3
+    ],
+    [
+     14.772,
+     25.652
+    ],
+    [
+     14.898,
+     26.024
+    ],
+    [
+     14.974,
+     26.408
+    ]
+   ],
+   "excluded": "existing tree marked to be removed: not a proposed quantity; DBH 95 cm is above the 80 cm broadleaf threshold of the municipal tree-protection rule, so removal needs a protection review"
+  },
+  {
+   "id": "L-1/hedge-01",
+   "sheet": "L-1",
+   "kind": "hedge",
+   "label": "DURANTA",
+   "centre": [
+    49.0,
+    15.0
+   ],
+   "quote_count": 182,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": 54.0,
+   "note": "H0.6 @0.3m o.c., double row: 2 x (floor(27.0/0.3)+1)",
+   "footprint": [
+    [
+     48.8,
+     1.5
+    ],
+    [
+     49.2,
+     1.5
+    ],
+    [
+     49.2,
+     28.5
+    ],
+    [
+     48.8,
+     28.5
+    ]
+   ]
+  },
+  {
+   "id": "L-1/shrub_bed-01",
+   "sheet": "L-1",
+   "kind": "shrub_bed",
+   "label": "AZALEA",
+   "centre": [
+    13.5,
+    17.0
+   ],
+   "quote_count": 150.0,
+   "unit": "m²",
+   "area_m2": 150.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     6.0,
+     12.0
+    ],
+    [
+     21.0,
+     12.0
+    ],
+    [
+     21.0,
+     22.0
+    ],
+    [
+     6.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1/lawn-01",
+   "sheet": "L-1",
+   "kind": "lawn",
+   "label": "LAWN",
+   "centre": [
+    34.0,
+    17.0
+   ],
+   "quote_count": 200.0,
+   "unit": "m²",
+   "area_m2": 200.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     24.0,
+     12.0
+    ],
+    [
+     44.0,
+     12.0
+    ],
+    [
+     44.0,
+     22.0
+    ],
+    [
+     24.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1/fire_lane-01",
+   "sheet": "L-1",
+   "kind": "fire_lane",
+   "label": "FIRE TRUCK ACCESS LANE",
+   "centre": [
+    2.0,
+    17.5
+   ],
+   "quote_count": 0,
+   "unit": "m²",
+   "area_m2": 92.0,
+   "length_m": null,
+   "note": "hatched EARTH; keep clear; hard-to-green area (§299)",
+   "footprint": [
+    [
+     0.0,
+     6.0
+    ],
+    [
+     4.0,
+     6.0
+    ],
+    [
+     4.0,
+     29.0
+    ],
+    [
+     0.0,
+     29.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-01",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    24.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-1/legend-02",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend symbol CC CAMPHOR",
+   "centre": [
+    57.5,
+    27.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "tree symbol",
+   "footprint": [
+    [
+     59.432,
+     27.618
+    ],
+    [
+     58.914,
+     28.514
+    ],
+    [
+     58.018,
+     29.032
+    ],
+    [
+     56.982,
+     29.032
+    ],
+    [
+     56.086,
+     28.514
+    ],
+    [
+     55.568,
+     27.618
+    ],
+    [
+     55.568,
+     26.582
+    ],
+    [
+     56.086,
+     25.686
+    ],
+    [
+     56.982,
+     25.168
+    ],
+    [
+     58.018,
+     25.168
+    ],
+    [
+     58.914,
+     25.686
+    ],
+    [
+     59.432,
+     26.582
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-03",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend swatch AZ AZALEA",
+   "centre": [
+    57.5,
+    23.6
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     22.9
+    ],
+    [
+     59.5,
+     22.9
+    ],
+    [
+     59.5,
+     24.3
+    ],
+    [
+     55.5,
+     24.3
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-04",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend swatch FIRE TRUCK ACCESS LANE",
+   "centre": [
+    57.5,
+    21.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     20.7
+    ],
+    [
+     59.5,
+     20.7
+    ],
+    [
+     59.5,
+     22.1
+    ],
+    [
+     55.5,
+     22.1
+    ]
+   ]
+  },
+  {
+   "id": "L-1/legend-05",
+   "sheet": "L-1",
+   "kind": "legend",
+   "label": "legend line DU DURANTA",
+   "centre": [
+    57.5,
+    19.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "hedge line",
+   "footprint": [
+    [
+     55.5,
+     18.9
+    ],
+    [
+     59.5,
+     18.9
+    ],
+    [
+     59.5,
+     19.3
+    ],
+    [
+     55.5,
+     19.3
+    ]
+   ]
+  },
+  {
+   "id": "L-1/notes-01",
+   "sheet": "L-1",
+   "kind": "notes",
+   "label": "GENERAL NOTES",
+   "centre": [
+    21.0,
+    -7.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "1. PLANT QUANTITIES ON PLAN TAKE PRECEDENCE OVER THE SCHEDULE.",
+   "footprint": null
+  },
+  {
+   "id": "L-1/title-01",
+   "sheet": "L-1",
+   "kind": "title",
+   "label": "Planting Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-1; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-01",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    5.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-02",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    9.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-03",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    13.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-04",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    17.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-05",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    21.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-06",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    25.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-07",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/elevation_tree-08",
+   "sheet": "L-2",
+   "kind": "elevation_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    33.0,
+    2.3
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "elevation: same tree as on L-1, not counted",
+   "footprint": null
+  },
+  {
+   "id": "L-2/title-01",
+   "sheet": "L-2",
+   "kind": "title",
+   "label": "South Elevation",
+   "centre": [
+    50.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-2; SCALE 1:100; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-3/paving-01",
+   "sheet": "L-3",
+   "kind": "paving",
+   "label": "PERMEABLE PAVERS",
+   "centre": [
+    15.25,
+    7.0
+   ],
+   "quote_count": 212.0,
+   "unit": "m²",
+   "area_m2": 212.0,
+   "length_m": null,
+   "note": "finish code PV-1",
+   "footprint": [
+    [
+     2.0,
+     3.0
+    ],
+    [
+     28.5,
+     3.0
+    ],
+    [
+     28.5,
+     11.0
+    ],
+    [
+     2.0,
+     11.0
+    ]
+   ]
+  },
+  {
+   "id": "L-3/paving-02",
+   "sheet": "L-3",
+   "kind": "paving",
+   "label": "EXPOSED AGGREGATE",
+   "centre": [
+    37.0,
+    5.0
+   ],
+   "quote_count": 48.0,
+   "unit": "m²",
+   "area_m2": 48.0,
+   "length_m": null,
+   "note": "boxed code reads PV-1 (PERMEABLE PAVERS) but the hatch is AR-SAND, which the legend keys to PV-2 EXPOSED AGGREGATE: code and hatch disagree",
+   "footprint": [
+    [
+     31.0,
+     3.0
+    ],
+    [
+     43.0,
+     3.0
+    ],
+    [
+     43.0,
+     7.0
+    ],
+    [
+     31.0,
+     7.0
+    ]
+   ]
+  },
+  {
+   "id": "L-3/paving-03",
+   "sheet": "L-3",
+   "kind": "paving",
+   "label": "GRASS PAVERS",
+   "centre": [
+    33.5,
+    12.4
+   ],
+   "quote_count": 36.0,
+   "unit": "m²",
+   "area_m2": 36.0,
+   "length_m": null,
+   "note": "finish code PV-3; overlaps the L-1 lawn by 20 m²",
+   "footprint": [
+    [
+     31.0,
+     8.8
+    ],
+    [
+     36.0,
+     8.8
+    ],
+    [
+     36.0,
+     16.0
+    ],
+    [
+     31.0,
+     16.0
+    ]
+   ]
+  },
+  {
+   "id": "L-3/planter_edge-01",
+   "sheet": "L-3",
+   "kind": "planter_edge",
+   "label": "PLANTER",
+   "centre": [
+    10.0,
+    17.5
+   ],
+   "quote_count": 22.0,
+   "unit": "m",
+   "area_m2": null,
+   "length_m": 22.0,
+   "note": "loose segments",
+   "footprint": null
+  },
+  {
+   "id": "L-3/legend-01",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    25.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-3/legend-02",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "legend swatch PV-1 PERMEABLE PAVERS",
+   "centre": [
+    57.5,
+    28.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     27.7
+    ],
+    [
+     59.5,
+     27.7
+    ],
+    [
+     59.5,
+     29.1
+    ],
+    [
+     55.5,
+     29.1
+    ]
+   ]
+  },
+  {
+   "id": "L-3/legend-03",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "legend swatch PV-2 EXPOSED AGGREGATE",
+   "centre": [
+    57.5,
+    26.2
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     25.5
+    ],
+    [
+     59.5,
+     25.5
+    ],
+    [
+     59.5,
+     26.9
+    ],
+    [
+     55.5,
+     26.9
+    ]
+   ]
+  },
+  {
+   "id": "L-3/legend-04",
+   "sheet": "L-3",
+   "kind": "legend",
+   "label": "legend swatch PV-3 GRASS PAVERS",
+   "centre": [
+    57.5,
+    24.0
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     23.3
+    ],
+    [
+     59.5,
+     23.3
+    ],
+    [
+     59.5,
+     24.7
+    ],
+    [
+     55.5,
+     24.7
+    ]
+   ]
+  },
+  {
+   "id": "L-3/title-01",
+   "sheet": "L-3",
+   "kind": "title",
+   "label": "Paving Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-3; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-4/schedule-01",
+   "sheet": "L-4",
+   "kind": "schedule",
+   "label": "PLANT SCHEDULE",
+   "centre": [
+    12.75,
+    23.75
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "schedule_mismatch",
+   "footprint": null
+  },
+  {
+   "id": "L-4/title-01",
+   "sheet": "L-4",
+   "kind": "title",
+   "label": "Plant Schedule",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-4; SCALE NTS; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-5/enlarged_tree-01",
+   "sheet": "L-5",
+   "kind": "enlarged_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    10.0,
+    13.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "enlarged plan: same tree as L-1/tree-01, not counted; model units are half-metres",
+   "footprint": [
+    [
+     13.864,
+     14.035
+    ],
+    [
+     12.828,
+     15.828
+    ],
+    [
+     11.035,
+     16.864
+    ],
+    [
+     8.965,
+     16.864
+    ],
+    [
+     7.172,
+     15.828
+    ],
+    [
+     6.136,
+     14.035
+    ],
+    [
+     6.136,
+     11.965
+    ],
+    [
+     7.172,
+     10.172
+    ],
+    [
+     8.965,
+     9.136
+    ],
+    [
+     11.035,
+     9.136
+    ],
+    [
+     12.828,
+     10.172
+    ],
+    [
+     13.864,
+     11.965
+    ]
+   ]
+  },
+  {
+   "id": "L-5/enlarged_tree-02",
+   "sheet": "L-5",
+   "kind": "enlarged_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    18.0,
+    13.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "enlarged plan: same tree as L-1/tree-02, not counted; model units are half-metres",
+   "footprint": [
+    [
+     21.864,
+     14.035
+    ],
+    [
+     20.828,
+     15.828
+    ],
+    [
+     19.035,
+     16.864
+    ],
+    [
+     16.965,
+     16.864
+    ],
+    [
+     15.172,
+     15.828
+    ],
+    [
+     14.136,
+     14.035
+    ],
+    [
+     14.136,
+     11.965
+    ],
+    [
+     15.172,
+     10.172
+    ],
+    [
+     16.965,
+     9.136
+    ],
+    [
+     19.035,
+     9.136
+    ],
+    [
+     20.828,
+     10.172
+    ],
+    [
+     21.864,
+     11.965
+    ]
+   ]
+  },
+  {
+   "id": "L-5/enlarged_tree-03",
+   "sheet": "L-5",
+   "kind": "enlarged_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    26.0,
+    13.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "enlarged plan: same tree as L-1/tree-03, not counted; model units are half-metres",
+   "footprint": [
+    [
+     29.864,
+     14.035
+    ],
+    [
+     28.828,
+     15.828
+    ],
+    [
+     27.035,
+     16.864
+    ],
+    [
+     24.965,
+     16.864
+    ],
+    [
+     23.172,
+     15.828
+    ],
+    [
+     22.136,
+     14.035
+    ],
+    [
+     22.136,
+     11.965
+    ],
+    [
+     23.172,
+     10.172
+    ],
+    [
+     24.965,
+     9.136
+    ],
+    [
+     27.035,
+     9.136
+    ],
+    [
+     28.828,
+     10.172
+    ],
+    [
+     29.864,
+     11.965
+    ]
+   ]
+  },
+  {
+   "id": "L-5/enlarged_tree-04",
+   "sheet": "L-5",
+   "kind": "enlarged_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    34.0,
+    13.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "enlarged plan: same tree as L-1/tree-04, not counted; model units are half-metres",
+   "footprint": [
+    [
+     37.864,
+     14.035
+    ],
+    [
+     36.828,
+     15.828
+    ],
+    [
+     35.035,
+     16.864
+    ],
+    [
+     32.965,
+     16.864
+    ],
+    [
+     31.172,
+     15.828
+    ],
+    [
+     30.136,
+     14.035
+    ],
+    [
+     30.136,
+     11.965
+    ],
+    [
+     31.172,
+     10.172
+    ],
+    [
+     32.965,
+     9.136
+    ],
+    [
+     35.035,
+     9.136
+    ],
+    [
+     36.828,
+     10.172
+    ],
+    [
+     37.864,
+     11.965
+    ]
+   ]
+  },
+  {
+   "id": "L-5/match_line-01",
+   "sheet": "L-5",
+   "kind": "match_line",
+   "label": "MATCH LINE — SEE L-1",
+   "centre": [
+    38.0,
+    13.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "x = 19.0 m on the site, between trees 4 and 5",
+   "footprint": null
+  },
+  {
+   "id": "L-5/scale_bar-01",
+   "sheet": "L-5",
+   "kind": "scale_bar",
+   "label": "SCALE 1:100",
+   "centre": [
+    5.0,
+    -4.8
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "graphic scale: 5 m spans 10 model units (1:100)",
+   "footprint": null
+  },
+  {
+   "id": "L-5/title-01",
+   "sheet": "L-5",
+   "kind": "title",
+   "label": "Enlarged Plan - West",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-5; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-6/tree_pit-01",
+   "sheet": "L-6",
+   "kind": "tree_pit",
+   "label": "TREE PIT",
+   "centre": [
+    1.05,
+    1.95
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": 2.25,
+   "length_m": null,
+   "note": "TREE PIT 1500 × 1500 · SOIL DEPTH 1000 · ON SLAB: pit 1.5 x 1.5 m = 2.25 m2; planting soil 1.0 m on the basement slab; drainage 0.1 m",
+   "footprint": [
+    [
+     0.3,
+     1.2
+    ],
+    [
+     1.8,
+     1.2
+    ],
+    [
+     1.8,
+     2.7
+    ],
+    [
+     0.3,
+     2.7
+    ]
+   ]
+  },
+  {
+   "id": "L-6/section-01",
+   "sheet": "L-6",
+   "kind": "section",
+   "label": "SECTION A-A",
+   "centre": [
+    3.65,
+    0.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "soil depth 1.0 m, drainage 0.1 m, on slab",
+   "footprint": null
+  },
+  {
+   "id": "L-6/title-01",
+   "sheet": "L-6",
+   "kind": "title",
+   "label": "Tree Pit Detail",
+   "centre": [
+    6.45,
+    -0.025
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-6; SCALE 1:20; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-7/background_tree-01",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    5.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-01, not counted",
+   "footprint": [
+    [
+     6.932,
+     3.018
+    ],
+    [
+     6.414,
+     3.914
+    ],
+    [
+     5.518,
+     4.432
+    ],
+    [
+     4.482,
+     4.432
+    ],
+    [
+     3.586,
+     3.914
+    ],
+    [
+     3.068,
+     3.018
+    ],
+    [
+     3.068,
+     1.982
+    ],
+    [
+     3.586,
+     1.086
+    ],
+    [
+     4.482,
+     0.568
+    ],
+    [
+     5.518,
+     0.568
+    ],
+    [
+     6.414,
+     1.086
+    ],
+    [
+     6.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-02",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    9.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-02, not counted",
+   "footprint": [
+    [
+     10.932,
+     3.018
+    ],
+    [
+     10.414,
+     3.914
+    ],
+    [
+     9.518,
+     4.432
+    ],
+    [
+     8.482,
+     4.432
+    ],
+    [
+     7.586,
+     3.914
+    ],
+    [
+     7.068,
+     3.018
+    ],
+    [
+     7.068,
+     1.982
+    ],
+    [
+     7.586,
+     1.086
+    ],
+    [
+     8.482,
+     0.568
+    ],
+    [
+     9.518,
+     0.568
+    ],
+    [
+     10.414,
+     1.086
+    ],
+    [
+     10.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-03",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    13.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-03, not counted",
+   "footprint": [
+    [
+     14.932,
+     3.018
+    ],
+    [
+     14.414,
+     3.914
+    ],
+    [
+     13.518,
+     4.432
+    ],
+    [
+     12.482,
+     4.432
+    ],
+    [
+     11.586,
+     3.914
+    ],
+    [
+     11.068,
+     3.018
+    ],
+    [
+     11.068,
+     1.982
+    ],
+    [
+     11.586,
+     1.086
+    ],
+    [
+     12.482,
+     0.568
+    ],
+    [
+     13.518,
+     0.568
+    ],
+    [
+     14.414,
+     1.086
+    ],
+    [
+     14.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-04",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    17.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-04, not counted",
+   "footprint": [
+    [
+     18.932,
+     3.018
+    ],
+    [
+     18.414,
+     3.914
+    ],
+    [
+     17.518,
+     4.432
+    ],
+    [
+     16.482,
+     4.432
+    ],
+    [
+     15.586,
+     3.914
+    ],
+    [
+     15.068,
+     3.018
+    ],
+    [
+     15.068,
+     1.982
+    ],
+    [
+     15.586,
+     1.086
+    ],
+    [
+     16.482,
+     0.568
+    ],
+    [
+     17.518,
+     0.568
+    ],
+    [
+     18.414,
+     1.086
+    ],
+    [
+     18.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-05",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    21.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-05, not counted",
+   "footprint": [
+    [
+     22.932,
+     3.018
+    ],
+    [
+     22.414,
+     3.914
+    ],
+    [
+     21.518,
+     4.432
+    ],
+    [
+     20.482,
+     4.432
+    ],
+    [
+     19.586,
+     3.914
+    ],
+    [
+     19.068,
+     3.018
+    ],
+    [
+     19.068,
+     1.982
+    ],
+    [
+     19.586,
+     1.086
+    ],
+    [
+     20.482,
+     0.568
+    ],
+    [
+     21.518,
+     0.568
+    ],
+    [
+     22.414,
+     1.086
+    ],
+    [
+     22.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-06",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    25.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-06, not counted",
+   "footprint": [
+    [
+     26.932,
+     3.018
+    ],
+    [
+     26.414,
+     3.914
+    ],
+    [
+     25.518,
+     4.432
+    ],
+    [
+     24.482,
+     4.432
+    ],
+    [
+     23.586,
+     3.914
+    ],
+    [
+     23.068,
+     3.018
+    ],
+    [
+     23.068,
+     1.982
+    ],
+    [
+     23.586,
+     1.086
+    ],
+    [
+     24.482,
+     0.568
+    ],
+    [
+     25.518,
+     0.568
+    ],
+    [
+     26.414,
+     1.086
+    ],
+    [
+     26.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-07",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-07, not counted",
+   "footprint": [
+    [
+     30.932,
+     3.018
+    ],
+    [
+     30.414,
+     3.914
+    ],
+    [
+     29.518,
+     4.432
+    ],
+    [
+     28.482,
+     4.432
+    ],
+    [
+     27.586,
+     3.914
+    ],
+    [
+     27.068,
+     3.018
+    ],
+    [
+     27.068,
+     1.982
+    ],
+    [
+     27.586,
+     1.086
+    ],
+    [
+     28.482,
+     0.568
+    ],
+    [
+     29.518,
+     0.568
+    ],
+    [
+     30.414,
+     1.086
+    ],
+    [
+     30.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-08",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    33.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-08, not counted",
+   "footprint": [
+    [
+     34.932,
+     3.018
+    ],
+    [
+     34.414,
+     3.914
+    ],
+    [
+     33.518,
+     4.432
+    ],
+    [
+     32.482,
+     4.432
+    ],
+    [
+     31.586,
+     3.914
+    ],
+    [
+     31.068,
+     3.018
+    ],
+    [
+     31.068,
+     1.982
+    ],
+    [
+     31.586,
+     1.086
+    ],
+    [
+     32.482,
+     0.568
+    ],
+    [
+     33.518,
+     0.568
+    ],
+    [
+     34.414,
+     1.086
+    ],
+    [
+     34.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-09",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    39.0,
+    -2.6
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-09, not counted",
+   "footprint": [
+    [
+     40.932,
+     -2.082
+    ],
+    [
+     40.414,
+     -1.186
+    ],
+    [
+     39.518,
+     -0.668
+    ],
+    [
+     38.482,
+     -0.668
+    ],
+    [
+     37.586,
+     -1.186
+    ],
+    [
+     37.068,
+     -2.082
+    ],
+    [
+     37.068,
+     -3.118
+    ],
+    [
+     37.586,
+     -4.014
+    ],
+    [
+     38.482,
+     -4.532
+    ],
+    [
+     39.518,
+     -4.532
+    ],
+    [
+     40.414,
+     -4.014
+    ],
+    [
+     40.932,
+     -3.118
+    ]
+   ]
+  },
+  {
+   "id": "L-7/background_tree-10",
+   "sheet": "L-7",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    2.0,
+    17.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-10, not counted",
+   "footprint": [
+    [
+     3.932,
+     17.518
+    ],
+    [
+     3.414,
+     18.414
+    ],
+    [
+     2.518,
+     18.932
+    ],
+    [
+     1.482,
+     18.932
+    ],
+    [
+     0.586,
+     18.414
+    ],
+    [
+     0.068,
+     17.518
+    ],
+    [
+     0.068,
+     16.482
+    ],
+    [
+     0.586,
+     15.586
+    ],
+    [
+     1.482,
+     15.068
+    ],
+    [
+     2.518,
+     15.068
+    ],
+    [
+     3.414,
+     15.586
+    ],
+    [
+     3.932,
+     16.482
+    ]
+   ]
+  },
+  {
+   "id": "L-7/legend-01",
+   "sheet": "L-7",
+   "kind": "legend",
+   "label": "IRRIGATION LEGEND",
+   "centre": [
+    63.5,
+    25.8
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-7/irrigation-01",
+   "sheet": "L-7",
+   "kind": "irrigation",
+   "label": "IRRIGATION",
+   "centre": [
+    25.0,
+    15.0
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "15 spray heads, 3 valves, 8 bubblers, controller IC",
+   "footprint": null
+  },
+  {
+   "id": "L-7/title-01",
+   "sheet": "L-7",
+   "kind": "title",
+   "label": "Irrigation Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-7; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-8/background_tree-01",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    5.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-01, not counted",
+   "footprint": [
+    [
+     6.932,
+     3.018
+    ],
+    [
+     6.414,
+     3.914
+    ],
+    [
+     5.518,
+     4.432
+    ],
+    [
+     4.482,
+     4.432
+    ],
+    [
+     3.586,
+     3.914
+    ],
+    [
+     3.068,
+     3.018
+    ],
+    [
+     3.068,
+     1.982
+    ],
+    [
+     3.586,
+     1.086
+    ],
+    [
+     4.482,
+     0.568
+    ],
+    [
+     5.518,
+     0.568
+    ],
+    [
+     6.414,
+     1.086
+    ],
+    [
+     6.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-02",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    9.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-02, not counted",
+   "footprint": [
+    [
+     10.932,
+     3.018
+    ],
+    [
+     10.414,
+     3.914
+    ],
+    [
+     9.518,
+     4.432
+    ],
+    [
+     8.482,
+     4.432
+    ],
+    [
+     7.586,
+     3.914
+    ],
+    [
+     7.068,
+     3.018
+    ],
+    [
+     7.068,
+     1.982
+    ],
+    [
+     7.586,
+     1.086
+    ],
+    [
+     8.482,
+     0.568
+    ],
+    [
+     9.518,
+     0.568
+    ],
+    [
+     10.414,
+     1.086
+    ],
+    [
+     10.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-03",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    13.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-03, not counted",
+   "footprint": [
+    [
+     14.932,
+     3.018
+    ],
+    [
+     14.414,
+     3.914
+    ],
+    [
+     13.518,
+     4.432
+    ],
+    [
+     12.482,
+     4.432
+    ],
+    [
+     11.586,
+     3.914
+    ],
+    [
+     11.068,
+     3.018
+    ],
+    [
+     11.068,
+     1.982
+    ],
+    [
+     11.586,
+     1.086
+    ],
+    [
+     12.482,
+     0.568
+    ],
+    [
+     13.518,
+     0.568
+    ],
+    [
+     14.414,
+     1.086
+    ],
+    [
+     14.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-04",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    17.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-04, not counted",
+   "footprint": [
+    [
+     18.932,
+     3.018
+    ],
+    [
+     18.414,
+     3.914
+    ],
+    [
+     17.518,
+     4.432
+    ],
+    [
+     16.482,
+     4.432
+    ],
+    [
+     15.586,
+     3.914
+    ],
+    [
+     15.068,
+     3.018
+    ],
+    [
+     15.068,
+     1.982
+    ],
+    [
+     15.586,
+     1.086
+    ],
+    [
+     16.482,
+     0.568
+    ],
+    [
+     17.518,
+     0.568
+    ],
+    [
+     18.414,
+     1.086
+    ],
+    [
+     18.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-05",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    21.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-05, not counted",
+   "footprint": [
+    [
+     22.932,
+     3.018
+    ],
+    [
+     22.414,
+     3.914
+    ],
+    [
+     21.518,
+     4.432
+    ],
+    [
+     20.482,
+     4.432
+    ],
+    [
+     19.586,
+     3.914
+    ],
+    [
+     19.068,
+     3.018
+    ],
+    [
+     19.068,
+     1.982
+    ],
+    [
+     19.586,
+     1.086
+    ],
+    [
+     20.482,
+     0.568
+    ],
+    [
+     21.518,
+     0.568
+    ],
+    [
+     22.414,
+     1.086
+    ],
+    [
+     22.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-06",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    25.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-06, not counted",
+   "footprint": [
+    [
+     26.932,
+     3.018
+    ],
+    [
+     26.414,
+     3.914
+    ],
+    [
+     25.518,
+     4.432
+    ],
+    [
+     24.482,
+     4.432
+    ],
+    [
+     23.586,
+     3.914
+    ],
+    [
+     23.068,
+     3.018
+    ],
+    [
+     23.068,
+     1.982
+    ],
+    [
+     23.586,
+     1.086
+    ],
+    [
+     24.482,
+     0.568
+    ],
+    [
+     25.518,
+     0.568
+    ],
+    [
+     26.414,
+     1.086
+    ],
+    [
+     26.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-07",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-07, not counted",
+   "footprint": [
+    [
+     30.932,
+     3.018
+    ],
+    [
+     30.414,
+     3.914
+    ],
+    [
+     29.518,
+     4.432
+    ],
+    [
+     28.482,
+     4.432
+    ],
+    [
+     27.586,
+     3.914
+    ],
+    [
+     27.068,
+     3.018
+    ],
+    [
+     27.068,
+     1.982
+    ],
+    [
+     27.586,
+     1.086
+    ],
+    [
+     28.482,
+     0.568
+    ],
+    [
+     29.518,
+     0.568
+    ],
+    [
+     30.414,
+     1.086
+    ],
+    [
+     30.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-08",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    33.0,
+    2.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-08, not counted",
+   "footprint": [
+    [
+     34.932,
+     3.018
+    ],
+    [
+     34.414,
+     3.914
+    ],
+    [
+     33.518,
+     4.432
+    ],
+    [
+     32.482,
+     4.432
+    ],
+    [
+     31.586,
+     3.914
+    ],
+    [
+     31.068,
+     3.018
+    ],
+    [
+     31.068,
+     1.982
+    ],
+    [
+     31.586,
+     1.086
+    ],
+    [
+     32.482,
+     0.568
+    ],
+    [
+     33.518,
+     0.568
+    ],
+    [
+     34.414,
+     1.086
+    ],
+    [
+     34.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-09",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    39.0,
+    -2.6
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-09, not counted",
+   "footprint": [
+    [
+     40.932,
+     -2.082
+    ],
+    [
+     40.414,
+     -1.186
+    ],
+    [
+     39.518,
+     -0.668
+    ],
+    [
+     38.482,
+     -0.668
+    ],
+    [
+     37.586,
+     -1.186
+    ],
+    [
+     37.068,
+     -2.082
+    ],
+    [
+     37.068,
+     -3.118
+    ],
+    [
+     37.586,
+     -4.014
+    ],
+    [
+     38.482,
+     -4.532
+    ],
+    [
+     39.518,
+     -4.532
+    ],
+    [
+     40.414,
+     -4.014
+    ],
+    [
+     40.932,
+     -3.118
+    ]
+   ]
+  },
+  {
+   "id": "L-8/background_tree-10",
+   "sheet": "L-8",
+   "kind": "background_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    2.0,
+    17.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "background: same tree as L-1/tree-10, not counted",
+   "footprint": [
+    [
+     3.932,
+     17.518
+    ],
+    [
+     3.414,
+     18.414
+    ],
+    [
+     2.518,
+     18.932
+    ],
+    [
+     1.482,
+     18.932
+    ],
+    [
+     0.586,
+     18.414
+    ],
+    [
+     0.068,
+     17.518
+    ],
+    [
+     0.068,
+     16.482
+    ],
+    [
+     0.586,
+     15.586
+    ],
+    [
+     1.482,
+     15.068
+    ],
+    [
+     2.518,
+     15.068
+    ],
+    [
+     3.414,
+     15.586
+    ],
+    [
+     3.932,
+     16.482
+    ]
+   ]
+  },
+  {
+   "id": "L-8/legend-01",
+   "sheet": "L-8",
+   "kind": "legend",
+   "label": "LIGHTING LEGEND",
+   "centre": [
+    63.5,
+    26.7
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-8/lighting-01",
+   "sheet": "L-8",
+   "kind": "lighting",
+   "label": "LIGHTING",
+   "centre": [
+    25.0,
+    15.0
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "7 bollards, 8 uplights, 2 pole lights, panel LP-1",
+   "footprint": null
+  },
+  {
+   "id": "L-8/title-01",
+   "sheet": "L-8",
+   "kind": "title",
+   "label": "Lighting Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-8; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-1 Rev B/tree-01",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    5.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     6.932,
+     3.018
+    ],
+    [
+     6.414,
+     3.914
+    ],
+    [
+     5.518,
+     4.432
+    ],
+    [
+     4.482,
+     4.432
+    ],
+    [
+     3.586,
+     3.914
+    ],
+    [
+     3.068,
+     3.018
+    ],
+    [
+     3.068,
+     1.982
+    ],
+    [
+     3.586,
+     1.086
+    ],
+    [
+     4.482,
+     0.568
+    ],
+    [
+     5.518,
+     0.568
+    ],
+    [
+     6.414,
+     1.086
+    ],
+    [
+     6.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-02",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    9.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     10.932,
+     3.018
+    ],
+    [
+     10.414,
+     3.914
+    ],
+    [
+     9.518,
+     4.432
+    ],
+    [
+     8.482,
+     4.432
+    ],
+    [
+     7.586,
+     3.914
+    ],
+    [
+     7.068,
+     3.018
+    ],
+    [
+     7.068,
+     1.982
+    ],
+    [
+     7.586,
+     1.086
+    ],
+    [
+     8.482,
+     0.568
+    ],
+    [
+     9.518,
+     0.568
+    ],
+    [
+     10.414,
+     1.086
+    ],
+    [
+     10.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-03",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    13.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 5 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     14.932,
+     3.018
+    ],
+    [
+     14.414,
+     3.914
+    ],
+    [
+     13.518,
+     4.432
+    ],
+    [
+     12.482,
+     4.432
+    ],
+    [
+     11.586,
+     3.914
+    ],
+    [
+     11.068,
+     3.018
+    ],
+    [
+     11.068,
+     1.982
+    ],
+    [
+     11.586,
+     1.086
+    ],
+    [
+     12.482,
+     0.568
+    ],
+    [
+     13.518,
+     0.568
+    ],
+    [
+     14.414,
+     1.086
+    ],
+    [
+     14.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-04",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    17.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 5 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     18.932,
+     3.018
+    ],
+    [
+     18.414,
+     3.914
+    ],
+    [
+     17.518,
+     4.432
+    ],
+    [
+     16.482,
+     4.432
+    ],
+    [
+     15.586,
+     3.914
+    ],
+    [
+     15.068,
+     3.018
+    ],
+    [
+     15.068,
+     1.982
+    ],
+    [
+     15.586,
+     1.086
+    ],
+    [
+     16.482,
+     0.568
+    ],
+    [
+     17.518,
+     0.568
+    ],
+    [
+     18.414,
+     1.086
+    ],
+    [
+     18.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-05",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    21.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 10 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     22.932,
+     3.018
+    ],
+    [
+     22.414,
+     3.914
+    ],
+    [
+     21.518,
+     4.432
+    ],
+    [
+     20.482,
+     4.432
+    ],
+    [
+     19.586,
+     3.914
+    ],
+    [
+     19.068,
+     3.018
+    ],
+    [
+     19.068,
+     1.982
+    ],
+    [
+     19.586,
+     1.086
+    ],
+    [
+     20.482,
+     0.568
+    ],
+    [
+     21.518,
+     0.568
+    ],
+    [
+     22.414,
+     1.086
+    ],
+    [
+     22.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-06",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    25.0,
+    4.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 10 cm; spec H3.5 W1.5 cal. 10 cm; Rev B: moved 2 m",
+   "footprint": [
+    [
+     26.932,
+     5.018
+    ],
+    [
+     26.414,
+     5.914
+    ],
+    [
+     25.518,
+     6.432
+    ],
+    [
+     24.482,
+     6.432
+    ],
+    [
+     23.586,
+     5.914
+    ],
+    [
+     23.068,
+     5.018
+    ],
+    [
+     23.068,
+     3.982
+    ],
+    [
+     23.586,
+     3.086
+    ],
+    [
+     24.482,
+     2.568
+    ],
+    [
+     25.518,
+     2.568
+    ],
+    [
+     26.414,
+     3.086
+    ],
+    [
+     26.932,
+     3.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-07",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 20 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     30.932,
+     3.018
+    ],
+    [
+     30.414,
+     3.914
+    ],
+    [
+     29.518,
+     4.432
+    ],
+    [
+     28.482,
+     4.432
+    ],
+    [
+     27.586,
+     3.914
+    ],
+    [
+     27.068,
+     3.018
+    ],
+    [
+     27.068,
+     1.982
+    ],
+    [
+     27.586,
+     1.086
+    ],
+    [
+     28.482,
+     0.568
+    ],
+    [
+     29.518,
+     0.568
+    ],
+    [
+     30.414,
+     1.086
+    ],
+    [
+     30.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-08",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    33.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 40 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     34.932,
+     3.018
+    ],
+    [
+     34.414,
+     3.914
+    ],
+    [
+     33.518,
+     4.432
+    ],
+    [
+     32.482,
+     4.432
+    ],
+    [
+     31.586,
+     3.914
+    ],
+    [
+     31.068,
+     3.018
+    ],
+    [
+     31.068,
+     1.982
+    ],
+    [
+     31.586,
+     1.086
+    ],
+    [
+     32.482,
+     0.568
+    ],
+    [
+     33.518,
+     0.568
+    ],
+    [
+     34.414,
+     1.086
+    ],
+    [
+     34.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/tree-09",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    39.0,
+    -2.6
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "proposed camphor drawn in the road reserve",
+   "footprint": [
+    [
+     40.932,
+     -2.082
+    ],
+    [
+     40.414,
+     -1.186
+    ],
+    [
+     39.518,
+     -0.668
+    ],
+    [
+     38.482,
+     -0.668
+    ],
+    [
+     37.586,
+     -1.186
+    ],
+    [
+     37.068,
+     -2.082
+    ],
+    [
+     37.068,
+     -3.118
+    ],
+    [
+     37.586,
+     -4.014
+    ],
+    [
+     38.482,
+     -4.532
+    ],
+    [
+     39.518,
+     -4.532
+    ],
+    [
+     40.414,
+     -4.014
+    ],
+    [
+     40.932,
+     -3.118
+    ]
+   ],
+   "excluded": "outside the site boundary (road reserve): drawn, not counted toward greening"
+  },
+  {
+   "id": "L-1 Rev B/tree-10",
+   "sheet": "L-1 Rev B",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    2.0,
+    17.0
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "proposed camphor drawn inside the fire-truck access lane",
+   "footprint": [
+    [
+     3.932,
+     17.518
+    ],
+    [
+     3.414,
+     18.414
+    ],
+    [
+     2.518,
+     18.932
+    ],
+    [
+     1.482,
+     18.932
+    ],
+    [
+     0.586,
+     18.414
+    ],
+    [
+     0.068,
+     17.518
+    ],
+    [
+     0.068,
+     16.482
+    ],
+    [
+     0.586,
+     15.586
+    ],
+    [
+     1.482,
+     15.068
+    ],
+    [
+     2.518,
+     15.068
+    ],
+    [
+     3.414,
+     15.586
+    ],
+    [
+     3.932,
+     16.482
+    ]
+   ],
+   "excluded": "inside the fire-truck access lane: fire-truck space is hard-to-green area (Building Technical Regulations §299), so the tree cannot count toward greening"
+  },
+  {
+   "id": "L-1 Rev B/existing_tree-01",
+   "sheet": "L-1 Rev B",
+   "kind": "existing_tree",
+   "label": "CAMPHOR",
+   "centre": [
+    12.0,
+    26.8
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "EX-01; dashed canopy r 3 m and dashed root protection zone r 4.5 m; DBH 95 cm; TO BE REMOVED",
+   "footprint": [
+    [
+     15.0,
+     26.8
+    ],
+    [
+     14.974,
+     27.192
+    ],
+    [
+     14.898,
+     27.576
+    ],
+    [
+     14.772,
+     27.948
+    ],
+    [
+     14.598,
+     28.3
+    ],
+    [
+     14.38,
+     28.626
+    ],
+    [
+     14.121,
+     28.921
+    ],
+    [
+     13.826,
+     29.18
+    ],
+    [
+     13.5,
+     29.398
+    ],
+    [
+     13.148,
+     29.572
+    ],
+    [
+     12.776,
+     29.698
+    ],
+    [
+     12.392,
+     29.774
+    ],
+    [
+     12.0,
+     29.8
+    ],
+    [
+     11.608,
+     29.774
+    ],
+    [
+     11.224,
+     29.698
+    ],
+    [
+     10.852,
+     29.572
+    ],
+    [
+     10.5,
+     29.398
+    ],
+    [
+     10.174,
+     29.18
+    ],
+    [
+     9.879,
+     28.921
+    ],
+    [
+     9.62,
+     28.626
+    ],
+    [
+     9.402,
+     28.3
+    ],
+    [
+     9.228,
+     27.948
+    ],
+    [
+     9.102,
+     27.576
+    ],
+    [
+     9.026,
+     27.192
+    ],
+    [
+     9.0,
+     26.8
+    ],
+    [
+     9.026,
+     26.408
+    ],
+    [
+     9.102,
+     26.024
+    ],
+    [
+     9.228,
+     25.652
+    ],
+    [
+     9.402,
+     25.3
+    ],
+    [
+     9.62,
+     24.974
+    ],
+    [
+     9.879,
+     24.679
+    ],
+    [
+     10.174,
+     24.42
+    ],
+    [
+     10.5,
+     24.202
+    ],
+    [
+     10.852,
+     24.028
+    ],
+    [
+     11.224,
+     23.902
+    ],
+    [
+     11.608,
+     23.826
+    ],
+    [
+     12.0,
+     23.8
+    ],
+    [
+     12.392,
+     23.826
+    ],
+    [
+     12.776,
+     23.902
+    ],
+    [
+     13.148,
+     24.028
+    ],
+    [
+     13.5,
+     24.202
+    ],
+    [
+     13.826,
+     24.42
+    ],
+    [
+     14.121,
+     24.679
+    ],
+    [
+     14.38,
+     24.974
+    ],
+    [
+     14.598,
+     25.3
+    ],
+    [
+     14.772,
+     25.652
+    ],
+    [
+     14.898,
+     26.024
+    ],
+    [
+     14.974,
+     26.408
+    ]
+   ],
+   "excluded": "existing tree marked to be removed: not a proposed quantity; DBH 95 cm is above the 80 cm broadleaf threshold of the municipal tree-protection rule, so removal needs a protection review"
+  },
+  {
+   "id": "L-1 Rev B/revision_cloud-01",
+   "sheet": "L-1 Rev B",
+   "kind": "revision_cloud",
+   "label": "REV B",
+   "centre": [
+    25.0,
+    4.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "revision cloud: Rev B change",
+   "footprint": null
+  },
+  {
+   "id": "L-1 Rev B/hedge-01",
+   "sheet": "L-1 Rev B",
+   "kind": "hedge",
+   "label": "DURANTA",
+   "centre": [
+    49.0,
+    15.0
+   ],
+   "quote_count": 182,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": 54.0,
+   "note": "H0.6 @0.3m o.c., double row: 2 x (floor(27.0/0.3)+1)",
+   "footprint": [
+    [
+     48.8,
+     1.5
+    ],
+    [
+     49.2,
+     1.5
+    ],
+    [
+     49.2,
+     28.5
+    ],
+    [
+     48.8,
+     28.5
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/shrub_bed-01",
+   "sheet": "L-1 Rev B",
+   "kind": "shrub_bed",
+   "label": "AZALEA",
+   "centre": [
+    13.5,
+    17.0
+   ],
+   "quote_count": 150.0,
+   "unit": "m²",
+   "area_m2": 150.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     6.0,
+     12.0
+    ],
+    [
+     21.0,
+     12.0
+    ],
+    [
+     21.0,
+     22.0
+    ],
+    [
+     6.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/lawn-01",
+   "sheet": "L-1 Rev B",
+   "kind": "lawn",
+   "label": "LAWN",
+   "centre": [
+    34.0,
+    17.0
+   ],
+   "quote_count": 200.0,
+   "unit": "m²",
+   "area_m2": 200.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     24.0,
+     12.0
+    ],
+    [
+     44.0,
+     12.0
+    ],
+    [
+     44.0,
+     22.0
+    ],
+    [
+     24.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/fire_lane-01",
+   "sheet": "L-1 Rev B",
+   "kind": "fire_lane",
+   "label": "FIRE TRUCK ACCESS LANE",
+   "centre": [
+    2.0,
+    17.5
+   ],
+   "quote_count": 0,
+   "unit": "m²",
+   "area_m2": 92.0,
+   "length_m": null,
+   "note": "hatched EARTH; keep clear; hard-to-green area (§299)",
+   "footprint": [
+    [
+     0.0,
+     6.0
+    ],
+    [
+     4.0,
+     6.0
+    ],
+    [
+     4.0,
+     29.0
+    ],
+    [
+     0.0,
+     29.0
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/legend-01",
+   "sheet": "L-1 Rev B",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    24.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-1 Rev B/legend-02",
+   "sheet": "L-1 Rev B",
+   "kind": "legend",
+   "label": "legend symbol CC CAMPHOR",
+   "centre": [
+    57.5,
+    27.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "tree symbol",
+   "footprint": [
+    [
+     59.432,
+     27.618
+    ],
+    [
+     58.914,
+     28.514
+    ],
+    [
+     58.018,
+     29.032
+    ],
+    [
+     56.982,
+     29.032
+    ],
+    [
+     56.086,
+     28.514
+    ],
+    [
+     55.568,
+     27.618
+    ],
+    [
+     55.568,
+     26.582
+    ],
+    [
+     56.086,
+     25.686
+    ],
+    [
+     56.982,
+     25.168
+    ],
+    [
+     58.018,
+     25.168
+    ],
+    [
+     58.914,
+     25.686
+    ],
+    [
+     59.432,
+     26.582
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/legend-03",
+   "sheet": "L-1 Rev B",
+   "kind": "legend",
+   "label": "legend swatch AZ AZALEA",
+   "centre": [
+    57.5,
+    23.6
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     22.9
+    ],
+    [
+     59.5,
+     22.9
+    ],
+    [
+     59.5,
+     24.3
+    ],
+    [
+     55.5,
+     24.3
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/legend-04",
+   "sheet": "L-1 Rev B",
+   "kind": "legend",
+   "label": "legend swatch FIRE TRUCK ACCESS LANE",
+   "centre": [
+    57.5,
+    21.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     20.7
+    ],
+    [
+     59.5,
+     20.7
+    ],
+    [
+     59.5,
+     22.1
+    ],
+    [
+     55.5,
+     22.1
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/legend-05",
+   "sheet": "L-1 Rev B",
+   "kind": "legend",
+   "label": "legend line DU DURANTA",
+   "centre": [
+    57.5,
+    19.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "hedge line",
+   "footprint": [
+    [
+     55.5,
+     18.9
+    ],
+    [
+     59.5,
+     18.9
+    ],
+    [
+     59.5,
+     19.3
+    ],
+    [
+     55.5,
+     19.3
+    ]
+   ]
+  },
+  {
+   "id": "L-1 Rev B/notes-01",
+   "sheet": "L-1 Rev B",
+   "kind": "notes",
+   "label": "GENERAL NOTES",
+   "centre": [
+    21.0,
+    -7.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "1. PLANT QUANTITIES ON PLAN TAKE PRECEDENCE OVER THE SCHEDULE.",
+   "footprint": null
+  },
+  {
+   "id": "L-1 Rev B/title-01",
+   "sheet": "L-1 Rev B",
+   "kind": "title",
+   "label": "Planting Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-1; SCALE 1:200; REV B 2026-10-14",
+   "footprint": null
+  },
+  {
+   "id": "D-01/detail-01",
+   "sheet": "D-01",
+   "kind": "detail",
+   "label": "DRAIN COVER 600 × 600",
+   "centre": [
+    0.35,
+    0.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "metalwork detail, not a landscape quantity",
+   "footprint": null
+  }
+ ],
+ "options": {
+  "lang": "en",
+  "revision": {
+   "letter": "A",
+   "date": "2026-09-18",
+   "note": "ISSUED FOR REVIEW",
+   "moves": [],
+   "added": []
+  },
+  "existing_tree_dbh_cm": 95,
+  "tree_outside_boundary": true,
+  "tree_in_fire_lane": true,
+  "paving_overlaps_lawn_m2": 20.0,
+  "paving_label_hatch_mismatch": true,
+  "scale_mismatch": true
+ },
+ "species": [
+  {
+   "code": "CC",
+   "name_en": "Camphor",
+   "scientific": "Cinnamomum camphora",
+   "native": true,
+   "form": "tree"
+  },
+  {
+   "code": "BJ",
+   "name_en": "Bischofia",
+   "scientific": "Bischofia javanica",
+   "native": true,
+   "form": "tree"
+  },
+  {
+   "code": "DU",
+   "name_en": "Duranta",
+   "scientific": "Duranta erecta",
+   "native": null,
+   "form": "shrub"
+  },
+  {
+   "code": "AZ",
+   "name_en": "Azalea",
+   "scientific": "Rhododendron spp.",
+   "native": null,
+   "form": "shrub"
+  },
+  {
+   "code": "LA",
+   "name_en": "Lawn",
+   "scientific": "Zoysia matrella",
+   "native": null,
+   "form": "lawn"
+  }
+ ],
+ "counted_trees": {
+  "L-1": 8,
+  "L-1 Rev B": 8
+ },
+ "odd_objects": [
+  {
+   "kind": "tree_outside_boundary",
+   "sheet": "L-1",
+   "object_ids": [
+    "L-1/tree-09"
+   ],
+   "counted": false,
+   "reason": "outside the site boundary (road reserve): drawn, not counted toward greening"
+  },
+  {
+   "kind": "tree_in_fire_lane",
+   "sheet": "L-1",
+   "object_ids": [
+    "L-1/tree-10",
+    "L-1/fire_lane-01"
+   ],
+   "counted": false,
+   "reason": "inside the fire-truck access lane: fire-truck space is hard-to-green area (Building Technical Regulations §299), so the tree cannot count toward greening"
+  },
+  {
+   "kind": "existing_tree",
+   "sheet": "L-1",
+   "object_ids": [
+    "L-1/existing_tree-01"
+   ],
+   "counted": false,
+   "reason": "existing tree marked to be removed: not a proposed quantity; DBH 95 cm is above the 80 cm broadleaf threshold of the municipal tree-protection rule, so removal needs a protection review"
+  },
+  {
+   "kind": "paving_overlaps_lawn",
+   "sheet": "L-3",
+   "object_ids": [
+    "L-3/paving-03",
+    "L-1/lawn-01"
+   ],
+   "overlap_m2": 20.0,
+   "counted": true,
+   "reason": "the grass pavers on L-3 overlap the lawn on L-1 by 20 m²: that area is counted twice"
+  },
+  {
+   "kind": "label_hatch_mismatch",
+   "sheet": "L-3",
+   "object_ids": [
+    "L-3/paving-02"
+   ],
+   "label": "PV-1 PERMEABLE PAVERS",
+   "hatch": "AR-SAND",
+   "legend_says": "PV-2 EXPOSED AGGREGATE",
+   "counted": true,
+   "reason": "the boxed code says PV-1 (permeable pavers), the hatch is PV-2's (exposed aggregate): which item, and which price? The key counts it as the hatch and legend say"
+  }
+ ],
+ "totals_by_revision": {
+  "A": {
+   "tree": {
+    "CAMPHOR": 8
+   },
+   "hedge": {
+    "DURANTA": 182
+   },
+   "shrub_bed": {
+    "AZALEA": 150.0
+   },
+   "lawn": {
+    "LAWN": 200.0
+   },
+   "paving": {
+    "PERMEABLE PAVERS": 212.0,
+    "EXPOSED AGGREGATE": 48.0,
+    "GRASS PAVERS": 36.0
+   },
+   "planter_edge": {
+    "PLANTER": 22.0
+   }
+  },
+  "B": {
+   "paving": {
+    "PERMEABLE PAVERS": 212.0,
+    "EXPOSED AGGREGATE": 48.0,
+    "GRASS PAVERS": 36.0
+   },
+   "planter_edge": {
+    "PLANTER": 22.0
+   },
+   "tree": {
+    "CAMPHOR": 8
+   },
+   "hedge": {
+    "DURANTA": 182
+   },
+   "shrub_bed": {
+    "AZALEA": 150.0
+   },
+   "lawn": {
+    "LAWN": 200.0
+   }
+  }
+ },
+ "tree_pit": {
+  "sheet": "L-6",
+  "width_m": 1.5,
+  "length_m": 1.5,
+  "area_m2": 2.25,
+  "soil_depth_m": 1.0,
+  "drainage_m": 0.1,
+  "ground": "artificial",
+  "label": "TREE PIT 1500 × 1500 · SOIL DEPTH 1000 · ON SLAB"
+ },
+ "package": {
+  "name": "Greenfield Residences — Landscape Package",
+  "seed": 0,
+  "basis": "synthetic",
+  "file_count": 30,
+  "price_list": "../firm price list.csv",
+  "project": "Greenfield Residences — landscape over basement slab"
+ },
+ "bills": {
+  "rev1": {
+   "file": "Bills/Landscape BOQ rev1.xlsx",
+   "revision": "1",
+   "date": "2026-01-21",
+   "sheet": "BOQ",
+   "hidden_sheets": [],
+   "rows": [
+    {
+     "key": "camphor",
+     "description": "Camphor tree, cal. 10 cm",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 4200
+    },
+    {
+     "key": "duranta",
+     "description": "Duranta",
+     "unit": "EA",
+     "qty": 150,
+     "unit_price": 145
+    },
+    {
+     "key": "azalea",
+     "description": "Azalea",
+     "unit": "EA",
+     "qty": 600,
+     "unit_price": 155
+    },
+    {
+     "key": "lawn",
+     "description": "Lawn",
+     "unit": "m²",
+     "qty": 200,
+     "unit_price": 280
+    },
+    {
+     "key": "pv1",
+     "description": "Permeable pavers (PV-1)",
+     "unit": "m²",
+     "qty": 212,
+     "unit_price": 1800
+    },
+    {
+     "key": "pv2",
+     "description": "Exposed aggregate (PV-2)",
+     "unit": "m²",
+     "qty": 48,
+     "unit_price": 2000
+    },
+    {
+     "key": "pv3",
+     "description": "Grass pavers (PV-3)",
+     "unit": "m²",
+     "qty": 36,
+     "unit_price": 1250
+    },
+    {
+     "key": "planter",
+     "description": "Planter edge",
+     "unit": "m",
+     "qty": 22,
+     "unit_price": 1800
+    },
+    {
+     "key": "pit",
+     "description": "Tree pit on slab",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 6500
+    },
+    {
+     "key": "soil",
+     "description": "Planting soil",
+     "unit": "m³",
+     "qty": 27,
+     "unit_price": 750
+    },
+    {
+     "key": "irrigation",
+     "description": "Irrigation system",
+     "unit": "LS",
+     "qty": 1,
+     "unit_price": 117190
+    }
+   ],
+   "totals": {
+    "sum_of_amounts": 998790,
+    "subtotal": 998790,
+    "overhead": 79903,
+    "tax": 53935,
+    "total": 1132628
+   },
+   "cells": {
+    "header": "A3:G4",
+    "camphor.description": "B6",
+    "camphor.unit": "D6",
+    "camphor.qty": "E6",
+    "camphor.price": "F6",
+    "camphor.amount": "G6",
+    "duranta.description": "B7",
+    "duranta.unit": "D7",
+    "duranta.qty": "E7",
+    "duranta.price": "F7",
+    "duranta.amount": "G7",
+    "azalea.description": "B8",
+    "azalea.unit": "D8",
+    "azalea.qty": "E8",
+    "azalea.price": "F8",
+    "azalea.amount": "G8",
+    "lawn.description": "B9",
+    "lawn.unit": "D9",
+    "lawn.qty": "E9",
+    "lawn.price": "F9",
+    "lawn.amount": "G9",
+    "pv1.description": "B11",
+    "pv1.unit": "D11",
+    "pv1.qty": "E11",
+    "pv1.price": "F11",
+    "pv1.amount": "G11",
+    "pv2.description": "B12",
+    "pv2.unit": "D12",
+    "pv2.qty": "E12",
+    "pv2.price": "F12",
+    "pv2.amount": "G12",
+    "pv3.description": "B13",
+    "pv3.unit": "D13",
+    "pv3.qty": "E13",
+    "pv3.price": "F13",
+    "pv3.amount": "G13",
+    "planter.description": "B14",
+    "planter.unit": "D14",
+    "planter.qty": "E14",
+    "planter.price": "F14",
+    "planter.amount": "G14",
+    "pit.description": "B16",
+    "pit.unit": "D16",
+    "pit.qty": "E16",
+    "pit.price": "F16",
+    "pit.amount": "G16",
+    "soil.description": "B17",
+    "soil.unit": "D17",
+    "soil.qty": "E17",
+    "soil.price": "F17",
+    "soil.amount": "G17",
+    "irrigation.description": "B19",
+    "irrigation.unit": "D19",
+    "irrigation.qty": "E19",
+    "irrigation.price": "F19",
+    "irrigation.amount": "G19",
+    "subtotal": "G20",
+    "overhead": "G21",
+    "business": "G22",
+    "total": "G23",
+    "subtotal_range": "G6:G19"
+   }
+  },
+  "rev1a": {
+   "file": "Bills/Landscape BOQ rev1a.xlsx",
+   "revision": "1a",
+   "date": "2026-01-21",
+   "sheet": "BOQ",
+   "hidden_sheets": [],
+   "rows": [
+    {
+     "key": "camphor",
+     "description": "Camphor tree, cal. 10 cm",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 4200
+    },
+    {
+     "key": "duranta",
+     "description": "Duranta",
+     "unit": "EA",
+     "qty": 150,
+     "unit_price": 145
+    },
+    {
+     "key": "azalea",
+     "description": "Azalea",
+     "unit": "EA",
+     "qty": 450,
+     "unit_price": 155
+    },
+    {
+     "key": "lawn",
+     "description": "Lawn",
+     "unit": "m²",
+     "qty": 200,
+     "unit_price": 280
+    },
+    {
+     "key": "pv1",
+     "description": "Permeable pavers (PV-1)",
+     "unit": "m²",
+     "qty": 212,
+     "unit_price": 1800
+    },
+    {
+     "key": "pv2",
+     "description": "Exposed aggregate (PV-2)",
+     "unit": "m²",
+     "qty": 48,
+     "unit_price": 2000
+    },
+    {
+     "key": "pv3",
+     "description": "Grass pavers (PV-3)",
+     "unit": "m²",
+     "qty": 36,
+     "unit_price": 1250
+    },
+    {
+     "key": "planter",
+     "description": "Planter edge",
+     "unit": "m",
+     "qty": 22,
+     "unit_price": 1800
+    },
+    {
+     "key": "pit",
+     "description": "Tree pit on slab",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 6500
+    },
+    {
+     "key": "soil",
+     "description": "Planting soil",
+     "unit": "m³",
+     "qty": 27,
+     "unit_price": 750
+    },
+    {
+     "key": "irrigation",
+     "description": "Irrigation system",
+     "unit": "LS",
+     "qty": 1,
+     "unit_price": 117190
+    }
+   ],
+   "totals": {
+    "sum_of_amounts": 975540,
+    "subtotal": 975540,
+    "overhead": 78043,
+    "tax": 52679,
+    "total": 1106262
+   },
+   "cells": {
+    "header": "A3:G4",
+    "camphor.description": "B6",
+    "camphor.unit": "D6",
+    "camphor.qty": "E6",
+    "camphor.price": "F6",
+    "camphor.amount": "G6",
+    "duranta.description": "B7",
+    "duranta.unit": "D7",
+    "duranta.qty": "E7",
+    "duranta.price": "F7",
+    "duranta.amount": "G7",
+    "azalea.description": "B8",
+    "azalea.unit": "D8",
+    "azalea.qty": "E8",
+    "azalea.price": "F8",
+    "azalea.amount": "G8",
+    "lawn.description": "B9",
+    "lawn.unit": "D9",
+    "lawn.qty": "E9",
+    "lawn.price": "F9",
+    "lawn.amount": "G9",
+    "pv1.description": "B11",
+    "pv1.unit": "D11",
+    "pv1.qty": "E11",
+    "pv1.price": "F11",
+    "pv1.amount": "G11",
+    "pv2.description": "B12",
+    "pv2.unit": "D12",
+    "pv2.qty": "E12",
+    "pv2.price": "F12",
+    "pv2.amount": "G12",
+    "pv3.description": "B13",
+    "pv3.unit": "D13",
+    "pv3.qty": "E13",
+    "pv3.price": "F13",
+    "pv3.amount": "G13",
+    "planter.description": "B14",
+    "planter.unit": "D14",
+    "planter.qty": "E14",
+    "planter.price": "F14",
+    "planter.amount": "G14",
+    "pit.description": "B16",
+    "pit.unit": "D16",
+    "pit.qty": "E16",
+    "pit.price": "F16",
+    "pit.amount": "G16",
+    "soil.description": "B17",
+    "soil.unit": "D17",
+    "soil.qty": "E17",
+    "soil.price": "F17",
+    "soil.amount": "G17",
+    "irrigation.description": "B19",
+    "irrigation.unit": "D19",
+    "irrigation.qty": "E19",
+    "irrigation.price": "F19",
+    "irrigation.amount": "G19",
+    "subtotal": "G20",
+    "overhead": "G21",
+    "business": "G22",
+    "total": "G23",
+    "subtotal_range": "G6:G19"
+   }
+  },
+  "rev2": {
+   "file": "Bills/Landscape BOQ rev2.xlsx",
+   "revision": "2",
+   "date": "2026-02-19",
+   "sheet": "BOQ",
+   "hidden_sheets": [
+    "old"
+   ],
+   "rows": [
+    {
+     "key": "camphor",
+     "description": "Camphore tree, cal. 10 cm",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 4200
+    },
+    {
+     "key": "duranta",
+     "description": "Duranta hedge",
+     "unit": "m",
+     "qty": 27,
+     "unit_price": 950
+    },
+    {
+     "key": "azalea",
+     "description": "Azalea",
+     "unit": "EA",
+     "qty": 450,
+     "unit_price": 155
+    },
+    {
+     "key": "lawn",
+     "description": "Lawn",
+     "unit": "m²",
+     "qty": 200,
+     "unit_price": 280
+    },
+    {
+     "key": "pv1",
+     "description": "Permeable pavers (PV-1)",
+     "unit": "m²",
+     "qty": 212,
+     "unit_price": 3800
+    },
+    {
+     "key": "pv2",
+     "description": "Exposed aggregate (PV-2)",
+     "unit": "m²",
+     "qty": 48,
+     "unit_price": 2000
+    },
+    {
+     "key": "pv3",
+     "description": "Grass pavers (PV-3)",
+     "unit": "m²",
+     "qty": 36,
+     "unit_price": 1250
+    },
+    {
+     "key": "planter",
+     "description": "Planter edge",
+     "unit": "m",
+     "qty": 22,
+     "unit_price": 1800
+    },
+    {
+     "key": "pit",
+     "description": "Tree pit on slab",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 6500
+    },
+    {
+     "key": "soil",
+     "description": "Planting soil",
+     "unit": "m³",
+     "qty": 27,
+     "unit_price": 750
+    },
+    {
+     "key": "irrigation",
+     "description": "Irrigation system",
+     "unit": "LS",
+     "qty": 1,
+     "unit_price": 117190
+    }
+   ],
+   "totals": {
+    "sum_of_amounts": 1403440,
+    "subtotal": 1286250,
+    "overhead": 102900,
+    "tax": 69458,
+    "total": 1458608
+   },
+   "cells": {
+    "header": "A3:G4",
+    "camphor.description": "B6",
+    "camphor.unit": "D6",
+    "camphor.qty": "E6",
+    "camphor.price": "F6",
+    "camphor.amount": "G6",
+    "duranta.description": "B7",
+    "duranta.unit": "D7",
+    "duranta.qty": "E7",
+    "duranta.price": "F7",
+    "duranta.amount": "G7",
+    "azalea.description": "B8",
+    "azalea.unit": "D8",
+    "azalea.qty": "E8",
+    "azalea.price": "F8",
+    "azalea.amount": "G8",
+    "lawn.description": "B9",
+    "lawn.unit": "D9",
+    "lawn.qty": "E9",
+    "lawn.price": "F9",
+    "lawn.amount": "G9",
+    "pv1.description": "B11",
+    "pv1.unit": "D11",
+    "pv1.qty": "E11",
+    "pv1.price": "F11",
+    "pv1.amount": "G11",
+    "pv2.description": "B12",
+    "pv2.unit": "D12",
+    "pv2.qty": "E12",
+    "pv2.price": "F12",
+    "pv2.amount": "G12",
+    "pv3.description": "B13",
+    "pv3.unit": "D13",
+    "pv3.qty": "E13",
+    "pv3.price": "F13",
+    "pv3.amount": "G13",
+    "planter.description": "B14",
+    "planter.unit": "D14",
+    "planter.qty": "E14",
+    "planter.price": "F14",
+    "planter.amount": "G14",
+    "pit.description": "B16",
+    "pit.unit": "D16",
+    "pit.qty": "E16",
+    "pit.price": "F16",
+    "pit.amount": "G16",
+    "soil.description": "B17",
+    "soil.unit": "D17",
+    "soil.qty": "E17",
+    "soil.price": "F17",
+    "soil.amount": "G17",
+    "irrigation.description": "B19",
+    "irrigation.unit": "D19",
+    "irrigation.qty": "E19",
+    "irrigation.price": "F19",
+    "irrigation.amount": "G19",
+    "subtotal": "G20",
+    "overhead": "G21",
+    "business": "G22",
+    "total": "G23",
+    "subtotal_range": "G6:G17"
+   }
+  },
+  "rev3": {
+   "file": "Bills/Landscape BOQ rev3 (paving update).xlsx",
+   "revision": "3",
+   "date": "2026-10-14",
+   "sheet": "BOQ",
+   "hidden_sheets": [],
+   "rows": [
+    {
+     "key": "camphor",
+     "description": "Camphore tree, cal. 10 cm",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 4200
+    },
+    {
+     "key": "duranta",
+     "description": "Duranta hedge",
+     "unit": "m",
+     "qty": 27,
+     "unit_price": 950
+    },
+    {
+     "key": "azalea",
+     "description": "Azalea",
+     "unit": "EA",
+     "qty": 450,
+     "unit_price": 155
+    },
+    {
+     "key": "lawn",
+     "description": "Lawn",
+     "unit": "m²",
+     "qty": 200,
+     "unit_price": 280
+    },
+    {
+     "key": "pv1",
+     "description": "Permeable pavers (PV-1)",
+     "unit": "m²",
+     "qty": 236,
+     "unit_price": 3800
+    },
+    {
+     "key": "pv2",
+     "description": "Exposed aggregate (PV-2)",
+     "unit": "m²",
+     "qty": 48,
+     "unit_price": 2000
+    },
+    {
+     "key": "pv3",
+     "description": "Grass pavers (PV-3)",
+     "unit": "m²",
+     "qty": 36,
+     "unit_price": 1250
+    },
+    {
+     "key": "planter",
+     "description": "Planter edge",
+     "unit": "m",
+     "qty": 22,
+     "unit_price": 1800
+    },
+    {
+     "key": "pit",
+     "description": "Tree pit on slab",
+     "unit": "EA",
+     "qty": 12,
+     "unit_price": 6500
+    },
+    {
+     "key": "soil",
+     "description": "Planting soil",
+     "unit": "m³",
+     "qty": 27,
+     "unit_price": 750
+    },
+    {
+     "key": "irrigation",
+     "description": "Irrigation system",
+     "unit": "LS",
+     "qty": 1,
+     "unit_price": 117190
+    }
+   ],
+   "totals": {
+    "sum_of_amounts": 1494640,
+    "subtotal": 1377450,
+    "overhead": 110196,
+    "tax": 74382,
+    "total": 1562028
+   },
+   "cells": {
+    "header": "A3:G4",
+    "camphor.description": "B6",
+    "camphor.unit": "D6",
+    "camphor.qty": "E6",
+    "camphor.price": "F6",
+    "camphor.amount": "G6",
+    "duranta.description": "B7",
+    "duranta.unit": "D7",
+    "duranta.qty": "E7",
+    "duranta.price": "F7",
+    "duranta.amount": "G7",
+    "azalea.description": "B8",
+    "azalea.unit": "D8",
+    "azalea.qty": "E8",
+    "azalea.price": "F8",
+    "azalea.amount": "G8",
+    "lawn.description": "B9",
+    "lawn.unit": "D9",
+    "lawn.qty": "E9",
+    "lawn.price": "F9",
+    "lawn.amount": "G9",
+    "pv1.description": "B11",
+    "pv1.unit": "D11",
+    "pv1.qty": "E11",
+    "pv1.price": "F11",
+    "pv1.amount": "G11",
+    "pv2.description": "B12",
+    "pv2.unit": "D12",
+    "pv2.qty": "E12",
+    "pv2.price": "F12",
+    "pv2.amount": "G12",
+    "pv3.description": "B13",
+    "pv3.unit": "D13",
+    "pv3.qty": "E13",
+    "pv3.price": "F13",
+    "pv3.amount": "G13",
+    "planter.description": "B14",
+    "planter.unit": "D14",
+    "planter.qty": "E14",
+    "planter.price": "F14",
+    "planter.amount": "G14",
+    "pit.description": "B16",
+    "pit.unit": "D16",
+    "pit.qty": "E16",
+    "pit.price": "F16",
+    "pit.amount": "G16",
+    "soil.description": "B17",
+    "soil.unit": "D17",
+    "soil.qty": "E17",
+    "soil.price": "F17",
+    "soil.amount": "G17",
+    "irrigation.description": "B19",
+    "irrigation.unit": "D19",
+    "irrigation.qty": "E19",
+    "irrigation.price": "F19",
+    "irrigation.amount": "G19",
+    "subtotal": "G20",
+    "overhead": "G21",
+    "business": "G22",
+    "total": "G23",
+    "subtotal_range": "G6:G17"
+   }
+  },
+  "latest_by_date": "rev3"
+ },
+ "price_list": [
+  {
+   "item": "Camphor (Cinnamomum camphora)",
+   "spec": "cal. 10 cm, H3.0-3.5 m, installed",
+   "unit": "EA",
+   "low_ntd": 6200,
+   "high_ntd": 7200,
+   "basis": "published_budget",
+   "source": "P006 municipal budget 6,149 (2021); P002 municipal budget 7,036 (2022)"
+  },
+  {
+   "item": "Duranta (Duranta erecta)",
+   "spec": "H0.6 m, installed",
+   "unit": "plant",
+   "low_ntd": 130,
+   "high_ntd": 160,
+   "basis": "published_budget",
+   "source": "P024 shrub planted 146"
+  },
+  {
+   "item": "Azalea (Rhododendron spp.)",
+   "spec": "4-5 in. pot, installed",
+   "unit": "plant",
+   "low_ntd": 140,
+   "high_ntd": 170,
+   "basis": "published_budget",
+   "source": "P026 150; P027 140"
+  },
+  {
+   "item": "Lawn (Zoysia matrella)",
+   "spec": "sod, installed",
+   "unit": "m²",
+   "low_ntd": 250,
+   "high_ntd": 300,
+   "basis": "published_budget",
+   "source": "P030 sod installed 273"
+  },
+  {
+   "item": "Permeable pavers",
+   "spec": "paver + bedding + base",
+   "unit": "m²",
+   "low_ntd": 1300,
+   "high_ntd": 2300,
+   "basis": "published_budget",
+   "source": "P048-P051 1,210-1,410; P052 2,120-2,340"
+  },
+  {
+   "item": "Exposed aggregate",
+   "spec": "100 mm, washed-pebble finish",
+   "unit": "m²",
+   "low_ntd": 1800,
+   "high_ntd": 2200,
+   "basis": "sample",
+   "source": "no direct source; nearest P060 washed-pebble permeable paver 2,020"
+  },
+  {
+   "item": "Grass pavers",
+   "spec": "concrete grid, 80 mm",
+   "unit": "m²",
+   "low_ntd": 1150,
+   "high_ntd": 1350,
+   "basis": "published_budget",
+   "source": "P063 1,150; P064 1,280; P065 1,320"
+  }
+ ],
+ "images": {
+  "pasted image #1.png": {
+   "material": "exposed aggregate",
+   "matches": "PV-2 EXPOSED AGGREGATE"
+  },
+  "pasted image #2.png": {
+   "material": "permeable concrete pavers",
+   "matches": "PV-1 PERMEABLE PAVERS"
+  }
+ },
+ "errors": [
+  {
+   "id": "E01",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "open outline; Muse Spark: one tree; asks",
+   "object_ids": [
+    "L-1/tree-08"
+   ],
+   "cells": [],
+   "source": "geometry + Spark",
+   "detail": "T-08 drawn as 12 loose pieces with 40 cm gaps",
+   "planted": true
+  },
+  {
+   "id": "E02",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf",
+    "Drawings/CAD/L-4 Plant Schedule.dxf",
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "schedule",
+   "scenario": "quote",
+   "expected_verdict": "schedule ≠ drawing (12 vs 8); drawing governs (general note 1 on L-1); raise with the developer",
+   "object_ids": [
+    "L-1/tree-01",
+    "L-1/tree-02",
+    "L-1/tree-03",
+    "L-1/tree-04",
+    "L-1/tree-05",
+    "L-1/tree-06",
+    "L-1/tree-07",
+    "L-1/tree-08",
+    "L-4/schedule-01"
+   ],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "E6"
+    }
+   ],
+   "source": "geometry + Spark",
+   "detail": "the schedule on L-4 and the bill say Camphor 12; the plan draws 8",
+   "planted": true
+  },
+  {
+   "id": "E03",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf",
+    "Drawings/CAD/L-1 Planting Plan (Rev B).dxf"
+   ],
+   "category": "revision",
+   "scenario": "design",
+   "expected_verdict": "two revisions of one sheet; Rev B (2026-10-14) is newer than Rev A (2026-09-18); counts shown for both: 8 and 8, one tree moved 2 m",
+   "object_ids": [
+    "L-1/tree-06",
+    "L-1 Rev B/tree-06",
+    "L-1 Rev B/revision_cloud-01"
+   ],
+   "cells": [],
+   "source": "Spark (title block)",
+   "detail": "Rev B moves tree 6 by 2 m; still 8 trees",
+   "planted": true
+  },
+  {
+   "id": "E04",
+   "files": [
+    "Drawings/CAD/L-2 South Elevation.dxf"
+   ],
+   "category": "sheet",
+   "scenario": "design",
+   "expected_verdict": "elevation — not counted",
+   "object_ids": [
+    "L-2/elevation_tree-01",
+    "L-2/elevation_tree-02",
+    "L-2/elevation_tree-03",
+    "L-2/elevation_tree-04",
+    "L-2/elevation_tree-05",
+    "L-2/elevation_tree-06",
+    "L-2/elevation_tree-07",
+    "L-2/elevation_tree-08"
+   ],
+   "cells": [],
+   "source": "Spark (classify)",
+   "detail": "L-2 shows the eight trees from the side",
+   "planted": true
+  },
+  {
+   "id": "E05",
+   "files": [
+    "Drawings/CAD/L-5 Enlarged Plan - West.dxf"
+   ],
+   "category": "sheet",
+   "scenario": "design",
+   "expected_verdict": "enlarged plan — not counted, match line found",
+   "object_ids": [
+    "L-5/enlarged_tree-01",
+    "L-5/enlarged_tree-02",
+    "L-5/enlarged_tree-03",
+    "L-5/enlarged_tree-04",
+    "L-5/match_line-01"
+   ],
+   "cells": [],
+   "source": "Spark + geometry",
+   "detail": "L-5 repeats the four west trees at 1:100",
+   "planted": true
+  },
+  {
+   "id": "E06",
+   "files": [
+    "Drawings/CAD/L-7 Irrigation Plan.dxf",
+    "Drawings/CAD/L-8 Lighting Plan.dxf"
+   ],
+   "category": "sheet",
+   "scenario": "design",
+   "expected_verdict": "irrigation / lighting — not a planting sheet",
+   "object_ids": [
+    "L-7/background_tree-01",
+    "L-7/background_tree-02",
+    "L-7/background_tree-03",
+    "L-7/background_tree-04",
+    "L-7/background_tree-05",
+    "L-7/background_tree-06",
+    "L-7/background_tree-07",
+    "L-7/background_tree-08",
+    "L-7/background_tree-09",
+    "L-7/background_tree-10",
+    "L-8/background_tree-01",
+    "L-8/background_tree-02",
+    "L-8/background_tree-03",
+    "L-8/background_tree-04",
+    "L-8/background_tree-05",
+    "L-8/background_tree-06",
+    "L-8/background_tree-07",
+    "L-8/background_tree-08",
+    "L-8/background_tree-09",
+    "L-8/background_tree-10"
+   ],
+   "cells": [],
+   "source": "Spark",
+   "detail": "the canopies are grey background line work under irrigation and lighting symbols",
+   "planted": true
+  },
+  {
+   "id": "E07",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "legend — not counted",
+   "object_ids": [
+    "L-1/legend-02"
+   ],
+   "cells": [],
+   "source": "geometry (box)",
+   "detail": "the legend's tree symbol is a canopy outline inside the legend box",
+   "planted": true
+  },
+  {
+   "id": "E08",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "outside the site — drawn, not counted toward greening",
+   "object_ids": [
+    "L-1/tree-09"
+   ],
+   "cells": [],
+   "source": "geometry",
+   "detail": "a proposed camphor in the road reserve",
+   "planted": true
+  },
+  {
+   "id": "E09",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "inside an area where greening cannot count (§299) — flagged",
+   "object_ids": [
+    "L-1/tree-10",
+    "L-1/fire_lane-01"
+   ],
+   "cells": [],
+   "source": "geometry + rules",
+   "detail": "a proposed camphor inside the fire-truck access lane",
+   "planted": true
+  },
+  {
+   "id": "E10",
+   "files": [
+    "Drawings/CAD/L-3 Paving Plan.dxf",
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "areas overlap between sheets — 20 m² counted twice",
+   "object_ids": [
+    "L-3/paving-03",
+    "L-1/lawn-01"
+   ],
+   "cells": [],
+   "source": "geometry",
+   "detail": "PV-3 grass pavers on L-3 overlap the L-1 lawn by 20 m²",
+   "planted": true
+  },
+  {
+   "id": "E11",
+   "files": [
+    "Drawings/CAD/L-3 Paving Plan.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "hatch pattern and label disagree (box PV-1, hatch PV-2) — which price?",
+   "object_ids": [
+    "L-3/paving-02"
+   ],
+   "cells": [],
+   "source": "geometry + Spark",
+   "detail": "the 48 m² area's boxed code says PV-1 permeable pavers, its hatch is PV-2 exposed aggregate's",
+   "planted": true
+  },
+  {
+   "id": "E12",
+   "files": [
+    "Drawings/CAD/L-6 Tree Pit Detail.dxf",
+    "Drawings/CAD/L-4 Plant Schedule.dxf",
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "large trees count as small (Gi 1.5 → 1.0): pit 1.5 x 1.5 m = 2.25 m² on artificial ground is inside the standard's 1.5–4 m² band; schedule and bill call them large trees",
+   "object_ids": [
+    "L-6/tree_pit-01",
+    "L-4/schedule-01"
+   ],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "B16"
+    }
+   ],
+   "source": "Spark (detail) + rules",
+   "detail": "TREE PIT 1500 × 1500 · SOIL DEPTH 1000 · ON SLAB",
+   "planted": true
+  },
+  {
+   "id": "E13",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx",
+    "Drawings/CAD/L-4 Plant Schedule.dxf"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "Azalea 450 plants for 150 m² = 3 per m² — below the schedule's 4 per m²",
+   "object_ids": [
+    "L-1/shrub_bed-01"
+   ],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "E8"
+    }
+   ],
+   "source": "bill vs schedule",
+   "detail": "changed from 600 to 450 in Rev 1a and carried on",
+   "planted": true
+  },
+  {
+   "id": "E14",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "one tree species → α 0.8; §302 short; two fixes (+2 trees, or swap 2 for a second native species)",
+   "object_ids": [
+    "L-1/tree-01",
+    "L-1/tree-02",
+    "L-1/tree-03",
+    "L-1/tree-04",
+    "L-1/tree-05",
+    "L-1/tree-06",
+    "L-1/tree-07",
+    "L-1/tree-08"
+   ],
+   "cells": [],
+   "source": "rules",
+   "detail": "eight camphors, nothing else",
+   "planted": true
+  },
+  {
+   "id": "E15",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "may be a protected tree (DBH 95 cm) — needs review; municipal rule",
+   "object_ids": [
+    "L-1/existing_tree-01"
+   ],
+   "cells": [],
+   "source": "Spark + rules",
+   "detail": "EX-01 existing camphor DBH 95 cm TO BE REMOVED",
+   "planted": true
+  },
+  {
+   "id": "E16",
+   "files": [
+    "Drawings/CAD/L-5 Enlarged Plan - West.dxf"
+   ],
+   "category": "sheet",
+   "scenario": "design",
+   "expected_verdict": "scale mismatch (title block 1:200, scale bar 1:100); areas on this sheet unreliable",
+   "object_ids": [
+    "L-5/title-01",
+    "L-5/scale_bar-01"
+   ],
+   "cells": [],
+   "source": "geometry + Spark",
+   "detail": "L-5 is drawn 2x in model space and its title block was not updated",
+   "planted": true
+  },
+  {
+   "id": "E17",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "unit mismatch: hedge billed 27 m, drawn 182 plants",
+   "object_ids": [
+    "L-1/hedge-01"
+   ],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "D7"
+    },
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "E7"
+    }
+   ],
+   "source": "bill",
+   "detail": "Duranta hedge, m, 27",
+   "planted": true
+  },
+  {
+   "id": "E18",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "\"Camphore tree\" aligned to Camphor at lower confidence",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "B6"
+    }
+   ],
+   "source": "Spark (align)",
+   "detail": "Camphore tree, cal. 10 cm",
+   "planted": true
+  },
+  {
+   "id": "E19",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "price",
+   "scenario": "quote",
+   "expected_verdict": "Camphor NT$4,200 — about 37% under your installed list (6,200–7,200; 32% below its low end), below even the nursery price of the tree alone (NT$4,505, P001)",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "F6"
+    }
+   ],
+   "source": "bill vs price list",
+   "detail": "unit price 4,200",
+   "planted": true
+  },
+  {
+   "id": "E20",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "price",
+   "scenario": "quote",
+   "expected_verdict": "Permeable pavers NT$3,800/m² — 65% over the top of your list (1,300–2,300)",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "F11"
+    }
+   ],
+   "source": "bill vs price list",
+   "detail": "unit price 3,800 per m²",
+   "planted": true
+  },
+  {
+   "id": "E21",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "the subtotal formula skips the last row (irrigation): the bill does not add up",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "G20"
+    }
+   ],
+   "source": "bill",
+   "detail": "SUM(G6:G17)",
+   "planted": true
+  },
+  {
+   "id": "E22",
+   "files": [
+    "Bills/Landscape BOQ rev1.xlsx",
+    "Bills/Landscape BOQ rev1a.xlsx",
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "four versions (Rev 1, Rev 1a, Rev 2, Rev 3); latest by date is Rev 3, the paving update (2026-10-14); paving 212 → 236 m²",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev3 (paving update).xlsx",
+     "sheet": "BOQ",
+     "cell": "E11"
+    }
+   ],
+   "source": "bill",
+   "detail": "Rev 1a changes Azalea; Rev 2 changes four rows; Rev 3 changes PV-1",
+   "planted": true
+  },
+  {
+   "id": "E23",
+   "files": [
+    "Bills/Landscape BOQ rev2.xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "hidden sheet found (\"old\": the Rev 1 bill with other totals)",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "old",
+     "cell": null
+    }
+   ],
+   "source": "bill",
+   "detail": "sheet 'old' is hidden",
+   "planted": true
+  },
+  {
+   "id": "E24",
+   "files": [
+    "Bills/Landscape BOQ rev1.xlsx",
+    "Bills/Landscape BOQ rev1a.xlsx",
+    "Bills/Landscape BOQ rev2.xlsx",
+    "Bills/Landscape BOQ rev3 (paving update).xlsx"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "merged two-row header parsed (robustness, not an error)",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Landscape BOQ rev2.xlsx",
+     "sheet": "BOQ",
+     "cell": "A3:G4"
+    }
+   ],
+   "source": "bill",
+   "detail": "Quantity and Price span two columns over a second header row",
+   "planted": false
+  },
+  {
+   "id": "E25",
+   "files": [
+    "Drawings/PDF/L-1 Planting Plan (scan).pdf"
+   ],
+   "category": "ingest",
+   "scenario": "format",
+   "expected_verdict": "raster PDF — no vectors; Spark read the title block; not measured",
+   "object_ids": [],
+   "cells": [],
+   "source": "ingest",
+   "detail": "image-only PDF, grey, rotated 1.5°",
+   "planted": true
+  },
+  {
+   "id": "E26",
+   "files": [
+    "Quotes/irrigation quote (old format).xls"
+   ],
+   "category": "ingest",
+   "scenario": "format",
+   "expected_verdict": "unsupported — Excel 97: save as .xlsx",
+   "object_ids": [],
+   "cells": [],
+   "source": "ingest",
+   "detail": "BIFF8 .xls",
+   "planted": true
+  },
+  {
+   "id": "E27",
+   "files": [
+    "Drawings/CAD/L-1 Planting Plan.bak",
+    "Quotes/metal-details.zip"
+   ],
+   "category": "ingest",
+   "scenario": "format",
+   "expected_verdict": "backup ignored (same content as Rev A); zip unpacked, one DXF inside, not a landscape quantity",
+   "object_ids": [
+    "D-01/detail-01"
+   ],
+   "cells": [],
+   "source": "ingest",
+   "detail": "Quotes/metal-details.zip holds drain-cover-detail.dxf",
+   "planted": true
+  },
+  {
+   "id": "E28",
+   "files": [
+    "Drawings/CAD/pasted image #1.png",
+    "Drawings/CAD/pasted image #2.png"
+   ],
+   "category": "ingest",
+   "scenario": "format",
+   "expected_verdict": "material photo: exposed aggregate → matched to PV-2 (and pavers → PV-1)",
+   "object_ids": [],
+   "cells": [],
+   "source": "Spark (vision)",
+   "detail": "pasted material photos in the CAD folder",
+   "planted": true
+  },
+  {
+   "id": "E29",
+   "files": [
+    "Drawings/CAD/L-0 Cover and Index.dxf"
+   ],
+   "category": "ingest",
+   "scenario": "design",
+   "expected_verdict": "L-9 Sections is listed on the index but missing from the package",
+   "object_ids": [
+    "L-0/index_entry-09"
+   ],
+   "cells": [],
+   "source": "Spark + ingest",
+   "detail": "the drawing index lists L-1 … L-9",
+   "planted": true
+  },
+  {
+   "id": "E30",
+   "files": [
+    "Documents/Green Building Label - required documents.pdf"
+   ],
+   "category": "document",
+   "scenario": "regulation",
+   "expected_verdict": "the greening report (TCO2 calculation) is required; link to the §302 result",
+   "object_ids": [],
+   "cells": [],
+   "source": "Spark (text)",
+   "detail": "Greening quantity report (TCO2 calculation) — required",
+   "planted": true
+  }
+ ],
+ "files": [
+  {
+   "path": "Drawings/CAD/L-0 Cover and Index.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "cover and drawing index (lists L-1 … L-9)"
+  },
+  {
+   "path": "Drawings/CAD/L-1 Planting Plan.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "planting plan, Rev A 2026-09-18"
+  },
+  {
+   "path": "Drawings/CAD/L-1 Planting Plan (Rev B).dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "planting plan, Rev B 2026-10-14 (newer)"
+  },
+  {
+   "path": "Drawings/CAD/L-1 Planting Plan.bak",
+   "verdict": "backup",
+   "chip": "backup — ignored",
+   "why": "AutoCAD backup of L-1 Rev A, same content"
+  },
+  {
+   "path": "Drawings/CAD/L-2 South Elevation.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "south elevation"
+  },
+  {
+   "path": "Drawings/CAD/L-3 Paving Plan.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "paving plan"
+  },
+  {
+   "path": "Drawings/CAD/L-4 Plant Schedule.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "plant schedule sheet"
+  },
+  {
+   "path": "Drawings/CAD/L-5 Enlarged Plan - West.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "enlarged plan of the west trees"
+  },
+  {
+   "path": "Drawings/CAD/L-6 Tree Pit Detail.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "tree pit detail"
+  },
+  {
+   "path": "Drawings/CAD/L-7 Irrigation Plan.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "irrigation plan"
+  },
+  {
+   "path": "Drawings/CAD/L-8 Lighting Plan.dxf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "lighting plan"
+  },
+  {
+   "path": "Drawings/CAD/pasted image #1.png",
+   "verdict": "drawing · image",
+   "chip": "image — read, not measured",
+   "why": "material photo pasted into the CAD: exposed aggregate"
+  },
+  {
+   "path": "Drawings/CAD/pasted image #2.png",
+   "verdict": "drawing · image",
+   "chip": "image — read, not measured",
+   "why": "material photo pasted into the CAD: permeable concrete pavers"
+  },
+  {
+   "path": "Drawings/PDF/Landscape Drawings (Full Set).pdf",
+   "verdict": "drawing · vector",
+   "chip": "drawing · vector",
+   "why": "the full set as a vector PDF, nine pages L-0 … L-8"
+  },
+  {
+   "path": "Drawings/PDF/L-1 Planting Plan (scan).pdf",
+   "verdict": "drawing · raster",
+   "chip": "drawing · raster",
+   "why": "a grey scan of L-1, image only"
+  },
+  {
+   "path": "Drawings/PDF/Presentation Plan (Colour).pdf",
+   "verdict": "drawing · raster",
+   "chip": "drawing · raster",
+   "why": "the coloured presentation plan (for SAM)"
+  },
+  {
+   "path": "Documents/Design review notes.pdf",
+   "verdict": "document",
+   "chip": "document",
+   "why": "design review notes: three issues"
+  },
+  {
+   "path": "Bills/Landscape BOQ rev1.xlsx",
+   "verdict": "bill",
+   "chip": "bill",
+   "why": "bill of quantities, Rev 1"
+  },
+  {
+   "path": "Bills/Landscape BOQ rev1a.xlsx",
+   "verdict": "bill",
+   "chip": "bill",
+   "why": "bill of quantities, Rev 1a"
+  },
+  {
+   "path": "Bills/Landscape BOQ rev2.xlsx",
+   "verdict": "bill",
+   "chip": "bill",
+   "why": "bill of quantities, Rev 2"
+  },
+  {
+   "path": "Documents/Tree pit guide - shallow roots.pdf",
+   "verdict": "spec",
+   "chip": "spec",
+   "why": "tree pit guide, shallow roots (TPG-S)"
+  },
+  {
+   "path": "Documents/Tree pit guide - medium roots.pdf",
+   "verdict": "spec",
+   "chip": "spec",
+   "why": "tree pit guide, medium roots (TPG-M)"
+  },
+  {
+   "path": "Documents/Tree pit guide - deep roots.pdf",
+   "verdict": "spec",
+   "chip": "spec",
+   "why": "tree pit guide, deep roots (TPG-D)"
+  },
+  {
+   "path": "Documents/Planting procurement spec.pdf",
+   "verdict": "spec",
+   "chip": "spec",
+   "why": "planting procurement and measurement spec"
+  },
+  {
+   "path": "Quotes/irrigation quote (old format).xls",
+   "verdict": "unsupported",
+   "chip": "unsupported — .xls",
+   "why": "Excel 97 — save as .xlsx"
+  },
+  {
+   "path": "Quotes/street-furniture-quote.pdf",
+   "verdict": "quote",
+   "chip": "quote",
+   "why": "street furniture and metalwork quotation"
+  },
+  {
+   "path": "Quotes/metal-details.zip",
+   "verdict": "archive",
+   "chip": "archive — unpacked",
+   "why": "zip with one metalwork detail DXF",
+   "contains": [
+    {
+     "path": "drain-cover-detail.dxf",
+     "verdict": "drawing · vector",
+     "why": "metalwork detail (drain cover), not a landscape quantity"
+    }
+   ]
+  },
+  {
+   "path": "Bills/Landscape BOQ rev3 (paving update).xlsx",
+   "verdict": "bill",
+   "chip": "bill",
+   "why": "bill of quantities, Rev 3"
+  },
+  {
+   "path": "Documents/Green Building Label - required documents.pdf",
+   "verdict": "document",
+   "chip": "document",
+   "why": "green-building checklist of required documents"
+  },
+  {
+   "path": "Other/Planter mood board.pptx",
+   "verdict": "presentation",
+   "chip": "presentation",
+   "why": "a planter mood board slide deck, not a drawing"
+  }
+ ],
+ "eval_line": "planted 30 · found N · flagged M · missed K · false alarms F"
+}

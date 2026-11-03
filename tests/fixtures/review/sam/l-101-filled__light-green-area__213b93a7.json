@@ -1,0 +1,77 @@
+{
+ "image": "L-101 filled",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:23:33+00:00",
+ "seconds": 2.03,
+ "image_sha256": "213b93a7220634ae8d1ce6f2fee002f1bcdd08274bf5274b855ebb9d65860774",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 2483,
+ "raw_output": "<0f>0<|box;x1=192;y1=759;x2=291;y2=858;w=2100;h=1140;c=0.7142857313156128|><|mask;x=0;y=0;c=0.7142857313156128;data=100,100,!!!!!kDbM=pSJgZF0+i(zh!eEyLeTq{8hkh&ci1i0CwFTflV?F([?bUjYJwmInp?:GrhJ=s.CySmVBxE)hK$qJ?UrTb|>,1<|box;x1=798;y1=759;x2=896;y2=858;w=2100;h=1140;c=0.6831682920455933|><|mask;x=0;y=0;c=0.6831682920455933;data=100,99,!!!!!fDXAtPKZJuSP+cu_eFe*?=[O!$Od8Cl`.Ct$OB22!fdYQbX1ZA`FAi){%L2C?$6nf?QnHAlkwW&CO%uB|>,2<|box;x1=294;y1=759;x2=392;y2=858;w=2100;h=1140;c=0.7037037014961243|><|mask;x=0;y=0;c=0.7037037014961243;data=100,99,!!!!!eDl)_Xe$z*cq585br0OpodUKXHth8R0[.iv&7gdjPiE-p#:!aIo#M_97ZDHc*47Uh#r5kv`+bRDu4$s|>,3<|box;x1=597;y1=759;x2=694;y2=858;w=2100;h=1140;c=0.6995305418968201|><|mask;x=0;y=0;c=0.6995305418968201;data=100,98,!!!!!jDbM!PO=2394eru]Iu:fuZk$zP3e`9mJpZo486l9GJITDznC2tnXbCS4kb(Iv7=YPS7hgqE0TONl^jG7UpuCF|>,4<|box;x1=496;y1=759;x2=594;y2=858;w=2100;h=1140;c=0.6800000071525574|><|mask;x=0;y=0;c=0.6800000071525574;data=100,99,!!!!!lDg3rDf7Od'KNk2Bks%UsIB$Y4*K3kJoW'9b[]lAR_)e)PKE%3kmzbJPn/f6ua#^637`3NK*gu.'hQ=y=D2lUn!!|>,5<|box;x1=395;y1=759;x2=493;y2=858;w=2100;h=1140;c=0.7142857313156128|><|mask;x=0;y=0;c=0.7142857313156128;data=100,99,!!!!!kDg4mM#Z=4o0]O5qqS5VfEqCggr1+dIRAs!H_:0`iavXi_P4_F`=$p($uZAs]7JT.Sg#@:RHXmdGvo/:R2*zzU|>,6<|box;x1=267;y1=317;x2=645;y2=569;w=2100;h=1140;c=0.7655677795410156|><|mask;x=0;y=0;c=0.7655677795410156;data=253,379,!!!!!aI7l)+`qyIUUYwE(dZ3a]50vB.8S?ViT%r^omGsi%3'.kv5jH-45Tqbkt6PaL4{ZWh!!!!!!!!|>,7<|box;x1=1517;y1=138;x2=1616;y2=237;w=2100;h=1140;c=0.6444444060325623|><|mask;x=0;y=0;c=0.6444444060325623;data=100,100,!!!!!kDg5+8MCs8zq{kq&2#v%69hGc/^@1Cdd-xqZ+1=J_J$4`0:-2u?IbVY8!Q3zjL8^ccO+.!GFXgpsNUQORneV:V|>,8<|box;x1=900;y1=759;x2=998;y2=858;w=2100;h=1140;c=0.6908212304115295|><|mask;x=0;y=0;c=0.6908212304115295;data=100,99,!!!!!kDXAW]^'HUzNAvC@-d'y=k/OpL-OD's:FXbdMg:=2sJ)S_F3IS=XnTT!`/m3=lSdnlNx*bd-jsv:t4VQstIK=M|>,9<|box;x1=697;y1=759;x2=796;y2=858;w=2100;h=1140;c=0.6640419960021973|><|mask;x=0;y=0;c=0.6640419960021973;data=100,100,!!!!!lD]mUne=G@k'LybUguD[A[Y6^H_rSikaM*]'VF%7$239%^#+9wGJO2'sey5Ywpj*JfF5KHPjFnV7$KzPJ.%gvI!!|>,10<|box;x1=722;y1=317;x2=1226;y2=569;w=2100;h=1140;c=0.8439024686813354|><|mask;x=0;y=0;c=0.8439024686813354;data=253,505,!!!!!fGvrfjW134NI9O@VuydhYy73w@X_].!_ZtsdtFMeRsRz`le'_7f2^3iHA*FEnlzu2#[=Ms4R02fp!!!!|>,11<|box;x1=1516;y1=258;x2=1618;y2=294;w=2100;h=1140;c=0.6800000071525574|><|mask;x=0;y=0;c=0.6800000071525574;data=37,103,!!!!!6JA&k:TxAAATObBH-@Hqwq3w(|>\n",
+ "response_id": "resp_6ae9b6258f5414bdb10a44ec",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6258f5414bdb10a44ec",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701413.0,
+  "completed_at": 1793701413.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_5aed436f-aa9d-460a-a388-57203173fe0b",
+    "status": "completed",
+    "content_chars": 2483
+   }
+  ]
+ },
+ "sheet": "L-101",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "area",
+  "labels": [
+   "AZ AZALEA"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

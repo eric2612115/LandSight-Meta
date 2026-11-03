@@ -1,0 +1,288 @@
+{
+ "image": "L-1_filled.png",
+ "sheet": "L-1",
+ "prompt": "light green circle",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:27+00:00",
+ "seconds": 2.86,
+ "image_sha256": "8891cb17a561b9ddae6a09a6a343075c1f1491cf5b9f4f526dda5fa90d9dd16c",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 9,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    496,
+    759,
+    595,
+    859
+   ],
+   "score": 0.5345454812049866,
+   "area_px": 7856,
+   "area_m2": 12.34,
+   "centroid_m": [
+    17.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-04",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.97,
+    "iou": 0.967
+   },
+   "touches": [
+    "L-1/tree-04"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    192,
+    759,
+    292,
+    859
+   ],
+   "score": 0.5460992455482483,
+   "area_px": 7956,
+   "area_m2": 12.5,
+   "centroid_m": [
+    4.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-01",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.954
+   },
+   "touches": [
+    "L-1/tree-01"
+   ]
+  },
+  {
+   "object_id": "2",
+   "box_px": [
+    698,
+    759,
+    797,
+    859
+   ],
+   "score": 0.5460992455482483,
+   "area_px": 7954,
+   "area_m2": 12.49,
+   "centroid_m": [
+    25.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-06",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 12.0,
+    "iou": 0.96
+   },
+   "touches": [
+    "L-1/tree-06"
+   ]
+  },
+  {
+   "object_id": "3",
+   "box_px": [
+    293,
+    759,
+    393,
+    859
+   ],
+   "score": 0.5460992455482483,
+   "area_px": 7917,
+   "area_m2": 12.44,
+   "centroid_m": [
+    9.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-02",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.958
+   },
+   "touches": [
+    "L-1/tree-02"
+   ]
+  },
+  {
+   "object_id": "4",
+   "box_px": [
+    597,
+    759,
+    695,
+    859
+   ],
+   "score": 0.5395683646202087,
+   "area_px": 7856,
+   "area_m2": 12.34,
+   "centroid_m": [
+    20.99,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-05",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.95,
+    "iou": 0.964
+   },
+   "touches": [
+    "L-1/tree-05"
+   ]
+  },
+  {
+   "object_id": "5",
+   "box_px": [
+    395,
+    759,
+    494,
+    859
+   ],
+   "score": 0.5460992455482483,
+   "area_px": 7905,
+   "area_m2": 12.42,
+   "centroid_m": [
+    13.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-03",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.964
+   },
+   "touches": [
+    "L-1/tree-03"
+   ]
+  },
+  {
+   "object_id": "6",
+   "box_px": [
+    1517,
+    138,
+    1617,
+    238
+   ],
+   "score": 0.507692277431488,
+   "area_px": 8006,
+   "area_m2": 12.58,
+   "centroid_m": [
+    57.5,
+    27.15
+   ],
+   "match": {
+    "id": "L-1/legend-02",
+    "kind": "legend",
+    "label": "legend: symbol 樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.99,
+    "iou": 0.953
+   },
+   "touches": [
+    "L-1/legend-02"
+   ]
+  },
+  {
+   "object_id": "7",
+   "box_px": [
+    798,
+    759,
+    897,
+    859
+   ],
+   "score": 0.5508772134780884,
+   "area_px": 7838,
+   "area_m2": 12.31,
+   "centroid_m": [
+    28.99,
+    2.51
+   ],
+   "match": {
+    "id": "L-1/tree-07",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 11.96,
+    "iou": 0.968
+   },
+   "touches": [
+    "L-1/tree-07"
+   ]
+  },
+  {
+   "object_id": "8",
+   "box_px": [
+    900,
+    759,
+    999,
+    859
+   ],
+   "score": 0.5540069937705994,
+   "area_px": 7883,
+   "area_m2": 12.38,
+   "centroid_m": [
+    33.0,
+    2.52
+   ],
+   "match": {
+    "id": "L-1/tree-08",
+    "kind": "tree",
+    "label": "樟樹",
+    "truth_m2": 12.0,
+    "overlap_m2": 12.0,
+    "iou": 0.968
+   },
+   "touches": [
+    "L-1/tree-08"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 1925,
+ "raw_output": "<0f>0<|box;x1=496;y1=759;x2=594;y2=858;w=2100;h=1140;c=0.5345454812049866|><|mask;x=0;y=0;c=0.5345454812049866;data=100,99,!!!!!mDg3rDf7Od'KNk2BksNecE&Ryo+WJ_4V%sYZd``pb[{-/!mS_?142'iN)PiT{aW3!X9xlmSUuW'uaYM3`n*[O/=J7|>,1<|box;x1=192;y1=759;x2=291;y2=858;w=2100;h=1140;c=0.5460992455482483|><|mask;x=0;y=0;c=0.5460992455482483;data=100,100,!!!!!jDg5+8MBV3K=bpnJr0AX.::vv:P?wPl?hV[a=NtGBNp9&zQ`r/'J.u7#G:?ZLYKLnCN6X'0#Y08aQX.BMZJYa|>,2<|box;x1=698;y1=759;x2=796;y2=858;w=2100;h=1140;c=0.5460992455482483|><|mask;x=0;y=0;c=0.5460992455482483;data=100,99,!!!!!jDbL$]B)7w=42BY%9xRIe`$y8VPmTz-W+Gr5djuqtgtunU4nkV5emeZBTgSNh2xX+-?NSt8dxul-k?KSBpCs:|>,3<|box;x1=293;y1=759;x2=392;y2=858;w=2100;h=1140;c=0.5460992455482483|><|mask;x=0;y=0;c=0.5460992455482483;data=100,100,!!!!!jDl)x$*+kR']_o)kEj&yG[`gd0Rs3^T']tPgZnmIY!a*'9'Aifk(znf@OlMydFfc'%0C$G6g{M:eO^`cMwh/z|>,4<|box;x1=597;y1=759;x2=694;y2=858;w=2100;h=1140;c=0.5395683646202087|><|mask;x=0;y=0;c=0.5395683646202087;data=100,98,!!!!!mDbM!PO=1[DTiq*Ng8w7hFt+Mw(Cg?uHV&cqQXdgtK`d]?hjF[DSnV2(^0fX2^t=y1ABtyUQcb#y89k_q^F=y(!!!|>,5<|box;x1=395;y1=759;x2=493;y2=858;w=2100;h=1140;c=0.5460992455482483|><|mask;x=0;y=0;c=0.5460992455482483;data=100,99,!!!!!hDg4mM#Z=4v:(N$JWgU*{fgHr'9^$KU8Q631r=ItWVPvw$K&(.hbTt[J+Hu$&ke`4(I#rS!Rgm.6mwSmn!!|>,6<|box;x1=1517;y1=138;x2=1616;y2=237;w=2100;h=1140;c=0.507692277431488|><|mask;x=0;y=0;c=0.507692277431488;data=100,100,!!!!!lDl*6BY11$qi3Kp@?Q(f[AZ*)i)]:9GcI$gIuX@8(+cpbF$l3w[rhY*MWPqU#Edyg1vtcwK#?dkF#?j_q7gGIc!!|>,7<|box;x1=798;y1=759;x2=896;y2=858;w=2100;h=1140;c=0.5508772134780884|><|mask;x=0;y=0;c=0.5508772134780884;data=100,99,!!!!!hDXAWXqp4aTkbB.(Um!exd{X+1Nh3NRcX[doph[r3orm=HtLhjJ[wwESI^UvU+YI'jT+b#Jipuhm1f$02!!|>,8<|box;x1=900;y1=759;x2=998;y2=858;w=2100;h=1140;c=0.5540069937705994|><|mask;x=0;y=0;c=0.5540069937705994;data=100,99,!!!!!lDX@oc:Xk)#YLRxVtJB!pAhg/Hqz*LS_h6rns@=34/X'jBYjVVW$Fl5n43GiwVl*h)/5Vi^)r1O`@n4RDBp&EL!!|>\n",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "symbol",
+  "labels": [
+   "樟樹"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

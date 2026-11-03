@@ -1,0 +1,70 @@
+{
+ "image": "Presentation Plan (Colour).pdf p1",
+ "prompt": "grey area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:26:00+00:00",
+ "seconds": 2.24,
+ "image_sha256": "3b72dd1e0aef4836a8c21e945df16bb105c779c7a3794ad7de00a9b511a204c6",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 458,
+ "raw_output": "<0f>0<|box;x1=1516;y1=806;x2=1618;y2=843;w=2100;h=1633;c=0.8476190567016602|><|mask;x=0;y=0;c=0.8476190567016602;data=38,103,!!!!!6Inq9xBy-=C'Od18X:/g^j{-4|>,1<|box;x1=112;y1=632;x2=217;y2=1214;w=2100;h=1633;c=0.8787879347801208|><|mask;x=0;y=0;c=0.8787879347801208;data=583,106,!!!!#YCH:x]aoSYy]*?/=*KOh@LS?wIR-@pE^Cr(X1V&qgYO`31^NV2.Pu'jK]Rb$-#5gv:(6wJt`Ar**DT7]edmfG(G4t5b?D+yTK7KbYDJFOYKD(RThXnZ?Yxcl*.tk0gX@BQ)-Kj%y?5GW2RAZj^ZZ/?a34ZKxMI{2A^##[g@{is{|>\n",
+ "response_id": "resp_6ae9b6b87b417b5f3a824d25",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6b87b417b5f3a824d25",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701559.0,
+  "completed_at": 1793701560.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_9dc069f3-f9f6-4ebf-a041-dd5278199dfc",
+    "status": "completed",
+    "content_chars": 458
+   }
+  ]
+ },
+ "sheet": "F-26-p1",
+ "prompt_source": "spark_raster_plan",
+ "legend": {
+  "labels": [
+   "FIRE TRUCK ACCESS LANE",
+   "FIRE TRUCK ACCESS LANE — KEEP CLEAR"
+  ],
+  "kind": "area"
+ }
+}

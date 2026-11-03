@@ -1,0 +1,24 @@
+{
+ "call": "classify_sheet",
+ "image_sha256": "3bb8334ffde5d387efdef7a74ba3ebeadd4d33fb7c1867d9ce3b8618fdb460b7",
+ "content_key": "cdb7aeed7bf0987e12f16f880ba21494949adf68b91f315d4a48cbb50562f912",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:22:24+00:00",
+ "seconds": 3.06,
+ "usage": {
+  "completion_tokens": 301,
+  "prompt_tokens": 2028,
+  "total_tokens": 2329,
+  "completion_tokens_details": {
+   "reasoning_tokens": 234
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 1905
+  }
+ },
+ "result": {
+  "confidence": 0.99,
+  "kind": "elevation",
+  "why": "The main drawing shows trees standing on a ground line labeled 南向立面圖 (south elevation), which is a side view."
+ }
+}

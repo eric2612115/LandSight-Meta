@@ -1,0 +1,66 @@
+{
+ "call": "review_classify_sheet",
+ "image_sha256": "2531138ad3bc306fe37ed9774f35ebc89a488062dad5e9e774d8d85b8f123e88",
+ "content_key": "pdfpage:f152ddd2250745e22f691fe1d85622446a628595c46e504f17d97f965a06083b|p=ace754ed",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:20:23+00:00",
+ "seconds": 10.27,
+ "usage": {
+  "completion_tokens": 390,
+  "prompt_tokens": 3640,
+  "total_tokens": 4030,
+  "completion_tokens_details": {
+   "reasoning_tokens": 263
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 497
+  }
+ },
+ "prompt": "This image is one whole sheet of a landscape drawing package. Return:\n- kind: 'plan' (a top-down plan whose own subject is planting or paving: a planting plan, a paving plan, or an enlarged plan of part of the site); 'elevation' (a side view of plants or structures standing on a ground line); 'detail' (a construction detail or section of one element, such as a tree pit or a drain cover); 'schedule' (a sheet that is mostly a table, such as a plant schedule); 'legend' (mostly symbols with their names); 'cover' (a cover sheet with a drawing index or general notes); 'background' (a plan of another trade, such as irrigation, lighting or drainage, where trees and beds appear only as thin reference line work under that trade's symbols).\n- discipline: planting, paving, irrigation, lighting, general, metalwork or other.\n- enlarged_partial: true if the sheet shows only part of the site at a larger scale (for example it has a match line or a key plan); match_line: true if a match line is drawn.\n- title_block: the values written in the title block: number (the drawing number), title, revision, date, scale; an empty string for anything not shown.\n- index: if the sheet carries a drawing index, every sheet number it lists, in order; otherwise an empty list.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "confidence": 0.98,
+  "discipline": "paving",
+  "enlarged_partial": false,
+  "index": [],
+  "kind": "plan",
+  "match_line": false,
+  "title_block": {
+   "date": "2026-09-18",
+   "number": "L-3",
+   "revision": "A",
+   "scale": "1:200",
+   "title": "Paving Plan"
+  },
+  "why": "Top-down sheet titled Paving Plan shows PV-1/PV-2/PV-3 hatch areas with legend, north arrow and scale."
+ },
+ "response_id": "chatcmpl-01a1a0ec-9c31-71eb-a98e-66ff739343fe",
+ "raw": {
+  "id": "chatcmpl-01a1a0ec-9c31-71eb-a98e-66ff739343fe",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"confidence\": 0.98, \"discipline\": \"paving\", \"enlarged_partial\": false, \"index\": [], \"kind\": \"plan\", \"match_line\": false, \"title_block\": {\"date\": \"2026-09-18\", \"number\": \"L-3\", \"revision\": \"A\", \"scale\": \"1:200\", \"title\": \"Paving Plan\"}, \"why\": \"Top-down sheet titled Paving Plan shows PV-1/PV-2/PV-3 hatch areas with legend, north arrow and scale.\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701223,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 390,
+   "prompt_tokens": 3640,
+   "total_tokens": 4030,
+   "completion_tokens_details": {
+    "reasoning_tokens": 263
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 497
+   }
+  }
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "image": "L-1_filled.png",
+ "sheet": "L-1",
+ "prompt": "dark green strip",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:06+00:00",
+ "seconds": 1.74,
+ "image_sha256": "8891cb17a561b9ddae6a09a6a343075c1f1491cf5b9f4f526dda5fa90d9dd16c",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 2,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    1515,
+    328,
+    1619,
+    341
+   ],
+   "score": 0.6604774594306946,
+   "area_px": 1242,
+   "area_m2": 1.95,
+   "centroid_m": [
+    57.48,
+    21.32
+   ],
+   "match": {
+    "id": "L-1/legend-04",
+    "kind": "legend",
+    "label": "legend: line 金露花",
+    "truth_m2": 1.6,
+    "overlap_m2": 1.59,
+    "iou": 0.808
+   },
+   "touches": [
+    "L-1/legend-04"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    1345,
+    152,
+    1360,
+    837
+   ],
+   "score": 0.6404494643211365,
+   "area_px": 9200,
+   "area_m2": 14.45,
+   "centroid_m": [
+    49.01,
+    14.99
+   ],
+   "match": {
+    "id": "L-1/hedge-01",
+    "kind": "hedge",
+    "label": "金露花",
+    "truth_m2": 10.8,
+    "overlap_m2": 10.7,
+    "iou": 0.735
+   },
+   "touches": [
+    "L-1/hedge-01"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 383,
+ "raw_output": "<0f>0<|box;x1=1515;y1=328;x2=1618;y2=340;w=2100;h=1140;c=0.6604774594306946|><|mask;x=0;y=0;c=0.6604774594306946;data=13,104,!!!!!2IU^M6rZ!'`Rno0[?5?j|>,1<|box;x1=1345;y1=152;x2=1359;y2=836;w=2100;h=1140;c=0.6404494643211365|><|mask;x=0;y=0;c=0.6404494643211365;data=685,15,!!!!!wL?f&'g(D5s42f_(22pa`dTaTFMp-BMepQtcxJU)t6fcrWN+#:8XYXy!`W:/1$TR7$ssjeuh$Zq2s:uKi_v!3:Qc81VAr4b+emndk|>\n",
+ "prompt_source": "manual"
+}

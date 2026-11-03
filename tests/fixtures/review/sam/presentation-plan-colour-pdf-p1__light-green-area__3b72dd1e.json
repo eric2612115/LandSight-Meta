@@ -1,0 +1,69 @@
+{
+ "image": "Presentation Plan (Colour).pdf p1",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:26:04+00:00",
+ "seconds": 3.44,
+ "image_sha256": "3b72dd1e0aef4836a8c21e945df16bb105c779c7a3794ad7de00a9b511a204c6",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 3265,
+ "raw_output": "<0f>0<|box;x1=1517;y1=631;x2=1616;y2=731;w=2100;h=1633;c=0.6878048777580261|><|mask;x=0;y=0;c=0.6878048777580261;data=101,100,!!!!!mDg5Eo%%O?1l0a0SR0f!fi=2qoY=I7ZK%XjWuLIICt3D{KhNt+Z)Qw+:vZ?1i)xa6O$=svNu0z8$GQXXK.C2MK@{i|>,1<|box;x1=117;y1=886;x2=215;y2=985;w=2100;h=1633;c=0.7387754917144775|><|mask;x=0;y=0;c=0.7387754917144775;data=100,99,!!!!!lDg45_8_YK(+do[iAE@]jv6FOzLI+_Zat+xxvshUcCr!jp$06w9OgeD9v3ow-y.84zl`UkrszE+7AFA2`3GMO:!!|>,2<|box;x1=496;y1=1252;x2=594;y2=1351;w=2100;h=1633;c=0.7037037014961243|><|mask;x=0;y=0;c=0.7037037014961243;data=100,99,!!!!!jDO[OtFL-'h94eNu3l?CCBR_k':SqG'`fsgp2r$mkET*3!kKC:jB:L]fCcXymKT#MUhhx_&hz!XBwYi[l111(|>,3<|box;x1=696;y1=1252;x2=796;y2=1351;w=2100;h=1633;c=0.7229437232017517|><|mask;x=0;y=0;c=0.7229437232017517;data=100,101,!!!!!lDSvBWG0pR(bW1W310GEIQ2PM(xOEYZV:f#p7t'xd-5$+q0+6q($'7Cc_&wx*9^jMBkqx?q09+kQ0*:=-1(:R+!!|>,4<|box;x1=722;y1=810;x2=1226;y2=1062;w=2100;h=1633;c=0.8552036285400391|><|mask;x=0;y=0;c=0.8552036285400391;data=253,505,!!!!!eHPJ(ci5DXyYm10[eI1f/^AXXD9gt2gj1]gKu{q@V%4^.QtC1if!J(QI)31s^.?$xu04V9Fi[DUw!!!|>,5<|box;x1=192;y1=1252;x2=291;y2=1352;w=2100;h=1633;c=0.7387754917144775|><|mask;x=0;y=0;c=0.7387754917144775;data=101,100,!!!!!mDX@JP5{^bKS9GxCX?lk8o:5It1xnKC[[VYa%xqiY:8j8.NF7rDcv*9e9jC/GexlqKM*I6:v#{:-g?+8A:U.oH&li|>,6<|box;x1=899;y1=1252;x2=998;y2=1352;w=2100;h=1633;c=0.7344398498535156|><|mask;x=0;y=0;c=0.7344398498535156;data=101,100,!!!!!nDO]rG3'Bmj-i&cfKi[[rpjnzibxyDbO]IV$8r_X((Q0^spvomz__q)jvnBb4=5)%ob6%8iOZ{T&A.0#T0C'KUp%p#|>,7<|box;x1=293;y1=1252;x2=392;y2=1351;w=2100;h=1633;c=0.7229437232017517|><|mask;x=0;y=0;c=0.7229437232017517;data=100,100,!!!!!lDGF.$]YMBl!v{mx?3Mo*M`S6)NXI@RIs*+_31o)c%&B*1=@aZ.X90W#'obijoFL/ko-g&h2y-fl8yWdcEcu[1!!|>,8<|box;x1=596;y1=1253;x2=694;y2=1352;w=2100;h=1633;c=0.7229437232017517|><|mask;x=0;y=0;c=0.7229437232017517;data=100,99,!!!!!nDg4mP@v]v.hPmtrsN^PQ6LQ94Je{S^RPH_va.'HyH6l`*Z@bgQXCAsri{]ky&SbPfeJKsn]o]aiUO*VRpja.aT7v=|>,9<|box;x1=395;y1=1252;x2=493;y2=1352;w=2100;h=1633;c=0.7460317611694336|><|mask;x=0;y=0;c=0.7460317611694336;data=101,99,!!!!!nDX@!A$.f:bIz=#4bRu$Q)wQSD.VCN.^zudtLFM4[FPbMQmq%_W627wg*`?nTt4Ar*LwN7Gk!X5vN_dZc7J-URZ'_1|>,10<|box;x1=305;y1=605;x2=532;y2=803;w=2100;h=1633;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=199,228,!!!!#KAVeL&7Q^XkvGi6nfeT*IWB3y6F#CY9(H-aCww6F#Ro_^diGOLnOd{A46qFpA(Mid8?.qUK-l^dN*U$&hKyUIOx({0?ZABnSTDCUnt:v5ztK+M/42bpMliIZcM=j{!BE!^-89i1N[6*+9$!%-UeBN!m&li|>,11<|box;x1=1516;y1=750;x2=1618;y2=787;w=2100;h=1633;c=0.6683937907218933|><|mask;x=0;y=0;c=0.6683937907218933;data=38,103,!!!!!4FG7n$Am3+[^#/-65P%!x#=|>,12<|box;x1=798;y1=1252;x2=896;y2=1352;w=2100;h=1633;c=0.7104072570800781|><|mask;x=0;y=0;c=0.7104072570800781;data=101,99,!!!!!jDOZuDkM$hRQ=7H1+#PmlpKkRKdZj3St'%lD9f2D_O!9zla:$&'O7y-JHol1=AABD2vaO1Gbr66R[Ycn`B69/|>,13<|box;x1=1050;y1=1380;x2=1150;y2=1480;w=2100;h=1633;c=0.7229437232017517|><|mask;x=0;y=0;c=0.7229437232017517;data=101,101,!!!!!lDbLbExl$Li[H/12=0BNyawB!Z?(e0NrAobm3Ay6{dH`08E8P!2Osn*btm12U8K2eP'CESu8*=!OZ&t$NNY5qu!!|>,14<|box;x1=267;y1=810;x2=645;y2=1062;w=2100;h=1633;c=0.8324607610702515|><|mask;x=0;y=0;c=0.8324607610702515;data=253,379,!!!!!mGb@Za!W6v%KMA5C2LGtDv4n7e8#uq'%6L?eqjiU$nm*yHM5AA%m]xz(tE$C`qPZ26O+tNzk5?R*FT3V9vq!THWP+|>\n",
+ "response_id": "resp_6ae9b6bca75283b21f7e4fac",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6bca75283b21f7e4fac",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701563.0,
+  "completed_at": 1793701564.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_0e45008d-3961-4c68-a1d0-140bce5b5769",
+    "status": "completed",
+    "content_chars": 3265
+   }
+  ]
+ },
+ "sheet": "F-26-p1",
+ "prompt_source": "spark_raster_plan",
+ "legend": {
+  "labels": [
+   "LA LAWN"
+  ],
+  "kind": "area"
+ }
+}

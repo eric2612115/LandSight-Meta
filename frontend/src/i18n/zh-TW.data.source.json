@@ -1,0 +1,2024 @@
+[
+ {
+  "template": "Bill {0} vs drawing {1} (schedule {2}) - ask developer to confirm governing quantity",
+  "example": "Bill 12 vs drawing 8 (schedule 12) - ask developer to confirm governing quantity",
+  "placeholders": 3,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "Confirm whether {0} m² area boxed {1} with {2} hatch is {3} permeable pavers or {4} exposed aggregate",
+  "example": "Confirm whether 48 m² area boxed PV-1 with PV-2 hatch is PV-1 permeable pavers or PV-2 exposed aggregate",
+  "placeholders": 5,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "Confirm with developer whether project is a new building for Art. {0} applicability",
+  "example": "Confirm with developer whether project is a new building for Art. 298 applicability",
+  "placeholders": 1,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "{0}",
+  "example": "8",
+  "placeholders": 1,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "{0} outside site in road reserve: do not price removal; confirm with developer if street tree by others and exclude from planting count",
+  "example": "T-10 outside site in road reserve: do not price removal; confirm with developer if street tree by others and exclude from planting count",
+  "placeholders": 1,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "{0} shows {1} M on slab vs TPG-D {2} m for camphor – confirm governing soil depth with developer before pricing",
+  "example": "L-6 shows 1.0 M on slab vs TPG-D 1.5 m for camphor – confirm governing soil depth with developer before pricing",
+  "placeholders": 3,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "{0}-{1}",
+  "example": "6200-7200",
+  "placeholders": 2,
+  "where": "ask.action.value"
+ },
+ {
+  "template": "Area exceeds {0} but new-building status is not stated in the sources.",
+  "example": "Area exceeds 300 but new-building status is not stated in the sources.",
+  "placeholders": 1,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "Bill NT${0} is about {1}% below installed list low end.",
+  "example": "Bill NT$4,200 is about 32% below installed list low end.",
+  "placeholders": 2,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "Confirm Camphore is same as Camphor CC and drawing quantity governs.",
+  "example": "Confirm Camphore is same as Camphor CC and drawing quantity governs.",
+  "placeholders": 0,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "Drawing depth meets the regulation minimum but not the deep-root guide for the specified species.",
+  "example": "Drawing depth meets the regulation minimum but not the deep-root guide for the specified species.",
+  "placeholders": 0,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "Label says {0} permeable pavers but hatch keys to {1}, so priced scope is ambiguous.",
+  "example": "Label says PV-1 permeable pavers but hatch keys to PV-2, so priced scope is ambiguous.",
+  "placeholders": 2,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "Quantity mismatch determines whether to price {0} or {1} trees and pits.",
+  "example": "Quantity mismatch determines whether to price 8 or 12 trees and pits.",
+  "placeholders": 2,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "Review check says it is drawn but cannot be planted or counted on this site.",
+  "example": "Review check says it is drawn but cannot be planted or counted on this site.",
+  "placeholders": 0,
+  "where": "ask.action.why"
+ },
+ {
+  "template": "For deep-rooted trees such as Cinnamomum camphora the developer guide TPG-D requires {0} m soil on artificial ground, while the national standard requires {1} m and the {2} detail for CC camphor shows {3} {4} M {5}. The sources do not settle which depth governs the podium job.",
+  "example": "For deep-rooted trees such as Cinnamomum camphora the developer guide TPG-D requires 1.5 m soil on artificial ground, while the national standard requires 1.0 m and the L-6 detail for CC camphor shows SOIL DEPTH 1.0 M ON SLAB. The sources do not settle which depth governs the podium job.",
+  "placeholders": 6,
+  "where": "ask.answer"
+ },
+ {
+  "template": "On site area the exemption does not apply: the limit is {0} m2 and the title block shows {1} m², and the regulation table says national Art. {2} applies at β {3} with no municipal greening rule. The sources do not state whether this is a new building, which Art. {4} lists as the applicability trigger, so that element is still missing.",
+  "example": "On site area the exemption does not apply: the limit is 300 m2 and the title block shows 1,500 m², and the regulation table says national Art. 302 applies at β 0.66 with no municipal greening rule. The sources do not state whether this is a new building, which Art. 298 lists as the applicability trigger, so that element is still missing.",
+  "placeholders": 5,
+  "where": "ask.answer"
+ },
+ {
+  "template": "The camphor row (bill {0} EA at NT${1}) is flagged for quantity and price, plus spelling. The latest bill has {2} plants but the governing drawing shows {3}, while the schedule says {4} and the plan takes precedence. Its NT${5} rate is about {6}% under your installed list ({7}–{8}), and the bill spells it '{9}' aligned to Camphor ({10}) at confidence {11}.",
+  "example": "The camphor row (bill 12 EA at NT$4,200) is flagged for quantity and price, plus spelling. The latest bill has 12 plants but the governing drawing shows 8, while the schedule says 12 and the plan takes precedence. Its NT$4,200 rate is about 32% under your installed list (6,200–7,200), and the bill spells it 'camphore' aligned to Camphor (CC) at confidence 0.85.",
+  "placeholders": 12,
+  "where": "ask.answer"
+ },
+ {
+  "template": "The current bill is {0}, revision {1}, dated {2}, with {3} priced rows and total NT${4}. From revision {5} (NT${6}) to {7} (NT${8}) Azalea qty changed {9} -> {10}, then to revision {11} (NT${12}) with Camphor/Duranta name, unit and quantity changes and Permeable pavers ({13}) price {14} -> {15}. The final change in revision {16} was Permeable pavers ({17}): qty {18} -> {19}.",
+  "example": "The current bill is Landscape BOQ rev3 (paving update).xlsx, revision 3, dated 2026-10-14, with 11 priced rows and total NT$1,562,028. From revision 1 (NT$1,132,628) to 1a (NT$1,106,262) Azalea qty changed 600 -> 450, then to revision 2 (NT$1,458,608) with Camphor/Duranta name, unit and quantity changes and Permeable pavers (PV-1) price 1,800 -> 3,800. The final change in revision 3 was Permeable pavers (PV-1): qty 212 -> 236.",
+  "placeholders": 20,
+  "where": "ask.answer"
+ },
+ {
+  "template": "The sample checklist lists {0} documents to submit with the Green Building Label application for the Greenery indicator: Greening quantity report (TCO2 calculation), planting plan with every species named, plant schedule with species, quantities, soil depth and pit area, tree pit and soil depth details for artificial ground, and site plan showing areas excluded from greening, plus existing tree survey and tree protection plan if existing trees are affected. The greening quantity report shows TCO2 = (ΣGi × Ai) × α against TCO2c = {1} × A′ × β, with the inputs read from the planting plan and the plant schedule.",
+  "example": "The sample checklist lists 6 documents to submit with the Green Building Label application for the Greenery indicator: Greening quantity report (TCO2 calculation), planting plan with every species named, plant schedule with species, quantities, soil depth and pit area, tree pit and soil depth details for artificial ground, and site plan showing areas excluded from greening, plus existing tree survey and tree protection plan if existing trees are affected. The greening quantity report shows TCO2 = (ΣGi × Ai) × α against TCO2c = 0.5 × A′ × β, with the inputs read from the planting plan and the plant schedule.",
+  "placeholders": 2,
+  "where": "ask.answer"
+ },
+ {
+  "template": "Yes. The {0} legend keys {1} as {2}, and the BOQ and spec both describe Permeable pavers ({3}) as concrete, {4} x {5} x {6} mm, on {7} mm sand. The {8} m² area boxed {9} but hatched as {10} is not settled by the sources.",
+  "example": "Yes. The L-3 legend keys PV-1 as PERMEABLE PAVERS, and the BOQ and spec both describe Permeable pavers (PV-1) as concrete, 200 x 100 x 80 mm, on 30 mm sand. The 48 m² area boxed PV-1 but hatched as PV-2 is not settled by the sources.",
+  "placeholders": 11,
+  "where": "ask.answer"
+ },
+ {
+  "template": "{0} is drawn outside the site boundary in the road reserve at ({1}, -{2}) and is not counted toward greening. The sources do not mark {3} for removal; the only tree labeled {4} is {5}, and the review says to ask whether {6} is a street tree by others.",
+  "example": "T-10 is drawn outside the site boundary in the road reserve at (39, -2.6) and is not counted toward greening. The sources do not mark T-10 for removal; the only tree labeled TO BE REMOVED is EX-01, and the review says to ask whether T-10 is a street tree by others.",
+  "placeholders": 7,
+  "where": "ask.answer"
+ },
+ {
+  "template": "About {0}, a tree on {1}: This tree is outside the site. Mark it for removal.",
+  "example": "About T-10, a tree on L-1: This tree is outside the site. Mark it for removal.",
+  "placeholders": 2,
+  "where": "ask.question"
+ },
+ {
+  "template": "Does Article {0} apply to this {1} m² site?",
+  "example": "Does Article 302 apply to this 1,500 m² site?",
+  "placeholders": 2,
+  "where": "ask.question"
+ },
+ {
+  "template": "Is {0} permeable paving?",
+  "example": "Is PV-1 permeable paving?",
+  "placeholders": 1,
+  "where": "ask.question"
+ },
+ {
+  "template": "What does the green-building checklist require from landscape?",
+  "example": "What does the green-building checklist require from landscape?",
+  "placeholders": 0,
+  "where": "ask.question"
+ },
+ {
+  "template": "What soil depth does the spec require for trees on the slab?",
+  "example": "What soil depth does the spec require for trees on the slab?",
+  "placeholders": 0,
+  "where": "ask.question"
+ },
+ {
+  "template": "Which bill revision is current and what changed?",
+  "example": "Which bill revision is current and what changed?",
+  "placeholders": 0,
+  "where": "ask.question"
+ },
+ {
+  "template": "Why is the camphor row flagged?",
+  "example": "Why is the camphor row flagged?",
+  "placeholders": 0,
+  "where": "ask.question"
+ },
+ {
+  "template": "Municipal tree protection ordinance, Art. {0}",
+  "example": "Municipal tree protection ordinance, Art. 3",
+  "placeholders": 1,
+  "where": "check.citation.article"
+ },
+ {
+  "template": "Building Technical Regulations, Design and Construction Part, Art. {0}",
+  "example": "Building Technical Regulations, Design and Construction Part, Art. 299",
+  "placeholders": 1,
+  "where": "check.citation.article|rule.citation.article"
+ },
+ {
+  "template": "Technical Specification for Building-Site Greening Design, formulas ({0})–({1})",
+  "example": "Technical Specification for Building-Site Greening Design, formulas (1)–(6)",
+  "placeholders": 2,
+  "where": "check.citation.article|rule.citation.article"
+ },
+ {
+  "template": "Technical Specification for Building-Site Greening Design, point {0}, table {1} and its note",
+  "example": "Technical Specification for Building-Site Greening Design, point 5, table 1 and its note",
+  "placeholders": 2,
+  "where": "check.citation.article|rule.citation.article"
+ },
+ {
+  "template": "Technical Specification for Building-Site Water Retention Design, point {0} and table {1}",
+  "example": "Technical Specification for Building-Site Water Retention Design, point 5.1 and table 1",
+  "placeholders": 2,
+  "where": "check.citation.article|rule.citation.article"
+ },
+ {
+  "template": "A corridor in a building whose rooms on one floor total {0} m² or more ({1} m² below ground) needs a clear width of at least {2} m, or {3} m where rooms open on both sides.",
+  "example": "A corridor in a building whose rooms on one floor total 200 m² or more (100 m² below ground) needs a clear width of at least 1.2 m, or 1.6 m where rooms open on both sides.",
+  "placeholders": 4,
+  "where": "check.citation.gloss"
+ },
+ {
+  "template": "A tree outside forestry land is protected if its diameter at {0} m is at least {1} m, its girth at least {2} m, or it is at least {3} years old, or rare, or of ecological or cultural value.",
+  "example": "A tree outside forestry land is protected if its diameter at 1.3 m is at least 0.8 m, its girth at least 2.5 m, or it is at least 50 years old, or rare, or of ecological or cultural value.",
+  "placeholders": 4,
+  "where": "check.citation.gloss"
+ },
+ {
+  "template": "Development projects must submit tree records and a protection or transplant plan to the city's agriculture bureau and have it approved before work starts; protected trees stay in place as a rule.",
+  "example": "Development projects must submit tree records and a protection or transplant plan to the city's agriculture bureau and have it approved before work starts; protected trees stay in place as a rule.",
+  "placeholders": 0,
+  "where": "check.citation.gloss"
+ },
+ {
+  "template": "Minimum greening area = (site area − area where greening is impracticable) × the legal open-space ratio. An area counts as impracticable only when the architect declares it as one of the kinds the article names (fire-truck rescue space recognised by the fire authority, sports fields, arcades, private and in-site roads, existing lanes); a label on a landscape sheet does not make it one.",
+  "example": "Minimum greening area = (site area − area where greening is impracticable) × the legal open-space ratio. An area counts as impracticable only when the architect declares it as one of the kinds the article names (fire-truck rescue space recognised by the fire authority, sports fields, arcades, private and in-site roads, existing lanes); a label on a landscape sheet does not make it one.",
+  "placeholders": 0,
+  "where": "check.citation.gloss|rule.citation.gloss"
+ },
+ {
+  "template": "On artificial ground a large tree needs a pit of at least {0} m² and {1} m of soil; a large tree in a pit of {2}–{3} m² counts as a small tree (Gi {4} → {5}); planting below the minimums is not counted.",
+  "example": "On artificial ground a large tree needs a pit of at least 4.0 m² and 1.0 m of soil; a large tree in a pit of 1.5–4 m² counts as a small tree (Gi 1.5 → 1.0); planting below the minimums is not counted.",
+  "placeholders": 6,
+  "where": "check.citation.gloss|rule.citation.gloss"
+ },
+ {
+  "template": "TCO2 = (Σ Gi × Ai) × α; TCO2c = {0} × A′ × β; α = {1} + {2} × ra, and ra = {3} with fewer than two tree species.",
+  "example": "TCO2 = (Σ Gi × Ai) × α; TCO2c = 0.5 × A′ × β; α = 0.8 + 0.5 × ra, and ra = 0 with fewer than two tree species.",
+  "placeholders": 4,
+  "where": "check.citation.gloss|rule.citation.gloss"
+ },
+ {
+  "template": "The planting's total carbon fixation must exceed ½ × minimum greening area × β (β {0} for an ordinary site).",
+  "example": "The planting's total carbon fixation must exceed ½ × minimum greening area × β (β 0.66 for an ordinary site).",
+  "placeholders": 1,
+  "where": "check.citation.gloss|rule.citation.gloss"
+ },
+ {
+  "template": "The site must keep the original ground's ability to hold and infiltrate rain: its water-retention index must exceed {0} × the legal open-space ratio ({1} − building coverage).",
+  "example": "The site must keep the original ground's ability to hold and infiltrate rain: its water-retention index must exceed 0.5 × the legal open-space ratio (1 − building coverage).",
+  "placeholders": 2,
+  "where": "check.citation.gloss|rule.citation.gloss"
+ },
+ {
+  "template": "λ = Q′ / Q0, Q0 = A0 × f × t (t = {0} s). Green space on natural ground: Q1 = A1·f·t. Unit permeable pavers: Q2 = {1}·A2·f·t + {2}·h·A2 (h = graded base ≤ {3} m; {4} on a concrete base). Garden soil on artificial ground (roof, balcony, ground over a basement): Q3 = {5}·V3, soil counted to {6} m deep.",
+  "example": "λ = Q′ / Q0, Q0 = A0 × f × t (t = 86,400 s). Green space on natural ground: Q1 = A1·f·t. Unit permeable pavers: Q2 = 0.5·A2·f·t + 0.05·h·A2 (h = graded base ≤ 0.25 m; 0 on a concrete base). Garden soil on artificial ground (roof, balcony, ground over a basement): Q3 = 0.05·V3, soil counted to 0.6 m deep.",
+  "placeholders": 7,
+  "where": "check.citation.gloss|rule.citation.gloss"
+ },
+ {
+  "template": "+{0} Camphor, the same species",
+  "example": "+8 Camphor, the same species",
+  "placeholders": 1,
+  "where": "check.fixes.label"
+ },
+ {
+  "template": "+{0} m² of shrub bed (Gi {1})",
+  "example": "+249.8 m² of shrub bed (Gi 0.5)",
+  "placeholders": 2,
+  "where": "check.fixes.label"
+ },
+ {
+  "template": "Change {0} Camphor to Bischofia, a second native species (α → {1}); no extra trees",
+  "example": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+  "placeholders": 2,
+  "where": "check.fixes.label"
+ },
+ {
+  "template": "Keep {0} (Camphor, DBH {1} cm) instead of removing it: an old tree kept by the design counts {2} × its {3} m² canopy (+{4} to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+  "example": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+  "placeholders": 5,
+  "where": "check.fixes.label"
+ },
+ {
+  "template": "cover and drawing index: nothing to measure",
+  "example": "cover and drawing index: nothing to measure",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "detail sheet: read for the tree pit, not measured",
+  "example": "detail sheet: read for the tree pit, not measured",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "elevation: the same plants seen from the side",
+  "example": "elevation: the same plants seen from the side",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "enlarged plan of part of the site (match line found): its trees are already on the full plan",
+  "example": "enlarged plan of part of the site (match line found): its trees are already on the full plan",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "irrigation plan: the planting is background line work",
+  "example": "irrigation plan: the planting is background line work",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "lighting plan: the planting is background line work",
+  "example": "lighting plan: the planting is background line work",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "metalwork detail from {0}: not a landscape quantity",
+  "example": "metalwork detail from metal-details.zip: not a landscape quantity",
+  "placeholders": 1,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "schedule sheet: read for the plant list, not measured",
+  "example": "schedule sheet: read for the plant list, not measured",
+  "placeholders": 0,
+  "where": "check.reason|sheet.not_counted_reason"
+ },
+ {
+  "template": "'{0}' aligned to Camphor ({1}) at confidence {2}",
+  "example": "'Camphore tree, cal. 10 cm' aligned to Camphor (CC) at confidence 0.85",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Azalea: {0} plants for {1} m² = {2} per m², below the schedule's {3} per m²",
+  "example": "Azalea: 450 plants for 150 m² = 3.0 per m², below the schedule's 4 per m²",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Camphor tree, cal. {1} cm {2} plants = drawing {3}",
+  "example": "Bill row 6: Camphor tree, cal. 10 cm 8 plants = drawing 8",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Duranta ({1}F and {2}F) {3} plants = drawing {4}",
+  "example": "Bill row 7: Duranta (1F and 5F) 284 plants = drawing 284",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Exposed aggregate ({1}) {2} m² = drawing {3}",
+  "example": "Bill row 12: Exposed aggregate (PV-2) 48 m² = drawing 48",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Grass pavers ({1}) {2} m² = drawing {3}",
+  "example": "Bill row 13: Grass pavers (PV-3) 36 m² = drawing 36",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Lawn {1} m² = drawing {2}",
+  "example": "Bill row 9: Lawn 200 m² = drawing 200",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Orange jasmine, roof planters {1} m² = drawing {2}",
+  "example": "Bill row 16: Orange jasmine, roof planters 35 m² = drawing 35",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Permeable pavers ({1}) {2} m² = drawing {3}",
+  "example": "Bill row 11: Permeable pavers (PV-1) 120 m² = drawing 120",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Planter edge {1} m = drawing {2}",
+  "example": "Bill row 14: Planter edge 22 m = drawing 22",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Roof lawn {1} m² = drawing {2}",
+  "example": "Bill row 15: Roof lawn 105 m² = drawing 105",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Bill row {0}: Yeddo hawthorn, podium planters {1} m² = drawing {2}",
+  "example": "Bill row 11: Yeddo hawthorn, podium planters 43.50 m² = drawing 43.50",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Box says {0} (Permeable pavers), hatch is {1}'s (Exposed aggregate): which item, which price?",
+  "example": "Box says PV-1 (Permeable pavers), hatch is PV-2's (Exposed aggregate): which item, which price?",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "Camphor NT${0}: about {1}% under your installed list ({2}–{3})",
+  "example": "Camphor NT$4,200: about 32% under your installed list (6,200–7,200)",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Camphor tree, cal. {0} cm: bill {1}, drawing {2}",
+  "example": "Camphor tree, cal. 10 cm: bill 12, drawing 6",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Camphore tree, cal. {0} cm: bill {1}, drawing {2}",
+  "example": "Camphore tree, cal. 10 cm: bill 12, drawing 8",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Duranta hedge: billed {0} m, drawn {1} plants",
+  "example": "Duranta hedge: billed 27 m, drawn 182 plants",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "Duranta: the same symbol and label on {0} floors — counted on each ({1} in all)",
+  "example": "Duranta: the same symbol and label on 2 floors — counted on each (284 in all)",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "Duranta: {0} m at {1} m, {2} rows = {3} plants",
+  "example": "Duranta: 27 m at 0.3 m, 2 rows = 182 plants",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Grass pavers on {0} overlaps Lawn on {1} by {2} m²",
+  "example": "Grass pavers on L-3 overlaps Lawn on L-1 by 20 m²",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Greening (Art. {0}): required {1}, provided {2} ({3} before the tree-pit rule) — pass",
+  "example": "Greening (Art. 302): required 297.0, provided 370.0 (370.0 before the tree-pit rule) — pass",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Hidden sheet '{0}' in {1}",
+  "example": "Hidden sheet 'old' in Landscape BOQ rev2.xlsx",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "Muse Spark read the {0} legend: {1}",
+  "example": "Muse Spark read the L-103 legend: light green = IC CHINESE IXORA",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "Muse Spark read the {0} legend: {1} · {2}",
+  "example": "Muse Spark read the L-102 legend: light green = RI YEDDO HAWTHORN · dark green = DU DURANTA",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Muse Spark read the {0} legend: {1} · {2} · {3}",
+  "example": "Muse Spark read the L-3 legend: beige = PV-1 PERMEABLE PAVERS · light grey = PV-2 EXPOSED AGGREGATE · grey = PV-3 GRASS PAVERS",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Muse Spark read the {0} legend: {1} · {2} · {3} · {4}",
+  "example": "Muse Spark read the L-1 legend: light green = CC CAMPHOR · light green = AZ AZALEA · light grey = FIRE TRUCK ACCESS LANE · dark green = DU DURANTA",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "Muse Spark read {0} (raster, no CAD): {1} area types, scale bar {2} m = {3} px ({4} m/px)",
+  "example": "Muse Spark read Presentation Plan (Colour).pdf (raster, no CAD): 10 area types, scale bar 10 m = 255 px (0.0392 m/px)",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "Permeable pavers ({0}): bill {1}, drawing {2}",
+  "example": "Permeable pavers (PV-1): bill 236, drawing 212",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Permeable pavers NT${0}: {1}% over the top of your list ({2}–{3})",
+  "example": "Permeable pavers NT$3,800: 65% over the top of your list (1,300–2,300)",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Planter drawn over the lift shaft ({0})",
+  "example": "Planter drawn over the lift shaft (L-102)",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Planters narrow the escape corridor on {0} to {1} m, below the {2} m minimum",
+  "example": "Planters narrow the escape corridor on L-103 to 0.9 m, below the 1.2 m minimum",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Roof lawn NT${0}: about {1}% under your installed list ({2}–{3})",
+  "example": "Roof lawn NT$280: about 57% under your installed list (650–850)",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1 on the coloured {0}: {1} prompts from Muse Spark's legend words, {2} masks, {3} in the legend excluded",
+  "example": "SAM 3.1 on the coloured L-1: 3 prompts from Muse Spark's legend words, 28 masks, 9 in the legend excluded",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1 on the line drawing of {0}: {1} masks for '{2}'; on the coloured render the same words find {3}",
+  "example": "SAM 3.1 on the line drawing of L-1: 0 masks for 'light green area'; on the coloured render the same words find 15",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1 on {0} (raster): Azalea {1} m² vs the DXF's {2} m² (-{3}%) — {4} awaits confirmation",
+  "example": "SAM 3.1 on Presentation Plan (Colour).pdf (raster): Azalea 146.4 m² vs the DXF's 150 m² (-2.4%) — S-03 awaits confirmation",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1 on {0} (raster): Fire truck access lane — keep clear {1} m² vs the DXF's fire truck access lane — keep clear {2} m² (-{3}%; a tree is drawn over part of it) — {4} awaits confirmation",
+  "example": "SAM 3.1 on Presentation Plan (Colour).pdf (raster): Fire truck access lane — keep clear 78.4 m² vs the DXF's fire truck access lane — keep clear 92 m² (-14.8%; a tree is drawn over part of it) — S-04 awaits confirmation",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1 on {0} (raster): Lawn {1} m² vs the DXF's {2} m² (-{3}%) — {4} awaits confirmation",
+  "example": "SAM 3.1 on Presentation Plan (Colour).pdf (raster): Lawn 195.7 m² vs the DXF's 200 m² (-2.2%) — S-02 awaits confirmation",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1 on {0} (raster): {1} Camphor symbols vs {2} tree symbols on the DXF ({3} counted, {4} excluded, {5} existing) — {6} awaits confirmation",
+  "example": "SAM 3.1 on Presentation Plan (Colour).pdf (raster): 11 Camphor symbols vs 11 tree symbols on the DXF (8 counted, 2 excluded, 1 existing) — S-01 awaits confirmation",
+  "placeholders": 7,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Azalea {0} m² vs CAD {1} m² (+{2}%)",
+  "example": "SAM 3.1: Azalea 120.2 m² vs CAD 120.0 m² (+0.1%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Azalea {0} m² vs CAD {1} m² (-{2}%)",
+  "example": "SAM 3.1: Azalea 149.1 m² vs CAD 150.0 m² (-0.6%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Exposed aggregate {0} m² vs CAD {1} m² (-{2}%)",
+  "example": "SAM 3.1: Exposed aggregate 47.9 m² vs CAD 48.0 m² (-0.3%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Grass pavers {0} m² vs CAD {1} m² (+{2}%)",
+  "example": "SAM 3.1: Grass pavers 40.1 m² vs CAD 40.0 m² (+0.2%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Grass pavers {0} m² vs CAD {1} m² (-{2}%)",
+  "example": "SAM 3.1: Grass pavers 35.8 m² vs CAD 36.0 m² (-0.7%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Lawn {0} m² vs CAD {1} m² (-{2}%)",
+  "example": "SAM 3.1: Lawn 199.7 m² vs CAD 200.0 m² (-0.1%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Permeable pavers {0} m² vs CAD {1} m² (-{2}%)",
+  "example": "SAM 3.1: Permeable pavers 209.5 m² vs CAD 212.0 m² (-1.2%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Planter edge {0} m² vs CAD {1} m² (+{2}%)",
+  "example": "SAM 3.1: Planter edge 24.6 m² vs CAD 24.0 m² (+2.4%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: Roof lawn {0} m² vs CAD {1} m² (+{2}%)",
+  "example": "SAM 3.1: Roof lawn 105.2 m² vs CAD 105.0 m² (+0.2%)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: {0} of {1} Camphor {2} m² vs CAD {3} m² (+{4}%)",
+  "example": "SAM 3.1: 8 of 8 Camphor 100.9 m² vs CAD 95.8 m² (+5.3%)",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: {0} of {1} Chinese ixora {2} m² vs CAD {3} m² (+{4}%)",
+  "example": "SAM 3.1: 6 of 6 Chinese ixora 39.7 m² vs CAD 38.4 m² (+3.5%)",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: {0} of {1} Orange jasmine {2} m² vs CAD {3} m² (+{4}%)",
+  "example": "SAM 3.1: 2 of 2 Orange jasmine 35.0 m² vs CAD 35.0 m² (+0.1%)",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "SAM 3.1: {0} of {1} Yeddo hawthorn {2} m² vs CAD {3} m² (+{4}%)",
+  "example": "SAM 3.1: 5 of 5 Yeddo hawthorn 44.4 m² vs CAD 43.5 m² (+2.0%)",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule and drawing agree: Azalea {0} m²",
+  "example": "Schedule and drawing agree: Azalea 150 m²",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule and drawing agree: Camphor {0}",
+  "example": "Schedule and drawing agree: Camphor 8",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule and drawing agree: Duranta {0}",
+  "example": "Schedule and drawing agree: Duranta 182",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule and drawing agree: Duranta {0} (on {1}, the sheet that carries the schedule; {2} on all floors)",
+  "example": "Schedule and drawing agree: Duranta 182 (on L-101, the sheet that carries the schedule; 284 on all floors)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule and drawing agree: Lawn {0} m²",
+  "example": "Schedule and drawing agree: Lawn 200 m²",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule says {0} Camphor, drawing shows {1} ({2} confirmed)",
+  "example": "Schedule says 12 Camphor, drawing shows 8 (T-08 confirmed)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Schedule says {0} Camphor: drawn {1}, Muse Spark {2} ({3} to confirm)",
+  "example": "Schedule says 12 Camphor: drawn 7, Muse Spark 8 (T-08 to confirm)",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Sky-garden planter shrubs, typ. floor x {0}: bill {1}, drawing {2}",
+  "example": "Sky-garden planter shrubs, typ. floor x 1: bill 38.40, drawing 153.60",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Soil on the roof: {0} says {1} m, {2} says {3} m — needs review",
+  "example": "Soil on the roof: L-501 says 0.6 m, L-104 says 0.3 m — needs review",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "The subtotal SUM({0}) skips Irrigation system",
+  "example": "The subtotal SUM(G6:G17) skips Irrigation system",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Tree pit {0} m² read from {1}: large trees keep their class (≥ {2} m²)",
+  "example": "Tree pit 4 m² read from L-501: large trees keep their class (≥ 4.0 m²)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "Two revisions of {0}: Rev {1} ({2}) is newer; trees {3} in both, {4} moved",
+  "example": "Two revisions of L-1: Rev B (2026-10-14) is newer; trees 8 in both, 1 moved",
+  "placeholders": 5,
+  "where": "check.title"
+ },
+ {
+  "template": "Two-row merged header read in {0} bill",
+  "example": "Two-row merged header read in 1 bill",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Two-row merged header read in {0} bills",
+  "example": "Two-row merged header read in 4 bills",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "Unit rates inside your list: Azalea {0}, Lawn {1}, Exposed aggregate {2} (sample), Grass pavers {3}",
+  "example": "Unit rates inside your list: Azalea 155, Lawn 280, Exposed aggregate 2,000 (sample), Grass pavers 1,250",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "Unit rates inside your list: Camphor {0}, Azalea {1}, Lawn {2}, Permeable pavers {3}, Exposed aggregate {4} (sample), Grass pavers {5}",
+  "example": "Unit rates inside your list: Camphor 6,500, Azalea 155, Lawn 280, Permeable pavers 1,800, Exposed aggregate 2,000 (sample), Grass pavers 1,250",
+  "placeholders": 6,
+  "where": "check.title"
+ },
+ {
+  "template": "Unit rates inside your list: Camphor {0}, Duranta {1}, Azalea {2}, Lawn {3}, Yeddo hawthorn {4} (sample), Chinese ixora {5} (sample), Orange jasmine {6} (sample)",
+  "example": "Unit rates inside your list: Camphor 6,500, Duranta 145, Azalea 155, Lawn 280, Yeddo hawthorn 620 (sample), Chinese ixora 620 (sample), Orange jasmine 650 (sample)",
+  "placeholders": 7,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} (balcony): soil depths meet the artificial-ground table (shrub {1} m ≥ {2} m)",
+  "example": "L-103 (balcony): soil depths meet the artificial-ground table (shrub 0.6 m ≥ 0.4 m)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} (podium): soil depths meet the artificial-ground table (shrub {1} m ≥ {2} m)",
+  "example": "L-102 (podium): soil depths meet the artificial-ground table (shrub 1 m ≥ 0.5 m)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} (roof): Orange jasmine on {1} m soil, below the {2} m minimum — not counted toward greening",
+  "example": "L-104 (roof): Orange jasmine on 0.3 m soil, below the 0.4 m minimum — not counted toward greening",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Cover and Index: cover — not counted",
+  "example": "L-0 Cover and Index: cover — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Drain Cover Detail: detail — not counted",
+  "example": "D-01 Drain Cover Detail: detail — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Enlarged Plan - West: enlarged plan — not counted",
+  "example": "L-5 Enlarged Plan - West: enlarged plan — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Irrigation Plan: background — not counted",
+  "example": "L-7 Irrigation Plan: background — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Landscape Sections: elevation — not counted",
+  "example": "L-301 Landscape Sections: elevation — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Lighting Plan: background — not counted",
+  "example": "L-8 Lighting Plan: background — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Plant Schedule: schedule — not counted",
+  "example": "L-4 Plant Schedule: schedule — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Planting Details: on the drawing index, not in the package",
+  "example": "L-5 Planting Details: on the drawing index, not in the package",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Sections: on the drawing index, not in the package",
+  "example": "L-9 Sections: on the drawing index, not in the package",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} South Elevation: elevation — not counted",
+  "example": "L-2 South Elevation: elevation — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} Tree Pit Detail: detail — not counted",
+  "example": "L-6 Tree Pit Detail: detail — not counted",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} and {1} look alike: {2}% of their line work is the same",
+  "example": "L-102 and L-103 look alike: 91% of their line work is the same",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} existing tree DBH {1} cm marked {2}: may be a protected tree — needs review",
+  "example": "EX-01 existing tree DBH 95 cm marked TO BE REMOVED: may be a protected tree — needs review",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} is drawn outside the site boundary — not counted toward greening",
+  "example": "T-10 is drawn outside the site boundary — not counted toward greening",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} legend: {1} symbol not counted",
+  "example": "L-102 legend: 1 symbol not counted",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} legend: {1} symbols not counted",
+  "example": "L-1 legend: 3 symbols not counted",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} stands for {1} floors (Typical Sky Garden Plan, {2}F, {3}F, {4}F, {5}F): quantities × {6}",
+  "example": "L-103 stands for 4 floors (Typical Sky Garden Plan, 8F, 12F, 16F, 20F): quantities × 4",
+  "placeholders": 7,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} versions of the bill; the latest by date is {1} ({2})",
+  "example": "4 versions of the bill; the latest by date is Landscape BOQ rev3 (paving update).xlsx (2026-10-14)",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0} {1}F-RF Planter Details: detail — not counted",
+  "example": "L-501 5F-RF Planter Details: detail — not counted",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: AutoCAD backup, byte-identical to {1}: ignored",
+  "example": "L-1 Planting Plan.bak: AutoCAD backup, byte-identical to L-1 Planting Plan.dxf: ignored",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: material photo — exposed aggregate concrete → {1} Exposed aggregate",
+  "example": "pasted image #1.png: material photo — exposed aggregate concrete → PV-2 Exposed aggregate",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: material photo — grey brick pavers → {1} Permeable pavers",
+  "example": "pasted image #2.png: material photo — grey brick pavers → PV-1 Permeable pavers",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: open outline ({1} pieces, {2} gaps up to {3} m); Muse Spark says one tree",
+  "example": "T-08: open outline (12 pieces, 12 gaps up to 0.40 m); Muse Spark says one tree",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: open outline ({1} pieces, {2} gaps up to {3} m); Muse Spark says one tree — confirmed",
+  "example": "T-08: open outline (12 pieces, 12 gaps up to 0.40 m); Muse Spark says one tree — confirmed",
+  "placeholders": 4,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: raster only — no vectors, not measured",
+  "example": "L-1 Planting Plan (scan).pdf: raster only — no vectors, not measured",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: required by {1}",
+  "example": "Greening quantity report (TCO2 calculation): required by Green Building Label — Required Documents",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: title block says {1}, the scale bar measures {2}",
+  "example": "L-5: title block says 1:200, the scale bar measures 1:100",
+  "placeholders": 3,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: unpacked, {1} file inside",
+  "example": "metal-details.zip: unpacked, 1 file inside",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: unsupported — Excel 97–2003, save as .xlsx",
+  "example": "irrigation quote (old format).xls: unsupported — Excel 97–2003, save as .xlsx",
+  "placeholders": 1,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: {1}",
+  "example": "Design Review — Issues: Record of the 2026-09-10 review meeting listing three landscape design issues to be resolved with the next drawing issue.",
+  "placeholders": 2,
+  "where": "check.title"
+ },
+ {
+  "template": "{0}: {1} vector pages ({2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}) — read, not measured",
+  "example": "Landscape Drawings (Full Set).pdf: 9 vector pages (L-0, L-1, L-2, L-3, L-4, L-5, L-6, L-7, L-8) — read, not measured",
+  "placeholders": 11,
+  "where": "check.title"
+ },
+ {
+  "template": "Greening (Art. {0}): required {1}, provided {2} ({3} before the tree-pit rule) — fail · {4} trees ({5} confirmed)",
+  "example": "Greening (Art. 302): required 297.0, provided 209.9 (261.1 before the tree-pit rule) — fail · 8 trees (T-08 confirmed)",
+  "placeholders": 6,
+  "where": "check.title|rule.title"
+ },
+ {
+  "template": "Greening (Art. {0}): required {1}, provided {2} ({3} before the tree-pit rule) — fail · {4} trees counted, {5} to confirm",
+  "example": "Greening (Art. 302): required 297.0, provided 197.1 (241.9 before the tree-pit rule) — fail · 7 trees counted, T-08 to confirm",
+  "placeholders": 6,
+  "where": "check.title|rule.title"
+ },
+ {
+  "template": "Tree pit {0} × {1} m = {2} m² on artificial ground: {3} large trees count as small (Gi {4} → {5})",
+  "example": "Tree pit 1.5 × 1.5 m = 2.25 m² on artificial ground: 7 large trees count as small (Gi 1.5 → 1.0)",
+  "placeholders": 6,
+  "where": "check.title|rule.title"
+ },
+ {
+  "template": "Water retention (Art. {0}): λ {1} < λc {2} over the basement slab — fails on the drawings' own areas",
+  "example": "Water retention (Art. 305): λ 0.011 < λc 0.30 over the basement slab — fails on the drawings' own areas",
+  "placeholders": 3,
+  "where": "check.title|rule.title"
+ },
+ {
+  "template": "{0} is drawn inside the fire truck access lane — not counted toward greening",
+  "example": "T-09 is drawn inside the fire truck access lane — not counted toward greening",
+  "placeholders": 1,
+  "where": "check.title|rule.title"
+ },
+ {
+  "template": "A backup is never counted; the drawing it copies is read once.",
+  "example": "A backup is never counted; the drawing it copies is read once.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Against your price list (landsight.db); rows not on the list: Planter edge.",
+  "example": "Against your price list (landsight.db); rows not on the list: Planter edge.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Against your price list (landsight.db); rows not on the list: none.",
+  "example": "Against your price list (landsight.db); rows not on the list: none.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Counted by geometry from the label '{0}': floor(length ÷ spacing) + {1} on each drawn line.",
+  "example": "Counted by geometry from the label 'DU Duranta @0.3m o.c., DOUBLE ROW': floor(length ÷ spacing) + 1 on each drawn line.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Each mask takes the type of the outline it lies in, not the prompt's; one prompt can return several types, and masks on legend swatches are a key, not a quantity.",
+  "example": "Each mask takes the type of the outline it lies in, not the prompt's; one prompt can return several types, and masks on legend swatches are a key, not a quantity.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Each page was rendered and classified; the DXF of the same sheet is the one measured. Kinds: {0} cover, {1} plan, {2} elevation, {3} plan, {4} schedule, {5} plan, {6} detail, {7} background, {8} background.",
+  "example": "Each page was rendered and classified; the DXF of the same sheet is the one measured. Kinds: L-0 cover, L-1 plan, L-2 elevation, L-3 plan, L-4 schedule, L-5 plan, L-6 detail, L-7 background, L-8 background.",
+  "placeholders": 9,
+  "where": "check.why"
+ },
+ {
+  "template": "Every page is an image (pymupdf found no vector paths and no text). Muse Spark read the title block: {0}, Planting Plan, Rev {1}, {2}. The DXF of {3} is measured instead.",
+  "example": "Every page is an image (pymupdf found no vector paths and no text). Muse Spark read the title block: L-1, Planting Plan, Rev A, 2026-09-18. The DXF of L-1 is measured instead.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Geometry could not close {0}'s line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence {1}): Twelve short segments form one circular canopy with central '{2}' matching the adjacent tree symbol. A person confirmed it. The same open outline is on {3}.",
+  "example": "Geometry could not close T-08's line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence 0.92): Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol. A person confirmed it. The same open outline is on L-1-revA.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Geometry could not close {0}'s line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence {1}): Twelve short segments form one circular canopy with central '{2}' matching the adjacent tree symbol. It is counted only after a person confirms. The same open outline is on {3}.",
+  "example": "Geometry could not close T-08's line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence 0.92): Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol. It is counted only after a person confirms. The same open outline is on L-1-revA.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Geometry could not close {0}'s line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence {1}): {2}. It is counted only after a person confirms.",
+  "example": "Geometry could not close T-04's line work; Muse Spark, shown the crop with the measured facts, says one tree (confidence 0.95): The 12 red pieces form one circular canopy with center mark identical in size to the adjacent labeled camphor trees and covered by the typ. label. It is counted only after a person confirms.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "Geometry found the legend box (the smallest frame around the word LEGEND); the symbols and swatches inside it are a key, not plants or paving.",
+  "example": "Geometry found the legend box (the smallest frame around the word LEGEND); the symbols and swatches inside it are a key, not plants or paving.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Key facts: {0}",
+  "example": "Key facts: review meeting 2026-09-10 for Greenfield Residences — landscape package; Trees on the podium: confirm tree pit size and soil depth on the basement slab against the greening standard before the permit set (Sheets L-1, L-6); Fire-truck access lane along the west boundary: keep the lane clear of planting; show its extent on the planting plan (Sheet L-1); Plant schedule and bill quantities must agree with the planting plan; the plan governs (Sheets L-4, bill); Actions assigned to Designer, Rev A and Developer with written response required with next issue of drawings; Sample document: synthetic, generated for the Landsight demo package. Not a real project record.",
+  "placeholders": 1,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as background (irrigation), confidence {0}: {1} Its {2} round outlines are not counted.",
+  "example": "Muse Spark classified the sheet as background (irrigation), confidence 0.96: Sheet is titled Irrigation Plan with an irrigation legend and irrigation symbols overlaid on thin landscape reference linework. Its 10 round outlines are not counted.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as background (lighting), confidence {0}: {1} Its {2} round outlines are not counted.",
+  "example": "Muse Spark classified the sheet as background (lighting), confidence 0.97: The sheet is a lighting layout with bollard, uplight and pole symbols over thin landscape linework and a Lighting Plan title. Its 10 round outlines are not counted.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as cover (general), confidence {0}: {1}",
+  "example": "Muse Spark classified the sheet as cover (general), confidence 0.99: Sheet is titled Cover and Index with a DRAWING INDEX table and general notes and no plan graphics.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as detail (metalwork), confidence {0}: {1}",
+  "example": "Muse Spark classified the sheet as detail (metalwork), confidence 0.98: Sheet shows PLAN and SECTION of a single drain cover element titled Drain Cover Detail.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as detail (planting), confidence {0}: {1}",
+  "example": "Muse Spark classified the sheet as detail (planting), confidence 0.98: Sheet shows plan and section of a single tree pit element with construction layers, not a site plan.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as elevation (general), confidence {0}: {1}",
+  "example": "Muse Spark classified the sheet as elevation (general), confidence 0.90: Sheet shows a side-view section with floor ground lines and planters labeled SECTION A-A, matching elevation definition.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as elevation (planting), confidence {0}: {1} Its {2} round outlines are not counted.",
+  "example": "Muse Spark classified the sheet as elevation (planting), confidence 0.98: The sheet shows a side view labeled SOUTH ELEVATION with trees standing on a ground line. Its 8 round outlines are not counted.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as plan (planting), confidence {0}: {1} Geometry found the match line ('{2}'). Its {3} round outlines are not counted.",
+  "example": "Muse Spark classified the sheet as plan (planting), confidence 0.95: Top-down tree layout titled Enlarged Plan-West with match line and key plan shows a partial planting plan. Geometry found the match line ('MATCH LINE — SEE L-1'). Its 4 round outlines are not counted.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark classified the sheet as schedule (planting), confidence {0}: {1}",
+  "example": "Muse Spark classified the sheet as schedule (planting), confidence 0.98: The sheet content is almost entirely a PLANT SCHEDULE table with tree/shrub/groundcover quantities matching a planting discipline title block.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark looked at the legend box of the coloured render and named each swatch's colour; SAM 3.1 is prompted with exactly those words (an area swatch becomes '{0}', a tree symbol '{1}'); line entries are left to geometry.",
+  "example": "Muse Spark looked at the legend box of the coloured render and named each swatch's colour; SAM 3.1 is prompted with exactly those words (an area swatch becomes '<colour> area', a tree symbol '<colour> circle'); line entries are left to geometry.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark named each filled type with a colour word and found the legend box and the scale bar ({0}); the bar was then measured in the page's own pixels between the ends Spark gave: {1} px for {2} m. Title block scale as written: {3}. SAM 3.1 is prompted with exactly Spark's words.",
+  "example": "Muse Spark named each filled type with a colour word and found the legend box and the scale bar (Legend box, on-plan area labels, graphic 0-10m scale bar and 1:200 title-block scale are all clearly legible.); the bar was then measured in the page's own pixels between the ends Spark gave: 255 px for 10 m. Title block scale as written: 1:200. SAM 3.1 is prompted with exactly Spark's words.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the checklist: {0}. Landsight's Art. {1} check ({2}): required {3}, provided {4} — fail. The report must show the inputs read from the planting plan and the schedule; the same numbers are in the greening check.",
+  "example": "Muse Spark read the checklist: Sample checklist listing the documents to submit with the Green Building Label application for the Greenery indicator. Landsight's Art. 302 check (C-51): required 297.0, provided 197.1 — fail. The report must show the inputs read from the planting plan and the schedule; the same numbers are in the greening check.",
+  "placeholders": 5,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the detail {0}: Pit size from '{1}', soil depth and slab condition from '{2}', confirmed by '{3}'. On artificial ground a large tree needs a {4} m² pit and {5} m of soil; this pit meets both, so nothing is downgraded.",
+  "example": "Muse Spark read the detail L-501: Pit size from 'TREE PIT 2000 x 2000', soil depth and slab condition from 'SOIL DEPTH 1.2 M ON SLAB', confirmed by 'PIT AREA 4 m2'. On artificial ground a large tree needs a 4.0 m² pit and 1.0 m of soil; this pit meets both, so nothing is downgraded.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the detail {0}: {1}. On artificial ground a large tree needs a {2} m² pit; one of {3}–{4} m² counts as a small tree. The schedule and the bill call them large trees. TCO2 {5} → {6}; the cheapest fix changes with it.",
+  "example": "Muse Spark read the detail L-6: Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition. On artificial ground a large tree needs a 4.0 m² pit; one of 1.5–4 m² counts as a small tree. The schedule and the bill call them large trees. TCO2 241.9 → 197.1; the cheapest fix changes with it.",
+  "placeholders": 7,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the soil depths written on {0} ({1}); the artificial-ground table applies the both (podium over a basement is not named) column: shrub {2} m ≥ {3} m.",
+  "example": "Muse Spark read the soil depths written on L-102 (PODIUM PLANTER SOIL 1.0 M ON SLAB); the artificial-ground table applies the both (podium over a basement is not named) column: shrub 1 m ≥ 0.5 m.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the soil depths written on {0} ({1}); the artificial-ground table applies the roof, balcony and terrace column: lawn {2} m ≥ {3} m; shrub {4} m < {5} m. {6} m² of planting is left out of the greening sum until the soil is deepened.",
+  "example": "Muse Spark read the soil depths written on L-104 (ROOF LAWN ON 0.3 M SOIL, DRAINAGE BOARD AND FILTER FABRIC; ROOF PLANTERS: SOIL 0.3 M); the artificial-ground table applies the roof, balcony and terrace column: lawn 0.3 m ≥ 0.1 m; shrub 0.3 m < 0.4 m. 35 m² of planting is left out of the greening sum until the soil is deepened.",
+  "placeholders": 7,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the soil depths written on {0} ({1}); the artificial-ground table applies the roof, balcony and terrace column: shrub {2} m ≥ {3} m.",
+  "example": "Muse Spark read the soil depths written on L-103 (SKY-GARDEN PLANTER SOIL 0.6 M); the artificial-ground table applies the roof, balcony and terrace column: shrub 0.6 m ≥ 0.4 m.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark read the title block: floors {0}, {1}, {2}, {3} (typical). One drawing, {4} floors built: Chinese ixora {5} m² per floor × {6} = {7} m². The take-off, the bill comparison and the greening sum all use the {8}-floor totals.",
+  "example": "Muse Spark read the title block: floors 8, 12, 16, 20 (typical). One drawing, 4 floors built: Chinese ixora 38.4 m² per floor × 4 = 153.6 m². The take-off, the bill comparison and the greening sum all use the 4-floor totals.",
+  "placeholders": 9,
+  "where": "check.why"
+ },
+ {
+  "template": "Muse Spark: {0} (confidence {1}). {2} is keyed on {3} legend. An image is read, never measured.",
+  "example": "Muse Spark: The frame is filled with a close-up beige matrix with grey black and white aggregate pebbles and no drawing lines or text. (confidence 0.90). PV-2 is keyed on L-3 legend. An image is read, never measured.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Not read: Excel 97–2003, save as .xlsx. Ask the sender for a readable copy if its numbers matter.",
+  "example": "Not read: Excel 97–2003, save as .xlsx. Ask the sender for a readable copy if its numbers matter.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Required TCO2c = {0} × A′ {1} m² × β {2} = {3}; provided (ΣGi·Ai {4}) × α {5} = {6} kgCO2e/yr. Orange jasmine counted as {7} m², not {8}: {9} m² on {10} sits on {11} m of soil, below the {12} m minimum for shrubs and vines. One tree species (Camphor), so ra = {13} and α = {14}. ",
+  "example": "Required TCO2c = 0.5 × A′ 900.0 m² × β 0.66 = 297.0; provided (ΣGi·Ai 462.45) × α 0.8 = 370.0 kgCO2e/yr. Orange jasmine counted as 0 m², not 35: 35 m² on L-104 sits on 0.3 m of soil, below the 0.4 m minimum for shrubs and vines. One tree species (Camphor), so ra = 0 and α = 0.8. ",
+  "placeholders": 15,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1 on the coloured render, asked for '{0}' (Muse Spark's words from the legend), returned a mask on each outline; its area is set against the geometry's. The CAD area governs the quantity.",
+  "example": "SAM 3.1 on the coloured render, asked for 'tan area' (Muse Spark's words from the legend), returned a mask on each outline; its area is set against the geometry's. The CAD area governs the quantity.",
+  "placeholders": 1,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1 on the coloured render, asked for '{0}' (Muse Spark's words from the legend), returned a mask on each outline; its area is set against the geometry's. The CAD area governs the quantity; SAM is {1}% off, outside the {2}% a coloured PDF alone would need.",
+  "example": "SAM 3.1 on the coloured render, asked for 'light green area' (Muse Spark's words from the legend), returned a mask on each outline; its area is set against the geometry's. The CAD area governs the quantity; SAM is 5.3% off, outside the 2% a coloured PDF alone would need.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1 on the coloured render, asked for '{0}' (Muse Spark's words from the legend), returned a mask on the outline; its area is set against the geometry's. The CAD area governs the quantity.",
+  "example": "SAM 3.1 on the coloured render, asked for 'light green area' (Muse Spark's words from the legend), returned a mask on the outline; its area is set against the geometry's. The CAD area governs the quantity.",
+  "placeholders": 1,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1 on the coloured render, asked for '{0}' (Muse Spark's words from the legend), returned a mask on the outline; its area is set against the geometry's. The CAD area governs the quantity; SAM is {1}% off, outside the {2}% a coloured PDF alone would need.",
+  "example": "SAM 3.1 on the coloured render, asked for 'light grey area' (Muse Spark's words from the legend), returned a mask on the outline; its area is set against the geometry's. The CAD area governs the quantity; SAM is 2.4% off, outside the 2% a coloured PDF alone would need.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1, prompted with Muse Spark's words ('{0}'), found {1} region typed '{2}' by the label written inside it; masks inside the legend box ({3} in all) were dropped as a key. Area = mask pixels × ({4} m/px)², the scale from the page's own bar. The DXF governs; this measures a file the CAD does not cover, and differs from it by -{5}%. Counted only after a person confirms it.",
+  "example": "SAM 3.1, prompted with Muse Spark's words ('grey area'), found 1 region typed 'FIRE TRUCK ACCESS LANE — KEEP CLEAR' by the label written inside it; masks inside the legend box (7 in all) were dropped as a key. Area = mask pixels × (0.0392 m/px)², the scale from the page's own bar. The DXF governs; this measures a file the CAD does not cover, and differs from it by -14.8%. Counted only after a person confirms it.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1, prompted with Muse Spark's words ('{0}'), found {1} region typed '{2}' by the label written inside it; masks inside the legend box ({3} in all) were dropped as a key. Area = mask pixels × ({4} m/px)², the scale from the page's own bar. The DXF governs; this measures a file the CAD does not cover. Counted only after a person confirms it.",
+  "example": "SAM 3.1, prompted with Muse Spark's words ('light green area'), found 1 region typed 'LA LAWN' by the label written inside it; masks inside the legend box (7 in all) were dropped as a key. Area = mask pixels × (0.0392 m/px)², the scale from the page's own bar. The DXF governs; this measures a file the CAD does not cover. Counted only after a person confirms it.",
+  "placeholders": 5,
+  "where": "check.why"
+ },
+ {
+  "template": "SAM 3.1, prompted with Muse Spark's words ('{0}'), found {1} regions typed '{2}' by the highest SAM score; masks inside the legend box ({3} in all) were dropped as a key. Area = mask pixels × ({4} m/px)², the scale from the page's own bar. The DXF governs; this measures a file the CAD does not cover. Counted only after a person confirms it.",
+  "example": "SAM 3.1, prompted with Muse Spark's words ('green circle'), found 11 regions typed 'CC CAMPHOR or EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED or CC typ.' by the highest SAM score; masks inside the legend box (7 in all) were dropped as a key. Area = mask pixels × (0.0392 m/px)², the scale from the page's own bar. The DXF governs; this measures a file the CAD does not cover. Counted only after a person confirms it.",
+  "placeholders": 5,
+  "where": "check.why"
+ },
+ {
+  "template": "The bill spells it '{0}'; the drawing's schedule says Camphor. Muse Spark: {1}. Confirm it is the same item.",
+  "example": "The bill spells it 'camphore'; the drawing's schedule says Camphor. Muse Spark: Misspelt Camphore but botanical spec matches CC. Confirm it is the same item.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "The bill's unit rate against the firm's own installed range in your price list (landsight.db): {0}% above the list's high end. The list row says: paver + bedding + base; source {1} {2}-{3}; {4} {5}-{6}.",
+  "example": "The bill's unit rate against the firm's own installed range in your price list (landsight.db): 65% above the list's high end. The list row says: paver + bedding + base; source P048-P051 1,210-1,410; P052 2,120-2,340.",
+  "placeholders": 7,
+  "where": "check.why"
+ },
+ {
+  "template": "The bill's unit rate against the firm's own installed range in your price list (landsight.db): {0}% below the list's low end. The list row says: cal. {1} cm, {2} m, installed; source {3} municipal budget {4} ({5}); {6} municipal budget {7} ({8}).",
+  "example": "The bill's unit rate against the firm's own installed range in your price list (landsight.db): 32% below the list's low end. The list row says: cal. 10 cm, H3.0-3.5 m, installed; source P006 municipal budget 6,149 (2021); P002 municipal budget 7,036 (2022).",
+  "placeholders": 9,
+  "where": "check.why"
+ },
+ {
+  "template": "The bill's unit rate against the firm's own installed range in your price list (landsight.db): {0}% below the list's low end. The list row says: sod on {1} m soil, filter fabric and drainage board, installed; source sample: lawn {2} {3} plus drainage board, filter fabric and lifting (no direct source).",
+  "example": "The bill's unit rate against the firm's own installed range in your price list (landsight.db): 57% below the list's low end. The list row says: sod on 0.3 m soil, filter fabric and drainage board, installed; source sample: lawn P030 273 plus drainage board, filter fabric and lifting (no direct source).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The boxed code '{0}' points at a {1} m² area hatched {2}, which the legend keys to {3} Exposed aggregate. The take-off follows the hatch and the legend ({4}); the bill may price it as {5}. Your list: Permeable pavers NT${6}–{7}, Exposed aggregate NT${8}–{9} per m².",
+  "example": "The boxed code 'PV-1' points at a 48 m² area hatched AR-SAND, which the legend keys to PV-2 Exposed aggregate. The take-off follows the hatch and the legend (PV-2); the bill may price it as PV-1. Your list: Permeable pavers NT$1,300–2,300, Exposed aggregate NT$1,800–2,200 per m².",
+  "placeholders": 10,
+  "where": "check.why"
+ },
+ {
+  "template": "The canopy's centre ({0}, -{1}) lies outside the site boundary (the property line on the sheet), in the road reserve. It is drawn but cannot be planted or counted on this site; ask whether it is a street tree by others.",
+  "example": "The canopy's centre (39, -2.6) lies outside the site boundary (the property line on the sheet), in the road reserve. It is drawn but cannot be planted or counted on this site; ask whether it is a street tree by others.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "The canopy's centre lies inside the area labelled '{0}': a tree there blocks a lane the drawing says to keep clear, so it is left out of the greening count until the designer moves it or the architect accepts it. If the architect confirms this strip is fire-truck rescue space under §{1}, the requirement drops to {2} kgCO2e/yr — still a fail — and the tree fix becomes +{3}. Until then the greening check keeps Ap = {4} (required {5}), as the drawings do not declare it.",
+  "example": "The canopy's centre lies inside the area labelled 'FIRE TRUCK ACCESS LANE — KEEP CLEAR': a tree there blocks a lane the drawing says to keep clear, so it is left out of the greening count until the designer moves it or the architect accepts it. If the architect confirms this strip is fire-truck rescue space under §299, the requirement drops to 278.8 kgCO2e/yr — still a fail — and the tree fix becomes +7. Until then the greening check keeps Ap = 0 (required 297.0), as the drawings do not declare it.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "The controlled test: the same words Muse Spark wrote, '{0}', on the plain line work and on the coloured render of the same sheet; only the image changes. SAM 3.1 segments filled regions, not line work.",
+  "example": "The controlled test: the same words Muse Spark wrote, 'light green area', on the plain line work and on the coloured render of the same sheet; only the image changes. SAM 3.1 segments filled regions, not line work.",
+  "placeholders": 1,
+  "where": "check.why"
+ },
+ {
+  "template": "The corridor walls (layer A-EGRESS) are {0} m apart; {1} Chinese ixora planters inside the corridor ({2}, {3}) leave {4} m clear at the narrowest, below the {5} m minimum ({6} m where rooms open on both sides). {7} stands for {8} floors, so the same narrowing repeats on {9}F, {10}F, {11}F and {12}F. Move the planters out of the corridor or widen it.",
+  "example": "The corridor walls (layer A-EGRESS) are 1.5 m apart; 2 Chinese ixora planters inside the corridor (B-02, B-03) leave 0.9 m clear at the narrowest, below the 1.2 m minimum (1.6 m where rooms open on both sides). L-103 stands for 4 floors, so the same narrowing repeats on 8F, 12F, 16F and 20F. Move the planters out of the corridor or widen it.",
+  "placeholders": 13,
+  "where": "check.why"
+ },
+ {
+  "template": "The detail ({0}: '{1}') and the plan ({2}: '{3}') give different soil depths for the same planting. The greening and the soil check use the plan's figure; ask which is built (and priced).",
+  "example": "The detail (L-501: 'SOIL 600 MM (0.6 M)') and the plan (L-104: 'ROOF LAWN ON 0.3 M SOIL, DRAINAGE BOARD AND FILTER FABRIC') give different soil depths for the same planting. The greening and the soil check use the plan's figure; ask which is built (and priced).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The drawing counts Duranta by plant ({0}: {1} rows of {2} m at {3} m); the bill prices {4} m, one row's length. Price per plant, as the procurement standard measures hedges.",
+  "example": "The drawing counts Duranta by plant (182: 2 rows of 27 m at 0.3 m); the bill prices 27 m, one row's length. Price per plant, as the procurement standard measures hedges.",
+  "placeholders": 5,
+  "where": "check.why"
+ },
+ {
+  "template": "The header spans two rows with group headings merged over their sub-headings; columns read as Item, Description, Spec, Quantity / Unit, Quantity / Qty, Price / Unit price (NT$), Price / Amount (NT$).",
+  "example": "The header spans two rows with group headings merged over their sub-headings; columns read as Item, Description, Spec, Quantity / Unit, Quantity / Qty, Price / Unit price (NT$), Price / Amount (NT$).",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "The index on {0} lists {1} sheets ({2}, {3}, {4}, {5}); no DXF or PDF page in the package carries {6}. Muse Spark's read and the DXF text agree. Ask for the missing sheet.",
+  "example": "The index on L-0 lists 4 sheets (L-1, L-3, L-5, L-6); no DXF or PDF page in the package carries L-5. Muse Spark's read and the DXF text agree. Ask for the missing sheet.",
+  "placeholders": 7,
+  "where": "check.why"
+ },
+ {
+  "template": "The index on {0} lists {1} sheets ({2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}); no DXF or PDF page in the package carries {11}. Muse Spark's read and the DXF text agree. Ask for the missing sheet.",
+  "example": "The index on L-0 lists 9 sheets (L-1, L-2, L-3, L-4, L-5, L-6, L-7, L-8, L-9); no DXF or PDF page in the package carries L-9. Muse Spark's read and the DXF text agree. Ask for the missing sheet.",
+  "placeholders": 12,
+  "where": "check.why"
+ },
+ {
+  "template": "The label reads '{0}'. DBH {1} m reaches the {2} m threshold of the local tree protection rule (Art. {3}: DBH ≥ {4} m or girth ≥ {5} m). Protection is the city's designation, not the drawing's: removal needs a tree record and a protection or transplant plan approved before work starts (Art. {6}). The dashed canopy (r {7} m) and root protection zone (r {8} m) are not counted as planting.",
+  "example": "The label reads 'EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED'. DBH 0.95 m reaches the 0.8 m threshold of the local tree protection rule (Art. 3: DBH ≥ 0.8 m or girth ≥ 2.5 m). Protection is the city's designation, not the drawing's: removal needs a tree record and a protection or transplant plan approved before work starts (Art. 11). The dashed canopy (r 3 m) and root protection zone (r 4.5 m) are not counted as planting.",
+  "placeholders": 9,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill has {0} m²; the governing drawing shows {1}.",
+  "example": "The latest bill has 38.40 m²; the governing drawing shows 153.60.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill has {0} m²; the governing drawing shows {1}. Bill {2} ({3}) changed it from {4} to {5}; the drawing was not changed.",
+  "example": "The latest bill has 236 m²; the governing drawing shows 212. Bill 3 (2026-10-14) changed it from 212 to 236; the drawing was not changed.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill has {0} plants; the governing drawing shows {1}; the plant schedule says {2}, and the drawing governs (general note); Tree pit on slab {3} EA follows the same {4}.",
+  "example": "The latest bill has 12 plants; the governing drawing shows 8; the plant schedule says 12, and the drawing governs (general note); Tree pit on slab 12 EA follows the same 12.",
+  "placeholders": 5,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Camphor ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 6 aligned to Camphor (CC, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Duranta ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 7 aligned to Duranta (DU, confidence 0.95); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Exposed aggregate ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 12 aligned to Exposed aggregate (PV-2, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Grass pavers ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 13 aligned to Grass pavers (PV-3, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Lawn ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 9 aligned to Lawn (LA, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Orange jasmine ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 16 aligned to Orange jasmine (MP, confidence 0.90); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Permeable pavers ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 11 aligned to Permeable pavers (PV-1, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Planter edge ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 14 aligned to Planter edge (PLANTER-EDGE, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Roof lawn ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 15 aligned to Roof lawn (RL, confidence 1.00); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The latest bill's row {0} aligned to Yeddo hawthorn ({1}, confidence {2}); same unit, same quantity (areas within {3}%).",
+  "example": "The latest bill's row 11 aligned to Yeddo hawthorn (RI, confidence 0.90); same unit, same quantity (areas within 1%).",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The plant schedule (read by Muse Spark) and the measured drawing disagree. General note on {0}: \"{1}\" — the drawing governs. Raise it with the developer.",
+  "example": "The plant schedule (read by Muse Spark) and the measured drawing disagree. General note on L-1-revB: \"1. PLANT QUANTITIES ON PLAN TAKE PRECEDENCE OVER THE SCHEDULE.\" — the drawing governs. Raise it with the developer.",
+  "placeholders": 2,
+  "where": "check.why"
+ },
+ {
+  "template": "The plant schedule (read by Muse Spark) says {0}; geometry closed {1} outlines and Muse Spark reads {2} as one more ({3}), which counts once a person confirms it. Either way the schedule disagrees with the drawing. General note on {4}: \"{5}\" — the drawing governs. Raise it with the developer.",
+  "example": "The plant schedule (read by Muse Spark) says 12; geometry closed 7 outlines and Muse Spark reads T-08 as one more (8), which counts once a person confirms it. Either way the schedule disagrees with the drawing. General note on L-1-revB: \"1. PLANT QUANTITIES ON PLAN TAKE PRECEDENCE OVER THE SCHEDULE.\" — the drawing governs. Raise it with the developer.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "The plant schedule and the measured drawing give the same number.",
+  "example": "The plant schedule and the measured drawing give the same number.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "The scale bar ({0} · {1} · {2} · {3} · {4} · {5} m) puts {6} drawing units in a metre; the frame and title block are the size of the package's other sheets, so the content plots at {7}, not {8}. Areas measured on this sheet as if it were {9} unit = {10} m would be {11}× too large: this sheet is not measured.",
+  "example": "The scale bar (0 · 1 · 2 · 3 · 4 · 5 m) puts 2 drawing units in a metre; the frame and title block are the size of the package's other sheets, so the content plots at 1:100, not 1:200. Areas measured on this sheet as if it were 1 unit = 1 m would be 4× too large: this sheet is not measured.",
+  "placeholders": 12,
+  "where": "check.why"
+ },
+ {
+  "template": "The schedule asks {0} plants per m²; the drawn bed is {1} m², so {2} plants. The bill has {3}.",
+  "example": "The schedule asks 4 plants per m²; the drawn bed is 150 m², so 600 plants. The bill has 450.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The subtotal formula stops at row {0}; row {1} (Irrigation system, NT${2}) is left out, so the bill does not add up in {3} versions.",
+  "example": "The subtotal formula stops at row 17; row 19 (Irrigation system, NT$117,190) is left out, so the bill does not add up in 2 versions.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "The subtotal formula stops at row {0}; row {1} (Irrigation system, NT${2}) is left out, so the bill does not add up.",
+  "example": "The subtotal formula stops at row 17; row 19 (Irrigation system, NT$260,000) is left out, so the bill does not add up.",
+  "placeholders": 3,
+  "where": "check.why"
+ },
+ {
+  "template": "The workbook hides a sheet '{0}' with {1} priced rows totalling NT${2}, against NT${3} on the visible sheet. Ask which one the developer priced from.",
+  "example": "The workbook hides a sheet 'old' with 11 priced rows totalling NT$1,132,628, against NT$1,458,608 on the visible sheet. Ask which one the developer priced from.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Unpacked into a temporary folder (member names checked: no absolute paths, no '{0}'). {1}: {2} Drain Cover Detail, metalwork detail from {3}: not a landscape quantity.",
+  "example": "Unpacked into a temporary folder (member names checked: no absolute paths, no '..'). drain-cover-detail.dxf: D-01 Drain Cover Detail, metalwork detail from metal-details.zip: not a landscape quantity.",
+  "placeholders": 4,
+  "where": "check.why"
+ },
+ {
+  "template": "Versions ordered by the date in each bill's heading: . The latest governs the comparison with the drawings.",
+  "example": "Versions ordered by the date in each bill's heading: . The latest governs the comparison with the drawings.",
+  "placeholders": 0,
+  "where": "check.why"
+ },
+ {
+  "template": "Versions ordered by the date in each bill's heading: {0} → {1} ({2}): Azalea: qty {3} → {4}; {5} → {6} ({7}): Camphor tree, cal. {8} cm: name Camphor tree, cal. {9} cm → Camphore tree, cal. {10} cm, Duranta: name Duranta → Duranta hedge, Duranta: unit EA → m, Duranta: qty {11} → {12}, Duranta: price {13} → {14}, Permeable pavers ({15}): price {16} → {17}; {18} → {19} ({20}): Permeable pavers ({21}): qty {22} → {23}. The latest governs the comparison with the drawings.",
+  "example": "Versions ordered by the date in each bill's heading: 1 → 1a (2026-01-21): Azalea: qty 600 → 450; 1a → 2 (2026-02-19): Camphor tree, cal. 10 cm: name Camphor tree, cal. 10 cm → Camphore tree, cal. 10 cm, Duranta: name Duranta → Duranta hedge, Duranta: unit EA → m, Duranta: qty 150 → 27, Duranta: price 145 → 950, Permeable pavers (PV-1): price 1,800 → 3,800; 2 → 3 (2026-10-14): Permeable pavers (PV-1): qty 212 → 236. The latest governs the comparison with the drawings.",
+  "placeholders": 24,
+  "where": "check.why"
+ },
+ {
+  "template": "Yeddo hawthorn planter {0} ({1} m²) overlaps the lift shaft on layer A-CORE-LIFT ({2} m²) by {3} m² ({4} × {5} m). A planter cannot stand in a lift shaft: either the planting or the core is drawn in the wrong place. Ask the designer where the planter goes before pricing it.",
+  "example": "Yeddo hawthorn planter B-10 (7.5 m²) overlaps the lift shaft on layer A-CORE-LIFT (6.25 m²) by 3.0 m² (2 × 1.5 m). A planter cannot stand in a lift shaft: either the planting or the core is drawn in the wrong place. Ask the designer where the planter goes before pricing it.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} ({1} m²) and {2} ({3} m²) share {4} m² ({5} × {6} m): the same ground is counted twice, once as paving and once as planting. Which one is built? Until then the greening check (Art. {7}) leaves the overlap out of the lawn: {8} − {9} = {10} m² at Gi {11}.",
+  "example": "P-03 (36 m²) and L-01 (200 m²) share 20.0 m² (5 × 4 m): the same ground is counted twice, once as paving and once as planting. Which one is built? Until then the greening check (Art. 302) leaves the overlap out of the lawn: 200 − 20.0 = 180.0 m² at Gi 0.3.",
+  "placeholders": 12,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} ({1}F) {2} object, {3} m of line; {4} ({5}F) {6} object, {7} m of line. Different floors are different planting: the take-off counts both and never merges them, even where the symbol, the label and the position repeat.",
+  "example": "L-101 (1F) 1 object, 54 m of line; L-102 (5F) 1 object, 30 m of line. Different floors are different planting: the take-off counts both and never merges them, even where the symbol, the label and the position repeat.",
+  "placeholders": 8,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} Camphor counted (closed outlines, geometry); {1}, which Muse Spark reads as one more tree, counts once a person confirms it ({2} then). Required TCO2c = {3} × A′ {4} m² × β {5} = {6}; provided (ΣGi·Ai {7}) × α {8} = {9} kgCO2e/yr. Lawn counted as {10} m², not {11}: {12} m² lies under Grass pavers on {13} (the overlap check): left out of the greening sum until the designer says which is built. One tree species (Camphor), so ra = {14} and α = {15}. Fixes: +{16} Camphor, the same species → {17}; Change {18} Camphor to Bischofia, a second native species (α → {19}); no extra trees → {20}; +{21} m² of shrub bed (Gi {22}) → {23}; Keep {24} (Camphor, DBH {25} cm) instead of removing it: an old tree kept by the design counts {26} × its {27} m² canopy (+{28} to ΣGi·Ai), if the basement leaves its root zone in natural ground → {29}.",
+  "example": "7 Camphor counted (closed outlines, geometry); T-08, which Muse Spark reads as one more tree, counts once a person confirms it (8 then). Required TCO2c = 0.5 × A′ 900.0 m² × β 0.66 = 297.0; provided (ΣGi·Ai 246.4) × α 0.8 = 197.1 kgCO2e/yr. Lawn counted as 180 m², not 200: 20 m² lies under Grass pavers on L-3 (the overlap check): left out of the greening sum until the designer says which is built. One tree species (Camphor), so ra = 0 and α = 0.8. Fixes: +8 Camphor, the same species → 299.52; Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees → 320.32; +249.8 m² of shrub bed (Gi 0.5) → 297.04; Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground → 264.96.",
+  "placeholders": 30,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} Camphor counted (closed outlines, geometry); {1}, which Muse Spark reads as one more tree, counts once a person confirms it ({2} then). Required TCO2c = {3} × A′ {4} m² × β {5} = {6}; provided (ΣGi·Ai {7}) × α {8} = {9} kgCO2e/yr. One tree species (Camphor), so ra = {10} and α = {11}. Fixes: +{12} Camphor, the same species → {13}; +{14} m² of shrub bed (Gi {15}) → {16}; Keep {17} (Camphor, DBH {18} cm) instead of removing it: an old tree kept by the design counts {19} × its {20} m² canopy (+{21} to ΣGi·Ai), if the basement leaves its root zone in natural ground → {22}.",
+  "example": "5 Camphor counted (closed outlines, geometry); T-04, which Muse Spark reads as one more tree, counts once a person confirms it (6 then). Required TCO2c = 0.5 × A′ 809.6 m² × β 0.66 = 267.2; provided (ΣGi·Ai 194.4) × α 0.8 = 155.5 kgCO2e/yr. One tree species (Camphor), so ra = 0 and α = 0.8. Fixes: +9 Camphor, the same species → 270.72; +279.2 m² of shrub bed (Gi 0.5) → 267.2; Keep EX-01 (Camphor, DBH 88 cm) instead of removing it: an old tree kept by the design counts 2 × its 18.1 m² canopy (+54.3 to ΣGi·Ai), if the basement leaves its root zone in natural ground → 198.96.",
+  "placeholders": 23,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} Camphor counted, {1} confirmed by a person. Required TCO2c = {2} × A′ {3} m² × β {4} = {5}; provided (ΣGi·Ai {6}) × α {7} = {8} kgCO2e/yr. Lawn counted as {9} m², not {10}: {11} m² lies under Grass pavers on {12} (the overlap check): left out of the greening sum until the designer says which is built. One tree species (Camphor), so ra = {13} and α = {14}. Fixes: +{15} Camphor, the same species → {16}; Change {17} Camphor to Bischofia, a second native species (α → {18}); no extra trees → {19}; +{20} m² of shrub bed (Gi {21}) → {22}; Keep {23} (Camphor, DBH {24} cm) instead of removing it: an old tree kept by the design counts {25} × its {26} m² canopy (+{27} to ΣGi·Ai), if the basement leaves its root zone in natural ground → {28}.",
+  "example": "8 Camphor counted, T-08 confirmed by a person. Required TCO2c = 0.5 × A′ 900.0 m² × β 0.66 = 297.0; provided (ΣGi·Ai 262.4) × α 0.8 = 209.9 kgCO2e/yr. Lawn counted as 180 m², not 200: 20 m² lies under Grass pavers on L-3 (the overlap check): left out of the greening sum until the designer says which is built. One tree species (Camphor), so ra = 0 and α = 0.8. Fixes: +7 Camphor, the same species → 299.52; Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees → 341.12; +217.8 m² of shrub bed (Gi 0.5) → 297.04; Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground → 277.76.",
+  "placeholders": 29,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} Camphor counted, {1} confirmed by a person. Required TCO2c = {2} × A′ {3} m² × β {4} = {5}; provided (ΣGi·Ai {6}) × α {7} = {8} kgCO2e/yr. One tree species (Camphor), so ra = {9} and α = {10}. Fixes: +{11} Camphor, the same species → {12}; Change {13} Camphor to Bischofia, a second native species (α → {14}); no extra trees → {15}; +{16} m² of shrub bed (Gi {17}) → {18}; Keep {19} (Camphor, DBH {20} cm) instead of removing it: an old tree kept by the design counts {21} × its {22} m² canopy (+{23} to ΣGi·Ai), if the basement leaves its root zone in natural ground → {24}.",
+  "example": "6 Camphor counted, T-04 confirmed by a person. Required TCO2c = 0.5 × A′ 809.6 m² × β 0.66 = 267.2; provided (ΣGi·Ai 210.4) × α 0.8 = 168.3 kgCO2e/yr. One tree species (Camphor), so ra = 0 and α = 0.8. Fixes: +8 Camphor, the same species → 270.72; Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees → 273.52; +247.2 m² of shrub bed (Gi 0.5) → 267.2; Keep EX-01 (Camphor, DBH 88 cm) instead of removing it: an old tree kept by the design counts 2 × its 18.1 m² canopy (+54.3 to ΣGi·Ai), if the basement leaves its root zone in natural ground → 211.76.",
+  "placeholders": 25,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} files carry sheet {1}: {2}: Rev {3} {4} (Muse Spark read Rev {5} {6}); {7}: Rev {8} {9} (Muse Spark read Rev {10} {11}). Rev {12} is the newer and governs; trees counted: Rev {13} {14}, Rev {15} {16} (they agree). Moved: {17} by {18} m (Rev {19} {20},{21} → Rev {22} {23},{24}).",
+  "example": "2 files carry sheet L-1: L-1-revA: Rev A 2026-09-18 (Muse Spark read Rev A 2026-09-18); L-1-revB: Rev B 2026-10-14 (Muse Spark read Rev B 2026-10-14). Rev B is the newer and governs; trees counted: Rev A 8, Rev B 8 (they agree). Moved: T-06 by 2.0 m (Rev A 25,2.5 → Rev B 25,4.5).",
+  "placeholders": 25,
+  "where": "check.why"
+ },
+ {
+  "template": "{0} of {1} segments coincide (outline, core, columns, planters). Only the title block tells them apart: {2} '{3}', {4} '{5}'. Check they are different floors before pricing both, and that neither is a copy left in by mistake.",
+  "example": "106 of 116 segments coincide (outline, core, columns, planters). Only the title block tells them apart: L-102 '5F Podium Roof Garden', L-103 'Typical Sky Garden Plan, 8F, 12F, 16F, 20F'. Check they are different floors before pricing both, and that neither is a copy left in by mistake.",
+  "placeholders": 6,
+  "where": "check.why"
+ },
+ {
+  "template": "λ = Q′ / Q0 must exceed λc = {0} × ({1} − {2}) = {3}. Q0 = A0 {4} m² × f {5} m/s × t {6} s = {7} m³ (f: the subsoil is not on the drawings; fill soil's {8} m/s, table {9} note {10}). Measured: planted {11} m² ({12} tree pits × {13} m²; Duranta band {14} m²; Azalea {15} m²; Chinese ixora {16} m²; Orange jasmine {17} m²; Yeddo hawthorn {18} m²; Lawn {19} m²; Roof lawn {20} m²), permeable paving {21} m². Planting over the basement slab (the title block says {22}): Q3 = {23} × V3 = {24} × {25} m² × {26} m = {27} m³ (soil counted to the {28} m maximum; the beds' depth is not on the drawings); the pavers' infiltration term needs natural ground below, so only their base counts: {29} × h {30} m × {31} m² = {32} m³ (h at the {33} m maximum; no base thickness is drawn). λ = {34} — below {35} even in this most favourable reading. On natural ground the same areas would give Q1 = {36} m³ and Q2 = {37} m³, λ = {38}. Ask the architect for the subsoil report, the basement's extent under the landscape and the paving base; an over-slab site usually needs storage (a retention tank or an infiltration trench) to pass.",
+  "example": "λ = Q′ / Q0 must exceed λc = 0.5 × (1 − 0.4) = 0.30. Q0 = A0 1,500 m² × f 1e-05 m/s × t 86,400 s = 1,296 m³ (f: the subsoil is not on the drawings; fill soil's 1e-05 m/s, table 2 note 1). Measured: planted 729.9 m² (8 tree pits × 4 m²; Duranta band 10.8 m²; Azalea 150 m²; Chinese ixora 153.6 m²; Orange jasmine 35 m²; Yeddo hawthorn 43.5 m²; Lawn 200 m²; Roof lawn 105 m²), permeable paving 0 m². Planting over the basement slab (the title block says ARTIFICIAL GROUND): Q3 = 0.05 × V3 = 0.05 × 729.9 m² × 0.6 m = 21.9 m³ (soil counted to the 0.6 m maximum; the beds' depth is not on the drawings); the pavers' infiltration term needs natural ground below, so only their base counts: 0.05 × h 0.25 m × 0 m² = 0.0 m³ (h at the 0.25 m maximum; no base thickness is drawn). λ = 0.017 — below 0.30 even in this most favourable reading. On natural ground the same areas would give Q1 = 630.6 m³ and Q2 = 0.0 m³, λ = 0.487. Ask the architect for the subsoil report, the basement's extent under the landscape and the paving base; an over-slab site usually needs storage (a retention tank or an infiltration trench) to pass.",
+  "placeholders": 39,
+  "where": "check.why"
+ },
+ {
+  "template": "λ = Q′ / Q0 must exceed λc = {0} × ({1} − {2}) = {3}. Q0 = A0 {4} m² × f {5} m/s × t {6} s = {7} m³ (f: the subsoil is not on the drawings; fill soil's {8} m/s, table {9} note {10}). Measured: planted {11} m² ({12} tree pits × {13} m²; Duranta band {14} m²; Azalea {15} m²; Lawn {16} m²), permeable paving {17} m²; not permeable: Exposed aggregate {18} m². Planting over the basement slab (the title block says {19}): Q3 = {20} × V3 = {21} × {22} m² × {23} m = {24} m³ (soil counted to the {25} m maximum; the beds' depth is not on the drawings); the pavers' infiltration term needs natural ground below, so only their base counts: {26} × h {27} m × {28} m² = {29} m³ (h at the {30} m maximum; no base thickness is drawn). λ = {31} — below {32} even in this most favourable reading. On natural ground the same areas would give Q1 = {33} m³ and Q2 = {34} m³, λ = {35}. Ask the architect for the subsoil report, the basement's extent under the landscape and the paving base; an over-slab site usually needs storage (a retention tank or an infiltration trench) to pass.",
+  "example": "λ = Q′ / Q0 must exceed λc = 0.5 × (1 − 0.4) = 0.30. Q0 = A0 1,500 m² × f 1e-05 m/s × t 86,400 s = 1,296 m³ (f: the subsoil is not on the drawings; fill soil's 1e-05 m/s, table 2 note 1). Measured: planted 356.6 m² (7 tree pits × 2.25 m²; Duranta band 10.8 m²; Azalea 150 m²; Lawn 180 m²), permeable paving 248 m²; not permeable: Exposed aggregate 48 m². Planting over the basement slab (the title block says ARTIFICIAL GROUND): Q3 = 0.05 × V3 = 0.05 × 356.6 m² × 0.6 m = 10.7 m³ (soil counted to the 0.6 m maximum; the beds' depth is not on the drawings); the pavers' infiltration term needs natural ground below, so only their base counts: 0.05 × h 0.25 m × 248 m² = 3.1 m³ (h at the 0.25 m maximum; no base thickness is drawn). λ = 0.011 — below 0.30 even in this most favourable reading. On natural ground the same areas would give Q1 = 308.1 m³ and Q2 = 110.2 m³, λ = 0.323. Ask the architect for the subsoil report, the basement's extent under the landscape and the paving base; an over-slab site usually needs storage (a retention tank or an infiltration trench) to pass.",
+  "placeholders": 36,
+  "where": "check.why"
+ },
+ {
+  "template": "archive_unpacked",
+  "example": "archive_unpacked",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "backup_ignored",
+  "example": "backup_ignored",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "bill",
+  "example": "bill",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "drawing_image",
+  "example": "drawing_image",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "drawing_raster",
+  "example": "drawing_raster",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "drawing_vector",
+  "example": "drawing_vector",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "presentation",
+  "example": "presentation",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "unsupported",
+  "example": "unsupported",
+  "placeholders": 0,
+  "where": "file.verdict"
+ },
+ {
+  "template": "document",
+  "example": "document",
+  "placeholders": 0,
+  "where": "file.verdict|file.why.head"
+ },
+ {
+  "template": "spec",
+  "example": "spec",
+  "placeholders": 0,
+  "where": "file.verdict|file.why.head"
+ },
+ {
+  "template": "quote",
+  "example": "quote",
+  "placeholders": 0,
+  "where": "file.verdict|file.why.head|scenario.name"
+ },
+ {
+  "template": "AutoCAD backup, byte-identical to {0}: ignored",
+  "example": "AutoCAD backup, byte-identical to L-1 Planting Plan.dxf: ignored",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "DXF: vector drawing, {0} lines and curves, {1} texts, {2} hatches",
+  "example": "DXF: vector drawing, 120 lines and curves, 75 texts, 0 hatches",
+  "placeholders": 3,
+  "where": "file.why"
+ },
+ {
+  "template": "Excel 97–2003, save as .xlsx",
+  "example": "Excel 97–2003, save as .xlsx",
+  "placeholders": 0,
+  "where": "file.why"
+ },
+ {
+  "template": "PDF, {0} vector pages: drawing sheets",
+  "example": "PDF, 9 vector pages: drawing sheets",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "bill of quantities: Bill of Quantities · Rev {0} · {1} · NT$, excluding tax",
+  "example": "bill of quantities: Bill of Quantities · Rev 1 · 2026-01-21 · NT$, excluding tax",
+  "placeholders": 2,
+  "where": "file.why"
+ },
+ {
+  "template": "document: {0}",
+  "example": "document: Record of the 2026-09-10 review meeting listing three landscape design issues to be resolved with the next drawing issue.",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "material photo: exposed aggregate concrete → matched to {0}; read, not measured",
+  "example": "material photo: exposed aggregate concrete → matched to PV-2; read, not measured",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "material photo: grey brick pavers → matched to {0}; read, not measured",
+  "example": "material photo: grey brick pavers → matched to PV-1; read, not measured",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "quote: {0}",
+  "example": "quote: Supplier priced quotation MQ-233 for street furniture and metalwork totalling NT$258,615 excluding installation.",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "raster PDF, no vectors: Muse Spark read the title block ({0} · Planting Plan · Rev {1} · {2} · {3}); not measured",
+  "example": "raster PDF, no vectors: Muse Spark read the title block (L-1 · Planting Plan · Rev A · 2026-09-18 · 1:200); not measured",
+  "placeholders": 4,
+  "where": "file.why"
+ },
+ {
+  "template": "slide deck, {0} slides: Planter mood board; not a drawing",
+  "example": "slide deck, 2 slides: Planter mood board; not a drawing",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "spec: {0}",
+  "example": "spec: Sets supply, measurement and pricing rules for landscape planting and paving for Greenfield Residences.",
+  "placeholders": 1,
+  "where": "file.why"
+ },
+ {
+  "template": "zip unpacked: {0} file ({1})",
+  "example": "zip unpacked: 1 file (drain-cover-detail.dxf)",
+  "placeholders": 2,
+  "where": "file.why"
+ },
+ {
+  "template": "AutoCAD backup, byte-identical to {0}",
+  "example": "AutoCAD backup, byte-identical to L-1 Planting Plan.dxf",
+  "placeholders": 1,
+  "where": "file.why.head"
+ },
+ {
+  "template": "DXF",
+  "example": "DXF",
+  "placeholders": 0,
+  "where": "file.why.head"
+ },
+ {
+  "template": "PDF, {0} vector pages",
+  "example": "PDF, 9 vector pages",
+  "placeholders": 1,
+  "where": "file.why.head"
+ },
+ {
+  "template": "bill of quantities",
+  "example": "bill of quantities",
+  "placeholders": 0,
+  "where": "file.why.head"
+ },
+ {
+  "template": "material photo",
+  "example": "material photo",
+  "placeholders": 0,
+  "where": "file.why.head"
+ },
+ {
+  "template": "raster PDF, no vectors",
+  "example": "raster PDF, no vectors",
+  "placeholders": 0,
+  "where": "file.why.head"
+ },
+ {
+  "template": "slide deck, {0} slides",
+  "example": "slide deck, 2 slides",
+  "placeholders": 1,
+  "where": "file.why.head"
+ },
+ {
+  "template": "zip unpacked",
+  "example": "zip unpacked",
+  "placeholders": 0,
+  "where": "file.why.head"
+ },
+ {
+  "template": "Azalea",
+  "example": "Azalea",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Camphor",
+  "example": "Camphor",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Chinese ixora",
+  "example": "Chinese ixora",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Duranta",
+  "example": "Duranta",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Exposed aggregate",
+  "example": "Exposed aggregate",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Fire truck access lane — keep clear",
+  "example": "Fire truck access lane — keep clear",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Grass pavers",
+  "example": "Grass pavers",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Lawn",
+  "example": "Lawn",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Orange jasmine",
+  "example": "Orange jasmine",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Permeable pavers",
+  "example": "Permeable pavers",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Planter edge",
+  "example": "Planter edge",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Roof lawn",
+  "example": "Roof lawn",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "Yeddo hawthorn",
+  "example": "Yeddo hawthorn",
+  "placeholders": 0,
+  "where": "item.label"
+ },
+ {
+  "template": "fixtures",
+  "example": "fixtures",
+  "placeholders": 0,
+  "where": "run.mode"
+ },
+ {
+  "template": "live",
+  "example": "live",
+  "placeholders": 0,
+  "where": "run.mode"
+ },
+ {
+  "template": "design",
+  "example": "design",
+  "placeholders": 0,
+  "where": "scenario.name"
+ },
+ {
+  "template": "format",
+  "example": "format",
+  "placeholders": 0,
+  "where": "scenario.name"
+ },
+ {
+  "template": "info",
+  "example": "info",
+  "placeholders": 0,
+  "where": "scenario.name"
+ },
+ {
+  "template": "regulation",
+  "example": "regulation",
+  "placeholders": 0,
+  "where": "scenario.name"
+ },
+ {
+  "template": "background",
+  "example": "background",
+  "placeholders": 0,
+  "where": "sheet.kind"
+ },
+ {
+  "template": "cover",
+  "example": "cover",
+  "placeholders": 0,
+  "where": "sheet.kind"
+ },
+ {
+  "template": "detail",
+  "example": "detail",
+  "placeholders": 0,
+  "where": "sheet.kind"
+ },
+ {
+  "template": "plan",
+  "example": "plan",
+  "placeholders": 0,
+  "where": "sheet.kind"
+ },
+ {
+  "template": "schedule",
+  "example": "schedule",
+  "placeholders": 0,
+  "where": "sheet.kind"
+ },
+ {
+  "template": "elevation",
+  "example": "elevation",
+  "placeholders": 0,
+  "where": "sheet.kind|sheet.not_counted_reason.head"
+ },
+ {
+  "template": "PDF page of {0}: the DXF of {1} is measured",
+  "example": "PDF page of L-0: the DXF of L-0 is measured",
+  "placeholders": 2,
+  "where": "sheet.not_counted_reason"
+ },
+ {
+  "template": "raster PDF page: no vectors, read for its title block only, not measured",
+  "example": "raster PDF page: no vectors, read for its title block only, not measured",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason"
+ },
+ {
+  "template": "superseded by Rev {0} ({1}) of {2}",
+  "example": "superseded by Rev B (2026-10-14) of L-1",
+  "placeholders": 3,
+  "where": "sheet.not_counted_reason"
+ },
+ {
+  "template": "PDF page of {0}",
+  "example": "PDF page of L-0",
+  "placeholders": 1,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "cover and drawing index",
+  "example": "cover and drawing index",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "detail sheet",
+  "example": "detail sheet",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "enlarged plan of part of the site",
+  "example": "enlarged plan of part of the site",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "irrigation plan",
+  "example": "irrigation plan",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "lighting plan",
+  "example": "lighting plan",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "metalwork detail from {0}",
+  "example": "metalwork detail from metal-details.zip",
+  "placeholders": 1,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "raster PDF page",
+  "example": "raster PDF page",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "schedule sheet",
+  "example": "schedule sheet",
+  "placeholders": 0,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "superseded by Rev {0}",
+  "example": "superseded by Rev B",
+  "placeholders": 1,
+  "where": "sheet.not_counted_reason.head"
+ },
+ {
+  "template": "Cover and Index",
+  "example": "Cover and Index",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Drain Cover Detail",
+  "example": "Drain Cover Detail",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Enlarged Plan - West",
+  "example": "Enlarged Plan - West",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Irrigation Plan",
+  "example": "Irrigation Plan",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Landscape Sections",
+  "example": "Landscape Sections",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Lighting Plan",
+  "example": "Lighting Plan",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Paving Plan",
+  "example": "Paving Plan",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Plant Schedule",
+  "example": "Plant Schedule",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Planting Plan",
+  "example": "Planting Plan",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "RF Roof Garden",
+  "example": "RF Roof Garden",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "South Elevation",
+  "example": "South Elevation",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Tree Pit Detail",
+  "example": "Tree Pit Detail",
+  "placeholders": 0,
+  "where": "sheet.title"
+ },
+ {
+  "template": "Typical Sky Garden Plan, {0}F, {1}F, {2}F, {3}F",
+  "example": "Typical Sky Garden Plan, 8F, 12F, 16F, 20F",
+  "placeholders": 4,
+  "where": "sheet.title"
+ },
+ {
+  "template": "{0}F Ground Floor Landscape Plan",
+  "example": "1F Ground Floor Landscape Plan",
+  "placeholders": 1,
+  "where": "sheet.title"
+ },
+ {
+  "template": "{0}F Podium Roof Garden",
+  "example": "5F Podium Roof Garden",
+  "placeholders": 1,
+  "where": "sheet.title"
+ },
+ {
+  "template": "{0}F-RF Planter Details",
+  "example": "5F-RF Planter Details",
+  "placeholders": 1,
+  "where": "sheet.title"
+ }
+]

@@ -1,0 +1,77 @@
+{
+ "image": "L-1 filled",
+ "prompt": "light green circle",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:24:45+00:00",
+ "seconds": 2.98,
+ "image_sha256": "7ca002ae54c31abfce584c2459b3402fea02041faeec01a49e6bc7de55d1c363",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 490,
+ "raw_output": "<0f>0<|box;x1=328;y1=99;x2=509;y2=281;w=2100;h=1140;c=0.5508772134780884|><|mask;x=0;y=0;c=0.5508772134780884;data=183,182,!!!!#BC+9Y6w&Wy3x+NJ:MZtMe-Z91Hk8-U'q4Q1_$^{{^TWOO:I'yNVla@-j=!YMaGn#Ym]]_nujPoB5$=A5Iqp:OnHut@Yv-{o`t^+cs9PfX.'E4LkV1E6CNTp_!vmzeO#U$i]])n9('UMyw!!|>,1<|box;x1=798;y1=747;x2=897;y2=846;w=2100;h=1140;c=0.5276752710342407|><|mask;x=0;y=0;c=0.5276752710342407;data=100,100,!!!!!lD]mUne9sY4t.uUNAHOXg!:WMair0tY*)&vcUVkLMo1)g(?6MHZ&X?'PY[YASaT*:Dl)enz[%xY^6_SF6i*jM=!!|>\n",
+ "response_id": "resp_6ae9b66c30da3efec66e40f3",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b66c30da3efec66e40f3",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701484.0,
+  "completed_at": 1793701484.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_9e00b56e-f0ed-464a-a14c-59fced41743a",
+    "status": "completed",
+    "content_chars": 490
+   }
+  ]
+ },
+ "sheet": "L-1",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "symbol",
+  "labels": [
+   "CC CAMPHOR"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

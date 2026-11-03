@@ -1,0 +1,69 @@
+{
+ "call": "review_read_floor_sheet",
+ "image_sha256": "210157eef643fd6f4da8d0c3164cb0f3f85739c42b870ab3fc733c8fac3e0885",
+ "content_key": "dxf:b1dbe81026c2e5cab8ea14a04b4d9fc84fad30c79a5499638040aedb46ea1db0:floors|p=423fbe85",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:23:05+00:00",
+ "seconds": 6.85,
+ "usage": {
+  "completion_tokens": 872,
+  "prompt_tokens": 3646,
+  "total_tokens": 4518,
+  "completion_tokens_details": {
+   "reasoning_tokens": 735
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "This image is one sheet of a landscape drawing package for a building with several floors. Read the title block and the notes:\n- floors: every floor this sheet stands for, each as written without the 'F' ('3', '10', 'R' for a roof written 'RF', '1' for the ground floor); a title such as '3F, 6F, 9F' stands for three floors; empty if the sheet is not tied to floors.\n- typical: true if this one sheet stands for several identical floors.\n- floor_label: the floor words exactly as the title block writes them.\n- ground: where this sheet's planting sits: 'grade' (natural ground), 'over_basement' (a ground floor over a basement slab), 'podium', 'balcony' (balconies or terraces of the typical floors), 'roof', 'mixed' (a detail sheet covering several), or 'unknown'.\n- soil: every soil depth written on the sheet: planting ('tree', 'shrub', 'lawn', or 'any' when a planter's soil is given without naming a plant); ground (as above, for that entry); applies_to, the place or floor it is written for, as written; depth_m in metres (1000 mm is 1.0); text, the words as written.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "confidence": 0.95,
+  "floor_label": "5F Podium Roof Garden",
+  "floors": [
+   "5"
+  ],
+  "ground": "podium",
+  "soil": [
+   {
+    "applies_to": "PODIUM PLANTER",
+    "depth_m": 1.0,
+    "ground": "podium",
+    "planting": "any",
+    "text": "PODIUM PLANTER SOIL 1.0 M ON SLAB"
+   }
+  ],
+  "typical": false,
+  "why": "Title block and plan title both state 5F Podium Roof Garden with one explicit 1.0m planter soil note on slab."
+ },
+ "response_id": "chatcmpl-01a1a0ef-148d-77b2-8277-ba7205ea4af3",
+ "raw": {
+  "id": "chatcmpl-01a1a0ef-148d-77b2-8277-ba7205ea4af3",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"confidence\": 0.95, \"floor_label\": \"5F Podium Roof Garden\", \"floors\": [\"5\"], \"ground\": \"podium\", \"soil\": [{\"applies_to\": \"PODIUM PLANTER\", \"depth_m\": 1.0, \"ground\": \"podium\", \"planting\": \"any\", \"text\": \"PODIUM PLANTER SOIL 1.0 M ON SLAB\"}], \"typical\": false, \"why\": \"Title block and plan title both state 5F Podium Roof Garden with one explicit 1.0m planter soil note on slab.\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701385,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 872,
+   "prompt_tokens": 3646,
+   "total_tokens": 4518,
+   "completion_tokens_details": {
+    "reasoning_tokens": 735
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ }
+}

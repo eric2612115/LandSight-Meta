@@ -1,0 +1,30 @@
+{
+ "image": "L-3_lines.png",
+ "sheet": "L-3",
+ "prompt": "beige area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:17+00:00",
+ "seconds": 1.45,
+ "image_sha256": "af34522d01114456d50893c6f2b4cfc39746f363ba1ba16927a950821e99be7b",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 0,
+ "masks": [],
+ "diagnostics": [],
+ "raw_output_chars": 0,
+ "raw_output": "",
+ "prompt_source": "manual"
+}

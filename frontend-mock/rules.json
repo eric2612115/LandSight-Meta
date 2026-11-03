@@ -1,0 +1,905 @@
+[
+ {
+  "check_id": "E09",
+  "category": "regulation",
+  "title": "T-09 is drawn inside the fire truck access lane — not counted toward greening",
+  "severity": "flag",
+  "by": [
+   "geometry",
+   "rule"
+  ],
+  "why": "The canopy's centre lies inside the area labelled 'FIRE TRUCK ACCESS LANE — KEEP CLEAR': a tree there blocks a lane the drawing says to keep clear, so it is left out of the greening count until the designer moves it or the architect accepts it. If the architect confirms this strip is fire-truck rescue space under §299, the requirement drops to 278.8 kgCO2e/yr — still a fail — and the tree fix becomes +7. Until then the greening check keeps Ap = 0 (required 297.0), as the drawings do not declare it.",
+  "evidence": {
+   "sheet_ids": [
+    "L-1-revB"
+   ],
+   "file_ids": [
+    "F-12"
+   ],
+   "object_ids": [
+    "L-1-revB/T-09",
+    "L-1-revB/Z-01"
+   ]
+  },
+  "citation": {
+   "article": "Building Technical Regulations, Design and Construction Part, Art. 299",
+   "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=299",
+   "gloss": "Minimum greening area = (site area − area where greening is impracticable) × the legal open-space ratio. An area counts as impracticable only when the architect declares it as one of the kinds the article names (fire-truck rescue space recognised by the fire authority, sports fields, arcades, private and in-site roads, existing lanes); a label on a landscape sheet does not make it one."
+  },
+  "numbers": {
+   "zone_m2": 92.0,
+   "required_ap0": 297.0,
+   "required_with_lane_as_ap": 278.8,
+   "provided_with_lane_as_ap": 197.1,
+   "tree_fix_ap0": 8,
+   "tree_fix_with_lane_as_ap": 7,
+   "with_lane_as_ap": "fail"
+  },
+  "pending_items": [
+   "I-01"
+  ],
+  "if_confirmed": {
+   "title": "T-09 is drawn inside the fire truck access lane — not counted toward greening",
+   "why": "The canopy's centre lies inside the area labelled 'FIRE TRUCK ACCESS LANE — KEEP CLEAR': a tree there blocks a lane the drawing says to keep clear, so it is left out of the greening count until the designer moves it or the architect accepts it. If the architect confirms this strip is fire-truck rescue space under §299, the requirement drops to 278.8 kgCO2e/yr — still a fail — and the tree fix becomes +6. Until then the greening check keeps Ap = 0 (required 297.0), as the drawings do not declare it.",
+   "severity": "flag",
+   "numbers": {
+    "zone_m2": 92.0,
+    "required_ap0": 297.0,
+    "required_with_lane_as_ap": 278.8,
+    "provided_with_lane_as_ap": 209.9,
+    "tree_fix_ap0": 7,
+    "tree_fix_with_lane_as_ap": 6,
+    "with_lane_as_ap": "fail"
+   }
+  },
+  "scenario": "regulation",
+  "decision": "open",
+  "note": null,
+  "decided_at": null
+ },
+ {
+  "check_id": "E14",
+  "category": "regulation",
+  "title": "Greening (Art. 302): required 297.0, provided 197.1 (241.9 before the tree-pit rule) — fail · 7 trees counted, T-08 to confirm",
+  "severity": "fail",
+  "by": [
+   "rule",
+   "geometry"
+  ],
+  "why": "7 Camphor counted (closed outlines, geometry); T-08, which Muse Spark reads as one more tree, counts once a person confirms it (8 then). Required TCO2c = 0.5 × A′ 900.0 m² × β 0.66 = 297.0; provided (ΣGi·Ai 246.4) × α 0.8 = 197.1 kgCO2e/yr. Lawn counted as 180 m², not 200: 20 m² lies under Grass pavers on L-3 (the overlap check): left out of the greening sum until the designer says which is built. One tree species (Camphor), so ra = 0 and α = 0.8. Fixes: +8 Camphor, the same species → 299.52; Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees → 320.32; +249.8 m² of shrub bed (Gi 0.5) → 297.04; Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground → 264.96.",
+  "evidence": {
+   "sheet_ids": [
+    "L-1-revB",
+    "L-3",
+    "L-6"
+   ],
+   "file_ids": [
+    "F-12",
+    "F-16"
+   ],
+   "object_ids": [
+    "L-1-revB/T-01",
+    "L-1-revB/T-02",
+    "L-1-revB/T-03",
+    "L-1-revB/T-04",
+    "L-1-revB/T-05",
+    "L-1-revB/T-06",
+    "L-1-revB/T-07",
+    "L-1-revB/T-08"
+   ]
+  },
+  "citation": {
+   "article": "Building Technical Regulations, Design and Construction Part, Art. 302",
+   "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+   "gloss": "The planting's total carbon fixation must exceed ½ × minimum greening area × β (β 0.66 for an ordinary site)."
+  },
+  "numbers": {
+   "required": 297.0,
+   "provided": 197.1,
+   "A0": 1500.0,
+   "Ap": 0.0,
+   "r": 0.4,
+   "A_prime": 900.0,
+   "beta": 0.66,
+   "alpha": 0.8,
+   "ra": 0.0,
+   "sum_gi_ai": 246.4,
+   "provided_before_pit_rule": 241.9
+  },
+  "fixes": [
+   {
+    "label": "+8 Camphor, the same species",
+    "result": 299.52,
+    "passes": true,
+    "id": "a",
+    "extra_trees": 8,
+    "object_ids": []
+   },
+   {
+    "label": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+    "result": 320.32,
+    "passes": true,
+    "id": "b",
+    "extra_trees": 0,
+    "object_ids": [
+     "T-05"
+    ]
+   },
+   {
+    "label": "+249.8 m² of shrub bed (Gi 0.5)",
+    "result": 297.04,
+    "passes": true,
+    "id": "c",
+    "extra_trees": 0,
+    "object_ids": []
+   },
+   {
+    "label": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+    "result": 264.96,
+    "passes": false,
+    "id": "d",
+    "extra_trees": 0,
+    "object_ids": [
+     "EX-01"
+    ],
+    "adds": 84.8,
+    "citation": {
+     "article": "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+     "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+     "gloss": "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts twice its actual canopy projection area; transplanted, it counts as a new tree."
+    }
+   }
+  ],
+  "citations": [
+   {
+    "article": "Building Technical Regulations, Design and Construction Part, Art. 302",
+    "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+    "gloss": "The planting's total carbon fixation must exceed ½ × minimum greening area × β (β 0.66 for an ordinary site)."
+   },
+   {
+    "article": "Technical Specification for Building-Site Greening Design, formulas (1)–(6)",
+    "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+    "gloss": "TCO2 = (Σ Gi × Ai) × α; TCO2c = 0.5 × A′ × β; α = 0.8 + 0.5 × ra, and ra = 0 with fewer than two tree species."
+   }
+  ],
+  "status": "fail",
+  "pending_items": [
+   "I-01"
+  ],
+  "if_confirmed": {
+   "title": "Greening (Art. 302): required 297.0, provided 209.9 (261.1 before the tree-pit rule) — fail · 8 trees (T-08 confirmed)",
+   "why": "8 Camphor counted, T-08 confirmed by a person. Required TCO2c = 0.5 × A′ 900.0 m² × β 0.66 = 297.0; provided (ΣGi·Ai 262.4) × α 0.8 = 209.9 kgCO2e/yr. Lawn counted as 180 m², not 200: 20 m² lies under Grass pavers on L-3 (the overlap check): left out of the greening sum until the designer says which is built. One tree species (Camphor), so ra = 0 and α = 0.8. Fixes: +7 Camphor, the same species → 299.52; Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees → 341.12; +217.8 m² of shrub bed (Gi 0.5) → 297.04; Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground → 277.76.",
+   "severity": "fail",
+   "numbers": {
+    "required": 297.0,
+    "provided": 209.9,
+    "A0": 1500.0,
+    "Ap": 0.0,
+    "r": 0.4,
+    "A_prime": 900.0,
+    "beta": 0.66,
+    "alpha": 0.8,
+    "ra": 0.0,
+    "sum_gi_ai": 262.4,
+    "provided_before_pit_rule": 261.1
+   },
+   "fixes": [
+    {
+     "label": "+7 Camphor, the same species",
+     "result": 299.52,
+     "passes": true,
+     "id": "a",
+     "extra_trees": 7,
+     "object_ids": []
+    },
+    {
+     "label": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+     "result": 341.12,
+     "passes": true,
+     "id": "b",
+     "extra_trees": 0,
+     "object_ids": [
+      "T-05"
+     ]
+    },
+    {
+     "label": "+217.8 m² of shrub bed (Gi 0.5)",
+     "result": 297.04,
+     "passes": true,
+     "id": "c",
+     "extra_trees": 0,
+     "object_ids": []
+    },
+    {
+     "label": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+     "result": 277.76,
+     "passes": false,
+     "id": "d",
+     "extra_trees": 0,
+     "object_ids": [
+      "EX-01"
+     ],
+     "adds": 84.8,
+     "citation": {
+      "article": "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+      "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+      "gloss": "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts twice its actual canopy projection area; transplanted, it counts as a new tree."
+     }
+    }
+   ],
+   "status": "fail",
+   "before_downgrade": {
+    "provided": 261.1,
+    "required": 297.0,
+    "status": "fail",
+    "alpha": 0.8,
+    "ra": 0.0,
+    "sum_gi_ai": 326.4,
+    "trees": [
+     {
+      "label": "Camphor",
+      "count": 8,
+      "gi": 1.5,
+      "ai_per_tree": 16.0,
+      "product": 192.0,
+      "pit_note": ""
+     }
+    ],
+    "fixes": [
+     {
+      "label": "+2 Camphor, the same species",
+      "result": 299.52,
+      "passes": true,
+      "id": "a",
+      "extra_trees": 2,
+      "object_ids": [],
+      "alpha": 0.8,
+      "alpha_before": 0.8,
+      "change": {
+       "add_trees": {
+        "CC Camphor": 2
+       }
+      }
+     },
+     {
+      "label": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+      "result": 424.32,
+      "passes": true,
+      "id": "b",
+      "extra_trees": 0,
+      "object_ids": [
+       "T-05"
+      ],
+      "alpha": 1.3,
+      "alpha_before": 0.8,
+      "change": {
+       "swap": {
+        "from": "CC Camphor",
+        "to": "",
+        "n": 1,
+        "from_en": "Camphor",
+        "to_en": "Bischofia",
+        "to_native": true
+       }
+      }
+     },
+     {
+      "label": "+89.8 m² of shrub bed (Gi 0.5)",
+      "result": 297.04,
+      "passes": true,
+      "id": "c",
+      "extra_trees": 0,
+      "object_ids": [],
+      "alpha": 0.8,
+      "alpha_before": 0.8,
+      "change": {
+       "add_shrub_m2": 89.8
+      }
+     },
+     {
+      "label": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+      "result": 328.96,
+      "passes": true,
+      "id": "d",
+      "extra_trees": 0,
+      "object_ids": [
+       "EX-01"
+      ],
+      "adds": 84.8,
+      "citation": {
+       "article": "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+       "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+       "gloss": "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts twice its actual canopy projection area; transplanted, it counts as a new tree."
+      }
+     }
+    ]
+   },
+   "after_downgrade": {
+    "provided": 209.9,
+    "required": 297.0,
+    "status": "fail",
+    "alpha": 0.8,
+    "ra": 0.0,
+    "sum_gi_ai": 262.4,
+    "trees": [
+     {
+      "label": "Camphor",
+      "count": 8,
+      "gi": 1.0,
+      "ai_per_tree": 16.0,
+      "product": 128.0,
+      "pit_note": "pit 2.25 m² in [1.5, 4.0) m² on artificial ground: a large tree counts as a small tree (Gi 1.5 → 1.0); soil 1.0 m ≥ 0.7 m"
+     }
+    ],
+    "fixes": [
+     {
+      "label": "+7 Camphor, the same species",
+      "result": 299.52,
+      "passes": true,
+      "id": "a",
+      "extra_trees": 7,
+      "object_ids": [],
+      "alpha": 0.8,
+      "alpha_before": 0.8,
+      "change": {
+       "add_trees": {
+        "CC Camphor": 7
+       }
+      }
+     },
+     {
+      "label": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+      "result": 341.12,
+      "passes": true,
+      "id": "b",
+      "extra_trees": 0,
+      "object_ids": [
+       "T-05"
+      ],
+      "alpha": 1.3,
+      "alpha_before": 0.8,
+      "change": {
+       "swap": {
+        "from": "CC Camphor",
+        "to": "",
+        "n": 1,
+        "from_en": "Camphor",
+        "to_en": "Bischofia",
+        "to_native": true
+       }
+      }
+     },
+     {
+      "label": "+217.8 m² of shrub bed (Gi 0.5)",
+      "result": 297.04,
+      "passes": true,
+      "id": "c",
+      "extra_trees": 0,
+      "object_ids": [],
+      "alpha": 0.8,
+      "alpha_before": 0.8,
+      "change": {
+       "add_shrub_m2": 217.8
+      }
+     },
+     {
+      "label": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+      "result": 277.76,
+      "passes": false,
+      "id": "d",
+      "extra_trees": 0,
+      "object_ids": [
+       "EX-01"
+      ],
+      "adds": 84.8,
+      "citation": {
+       "article": "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+       "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+       "gloss": "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts twice its actual canopy projection area; transplanted, it counts as a new tree."
+      }
+     }
+    ],
+    "pit": {
+     "sheet_id": "L-6",
+     "width_m": 1.5,
+     "length_m": 1.5,
+     "area_m2": 2.25,
+     "soil_depth_m": 1.0,
+     "on_slab": true,
+     "by": "spark",
+     "why": "Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition."
+    },
+    "artificial_ground": "title block L-1-revB: GROUND ARTIFICIAL GROUND",
+    "rule": "pit 1.5–4.0 m² on artificial ground → a large tree counts as a small tree (Gi 1.5 → 1.0)",
+    "review": [],
+    "downgraded": [
+     {
+      "label": "Camphor",
+      "count": 8,
+      "from_gi": 1.5,
+      "to_gi": 1.0
+     }
+    ],
+    "repriced": {
+     "a": {
+      "extra_trees": [
+       2,
+       7
+      ],
+      "result": [
+       299.52,
+       299.52
+      ]
+     },
+     "b": {
+      "extra_trees": [
+       0,
+       0
+      ],
+      "result": [
+       424.32,
+       341.12
+      ]
+     },
+     "c": {
+      "extra_trees": [
+       0,
+       0
+      ],
+      "result": [
+       297.04,
+       297.04
+      ]
+     }
+    }
+   }
+  },
+  "before_downgrade": {
+   "provided": 241.9,
+   "required": 297.0,
+   "status": "fail",
+   "alpha": 0.8,
+   "ra": 0.0,
+   "sum_gi_ai": 302.4,
+   "trees": [
+    {
+     "label": "Camphor",
+     "count": 7,
+     "gi": 1.5,
+     "ai_per_tree": 16.0,
+     "product": 168.0,
+     "pit_note": ""
+    }
+   ],
+   "fixes": [
+    {
+     "label": "+3 Camphor, the same species",
+     "result": 299.52,
+     "passes": true,
+     "id": "a",
+     "extra_trees": 3,
+     "object_ids": [],
+     "alpha": 0.8,
+     "alpha_before": 0.8,
+     "change": {
+      "add_trees": {
+       "CC Camphor": 3
+      }
+     }
+    },
+    {
+     "label": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+     "result": 393.12,
+     "passes": true,
+     "id": "b",
+     "extra_trees": 0,
+     "object_ids": [
+      "T-05"
+     ],
+     "alpha": 1.3,
+     "alpha_before": 0.8,
+     "change": {
+      "swap": {
+       "from": "CC Camphor",
+       "to": "",
+       "n": 1,
+       "from_en": "Camphor",
+       "to_en": "Bischofia",
+       "to_native": true
+      }
+     }
+    },
+    {
+     "label": "+137.8 m² of shrub bed (Gi 0.5)",
+     "result": 297.04,
+     "passes": true,
+     "id": "c",
+     "extra_trees": 0,
+     "object_ids": [],
+     "alpha": 0.8,
+     "alpha_before": 0.8,
+     "change": {
+      "add_shrub_m2": 137.8
+     }
+    },
+    {
+     "label": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+     "result": 309.76,
+     "passes": true,
+     "id": "d",
+     "extra_trees": 0,
+     "object_ids": [
+      "EX-01"
+     ],
+     "adds": 84.8,
+     "citation": {
+      "article": "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+      "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+      "gloss": "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts twice its actual canopy projection area; transplanted, it counts as a new tree."
+     }
+    }
+   ]
+  },
+  "after_downgrade": {
+   "provided": 197.1,
+   "required": 297.0,
+   "status": "fail",
+   "alpha": 0.8,
+   "ra": 0.0,
+   "sum_gi_ai": 246.4,
+   "trees": [
+    {
+     "label": "Camphor",
+     "count": 7,
+     "gi": 1.0,
+     "ai_per_tree": 16.0,
+     "product": 112.0,
+     "pit_note": "pit 2.25 m² in [1.5, 4.0) m² on artificial ground: a large tree counts as a small tree (Gi 1.5 → 1.0); soil 1.0 m ≥ 0.7 m"
+    }
+   ],
+   "fixes": [
+    {
+     "label": "+8 Camphor, the same species",
+     "result": 299.52,
+     "passes": true,
+     "id": "a",
+     "extra_trees": 8,
+     "object_ids": [],
+     "alpha": 0.8,
+     "alpha_before": 0.8,
+     "change": {
+      "add_trees": {
+       "CC Camphor": 8
+      }
+     }
+    },
+    {
+     "label": "Change 1 Camphor to Bischofia, a second native species (α → 1.30); no extra trees",
+     "result": 320.32,
+     "passes": true,
+     "id": "b",
+     "extra_trees": 0,
+     "object_ids": [
+      "T-05"
+     ],
+     "alpha": 1.3,
+     "alpha_before": 0.8,
+     "change": {
+      "swap": {
+       "from": "CC Camphor",
+       "to": "",
+       "n": 1,
+       "from_en": "Camphor",
+       "to_en": "Bischofia",
+       "to_native": true
+      }
+     }
+    },
+    {
+     "label": "+249.8 m² of shrub bed (Gi 0.5)",
+     "result": 297.04,
+     "passes": true,
+     "id": "c",
+     "extra_trees": 0,
+     "object_ids": [],
+     "alpha": 0.8,
+     "alpha_before": 0.8,
+     "change": {
+      "add_shrub_m2": 249.8
+     }
+    },
+    {
+     "label": "Keep EX-01 (Camphor, DBH 95 cm) instead of removing it: an old tree kept by the design counts 2 × its 28.27 m² canopy (+84.8 to ΣGi·Ai), if the basement leaves its root zone in natural ground",
+     "result": 264.96,
+     "passes": false,
+     "id": "d",
+     "extra_trees": 0,
+     "object_ids": [
+      "EX-01"
+     ],
+     "adds": 84.8,
+     "citation": {
+      "article": "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
+      "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+      "gloss": "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts twice its actual canopy projection area; transplanted, it counts as a new tree."
+     }
+    }
+   ],
+   "pit": {
+    "sheet_id": "L-6",
+    "width_m": 1.5,
+    "length_m": 1.5,
+    "area_m2": 2.25,
+    "soil_depth_m": 1.0,
+    "on_slab": true,
+    "by": "spark",
+    "why": "Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition."
+   },
+   "artificial_ground": "title block L-1-revB: GROUND ARTIFICIAL GROUND",
+   "rule": "pit 1.5–4.0 m² on artificial ground → a large tree counts as a small tree (Gi 1.5 → 1.0)",
+   "review": [],
+   "downgraded": [
+    {
+     "label": "Camphor",
+     "count": 7,
+     "from_gi": 1.5,
+     "to_gi": 1.0
+    }
+   ],
+   "repriced": {
+    "a": {
+     "extra_trees": [
+      3,
+      8
+     ],
+     "result": [
+      299.52,
+      299.52
+     ]
+    },
+    "b": {
+     "extra_trees": [
+      0,
+      0
+     ],
+     "result": [
+      393.12,
+      320.32
+     ]
+    },
+    "c": {
+     "extra_trees": [
+      0,
+      0
+     ],
+     "result": [
+      297.04,
+      297.04
+     ]
+    }
+   }
+  },
+  "scenario": "regulation",
+  "decision": "open",
+  "note": null,
+  "decided_at": null
+ },
+ {
+  "check_id": "E12",
+  "category": "regulation",
+  "title": "Tree pit 1.5 × 1.5 m = 2.25 m² on artificial ground: 7 large trees count as small (Gi 1.5 → 1.0)",
+  "severity": "flag",
+  "by": [
+   "spark",
+   "rule"
+  ],
+  "why": "Muse Spark read the detail L-6: Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition. On artificial ground a large tree needs a 4.0 m² pit; one of 1.5–4 m² counts as a small tree. The schedule and the bill call them large trees. TCO2 241.9 → 197.1; the cheapest fix changes with it.",
+  "evidence": {
+   "sheet_ids": [
+    "L-6",
+    "L-4",
+    "L-1-revB",
+    "L-3"
+   ],
+   "file_ids": [
+    "F-17",
+    "F-19",
+    "F-01",
+    "F-02",
+    "F-03",
+    "F-04"
+   ],
+   "object_ids": [
+    "L-6/PIT-01",
+    "L-4/X-01",
+    "L-4/X-02"
+   ],
+   "cells": [
+    "F-01:BOQ!B16",
+    "F-02:BOQ!B16",
+    "F-03:BOQ!B16",
+    "F-04:BOQ!B16"
+   ]
+  },
+  "citation": {
+   "article": "Technical Specification for Building-Site Greening Design, point 5, table 1 and its note",
+   "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+   "gloss": "On artificial ground a large tree needs a pit of at least 4.0 m² and 1.0 m of soil; a large tree in a pit of 1.5–4 m² counts as a small tree (Gi 1.5 → 1.0); planting below the minimums is not counted."
+  },
+  "numbers": {
+   "pit_w_m": 1.5,
+   "pit_l_m": 1.5,
+   "soil_depth_m": 1.0,
+   "on_slab": "yes",
+   "pit_area_m2": 2.25,
+   "trees_downgraded": 7,
+   "provided_before": 241.9,
+   "provided_after": 197.1
+  },
+  "repriced": {
+   "a": {
+    "extra_trees": [
+     3,
+     8
+    ],
+    "provided": [
+     299.52,
+     299.52
+    ],
+    "change": [
+     {
+      "add_trees": {
+       "CC Camphor": 3
+      }
+     },
+     {
+      "add_trees": {
+       "CC Camphor": 8
+      }
+     }
+    ]
+   },
+   "b": {
+    "extra_trees": [
+     0,
+     0
+    ],
+    "provided": [
+     393.12,
+     320.32
+    ],
+    "change": [
+     {
+      "swap": {
+       "from": "CC Camphor",
+       "to": "",
+       "n": 1,
+       "from_en": "Camphor",
+       "to_en": "Bischofia",
+       "to_native": true
+      }
+     },
+     {
+      "swap": {
+       "from": "CC Camphor",
+       "to": "",
+       "n": 1,
+       "from_en": "Camphor",
+       "to_en": "Bischofia",
+       "to_native": true
+      }
+     }
+    ]
+   },
+   "c": {
+    "extra_trees": [
+     0,
+     0
+    ],
+    "provided": [
+     297.04,
+     297.04
+    ],
+    "change": [
+     {
+      "add_shrub_m2": 137.8
+     },
+     {
+      "add_shrub_m2": 249.8
+     }
+    ]
+   }
+  },
+  "pending_items": [
+   "I-01"
+  ],
+  "if_confirmed": {
+   "title": "Tree pit 1.5 × 1.5 m = 2.25 m² on artificial ground: 8 large trees count as small (Gi 1.5 → 1.0)",
+   "why": "Muse Spark read the detail L-6: Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition. On artificial ground a large tree needs a 4.0 m² pit; one of 1.5–4 m² counts as a small tree. The schedule and the bill call them large trees. TCO2 261.1 → 209.9; the cheapest fix changes with it.",
+   "severity": "flag",
+   "numbers": {
+    "pit_w_m": 1.5,
+    "pit_l_m": 1.5,
+    "soil_depth_m": 1.0,
+    "on_slab": "yes",
+    "pit_area_m2": 2.25,
+    "trees_downgraded": 8,
+    "provided_before": 261.1,
+    "provided_after": 209.9
+   }
+  },
+  "scenario": "regulation",
+  "decision": "open",
+  "note": null,
+  "decided_at": null
+ },
+ {
+  "check_id": "C-53",
+  "category": "regulation",
+  "title": "Water retention (Art. 305): λ 0.011 < λc 0.30 over the basement slab — fails on the drawings' own areas",
+  "severity": "review",
+  "by": [
+   "rule",
+   "geometry"
+  ],
+  "why": "λ = Q′ / Q0 must exceed λc = 0.5 × (1 − 0.4) = 0.30. Q0 = A0 1,500 m² × f 1e-05 m/s × t 86,400 s = 1,296 m³ (f: the subsoil is not on the drawings; fill soil's 1e-05 m/s, table 2 note 1). Measured: planted 356.6 m² (7 tree pits × 2.25 m²; Duranta band 10.8 m²; Azalea 150 m²; Lawn 180 m²), permeable paving 248 m²; not permeable: Exposed aggregate 48 m². Planting over the basement slab (the title block says ARTIFICIAL GROUND): Q3 = 0.05 × V3 = 0.05 × 356.6 m² × 0.6 m = 10.7 m³ (soil counted to the 0.6 m maximum; the beds' depth is not on the drawings); the pavers' infiltration term needs natural ground below, so only their base counts: 0.05 × h 0.25 m × 248 m² = 3.1 m³ (h at the 0.25 m maximum; no base thickness is drawn). λ = 0.011 — below 0.30 even in this most favourable reading. On natural ground the same areas would give Q1 = 308.1 m³ and Q2 = 110.2 m³, λ = 0.323. Ask the architect for the subsoil report, the basement's extent under the landscape and the paving base; an over-slab site usually needs storage (a retention tank or an infiltration trench) to pass.",
+  "evidence": {
+   "sheet_ids": [
+    "L-1-revB",
+    "L-3"
+   ],
+   "file_ids": [
+    "F-12",
+    "F-16"
+   ]
+  },
+  "citation": {
+   "article": "Building Technical Regulations, Design and Construction Part, Art. 305",
+   "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=305",
+   "gloss": "The site must keep the original ground's ability to hold and infiltrate rain: its water-retention index must exceed 0.5 × the legal open-space ratio (1 − building coverage)."
+  },
+  "numbers": {
+   "lambda": 0.011,
+   "lambda_c": 0.3,
+   "lambda_over_slab": 0.011,
+   "lambda_natural_ground": 0.323,
+   "Q0_m3": 1296.0,
+   "Q1_m3": 308.1,
+   "Q2_m3": 110.2,
+   "Q2_base_m3": 3.1,
+   "Q3_m3": 10.7,
+   "A0": 1500.0,
+   "r": 0.4,
+   "f_m_per_s": 1e-05,
+   "t_s": 86400.0,
+   "planted_m2": 356.6,
+   "permeable_m2": 248.0,
+   "h_m": 0.25,
+   "soil_depth_counted_m": 0.6,
+   "on_slab": "yes"
+  },
+  "citations": [
+   {
+    "article": "Building Technical Regulations, Design and Construction Part, Art. 305",
+    "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=305",
+    "gloss": "The site must keep the original ground's ability to hold and infiltrate rain: its water-retention index must exceed 0.5 × the legal open-space ratio (1 − building coverage)."
+   },
+   {
+    "article": "Technical Specification for Building-Site Water Retention Design, point 5.1 and table 1",
+    "url": "https://www.nlma.gov.tw/uploads/files/0f741327224b557bd4f672ad1d610c46.pdf",
+    "gloss": "λ = Q′ / Q0, Q0 = A0 × f × t (t = 86,400 s). Green space on natural ground: Q1 = A1·f·t. Unit permeable pavers: Q2 = 0.5·A2·f·t + 0.05·h·A2 (h = graded base ≤ 0.25 m; 0 on a concrete base). Garden soil on artificial ground (roof, balcony, ground over a basement): Q3 = 0.05·V3, soil counted to 0.6 m deep."
+   }
+  ],
+  "status": "fail",
+  "unscored": true,
+  "assumed": {
+   "f_m_per_s": "fill soil default (table 2 note 1)",
+   "h_m": "0.25, the maximum the specification counts",
+   "soil_depth_m": "0.6, the maximum the specification counts"
+  },
+  "scenario": "regulation",
+  "decision": "open",
+  "note": null,
+  "decided_at": null
+ }
+]

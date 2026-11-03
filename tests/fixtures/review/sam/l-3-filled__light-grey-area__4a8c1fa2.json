@@ -1,0 +1,77 @@
+{
+ "image": "L-3 filled",
+ "prompt": "light grey area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:22:11+00:00",
+ "seconds": 0.96,
+ "image_sha256": "4a8c1fa2e9199aeea372e92e4393c525a323129fc5e9b0844177597bced029ee",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 888,
+ "raw_output": "<0f>0<|box;x1=266;y1=392;x2=469;y2=469;w=2100;h=1140;c=0.6444444060325623|><|mask;x=0;y=0;c=0.6444444060325623;data=78,204,!!!!!KHnLLQ[1wX#/It`Ai=6p)eF0Q(5*r'VTDyP3]ysNqN5C'*!!|>,1<|box;x1=1516;y1=248;x2=1618;y2=284;w=2100;h=1140;c=0.8787879347801208|><|mask;x=0;y=0;c=0.8787879347801208;data=37,103,!!!!!:JAXry_MsQrhTlDol2lt7TS?^tD%r[|>,2<|box;x1=898;y1=468;x2=1026;y2=649;w=2100;h=1140;c=0.9064327478408813|><|mask;x=0;y=0;c=0.9064327478408813;data=182,129,!!!!!bBNcvjanw8/*R*.SXg5l%#/0W4nfVAt!G:IQ)xLm@[[r_t6c1$Zt^Yc)=__CWiw1/+cu/$_uEyA|>,3<|box;x1=898;y1=695;x2=1201;y2=796;w=2100;h=1140;c=0.9101123809814453|><|mask;x=0;y=0;c=0.9101123809814453;data=102,304,!!!!!YH2?fLOcFty^GXO44'z_s[1Df5H10.O(s*c)Wxf(2`PZ]hk++8SF+Y4]truGG@{is|>,4<|box;x1=1516;y1=192;x2=1618;y2=229;w=2100;h=1140;c=0.8787879347801208|><|mask;x=0;y=0;c=0.8787879347801208;data=38,103,!!!!!4K.DtQ$82#9Sf[(!&oggL%S|>\n",
+ "response_id": "resp_6ae9b5d3590e4a5212a449d9",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b5d3590e4a5212a449d9",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701330.0,
+  "completed_at": 1793701331.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_348cb3c6-4235-43ef-864d-0447bb6581cb",
+    "status": "completed",
+    "content_chars": 888
+   }
+  ]
+ },
+ "sheet": "L-3",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light grey",
+  "kind": "area",
+  "labels": [
+   "PV-2 EXPOSED AGGREGATE"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

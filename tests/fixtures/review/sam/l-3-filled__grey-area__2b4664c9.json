@@ -1,0 +1,77 @@
+{
+ "image": "L-3 filled",
+ "prompt": "grey area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:25:03+00:00",
+ "seconds": 1.48,
+ "image_sha256": "2b4664c91245d79496cc04119280ae25d7f30056a56d366ef7ded14540fdda44",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 690,
+ "raw_output": "<0f>0<|box;x1=1516;y1=248;x2=1618;y2=284;w=2100;h=1140;c=0.9139785170555115|><|mask;x=0;y=0;c=0.9139785170555115;data=37,103,!!!!!@J@tBgAdgrV?l*XXWCuK`j@kbwo/Sv3.VN|>,1<|box;x1=822;y1=166;x2=1075;y2=267;w=2100;h=1140;c=0.941605806350708|><|mask;x=0;y=0;c=0.941605806350708;data=102,254,!!!!!MI7W*?0o0AXtCZzKidhz4.B8tW!YGZPlEb#?*0d[aMef)8S]=&|>,2<|box;x1=1126;y1=166;x2=1227;y2=543;w=2100;h=1140;c=0.941605806350708|><|mask;x=0;y=0;c=0.941605806350708;data=378,102,!!!!!UI6^ZGIK[y=4[CL:GM.'22=ESwi!va{+o_FkJM87Vb5R7O+gs)K9_Ns_^&fV|>,3<|box;x1=1516;y1=192;x2=1618;y2=229;w=2100;h=1140;c=0.9101123809814453|><|mask;x=0;y=0;c=0.9101123809814453;data=38,103,!!!!!9JAX9Ba*`DfbdV8/DkzOjdppKmmFn|>\n",
+ "response_id": "resp_6ae9b67fb1bfd7b543b94554",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b67fb1bfd7b543b94554",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701502.0,
+  "completed_at": 1793701503.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_638ba17d-8e6e-4716-8a5d-4b8817cb2ab4",
+    "status": "completed",
+    "content_chars": 690
+   }
+  ]
+ },
+ "sheet": "L-3",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "grey",
+  "kind": "area",
+  "labels": [
+   "PV-3 GRASS PAVERS"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

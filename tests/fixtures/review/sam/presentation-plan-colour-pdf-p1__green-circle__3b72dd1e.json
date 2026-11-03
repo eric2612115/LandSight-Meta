@@ -1,0 +1,71 @@
+{
+ "image": "Presentation Plan (Colour).pdf p1",
+ "prompt": "green circle",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:25:53+00:00",
+ "seconds": 2.71,
+ "image_sha256": "3b72dd1e0aef4836a8c21e945df16bb105c779c7a3794ad7de00a9b511a204c6",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 2666,
+ "raw_output": "<0f>0<|box;x1=1518;y1=631;x2=1616;y2=731;w=2100;h=1633;c=0.859649121761322|><|mask;x=0;y=0;c=0.859649121761322;data=101,99,!!!!!lDl*6E]zG=`l3dnY_7WbcddF-NDb^d]S3bNFhh7y&Oj:pNH1U2r0F0$XkJWx9[/Dv6hM:_'DAzB'i=sB0f6{5R!!|>,1<|box;x1=117;y1=886;x2=215;y2=985;w=2100;h=1633;c=0.8987342119216919|><|mask;x=0;y=0;c=0.8987342119216919;data=100,99,!!!!!iD]m6C%Cn$oUQrnQ^==j%]MWGPM(_Wn.pxIYJ0?8aSI4G@PKr0+B3CYK22Ej+={&*YnI4rH:e'5nnJ[$#&li|>,2<|box;x1=496;y1=1252;x2=594;y2=1351;w=2100;h=1633;c=0.8987342119216919|><|mask;x=0;y=0;c=0.8987342119216919;data=100,99,!!!!!kDO[OtFL-b-bX2LYhsO[[304I7n+U8aer@Q!NLQVm2@g+lB0kv%VHxR0wB'C$d1CwBO%KctP]KJ2Y@T%OYqFSP|>,3<|box;x1=192;y1=1252;x2=292;y2=1352;w=2100;h=1633;c=0.9064327478408813|><|mask;x=0;y=0;c=0.9064327478408813;data=101,101,!!!!!oDSu.hI*&J(EhVyIuv]um%24_l%`_1O0N!ht*in-*pTM^VmIE7[B_-%vk04gA!:hH+Wo5-k!@4U1bka2OL0k516op{3|>,4<|box;x1=1050;y1=1380;x2=1149;y2=1480;w=2100;h=1633;c=0.8987342119216919|><|mask;x=0;y=0;c=0.8987342119216919;data=101,100,!!!!!hDg4S22AtgNZZ^)moTF3.rF.IQx2Rj9r##9NAD0+k*ef%de^CH^1XT3zGufS-F`R0cCQ8$Qjrlm-d!Ji%.V|>,5<|box;x1=696;y1=1252;x2=797;y2=1351;w=2100;h=1633;c=0.9064327478408813|><|mask;x=0;y=0;c=0.9064327478408813;data=100,102,!!!!!nDSvBWG3bXx`vN:k3&ItrRDC1Cfbx1T/Xk*cwV?o+^tt1(Qa0(M$F#GJsNRpg]SKY`x9pVb%r-3Ha#$o=BB1[%-kXl|>,6<|box;x1=293;y1=1252;x2=392;y2=1352;w=2100;h=1633;c=0.9024390578269958|><|mask;x=0;y=0;c=0.9024390578269958;data=101,100,!!!!!kDO]rG3)7mzLmU7PuNs!k1K*l^'o?NkKO'bEccc')R8H^lQSWSB#h(Sajabrq+CEJ+U#]3$6pH#Tbm$qr2DQ2t|>,7<|box;x1=596;y1=1253;x2=694;y2=1352;w=2100;h=1633;c=0.9024390578269958|><|mask;x=0;y=0;c=0.9024390578269958;data=100,99,!!!!!nDg4mP@v]v.g9y4)]rl@N[X4M-YGlFjENA$9J*_fk$rW(V!Ctw5*[ZE]F6blJ*iTP%Qcng?(vHqW6S!leKSE({MQHn|>,8<|box;x1=395;y1=1252;x2=493;y2=1352;w=2100;h=1633;c=0.9064327478408813|><|mask;x=0;y=0;c=0.9064327478408813;data=101,99,!!!!!jD]lNiB[e^ZA[E@a:xwv5^zXNes-o.dcJ)ao@QlHefUPFWFXgd?x[:Y$u[foM1G3oe3?H9*vyb'bMaRUZf'_d|>,9<|box;x1=305;y1=605;x2=532;y2=803;w=2100;h=1633;c=0.8202247023582458|><|mask;x=0;y=0;c=0.8202247023582458;data=199,228,!!!!#HAYYfCoB`$-N-IaRP%rb2VM!jkv]1Ei:tFct6fgTXDDs3LX$eRUPoE!S:)Jtv`8=7:#T@rfVMnwqrI!]fa[0j/y%h:H^SW_#RA-MqKtLaZ'eM_.aPG%NL9Dj5/dP#`Xz^/Yo#J#Ybux=D%CZG$g.=u|>,10<|box;x1=899;y1=1252;x2=998;y2=1352;w=2100;h=1633;c=0.9101123809814453|><|mask;x=0;y=0;c=0.9101123809814453;data=101,100,!!!!!nDO]rKNhQPl=mDly*5Nl8q`xr]Jm6W*CN7E%AmAmbMSt!mrZGle*!pNkr-fK.Q=cDb$7DYd^`cl3TdfmdD=2%CoBLz|>,11<|box;x1=797;y1=1252;x2=896;y2=1352;w=2100;h=1633;c=0.9101123809814453|><|mask;x=0;y=0;c=0.9101123809814453;data=101,100,!!!!!kDKL*_0]vsyqpFK0&Qo/E[-KYC(o?/tSAi!c!^UA]KQ8!m6jvj_^x7E8tuhSft'yY'[$yEDi?XlBg?/+N@06@F|>\n",
+ "response_id": "resp_6ae9b6b0a2db316823e040e7",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6b0a2db316823e040e7",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701552.0,
+  "completed_at": 1793701552.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_56593e54-9018-4c18-ba2e-ef4f0487d892",
+    "status": "completed",
+    "content_chars": 2666
+   }
+  ]
+ },
+ "sheet": "F-26-p1",
+ "prompt_source": "spark_raster_plan",
+ "legend": {
+  "labels": [
+   "CC CAMPHOR",
+   "EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED",
+   "CC typ."
+  ],
+  "kind": "symbol"
+ }
+}

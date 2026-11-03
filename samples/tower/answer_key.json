@@ -1,0 +1,1895 @@
+{
+ "site": {
+  "name": "Greenfield Residences — landscape over basement slab — tower",
+  "sheets": {
+   "L-101": {
+    "file": "Drawings/CAD/L-101 Ground Floor Landscape Plan.dxf",
+    "title": "1F Ground Floor Landscape Plan"
+   },
+   "L-102": {
+    "file": "Drawings/CAD/L-102 5F Podium Roof Garden.dxf",
+    "title": "5F Podium Roof Garden"
+   },
+   "L-103": {
+    "file": "Drawings/CAD/L-103 Typical Sky Garden (8F, 12F, 16F, 20F).dxf",
+    "title": "Typical Sky Garden Plan, 8F, 12F, 16F, 20F"
+   },
+   "L-104": {
+    "file": "Drawings/CAD/L-104 RF Roof Garden.dxf",
+    "title": "RF Roof Garden"
+   },
+   "L-301": {
+    "file": "Drawings/CAD/L-301 Landscape Sections.dxf",
+    "title": "Landscape Sections"
+   },
+   "L-501": {
+    "file": "Drawings/CAD/L-501 Planter Details.dxf",
+    "title": "5F-RF Planter Details"
+   }
+  }
+ },
+ "floors": {
+  "L-101": [
+   1
+  ],
+  "L-102": [
+   5
+  ],
+  "L-103": [
+   8,
+   12,
+   16,
+   20
+  ],
+  "L-104": [
+   "R"
+  ]
+ },
+ "objects": [
+  {
+   "id": "L-101/tree-01",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    5.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     6.932,
+     3.018
+    ],
+    [
+     6.414,
+     3.914
+    ],
+    [
+     5.518,
+     4.432
+    ],
+    [
+     4.482,
+     4.432
+    ],
+    [
+     3.586,
+     3.914
+    ],
+    [
+     3.068,
+     3.018
+    ],
+    [
+     3.068,
+     1.982
+    ],
+    [
+     3.586,
+     1.086
+    ],
+    [
+     4.482,
+     0.568
+    ],
+    [
+     5.518,
+     0.568
+    ],
+    [
+     6.414,
+     1.086
+    ],
+    [
+     6.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-02",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    9.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     10.932,
+     3.018
+    ],
+    [
+     10.414,
+     3.914
+    ],
+    [
+     9.518,
+     4.432
+    ],
+    [
+     8.482,
+     4.432
+    ],
+    [
+     7.586,
+     3.914
+    ],
+    [
+     7.068,
+     3.018
+    ],
+    [
+     7.068,
+     1.982
+    ],
+    [
+     7.586,
+     1.086
+    ],
+    [
+     8.482,
+     0.568
+    ],
+    [
+     9.518,
+     0.568
+    ],
+    [
+     10.414,
+     1.086
+    ],
+    [
+     10.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-03",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    13.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     14.932,
+     3.018
+    ],
+    [
+     14.414,
+     3.914
+    ],
+    [
+     13.518,
+     4.432
+    ],
+    [
+     12.482,
+     4.432
+    ],
+    [
+     11.586,
+     3.914
+    ],
+    [
+     11.068,
+     3.018
+    ],
+    [
+     11.068,
+     1.982
+    ],
+    [
+     11.586,
+     1.086
+    ],
+    [
+     12.482,
+     0.568
+    ],
+    [
+     13.518,
+     0.568
+    ],
+    [
+     14.414,
+     1.086
+    ],
+    [
+     14.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-04",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    17.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     18.932,
+     3.018
+    ],
+    [
+     18.414,
+     3.914
+    ],
+    [
+     17.518,
+     4.432
+    ],
+    [
+     16.482,
+     4.432
+    ],
+    [
+     15.586,
+     3.914
+    ],
+    [
+     15.068,
+     3.018
+    ],
+    [
+     15.068,
+     1.982
+    ],
+    [
+     15.586,
+     1.086
+    ],
+    [
+     16.482,
+     0.568
+    ],
+    [
+     17.518,
+     0.568
+    ],
+    [
+     18.414,
+     1.086
+    ],
+    [
+     18.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-05",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    21.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     22.932,
+     3.018
+    ],
+    [
+     22.414,
+     3.914
+    ],
+    [
+     21.518,
+     4.432
+    ],
+    [
+     20.482,
+     4.432
+    ],
+    [
+     19.586,
+     3.914
+    ],
+    [
+     19.068,
+     3.018
+    ],
+    [
+     19.068,
+     1.982
+    ],
+    [
+     19.586,
+     1.086
+    ],
+    [
+     20.482,
+     0.568
+    ],
+    [
+     21.518,
+     0.568
+    ],
+    [
+     22.414,
+     1.086
+    ],
+    [
+     22.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-06",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    25.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     26.932,
+     3.018
+    ],
+    [
+     26.414,
+     3.914
+    ],
+    [
+     25.518,
+     4.432
+    ],
+    [
+     24.482,
+     4.432
+    ],
+    [
+     23.586,
+     3.914
+    ],
+    [
+     23.068,
+     3.018
+    ],
+    [
+     23.068,
+     1.982
+    ],
+    [
+     23.586,
+     1.086
+    ],
+    [
+     24.482,
+     0.568
+    ],
+    [
+     25.518,
+     0.568
+    ],
+    [
+     26.414,
+     1.086
+    ],
+    [
+     26.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-07",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    29.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     30.932,
+     3.018
+    ],
+    [
+     30.414,
+     3.914
+    ],
+    [
+     29.518,
+     4.432
+    ],
+    [
+     28.482,
+     4.432
+    ],
+    [
+     27.586,
+     3.914
+    ],
+    [
+     27.068,
+     3.018
+    ],
+    [
+     27.068,
+     1.982
+    ],
+    [
+     27.586,
+     1.086
+    ],
+    [
+     28.482,
+     0.568
+    ],
+    [
+     29.518,
+     0.568
+    ],
+    [
+     30.414,
+     1.086
+    ],
+    [
+     30.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/tree-08",
+   "sheet": "L-101",
+   "kind": "tree",
+   "label": "CAMPHOR",
+   "centre": [
+    33.0,
+    2.5
+   ],
+   "quote_count": 1,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": null,
+   "note": "end gap 0 cm; spec H3.5 W1.5 cal. 10 cm",
+   "footprint": [
+    [
+     34.932,
+     3.018
+    ],
+    [
+     34.414,
+     3.914
+    ],
+    [
+     33.518,
+     4.432
+    ],
+    [
+     32.482,
+     4.432
+    ],
+    [
+     31.586,
+     3.914
+    ],
+    [
+     31.068,
+     3.018
+    ],
+    [
+     31.068,
+     1.982
+    ],
+    [
+     31.586,
+     1.086
+    ],
+    [
+     32.482,
+     0.568
+    ],
+    [
+     33.518,
+     0.568
+    ],
+    [
+     34.414,
+     1.086
+    ],
+    [
+     34.932,
+     1.982
+    ]
+   ]
+  },
+  {
+   "id": "L-101/hedge-01",
+   "sheet": "L-101",
+   "kind": "hedge",
+   "label": "DURANTA",
+   "centre": [
+    49.0,
+    15.0
+   ],
+   "quote_count": 182,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": 54.0,
+   "note": "H0.6 @0.3m o.c., double row: 2 x (floor(27.0/0.3)+1)",
+   "footprint": [
+    [
+     48.8,
+     1.5
+    ],
+    [
+     49.2,
+     1.5
+    ],
+    [
+     49.2,
+     28.5
+    ],
+    [
+     48.8,
+     28.5
+    ]
+   ]
+  },
+  {
+   "id": "L-101/shrub_bed-01",
+   "sheet": "L-101",
+   "kind": "shrub_bed",
+   "label": "AZALEA",
+   "centre": [
+    13.5,
+    17.0
+   ],
+   "quote_count": 150.0,
+   "unit": "m²",
+   "area_m2": 150.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     6.0,
+     12.0
+    ],
+    [
+     21.0,
+     12.0
+    ],
+    [
+     21.0,
+     22.0
+    ],
+    [
+     6.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-101/lawn-01",
+   "sheet": "L-101",
+   "kind": "lawn",
+   "label": "LAWN",
+   "centre": [
+    34.0,
+    17.0
+   ],
+   "quote_count": 200.0,
+   "unit": "m²",
+   "area_m2": 200.0,
+   "length_m": null,
+   "note": "",
+   "footprint": [
+    [
+     24.0,
+     12.0
+    ],
+    [
+     44.0,
+     12.0
+    ],
+    [
+     44.0,
+     22.0
+    ],
+    [
+     24.0,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "L-101/legend-01",
+   "sheet": "L-101",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    25.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-101/legend-02",
+   "sheet": "L-101",
+   "kind": "legend",
+   "label": "legend symbol CC CAMPHOR",
+   "centre": [
+    57.5,
+    27.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "tree symbol",
+   "footprint": [
+    [
+     59.432,
+     27.618
+    ],
+    [
+     58.914,
+     28.514
+    ],
+    [
+     58.018,
+     29.032
+    ],
+    [
+     56.982,
+     29.032
+    ],
+    [
+     56.086,
+     28.514
+    ],
+    [
+     55.568,
+     27.618
+    ],
+    [
+     55.568,
+     26.582
+    ],
+    [
+     56.086,
+     25.686
+    ],
+    [
+     56.982,
+     25.168
+    ],
+    [
+     58.018,
+     25.168
+    ],
+    [
+     58.914,
+     25.686
+    ],
+    [
+     59.432,
+     26.582
+    ]
+   ]
+  },
+  {
+   "id": "L-101/legend-03",
+   "sheet": "L-101",
+   "kind": "legend",
+   "label": "legend swatch AZ AZALEA",
+   "centre": [
+    57.5,
+    23.6
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     22.9
+    ],
+    [
+     59.5,
+     22.9
+    ],
+    [
+     59.5,
+     24.3
+    ],
+    [
+     55.5,
+     24.3
+    ]
+   ]
+  },
+  {
+   "id": "L-101/legend-04",
+   "sheet": "L-101",
+   "kind": "legend",
+   "label": "legend line DU DURANTA",
+   "centre": [
+    57.5,
+    21.3
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "hedge line",
+   "footprint": [
+    [
+     55.5,
+     21.1
+    ],
+    [
+     59.5,
+     21.1
+    ],
+    [
+     59.5,
+     21.5
+    ],
+    [
+     55.5,
+     21.5
+    ]
+   ]
+  },
+  {
+   "id": "L-101/schedule-01",
+   "sheet": "L-101",
+   "kind": "schedule",
+   "label": "PLANT SCHEDULE",
+   "centre": [
+    64.75,
+    14.65
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "",
+   "footprint": null
+  },
+  {
+   "id": "L-101/notes-01",
+   "sheet": "L-101",
+   "kind": "notes",
+   "label": "GENERAL NOTES",
+   "centre": [
+    21.0,
+    -7.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "1. PLANT QUANTITIES ON PLAN TAKE PRECEDENCE OVER THE SCHEDULE.",
+   "footprint": null
+  },
+  {
+   "id": "L-101/title-01",
+   "sheet": "L-101",
+   "kind": "title",
+   "label": "1F Ground Floor Landscape Plan",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-1; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-102/title-01",
+   "sheet": "L-102",
+   "kind": "title",
+   "label": "5F Podium Roof Garden",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-102; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-102/shrub_bed-01",
+   "sheet": "L-102",
+   "kind": "shrub_bed",
+   "label": "Yeddo hawthorn",
+   "centre": [
+    9.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "podium planter",
+   "footprint": [
+    [
+     6.5,
+     7.0
+    ],
+    [
+     12.5,
+     7.0
+    ],
+    [
+     12.5,
+     8.5
+    ],
+    [
+     6.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-102/shrub_bed-02",
+   "sheet": "L-102",
+   "kind": "shrub_bed",
+   "label": "Yeddo hawthorn",
+   "centre": [
+    16.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "podium planter",
+   "footprint": [
+    [
+     13.5,
+     7.0
+    ],
+    [
+     19.5,
+     7.0
+    ],
+    [
+     19.5,
+     8.5
+    ],
+    [
+     13.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-102/shrub_bed-03",
+   "sheet": "L-102",
+   "kind": "shrub_bed",
+   "label": "Yeddo hawthorn",
+   "centre": [
+    23.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "podium planter",
+   "footprint": [
+    [
+     20.5,
+     7.0
+    ],
+    [
+     26.5,
+     7.0
+    ],
+    [
+     26.5,
+     8.5
+    ],
+    [
+     20.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-102/shrub_bed-04",
+   "sheet": "L-102",
+   "kind": "shrub_bed",
+   "label": "Yeddo hawthorn",
+   "centre": [
+    30.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "podium planter",
+   "footprint": [
+    [
+     27.5,
+     7.0
+    ],
+    [
+     33.5,
+     7.0
+    ],
+    [
+     33.5,
+     8.5
+    ],
+    [
+     27.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-102/shrub_bed-05",
+   "sheet": "L-102",
+   "kind": "shrub_bed",
+   "label": "Yeddo hawthorn",
+   "centre": [
+    16.5,
+    14.25
+   ],
+   "quote_count": 7.5,
+   "unit": "m²",
+   "area_m2": 7.5,
+   "length_m": null,
+   "note": "podium planter drawn over the lift shaft",
+   "footprint": [
+    [
+     15.0,
+     13.0
+    ],
+    [
+     18.0,
+     13.0
+    ],
+    [
+     18.0,
+     15.5
+    ],
+    [
+     15.0,
+     15.5
+    ]
+   ]
+  },
+  {
+   "id": "L-102/legend-01",
+   "sheet": "L-102",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    26.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-102/legend-02",
+   "sheet": "L-102",
+   "kind": "legend",
+   "label": "legend swatch RI YEDDO HAWTHORN",
+   "centre": [
+    57.5,
+    28.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     27.7
+    ],
+    [
+     59.5,
+     27.7
+    ],
+    [
+     59.5,
+     29.1
+    ],
+    [
+     55.5,
+     29.1
+    ]
+   ]
+  },
+  {
+   "id": "L-102/legend-03",
+   "sheet": "L-102",
+   "kind": "legend",
+   "label": "legend line DU DURANTA",
+   "centre": [
+    57.5,
+    26.1
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "hedge line",
+   "footprint": [
+    [
+     55.5,
+     25.9
+    ],
+    [
+     59.5,
+     25.9
+    ],
+    [
+     59.5,
+     26.3
+    ],
+    [
+     55.5,
+     26.3
+    ]
+   ]
+  },
+  {
+   "id": "L-102/hedge-01",
+   "sheet": "L-102",
+   "kind": "hedge",
+   "label": "Duranta",
+   "centre": [
+    40.2,
+    17.5
+   ],
+   "quote_count": 102,
+   "unit": "EA",
+   "area_m2": null,
+   "length_m": 30.0,
+   "note": "L-101's symbol and label on 5F",
+   "footprint": null
+  },
+  {
+   "id": "L-103/title-01",
+   "sheet": "L-103",
+   "kind": "title",
+   "label": "Typical Sky Garden Plan, 8F, 12F, 16F, 20F",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-103; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-103/shrub_bed-01",
+   "sheet": "L-103",
+   "kind": "shrub_bed",
+   "label": "Chinese ixora",
+   "centre": [
+    9.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "sky-garden planter, typical for 8F, 12F, 16F, 20F",
+   "footprint": [
+    [
+     6.5,
+     7.0
+    ],
+    [
+     12.5,
+     7.0
+    ],
+    [
+     12.5,
+     8.5
+    ],
+    [
+     6.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-103/shrub_bed-02",
+   "sheet": "L-103",
+   "kind": "shrub_bed",
+   "label": "Chinese ixora",
+   "centre": [
+    16.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "sky-garden planter, typical for 8F, 12F, 16F, 20F",
+   "footprint": [
+    [
+     13.5,
+     7.0
+    ],
+    [
+     19.5,
+     7.0
+    ],
+    [
+     19.5,
+     8.5
+    ],
+    [
+     13.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-103/shrub_bed-03",
+   "sheet": "L-103",
+   "kind": "shrub_bed",
+   "label": "Chinese ixora",
+   "centre": [
+    23.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "sky-garden planter, typical for 8F, 12F, 16F, 20F",
+   "footprint": [
+    [
+     20.5,
+     7.0
+    ],
+    [
+     26.5,
+     7.0
+    ],
+    [
+     26.5,
+     8.5
+    ],
+    [
+     20.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-103/shrub_bed-04",
+   "sheet": "L-103",
+   "kind": "shrub_bed",
+   "label": "Chinese ixora",
+   "centre": [
+    30.5,
+    7.75
+   ],
+   "quote_count": 9.0,
+   "unit": "m²",
+   "area_m2": 9.0,
+   "length_m": null,
+   "note": "sky-garden planter, typical for 8F, 12F, 16F, 20F",
+   "footprint": [
+    [
+     27.5,
+     7.0
+    ],
+    [
+     33.5,
+     7.0
+    ],
+    [
+     33.5,
+     8.5
+    ],
+    [
+     27.5,
+     8.5
+    ]
+   ]
+  },
+  {
+   "id": "L-103/shrub_bed-05",
+   "sheet": "L-103",
+   "kind": "shrub_bed",
+   "label": "Chinese ixora",
+   "centre": [
+    24.5,
+    19.7
+   ],
+   "quote_count": 1.2,
+   "unit": "m²",
+   "area_m2": 1.2,
+   "length_m": null,
+   "note": "planter inside the escape corridor, typical for 8F, 12F, 16F, 20F",
+   "footprint": [
+    [
+     23.5,
+     19.4
+    ],
+    [
+     25.5,
+     19.4
+    ],
+    [
+     25.5,
+     20.0
+    ],
+    [
+     23.5,
+     20.0
+    ]
+   ]
+  },
+  {
+   "id": "L-103/shrub_bed-06",
+   "sheet": "L-103",
+   "kind": "shrub_bed",
+   "label": "Chinese ixora",
+   "centre": [
+    26.8,
+    19.7
+   ],
+   "quote_count": 1.2,
+   "unit": "m²",
+   "area_m2": 1.2,
+   "length_m": null,
+   "note": "planter inside the escape corridor, typical for 8F, 12F, 16F, 20F",
+   "footprint": [
+    [
+     25.8,
+     19.4
+    ],
+    [
+     27.8,
+     19.4
+    ],
+    [
+     27.8,
+     20.0
+    ],
+    [
+     25.8,
+     20.0
+    ]
+   ]
+  },
+  {
+   "id": "L-103/legend-01",
+   "sheet": "L-103",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    28.5
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-103/legend-02",
+   "sheet": "L-103",
+   "kind": "legend",
+   "label": "legend swatch IC CHINESE IXORA",
+   "centre": [
+    57.5,
+    28.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     27.7
+    ],
+    [
+     59.5,
+     27.7
+    ],
+    [
+     59.5,
+     29.1
+    ],
+    [
+     55.5,
+     29.1
+    ]
+   ]
+  },
+  {
+   "id": "L-104/title-01",
+   "sheet": "L-104",
+   "kind": "title",
+   "label": "RF Roof Garden",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-104; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-104/lawn-01",
+   "sheet": "L-104",
+   "kind": "lawn",
+   "label": "Roof lawn",
+   "centre": [
+    11.25,
+    18.0
+   ],
+   "quote_count": 105.0,
+   "unit": "m²",
+   "area_m2": 105.0,
+   "length_m": null,
+   "note": "on 0.3 m soil",
+   "footprint": [
+    [
+     7.5,
+     11.0
+    ],
+    [
+     15.0,
+     11.0
+    ],
+    [
+     15.0,
+     25.0
+    ],
+    [
+     7.5,
+     25.0
+    ]
+   ]
+  },
+  {
+   "id": "L-104/shrub_bed-01",
+   "sheet": "L-104",
+   "kind": "shrub_bed",
+   "label": "Orange jasmine",
+   "centre": [
+    28.5,
+    12.25
+   ],
+   "quote_count": 17.5,
+   "unit": "m²",
+   "area_m2": 17.5,
+   "length_m": null,
+   "note": "roof planter on 0.3 m soil",
+   "footprint": [
+    [
+     25.0,
+     11.0
+    ],
+    [
+     32.0,
+     11.0
+    ],
+    [
+     32.0,
+     13.5
+    ],
+    [
+     25.0,
+     13.5
+    ]
+   ]
+  },
+  {
+   "id": "L-104/shrub_bed-02",
+   "sheet": "L-104",
+   "kind": "shrub_bed",
+   "label": "Orange jasmine",
+   "centre": [
+    28.5,
+    23.25
+   ],
+   "quote_count": 17.5,
+   "unit": "m²",
+   "area_m2": 17.5,
+   "length_m": null,
+   "note": "roof planter on 0.3 m soil",
+   "footprint": [
+    [
+     25.0,
+     22.0
+    ],
+    [
+     32.0,
+     22.0
+    ],
+    [
+     32.0,
+     24.5
+    ],
+    [
+     25.0,
+     24.5
+    ]
+   ]
+  },
+  {
+   "id": "L-104/legend-01",
+   "sheet": "L-104",
+   "kind": "legend",
+   "label": "LEGEND",
+   "centre": [
+    63.5,
+    27.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "legend box",
+   "footprint": null
+  },
+  {
+   "id": "L-104/legend-02",
+   "sheet": "L-104",
+   "kind": "legend",
+   "label": "legend swatch RL ROOF LAWN",
+   "centre": [
+    57.5,
+    28.4
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     27.7
+    ],
+    [
+     59.5,
+     27.7
+    ],
+    [
+     59.5,
+     29.1
+    ],
+    [
+     55.5,
+     29.1
+    ]
+   ]
+  },
+  {
+   "id": "L-104/legend-03",
+   "sheet": "L-104",
+   "kind": "legend",
+   "label": "legend swatch MP ORANGE JASMINE",
+   "centre": [
+    57.5,
+    26.2
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "swatch",
+   "footprint": [
+    [
+     55.5,
+     25.5
+    ],
+    [
+     59.5,
+     25.5
+    ],
+    [
+     59.5,
+     26.9
+    ],
+    [
+     55.5,
+     26.9
+    ]
+   ]
+  },
+  {
+   "id": "L-301/title-01",
+   "sheet": "L-301",
+   "kind": "title",
+   "label": "Landscape Sections",
+   "centre": [
+    64.5,
+    -0.25
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-301; SCALE 1:200; REV A 2026-09-18",
+   "footprint": null
+  },
+  {
+   "id": "L-501/tree_pit-01",
+   "sheet": "L-501",
+   "kind": "tree_pit",
+   "label": "TREE PIT",
+   "centre": [
+    5.1,
+    1.5
+   ],
+   "quote_count": 0,
+   "unit": "EA",
+   "area_m2": 4.0,
+   "length_m": null,
+   "note": "pit 2.0 x 2.0 m, soil 1.2 m on slab (drawn at half size)",
+   "footprint": null
+  },
+  {
+   "id": "L-501/title-01",
+   "sheet": "L-501",
+   "kind": "title",
+   "label": "5F-RF Planter Details",
+   "centre": [
+    6.45,
+    -0.025
+   ],
+   "quote_count": 0,
+   "unit": "",
+   "area_m2": null,
+   "length_m": null,
+   "note": "DRAWING NO. L-501; SCALE 1:20; REV A 2026-09-18",
+   "footprint": null
+  }
+ ],
+ "package": {
+  "name": "Greenfield Residences — Tower Landscape Package",
+  "seed": 0,
+  "basis": "synthetic",
+  "kind": "tower"
+ },
+ "bills": {
+  "T1": {
+   "file": "Bills/Tower landscape BOQ.xlsx",
+   "cells": {
+    "header": "A3:G4",
+    "camphor.description": "B6",
+    "camphor.unit": "D6",
+    "camphor.qty": "E6",
+    "camphor.price": "F6",
+    "camphor.amount": "G6",
+    "duranta.description": "B7",
+    "duranta.unit": "D7",
+    "duranta.qty": "E7",
+    "duranta.price": "F7",
+    "duranta.amount": "G7",
+    "azalea.description": "B8",
+    "azalea.unit": "D8",
+    "azalea.qty": "E8",
+    "azalea.price": "F8",
+    "azalea.amount": "G8",
+    "lawn.description": "B9",
+    "lawn.unit": "D9",
+    "lawn.qty": "E9",
+    "lawn.price": "F9",
+    "lawn.amount": "G9",
+    "podium.description": "B11",
+    "podium.unit": "D11",
+    "podium.qty": "E11",
+    "podium.price": "F11",
+    "podium.amount": "G11",
+    "typical.description": "B13",
+    "typical.unit": "D13",
+    "typical.qty": "E13",
+    "typical.price": "F13",
+    "typical.amount": "G13",
+    "roof_lawn.description": "B15",
+    "roof_lawn.unit": "D15",
+    "roof_lawn.qty": "E15",
+    "roof_lawn.price": "F15",
+    "roof_lawn.amount": "G15",
+    "roof_shrub.description": "B16",
+    "roof_shrub.unit": "D16",
+    "roof_shrub.qty": "E16",
+    "roof_shrub.price": "F16",
+    "roof_shrub.amount": "G16",
+    "pit.description": "B18",
+    "pit.unit": "D18",
+    "pit.qty": "E18",
+    "pit.price": "F18",
+    "pit.amount": "G18",
+    "soil.description": "B19",
+    "soil.unit": "D19",
+    "soil.qty": "E19",
+    "soil.price": "F19",
+    "soil.amount": "G19",
+    "subtotal": "G20",
+    "overhead": "G21",
+    "business": "G22",
+    "total": "G23",
+    "subtotal_range": "G6:G19"
+   }
+  }
+ },
+ "errors": [
+  {
+   "id": "T01",
+   "files": [
+    "Drawings/CAD/L-103 Typical Sky Garden (8F, 12F, 16F, 20F).dxf"
+   ],
+   "category": "floors",
+   "scenario": "regulation",
+   "expected_verdict": "one sheet for four floors (8F, 12F, 16F, 20F): quantities × 4",
+   "object_ids": [
+    "L-103/shrub_bed-01",
+    "L-103/shrub_bed-02",
+    "L-103/shrub_bed-03",
+    "L-103/shrub_bed-04",
+    "L-103/shrub_bed-05",
+    "L-103/shrub_bed-06"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T02",
+   "files": [
+    "Drawings/CAD/L-104 RF Roof Garden.dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "roof planters on 0.3 m soil, below the 0.4 m shrub minimum; the roof lawn on 0.3 m counts",
+   "object_ids": [],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T03",
+   "files": [
+    "Drawings/CAD/L-301 Landscape Sections.dxf"
+   ],
+   "category": "sheet",
+   "scenario": "design",
+   "expected_verdict": "sections — not counted",
+   "object_ids": [],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T04",
+   "files": [
+    "Drawings/CAD/L-104 RF Roof Garden.dxf"
+   ],
+   "category": "sheet",
+   "scenario": "design",
+   "expected_verdict": "detail L-501 says 0.6 m roof soil, plan L-104 says 0.3 m",
+   "object_ids": [
+    "L-104/shrub_bed-01",
+    "L-104/shrub_bed-02"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T05",
+   "files": [
+    "Drawings/CAD/L-101 Ground Floor Landscape Plan.dxf",
+    "Drawings/CAD/L-102 5F Podium Roof Garden.dxf"
+   ],
+   "category": "floors",
+   "scenario": "design",
+   "expected_verdict": "the same hedge symbol and label on 1F and 5F: counted on both, never merged",
+   "object_ids": [
+    "L-101/hedge-01",
+    "L-102/hedge-01"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T06",
+   "files": [
+    "Bills/Tower landscape BOQ.xlsx",
+    "Drawings/CAD/L-103 Typical Sky Garden (8F, 12F, 16F, 20F).dxf"
+   ],
+   "category": "bill",
+   "scenario": "quote",
+   "expected_verdict": "bill prices one sky-garden floor; the drawing stands for four",
+   "object_ids": [
+    "L-103/shrub_bed-01",
+    "L-103/shrub_bed-02",
+    "L-103/shrub_bed-03",
+    "L-103/shrub_bed-04",
+    "L-103/shrub_bed-05",
+    "L-103/shrub_bed-06"
+   ],
+   "cells": [
+    {
+     "file": "Bills/Tower landscape BOQ.xlsx",
+     "sheet": "BOQ",
+     "cell": "E13"
+    }
+   ],
+   "planted": true
+  },
+  {
+   "id": "T07",
+   "files": [
+    "Bills/Tower landscape BOQ.xlsx"
+   ],
+   "category": "price",
+   "scenario": "quote",
+   "expected_verdict": "roof lawn billed at the ground lawn's rate",
+   "object_ids": [],
+   "cells": [
+    {
+     "file": "Bills/Tower landscape BOQ.xlsx",
+     "sheet": "BOQ",
+     "cell": "F15"
+    }
+   ],
+   "planted": true
+  },
+  {
+   "id": "T08",
+   "files": [
+    "Drawings/CAD/L-102 5F Podium Roof Garden.dxf",
+    "Drawings/CAD/L-103 Typical Sky Garden (8F, 12F, 16F, 20F).dxf"
+   ],
+   "category": "floors",
+   "scenario": "design",
+   "expected_verdict": "L-102 and L-103 share their floor plate: only the title block's floor tells them apart",
+   "object_ids": [
+    "L-102/shrub_bed-01",
+    "L-102/shrub_bed-02",
+    "L-102/shrub_bed-03",
+    "L-102/shrub_bed-04",
+    "L-102/shrub_bed-05",
+    "L-103/shrub_bed-01",
+    "L-103/shrub_bed-02",
+    "L-103/shrub_bed-03",
+    "L-103/shrub_bed-04",
+    "L-103/shrub_bed-05",
+    "L-103/shrub_bed-06"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T09",
+   "files": [
+    "Drawings/CAD/L-102 5F Podium Roof Garden.dxf"
+   ],
+   "category": "geometry",
+   "scenario": "design",
+   "expected_verdict": "a planter and its shrubs drawn over the lift shaft",
+   "object_ids": [
+    "L-102/shrub_bed-05"
+   ],
+   "cells": [],
+   "planted": true
+  },
+  {
+   "id": "T10",
+   "files": [
+    "Drawings/CAD/L-103 Typical Sky Garden (8F, 12F, 16F, 20F).dxf"
+   ],
+   "category": "rules",
+   "scenario": "regulation",
+   "expected_verdict": "planters leave 0.9 m of the escape corridor clear, below the 1.2 m minimum, on each of the four floors",
+   "object_ids": [
+    "L-103/shrub_bed-05",
+    "L-103/shrub_bed-06"
+   ],
+   "cells": [],
+   "planted": true
+  }
+ ],
+ "eval_line": "planted 10 · found N · flagged M · missed K · false alarms F"
+}

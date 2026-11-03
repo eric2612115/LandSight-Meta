@@ -1,0 +1,77 @@
+{
+ "image": "L-1 filled",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:25:29+00:00",
+ "seconds": 2.08,
+ "image_sha256": "b66ec7db414dbef83842d13b58f4457435179ccffdaab0999493cbde49be943a",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 3290,
+ "raw_output": "<0f>0<|box;x1=1517;y1=631;x2=1616;y2=731;w=2100;h=1633;c=0.7142857313156128|><|mask;x=0;y=0;c=0.7142857313156128;data=101,100,!!!!!mDg5Eo%$3PpJRdjYsiRii2oKUdjIQ5HwUvYYftiH=Q]/P9a{Oqsl(OMrlQ/dz6MLGQqq2_xP.Uhcsi2qqC_AV@(JF|>,1<|box;x1=693;y1=1200;x2=800;y2=1303;w=2100;h=1633;c=0.7264957427978516|><|mask;x=0;y=0;c=0.7264957427978516;data=104,108,!!!!!nD1:f8M9#eK`TSz%U$Xj'/g0s-_HE.hn%B8ws7FdH?^Ce.0^SLG!X6S(g41nD@InPE#rSSIMw8lbt%k*K%c`_fWnJE|>,2<|box;x1=117;y1=886;x2=215;y2=985;w=2100;h=1633;c=0.7730495929718018|><|mask;x=0;y=0;c=0.7730495929718018;data=100,99,!!!!!lDg3rDf7Od'N'rh?h_5I!gZ%UfajR3NmFM:FNO*Ngwy9LZex{Dm=r.0yGuuU$b]J-!sETSVuBP^Tb5h4E2jHB+!!|>,3<|box;x1=721;y1=810;x2=1226;y2=1062;w=2100;h=1633;c=0.8750000596046448|><|mask;x=0;y=0;c=0.8750000596046448;data=253,506,!!!!!pH3p0@lJt$X+.H)[7qSJy%k87vh^4B6OmQMPnH#:LNkv0B'MBMxN1#qmo-J`@y':!XU1^!_v{mbi73Zu$kX%QE6D]q%!!|>,4<|box;x1=192;y1=1252;x2=291;y2=1352;w=2100;h=1633;c=0.7730495929718018|><|mask;x=0;y=0;c=0.7730495929718018;data=101,100,!!!!!mDSt/#!xg&BE2KBb8Z-N6SBE/k!-?e07^iQF-ZG=%JP/7q.uI7]VY`6wL&''KwPi?L[+7Su&A'!F]059i+NYvo!!!|>,5<|box;x1=797;y1=1252;x2=897;y2=1352;w=2100;h=1633;c=0.7655677795410156|><|mask;x=0;y=0;c=0.7655677795410156;data=101,101,!!!!!lDSvB[/tW=K1/3uOkI9'&f[IPBmk[m'PZ6_HW%-MmNlzt9-1amfQakAKQ$ml3`Zv)a`S$3Fi%0H`Ai7pe@R7:^!!|>,6<|box;x1=293;y1=1252;x2=392;y2=1352;w=2100;h=1633;c=0.7620818018913269|><|mask;x=0;y=0;c=0.7620818018913269;data=101,100,!!!!!mDKMYdNWB?d6WNu?)@8%0iy[BhQeG7K?@PYZVpnuF?bRmLH+8*O5%RP94u`^5Xs!.dYKG0*@%k5?T&Vk2ddS.YdFt|>,7<|box;x1=496;y1=1252;x2=594;y2=1352;w=2100;h=1633;c=0.7460317611694336|><|mask;x=0;y=0;c=0.7460317611694336;data=101,99,!!!!!mDSt_XIS9_/Uop'CVS8)qgX&mZbb$cH)PwRU9bM22kpU+vS5fve]iLP!D=@&bU++v-x[aIi5mm8#6norRSVO-w!!!|>,8<|box;x1=596;y1=1252;x2=695;y2=1352;w=2100;h=1633;c=0.7697842121124268|><|mask;x=0;y=0;c=0.7697842121124268;data=101,100,!!!!!lDX@oZ/G&st&D.SJB3lTLPbKF!ix-O#OtT063wa9PvQ8I9uXGS@]lKefFd7S'7h&rFFd?yW2bE#Gg/xSA&MFLm!!|>,9<|box;x1=395;y1=1252;x2=493;y2=1352;w=2100;h=1633;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=101,99,!!!!!mDX@!A$+TzvNCvw3b'CC0D?g9#0_{A&pO)B#NW`[t(gC/Q9*5cI78s6UlG^4138?V$44H+yULUh%v=bb4a9VFH.80|>,10<|box;x1=305;y1=605;x2=532;y2=803;w=2100;h=1633;c=0.8012422323226929|><|mask;x=0;y=0;c=0.8012422323226929;data=199,228,!!!!#JAWb&?tvc/Wu6&(IlOY(o8rdB[E#+RZ9&80Il@0+{(0Srj:Q=F4IWk#75sRCobj$cmer{r0S^/a+:L(hJiZlvF0lHCr2YFbcZA{+(az&lrQzshl]xe+6FW!MGOug]'LByTs552^I`oVA6`IKpGo!:TG!!|>,11<|box;x1=1516;y1=750;x2=1618;y2=787;w=2100;h=1633;c=0.6952381134033203|><|mask;x=0;y=0;c=0.6952381134033203;data=38,103,!!!!!:EnuhO)H$ZAiOSv396Ydb#Z'C{&g-n|>,12<|box;x1=899;y1=1252;x2=998;y2=1352;w=2100;h=1633;c=0.7620818018913269|><|mask;x=0;y=0;c=0.7620818018913269;data=101,100,!!!!!mDO]MQqwY8#lD+VYoDIDsWN6YVWT5i+-Q{O^KKdnErWkaWWY8oLJYEiMm]jQZi'uEMwCO^c&&1l7Lz2+'ZHI2Y@$m|>,13<|box;x1=1050;y1=1380;x2=1150;y2=1480;w=2100;h=1633;c=0.7697842121124268|><|mask;x=0;y=0;c=0.7697842121124268;data=101,101,!!!!!mDbLbB9ZK%=HLPX.@cWN)!+4PwS^ibF'9'a?aG':x#W40:JmT'aX?$'kINF`SOi:@?Wv9^IGemQ{ra`#/xSb5n!!!|>,14<|box;x1=267;y1=810;x2=645;y2=1062;w=2100;h=1633;c=0.8518518805503845|><|mask;x=0;y=0;c=0.8518518805503845;data=253,379,!!!!!jGbE7o:XMrY!T!lU:lnJ*g#m/#FCzRuur+ntJmrv9lgC3dw!h%wx&QR0seH[&5H!cLxL%wI%TUgd8SL(7lSXB|>\n",
+ "response_id": "resp_6ae9b699f9d2c28cc0d04ab2",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b699f9d2c28cc0d04ab2",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701528.0,
+  "completed_at": 1793701529.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_b85ccb7f-d844-41d1-89e6-f71759c1cb3a",
+    "status": "completed",
+    "content_chars": 3290
+   }
+  ]
+ },
+ "sheet": "L-1-revB",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "area",
+  "labels": [
+   "AZ AZALEA"
+  ],
+  "crop_px": [
+   1472,
+   563,
+   1965,
+   935
+  ],
+  "spark_call": "read_legend"
+ }
+}

@@ -1,0 +1,296 @@
+{
+ "item_id": "I-01",
+ "kind": "tree",
+ "label": "Camphor",
+ "species_code": "CC",
+ "unit": "plant",
+ "geometry_count": 7,
+ "spark_count": 8,
+ "schedule_count": 12,
+ "label_count": null,
+ "agreed": true,
+ "flagged_reason": "L-1-revB/C-03 open outline (12 pieces, 12 gaps up to 0.40 m): Muse Spark says tree (one object), label 'none', counts 1, confidence 0.92; sources disagree: geometry 7, Muse Spark 8, schedule 12",
+ "quote_count": 8,
+ "proposed_count": 8,
+ "object_ids": [
+  "T-01",
+  "T-02",
+  "T-03",
+  "T-04",
+  "T-05",
+  "T-06",
+  "T-07",
+  "T-08"
+ ],
+ "sheet_ids": [
+  "L-1-revB"
+ ],
+ "confirmed": true,
+ "botanical": "Cinnamomum camphora",
+ "spark": {
+  "crop_url": "/api/crops/I-01.png?run=2f4895ec6012",
+  "answer": {
+   "confidence": 0.92,
+   "id": "C-03",
+   "implies_count": 1,
+   "is_one_object": true,
+   "kind": "tree",
+   "label_meaning": "",
+   "label_text": "",
+   "points": [
+    {
+     "x": 498,
+     "y": 377
+    },
+    {
+     "x": 577,
+     "y": 402
+    },
+    {
+     "x": 623,
+     "y": 463
+    },
+    {
+     "x": 642,
+     "y": 532
+    },
+    {
+     "x": 618,
+     "y": 600
+    },
+    {
+     "x": 570,
+     "y": 648
+    },
+    {
+     "x": 500,
+     "y": 663
+    },
+    {
+     "x": 430,
+     "y": 640
+    },
+    {
+     "x": 385,
+     "y": 592
+    },
+    {
+     "x": 376,
+     "y": 525
+    },
+    {
+     "x": 395,
+     "y": 458
+    },
+    {
+     "x": 435,
+     "y": 408
+    }
+   ],
+   "why": "Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol."
+  },
+  "why": "Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol.",
+  "confidence": 0.92,
+  "object_id": "T-08",
+  "sheet_id": "L-1-revB",
+  "facts": "12 separate straight pieces drawn with a solid (continuous) linetype; 12 gaps between piece ends, the largest 0.40 m; overall 3.9 m x 3.9 m, total length 7.5 m; 1 '+' centre mark inside; the closed round outlines near it are 12.0 m2 each",
+  "seconds": 10.29,
+  "crop_px": [
+   1200,
+   1200
+  ],
+  "crop_window_m": [
+   25.068,
+   -5.432,
+   40.932,
+   10.432
+  ],
+  "recorded": true,
+  "points": [
+   {
+    "norm": [
+     498.0,
+     377.0
+    ],
+    "px": [
+     597.6,
+     452.4
+    ],
+    "m": [
+     32.968,
+     4.451
+    ],
+    "to_segment_m": 0.019
+   },
+   {
+    "norm": [
+     577.0,
+     402.0
+    ],
+    "px": [
+     692.4,
+     482.4
+    ],
+    "m": [
+     34.222,
+     4.055
+    ],
+    "to_segment_m": 0.026
+   },
+   {
+    "norm": [
+     623.0,
+     463.0
+    ],
+    "px": [
+     747.6,
+     555.6
+    ],
+    "m": [
+     34.951,
+     3.087
+    ],
+    "to_segment_m": 0.165
+   },
+   {
+    "norm": [
+     642.0,
+     532.0
+    ],
+    "px": [
+     770.4,
+     638.4
+    ],
+    "m": [
+     35.253,
+     1.992
+    ],
+    "to_segment_m": 0.377
+   },
+   {
+    "norm": [
+     618.0,
+     600.0
+    ],
+    "px": [
+     741.6,
+     720.0
+    ],
+    "m": [
+     34.872,
+     0.914
+    ],
+    "to_segment_m": 0.499
+   },
+   {
+    "norm": [
+     570.0,
+     648.0
+    ],
+    "px": [
+     684.0,
+     777.6
+    ],
+    "m": [
+     34.11,
+     0.152
+    ],
+    "to_segment_m": 0.657
+   },
+   {
+    "norm": [
+     500.0,
+     663.0
+    ],
+    "px": [
+     600.0,
+     795.6
+    ],
+    "m": [
+     33.0,
+     -0.086
+    ],
+    "to_segment_m": 0.654
+   },
+   {
+    "norm": [
+     430.0,
+     640.0
+    ],
+    "px": [
+     516.0,
+     768.0
+    ],
+    "m": [
+     31.89,
+     0.279
+    ],
+    "to_segment_m": 0.547
+   },
+   {
+    "norm": [
+     385.0,
+     592.0
+    ],
+    "px": [
+     462.0,
+     710.4
+    ],
+    "m": [
+     31.176,
+     1.041
+    ],
+    "to_segment_m": 0.379
+   },
+   {
+    "norm": [
+     376.0,
+     525.0
+    ],
+    "px": [
+     451.2,
+     630.0
+    ],
+    "m": [
+     31.033,
+     2.103
+    ],
+    "to_segment_m": 0.093
+   },
+   {
+    "norm": [
+     395.0,
+     458.0
+    ],
+    "px": [
+     474.0,
+     549.6
+    ],
+    "m": [
+     31.334,
+     3.166
+    ],
+    "to_segment_m": 0.156
+   },
+   {
+    "norm": [
+     435.0,
+     408.0
+    ],
+    "px": [
+     522.0,
+     489.6
+    ],
+    "m": [
+     31.969,
+     3.959
+    ],
+    "to_segment_m": 0.153
+   }
+  ],
+  "points_status": "returned",
+  "points_on_segments": 6,
+  "points_max_to_segment_m": 0.657,
+  "points_note": "Muse Spark placed 12 points; 6 lie within 0.3 m of a red segment, the farthest 0.66 m"
+ }
+}

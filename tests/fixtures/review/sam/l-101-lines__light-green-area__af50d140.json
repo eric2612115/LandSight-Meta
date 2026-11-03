@@ -1,0 +1,64 @@
+{
+ "image": "L-101 lines",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:23:37+00:00",
+ "seconds": 2.07,
+ "image_sha256": "af50d140629a9f29c8430999253642de57f7e9ff440a0025caf5aeac65a736c1",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 0,
+ "raw_output": "",
+ "response_id": "resp_6ae9b628ae858a679e574007",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b628ae858a679e574007",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701416.0,
+  "completed_at": 1793701416.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_22077787-d03b-4970-a078-bc38e5c5fe9e",
+    "status": "completed",
+    "content_chars": 0
+   }
+  ]
+ },
+ "sheet": "L-101",
+ "prompt_source": "spark_legend",
+ "control_of": "L-101 filled"
+}

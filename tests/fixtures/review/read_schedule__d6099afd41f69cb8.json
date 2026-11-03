@@ -1,0 +1,79 @@
+{
+ "call": "read_schedule",
+ "image_sha256": "17011e179b737493ce096afba499e79bfc8e6c9c8709469bab2af39fb89a45fb",
+ "content_key": "4d9b62faf75a64f5be78f4071d9d50bf06ff94cec178465493c0f37086d7b7bc:schedule|p=4c6ddfbe",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:23:16+00:00",
+ "seconds": 5.17,
+ "usage": {
+  "completion_tokens": 700,
+  "prompt_tokens": 2532,
+  "total_tokens": 3232,
+  "completion_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 241
+  }
+ },
+ "prompt": "This is a plant schedule table (植栽表) cropped from a planting plan. Return one row per plant: species exactly as written, qty as a number, unit as written (株, m², m), and spec (the 規格 columns and the remarks joined into one short string). Skip the title row, the header rows and the totals line; copy the totals line into footer.",
+ "result": {
+  "footer": "TOTAL TREES: 8",
+  "rows": [
+   {
+    "qty": 8.0,
+    "spec": "CAL.10 HT3.5 SPREAD1.5 NATIVE, ROOT-BALLED",
+    "species": "Camphor",
+    "unit": "EA"
+   },
+   {
+    "qty": 182.0,
+    "spec": "HT0.6 @0.3m o.c., DOUBLE ROW",
+    "species": "Duranta",
+    "unit": "EA"
+   },
+   {
+    "qty": 150.0,
+    "spec": "HT0.3 4 PLANTS/m²",
+    "species": "Azalea",
+    "unit": "m²"
+   },
+   {
+    "qty": 200.0,
+    "spec": "SOD",
+    "species": "Lawn",
+    "unit": "m²"
+   }
+  ]
+ },
+ "response_id": "chatcmpl-01a1a0ef-3eb3-7291-8ea2-65979ea9adbf",
+ "raw": {
+  "id": "chatcmpl-01a1a0ef-3eb3-7291-8ea2-65979ea9adbf",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"footer\": \"TOTAL TREES: 8\", \"rows\": [{\"qty\": 8.0, \"spec\": \"CAL.10 HT3.5 SPREAD1.5 NATIVE, ROOT-BALLED\", \"species\": \"Camphor\", \"unit\": \"EA\"}, {\"qty\": 182.0, \"spec\": \"HT0.6 @0.3m o.c., DOUBLE ROW\", \"species\": \"Duranta\", \"unit\": \"EA\"}, {\"qty\": 150.0, \"spec\": \"HT0.3 4 PLANTS/m\\u00b2\", \"species\": \"Azalea\", \"unit\": \"m\\u00b2\"}, {\"qty\": 200.0, \"spec\": \"SOD\", \"species\": \"Lawn\", \"unit\": \"m\\u00b2\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701396,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 700,
+   "prompt_tokens": 2532,
+   "total_tokens": 3232,
+   "completion_tokens_details": {
+    "reasoning_tokens": 516
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 241
+   }
+  }
+ }
+}

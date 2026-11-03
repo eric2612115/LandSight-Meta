@@ -1,0 +1,153 @@
+{
+ "image": "L-3_filled.png",
+ "sheet": "L-3",
+ "prompt": "medium grey area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:40:37+00:00",
+ "seconds": 2.13,
+ "image_sha256": "d57ce91f83e689015030204c909e64e1b93d0c67c2778746b5e43e7a9849e950",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "metres_per_pixel": [
+  0.039619,
+  0.039649
+ ],
+ "window_m": [
+  -4.6,
+  -10.6,
+  78.6,
+  34.6
+ ],
+ "error": null,
+ "n_masks": 4,
+ "masks": [
+  {
+   "object_id": "0",
+   "box_px": [
+    1516,
+    248,
+    1619,
+    285
+   ],
+   "score": 0.8552036285400391,
+   "area_px": 3689,
+   "area_m2": 5.79,
+   "centroid_m": [
+    57.51,
+    24.04
+   ],
+   "match": {
+    "id": "L-3/legend-04",
+    "kind": "legend",
+    "label": "legend: swatch 植草磚",
+    "truth_m2": 5.6,
+    "overlap_m2": 5.46,
+    "iou": 0.921
+   },
+   "touches": [
+    "L-3/legend-04"
+   ]
+  },
+  {
+   "object_id": "1",
+   "box_px": [
+    898,
+    493,
+    1052,
+    645
+   ],
+   "score": 0.8709677457809448,
+   "area_px": 22852,
+   "area_m2": 35.9,
+   "centroid_m": [
+    34.0,
+    12.02
+   ],
+   "match": {
+    "id": "L-3/paving-03",
+    "kind": "paving",
+    "label": "植草磚",
+    "truth_m2": 36.0,
+    "overlap_m2": 35.67,
+    "iou": 0.985
+   },
+   "touches": [
+    "L-3/paving-03"
+   ]
+  },
+  {
+   "object_id": "2",
+   "box_px": [
+    898,
+    695,
+    1202,
+    797
+   ],
+   "score": 0.8865247964859009,
+   "area_px": 30468,
+   "area_m2": 47.86,
+   "centroid_m": [
+    36.98,
+    5.01
+   ],
+   "match": {
+    "id": "L-3/paving-02",
+    "kind": "paving",
+    "label": "洗石子",
+    "truth_m2": 48.0,
+    "overlap_m2": 47.69,
+    "iou": 0.99
+   },
+   "touches": [
+    "L-3/paving-02"
+   ]
+  },
+  {
+   "object_id": "3",
+   "box_px": [
+    1516,
+    192,
+    1619,
+    230
+   ],
+   "score": 0.8518518805503845,
+   "area_px": 3828,
+   "area_m2": 6.01,
+   "centroid_m": [
+    57.49,
+    26.24
+   ],
+   "match": {
+    "id": "L-3/legend-03",
+    "kind": "legend",
+    "label": "legend: swatch 洗石子",
+    "truth_m2": 5.6,
+    "overlap_m2": 5.62,
+    "iou": 0.938
+   },
+   "touches": [
+    "L-3/legend-03"
+   ]
+  }
+ ],
+ "diagnostics": [],
+ "raw_output_chars": 739,
+ "raw_output": "<0f>0<|box;x1=1516;y1=248;x2=1618;y2=284;w=2100;h=1140;c=0.8552036285400391|><|mask;x=0;y=0;c=0.8552036285400391;data=37,103,!!!!!BJA!Q%u*04'7R%P{aVoA((4D-4x6F2MA5iP)|>,1<|box;x1=898;y1=493;x2=1051;y2=644;w=2100;h=1140;c=0.8709677457809448|><|mask;x=0;y=0;c=0.8709677457809448;data=152,154,!!!!![B=mIIiDEtC!1T@i2116VF6r%'m*]d=q!W^W_Q`_K){r`A:`_$i7R.j9&P[JBYM3fM!!|>,2<|box;x1=898;y1=695;x2=1201;y2=796;w=2100;h=1140;c=0.8865247964859009|><|mask;x=0;y=0;c=0.8865247964859009;data=102,304,!!!!!iDv92.-7SSZ-.'D#qM@xMR:+(KfJU-G-okp?@lo8AdJWpuL[uF&pt7`LTx?{.gA8-{oM=M8pxEk(2@Vz4!!!|>,3<|box;x1=1516;y1=192;x2=1618;y2=229;w=2100;h=1140;c=0.8518518805503845|><|mask;x=0;y=0;c=0.8518518805503845;data=38,103,!!!!!=K.D&sN66w7PRYCOhb`e9xF/#'48Do_|>\n",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "medium grey",
+  "kind": "area",
+  "labels": [
+   "植草磚"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

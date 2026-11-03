@@ -1,0 +1,149 @@
+{
+ "call": "review_read_raster_plan",
+ "image_sha256": "5ad3aaf96cb1e7facf63bc3ab0d84303ea906c053c308926d032f458f395c2c1",
+ "content_key": "raster:40481febad5d666ca0f22ef6baee1fcc425b56f5e5d0da65df1009495442d745:plan|p=16b9e9e3",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:25:50+00:00",
+ "seconds": 15.55,
+ "usage": {
+  "completion_tokens": 1869,
+  "prompt_tokens": 4747,
+  "total_tokens": 6616,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1283
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "This image is one page of a landscape drawing package: a coloured plan delivered as a picture, with no CAD file behind it. Read what is needed to measure it:\n- entries: every filled area type and plant symbol the plan uses, from the legend box and from areas labelled directly on the plan (a bed or a lawn labelled in place is an entry too): label, the text exactly as written; swatch_colour_word, the fill colour you see, as one or two plain English colour words an image segmentation model can be prompted with (for example 'light green', 'grey'), never the material's name; kind, 'area' for a filled region, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip such as a hedge; where, 'legend' or 'plan'; x and y, for an entry labelled on the plan, the centre of its label text normalised to 0-1000 (x from the left edge, y from the top edge of the image), 0 and 0 for a legend entry.\n- legend_box: the legend box's corners, x0 y0 (top left) and x1 y1 (bottom right), each normalised to 0-1000 with x from the left edge and y from the top edge of the image; all 0 when there is no legend box.\n- scale_bar: the graphic scale bar: x_start and x_end, the x of its zero end and of its far labelled end, y, the bar's centre line, all normalised to 0-1000 as above, and distance_m, the distance in metres its far label states; all 0 when there is none.\n- title_scale: the scale written in the title block (for example '1:200'), empty if none.\n- confidence from 0 to 1, and why in one sentence.",
+ "result": {
+  "confidence": 0.92,
+  "entries": [
+   {
+    "kind": "symbol",
+    "label": "CC CAMPHOR",
+    "swatch_colour_word": "green",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "kind": "area",
+    "label": "AZ AZALEA",
+    "swatch_colour_word": "green",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "kind": "area",
+    "label": "FIRE TRUCK ACCESS LANE",
+    "swatch_colour_word": "grey",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "kind": "line",
+    "label": "DU DURANTA",
+    "swatch_colour_word": "dark green",
+    "where": "legend",
+    "x": 0,
+    "y": 0
+   },
+   {
+    "kind": "area",
+    "label": "AZ AZALEA",
+    "swatch_colour_word": "green",
+    "where": "plan",
+    "x": 217,
+    "y": 575
+   },
+   {
+    "kind": "area",
+    "label": "LA LAWN",
+    "swatch_colour_word": "light green",
+    "where": "plan",
+    "x": 464,
+    "y": 575
+   },
+   {
+    "kind": "area",
+    "label": "FIRE TRUCK ACCESS LANE — KEEP CLEAR",
+    "swatch_colour_word": "grey",
+    "where": "plan",
+    "x": 79,
+    "y": 466
+   },
+   {
+    "kind": "symbol",
+    "label": "EXISTING CAMPHOR DBH 95 cm — TO BE REMOVED",
+    "swatch_colour_word": "green",
+    "where": "plan",
+    "x": 359,
+    "y": 406
+   },
+   {
+    "kind": "line",
+    "label": "DU H0.6 @0.3m o.c. DOUBLE ROW",
+    "swatch_colour_word": "dark green",
+    "where": "plan",
+    "x": 526,
+    "y": 443
+   },
+   {
+    "kind": "symbol",
+    "label": "CC typ.",
+    "swatch_colour_word": "green",
+    "where": "plan",
+    "x": 236,
+    "y": 723
+   }
+  ],
+  "legend_box": {
+   "x0": 703,
+   "x1": 933,
+   "y0": 348,
+   "y1": 570
+  },
+  "scale_bar": {
+   "distance_m": 10,
+   "x_end": 176,
+   "x_start": 55,
+   "y": 910
+  },
+  "title_scale": "1:200",
+  "why": "Legend box, on-plan area labels, graphic 0-10m scale bar and 1:200 title-block scale are all clearly legible."
+ },
+ "response_id": "chatcmpl-01a1a0f1-99ad-77f5-8c6c-f22532ab8155",
+ "raw": {
+  "id": "chatcmpl-01a1a0f1-99ad-77f5-8c6c-f22532ab8155",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"confidence\": 0.92, \"entries\": [{\"kind\": \"symbol\", \"label\": \"CC CAMPHOR\", \"swatch_colour_word\": \"green\", \"where\": \"legend\", \"x\": 0, \"y\": 0}, {\"kind\": \"area\", \"label\": \"AZ AZALEA\", \"swatch_colour_word\": \"green\", \"where\": \"legend\", \"x\": 0, \"y\": 0}, {\"kind\": \"area\", \"label\": \"FIRE TRUCK ACCESS LANE\", \"swatch_colour_word\": \"grey\", \"where\": \"legend\", \"x\": 0, \"y\": 0}, {\"kind\": \"line\", \"label\": \"DU DURANTA\", \"swatch_colour_word\": \"dark green\", \"where\": \"legend\", \"x\": 0, \"y\": 0}, {\"kind\": \"area\", \"label\": \"AZ AZALEA\", \"swatch_colour_word\": \"green\", \"where\": \"plan\", \"x\": 217, \"y\": 575}, {\"kind\": \"area\", \"label\": \"LA LAWN\", \"swatch_colour_word\": \"light green\", \"where\": \"plan\", \"x\": 464, \"y\": 575}, {\"kind\": \"area\", \"label\": \"FIRE TRUCK ACCESS LANE \\u2014 KEEP CLEAR\", \"swatch_colour_word\": \"grey\", \"where\": \"plan\", \"x\": 79, \"y\": 466}, {\"kind\": \"symbol\", \"label\": \"EXISTING CAMPHOR DBH 95 cm \\u2014 TO BE REMOVED\", \"swatch_colour_word\": \"green\", \"where\": \"plan\", \"x\": 359, \"y\": 406}, {\"kind\": \"line\", \"label\": \"DU H0.6 @0.3m o.c. DOUBLE ROW\", \"swatch_colour_word\": \"dark green\", \"where\": \"plan\", \"x\": 526, \"y\": 443}, {\"kind\": \"symbol\", \"label\": \"CC typ.\", \"swatch_colour_word\": \"green\", \"where\": \"plan\", \"x\": 236, \"y\": 723}], \"legend_box\": {\"x0\": 703, \"x1\": 933, \"y0\": 348, \"y1\": 570}, \"scale_bar\": {\"distance_m\": 10, \"x_end\": 176, \"x_start\": 55, \"y\": 910}, \"title_scale\": \"1:200\", \"why\": \"Legend box, on-plan area labels, graphic 0-10m scale bar and 1:200 title-block scale are all clearly legible.\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701550,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 1869,
+   "prompt_tokens": 4747,
+   "total_tokens": 6616,
+   "completion_tokens_details": {
+    "reasoning_tokens": 1283
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ }
+}

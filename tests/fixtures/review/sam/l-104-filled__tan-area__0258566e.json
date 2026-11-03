@@ -1,0 +1,77 @@
+{
+ "image": "L-104 filled",
+ "prompt": "tan area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:24:03+00:00",
+ "seconds": 1.32,
+ "image_sha256": "0258566e01b1b6368256d2a3fe545c239d1d3f51f3138ad5db3b97c966b6940a",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 453,
+ "raw_output": "<0f>0<|box;x1=747;y1=532;x2=923;y2=594;w=2100;h=1140;c=0.8552036285400391|><|mask;x=0;y=0;c=0.8552036285400391;data=63,177,!!!!!.rE^4ax3bEztJ=o|>,1<|box;x1=1516;y1=192;x2=1617;y2=229;w=2100;h=1140;c=0.8324607610702515|><|mask;x=0;y=0;c=0.8324607610702515;data=38,102,!!!!!7FjN#1U.QN&](j36dTH:E`n=Te|>,2<|box;x1=747;y1=253;x2=924;y2=316;w=2100;h=1140;c=0.8552036285400391|><|mask;x=0;y=0;c=0.8552036285400391;data=64,178,!!!!!6I5-]z#Rwhmr3UZGj]9#[IHzt|>\n",
+ "response_id": "resp_6ae9b6421c8962e0848b4178",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b6421c8962e0848b4178",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701442.0,
+  "completed_at": 1793701442.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_ef85c4af-5515-4afe-9f6a-7bd75b8388ce",
+    "status": "completed",
+    "content_chars": 453
+   }
+  ]
+ },
+ "sheet": "L-104",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "tan",
+  "kind": "area",
+  "labels": [
+   "MP ORANGE JASMINE"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   291
+  ],
+  "spark_call": "read_legend"
+ }
+}

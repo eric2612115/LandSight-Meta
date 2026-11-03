@@ -1,0 +1,764 @@
+{
+  "meta": {
+    "description": "Machine-readable regulation constants for Landsight's planting-code checks. Every constant carries its citation. Transcribed from the regulation texts and sources read 2026-11-01/02.",
+    "units": {
+      "Gi": "kgCO2e/(m2*yr)",
+      "beta": "kgCO2e/(m2*yr)",
+      "area": "m2",
+      "length": "m"
+    },
+    "jurisdiction_note": "National rules apply everywhere. Some municipalities add stricter rules (the 'municipal_reference' section, a reference set of one municipality's greening rule and tree protection ordinance). For the sample site no municipal greening rule applies; national rules are assumed, as in docs/PLAN.md. The site's municipal tree protection ordinance is in 'municipal' (below).",
+    "disclaimer": "Reference data for a review tool. The registered architect signs off the code calculation (D-05)."
+  },
+  "glossary": {
+    "綠化總固碳當量 TCO2": "total carbon fixation equivalent of greening (kgCO2e/yr)",
+    "綠化總固碳當量基準值 TCO2c": "required (design threshold) carbon fixation equivalent",
+    "固碳當量 Gi": "carbon fixation equivalent per unit planted area of a plant type",
+    "固碳當量基準值 β": "baseline carbon fixation equivalent per m2 of minimum green area, by land-use class",
+    "最小綠化面積 A′": "minimum greening area",
+    "基地面積 A0": "site area (one building-permit parcel)",
+    "執行綠化有困難之面積 Ap": "area where greening is impracticable, only as the architect declares it under §299 (for example fire-truck rescue space the fire authority recognises, arcades, site roads, sports fields); 0 unless declared",
+    "法定建蔽率 r": "legal building coverage ratio",
+    "生態綠化修正係數 α": "ecological greening correction factor (native-tree bonus)",
+    "原生或誘鳥誘蝶植物採用比值 ra": "share of native or bird/butterfly-attracting trees, by tree count",
+    "栽種面積基準值 Ai": "standard planted (canopy) area per plant",
+    "闊葉大喬木": "broadleaf large tree (mature height >= 10 m)",
+    "闊葉小喬木": "broadleaf small tree (mature height < 10 m)",
+    "針葉喬木": "coniferous tree",
+    "疏葉喬木": "sparse-leaf tree",
+    "棕櫚類": "palms",
+    "灌木": "shrubs",
+    "多年生蔓藤": "perennial vines",
+    "草花花圃/自然野草地/水生植物/草坪": "flower beds / meadow / aquatic plants / lawn",
+    "薄層綠化/壁掛式綠化": "thin-layer greening / wall-mounted greening",
+    "生態複層": "ecological multi-layer planting (trees, shrubs and groundcover mixed, tree spacing <= 3.5 m)",
+    "人工地盤": "artificial ground (roof, balcony, terrace, facade, podium slab)",
+    "覆土深度": "soil depth",
+    "最小樹穴面積": "minimum tree-pit area",
+    "老樹": "old tree (米高徑 >= 30 cm or age >= 20 yr)",
+    "米高徑": "trunk diameter measured 1 m above ground",
+    "胸高直徑 DBH": "diameter at breast height (1.3 m)",
+    "胸圍": "girth at breast height",
+    "樹齡": "tree age",
+    "樹冠投影面積": "canopy projection area",
+    "綠覆率": "green coverage ratio (green-cover area / legal open space) - municipal greening rule",
+    "綠容率": "green volume ratio (equivalent green-cover area / site area) - municipal greening rule",
+    "法定空地": "legal open space (site area x (1 - coverage ratio))",
+    "保水指標": "site water-retention index",
+    "受保護樹木": "protected tree"
+  },
+  "national": {
+    "applicability": {
+      "applies_to": "new buildings (新建建築物)",
+      "exempt": [
+        "individually built farmhouses (農舍)",
+        "sites <= 300 m2"
+      ],
+      "site_area_exempt_max_m2": 300,
+      "cite": {
+        "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+        "article": "第298條第1款",
+        "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=298",
+        "read": "2026-11-01"
+      }
+    },
+    "formulas": {
+      "pass_condition": "TCO2 > TCO2c",
+      "TCO2": "(sum(Gi*Ai)) * alpha",
+      "TCO2c": "0.5 * A_prime * beta",
+      "A_prime": "(A0 - Ap) * (1 - r)",
+      "alpha": "0.8 + 0.5 * ra",
+      "ra": "native_or_bird_butterfly_trees / all_trees (by tree count); ra = 0 if fewer than 2 tree species",
+      "cite": [
+        {
+          "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+          "article": "第299條 (definitions: 最小綠化面積, 執行綠化有困難之面積)",
+          "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=299",
+          "read": "2026-11-01"
+        },
+        {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 公式(1)-(6)",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        },
+        {
+          "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+          "article": "第302條 (TCO2 > 1/2 x 最小綠化面積 x β)",
+          "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+          "read": "2026-11-01"
+        }
+      ]
+    },
+    "constants": {
+      "tco2c_factor": {
+        "value": 0.5,
+        "cite": {
+          "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+          "article": "第302條",
+          "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+          "read": "2026-11-01"
+        }
+      },
+      "a_prime_floor_fraction_of_A0": {
+        "value": 0.15,
+        "rule": "if A_prime < 0.15*A0 then A_prime = 0.15*A0",
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 A′ definition; §6.2",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "r_cap": {
+        "value": 0.85,
+        "rule": "if r > 0.85 then r = 0.85",
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 r definition",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "alpha_base": {
+        "value": 0.8,
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 公式(5)",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "alpha_slope": {
+        "value": 0.5,
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 公式(5)",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "alpha_min": {
+        "value": 0.8,
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 α definition (全無生態綠化者為0.8)",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "alpha_max": {
+        "value": 1.3,
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 α definition (全面生態綠化者為1.3)",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "ra_min_tree_species": {
+        "value": 2,
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 ra definition (須二種以上樹種始可計算ra值)",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "alpha_requires_full_planting_plan": {
+        "value": true,
+        "note": "without a whole planting plan and calculation sheet α is taken as 0.8",
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 α definition",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "native_reference": {
+        "value": "內政部建築研究所「應用於綠建築設計之原生植物圖鑑」 or 特有生物研究保育中心「野生植物資料庫」",
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§5 α definition; §6.8",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      }
+    },
+    "gi_table": [
+      {
+        "key": "eco_multilayer",
+        "zh": "生態複層 (大小喬木、灌木、花草密植混種區, 喬木間距3.5m以下)",
+        "en": "ecological multi-layer planting, tree spacing <= 3.5 m",
+        "gi": 2.0
+      },
+      {
+        "key": "broadleaf_large_tree",
+        "zh": "闊葉大喬木",
+        "en": "broadleaf large tree",
+        "gi": 1.5
+      },
+      {
+        "key": "small_conifer_sparse_tree",
+        "zh": "闊葉小喬木、針葉喬木、疏葉喬木",
+        "en": "broadleaf small tree, conifer, sparse-leaf tree",
+        "gi": 1.0
+      },
+      {
+        "key": "palm",
+        "zh": "棕櫚類",
+        "en": "palms",
+        "gi": 0.66
+      },
+      {
+        "key": "shrub",
+        "zh": "灌木 (每㎡栽植2株以上)",
+        "en": "shrubs (>= 2 plants per m2)",
+        "gi": 0.5,
+        "min_plants_per_m2": 2
+      },
+      {
+        "key": "vine",
+        "zh": "多年生蔓藤",
+        "en": "perennial vines (climbing area)",
+        "gi": 0.4
+      },
+      {
+        "key": "flower_meadow_aquatic_lawn",
+        "zh": "草花花圃、自然野草地、水生植物、草坪",
+        "en": "flower beds, meadow, aquatic plants, lawn",
+        "gi": 0.3
+      },
+      {
+        "key": "thin_layer_wall",
+        "zh": "薄層綠化、壁掛式綠化",
+        "en": "thin-layer or wall-mounted greening (facade projection area)",
+        "gi": 0.3
+      }
+    ],
+    "gi_table_cite": {
+      "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+      "article": "§5 表1",
+      "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+      "read": "2026-11-01"
+    },
+    "gi_layering": {
+      "rule": "Gi of stacked layers add up, e.g. small tree (1.0) over shrubs (0.5) = 1.5 on that area",
+      "cite": {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "§6.5",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-01"
+      }
+    },
+    "large_small_tree_definition": {
+      "large_tree_min_mature_height_m": 10,
+      "named_large": [
+        "榕樹",
+        "刺桐",
+        "樟樹",
+        "楓香",
+        "梧桐",
+        "菩提",
+        "欒樹",
+        "火焰木"
+      ],
+      "named_small": [
+        "阿勃勒",
+        "無患子",
+        "楊梅",
+        "含笑",
+        "海檬果",
+        "黃槿",
+        "羊蹄甲",
+        "枇杷"
+      ],
+      "named_conifer": [
+        "小葉南洋杉",
+        "龍柏",
+        "圓柏",
+        "琉球松"
+      ],
+      "named_sparse_leaf": [
+        "小葉欖仁",
+        "木棉",
+        "相思樹",
+        "垂柳"
+      ],
+      "cite": {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "§3.3, §3.4, §6.4",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-02"
+      },
+      "drawing_judgement": {
+        "rule": "tree vs shrub is judged from the landscape drawing; densely clipped 羅漢松 counts as shrub",
+        "cite": {
+          "source": "2026年版綠建築評估手冊-基本型 (EEWH-BC), 內政部建築研究所",
+          "article": "§2-1.3(4)",
+          "url": "https://www.abri.gov.tw/News_Content.aspx?n=20916&sms=9512&s=339049",
+          "read": "2026-11-01"
+        }
+      }
+    },
+    "tree_ai": [
+      {
+        "site_class": "urban or ordinary small site (市街地或一般小建築基地)",
+        "spacing_m": 4,
+        "ai_m2": 16
+      },
+      {
+        "site_class": "school, small community park, industrial zone, or site >= 1 ha",
+        "spacing_m": 5,
+        "ai_m2": 25
+      },
+      {
+        "site_class": "metropolitan park, science park, or site >= 5 ha",
+        "spacing_m": 6,
+        "ai_m2": 36
+      }
+    ],
+    "tree_ai_rules": {
+      "closer_spacing": "trees closer than the class spacing use (actual spacing)^2",
+      "old_tree_in_place": "actual canopy projection area",
+      "old_tree_kept_by_design": "2 x actual canopy projection area",
+      "old_tree_transplanted": "counted as a new tree",
+      "old_tree_definition": {
+        "min_trunk_diameter_at_1m_cm": 30,
+        "min_age_yr": 20,
+        "cite": {
+          "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+          "article": "§3.6; 表2 註2",
+          "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+          "read": "2026-11-01"
+        }
+      },
+      "large_site_shortcut": "sites >= 1 ha may use D = A/n capped at Ai (§6.10)",
+      "cite": {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "§5 表2; §6.3; §6.10",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-01"
+      }
+    },
+    "beta": [
+      {
+        "land_use": "school land or park land (學校用地、公園用地)",
+        "beta": 0.83
+      },
+      {
+        "land_use": "commercial or industrial zone, excluding science parks (商業區、工業區(不含科學園區))",
+        "beta": 0.5
+      },
+      {
+        "land_use": "all other building sites (前二類以外之建築基地)",
+        "beta": 0.66
+      }
+    ],
+    "beta_cite": [
+      {
+        "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+        "article": "第302條",
+        "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=302",
+        "read": "2026-11-01"
+      },
+      {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "§5 表3",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-01"
+      }
+    ],
+    "artificial_ground": {
+      "description": "Minimum soil depth and tree-pit area per plant type. Planting that misses these is not counted (§5: 植栽之覆土深度與最小樹穴面積必須合乎表1之規定始得承認之).",
+      "column_note": "Table 1 has two soil-depth columns: 屋頂、陽臺、露臺、建築立面 (roof, balcony, terrace, facade) and 其他 (other ground). The text does not name a podium over a basement (地下室頂板); treat it as 'needs review' and show both depths. The municipal greening rule, Arts 8-9, does cover podiums (see municipal_reference.soil_depth).",
+      "rows": [
+        {
+          "plant": "生態複層 / 闊葉大喬木 (eco multi-layer, broadleaf large tree)",
+          "soil_depth_roof_m": 1.0,
+          "soil_depth_other_m": 1.0,
+          "min_pit_area_m2": 4.0
+        },
+        {
+          "plant": "闊葉小喬木、針葉喬木、疏葉喬木、棕櫚類 (small tree, conifer, sparse-leaf, palm)",
+          "soil_depth_roof_m": 0.7,
+          "soil_depth_other_m": 1.0,
+          "min_pit_area_m2": 1.5
+        },
+        {
+          "plant": "灌木、多年生蔓藤 (shrubs, vines)",
+          "soil_depth_roof_m": 0.4,
+          "soil_depth_other_m": 0.5,
+          "min_pit_area_m2": null
+        },
+        {
+          "plant": "草花花圃、草坪、薄層綠化、壁掛式綠化 (flowers, lawn, thin-layer, wall)",
+          "soil_depth_roof_m": 0.1,
+          "soil_depth_other_m": 0.3,
+          "min_pit_area_m2": null
+        }
+      ],
+      "downgrade_rule": {
+        "rule": "a large tree whose pit is >= 1.5 m2 but < 4.0 m2 is counted as a small tree (Gi 1.0)",
+        "pit_min_m2": 1.5,
+        "pit_full_m2": 4.0,
+        "downgrade_to_gi": 1.0
+      },
+      "green_tech_exception": "depths and pit areas certified as a green-building new technology by an ABRI-accredited body may be used instead",
+      "cite": {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "§5 表1 and its 註; §6.3",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-02"
+      }
+    },
+    "submission": {
+      "rule": "planting plan naming every species, plus a plant schedule with species, soil depth and (for pit-planted trees) pit area; 附表一 calculation sheet",
+      "cite": {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "§7.1",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-01"
+      }
+    },
+    "water_retention": {
+      "rule": "保水指標 > 0.5 x legal open-space ratio",
+      "factor": 0.5,
+      "cite": {
+        "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+        "article": "第305條",
+        "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=305",
+        "read": "2026-11-01"
+      },
+      "note": "calculation method read 2026-11-02: see water_retention_spec (建築基地保水設計技術規範修正規定)"
+    },
+    "per_parcel": {
+      "rule": "review per parcel (一宗基地)",
+      "cite": {
+        "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+        "article": "第303條",
+        "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=303",
+        "read": "2026-11-01"
+      }
+    },
+    "protected_trees_national": {
+      "legal_basis": "森林法 第38條之2 第3項; 森林以外之樹木普查方法及受保護樹木認定標準 (農委會 105-05-27 農林務字第1051700926號令)",
+      "article": "認定標準 第2條 第1-3款 (objective criteria; any one, plus designation and notice by the city/county)",
+      "measured_at_m": 1.3,
+      "age_min_yr": 100,
+      "dbh_min_m": {
+        "broadleaf": 1.5,
+        "conifer": 0.75
+      },
+      "girth_min_m": {
+        "broadleaf": 4.7,
+        "conifer": 2.4
+      },
+      "canopy_projection_min_m2": 400,
+      "cite": {
+        "source": "農業部 說明 (quoting 認定標準 第2條)",
+        "article": "第2條",
+        "url": "https://www.moa.gov.tw/ws.php?id=2505146",
+        "read": "2026-11-02"
+      },
+      "note": "Official law.moj.gov.tw text could not be loaded on 2026-11-02; values quoted from the 農業部 page. Municipal ordinances are stricter and apply first."
+    },
+    "water_retention_spec": {
+      "description": "Site water-retention index λ = Q′ / Q0 must exceed λc; Q′ (the sum of the retention items, at most Q0) and Q0 = A0 × f × t.",
+      "lambda_c": "0.5 × (1 − r) for an ordinary building site (0.5 for a whole school campus); r capped at 0.85",
+      "t_s": 86400,
+      "items": {
+        "Q1": "Q1 = A1 · f · t — green space, covered ground, grass swales (natural ground: nothing built below, no paving above)",
+        "Q2": "Q2 = 0.5 · A2 · f · t + 0.05 · h · A2 (interlocking unit pavers); 0.5 · A2 · f · t + 0.3 · h · A2 (vented structure); h = graded base thickness ≤ 0.25 m; Q2 = 0 when the base is concrete or another impervious layer",
+        "Q3": "Q3 = 0.05 · V3 — garden soil on artificial ground (roofs, balconies, ground over a basement); V3 counts soil depth up to 0.6 m"
+      },
+      "f_defaults_m_per_s": {
+        "sand": 1e-05,
+        "silt": 1e-06,
+        "clay": 1e-07,
+        "backfill": 1e-05
+      },
+      "f_note": "f from an infiltration test or the soil within 2 m of the surface (tables 2 and 3); fill soil takes 1e-5 m/s (table 2, note 1)",
+      "applies_to": "new buildings, except hillside sites (chapter 13), groundwater shallower than 1 m, individually built farmhouses and sites of 300 m² or less",
+      "cite": {
+        "source": "建築基地保水設計技術規範修正規定 (Technical Specification for Building-Site Water Retention Design)",
+        "article": "§3.3, §4, §5.1 formula (1), table 1 (Q1–Q3), tables 2–3",
+        "url": "https://www.nlma.gov.tw/uploads/files/0f741327224b557bd4f672ad1d610c46.pdf",
+        "read": "2026-11-02"
+      }
+    },
+    "corridor_width": {
+      "rule": "走廊寬度 (corridor width): the minimum clear width of a corridor, by use, with rooms on both sides (兩側有居室者) or not (其他走廊)",
+      "rooms_one_side_m": 1.2,
+      "rooms_both_sides_m": 1.6,
+      "applies_to": "其他建築物 (other buildings) whose rooms on one floor total 200 m2 or more (100 m2 or more below ground); the 1.2 / 1.6 m pair is also the F-1 row",
+      "table": [
+        {
+          "use": "D-3, D-4, D-5 classrooms (中小學校教室)",
+          "rooms_both_sides_m": 2.4,
+          "other_m": 1.8
+        },
+        {
+          "use": "F-1",
+          "rooms_both_sides_m": 1.6,
+          "other_m": 1.2
+        },
+        {
+          "use": "other buildings, rooms on one floor >= 200 m2 (>= 100 m2 below ground)",
+          "rooms_both_sides_m": 1.6,
+          "other_m": 1.2
+        },
+        {
+          "use": "other buildings, rooms on one floor < 200 m2 (< 100 m2 below ground)",
+          "rooms_both_sides_m": 1.2,
+          "other_m": 1.2
+        }
+      ],
+      "cite": {
+        "source": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+        "article": "第92條第1款",
+        "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0070115&flno=92",
+        "read": "2026-11-03"
+      }
+    }
+  },
+  "municipal_reference": {
+    "municipal": "a reference municipality (not named)",
+    "greening_rule": {
+      "source": "新建建築物綠化實施規則 (a municipal greening rule; re-issued 114-07-31, in force 115-01-01)",
+      "article": "Arts.3-10",
+      "url": "",
+      "read": "2026-11-01"
+    },
+    "site_classes_note": "Art.4: Classes 1-5, e.g. Class 1 = new park land >= 1 ha; Class 4 = 500-1000 m2 or residential >= 300 m2.",
+    "green_cover_by_class": [
+      {
+        "class": 1,
+        "green_cover_ratio_min": 0.9,
+        "green_volume_ratio_min": 2.0
+      },
+      {
+        "class": 2,
+        "green_cover_ratio_min": 0.8,
+        "green_volume_ratio_min": 1.9
+      },
+      {
+        "class": 3,
+        "green_cover_ratio_min": 0.7,
+        "green_volume_ratio_min": 1.8
+      },
+      {
+        "class": 4,
+        "green_cover_ratio_min": 0.6,
+        "green_volume_ratio_min": 1.6
+      },
+      {
+        "class": 5,
+        "green_cover_ratio_min": 0.5,
+        "green_volume_ratio_min": 1.4
+      }
+    ],
+    "green_cover_cite": {
+      "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+      "article": "第5條",
+      "url": "",
+      "read": "2026-11-01"
+    },
+    "cooling_coefficients": {
+      "high_shade_tree": 3,
+      "low_shade_tree": 2,
+      "shrub": 1.2,
+      "other": 1,
+      "cite": {
+        "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+        "article": "第5條",
+        "url": "",
+        "read": "2026-11-01"
+      }
+    },
+    "beta_by_class": [
+      {
+        "classes": [
+          1
+        ],
+        "beta": 0.99
+      },
+      {
+        "classes": [
+          2,
+          3
+        ],
+        "beta": 0.83
+      },
+      {
+        "classes": [
+          4,
+          5
+        ],
+        "beta": 0.66
+      }
+    ],
+    "beta_cite": {
+      "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+      "article": "第6條",
+      "url": "",
+      "read": "2026-11-01"
+    },
+    "soil_depth": {
+      "open_space": {
+        "tree_and_palm_full_m": 1.5,
+        "tree_120_150cm_counts": 0.8,
+        "tree_100_120cm_counts": 0.6,
+        "shrub_m": 0.6,
+        "other_m": 0.3
+      },
+      "podium_and_roof": {
+        "tree_m": 0.7,
+        "shrub_m": 0.4,
+        "other_m": 0.1
+      },
+      "roof_green_cover_min_fraction": 0.5,
+      "street_trees": {
+        "spacing_m": [
+          4,
+          6
+        ],
+        "soil_depth_m": 2.0,
+        "branching_height_m": 2.5
+      },
+      "cite": {
+        "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+        "article": "第7-9條",
+        "url": "",
+        "read": "2026-11-01"
+      }
+    },
+    "shrub_min_plants_per_m2": {
+      "value": 4,
+      "cite": {
+        "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+        "article": "第10條",
+        "url": "",
+        "read": "2026-11-01"
+      }
+    },
+    "grass_paver_counts": {
+      "value": 0.3333,
+      "cite": {
+        "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+        "article": "第10條",
+        "url": "",
+        "read": "2026-11-01"
+      }
+    },
+    "tree_cover_formula": "by 米高徑 and 株距 per a 都發局 notice (not retrieved)",
+    "protected_trees": {
+      "ordinance": "樹木保護自治條例 (a municipal tree protection ordinance; amended 114-12-30; in force six months after promulgation - in-force date not confirmed)",
+      "article": "第3條",
+      "measured_at_m": 1.3,
+      "dbh_min_m": {
+        "broadleaf": 0.8,
+        "conifer": 0.6,
+        "ficus": 1.1
+      },
+      "girth_min_m": {
+        "broadleaf": 2.5,
+        "conifer": 1.8,
+        "ficus": 3.4
+      },
+      "age_min_yr": 50,
+      "height_test": "removed (old 樹高 >= 15 m test no longer in the text)",
+      "other": "rare or of ecological/cultural value",
+      "developer_duty": {
+        "rule": "tree records and a protection or transplant plan approved before the building permit",
+        "article": "第6條"
+      },
+      "cite": {
+        "source": "樹木保護自治條例 (a municipal tree protection ordinance)",
+        "article": "第3條, 第3-1條, 第5條, 第6條",
+        "url": "",
+        "read": "2026-11-01"
+      },
+      "caution": "A web search on 2026-11-02 returned a municipal page describing the broadleaf/conifer/Ficus version as not yet in force; the previous text was DBH >= 0.8 m, girth >= 2.5 m or age >= 50 for all trees. Confirm before relying on the conifer/Ficus split."
+    }
+  },
+  "municipal": {
+    "municipal": "the site's city (not named)",
+    "greening": "No municipal greening rule applies to the sample site (one search 2026-11-02); national 第302條 and the 技術規範 apply (β 0.66 for an ordinary site).",
+    "protected_trees": {
+      "ordinance": "a municipal tree protection ordinance (樹木保護自治條例; promulgated 102-04-24; no later amendment seen)",
+      "article": "第3條",
+      "scope": "trees outside forestry land (林業用地外), designated and announced by the city's agriculture bureau",
+      "measured_at_m": 1.3,
+      "dbh_min_m": 0.8,
+      "girth_min_m": 2.5,
+      "multi_stem": "branched trees: DBH of the branches combined",
+      "age_min_yr": 50,
+      "height_test": null,
+      "height_test_note": "no height criterion in the text",
+      "other": "rare, or of ecological, biological, geographic, regional-historical or cultural significance (incl. groves, hedges, vines)",
+      "habitat": "necessary habitat = land under the full normal canopy (第3條第2項)",
+      "no_conifer_or_ficus_split": true,
+      "developer_duty": {
+        "rule": "developers of public or private land readjustment, zone expropriation, road, park or green-space projects must submit tree records and a protection or transplant/restoration plan to the city's agriculture bureau and get approval before starting work; protected trees stay in place as a rule",
+        "article": "第11條"
+      },
+      "cite": [
+        {
+          "source": "a municipal tree protection ordinance (樹木保護自治條例), ordinance text",
+          "article": "第3條, 第11條",
+          "url": "",
+          "read": "2026-11-02"
+        }
+      ],
+      "note": "第11條 names land readjustment, roads and parks; whether an ordinary private building permit triggers it is not stated - flag existing trees above the thresholds as 'needs review'. Older 1.5 m / 4.7 m / 100 yr numbers come from rules that predate the current ordinance and are not current."
+    }
+  },
+  "amendments_2026": [
+    {
+      "instrument": "建築技術規則 建築設計施工編 (Building Technical Regulations, Design and Construction Part)",
+      "date": "2026-02-23 (民國115-02-23), effective 2026-07-01",
+      "change": "amended Arts.140-142 and 144, deleted Chapter 6 section titles",
+      "touches_chapter_17_greening": false,
+      "cite": {
+        "source": "全國法規資料庫 法規沿革",
+        "article": "",
+        "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=D0070115",
+        "read": "2026-11-02"
+      }
+    },
+    {
+      "instrument": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+      "date": null,
+      "change": "No 2026 amendment found (one search 2026-11-02). Edition in use is believed to be 108-12-31 台內營字第1080824127號, effective 110-01-01 (search snippet only, unconfirmed).",
+      "cite": {
+        "source": "建築基地綠化設計技術規範修正規定 (Technical Specification for Building-Site Greening Design)",
+        "article": "",
+        "url": "https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf",
+        "read": "2026-11-02"
+      }
+    },
+    {
+      "instrument": "新建建築物綠化實施規則 (a municipal greening rule)",
+      "date": "re-issued 2025-07-31, in force 2026-01-01",
+      "change": "full re-issue (17 articles)",
+      "cite": {
+        "source": "新建建築物綠化實施規則 (a municipal greening rule)",
+        "article": "",
+        "url": "",
+        "read": "2026-11-01"
+      }
+    },
+    {
+      "instrument": "樹木保護自治條例 (a municipal tree protection ordinance)",
+      "date": "amended 2025-12-30, in force six months after promulgation (unconfirmed)",
+      "change": "broadleaf/conifer/Ficus DBH and girth split; height test removed",
+      "cite": {
+        "source": "樹木保護自治條例 (a municipal tree protection ordinance)",
+        "article": "第3條",
+        "url": "",
+        "read": "2026-11-01"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+ "call": "classify_sheet",
+ "image_sha256": "ad5d28f8a78c15312dae2023f720fba906919f37efeb00e8f2aa520c79890f82",
+ "content_key": "44c85e253c4f5791a1949a3de2b94c765866025b1be8d9aa63ea79ebb6b39f23",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:20:25+00:00",
+ "seconds": 4.4,
+ "usage": {
+  "completion_tokens": 360,
+  "prompt_tokens": 3378,
+  "total_tokens": 3738,
+  "completion_tokens_details": {
+   "reasoning_tokens": 285
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 241
+  }
+ },
+ "result": {
+  "confidence": 0.99,
+  "kind": "plan",
+  "why": "The main drawing is a top-down planting layout with north arrow, scale bar, and plan symbols, titled 植栽配置平面圖."
+ }
+}

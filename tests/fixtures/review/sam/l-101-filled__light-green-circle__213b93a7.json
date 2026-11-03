@@ -1,0 +1,77 @@
+{
+ "image": "L-101 filled",
+ "prompt": "light green circle",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:23:31+00:00",
+ "seconds": 3.46,
+ "image_sha256": "213b93a7220634ae8d1ce6f2fee002f1bcdd08274bf5274b855ebb9d65860774",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 0,
+ "raw_output": "",
+ "response_id": "resp_6ae9b622dbffd4268c304a17",
+ "envelope": {
+  "metadata": {
+   "include_confidence": "true",
+   "mask_encoding": "one_bit"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b622dbffd4268c304a17",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701410.0,
+  "completed_at": 1793701410.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_19fc10ed-ba73-46b0-8646-637383e31f8e",
+    "status": "completed",
+    "content_chars": 0
+   }
+  ]
+ },
+ "sheet": "L-101",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "symbol",
+  "labels": [
+   "CC CAMPHOR"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

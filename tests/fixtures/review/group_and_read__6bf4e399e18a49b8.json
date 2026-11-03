@@ -1,0 +1,118 @@
+{
+ "call": "group_and_read",
+ "image_sha256": "f36c0c60200a38e12fd551c7469fe868232d7d9bbdb4af2e64d095cd989fe476",
+ "content_key": "f8b1dffbb89e3adda51c99078e7473bb2ad87678d619ed39a8e0d84353470d3c:b143a61b1ccf2f4b3a60a57b694b5b721be229220b2fc4916413076c084620f2|p=da13e421",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:20:49+00:00",
+ "seconds": 10.29,
+ "usage": {
+  "completion_tokens": 1075,
+  "prompt_tokens": 2464,
+  "total_tokens": 3539,
+  "completion_tokens_details": {
+   "reasoning_tokens": 847
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "This image is a crop of a landscape plan (top-down view). Each candidate below is drawn in RED and tagged with its ID; it is a group of line segments that the CAD geometry could not join into one closed outline. Black line work is context (other symbols, outlines that did close, labels). For each candidate decide: is_one_object (do the red segments together form one object?), kind, label_text (the text that labels this candidate through a leader line or written right beside it, exactly as written, else empty), label_meaning, implies_count (how many plants or objects this candidate itself stands for after applying the conventions; one plant symbol with no multiplier is 1), confidence from 0 to 1, why in one sentence, and points: up to 12 points placed on this candidate's red segments, spread around it, each {x, y} with x from the left edge and y from the top edge of this image, both normalised to 0-1000.\n\nCandidates and facts measured from the CAD file:\n- C-03: 12 separate straight pieces drawn with a solid (continuous) linetype; 12 gaps between piece ends, the largest 0.40 m; overall 3.9 m x 3.9 m, total length 7.5 m; 1 '+' centre mark inside; the closed round outlines near it are 12.0 m2 each",
+ "candidates": [
+  {
+   "id": "C-03",
+   "facts": "12 separate straight pieces drawn with a solid (continuous) linetype; 12 gaps between piece ends, the largest 0.40 m; overall 3.9 m x 3.9 m, total length 7.5 m; 1 '+' centre mark inside; the closed round outlines near it are 12.0 m2 each"
+  }
+ ],
+ "result": [
+  {
+   "confidence": 0.92,
+   "id": "C-03",
+   "implies_count": 1,
+   "is_one_object": true,
+   "kind": "tree",
+   "label_meaning": "",
+   "label_text": "",
+   "points": [
+    {
+     "x": 498,
+     "y": 377
+    },
+    {
+     "x": 577,
+     "y": 402
+    },
+    {
+     "x": 623,
+     "y": 463
+    },
+    {
+     "x": 642,
+     "y": 532
+    },
+    {
+     "x": 618,
+     "y": 600
+    },
+    {
+     "x": 570,
+     "y": 648
+    },
+    {
+     "x": 500,
+     "y": 663
+    },
+    {
+     "x": 430,
+     "y": 640
+    },
+    {
+     "x": 385,
+     "y": 592
+    },
+    {
+     "x": 376,
+     "y": 525
+    },
+    {
+     "x": 395,
+     "y": 458
+    },
+    {
+     "x": 435,
+     "y": 408
+    }
+   ],
+   "why": "Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol."
+  }
+ ],
+ "response_id": "chatcmpl-01a1a0ed-035e-71f7-b2ab-d8031f01ef07",
+ "raw": {
+  "id": "chatcmpl-01a1a0ed-035e-71f7-b2ab-d8031f01ef07",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"candidates\": [{\"confidence\": 0.92, \"id\": \"C-03\", \"implies_count\": 1, \"is_one_object\": true, \"kind\": \"tree\", \"label_meaning\": \"\", \"label_text\": \"\", \"points\": [{\"x\": 498, \"y\": 377}, {\"x\": 577, \"y\": 402}, {\"x\": 623, \"y\": 463}, {\"x\": 642, \"y\": 532}, {\"x\": 618, \"y\": 600}, {\"x\": 570, \"y\": 648}, {\"x\": 500, \"y\": 663}, {\"x\": 430, \"y\": 640}, {\"x\": 385, \"y\": 592}, {\"x\": 376, \"y\": 525}, {\"x\": 395, \"y\": 458}, {\"x\": 435, \"y\": 408}], \"why\": \"Twelve short segments form one circular canopy with central '+' matching the adjacent tree symbol.\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701249,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 1075,
+   "prompt_tokens": 2464,
+   "total_tokens": 3539,
+   "completion_tokens_details": {
+    "reasoning_tokens": 847
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ }
+}

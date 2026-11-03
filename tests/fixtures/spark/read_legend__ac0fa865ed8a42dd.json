@@ -1,0 +1,37 @@
+{
+ "call": "read_legend",
+ "image_sha256": "2840c9f546a87ef5755fcfb96b675cebcd09f58fe328a7e16b9488f51450e4ba",
+ "content_key": "ee260ceeae739701a8092661dce38500438e6f07ee38f479969bbe2e59287aee:legend",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-01T17:17:56+00:00",
+ "seconds": 5.56,
+ "usage": {
+  "completion_tokens": 1019,
+  "prompt_tokens": 574,
+  "total_tokens": 1593,
+  "completion_tokens_details": {
+   "reasoning_tokens": 933
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "This image is the legend box cropped from a coloured landscape plan. For each entry in it (a filled swatch, a plant symbol or a line, with the text that keys it) return: swatch_colour_word, the colour you see in the swatch as one or two plain English colour words that an image segmentation model could be prompted with to find areas of that colour on the plan (for example 'beige', 'light grey', 'dark green'), never the material's name; label, the text the entry keys, exactly as written; kind, 'area' for a filled rectangle that keys a paved or planted area, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip that keys a hedge or an edge. Skip the legend's own title.",
+ "result": [
+  {
+   "kind": "symbol",
+   "label": "樟樹",
+   "swatch_colour_word": "light green"
+  },
+  {
+   "kind": "area",
+   "label": "杜鵑",
+   "swatch_colour_word": "light green"
+  },
+  {
+   "kind": "line",
+   "label": "金露花",
+   "swatch_colour_word": "dark green"
+  }
+ ]
+}

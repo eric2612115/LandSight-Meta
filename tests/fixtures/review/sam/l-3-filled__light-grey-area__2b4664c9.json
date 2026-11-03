@@ -1,0 +1,77 @@
+{
+ "image": "L-3 filled",
+ "prompt": "light grey area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:25:02+00:00",
+ "seconds": 1.49,
+ "image_sha256": "2b4664c91245d79496cc04119280ae25d7f30056a56d366ef7ded14540fdda44",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 696,
+ "raw_output": "<0f>0<|box;x1=1126;y1=165;x2=1227;y2=543;w=2100;h=1140;c=0.9139785170555115|><|mask;x=0;y=0;c=0.9139785170555115;data=379,102,!!!!!XD.sx@NKb3eQ7J`wF4'a_:f)i=R2t*/pnP?/_$DUE&myRdvnmcfQ]To)tsRS$!!!|>,1<|box;x1=1516;y1=248;x2=1618;y2=284;w=2100;h=1140;c=0.8904109597206116|><|mask;x=0;y=0;c=0.8904109597206116;data=37,103,!!!!!:JAXry_MsQr`Jpg06MOIslpZVgRCaI|>,2<|box;x1=822;y1=166;x2=1075;y2=267;w=2100;h=1140;c=0.9179486632347107|><|mask;x=0;y=0;c=0.9179486632347107;data=102,254,!!!!!OHnSSv^bsG&A2`h[1Rh@jw3X`CFD6Ly-@^JB[rjAA5mgkAZ_{3V!!|>,3<|box;x1=1516;y1=192;x2=1618;y2=229;w=2100;h=1140;c=0.8904109597206116|><|mask;x=0;y=0;c=0.8904109597206116;data=38,103,!!!!!8K.DtOsDb(#p(R@)1KyAPa6tVD!!|>\n",
+ "response_id": "resp_6ae9b67da23b4d9ca7454d40",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b67da23b4d9ca7454d40",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701501.0,
+  "completed_at": 1793701501.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_0406e622-05eb-422b-8554-9f7e5291241e",
+    "status": "completed",
+    "content_chars": 696
+   }
+  ]
+ },
+ "sheet": "L-3",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light grey",
+  "kind": "area",
+  "labels": [
+   "PV-2 EXPOSED AGGREGATE"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

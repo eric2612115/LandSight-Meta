@@ -1,0 +1,132 @@
+{
+ "call": "review_align",
+ "image_sha256": "",
+ "content_key": "f6d73b0fc1bee230f34236e87dd7152b17fc64859cd6af8a63509009ba6bbf57|p=dd2ebb4d",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-02T21:11:55+00:00",
+ "seconds": 7.1,
+ "usage": {
+  "completion_tokens": 1279,
+  "prompt_tokens": 770,
+  "total_tokens": 2049,
+  "completion_tokens_details": {
+   "reasoning_tokens": 715
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "prompt": "Match each row of a developer's bill of quantities to the item on the drawings that it prices.\n\nDrawing items (code | name | botanical name | kind | unit on the drawing):\nCC | Camphor | Cinnamomum camphora | tree | plant\nDU | Duranta | Duranta erecta | hedge | plant\nAZ | Azalea | Rhododendron spp. | shrub_bed | m2\nLA | Lawn | Zoysia matrella | lawn | m2\nPV-1 | Permeable pavers | - | paving | m2\nPV-2 | Exposed aggregate | - | paving | m2\nPV-3 | Grass pavers | - | paving | m2\nPLANTER-EDGE | Planter edge | - | planter_edge | m\n\nBill rows (row id | description | spec | unit):\nR-01 | Camphor tree, cal. 10 cm | Cinnamomum camphora, H3.5 m, W1.5 m, root-balled | EA\nR-02 | Duranta | Duranta erecta, H0.6 m, @0.3 m o.c., double row | EA\nR-03 | Azalea | Rhododendron spp., 4-5 in. pot, 4 plants/m² | EA\nR-04 | Lawn | Zoysia matrella, sod | m²\nR-05 | Permeable pavers (PV-1) | concrete, 200 x 100 x 80 mm, on 30 mm sand | m²\nR-06 | Exposed aggregate (PV-2) | 100 mm, 6-10 mm aggregate | m²\nR-07 | Grass pavers (PV-3) | concrete grid 400 x 400 x 80 mm, soil and sod | m²\nR-08 | Planter edge | precast concrete kerb, 150 mm | m\nR-09 | Tree pit on slab | 1.5 x 1.5 m, drainage layer 100 mm, filter fabric | EA\nR-10 | Planting soil | imported, 1.0 m deep in tree pits | m³\nR-11 | Irrigation system | as quotation IQ-417 | LS\nR-12 | Camphore tree, cal. 10 cm | Cinnamomum camphora, H3.5 m, W1.5 m, root-balled | EA\nR-13 | Duranta hedge | Duranta erecta, H0.6 m, double row | m\n\nFor every bill row return row_id, item_code (one code from the drawing items, or 'none' when the row prices something that is not a drawn item, such as tree pits, soil or irrigation), confidence from 0 to 1 (lower it when the description is misspelt, abbreviated or ambiguous), and why in one short sentence.",
+ "result": {
+  "rows": [
+   {
+    "confidence": 1.0,
+    "item_code": "CC",
+    "row_id": "R-01",
+    "why": "Name, botanical name and tree unit match CC exactly."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "DU",
+    "row_id": "R-02",
+    "why": "Name, botanical name and per-plant unit match DU hedge."
+   },
+   {
+    "confidence": 0.8,
+    "item_code": "AZ",
+    "row_id": "R-03",
+    "why": "Same species but billed per plant while drawing measures AZ by m2."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "LA",
+    "row_id": "R-04",
+    "why": "Name, Zoysia matrella sod and m2 match LA exactly."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "PV-1",
+    "row_id": "R-05",
+    "why": "Explicit PV-1 code and permeable pavers match PV-1."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "PV-2",
+    "row_id": "R-06",
+    "why": "Explicit PV-2 code and exposed aggregate match PV-2."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "PV-3",
+    "row_id": "R-07",
+    "why": "Explicit PV-3 code and grass pavers match PV-3."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "PLANTER-EDGE",
+    "row_id": "R-08",
+    "why": "Precast kerb description and metre unit match planter edge."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "none",
+    "row_id": "R-09",
+    "why": "Tree pit construction is not a drawn item."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "none",
+    "row_id": "R-10",
+    "why": "Imported planting soil by volume is not a drawn item."
+   },
+   {
+    "confidence": 1.0,
+    "item_code": "none",
+    "row_id": "R-11",
+    "why": "Irrigation lump-sum system is not a drawn item."
+   },
+   {
+    "confidence": 0.85,
+    "item_code": "CC",
+    "row_id": "R-12",
+    "why": "Misspelt Camphore but botanical spec matches CC."
+   },
+   {
+    "confidence": 0.7,
+    "item_code": "DU",
+    "row_id": "R-13",
+    "why": "Same species but billed per metre while drawing counts DU plants."
+   }
+  ]
+ },
+ "response_id": "chatcmpl-01a19e1a-be2c-7544-b6ef-312e802614f0",
+ "raw": {
+  "id": "chatcmpl-01a19e1a-be2c-7544-b6ef-312e802614f0",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"rows\": [{\"confidence\": 1.0, \"item_code\": \"CC\", \"row_id\": \"R-01\", \"why\": \"Name, botanical name and tree unit match CC exactly.\"}, {\"confidence\": 1.0, \"item_code\": \"DU\", \"row_id\": \"R-02\", \"why\": \"Name, botanical name and per-plant unit match DU hedge.\"}, {\"confidence\": 0.8, \"item_code\": \"AZ\", \"row_id\": \"R-03\", \"why\": \"Same species but billed per plant while drawing measures AZ by m2.\"}, {\"confidence\": 1.0, \"item_code\": \"LA\", \"row_id\": \"R-04\", \"why\": \"Name, Zoysia matrella sod and m2 match LA exactly.\"}, {\"confidence\": 1.0, \"item_code\": \"PV-1\", \"row_id\": \"R-05\", \"why\": \"Explicit PV-1 code and permeable pavers match PV-1.\"}, {\"confidence\": 1.0, \"item_code\": \"PV-2\", \"row_id\": \"R-06\", \"why\": \"Explicit PV-2 code and exposed aggregate match PV-2.\"}, {\"confidence\": 1.0, \"item_code\": \"PV-3\", \"row_id\": \"R-07\", \"why\": \"Explicit PV-3 code and grass pavers match PV-3.\"}, {\"confidence\": 1.0, \"item_code\": \"PLANTER-EDGE\", \"row_id\": \"R-08\", \"why\": \"Precast kerb description and metre unit match planter edge.\"}, {\"confidence\": 1.0, \"item_code\": \"none\", \"row_id\": \"R-09\", \"why\": \"Tree pit construction is not a drawn item.\"}, {\"confidence\": 1.0, \"item_code\": \"none\", \"row_id\": \"R-10\", \"why\": \"Imported planting soil by volume is not a drawn item.\"}, {\"confidence\": 1.0, \"item_code\": \"none\", \"row_id\": \"R-11\", \"why\": \"Irrigation lump-sum system is not a drawn item.\"}, {\"confidence\": 0.85, \"item_code\": \"CC\", \"row_id\": \"R-12\", \"why\": \"Misspelt Camphore but botanical spec matches CC.\"}, {\"confidence\": 0.7, \"item_code\": \"DU\", \"row_id\": \"R-13\", \"why\": \"Same species but billed per metre while drawing counts DU plants.\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793653915,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 1279,
+   "prompt_tokens": 770,
+   "total_tokens": 2049,
+   "completion_tokens_details": {
+    "reasoning_tokens": 715
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  }
+ }
+}

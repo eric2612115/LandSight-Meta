@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.200 45.200" width="998" height="542" font-family="Heiti TC, PingFang TC, Noto Sans CJK TC, sans-serif">
+<defs><pattern id="hatch" width="0.6" height="0.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6" stroke="#888" stroke-width="0.05"/></pattern></defs>
+<rect width="83.200" height="45.200" fill="#f7f5f0"/>
+<polyline points="1.600,43.600 81.600,43.600 81.600,1.600 1.600,1.600 1.600,43.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="99" data-layer="FRAME"/>
+<polyline points="4.600,34.600 54.600,34.600 54.600,4.600 4.600,4.600 4.600,34.600" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="9A" data-layer="SITE"/>
+<polyline points="11.532,31.582 11.014,30.686 10.118,30.168 9.082,30.168 8.186,30.686 7.668,31.582 7.668,32.618 8.186,33.514 9.082,34.032 10.118,34.032 11.014,33.514 11.532,32.618 11.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="9C" data-layer="X-PLANTING"/>
+<polyline points="15.532,31.582 15.014,30.686 14.118,30.168 13.082,30.168 12.186,30.686 11.668,31.582 11.668,32.618 12.186,33.514 13.082,34.032 14.118,34.032 15.014,33.514 15.532,32.618 15.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="9D" data-layer="X-PLANTING"/>
+<polyline points="19.532,31.582 19.014,30.686 18.118,30.168 17.082,30.168 16.186,30.686 15.668,31.582 15.668,32.618 16.186,33.514 17.082,34.032 18.118,34.032 19.014,33.514 19.532,32.618 19.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="9E" data-layer="X-PLANTING"/>
+<polyline points="23.532,31.582 23.014,30.686 22.118,30.168 21.082,30.168 20.186,30.686 19.668,31.582 19.668,32.618 20.186,33.514 21.082,34.032 22.118,34.032 23.014,33.514 23.532,32.618 23.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="9F" data-layer="X-PLANTING"/>
+<polyline points="27.532,31.582 27.014,30.686 26.118,30.168 25.082,30.168 24.186,30.686 23.668,31.582 23.668,32.618 24.186,33.514 25.082,34.032 26.118,34.032 27.014,33.514 27.532,32.618 27.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="A0" data-layer="X-PLANTING"/>
+<polyline points="31.532,31.582 31.014,30.686 30.118,30.168 29.082,30.168 28.186,30.686 27.668,31.582 27.668,32.618 28.186,33.514 29.082,34.032 30.118,34.032 31.014,33.514 31.532,32.618 31.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="A1" data-layer="X-PLANTING"/>
+<polyline points="35.532,31.582 35.014,30.686 34.118,30.168 33.082,30.168 32.186,30.686 31.668,31.582 31.668,32.618 32.186,33.514 33.082,34.032 34.118,34.032 35.014,33.514 35.532,32.618 35.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="A2" data-layer="X-PLANTING"/>
+<polyline points="39.532,31.582 39.014,30.686 38.118,30.168 37.082,30.168 36.186,30.686 35.668,31.582 35.668,32.618 36.186,33.514 37.082,34.032 38.118,34.032 39.014,33.514 39.532,32.618 39.532,31.582" fill="none" stroke="#000" stroke-width="0.06" data-handle="A3" data-layer="X-PLANTING"/>
+<polyline points="45.532,36.682 45.014,35.786 44.118,35.268 43.082,35.268 42.186,35.786 41.668,36.682 41.668,37.718 42.186,38.614 43.082,39.132 44.118,39.132 45.014,38.614 45.532,37.718 45.532,36.682" fill="none" stroke="#000" stroke-width="0.06" data-handle="A4" data-layer="X-PLANTING"/>
+<polyline points="8.532,17.082 8.014,16.186 7.118,15.668 6.082,15.668 5.186,16.186 4.668,17.082 4.668,18.118 5.186,19.014 6.082,19.532 7.118,19.532 8.014,19.014 8.532,18.118 8.532,17.082" fill="none" stroke="#000" stroke-width="0.06" data-handle="A5" data-layer="X-PLANTING"/>
+<polyline points="53.400,33.100 53.400,6.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="A6" data-layer="X-PLANTING"/>
+<polyline points="53.800,33.100 53.800,6.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="A7" data-layer="X-PLANTING"/>
+<polyline points="10.600,22.600 25.600,22.600 25.600,12.600 10.600,12.600 10.600,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="A8" data-layer="X-PLANTING"/>
+<polyline points="28.600,22.600 48.600,22.600 48.600,12.600 28.600,12.600 28.600,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="A9" data-layer="X-PLANTING"/>
+<polyline points="4.600,28.600 8.600,28.600 8.600,5.600 4.600,5.600 4.600,28.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="AA" data-layer="X-PLANTING"/>
+<polyline points="50.600,7.000 52.000,7.000 52.000,5.600 50.600,5.600 50.600,7.000" fill="none" stroke="#000" stroke-width="0.06" data-handle="AC" data-layer="IRRIGATION"/>
+<polyline points="51.300,7.000 51.300,11.400 9.600,11.400 9.600,28.400 51.300,28.400 51.300,11.400" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="AE" data-layer="IRRIGATION"/>
+<polyline points="27.300,11.700 27.900,11.700 27.900,11.100 27.300,11.100 27.300,11.700" fill="none" stroke="#000" stroke-width="0.06" data-handle="AF" data-layer="IRRIGATION"/>
+<polyline points="9.300,17.900 9.900,17.900 9.900,17.300 9.300,17.300 9.300,17.900" fill="none" stroke="#000" stroke-width="0.06" data-handle="B1" data-layer="IRRIGATION"/>
+<polyline points="34.300,28.700 34.900,28.700 34.900,28.100 34.300,28.100 34.300,28.700" fill="none" stroke="#000" stroke-width="0.06" data-handle="B3" data-layer="IRRIGATION"/>
+<polyline points="28.850,22.600 28.830,22.697 28.777,22.777 28.697,22.830 28.600,22.850 28.503,22.830 28.423,22.777 28.370,22.697 28.350,22.600 28.370,22.503 28.423,22.423 28.503,22.370 28.600,22.350 28.697,22.370 28.777,22.423 28.830,22.503 28.850,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="B5" data-layer="IRRIGATION"/>
+<polyline points="33.850,22.600 33.830,22.697 33.777,22.777 33.697,22.830 33.600,22.850 33.503,22.830 33.423,22.777 33.370,22.697 33.350,22.600 33.370,22.503 33.423,22.423 33.503,22.370 33.600,22.350 33.697,22.370 33.777,22.423 33.830,22.503 33.850,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="B6" data-layer="IRRIGATION"/>
+<polyline points="38.850,22.600 38.830,22.697 38.777,22.777 38.697,22.830 38.600,22.850 38.503,22.830 38.423,22.777 38.370,22.697 38.350,22.600 38.370,22.503 38.423,22.423 38.503,22.370 38.600,22.350 38.697,22.370 38.777,22.423 38.830,22.503 38.850,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="B7" data-layer="IRRIGATION"/>
+<polyline points="43.850,22.600 43.830,22.697 43.777,22.777 43.697,22.830 43.600,22.850 43.503,22.830 43.423,22.777 43.370,22.697 43.350,22.600 43.370,22.503 43.423,22.423 43.503,22.370 43.600,22.350 43.697,22.370 43.777,22.423 43.830,22.503 43.850,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="B8" data-layer="IRRIGATION"/>
+<polyline points="48.850,22.600 48.830,22.697 48.777,22.777 48.697,22.830 48.600,22.850 48.503,22.830 48.423,22.777 48.370,22.697 48.350,22.600 48.370,22.503 48.423,22.423 48.503,22.370 48.600,22.350 48.697,22.370 48.777,22.423 48.830,22.503 48.850,22.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="B9" data-layer="IRRIGATION"/>
+<polyline points="28.850,17.600 28.830,17.697 28.777,17.777 28.697,17.830 28.600,17.850 28.503,17.830 28.423,17.777 28.370,17.697 28.350,17.600 28.370,17.503 28.423,17.423 28.503,17.370 28.600,17.350 28.697,17.370 28.777,17.423 28.830,17.503 28.850,17.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BA" data-layer="IRRIGATION"/>
+<polyline points="33.850,17.600 33.830,17.697 33.777,17.777 33.697,17.830 33.600,17.850 33.503,17.830 33.423,17.777 33.370,17.697 33.350,17.600 33.370,17.503 33.423,17.423 33.503,17.370 33.600,17.350 33.697,17.370 33.777,17.423 33.830,17.503 33.850,17.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BB" data-layer="IRRIGATION"/>
+<polyline points="38.850,17.600 38.830,17.697 38.777,17.777 38.697,17.830 38.600,17.850 38.503,17.830 38.423,17.777 38.370,17.697 38.350,17.600 38.370,17.503 38.423,17.423 38.503,17.370 38.600,17.350 38.697,17.370 38.777,17.423 38.830,17.503 38.850,17.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BC" data-layer="IRRIGATION"/>
+<polyline points="43.850,17.600 43.830,17.697 43.777,17.777 43.697,17.830 43.600,17.850 43.503,17.830 43.423,17.777 43.370,17.697 43.350,17.600 43.370,17.503 43.423,17.423 43.503,17.370 43.600,17.350 43.697,17.370 43.777,17.423 43.830,17.503 43.850,17.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BD" data-layer="IRRIGATION"/>
+<polyline points="48.850,17.600 48.830,17.697 48.777,17.777 48.697,17.830 48.600,17.850 48.503,17.830 48.423,17.777 48.370,17.697 48.350,17.600 48.370,17.503 48.423,17.423 48.503,17.370 48.600,17.350 48.697,17.370 48.777,17.423 48.830,17.503 48.850,17.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BE" data-layer="IRRIGATION"/>
+<polyline points="28.850,12.600 28.830,12.697 28.777,12.777 28.697,12.830 28.600,12.850 28.503,12.830 28.423,12.777 28.370,12.697 28.350,12.600 28.370,12.503 28.423,12.423 28.503,12.370 28.600,12.350 28.697,12.370 28.777,12.423 28.830,12.503 28.850,12.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="BF" data-layer="IRRIGATION"/>
+<polyline points="33.850,12.600 33.830,12.697 33.777,12.777 33.697,12.830 33.600,12.850 33.503,12.830 33.423,12.777 33.370,12.697 33.350,12.600 33.370,12.503 33.423,12.423 33.503,12.370 33.600,12.350 33.697,12.370 33.777,12.423 33.830,12.503 33.850,12.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="C0" data-layer="IRRIGATION"/>
+<polyline points="38.850,12.600 38.830,12.697 38.777,12.777 38.697,12.830 38.600,12.850 38.503,12.830 38.423,12.777 38.370,12.697 38.350,12.600 38.370,12.503 38.423,12.423 38.503,12.370 38.600,12.350 38.697,12.370 38.777,12.423 38.830,12.503 38.850,12.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="C1" data-layer="IRRIGATION"/>
+<polyline points="43.850,12.600 43.830,12.697 43.777,12.777 43.697,12.830 43.600,12.850 43.503,12.830 43.423,12.777 43.370,12.697 43.350,12.600 43.370,12.503 43.423,12.423 43.503,12.370 43.600,12.350 43.697,12.370 43.777,12.423 43.830,12.503 43.850,12.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="C2" data-layer="IRRIGATION"/>
+<polyline points="48.850,12.600 48.830,12.697 48.777,12.777 48.697,12.830 48.600,12.850 48.503,12.830 48.423,12.777 48.370,12.697 48.350,12.600 48.370,12.503 48.423,12.423 48.503,12.370 48.600,12.350 48.697,12.370 48.777,12.423 48.830,12.503 48.850,12.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="C3" data-layer="IRRIGATION"/>
+<polyline points="40.720,9.750 34.600,9.750 33.800,12.400" fill="none" stroke="#000" stroke-width="0.06" data-handle="C5" data-layer="LEADER"/>
+<polyline points="10.550,32.100 10.538,32.158 10.506,32.206 10.458,32.238 10.400,32.250 10.342,32.238 10.294,32.206 10.262,32.158 10.250,32.100 10.262,32.042 10.294,31.994 10.342,31.962 10.400,31.950 10.458,31.962 10.506,31.994 10.538,32.042 10.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="C6" data-layer="IRRIGATION"/>
+<polyline points="14.550,32.100 14.538,32.158 14.506,32.206 14.458,32.238 14.400,32.250 14.342,32.238 14.294,32.206 14.262,32.158 14.250,32.100 14.262,32.042 14.294,31.994 14.342,31.962 14.400,31.950 14.458,31.962 14.506,31.994 14.538,32.042 14.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="C7" data-layer="IRRIGATION"/>
+<polyline points="18.550,32.100 18.538,32.158 18.506,32.206 18.458,32.238 18.400,32.250 18.342,32.238 18.294,32.206 18.262,32.158 18.250,32.100 18.262,32.042 18.294,31.994 18.342,31.962 18.400,31.950 18.458,31.962 18.506,31.994 18.538,32.042 18.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="C8" data-layer="IRRIGATION"/>
+<polyline points="22.550,32.100 22.538,32.158 22.506,32.206 22.458,32.238 22.400,32.250 22.342,32.238 22.294,32.206 22.262,32.158 22.250,32.100 22.262,32.042 22.294,31.994 22.342,31.962 22.400,31.950 22.458,31.962 22.506,31.994 22.538,32.042 22.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="C9" data-layer="IRRIGATION"/>
+<polyline points="26.550,32.100 26.538,32.158 26.506,32.206 26.458,32.238 26.400,32.250 26.342,32.238 26.294,32.206 26.262,32.158 26.250,32.100 26.262,32.042 26.294,31.994 26.342,31.962 26.400,31.950 26.458,31.962 26.506,31.994 26.538,32.042 26.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CA" data-layer="IRRIGATION"/>
+<polyline points="30.550,32.100 30.538,32.158 30.506,32.206 30.458,32.238 30.400,32.250 30.342,32.238 30.294,32.206 30.262,32.158 30.250,32.100 30.262,32.042 30.294,31.994 30.342,31.962 30.400,31.950 30.458,31.962 30.506,31.994 30.538,32.042 30.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CB" data-layer="IRRIGATION"/>
+<polyline points="34.550,32.100 34.538,32.158 34.506,32.206 34.458,32.238 34.400,32.250 34.342,32.238 34.294,32.206 34.262,32.158 34.250,32.100 34.262,32.042 34.294,31.994 34.342,31.962 34.400,31.950 34.458,31.962 34.506,31.994 34.538,32.042 34.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CC" data-layer="IRRIGATION"/>
+<polyline points="38.550,32.100 38.538,32.158 38.506,32.206 38.458,32.238 38.400,32.250 38.342,32.238 38.294,32.206 38.262,32.158 38.250,32.100 38.262,32.042 38.294,31.994 38.342,31.962 38.400,31.950 38.458,31.962 38.506,31.994 38.538,32.042 38.550,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CD" data-layer="IRRIGATION"/>
+<polyline points="27.240,27.350 18.600,27.350 18.400,32.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="CF" data-layer="LEADER"/>
+<polyline points="11.100,20.600 25.100,20.600" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="D0" data-layer="IRRIGATION"/>
+<polyline points="11.100,17.600 25.100,17.600" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="D1" data-layer="IRRIGATION"/>
+<polyline points="11.100,14.600 25.100,14.600" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="D2" data-layer="IRRIGATION"/>
+<polyline points="53.150,33.100 53.150,6.100" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="D4" data-layer="IRRIGATION"/>
+<polyline points="40.600,7.750 46.720,7.750 53.150,8.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="D6" data-layer="LEADER"/>
+<polyline points="58.600,14.500 77.600,14.500 77.600,3.100 58.600,3.100 58.600,14.500" fill="none" stroke="#000" stroke-width="0.06" data-handle="D7" data-layer="FRAME"/>
+<polyline points="61.850,6.100 61.830,6.197 61.777,6.277 61.697,6.330 61.600,6.350 61.503,6.330 61.423,6.277 61.370,6.197 61.350,6.100 61.370,6.003 61.423,5.923 61.503,5.870 61.600,5.850 61.697,5.870 61.777,5.923 61.830,6.003 61.850,6.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="D9" data-layer="IRRIGATION"/>
+<polyline points="61.300,8.200 61.900,8.200 61.900,7.600 61.300,7.600 61.300,8.200" fill="none" stroke="#000" stroke-width="0.06" data-handle="DB" data-layer="IRRIGATION"/>
+<polyline points="61.750,9.700 61.738,9.758 61.706,9.806 61.658,9.838 61.600,9.850 61.542,9.838 61.494,9.806 61.462,9.758 61.450,9.700 61.462,9.642 61.494,9.594 61.542,9.562 61.600,9.550 61.658,9.562 61.706,9.594 61.738,9.642 61.750,9.700" fill="none" stroke="#000" stroke-width="0.06" data-handle="DD" data-layer="IRRIGATION"/>
+<polyline points="60.600,11.500 62.600,11.500" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="DF" data-layer="IRRIGATION"/>
+<polyline points="60.600,13.300 62.600,13.300" fill="none" stroke="#000" stroke-width="0.06" stroke-dasharray="0.6 0.3" data-handle="E1" data-layer="IRRIGATION"/>
+<polyline points="58.600,27.600 79.600,27.600" fill="none" stroke="#000" stroke-width="0.06" data-handle="E3" data-layer="FRAME"/>
+<polyline points="58.600,28.715 79.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="E4" data-layer="FRAME"/>
+<polyline points="58.600,27.600 58.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="E5" data-layer="FRAME"/>
+<polyline points="79.600,27.600 79.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="E6" data-layer="FRAME"/>
+<polyline points="64.600,27.600 64.600,28.715" fill="none" stroke="#000" stroke-width="0.06" data-handle="E8" data-layer="FRAME"/>
+<polyline points="58.600,29.831 79.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="EA" data-layer="FRAME"/>
+<polyline points="58.600,28.715 58.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="EB" data-layer="FRAME"/>
+<polyline points="79.600,28.715 79.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="EC" data-layer="FRAME"/>
+<polyline points="64.600,28.715 64.600,29.831" fill="none" stroke="#000" stroke-width="0.06" data-handle="EE" data-layer="FRAME"/>
+<polyline points="58.600,30.946 79.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="F0" data-layer="FRAME"/>
+<polyline points="58.600,29.831 58.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="F1" data-layer="FRAME"/>
+<polyline points="79.600,29.831 79.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="F2" data-layer="FRAME"/>
+<polyline points="64.600,29.831 64.600,30.946" fill="none" stroke="#000" stroke-width="0.06" data-handle="F4" data-layer="FRAME"/>
+<polyline points="58.600,32.062 79.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="F6" data-layer="FRAME"/>
+<polyline points="58.600,30.946 58.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="F7" data-layer="FRAME"/>
+<polyline points="79.600,30.946 79.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="F8" data-layer="FRAME"/>
+<polyline points="64.600,30.946 64.600,32.062" fill="none" stroke="#000" stroke-width="0.06" data-handle="FA" data-layer="FRAME"/>
+<polyline points="58.600,33.177 79.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="FC" data-layer="FRAME"/>
+<polyline points="58.600,32.062 58.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="FD" data-layer="FRAME"/>
+<polyline points="79.600,32.062 79.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="FE" data-layer="FRAME"/>
+<polyline points="64.600,32.062 64.600,33.177" fill="none" stroke="#000" stroke-width="0.06" data-handle="100" data-layer="FRAME"/>
+<polyline points="58.600,34.292 79.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="102" data-layer="FRAME"/>
+<polyline points="58.600,33.177 58.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="103" data-layer="FRAME"/>
+<polyline points="79.600,33.177 79.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="104" data-layer="FRAME"/>
+<polyline points="64.600,33.177 64.600,34.292" fill="none" stroke="#000" stroke-width="0.06" data-handle="106" data-layer="FRAME"/>
+<polyline points="58.600,35.408 79.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="108" data-layer="FRAME"/>
+<polyline points="58.600,34.292 58.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="109" data-layer="FRAME"/>
+<polyline points="79.600,34.292 79.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="10A" data-layer="FRAME"/>
+<polyline points="64.600,34.292 64.600,35.408" fill="none" stroke="#000" stroke-width="0.06" data-handle="10C" data-layer="FRAME"/>
+<polyline points="58.600,36.523 79.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="10E" data-layer="FRAME"/>
+<polyline points="58.600,35.408 58.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="10F" data-layer="FRAME"/>
+<polyline points="79.600,35.408 79.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="110" data-layer="FRAME"/>
+<polyline points="64.600,35.408 64.600,36.523" fill="none" stroke="#000" stroke-width="0.06" data-handle="112" data-layer="FRAME"/>
+<polyline points="58.600,37.638 79.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="114" data-layer="FRAME"/>
+<polyline points="58.600,36.523 58.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="115" data-layer="FRAME"/>
+<polyline points="79.600,36.523 79.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="116" data-layer="FRAME"/>
+<polyline points="64.600,36.523 64.600,37.638" fill="none" stroke="#000" stroke-width="0.06" data-handle="118" data-layer="FRAME"/>
+<polyline points="58.600,38.754 79.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="11A" data-layer="FRAME"/>
+<polyline points="58.600,37.638 58.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="11B" data-layer="FRAME"/>
+<polyline points="79.600,37.638 79.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="11C" data-layer="FRAME"/>
+<polyline points="64.600,37.638 64.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="11E" data-layer="FRAME"/>
+<polyline points="58.600,38.754 79.600,38.754" fill="none" stroke="#000" stroke-width="0.06" data-handle="120" data-layer="FRAME"/>
+<polyline points="58.600,39.869 79.600,39.869" fill="none" stroke="#000" stroke-width="0.06" data-handle="121" data-layer="FRAME"/>
+<polyline points="58.600,38.754 58.600,39.869" fill="none" stroke="#000" stroke-width="0.06" data-handle="122" data-layer="FRAME"/>
+<polyline points="79.600,38.754 79.600,39.869" fill="none" stroke="#000" stroke-width="0.06" data-handle="123" data-layer="FRAME"/>
+<polyline points="58.600,40.985 79.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="125" data-layer="FRAME"/>
+<polyline points="58.600,39.869 58.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="126" data-layer="FRAME"/>
+<polyline points="79.600,39.869 79.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="127" data-layer="FRAME"/>
+<polyline points="60.600,39.869 60.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="129" data-layer="FRAME"/>
+<polyline points="64.600,39.869 64.600,40.985" fill="none" stroke="#000" stroke-width="0.06" data-handle="12B" data-layer="FRAME"/>
+<polyline points="58.600,42.100 79.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="12D" data-layer="FRAME"/>
+<polyline points="58.600,40.985 58.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="12E" data-layer="FRAME"/>
+<polyline points="79.600,40.985 79.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="12F" data-layer="FRAME"/>
+<polyline points="60.600,40.985 60.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="130" data-layer="FRAME"/>
+<polyline points="64.600,40.985 64.600,42.100" fill="none" stroke="#000" stroke-width="0.06" data-handle="131" data-layer="FRAME"/>
+<text x="50.850" y="6.600" font-size="0.600">IC</text>
+<text x="28.100" y="11.000" font-size="0.500">V-1</text>
+<text x="10.100" y="17.200" font-size="0.500">V-2</text>
+<text x="35.100" y="28.000" font-size="0.500">V-3</text>
+<text x="34.600" y="9.600" font-size="0.600">SPRAY HEAD (TYP.)</text>
+<text x="18.600" y="27.200" font-size="0.600">TREE BUBBLER ×1 PER TREE</text>
+<text x="11.600" y="23.800" font-size="0.500">DRIP LINE @0.4 M (AZALEA BED)</text>
+<text x="40.600" y="7.600" font-size="0.600">DRIP LINE (HEDGE)</text>
+<text x="59.600" y="4.500" font-size="0.800">IRRIGATION LEGEND</text>
+<text x="64.600" y="6.400" font-size="0.550">SPRAY HEAD, POP-UP</text>
+<text x="64.600" y="8.200" font-size="0.550">SOLENOID VALVE</text>
+<text x="64.600" y="10.000" font-size="0.550">TREE BUBBLER</text>
+<text x="64.600" y="11.800" font-size="0.550">PE MAINLINE 32 mm</text>
+<text x="64.600" y="13.600" font-size="0.550">DRIP LINE 16 mm</text>
+<text x="58.800" y="28.383" font-size="0.450">PROJECT</text>
+<text x="64.800" y="28.383" font-size="0.450">Greenfield Residences</text>
+<text x="58.800" y="29.498" font-size="0.450">WORKS</text>
+<text x="64.800" y="29.498" font-size="0.450">Landscape over basement slab</text>
+<text x="58.800" y="30.613" font-size="0.450">TITLE</text>
+<text x="64.800" y="30.613" font-size="0.450">Irrigation Plan</text>
+<text x="58.800" y="31.729" font-size="0.450">DRAWING NO.</text>
+<text x="64.800" y="31.729" font-size="0.450">L-7</text>
+<text x="58.800" y="32.844" font-size="0.450">SCALE</text>
+<text x="64.800" y="32.844" font-size="0.450">1:200</text>
+<text x="58.800" y="33.960" font-size="0.450">SITE AREA</text>
+<text x="64.800" y="33.960" font-size="0.450">1,500 m²</text>
+<text x="58.800" y="35.075" font-size="0.450">BUILDING COVERAGE</text>
+<text x="64.800" y="35.075" font-size="0.450">40%</text>
+<text x="58.800" y="36.190" font-size="0.450">GROUND</text>
+<text x="64.800" y="36.190" font-size="0.450">ARTIFICIAL GROUND</text>
+<text x="58.800" y="37.306" font-size="0.450">REV</text>
+<text x="64.800" y="37.306" font-size="0.450">A</text>
+<text x="58.800" y="38.421" font-size="0.450">DATE</text>
+<text x="64.800" y="38.421" font-size="0.450">2026-09-18</text>
+<text x="58.900" y="39.537" font-size="0.450">REVISIONS</text>
+<text x="58.800" y="40.652" font-size="0.450">A</text>
+<text x="60.800" y="40.652" font-size="0.450">2026-09-18</text>
+<text x="64.800" y="40.652" font-size="0.450">ISSUED FOR REVIEW</text>
+</svg>

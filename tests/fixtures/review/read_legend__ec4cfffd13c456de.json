@@ -1,0 +1,62 @@
+{
+ "call": "read_legend",
+ "image_sha256": "e3013e7900436f9dc3cf8ed155c0af9914dca5d7560ec4375bf1c500a26bb06a",
+ "content_key": "b1dbe81026c2e5cab8ea14a04b4d9fc84fad30c79a5499638040aedb46ea1db0:legend|p=4e2b3bb1",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:23:43+00:00",
+ "seconds": 5.48,
+ "usage": {
+  "completion_tokens": 562,
+  "prompt_tokens": 536,
+  "total_tokens": 1098,
+  "completion_tokens_details": {
+   "reasoning_tokens": 494
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 369
+  }
+ },
+ "prompt": "This image is the legend box cropped from a coloured landscape plan. For each entry in it (a filled swatch, a plant symbol or a line, with the text that keys it) return: swatch_colour_word, the colour you see in the swatch as one or two plain English colour words that an image segmentation model could be prompted with to find areas of that colour on the plan (for example 'beige', 'light grey', 'dark green'), never the material's name; label, the text the entry keys, exactly as written; kind, 'area' for a filled rectangle that keys a paved or planted area, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip that keys a hedge or an edge. Skip the legend's own title.",
+ "result": [
+  {
+   "kind": "area",
+   "label": "RI YEDDO HAWTHORN",
+   "swatch_colour_word": "light green"
+  },
+  {
+   "kind": "line",
+   "label": "DU DURANTA",
+   "swatch_colour_word": "dark green"
+  }
+ ],
+ "response_id": "chatcmpl-01a1a0ef-a81c-72d6-8b38-295c1c0233c5",
+ "raw": {
+  "id": "chatcmpl-01a1a0ef-a81c-72d6-8b38-295c1c0233c5",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"swatches\": [{\"kind\": \"area\", \"label\": \"RI YEDDO HAWTHORN\", \"swatch_colour_word\": \"light green\"}, {\"kind\": \"line\", \"label\": \"DU DURANTA\", \"swatch_colour_word\": \"dark green\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701423,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 562,
+   "prompt_tokens": 536,
+   "total_tokens": 1098,
+   "completion_tokens_details": {
+    "reasoning_tokens": 494
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 369
+   }
+  }
+ }
+}

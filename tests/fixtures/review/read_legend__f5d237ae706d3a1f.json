@@ -1,0 +1,67 @@
+{
+ "call": "read_legend",
+ "image_sha256": "663532206c72bb08036f08b1595c8b2e79d4a6237b63436a519d6d6b4856b9f2",
+ "content_key": "17eb01df73d0579a32b32da7583ed776ef97f6e1b21b63d963450ea33b1c576b:legend|p=4e2b3bb1",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:24:57+00:00",
+ "seconds": 5.35,
+ "usage": {
+  "completion_tokens": 506,
+  "prompt_tokens": 570,
+  "total_tokens": 1076,
+  "completion_tokens_details": {
+   "reasoning_tokens": 403
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 497
+  }
+ },
+ "prompt": "This image is the legend box cropped from a coloured landscape plan. For each entry in it (a filled swatch, a plant symbol or a line, with the text that keys it) return: swatch_colour_word, the colour you see in the swatch as one or two plain English colour words that an image segmentation model could be prompted with to find areas of that colour on the plan (for example 'beige', 'light grey', 'dark green'), never the material's name; label, the text the entry keys, exactly as written; kind, 'area' for a filled rectangle that keys a paved or planted area, 'symbol' for a plant symbol such as a tree, 'line' for a line or strip that keys a hedge or an edge. Skip the legend's own title.",
+ "result": [
+  {
+   "kind": "area",
+   "label": "PV-1 PERMEABLE PAVERS",
+   "swatch_colour_word": "beige"
+  },
+  {
+   "kind": "area",
+   "label": "PV-2 EXPOSED AGGREGATE",
+   "swatch_colour_word": "light grey"
+  },
+  {
+   "kind": "area",
+   "label": "PV-3 GRASS PAVERS",
+   "swatch_colour_word": "grey"
+  }
+ ],
+ "response_id": "chatcmpl-01a1a0f0-cb67-7701-a06c-bf552bbcd64b",
+ "raw": {
+  "id": "chatcmpl-01a1a0f0-cb67-7701-a06c-bf552bbcd64b",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"swatches\": [{\"kind\": \"area\", \"label\": \"PV-1 PERMEABLE PAVERS\", \"swatch_colour_word\": \"beige\"}, {\"kind\": \"area\", \"label\": \"PV-2 EXPOSED AGGREGATE\", \"swatch_colour_word\": \"light grey\"}, {\"kind\": \"area\", \"label\": \"PV-3 GRASS PAVERS\", \"swatch_colour_word\": \"grey\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701497,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 506,
+   "prompt_tokens": 570,
+   "total_tokens": 1076,
+   "completion_tokens_details": {
+    "reasoning_tokens": 403
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 497
+   }
+  }
+ }
+}

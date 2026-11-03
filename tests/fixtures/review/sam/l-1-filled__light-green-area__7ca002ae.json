@@ -1,0 +1,77 @@
+{
+ "image": "L-1 filled",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:24:49+00:00",
+ "seconds": 3.06,
+ "image_sha256": "7ca002ae54c31abfce584c2459b3402fea02041faeec01a49e6bc7de55d1c363",
+ "image_px": [
+  2100,
+  1140
+ ],
+ "error": null,
+ "raw_output_chars": 2540,
+ "raw_output": "<0f>0<|box;x1=327;y1=99;x2=509;y2=281;w=2100;h=1140;c=0.7104072570800781|><|mask;x=0;y=0;c=0.7104072570800781;data=183,183,!!!!#@C.GYi`uxG6#vO[Ed'qY__bytyXx1LOQ6:zUAZe{c(T{zOLv=]O.Jak'et79ndZl$ScnQZ9Ee&TGWhg(&h(E_NP0L^fx6Al'fI.JPDXy$Gv.4ufYp&ws&pUCS23yTGUWz&s5^VG&ntP/|>,1<|box;x1=419;y1=747;x2=518;y2=846;w=2100;h=1140;c=0.7575758099555969|><|mask;x=0;y=0;c=0.7575758099555969;data=100,100,!!!!!lD]mqbihVKJd{l^yhkIc.NxY&)^(S5a2@Y_Fi!o=yY7E!Z%lNHXPrA{2U*i!K't6O!Izc?JFTo`PIUuCm`lu(-!!|>,2<|box;x1=924;y1=747;x2=1024;y2=846;w=2100;h=1140;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=100,101,!!!!!jD]n1t4Zzvb%=j7Xk(!V+8T'60CR`waTA2Gp'orUStAWM'3Z[MMn'C@QI:#.=gcz:`Z-@l?O6/c^#*V=EKY@H|>,3<|box;x1=545;y1=747;x2=645;y2=845;w=2100;h=1140;c=0.7419355511665344|><|mask;x=0;y=0;c=0.7419355511665344;data=99,101,!!!!!hD]nLc[W!r$sozbkq@78Mh/jcflh!G/Te?XrW=xgg%OnIa2mffs/czh=^b'WhoGtSO^02A!ki2p^f%idzOi|>,4<|box;x1=673;y1=746;x2=771;y2=846;w=2100;h=1140;c=0.7575758099555969|><|mask;x=0;y=0;c=0.7575758099555969;data=101,99,!!!!!lDKL*e*'HR44v2/aG:rcnLOdLb:qT5sekAB90quhEBb{X?3Fzdf!`4/M)Q@6^5Luk4d6N+=H_-+uG:p./^K9wi!!|>,5<|box;x1=1051;y1=747;x2=1150;y2=845;w=2100;h=1140;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=99,100,!!!!!jDg5+8MCt2ckOkZ.WFq.`:H(UN_t5#'9s4X@[q[kZP!qdE`'I&]szCx2lp0@?R@NTLdD{IxnM?:J#Y.EIXP9h|>,6<|box;x1=1517;y1=138;x2=1616;y2=237;w=2100;h=1140;c=0.7264957427978516|><|mask;x=0;y=0;c=0.7264957427978516;data=100,100,!!!!!lDg4mFTcVAzpb.MVLOrEsDfjG&CT0_9WOLLTP%FxRT&^4*x6T2/XP6vzR17j!Fxsak(vAvoSNckx7%J?(9-N+E!!|>,7<|box;x1=798;y1=747;x2=897;y2=846;w=2100;h=1140;c=0.7500000596046448|><|mask;x=0;y=0;c=0.7500000596046448;data=100,100,!!!!!kD]mUrA{EdM]@e/kN?ySGGR-ag&?xj+=)*+{NA&E=4+p?Vk]E8Us-3`L#?S-Ln[$[4W2{xED9xrRDaboF7B7IS|>,8<|box;x1=1075;y1=888;x2=1175;y2=987;w=2100;h=1140;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=100,101,!!!!!nDSvB[/y9Ve4/TPwnIGA:W:(2v%iX19uP#yU^24Od@+TRdLtnm0CwAyo=bt2TZ5wBX+8z:6xb@8bj-*l56mYfoZFz:|>,9<|box;x1=771;y1=317;x2=1075;y2=569;w=2100;h=1140;c=0.8083832263946533|><|mask;x=0;y=0;c=0.8083832263946533;data=253,305,!!!!!bHPV&]tBFrA[*6/z4R*iOAgxxrvK^o]jNE2zk`:G39YFp2Kt5DrIcb_$KoZV-cf9xYg?w*4ID(_|>,10<|box;x1=1516;y1=258;x2=1618;y2=294;w=2100;h=1140;c=0.719298243522644|><|mask;x=0;y=0;c=0.719298243522644;data=37,103,!!!!!6JA)Us$n&B.t*1ehk-4=Ucx*e|>,11<|box;x1=268;y1=292;x2=569;y2=644;w=2100;h=1140;c=0.859649121761322|><|mask;x=0;y=0;c=0.859649121761322;data=353,302,!!!!!X@LRZwP^PF'%&sIPDs(GnppA:/6Y.5-CQ]XlIvhX9VK{0*xf6?]hvg[L`m_7m!!!|>\n",
+ "response_id": "resp_6ae9b67036cd3089887d40ab",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b67036cd3089887d40ab",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701487.0,
+  "completed_at": 1793701488.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_4e8d7857-2c04-4c09-a291-8284dfbe4022",
+    "status": "completed",
+    "content_chars": 2540
+   }
+  ]
+ },
+ "sheet": "L-1",
+ "prompt_source": "spark_legend",
+ "legend": {
+  "colour": "light green",
+  "kind": "area",
+  "labels": [
+   "AZ AZALEA"
+  ],
+  "crop_px": [
+   1472,
+   71,
+   1965,
+   387
+  ],
+  "spark_call": "read_legend"
+ }
+}

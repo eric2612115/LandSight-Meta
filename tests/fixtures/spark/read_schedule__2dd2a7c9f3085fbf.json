@@ -1,0 +1,48 @@
+{
+ "call": "read_schedule",
+ "image_sha256": "5c834ccf02307d4cec65e603c574d0f91aefc9585bec191f290beda9d39f6177",
+ "content_key": "88a3211655b4c1a8fe14ed1842dd3a2b7a70ea5d1ce204fea1fadf292a1f2187:schedule",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:21:20+00:00",
+ "seconds": 7.26,
+ "usage": {
+  "completion_tokens": 867,
+  "prompt_tokens": 2430,
+  "total_tokens": 3297,
+  "completion_tokens_details": {
+   "reasoning_tokens": 685
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 2417
+  }
+ },
+ "result": {
+  "footer": "植栽表合計 喬木 8 株 / 圖面 8 株",
+  "rows": [
+   {
+    "qty": 8.0,
+    "spec": "米高徑10cm 樹高3.5m 冠幅1.5m",
+    "species": "樟樹",
+    "unit": "株"
+   },
+   {
+    "qty": 182.0,
+    "spec": "樹高0.6m @0.3m 雙排",
+    "species": "金露花",
+    "unit": "株"
+   },
+   {
+    "qty": 150.0,
+    "spec": "4株/m²",
+    "species": "杜鵑",
+    "unit": "m²"
+   },
+   {
+    "qty": 200.0,
+    "spec": "",
+    "species": "草皮",
+    "unit": "m²"
+   }
+  ]
+ }
+}

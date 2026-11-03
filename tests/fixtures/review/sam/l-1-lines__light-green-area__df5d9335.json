@@ -1,0 +1,64 @@
+{
+ "image": "L-1 lines",
+ "prompt": "light green area",
+ "model": "sam-3.1",
+ "recorded_at": "2026-11-03T10:21:57+00:00",
+ "seconds": 1.31,
+ "image_sha256": "df5d9335cfa8130fd77610c48dc89aae5accca1b48ce4907ce23c7c8f520a087",
+ "image_px": [
+  2100,
+  1633
+ ],
+ "error": null,
+ "raw_output_chars": 0,
+ "raw_output": "",
+ "response_id": "resp_6ae9b5c48dbf6063def3439e",
+ "envelope": {
+  "metadata": {
+   "mask_encoding": "one_bit",
+   "include_confidence": "true"
+  },
+  "top_logprobs": 0,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "service_tier": "auto",
+  "model": "sam-3.1",
+  "background": false,
+  "tools": [],
+  "tool_choice": "auto",
+  "truncation": "disabled",
+  "id": "resp_6ae9b5c48dbf6063def3439e",
+  "object": "response",
+  "status": "completed",
+  "created_at": 1793701316.0,
+  "completed_at": 1793701316.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "usage": {
+   "input_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens": 0,
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   },
+   "total_tokens": 0,
+   "images_processed": 1
+  },
+  "parallel_tool_calls": true,
+  "store": true,
+  "output": [
+   {
+    "type": "message",
+    "id": "msg_24a30936-305c-435f-99da-774cb318555c",
+    "status": "completed",
+    "content_chars": 0
+   }
+  ]
+ },
+ "sheet": "L-1-revB",
+ "prompt_source": "spark_legend",
+ "control_of": "L-1 filled"
+}

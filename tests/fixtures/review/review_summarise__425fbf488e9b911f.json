@@ -1,0 +1,66 @@
+{
+ "call": "review_summarise",
+ "image_sha256": "",
+ "content_key": "doc:1bca8b32467a2b04a7790bde4326092ecefc950578775c1a01d23693ac7aab2e|p=784ca302",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-02T21:11:40+00:00",
+ "seconds": 5.44,
+ "usage": {
+  "completion_tokens": 795,
+  "prompt_tokens": 725,
+  "total_tokens": 1520,
+  "completion_tokens_details": {
+   "reasoning_tokens": 577
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 241
+  }
+ },
+ "prompt": "Below is the text of a document found in a landscape drawing package (extracted from a PDF). Classify it: 'spec' (a standard or specification that sets rules, dimensions or measurement methods), 'quote' (a supplier's priced quotation), 'bill' (a bill of quantities) or 'document' (anything else: meeting notes, review comments, checklists, letters). Give its title as written, a one-sentence summary, up to six key facts a reviewer pricing the landscape works must know (keep numbers exactly as written), and, if the document lists documents or deliverables, each one with its status as written (for example 'required'). Confidence from 0 to 1; why in one sentence.\n\n--- document text ---\nTree pit guide — shallow roots\nDeveloper's guide for tree pits, shallow-rooted species · document TPG-S · 2026 edition\n(sample)\n1. Scope\nApplies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade\nor on artificial ground (podium over a basement slab, roof).\n2. Minimum dimensions\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\n3. Construction\n•  Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth\n   above.\n•  Root ball top level with the finished soil surface; three timber stakes per tree.\n•  On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a\n   small tree (Gi 1.0 instead of 1.5).\n4. All guides\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\nMedium\n2.0 x 2.0 m (4.0\nm²)\n1.0 m\n1.2 m\n100 mm\nDeep-rooted\n2.0 x 2.0 m (4.0\nm²)\n1.5 m\n1.5 m\n150 mm\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1\n",
+ "result": {
+  "confidence": 0.95,
+  "key_facts": [
+   "Applies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade or on artificial ground (podium over a basement slab, roof)",
+   "Shallow-rooted minimum pit: 1.5 x 1.5 m (2.25 m²)",
+   "Soil on artificial ground: 0.7 m",
+   "Soil on grade: 1.0 m",
+   "Drainage layer: 100 mm on waterproofed slab with filter fabric",
+   "Root ball top level with finished soil surface; three timber stakes per tree"
+  ],
+  "kind": "spec",
+  "required": [],
+  "summary": "Developer's guide TPG-S 2026 edition setting minimum dimensions and construction for shallow-rooted tree pits.",
+  "title": "Tree pit guide — shallow roots",
+  "why": "It sets rules and minimum dimensions for tree pit construction, which matches the spec definition."
+ },
+ "response_id": "chatcmpl-01a19e1a-85b6-71a3-b21c-bd28f9fbf3c3",
+ "raw": {
+  "id": "chatcmpl-01a19e1a-85b6-71a3-b21c-bd28f9fbf3c3",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"confidence\": 0.95, \"key_facts\": [\"Applies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade or on artificial ground (podium over a basement slab, roof)\", \"Shallow-rooted minimum pit: 1.5 x 1.5 m (2.25 m\\u00b2)\", \"Soil on artificial ground: 0.7 m\", \"Soil on grade: 1.0 m\", \"Drainage layer: 100 mm on waterproofed slab with filter fabric\", \"Root ball top level with finished soil surface; three timber stakes per tree\"], \"kind\": \"spec\", \"required\": [], \"summary\": \"Developer's guide TPG-S 2026 edition setting minimum dimensions and construction for shallow-rooted tree pits.\", \"title\": \"Tree pit guide \\u2014 shallow roots\", \"why\": \"It sets rules and minimum dimensions for tree pit construction, which matches the spec definition.\"}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793653900,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 795,
+   "prompt_tokens": 725,
+   "total_tokens": 1520,
+   "completion_tokens_details": {
+    "reasoning_tokens": 577
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 241
+   }
+  }
+ }
+}

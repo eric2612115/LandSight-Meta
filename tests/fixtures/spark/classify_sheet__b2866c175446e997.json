@@ -1,0 +1,24 @@
+{
+ "call": "classify_sheet",
+ "image_sha256": "45af44ae2546324d4a994c8a2dbde1750abec63ff984a2d00e110e4689b6088b",
+ "content_key": "037f8efd77f877559821e3445e7b58d9657cbdc9836a4f6aaf5494b3fe1d072e",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:22:28+00:00",
+ "seconds": 4.76,
+ "usage": {
+  "completion_tokens": 441,
+  "prompt_tokens": 3378,
+  "total_tokens": 3819,
+  "completion_tokens_details": {
+   "reasoning_tokens": 376
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 3313
+  }
+ },
+ "result": {
+  "confidence": 0.98,
+  "kind": "plan",
+  "why": "The sheet shows a top-down paving layout with north arrow, scale bar, and hatches titled 鋪面計畫圖."
+ }
+}

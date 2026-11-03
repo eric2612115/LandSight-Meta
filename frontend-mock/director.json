@@ -1,0 +1,256 @@
+[
+ {
+  "id": "drop",
+  "title": "The package lands",
+  "focus": [
+   "F-01",
+   "F-02",
+   "F-03",
+   "F-04",
+   "F-05",
+   "F-06",
+   "F-07",
+   "F-08",
+   "F-09",
+   "F-10",
+   "F-11",
+   "F-12",
+   "F-13",
+   "F-14",
+   "F-15",
+   "F-16",
+   "F-17",
+   "F-18",
+   "F-19",
+   "F-20",
+   "F-21",
+   "F-22",
+   "F-23",
+   "F-24",
+   "F-25",
+   "F-26",
+   "F-27",
+   "F-28",
+   "F-29",
+   "F-30"
+  ],
+  "file_count": 30,
+  "check_ids": [
+   "E27",
+   "E28",
+   "E28.2",
+   "E25",
+   "C-05",
+   "E26",
+   "E27.2",
+   "E29",
+   "E22"
+  ],
+  "item_ids": [],
+  "duration_s": 19
+ },
+ {
+  "id": "wake",
+  "title": "The drawing wakes up",
+  "sheet_id": "L-1-revB",
+  "focus": [
+   "T-01",
+   "T-02",
+   "T-03",
+   "T-04",
+   "T-05",
+   "T-06",
+   "T-07",
+   "T-08",
+   "H-01",
+   "B-01",
+   "L-01"
+  ],
+  "check_ids": [
+   "E01",
+   "E02"
+  ],
+  "item_ids": [
+   "I-01",
+   "I-02",
+   "I-03",
+   "I-04"
+  ],
+  "duration_s": 22
+ },
+ {
+  "id": "eye",
+  "title": "The eye",
+  "sheet_id": "L-1-revB",
+  "focus": [
+   "T-08"
+  ],
+  "check_ids": [
+   "E01"
+  ],
+  "item_ids": [
+   "I-01"
+  ],
+  "duration_s": 20
+ },
+ {
+  "id": "hedge",
+  "title": "Hedge math",
+  "sheet_id": "L-1-revB",
+  "focus": [
+   "H-01"
+  ],
+  "check_ids": [
+   "C-27",
+   "E07"
+  ],
+  "item_ids": [
+   "I-02"
+  ],
+  "duration_s": 14
+ },
+ {
+  "id": "colour",
+  "title": "Lines to colour",
+  "sheet_id": "L-3",
+  "sheet_ids": [
+   "L-3",
+   "L-1-revB"
+  ],
+  "focus": [
+   "X-01",
+   "P-01",
+   "P-02",
+   "P-03",
+   "E-01"
+  ],
+  "check_ids": [
+   "C-38",
+   "C-39",
+   "C-40",
+   "C-41",
+   "C-42",
+   "C-43",
+   "C-44",
+   "C-32",
+   "C-33",
+   "C-34",
+   "E01.2",
+   "C-36",
+   "C-37"
+  ],
+  "control_check_id": "C-39",
+  "item_ids": [
+   "I-01",
+   "I-03",
+   "I-04",
+   "I-05",
+   "I-06",
+   "I-07",
+   "I-08",
+   "S-01",
+   "S-02",
+   "S-03",
+   "S-04"
+  ],
+  "duration_s": 20
+ },
+ {
+  "id": "gauge",
+  "title": "The gauge, twice",
+  "sheet_id": "L-1-revB",
+  "sheet_ids": [
+   "L-1-revB",
+   "L-6"
+  ],
+  "focus": [
+   "T-05"
+  ],
+  "check_ids": [
+   "E14",
+   "E12"
+  ],
+  "item_ids": [
+   "I-01"
+  ],
+  "duration_s": 22
+ },
+ {
+  "id": "bill",
+  "title": "The bill, traced",
+  "sheet_id": "L-1-revB",
+  "focus": [
+   "T-01",
+   "T-02",
+   "T-03",
+   "T-04",
+   "T-05",
+   "T-06",
+   "T-07",
+   "T-08"
+  ],
+  "check_ids": [
+   "E02.2",
+   "E17",
+   "E20",
+   "E23",
+   "E21",
+   "E22",
+   "E19",
+   "E13",
+   "E22.2",
+   "C-64",
+   "C-65",
+   "C-66",
+   "C-67",
+   "E18"
+  ],
+  "amber_check_ids": [
+   "E02.2",
+   "E17",
+   "E20"
+  ],
+  "item_ids": [
+   "I-01",
+   "I-02"
+  ],
+  "duration_s": 24
+ },
+ {
+  "id": "callback",
+  "title": "Twelve, again",
+  "sheet_id": "L-2",
+  "sheet_ids": [
+   "L-2",
+   "L-1-revB",
+   "L-5"
+  ],
+  "focus": [
+   "R-01",
+   "R-02",
+   "R-03",
+   "R-04",
+   "R-05",
+   "R-06",
+   "R-07",
+   "R-08",
+   "T-01",
+   "T-02",
+   "T-03",
+   "T-04",
+   "T-05",
+   "T-06",
+   "T-07",
+   "T-08"
+  ],
+  "check_ids": [
+   "E04",
+   "E16",
+   "E02"
+  ],
+  "item_ids": [
+   "I-01"
+  ],
+  "duration_s": 16
+ }
+]

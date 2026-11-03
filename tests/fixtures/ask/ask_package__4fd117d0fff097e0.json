@@ -1,0 +1,84 @@
+{
+ "call": "ask_package",
+ "image_sha256": "",
+ "content_key": "ask:08ba04474739a7a6|p=d20db23f",
+ "model": "muse-spark-1.3",
+ "recorded_at": "2026-11-03T10:29:59+00:00",
+ "seconds": 14.82,
+ "usage": {
+  "completion_tokens": 1889,
+  "prompt_tokens": 3636,
+  "total_tokens": 5525,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1494
+  },
+  "prompt_tokens_details": {
+   "cached_tokens": 3569
+  }
+ },
+ "prompt": "A landscape design firm's owner is reviewing a developer's package before pricing the job and asks the question below. Answer from the numbered sources only: extracts of the package's own PDFs, its bill rows, its drawings' title blocks and sheet text, the regulation table, the firm's own price list and the checks the firm's review tool already ran; page images, when attached, are renders of the sources marked [image attached], in the order listed.\n- answer: English, one to four sentences, numbers exactly as the sources write them; say plainly when the sources do not settle the question, and what is missing.\n- citations: one per fact you used: file_id and page exactly as in that source's header, and quote, a short passage copied verbatim from that source's text (at most 30 words, no ellipsis).\n- proposed_actions: only what the answer supports; an empty list is fine. kind confirm_element (target_id an item id such as I-01; value the quantity to confirm), confirm_price (target_id a price-list code such as CC; value the installed range as low-high in NT$), regulation_note (target_id a check id such as E12, or a regulation id; value the note to attach), flag (target_id a check id, item id or file id; value what to raise with the developer). why: one sentence.\n- confidence from 0 to 1.\n\nQuestion: What soil depth does the spec require for trees on the slab?\n\nSources:\n[S1] file_id=F-09 page=1 · Tree pit guide - medium roots.pdf\nTree pit guide - medium roots.pdf page 1:\nTree pit guide — medium roots\nDeveloper's guide for tree pits, medium-rooted species · document TPG-M · 2026 edition\n(sample)\n1. Scope\nApplies to medium trees, e.g. Koelreuteria elegans subsp. formosana, planted on grade or on\nartificial ground (podium over a basement slab, roof).\n2. Minimum dimensions\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nMedium\n2.0 x 2.0 m (4.0\nm²)\n1.0 m\n1.2 m\n100 mm\n3. Construction\n• Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth\nabove.\n• Root ball top level with the finished soil surface; three timber stakes per tree.\n\n[S2] file_id=F-10 page=1 · Tree pit guide - shallow roots.pdf\nTree pit guide - shallow roots.pdf page 1:\nTree pit guide — shallow roots\nDeveloper's guide for tree pits, shallow-rooted species · document TPG-S · 2026 edition\n(sample)\n1. Scope\nApplies to small trees and palms, e.g. Lagerstroemia indica, Livistona chinensis, planted on grade\nor on artificial ground (podium over a basement slab, roof).\n2. Minimum dimensions\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\n3. Construction\n• Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth\nabove.\n• Root ball top level with the finished soil surface; three timber stakes per tree.\n\n[S3] file_id=F-08 page=1 · Tree pit guide - deep roots.pdf\nTree pit guide - deep roots.pdf page 1:\nTree pit guide — deep roots\nDeveloper's guide for tree pits, deep-rooted species · document TPG-D · 2026 edition\n(sample)\n1. Scope\nApplies to large broadleaf trees, e.g. Cinnamomum camphora (camphor), Bischofia javanica, planted\non grade or on artificial ground (podium over a basement slab, roof).\n2. Minimum dimensions\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nDeep-rooted\n2.0 x 2.0 m (4.0\nm²)\n1.5 m\n1.5 m\n150 mm\n3. Construction\n• Drainage layer on the waterproofed slab, filter fabric, then planting soil to the depth\nabove.\n• Root ball top level with the finished soil surface; three timber stakes per tree.\n\n[S4] file_id=rules page=0 · Regulation table (rules.json)\nRegulation national.artificial_ground.row3 (national): (Technical Specification for Building-Site Greening Design) §5 table 1 and its note; §6.3: Artificial ground minimums for (shrubs, vines): soil on a roof, balcony, terrace or facade 0.4 m; soil on other ground 0.5 m; minimum tree-pit area none m². Minimum soil depth and tree-pit area per plant type. Planting that misses these is not counted (§5: table 1 ). Source: https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf\n\n[S5] file_id=rules page=0 · Regulation table (rules.json)\nRegulation national.artificial_ground.row1 (national): (Technical Specification for Building-Site Greening Design) §5 table 1 and its note; §6.3: Artificial ground minimums for / (eco multi-layer, broadleaf large tree): soil on a roof, balcony, terrace or facade 1.0 m; soil on other ground 1.0 m; minimum tree-pit area 4.0 m². Minimum soil depth and tree-pit area per plant type. Planting that misses these is not counted (§5: table 1 ). Source: https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf\n\n[S6] file_id=rules page=0 · Regulation table (rules.json)\nRegulation national.artificial_ground.row2 (national): (Technical Specification for Building-Site Greening Design) §5 table 1 and its note; §6.3: Artificial ground minimums for (small tree, conifer, sparse-leaf, palm): soil on a roof, balcony, terrace or facade 0.7 m; soil on other ground 1.0 m; minimum tree-pit area 1.5 m². Minimum soil depth and tree-pit area per plant type. Planting that misses these is not counted (§5: table 1 ). Source: https://www.nlma.gov.tw/uploads/files/570f0fafb4e7fc5fd174a4f184618467.pdf\n\n[S7] file_id=rules page=0 · Regulation table (rules.json)\nGlossary: artificial ground: artificial ground (roof, balcony, terrace, facade, podium slab)\n\n[S8] file_id=run page=0 · Review check E12\nReview check E12 (regulation, flag, regulation): Tree pit 1.5 × 1.5 m = 2.25 m² on artificial ground: 7 large trees count as small (Gi 1.5 → 1.0). Muse Spark read the detail L-6: Plan dimensions 1500x1500, soil label PLANTING SOIL 1000mm (SOIL DEPTH 1.0M ON SLAB), and BASEMENT SLAB (ARTIFICIAL GROUND) with title ON SLAB confirm pit size, depth and slab condition. On artificial ground a large tree needs a 4.0 m² pit; one of 1.5–4 m² counts as a small tree. The schedule and the bill call them large trees. TCO2 241.9 → 197.1; the cheapest fix changes with it. Numbers: {\"pit_w_m\": 1.5, \"pit_l_m\": 1.5, \"soil_depth_m\": 1.0, \"on_slab\": \"yes\", \"pit_area_m2\": 2.25, \"trees_downgraded\": 7, \"provided_before\": 241.9, \"provided_after\": 197.1} Cites Technical Specification for Building-Site Greening Design, point 5, table 1 and its note: On artificial ground a large tree needs a pit of at least 4.0 m² and 1.0 m of soil; a large tree in a pit of 1.5–4 m² counts as a small tree (Gi 1.5 → 1.0); planting below the minimums is not counted.\n\n[S9] file_id=F-06 page=1 · Green Building Label - required documents.pdf\nGreen Building Label - required documents.pdf page 1:\nGreen Building Label — Required Documents\nGreenery indicator · checklist of documents to submit with the application · sample\nchecklist\nDocument\nStatus\nGreening quantity report (TCO2 calculation)\nrequired\nPlanting plan with every species named\nrequired\nPlant schedule with species, quantities, soil depth and pit\narea\nrequired\nTree pit and soil depth details for artificial ground\nrequired\nSite plan showing areas excluded from greening (fire-truck\nspace, driveways)\nrequired\nExisting tree survey and tree protection plan\nif existing trees are\naffected\nThe greening quantity report shows TCO2 = (ΣGi × Ai) × α against TCO2c = 0.5 × A′ × β (Building\n\n[S10] file_id=F-25 page=7 · Landscape Drawings (Full Set).pdf\nLandscape Drawings (Full Set).pdf page 7 (drawing L-6 Tree Pit Detail):\n1500\n1500\nROOT BALL Ø 0.6 M\nTREE PIT 1500 × 1500 · SOIL DEPTH 1000 · ON SLAB\nPIT AREA 2.25 m²\nPLAN 1:20\n1000\n1500\nTIMBER STAKES ×3\nMULCH 50 mm, FINISHED LEVEL +1.20\nCONCRETE KERB 150 mm\nPLANTING SOIL 1000 mm (SOIL DEPTH 1.0 M ON SLAB)\nFILTER FABRIC\nDRAINAGE LAYER 100 mm\nBASEMENT SLAB (ARTIFICIAL GROUND), WATERPROOFED\nSECTION A-A 1:20\nTREE PIT 1500 × 1500 · SOIL DEPTH 1000 · ON SLAB\nNOTES\n1. PIT 1500 × 1500 = 2.25 m².\n2. PLANTING SOIL 1.0 M ON THE BASEMENT SLAB.\n3. FOR ALL CC CAMPHOR ON THE PODIUM (L-1).\nPROJECT\nGreenfield Residences\nWORKS\nLandscape over basement slab\nTITLE\nTree Pit Detail\nDRAWING NO.\nL-6\nSCALE\n1:20\nSITE AREA\n1,500 m²\nBUILDING COVERAGE\n40%\nGROUND\nARTIFICIAL GROUND\nREV\nA\nDATE\n\n[S11] file_id=F-19 page=0 · L-6 Tree Pit Detail.dxf\nDrawing L-6 Tree Pit Detail (L-6 Tree Pit Detail.dxf): kind detail, revision A, date 2026-09-18, title-block scale 1:20, measured scale 1:20; not counted (detail sheet: read for the tree pit, not measured). Muse Spark read the detail: pit 1.5 x 1.5 m, soil 1.0 m, on slab True. Text on the sheet: 1500 | ROOT BALL Ø 0.6 M | TREE PIT 1500 × 1500 · SOIL DEPTH 1000 · ON SLAB | PIT AREA 2.25 m² | PLAN 1:20 | 1000 | TIMBER STAKES ×3 | MULCH 50 mm, FINISHED LEVEL +1.20 | CONCRETE KERB 150 mm | PLANTING SOIL 1000 mm (SOIL DEPTH 1.0 M ON SLAB) | FILTER FABRIC | DRAINAGE LAYER 100 mm | BASEMENT SLAB (ARTIFICIAL GROUND), WATERPROOFED | SECTION A-A 1:20 | NOTES | 1. PIT 1500 × 1500 = 2.25 m². | 2. PLANTING SOIL 1.0 M ON THE BASEMENT SLAB. | 3. FOR ALL CC CAMPHOR ON THE PODIUM (L-1). | PROJECT | Greenfield Residences | WORKS | Landscape over basement slab | TITLE | Tree Pit Detail | DRAWING NO. | L-6 | SCALE | 1:20 | SITE AREA | 1,500 m² | BUILDING COVERAGE | 40% | GROUND | ARTIFICIAL GROUND | REV | A | DATE | 2026-09-18 | REVISIONS | ISSUED FOR REVIEW\n\n[S12] file_id=run page=0 · Review check C-70\nReview check C-70 (info, info, document): Design Review — Issues: Record of the 2026-09-10 review meeting listing three landscape design issues to be resolved with the next drawing issue.. Key facts: review meeting 2026-09-10 for Greenfield Residences — landscape package; Trees on the podium: confirm tree pit size and soil depth on the basement slab against the greening standard before the permit set (Sheets L-1, L-6); Fire-truck access lane along the west boundary: keep the lane clear of planting; show its extent on the planting plan (Sheet L-1); Plant schedule and bill quantities must agree with the planting plan; the plan governs (Sheets L-4, bill); Actions assigned to Designer, Rev A and Developer with written response required with next issue of drawings; Sample document: synthetic, generated for the Landsight demo package. Not a real project record.\n\n[S13] file_id=F-05 page=1 · Design review notes.pdf\nDesign review notes.pdf page 1:\nDesign Review — Issues\nGreenfield Residences — landscape package · review meeting 2026-09-10 · drawings reviewed:\nprevious issue (before Rev A) · reviewer: sample reviewer\nNo.\nSheet\nIssue\nAction\n1\nL-1, L-6\nTrees on the podium: confirm the tree pit size and\nthe soil depth on the basement slab against the\ngreening standard before the permit set.\nDesigner, Rev A\n2\nL-1\nFire-truck access lane along the west boundary:\nkeep the lane clear of planting; show its extent on\nthe planting plan.\nDesigner, Rev A\n3\nL-4, bill\nPlant schedule and bill quantities must agree with\nthe planting plan; the plan governs.\nDeveloper\nPlease respond in writing with the next issue of the drawings.\n\n[S14] file_id=F-08 page=1 · Tree pit guide - deep roots.pdf\nTree pit guide - deep roots.pdf page 1:\n• On artificial ground the greening standard counts a large tree in a pit of 1.5–4 m² as a\nsmall tree (Gi 1.0 instead of 1.5).\n4. All guides\nRoots\nPit (min.)\nSoil on artificial\nground\nSoil on grade\nDrainage layer\nShallow-rooted\n1.5 x 1.5 m (2.25\nm²)\n0.7 m\n1.0 m\n100 mm\nMedium\n2.0 x 2.0 m (4.0\nm²)\n1.0 m\n1.2 m\n100 mm\nDeep-rooted\n2.0 x 2.0 m (4.0\nm²)\n1.5 m\n1.5 m\n150 mm\nSample document: synthetic, generated for the Landsight demo package. Not a real project record.\npage 1",
+ "result": {
+  "answer": "For deep-rooted trees such as Cinnamomum camphora the developer guide TPG-D requires 1.5 m soil on artificial ground, while the national standard requires 1.0 m and the L-6 detail for CC camphor shows SOIL DEPTH 1.0 M ON SLAB. The sources do not settle which depth governs the podium job.",
+  "citations": [
+   {
+    "file_id": "F-08",
+    "page": 1,
+    "quote": "Applies to large broadleaf trees, e.g. Cinnamomum camphora (camphor), Bischofia javanica, planted"
+   },
+   {
+    "file_id": "F-08",
+    "page": 1,
+    "quote": "Deep-rooted 2.0 x 2.0 m (4.0 m²) 1.5 m 1.5 m 150 mm"
+   },
+   {
+    "file_id": "rules",
+    "page": 0,
+    "quote": "soil on a roof, balcony, terrace or facade 1.0 m; soil on other ground 1.0 m; minimum tree-pit area 4.0 m²"
+   },
+   {
+    "file_id": "F-25",
+    "page": 7,
+    "quote": "PLANTING SOIL 1000 mm (SOIL DEPTH 1.0 M ON SLAB)"
+   }
+  ],
+  "confidence": 0.65,
+  "proposed_actions": [
+   {
+    "kind": "flag",
+    "target_id": "F-25",
+    "value": "L-6 shows 1.0 M on slab vs TPG-D 1.5 m for camphor – confirm governing soil depth with developer before pricing",
+    "why": "Drawing depth meets the regulation minimum but not the deep-root guide for the specified species."
+   }
+  ]
+ },
+ "response_id": "chatcmpl-01a1a0f5-654f-76a7-9c66-8db628b272ae",
+ "raw": {
+  "id": "chatcmpl-01a1a0f5-654f-76a7-9c66-8db628b272ae",
+  "choices": [
+   {
+    "finish_reason": "stop",
+    "index": 0,
+    "message": {
+     "content": "{\"answer\": \"For deep-rooted trees such as Cinnamomum camphora the developer guide TPG-D requires 1.5 m soil on artificial ground, while the national standard requires 1.0 m and the L-6 detail for CC camphor shows SOIL DEPTH 1.0 M ON SLAB. The sources do not settle which depth governs the podium job.\", \"citations\": [{\"file_id\": \"F-08\", \"page\": 1, \"quote\": \"Applies to large broadleaf trees, e.g. Cinnamomum camphora (camphor), Bischofia javanica, planted\"}, {\"file_id\": \"F-08\", \"page\": 1, \"quote\": \"Deep-rooted 2.0 x 2.0 m (4.0 m\\u00b2) 1.5 m 1.5 m 150 mm\"}, {\"file_id\": \"rules\", \"page\": 0, \"quote\": \"soil on a roof, balcony, terrace or facade 1.0 m; soil on other ground 1.0 m; minimum tree-pit area 4.0 m\\u00b2\"}, {\"file_id\": \"F-25\", \"page\": 7, \"quote\": \"PLANTING SOIL 1000 mm (SOIL DEPTH 1.0 M ON SLAB)\"}], \"confidence\": 0.65, \"proposed_actions\": [{\"kind\": \"flag\", \"target_id\": \"F-25\", \"value\": \"L-6 shows 1.0 M on slab vs TPG-D 1.5 m for camphor \\u2013 confirm governing soil depth with developer before pricing\", \"why\": \"Drawing depth meets the regulation minimum but not the deep-root guide for the specified species.\"}]}",
+     "refusal": null,
+     "role": "assistant"
+    },
+    "logprobs": null
+   }
+  ],
+  "created": 1793701799,
+  "model": "muse-spark-1.3",
+  "object": "chat.completion",
+  "usage": {
+   "completion_tokens": 1889,
+   "prompt_tokens": 3636,
+   "total_tokens": 5525,
+   "completion_tokens_details": {
+    "reasoning_tokens": 1494
+   },
+   "prompt_tokens_details": {
+    "cached_tokens": 3569
+   }
+  }
+ }
+}
