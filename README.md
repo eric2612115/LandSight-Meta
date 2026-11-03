@@ -22,6 +22,9 @@ uv run python -m landsight serve --port 8795
 cd frontend && npm ci && npm run dev
 ```
 
+(Port 8795 or 5195 already taken? See **Ports** under the full walkthrough: `serve --port 8796` in terminal 1,
+`VITE_API_PORT=8796 npm run dev` in terminal 2, and open the URL Vite prints.)
+
 Open **http://localhost:5195/try**, then either:
 
 - under "Try a sample:", click **Greenfield Residences** (site, 30 files) — or **Greenfield Tower**, which opens only
@@ -33,7 +36,8 @@ Open **http://localhost:5195/try**, then either:
 **No key needed** for the samples: their Muse Spark and SAM 3.1 answers are replayed from the recordings in
 `tests/fixtures/review/`, `tests/fixtures/review/sam/` and `tests/fixtures/ask/`, offline, and so are the recorded
 questions to the package. Dropping the sample folder replays the same recordings, because they are keyed by file
-content. Without terminal 1 the Greenfield sample still opens, from the recorded copy in `frontend-mock/`.
+content. In Review, the Ask tab lists the six recorded questions on the Greenfield package; click one for an answer
+with its sources. Without terminal 1 the Greenfield sample still opens, from the recorded copy in `frontend-mock/`.
 
 **Needs `MODEL_API_KEY`** (the Meta Model API key, read from the API's environment only; set it in terminal 1
 before `serve`, never in a file):
@@ -88,8 +92,8 @@ docs/STACK.md has the live pass, the calls and the cost.
 
 | Model | What it does here | Calls on the sample package |
 |---|---|---|
-| **Muse Spark 1.3** (`muse-spark-1.3`) | Every reading call: each sheet's kind, discipline, title block and drawing index (`review_classify_sheet`, 22); each text PDF summarised and classified (`review_summarise`, 7); the two pasted images (`review_look_image`, 2); bill rows aligned to drawing items with a confidence (`review_align`, 1); the plant schedule (`read_schedule`, 1); the open outline T-08, with grounding points (`group_and_read`, 2); the tree-pit detail L-6 (`read_detail`, 1); the legend colours of L-1 and L-3 (`read_legend`, 2); the raster Presentation Plan's legend, labels and scale bar (`review_read_raster_plan`, 1); questions put to the package (`ask_package`, one per question) | 39, 144.9 s of call time |
-| **SAM 3.1** (`sam-3.1`) | Colour prompts written from Muse Spark's legend read ("beige area" for PV-1 PERMEABLE PAVERS) on the coloured renders of L-1 and L-3, each mask typed by the outline it lies in; the controlled test: the same words on the line drawing (0 masks); the beds, lawn and lane measured on the raster Presentation Plan (no CAD behind it), each region typed by the label written inside it | 12, 24.9 s |
+| **Muse Spark 1.3** (`muse-spark-1.3`) | Every reading call: each sheet's kind, discipline, title block and drawing index (`review_classify_sheet`, 22); each text PDF summarised and classified (`review_summarise`, 7); the two pasted images (`review_look_image`, 2); bill rows aligned to drawing items with a confidence (`review_align`, 1); the plant schedule (`read_schedule`, 1); the open outline T-08, with grounding points (`group_and_read`, 2); the tree-pit detail L-6 (`read_detail`, 1); the legend colours of L-1 and L-3 (`read_legend`, 2); the raster Presentation Plan's legend, labels and scale bar (`review_read_raster_plan`, 1); questions put to the package (`ask_package`, one per question) | 39, 267.9 s of call time |
+| **SAM 3.1** (`sam-3.1`) | Colour prompts written from Muse Spark's legend read ("beige area" for PV-1 PERMEABLE PAVERS) on the coloured renders of L-1 and L-3, each mask typed by the outline it lies in; the controlled test: the same words on the line drawing (0 masks); the beds, lawn and lane measured on the raster Presentation Plan (no CAD behind it), each region typed by the label written inside it | 12, 23.2 s |
 | **Recorded fixtures** | Every answer above was recorded from a real call (`tests/fixtures/review/`, `tests/fixtures/review/sam/`, `tests/fixtures/ask/`) and is replayed by default, offline, in about 10 s; `?live=1` (API) or `--live` (CLI) asks for what is not recorded; `--live --fresh N` (or `all`) re-asks recorded calls and prints the new response ids without touching the recordings (docs/STACK.md) | |
 
 ## Full walkthrough: CLI, tests and the review desk
@@ -132,7 +136,7 @@ What each step shows: `package` writes the 30-file package, the firm's price lis
 an earlier copy in the same folder); `review` prints every file verdict, the 22 sheets it read (20 DXF and vector
 PDF pages, 2 raster pages read for their title blocks), the 12 take-off items (8 from the CAD, 4 measured by SAM 3.1 on
 the raster plan, awaiting confirmation), 71 checks and the scoreboard line above;
-`pytest` runs the Python tests, all passing (about 1–2 minutes; the frontend's are `npm test` in frontend/); `serve` answers `GET /api/health` and prints its address only once
+`pytest` runs the Python tests, all passing (about 2–4 minutes; the frontend's are `npm test` in frontend/); `serve` answers `GET /api/health` and prints its address only once
 it is listening. Without the backend the screen falls back to `frontend-mock/` (the same Run, recorded); the corner
 toggle says which (`live`, `repo mock`).
 

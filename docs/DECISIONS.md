@@ -976,3 +976,15 @@ Chinese (demo/TRY-UI.md). Token discipline: no more writers' rooms or judge pane
 agent's half-done dark mode, cascade and i18n for the desk are stashed (`git stash list`), not finished. The developer's
 "pool in mid-air" is voiced as his example; the picture under it is the real finding E08 (a tree off the site) — no new
 check is built for it.
+
+## D-89 A judge's fresh clone: `serve` registers the samples, the PDF paginates, Ask offers the recorded questions — Proposed (2026-11-03)
+
+A walk of the README from a fresh clone (no `landsight.db`, no key) found three things the owner's own checkout hid.
+`landsight serve` now registers the bundled samples in landsight.db before it listens (`seed_db`, what `landsight db
+init` does, idempotent): without it "Try a sample" said "the API lists no samples/greenfield package". The change
+request's print stylesheet prints the report in normal flow on A4 landscape, light colours, one section a page: the
+fixed-position version printed one dark, clipped page. The quick review's Ask tab lists the six recorded questions on
+the Greenfield package (English, not in the film), so a judge without a key has questions that answer; a new question
+still answers "live mode needs MODEL_API_KEY". Also: the price-list chip opens in a new tab (the quick review keeps its
+place), the tower sample says 20 floors as the generator does, and the README's call times match the recordings
+(267.9 s Muse Spark, 23.2 s SAM 3.1). Trade-off: `serve` writes three package rows into a fresh database on start.

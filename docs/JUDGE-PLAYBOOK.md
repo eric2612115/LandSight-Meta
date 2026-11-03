@@ -45,13 +45,13 @@ planted 30 · found 28 · flagged 2 · missed 0 · false alarms 0
   outside the answer key: C-53 review Water retention (Art. 305)
   by scenario: quote 9/1/0 of 10 | regulation 4/1/0 of 5 | design 11/0/0 of 11 | format 4/0/0 of 4 (found/flagged/missed)
 
-39 Muse Spark calls (recorded), 144.91 s of calls; 12 SAM 3.1 calls (recorded), 24.89 s; …
+39 Muse Spark calls (recorded), 267.89 s of calls; 12 SAM 3.1 calls (recorded), 23.15 s; …
 ```
 
 ```bash
 uv run pytest -q
 ```
-The tests (about 1–2 minutes), all passing.
+The tests (about 2–4 minutes), all passing.
 
 ```bash
 uv run python -m landsight serve --port 8795
