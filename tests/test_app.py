@@ -48,7 +48,7 @@ def test_open_gives_the_eight_items(client):
     tree = run["items"][0]
     assert (tree["label"], tree["species_code"], tree["unit"]) == ("Camphor", "CC", "plant")
     assert (tree["geometry_count"], tree["spark_count"], tree["schedule_count"], tree["agreed"]) == (7, 8, 8, False)
-    assert tree["spark"]["crop_url"] == "/api/crops/I-01.png" and tree["spark"]["confidence"] == 0.95
+    assert tree["spark"]["crop_url"] == f"/api/crops/I-01.png?run={run['run_id']}" and tree["spark"]["confidence"] == 0.95
     assert [i["label"] for i in run["items"][1:]] == ["Duranta", "Azalea", "Lawn", "Grass pavers", "Exposed aggregate",
                                                       "Permeable pavers", "Planter edge"]
     assert [s["sheet_id"] for s in run["sheets"]] == ["L-1", "L-2", "L-3", "L-6"]

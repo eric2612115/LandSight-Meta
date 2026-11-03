@@ -255,7 +255,9 @@ class RunState:
         }
         if folder == M4_DIR and STANDIN_DETAIL.is_file():
             out["package"]["note"] = "the m4 synthetic site, plus a stand-in tree-pit detail L-6 until the sample package exists"
-        return deep(out)
+        from landsight.app.package import tag_urls
+
+        return tag_urls(deep(out), self.run_id)
 
     def _timing(self, sam) -> dict:
         """Wall time of this open, and every Meta call with its recorded time (fixtures carry the real call's seconds;

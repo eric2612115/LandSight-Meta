@@ -8,8 +8,9 @@
                                        "stale": true, or 202 {"status": "running"} when there is none yet
   POST /api/items/{item_id}/confirm    a person confirms a flagged item -> Item (an item every source already agreed
                                        on comes back with "confirmed": true and "note": "already agreed")
-  GET  /api/sheets/{sheet_id}.svg      the sheet as it prints (also .png, and .filled.png: the coloured render SAM saw)
-  GET  /api/crops/{item_id}.png        the exact image Muse Spark was sent for the item
+  GET  /api/sheets/{sheet_id}.svg      the sheet as it prints (also .png, and .filled.png: the coloured render SAM saw);
+                                       ?run=<run_id> any stored run (every URL inside a Run carries its own)
+  GET  /api/crops/{item_id}.png        the exact image Muse Spark was sent for the item (?run= as above)
   GET  /api/rules                      the regulation checks
   GET  /api/director                   the film's scenes, as pointers into the run
   GET  /api/run?scenario=quote         the last Run as one scenario sees it (its checks, its slice of the scoreboard)
@@ -35,19 +36,21 @@ landsight.db (LANDSIGHT_DB, else ./landsight.db; docs/API.md "Stable data"):
 from __future__ import annotations
 
 import threading
+from collections import OrderedDict
 from pathlib import Path
 
 from fastapi import Body, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 
-from landsight.app.package import PackageState
+from landsight.app.package import PackageState, tag_urls
 from landsight.app.run import VERSION, RunState
 from landsight.review import scenarios as SC
 
 PORT = 8795
 FRONTEND_ORIGINS = ["http://localhost:5195", "http://127.0.0.1:5195"]
 MEDIA = {"svg": "image/svg+xml", "png": "image/png", "filled.png": "image/png"}
+OPENED_RUNS = 3  # stored runs kept opened (rendered on demand) besides the current one
 
 
 def create_app(features: dict[str, bool] | None = None, db_path: str | Path | None = None) -> FastAPI:
@@ -70,6 +73,41 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         if st is None or (st is m4 and m4.takeoff is None) or (st is package and not package.opened):
             raise HTTPException(404, "no package opened: POST /api/package/open first")
         return st
+
+    opened: OrderedDict[str, PackageState] = OrderedDict()  # run_id -> its package, reviewed again from recordings
+    opening = threading.Lock()
+
+    def run_state(run_id: str):
+        """The state that renders a run's sheets and crops: no run_id, the current run (as before); the current
+        package's or m4's run by id; else the stored run's package, opened on first use (recorded calls, nothing written
+        to the database) and kept among the last OPENED_RUNS."""
+        if not run_id:
+            return need_run()
+        if package.opened and package.base["run_id"] == run_id:
+            return package
+        if m4.takeoff is not None and m4.run_id == run_id:
+            return m4
+        with opening:
+            if run_id in opened:
+                opened.move_to_end(run_id)
+                return opened[run_id]
+            c = conn()
+            try:
+                row = DBS.run_row(c, run_id)
+                folder = DBS.package(c, row["package_id"])["path"]
+            except KeyError as e:
+                raise HTTPException(404, str(e).strip("'")) from e
+            finally:
+                c.close()
+            st = PackageState()
+            try:
+                st.open(folder)
+            except ValueError as e:
+                raise HTTPException(404, f"run {run_id}: {e}") from e
+            opened[run_id] = st
+            while len(opened) > OPENED_RUNS:
+                opened.popitem(last=False)
+            return st
 
     @app.get("/")
     def root():
@@ -143,8 +181,8 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             raise HTTPException(404, f"no item {item_id}") from e
 
     @app.get("/api/sheets/{name}")
-    def sheet(name: str):
-        st = need_run()
+    def sheet(name: str, run: str = ""):
+        st = run_state(run)
         for kind in ("filled.png", "svg", "png"):
             if name.endswith("." + kind):
                 data = st.render(name[: -len(kind) - 1], kind)
@@ -154,8 +192,8 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         raise HTTPException(404, f"no sheet {name}")
 
     @app.get("/api/crops/{name}")
-    def crop(name: str):
-        st = need_run()
+    def crop(name: str, run: str = ""):
+        st = run_state(run)
         data = st.crop(name.removesuffix(".png")) if name.endswith(".png") else None
         if data is None:
             raise HTTPException(404, f"no crop {name}")
@@ -312,7 +350,7 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             return package.run() | {"stored": True, "current": True}
         c = conn()
         try:
-            return DBS.get_run(c, run_id)
+            return tag_urls(DBS.get_run(c, run_id), run_id)
         except KeyError as e:
             raise HTTPException(404, str(e).strip("'")) from e
         finally:

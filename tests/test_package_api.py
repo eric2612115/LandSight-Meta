@@ -54,7 +54,7 @@ def test_open_serves_the_package(api):
     assert [i["item_id"] for i in run["items"] if i.get("source") == "sam"] == ["S-01", "S-02", "S-03", "S-04"]
     tree = run["items"][0]
     assert (tree["geometry_count"], tree["spark_count"], tree["schedule_count"], tree["agreed"]) == (7, 8, 12, False)
-    assert tree["spark"]["crop_url"] == "/api/crops/I-01.png" and tree["spark"]["object_id"] == "T-08"
+    assert tree["spark"]["crop_url"] == f"/api/crops/I-01.png?run={run['run_id']}" and tree["spark"]["object_id"] == "T-08"
     assert tree["spark"]["points_status"] == "returned" and len(tree["spark"]["points"]) == 12
     e = run["errors"]
     assert (e["planted"], len(e["found"]), len(e["flagged"]), len(e["missed"]), len(e["false_alarms"])) == (30, 28, 2, 0, 0)
@@ -182,3 +182,29 @@ def test_m4_site_is_still_reachable():
     run = c.post("/api/package/open?site=m4").json()
     assert run["package"]["name"] == "m4 synthetic site" and len(run["items"]) == 8
     assert c.post("/api/package/open?site=elsewhere").status_code == 400
+
+
+def test_an_earlier_run_keeps_its_renders_and_crops_after_another_review():
+    """Every render and crop URL in a Run names its run: greenfield's still answer once the tower is the current run."""
+    from landsight.app.package import REPO
+
+    tower = REPO / "samples" / "tower"
+    if not tower.is_dir():
+        pytest.skip("samples/tower not generated")
+    c = TestClient(create_app())
+    green = c.post("/api/package/open").json()
+    pid = c.get("/api/projects").json()[0]["project_id"]
+    tid = c.post(f"/api/projects/{pid}/packages", json={"path": str(tower)}).json()["package_id"]
+    t = c.post(f"/api/packages/{tid}/review").json()
+    assert t["run_id"] != green["run_id"] and c.get("/api/run").json()["run_id"] == t["run_id"]
+    crop = next(i["spark"]["crop_url"] for i in green["items"] if i.get("spark"))
+    sheet = next(s for s in green["sheets"] if s["sheet_id"] == "L-1-revB")
+    assert crop.endswith(f"?run={green['run_id']}") and sheet["svg_url"].endswith(f"?run={green['run_id']}")
+    for url in (crop, sheet["svg_url"], sheet["png_url"]):
+        r = c.get(url)
+        assert r.status_code == 200, url
+    assert c.get(crop).content[:4] == b"\x89PNG" and "<svg" in c.get(sheet["svg_url"]).text
+    stored = c.get(f"/api/runs/{green['run_id']}").json()
+    assert c.get(stored["sheets"][0]["png_url"]).status_code == 200
+    assert c.get(f"/api/sheets/L-102.svg?run={t['run_id']}").status_code == 200
+    assert c.get("/api/crops/I-01.png?run=000000000000").status_code == 404

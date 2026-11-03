@@ -29,6 +29,24 @@ COLOURED_SHARE = 0.02  # a raster page is a coloured render when this share of i
 RASTER_REASON = "raster PDF page: no vectors, read for its title block only, not measured"
 
 
+ASSET_PATHS = ("/api/sheets/", "/api/crops/")
+
+
+def tag_urls(obj, run_id: str):
+    """Every sheet render and crop URL in a Run (or an Item) carries its own `?run=<run_id>`, so the image stays
+    reachable after another package becomes the current run. In place; returns `obj`."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if (k.endswith("_url") and isinstance(v, str) and v.startswith(ASSET_PATHS) and "?" not in v and run_id):
+                obj[k] = f"{v}?run={run_id}"
+            elif isinstance(v, (dict, list)):
+                tag_urls(v, run_id)
+    elif isinstance(obj, list):
+        for v in obj:
+            tag_urls(v, run_id)
+    return obj
+
+
 def _review(*a, **k):
     """landsight.review.review, looked up when called (a test slows a reopen down by replacing `review` here)."""
     return review(*a, **k)
@@ -235,7 +253,7 @@ class PackageState:
                 run = service.apply_confirmations(run, rows)
             service.apply_decisions(run, verdicts)  # each check's decision: confirm, dismiss or open
             run["package_id"] = self.package_id
-        return deep(run)
+        return tag_urls(deep(run), run["run_id"])
 
     def _raster_sheets(self, files: list[dict]) -> list[dict]:
         out = []
