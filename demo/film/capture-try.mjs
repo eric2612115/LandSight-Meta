@@ -33,7 +33,7 @@ const BASE = opt('base', 'http://localhost:5195')
 const SECONDS = opt('seconds', '')
 const W = 1920
 const H = 1080
-const URL_ = `${BASE}/try?director=1&sample=greenfield&scale=1&wait=1&mute=1&source=${SOURCE}`
+const URL_ = `${BASE}/try?director=1&sample=greenfield&scale=1&wait=1&mute=1&lang=en&theme=dark&source=${SOURCE}`
 
 const VCLOCK = readFileSync(join(HERE, 'lib', 'vclock.js'), 'utf8')
 const VITE_STUB = readFileSync(join(HERE, 'lib', 'vite-client-stub.js'), 'utf8')
