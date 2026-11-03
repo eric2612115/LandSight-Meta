@@ -112,6 +112,10 @@ CITES = {
                 "Technical Specification for Building-Site Greening Design, point 3.6 and table 2 note 2",
                 "An old tree (trunk at least 30 cm across at 1 m, or 20 years old) kept in place by the design counts "
                 "twice its actual canopy projection area; transplanted, it counts as a new tree."),
+    "BTR-92": (["national", "corridor_width", "cite"],
+               "Building Technical Regulations, Design and Construction Part, Art. 92",
+               "A corridor in a building whose rooms on one floor total 200 m² or more (100 m² below ground) needs a "
+               "clear width of at least 1.2 m, or 1.6 m where rooms open on both sides."),
     "TC-TREE-3": (["local", "protected_trees", "cite", 0],
                   "local City Tree Protection Self-Government Ordinance, Art. 3",
                   "A tree outside forestry land is protected if its diameter at 1.3 m is at least 0.8 m, its girth at "

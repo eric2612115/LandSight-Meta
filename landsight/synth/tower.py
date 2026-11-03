@@ -5,10 +5,10 @@ alike. `landsight package <dir> --tower` writes
       Greenfield Residences — Tower Landscape Package/
         Drawings/CAD/L-101 … L-501 (six sheets)      Bills/Tower landscape BOQ.xlsx
       firm price list.csv     the firm's list with the tower's rows (roof lawn, planter shrubs)
-      answer_key.json         T01–T08, each with its scenario
+      answer_key.json         T01–T10, each with its scenario
 
 A 20-floor tower. The ground floor L-101 is the v1 site drawn tidily (closed canopies, the schedule on the sheet, none
-of v1's thirty errors), so the tower's eight are the only ones planted:
+of v1's thirty errors), so the tower's ten are the only ones planted:
 
 T01 L-103 is one typical sky-garden sheet for four floors ("8F, 12F, 16F, 20F"): its quantities × 4.
 T02 L-104 roof (RF): lawn on 0.3 m soil (counts: the roof minimum is 0.1 m) and shrub planters on 0.3 m (below 0.4 m).
@@ -20,9 +20,15 @@ T06 the bill prices the sky-garden planters for one floor.
 T07 the roof lawn is billed at the ground lawn's price (a roof lawn needs a drainage layer).
 T08 L-102 and L-103 share their whole floor plate (outline, core, columns, planters): only the title block tells them
     apart.
+T09 L-102: a planter with its shrubs drawn over the lift shaft.
+T10 L-103: two planters inside the escape corridor leave 0.9 m of its 1.5 m clear, below the 1.2 m minimum; the sheet
+    stands for four floors, so the narrowing repeats on each.
 
 Floor plate (L-102, L-103, L-104): a 28 × 18 m tower block at (6, 9)–(34, 27) on the site's coordinates, a 7 × 6 m
-core, 14 columns; four 6 × 1.5 m sky-garden planters along the south face."""
+core, 14 columns; four 6 × 1.5 m sky-garden planters along the south face. On L-102 and L-103 the core is drawn as plans
+show it: the lift shaft (a rectangle with an X, layer A-CORE-LIFT) and the lift lobby inside the core, the escape stair
+east of it (A-CORE-STAIR, with its treads); L-103 adds the escape corridor from the lobby to the stair (walls on
+A-EGRESS)."""
 
 from __future__ import annotations
 
@@ -51,6 +57,13 @@ PLATE = (6.0, 9.0, 34.0, 27.0)
 CORE = (16.0, 14.0, 23.0, 20.0)
 COLUMNS = [(x, y) for x in (7.0, 13.5, 20.0, 26.5, 33.0) for y in (10.0, 18.0, 26.0) if (x, y) != (20.0, 18.0)]  # 14
 PLANTERS = [(x, 7.0, x + 6.0, 8.5) for x in (6.5, 13.5, 20.5, 27.5)]  # 4 × 9 m² on the south face
+LIFT = (16.0, 14.0, 18.5, 16.5)  # the lift shaft, in the core's south-west corner
+LOBBY = (16.0, 16.5, 23.0, 20.0)  # the lift lobby, opening east into the corridor
+STAIR = (28.0, 17.0, 31.0, 23.0)  # the escape stair, east of the core
+CORRIDOR = (23.0, 18.5, 28.0, 20.0)  # lobby to stair, 1.5 m between its walls
+LIFT_PLANTER = (15.0, 13.0, 18.0, 15.5)  # T09: 7.5 m², 3 m² of it over the lift shaft
+LIFT_SHRUBS = [(15.6, 13.6), (16.8, 13.6), (15.6, 14.9), (16.8, 14.9), (17.5, 14.25)]
+CORRIDOR_PLANTERS = [(23.5, 19.4, 25.5, 20.0), (25.8, 19.4, 27.8, 20.0)]  # T10: 0.9 m left of 1.5 m
 PODIUM_HEDGE_X, PODIUM_HEDGE_Y = (40.0, 40.4), (10.0, 25.0)  # 15 m, double row, east of the tower
 ROOF_LAWN = (7.5, 11.0, 15.0, 25.0)  # 105 m²
 ROOF_PLANTERS = [(25.0, 11.0, 32.0, 13.5), (25.0, 22.0, 32.0, 24.5)]  # 2 × 17.5 m²
@@ -62,16 +75,44 @@ PRICES = {"camphor": 6500, "duranta": 145, "azalea": 155, "lawn": 280, "podium":
           "roof_lawn": 280, "roof_shrub": 650, "pit": 6500, "soil": 750}
 
 
-def _plate(sh: S._Sheet, columns: bool = True, planters: bool = True) -> None:
+def _plate(sh: S._Sheet, columns: bool = True, planters: bool = True, core: bool = False) -> None:
     sh.poly(S._box_pts(PLATE), layer="ARCH", close=True)
     sh.poly(S._box_pts(CORE), layer="ARCH", close=True)
-    sh.text("CORE", CORE[0] + 2.0, CORE[1] + 2.7, 0.6)
+    if core:
+        _core(sh)
+    else:
+        sh.text("CORE", CORE[0] + 2.0, CORE[1] + 2.7, 0.6)
     if columns:
         for x, y in COLUMNS:
             sh.poly(S._box_pts((x - 0.4, y - 0.4, x + 0.4, y + 0.4)), layer="ARCH", close=True)
     if planters:
         for b in PLANTERS:
             sh.poly(S._box_pts(b), layer="PLANT", close=True)
+
+
+def _core(sh: S._Sheet) -> None:
+    """The lift shaft (a box with its X), the lift lobby and the escape stair (a box with its treads)."""
+    lift = sh.layer("A-CORE-LIFT")
+    sh.poly(S._box_pts(LIFT), layer=lift, close=True)
+    sh.line((LIFT[0], LIFT[1]), (LIFT[2], LIFT[3]), layer=lift)
+    sh.line((LIFT[0], LIFT[3]), (LIFT[2], LIFT[1]), layer=lift)
+    sh.text("LIFT", LIFT[0] + 0.15, LIFT[3] - 0.5, 0.35)
+    sh.poly(S._box_pts(LOBBY), layer=sh.layer("A-CORE-LOBBY"), close=True)
+    sh.text("LIFT LOBBY", LOBBY[0] + 2.6, LOBBY[1] + 2.4, 0.4)
+    stair = sh.layer("A-CORE-STAIR")
+    sh.poly(S._box_pts(STAIR), layer=stair, close=True)
+    y = STAIR[1] + 0.6
+    while y < STAIR[3] - 0.5:
+        sh.line((STAIR[0], y), (STAIR[2], y), layer=stair)
+        y = round(y + 0.4, 6)
+    sh.text("STAIR", STAIR[2] + 0.3, STAIR[1] + 2.8, 0.4)
+
+
+def _corridor(sh: S._Sheet) -> None:
+    egress = sh.layer("A-EGRESS")
+    for y in (CORRIDOR[1], CORRIDOR[3]):
+        sh.line((CORRIDOR[0], y), (CORRIDOR[2], y), layer=egress)
+    sh.text("ESCAPE CORRIDOR", CORRIDOR[0] + 0.2, CORRIDOR[3] + 0.3, 0.35)
 
 
 def _frame(sh: S._Sheet, number: str) -> None:
@@ -84,7 +125,8 @@ def _hatched(sh: S._Sheet, box, pattern: str, label: str, kind: str, note: str =
     pts = S._box_pts(box)
     sh.poly(pts, layer="PLANT", close=True)
     sh.hatch(pts, pattern, layer="HATCH")
-    sh.add(kind, label, S._box_centre(box), S._box_area(box), "m²", area_m2=S._box_area(box), footprint=S._fp(pts),
+    area = round(S._box_area(box), 4)
+    sh.add(kind, label, S._box_centre(box), area, "m²", area_m2=area, footprint=S._fp(pts),
            note=note)
 
 
@@ -100,9 +142,13 @@ def sheet_l102() -> S._Sheet:
     sh = S._Sheet("L-102", TITLES["L-102"], "1:200", "en", S.REV_A)
     sh.layer("ARCH")
     _frame(sh, "L-102")
-    _plate(sh)
+    _plate(sh, core=True)
     for b in PLANTERS:
         _hatched(sh, b, PATTERNS["RI"], "Yeddo hawthorn", "shrub_bed", "podium planter")
+    # T09: a planter and its shrubs drawn over the lift shaft
+    _hatched(sh, LIFT_PLANTER, PATTERNS["RI"], "Yeddo hawthorn", "shrub_bed", "podium planter drawn over the lift shaft")
+    for x, y in LIFT_SHRUBS:
+        sh.msp.add_circle((x, y), 0.3, dxfattribs={"layer": "PLANT"})
     sh.leader("RI typ.", 7.0, 4.6, (7.5, 7.3))
     S._legend(sh, 54, 21.5, 73, 31.5, [("swatch", "RI YEDDO HAWTHORN", PATTERNS["RI"]), ("hedge", "DU DURANTA", None)])
     for x in PODIUM_HEDGE_X:  # T05: the ground floor's hedge symbol and label, on the podium roof
@@ -120,9 +166,13 @@ def sheet_l103() -> S._Sheet:
     sh = S._Sheet("L-103", TITLES["L-103"], "1:200", "en", S.REV_A)
     sh.layer("ARCH")
     _frame(sh, "L-103")
-    _plate(sh)
+    _plate(sh, core=True)
+    _corridor(sh)
     for b in PLANTERS:
         _hatched(sh, b, PATTERNS["IC"], "Chinese ixora", "shrub_bed", f"sky-garden planter, typical for {TYPICAL}")
+    for b in CORRIDOR_PLANTERS:  # T10: planters inside the escape corridor
+        _hatched(sh, b, PATTERNS["IC"], "Chinese ixora", "shrub_bed", f"planter inside the escape corridor, typical for "
+                 f"{TYPICAL}")
     sh.leader("IC typ.", 7.0, 4.6, (7.5, 7.3))
     S._legend(sh, 54, 25.5, 73, 31.5, [("swatch", "IC CHINESE IXORA", PATTERNS["IC"])])
     sh.text(f"SKY-GARDEN PLANTER SOIL {SOIL['L-103']:.1f} M", 7.0, 1.0, 0.5)
@@ -205,6 +255,8 @@ class Tower:
 
 def _bill(hedge_total: int) -> B.Bill:
     planter_m2 = sum(S._box_area(b) for b in PLANTERS)
+    podium_m2 = round(planter_m2 + S._box_area(LIFT_PLANTER), 4)  # the bill prices every planter drawn, the one over the lift too
+    typical_m2 = round(planter_m2 + sum(S._box_area(b) for b in CORRIDOR_PLANTERS), 4)
     roof_lawn, roof_shrub = S._box_area(ROOF_LAWN), sum(S._box_area(b) for b in ROOF_PLANTERS)
     sections = [
         B.Section("A", "GROUND FLOOR 1F (L-101)", [
@@ -217,11 +269,11 @@ def _bill(hedge_total: int) -> B.Bill:
             B.Row("lawn", "Lawn", "Zoysia matrella, sod", "m²", S._box_area(S.LAWN_BOX), PRICES["lawn"]),
         ]),
         B.Section("B", "PODIUM ROOF GARDEN 5F (L-102)", [
-            B.Row("podium", "Yeddo hawthorn, podium planters", "Rhaphiolepis indica, 1 gal., 4 plants/m²", "m²", planter_m2,
+            B.Row("podium", "Yeddo hawthorn, podium planters", "Rhaphiolepis indica, 1 gal., 4 plants/m²", "m²", podium_m2,
                   PRICES["podium"]),
         ]),
         B.Section("C", "TYPICAL SKY GARDENS (L-103)", [  # T06: one floor, not four
-            B.Row("typical", "Sky-garden planter shrubs, typ. floor x 1", "Chinese ixora, 1 gal., 4 plants/m²", "m²", planter_m2,
+            B.Row("typical", "Sky-garden planter shrubs, typ. floor x 1", "Chinese ixora, 1 gal., 4 plants/m²", "m²", typical_m2,
                   PRICES["typical"]),
         ]),
         B.Section("D", "ROOF RF (L-104)", [
@@ -282,7 +334,7 @@ def write_tower(out_dir: str | Path, seed: int = 0) -> Tower:
            "objects": objects, "package": {"name": ROOT, "seed": seed, "basis": "synthetic", "kind": "tower"},
            "bills": {"T1": {"file": BOQ, "cells": bill.cells}}}
     key["errors"] = _errors(bill, objects)
-    key["eval_line"] = "planted 8 · found N · flagged M · missed K · false alarms F"
+    key["eval_line"] = "planted 10 · found N · flagged M · missed K · false alarms F"
     kp = out / ANSWER_KEY
     kp.write_text(json.dumps(key, ensure_ascii=False, indent=1))
     return Tower(out, root, kp, price, key, sorted(p for p in root.rglob("*") if p.is_file()))
@@ -305,6 +357,7 @@ def _errors(bill: B.Bill, objects: list[dict]) -> list[dict]:
     cell = lambda name: {"file": BOQ, "sheet": B.SHEET, "cell": bill.cells.get(name)}  # noqa: E731
     hedges = [o["id"] for o in objects if o["kind"] == "hedge" and o["sheet"] in ("L-101", "L-102")]
     beds = lambda *sheets: [o["id"] for o in objects if o["kind"] == "shrub_bed" and o["sheet"] in sheets]  # noqa: E731
+    noted = lambda sheet, words: [o["id"] for o in objects if o["sheet"] == sheet and words in (o.get("note") or "")]  # noqa: E731
     # Object ids keep a check about other drawing objects on the same sheet (a legend note) from standing in for these
     rows = [
         ("T01", [FILES["L-103"]], "floors", "regulation", f"one sheet for four floors ({TYPICAL}): quantities × 4",
@@ -322,6 +375,10 @@ def _errors(bill: B.Bill, objects: list[dict]) -> list[dict]:
         ("T07", [BOQ], "price", "quote", "roof lawn billed at the ground lawn's rate", [], [cell("roof_lawn.price")]),
         ("T08", [FILES["L-102"], FILES["L-103"]], "floors", "design", "L-102 and L-103 share their floor plate: only the "
          "title block's floor tells them apart", beds("L-102", "L-103"), []),
+        ("T09", [FILES["L-102"]], "geometry", "design", "a planter and its shrubs drawn over the lift shaft",
+         noted("L-102", "over the lift shaft"), []),
+        ("T10", [FILES["L-103"]], "rules", "regulation", "planters leave 0.9 m of the escape corridor clear, below the "
+         "1.2 m minimum, on each of the four floors", noted("L-103", "escape corridor"), []),
     ]
     return [{"id": i, "files": fs, "category": cat, "scenario": sc, "expected_verdict": v, "object_ids": o, "cells": c,
              "planted": True} for i, fs, cat, sc, v, o, c in rows]

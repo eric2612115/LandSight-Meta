@@ -8,7 +8,7 @@ import { isAlarm } from '../lib/scenario'
 import type { Check, Run } from '../lib/types'
 import { cloudBox, cloudPath } from './cloud'
 import { changeOf, findingsOf, withConfirmed } from './model'
-import { groupOf, plainTitle, SAMPLE } from './plain'
+import { groupOf, plainTitle, SAMPLE, TOWER } from './plain'
 
 const run = normalise(JSON.parse(readFileSync(join(import.meta.dirname, '..', '..', '..', 'frontend-mock', 'run.json'), 'utf8')) as Run, 'repo')
 const byId = (id: string) => run.checks.find((c) => c.check_id === id)!
@@ -43,6 +43,22 @@ describe('the sample table', () => {
     const c = withConfirmed(run, ['I-01'])
     expect(c.checks.find((x) => x.check_id === 'E14')!.numbers!.provided).toBe(209.9)
     expect(c.items.find((x) => x.item_id === 'I-01')!.quote_count).toBe(8)
+  })
+})
+
+describe('the tower table', () => {
+  const check = (p: Partial<Check>): Check => ({ check_id: 'T09', category: 'area', title: 'Planter drawn over the lift shaft (L-102)', severity: 'fail', by: ['geometry'], why: '', evidence: {}, scenario: 'design', ...p })
+  it('sends the planter over the lift shaft back and puts the corridor under the building code', () => {
+    const t09 = check({})
+    const t10 = check({ check_id: 'T10', category: 'regulation', scenario: 'regulation', title: 'Planters narrow the escape corridor on L-103 to 0.9 m, below the 1.2 m minimum' })
+    expect([groupOf(t09), groupOf(t10)]).toEqual(['send', 'code'])
+    expect(plainTitle(t09, 'en')).toBe('A planter drawn over the lift shaft')
+    expect(plainTitle(t10, 'en')).toBe('Planters narrow the escape corridor to 0.9 m')
+    expect(plainTitle(t10, 'zh-TW')).toBe(TOWER.T10.zh)
+  })
+  it('keeps its titles short and leaves another category alone', () => {
+    for (const [id, row] of Object.entries(TOWER)) expect(row.en.split(/\s+/).length, id).toBeLessThanOrEqual(9)
+    expect(plainTitle(check({ category: 'quantity', title: 'something else' }), 'en')).toBe('something else')
   })
 })
 

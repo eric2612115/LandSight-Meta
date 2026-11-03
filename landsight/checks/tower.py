@@ -1,5 +1,6 @@
 """The tower's checks (docs/PACKAGE.md v2): one sheet standing for several floors, soil depths on artificial ground
-per sheet, the detail against the plan, the same symbol on two floors, and floors that look alike.
+per sheet, the detail against the plan, the same symbol on two floors, floors that look alike, planting drawn over the
+lift shaft, and planters that narrow the escape corridor.
 
 `analyse(ctx)` runs after the take-off and before the bill and greening: it reads each floor sheet's Muse Spark answer
 (review_read_floor_sheet: floors, ground, soil depths), multiplies the items of a typical-floor sheet by its floor
@@ -18,6 +19,8 @@ FLOOR_TITLE = re.compile(r"\b\d{1,2}F\b|\bR\d?F\b|\bROOF\b|\bPODIUM\b|\bTYPICAL\
 ROOF_COLUMN = ("roof", "balcony")  # table 1's roof, balcony, terrace and facade column
 BOTH_COLUMNS = ("podium", "over_basement", "mixed", "unknown")  # not named by the text: both columns are shown
 LOOKS_ALIKE = 0.9
+PLANTING = ("shrub_bed", "lawn")
+LIFT_LAYER, EGRESS_LAYER = "LIFT", "EGRESS"  # layer names containing these words (A-CORE-LIFT, A-EGRESS)
 
 
 def floor_sheets(ctx) -> dict[str, dict]:
@@ -251,7 +254,7 @@ def _segments(d, furniture) -> set:
 def looks_alike(ctx) -> list[Check]:
     from shapely.geometry import Polygon
 
-    plans = [d for d in ctx.sheets if d.source == "dxf" and d.counted and d.kind == "plan" and d.model is not None]
+    plans = _plans(ctx)
     if len(plans) < 2:
         return []
     segs = {}
@@ -283,8 +286,133 @@ def looks_alike(ctx) -> list[Check]:
     return out
 
 
+def _plans(ctx) -> list:
+    return [d for d in ctx.sheets if d.source == "dxf" and d.counted and d.kind == "plan" and d.model is not None]
+
+
+def _planting(ctx, sid: str) -> list[tuple[dict, object]]:
+    from shapely.geometry import Polygon
+
+    out = []
+    for o in ctx.objects.get(sid, []):
+        if o["kind"] in PLANTING and len(o.get("outline") or []) >= 3:
+            poly = Polygon(o["outline"])
+            if poly.is_valid and poly.area > 0:
+                out.append((o, poly))
+    return out
+
+
+def _on_layer(d, word: str) -> list:
+    return [e for e in d.model.entities if word in (e.layer or "").upper() and e.geometry is not None]
+
+
+def lift_overlap(ctx, min_m2: float = 0.1) -> list[Check]:
+    """A planting polygon over a lift-shaft polygon (a closed outline on a layer named for the lift) on the same sheet:
+    nothing can be planted in a lift shaft."""
+    from shapely.geometry import Polygon
+
+    out = []
+    for d in _plans(ctx):
+        lifts = []
+        for e in _on_layer(d, LIFT_LAYER):
+            cs = list(e.geometry.coords)
+            if e.closed and len(cs) >= 3 and Polygon(cs).is_valid and Polygon(cs).area > 0:
+                lifts.append((e, Polygon(cs)))
+        if not lifts:
+            continue
+        for o, poly in _planting(ctx, d.sheet_id):
+            for e, lift in lifts:
+                inter = poly.intersection(lift)
+                if inter.area < min_m2:
+                    continue
+                x0, y0, x1, y1 = inter.bounds
+                out.append(Check(
+                    "area", f"Planter drawn over the lift shaft ({d.number})", "fail", ["geometry"],
+                    f"{o['label']} planter {o['object_id']} ({poly.area:.1f} m²) overlaps the lift shaft on layer "
+                    f"{e.layer} ({lift.area:.2f} m²) by {inter.area:.1f} m² ({x1 - x0:g} × {y1 - y0:g} m). A planter "
+                    "cannot stand in a lift shaft: either the planting or the core is drawn in the wrong place. Ask "
+                    "the designer where the planter goes before pricing it.",
+                    {"sheet_ids": [d.sheet_id], "file_ids": ctx.files_of([d.sheet_id]),
+                     "object_ids": [obj_ref(d.sheet_id, o["object_id"])]},
+                    numbers={"overlap_m2": round(inter.area, 2), "planter_m2": round(poly.area, 2),
+                             "lift_m2": round(lift.area, 2)},
+                    extra={"scenario": "design"}))
+    return out
+
+
+def clear_width(walls, obstacles, step: float = 0.05) -> tuple[float, float]:
+    """(the width between the walls, the narrowest clear width left by the obstacles): cross-sections every `step`
+    along the corridor's long axis, each the longest piece not covered by an obstacle."""
+    import math
+
+    from shapely.geometry import LineString
+    from shapely.ops import unary_union
+
+    box = unary_union(walls).minimum_rotated_rectangle
+    cs = list(box.exterior.coords)[:4]
+    sides = [(cs[i], cs[(i + 1) % 4]) for i in range(4)]
+    a, b = max(sides, key=lambda s: math.dist(*s))  # the long side: the axis
+    c = next(q for q in cs if q not in (a, b) and math.dist(b, q) < math.dist(a, q))  # across from b
+    length, width = math.dist(a, b), math.dist(b, c)
+    ux, uy = (b[0] - a[0]) / length, (b[1] - a[1]) / length
+    vx, vy = (c[0] - b[0]) / width, (c[1] - b[1]) / width
+    block = unary_union(obstacles) if obstacles else None
+    narrowest = width
+    n = max(1, int(length / step))
+    for i in range(1, n):
+        t = i * length / n
+        p0 = (a[0] + ux * t, a[1] + uy * t)
+        cut = LineString([p0, (p0[0] + vx * width, p0[1] + vy * width)])
+        free = cut.difference(block) if block is not None else cut
+        pieces = getattr(free, "geoms", [free])
+        narrowest = min(narrowest, max((g.length for g in pieces if not g.is_empty), default=0.0))
+    return width, narrowest
+
+
+def corridor_width(ctx) -> list[Check]:
+    """The narrowest clear width of an escape corridor (its walls on a layer named for egress) once the planters drawn
+    inside it are subtracted, against the minimum in rules.json (Art. 92)."""
+    from shapely.geometry import LineString
+    from shapely.ops import unary_union
+
+    out = []
+    info = getattr(ctx, "floor_info", {}) or {}
+    for d in _plans(ctx):
+        walls = [LineString(list(e.geometry.coords)) for e in _on_layer(d, EGRESS_LAYER) if len(e.geometry.coords) >= 2]
+        if len(walls) < 2:
+            continue
+        hull = unary_union(walls).minimum_rotated_rectangle
+        inside = [(o, p) for o, p in _planting(ctx, d.sheet_id) if p.intersection(hull).area > 0.01]
+        width, narrowest = clear_width(walls, [p for _, p in inside])
+        narrowest = round(narrowest, 2)
+        rule = rules()["national"]["corridor_width"]
+        need, both = float(rule["rooms_one_side_m"]), float(rule["rooms_both_sides_m"])
+        if not inside or narrowest >= need - 1e-9:
+            continue
+        fl = info.get(d.sheet_id) or {}
+        floors = [f"{f}F" for f in fl.get("floors") or []] if fl.get("n", 1) > 1 else []
+        repeat = (f" {d.number} stands for {len(floors)} floors, so the same narrowing repeats on "
+                  f"{', '.join(floors[:-1])} and {floors[-1]}." if len(floors) > 1 else "")
+        labels = sorted({o["label"] for o, _ in inside})
+        out.append(Check(
+            "regulation", f"Planters narrow the escape corridor on {d.number} to {narrowest:g} m, below the {need:g} m "
+            "minimum", "fail", ["geometry", "rule"],
+            f"The corridor walls (layer {', '.join(sorted({e.layer for e in _on_layer(d, EGRESS_LAYER)}))}) are "
+            f"{width:.1f} m apart; {len(inside)} {' and '.join(labels)} planter{'s' if len(inside) > 1 else ''} "
+            f"inside the corridor ({', '.join(o['object_id'] for o, _ in inside)}) leave {narrowest:g} m clear at the "
+            f"narrowest, below the {need:g} m minimum ({both:g} m where rooms open on both sides).{repeat} Move the "
+            "planters out of the corridor or widen it.",
+            {"sheet_ids": [d.sheet_id], "file_ids": ctx.files_of([d.sheet_id]),
+             "object_ids": [obj_ref(d.sheet_id, o["object_id"]) for o, _ in inside]},
+            citation=citation("BTR-92"),
+            numbers={"clear_m": narrowest, "walls_m": round(width, 2), "minimum_m": need, "floors": len(floors) or 1},
+            extra={"scenario": "regulation", **({"floors": [f.rstrip("F") for f in floors]} if floors else {})}))
+    return out
+
+
 def checks(ctx) -> list[Check]:
-    return typical_floors(ctx) + soil_depths(ctx) + detail_vs_plan(ctx) + same_symbol(ctx) + looks_alike(ctx)
+    return (typical_floors(ctx) + soil_depths(ctx) + detail_vs_plan(ctx) + same_symbol(ctx) + looks_alike(ctx)
+            + lift_overlap(ctx) + corridor_width(ctx))
 
 
 def object_quantity(it: dict, obj: dict) -> float:

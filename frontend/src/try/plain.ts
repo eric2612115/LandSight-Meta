@@ -1,7 +1,8 @@
 /** The quick review's groups and plain titles. For the sample package (Greenfield Residences, the 30 planted errors)
- * an explicit table, checked against frontend-mock/run.json: each row names the check's category, and is used only
- * when the check on screen has that id *and* that category, so another package's "E08" never borrows it. Every other
- * check falls back to a rule on its scenario, category and severity, and to the backend's own title. */
+ * an explicit table, checked against frontend-mock/run.json, and a second one for the tower's two drawing checks
+ * (T09, T10): each row names the check's category, and is used only when the check on screen has that id *and* that
+ * category, so another package's "E08" never borrows it. Every other check falls back to a rule on its scenario,
+ * category and severity, and to the backend's own title. */
 import { scenarioOf } from '../lib/scenario'
 import type { Check, Run } from '../lib/types'
 
@@ -38,8 +39,14 @@ export const SAMPLE: Record<string, Row> = {
   E15: { group: 'ask', category: 'protected_tree', en: 'A possibly protected tree marked for removal', zh: '可能受保護的老樹標示移除' },
 }
 
+/** The tower's (samples/tower) planter over the lift shaft and planters in the escape corridor. */
+export const TOWER: Record<string, Row> = {
+  T09: { group: 'send', category: 'area', en: 'A planter drawn over the lift shaft', zh: '花台畫在電梯井上' },
+  T10: { group: 'code', category: 'regulation', en: 'Planters narrow the escape corridor to 0.9 m', zh: '花台使逃生走廊淨寬縮至 0.9 m' },
+}
+
 const sampleRow = (c: Check): Row | undefined => {
-  const r = SAMPLE[c.check_id]
+  const r = SAMPLE[c.check_id] ?? TOWER[c.check_id]
   return r && r.category === c.category ? r : undefined
 }
 
