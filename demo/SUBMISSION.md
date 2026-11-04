@@ -4,7 +4,7 @@ The form has 24 fields. The first nine are read by judges; the rest is Meta's de
 honestly). Nothing below has been submitted. Every number matches the README and was checked on 2026-11-04 against
 the test run, the offline reviews of the sample and the held-out package, the live runs in landsight.db
 (docs/STACK.md has the call tables) and the open-reader and firm-memory recordings (docs/NEW-MODES.md). The film is
-https://www.youtube.com/watch?v=NSSqXng9zfg; replace X_POST_URL before pasting.
+https://www.youtube.com/watch?v=ObB8pePCIAo; replace X_POST_URL before pasting.
 
 ## Team Name
 `Landsight`
@@ -112,7 +112,7 @@ where Muse Wonder learns a firm's habits from its decisions and drafts its reply
 results, the Meta engineering and a two-terminal quick start)
 
 ## 3-Minute Demo Video
-https://www.youtube.com/watch?v=NSSqXng9zfg. Part 1 illustrates real findings; Part 2 is the real product, with the
+https://www.youtube.com/watch?v=ObB8pePCIAo. Part 1 illustrates real findings; Part 2 is the real product, with the
 sample's Analyze step replaying a recorded run.
 
 ## Describe your use of Meta products to build the submitted project
