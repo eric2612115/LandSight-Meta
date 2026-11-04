@@ -53,6 +53,8 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
   architecture and MEP firms that review the same packages.
 - **Why it continues:** Landsight is meant to become a company. A prize would go into building it: the company itself,
   pilots on private deployments and the product work in [docs/ROADMAP.md](docs/ROADMAP.md).
+- **Get in touch:** to bring Landsight to your country, to talk about funding, or to try it on your own packages,
+  email **eric2612115@gmail.com**.
 
 ## What it does
 

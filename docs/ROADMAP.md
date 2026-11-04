@@ -41,3 +41,8 @@ next.
 
 Private deployment of Muse Spark Open for firms whose drawings cannot leave their walls, and Muse Wonder as the
 memory of how each firm works.
+
+## Get in touch
+
+To bring Landsight to your country, to talk about funding, or to try it on your own packages, email
+**eric2612115@gmail.com**.
