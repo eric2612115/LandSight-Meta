@@ -5,6 +5,7 @@ scenario's checks and its slice of the scoreboard."""
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -80,15 +81,15 @@ def main(package_dir: str, live: bool = False, json_out: str | None = None, scen
     if fresh and not live:
         print("landsight review: --fresh re-asks recorded calls live and needs --live", file=sys.stderr)
         return 2
-    from landsight.review.spark import live_problem, reader_name
+    from landsight.review.spark import live_problem, reader_name, rejected_key
 
     try:
         reader = reader_name(reader)
     except ValueError as e:
         print(f"landsight review: {e}", file=sys.stderr)
         return 2
-    if live and live_problem(reader):
-        print(f"landsight review: {live_problem(reader)}", file=sys.stderr)
+    if live and (problem := live_problem(reader) or rejected_key(reader)):
+        print(f"landsight review: {problem}", file=sys.stderr)
         return 2
     keep: dict = {}
     if db:
@@ -153,4 +154,9 @@ def main(package_dir: str, live: bool = False, json_out: str | None = None, scen
         print(f"\nRun shape: {len(problems)} problems, first: {problems[0]}")
     for n in run.get("notes", []):
         print(f"note: {n}")
+    failed = [n for n in run.get("notes", []) if re.search(r"HTTP \d{3}|TransportError|Timeout", n)]
+    if live and failed:
+        print(f"\n{len(failed)} model calls failed, the first: {failed[0][:200]}\n"
+              "The score above is not a full result. Run the same command again.", file=sys.stderr)
+        return 3
     return 0 if not problems else 1

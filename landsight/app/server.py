@@ -473,7 +473,7 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
     @app.post("/api/ask")
     def ask(body=Body(default=None), live: int = 0, reader: str = ""):
         from landsight.ask.service import ask_run
-        from landsight.review.spark import FixtureMissing, live_problem, reader_name
+        from landsight.review.spark import FixtureMissing, live_problem, reader_name, rejected_key
 
         b = body_dict(body)
         q = b.get("question")
@@ -491,6 +491,8 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
             raise HTTPException(400, "live mode needs MODEL_API_KEY")
         if live and rd_name == "open" and live_problem("open"):
             raise HTTPException(400, live_problem("open"))
+        if live and (problem := rejected_key(rd_name)):
+            raise HTTPException(400, problem)
         c = conn()
         try:
             rid = ask_run_id(c, b)
@@ -507,6 +509,10 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
     def memory_live(live: int) -> None:
         if live and not os.environ.get("MODEL_API_KEY"):
             raise HTTPException(400, "live mode needs MODEL_API_KEY (Muse Wonder)")
+        from landsight.review.spark import rejected_key
+
+        if live and (problem := rejected_key("api")):
+            raise HTTPException(400, problem)
 
     @app.get("/api/firms/{firm}/memory")
     def get_firm_memory(firm: str):

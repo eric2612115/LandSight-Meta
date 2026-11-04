@@ -15,8 +15,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import httpx
-
+from landsight.meta.http import post as post_retrying
 from landsight.review.spark import BASE_URL, ReviewSpark, SparkUnavailable
 
 WONDER_MODEL = "muse-wonder-1.0"
@@ -40,9 +39,9 @@ class Wonder(ReviewSpark):
         body = {"model": self.model, "reasoning_effort": self.effort,
                 "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": text}],
                 "response_format": {"type": "json_schema", "json_schema": {"name": call, "schema": schema}}}
-        with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
-            r = client.post(BASE_URL.rstrip("/") + "/chat/completions", json=body,
-                            headers={"Authorization": f"Bearer {self.api_key}"})
+        r = post_retrying(BASE_URL.rstrip("/") + "/chat/completions", json=body,
+                          headers={"Authorization": f"Bearer {self.api_key}"}, timeout=self.timeout,
+                          transport=self.transport)
         if r.status_code != 200:
             raise SparkUnavailable(f"{call}: HTTP {r.status_code}: {r.text[:200]}")
         data = r.json()

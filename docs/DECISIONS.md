@@ -1156,5 +1156,13 @@ The film's production files (`demo/film/`, `demo/SCRIPT.md`) and the screenshot 
 need them, and no code or test used them. The film stays on YouTube. Older entries here still name those paths, as they
 stood then; the files remain in git history.
 
+A judge brings their own key, so a key's failure has to be plain. A failed call only becomes a note on the run, so with a
+wrong key `review --live --fresh all` finished with exit 0 and scored 25 found, 2 flagged, 3 missed, its HTTP 401s among
+160 lines. Now, before a live pass, `rejected_key` asks the endpoint's `/models`; only a 401 stops the pass, with one
+line naming the key, and any other answer lets it go ahead. Muse Spark 1.3, SAM 3.1 and Muse Wonder had no retry; every
+model call now gets up to three tries on HTTP 429, 5xx or a dropped connection (`landsight/meta/http.py`). A call that
+still fails makes `review --live` say so and exit with code 3. All three samples were run for real on both Muse Spark 1.3
+and Muse Spark Open and scored as the answer keys say.
+
 Trade-off: `--env-file` needs the flag on each command, and errors if `.env` is missing, but it leaves the no-key path
 untouched. Verified on macOS (Apple silicon) only.

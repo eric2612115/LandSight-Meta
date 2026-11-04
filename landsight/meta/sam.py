@@ -22,6 +22,8 @@ from dataclasses import dataclass
 import httpx
 import numpy as np
 
+from landsight.meta.http import post as post_retrying
+
 SAM_URL = "https://api.meta.ai/v1/responses"
 MODEL = "sam-3.1"
 _BOX = re.compile(r"<\|box;((?:[a-z0-9]+=[-+0-9.eE]+;?)+)\|>")  # numeric fields only: mask data never matches
@@ -113,8 +115,7 @@ def call_envelope(png: bytes, phrase: str, api_key: str | None = None, timeout: 
         "metadata": {"include_confidence": "true", "mask_encoding": "one_bit"},
     }
     started = time.monotonic()
-    with httpx.Client(timeout=timeout, transport=transport) as client:
-        r = client.post(SAM_URL, json=body, headers={"Authorization": f"Bearer {key}"})
+    r = post_retrying(SAM_URL, json=body, headers={"Authorization": f"Bearer {key}"}, timeout=timeout, transport=transport)
     seconds = time.monotonic() - started
     if r.status_code != 200:
         raise RuntimeError(f"sam-3.1: HTTP {r.status_code}: {r.text[:300]}")

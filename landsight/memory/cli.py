@@ -73,11 +73,11 @@ def print_applied(out: dict) -> None:
 def main(action: str, firm: str = "default", run_id: str | None = None, package: str | None = None,
          live: bool = False, db: str | None = None, json_out: str | None = None) -> int:
     from landsight.memory import NoMemory, apply, distil, forget, get_memory, seed_sample
-    from landsight.review.spark import FixtureMissing, SparkUnavailable, live_problem
+    from landsight.review.spark import FixtureMissing, SparkUnavailable, live_problem, rejected_key
     from landsight.store import service
 
-    if live and live_problem("api"):
-        print(f"landsight memory: {live_problem('api')}", file=sys.stderr)
+    if live and (problem := live_problem("api") or rejected_key("api")):
+        print(f"landsight memory: {problem}", file=sys.stderr)
         return 2
     conn = connect(db)
     out: dict

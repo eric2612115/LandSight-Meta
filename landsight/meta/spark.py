@@ -34,6 +34,8 @@ from pathlib import Path
 
 import httpx
 
+from landsight.meta.http import post as post_retrying
+
 BASE_URL = "https://api.meta.ai/v1"
 MODEL = "muse-spark-1.3"
 FIXTURES = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "spark"
@@ -208,17 +210,7 @@ class SparkClient:
     def _post(self, call: str, body: dict) -> dict:
         started = time.monotonic()
         headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
-        tries = 2 if self.open_weights else 1
-        for attempt in range(tries):
-            try:
-                with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
-                    r = client.post(self.url, json=body, headers=headers)
-            except httpx.TransportError:
-                if attempt + 1 < tries:
-                    continue
-                raise
-            if r.status_code == 200 or attempt + 1 == tries or not (r.status_code == 429 or r.status_code >= 500):
-                break
+        r = post_retrying(self.url, json=body, headers=headers, timeout=self.timeout, transport=self.transport)
         seconds = time.monotonic() - started
         if r.status_code != 200:
             raise SparkError(f"{call}: HTTP {r.status_code}: {r.text[:300]}")

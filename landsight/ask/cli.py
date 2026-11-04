@@ -6,6 +6,7 @@ from __future__ import annotations
 import sys
 
 from landsight.ask.service import ask_run
+from landsight.review.spark import SparkUnavailable, live_problem, rejected_key
 from landsight.store import connect, service
 
 
@@ -17,8 +18,10 @@ def main(question: str, run_id: str | None = None, live: bool = False, db: str |
         print("landsight ask: no run in the database; review a package first (landsight review <dir>)", file=sys.stderr)
         return 2
     try:
+        if live and (problem := live_problem(reader) or rejected_key(reader)):
+            raise ValueError(problem)
         out = ask_run(conn, run_id, question, live=live, reader=reader)
-    except (KeyError, ValueError) as e:
+    except (KeyError, ValueError, SparkUnavailable) as e:
         print(f"landsight ask: {e}", file=sys.stderr)
         return 2
     print(f"Q: {out['question']}\nA: {out['answer']}  (confidence {out['confidence']})")

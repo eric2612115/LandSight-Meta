@@ -105,6 +105,10 @@ toggle says which (`live`, `repo mock`).
 in `npm ci` or when Vite starts. Check `node -v`, then `nvm use 24`. `npm run build` and `npm run lint` both pass on
 Node 24.
 
+**A wrong key** stops the command, or answers HTTP 400, with one line naming it. **A rate limit or a busy API** is tried
+again, up to three times; if a call still fails, `review` says so at the end and exits with code 3, and that score is not
+a full result.
+
 **The key.** `MODEL_API_KEY` is read from the environment only (`uv run --env-file .env` puts it there); it is never written to a file, a log, a fixture or
 the API's responses. Without it `?live=1` answers HTTP 400 "live mode needs MODEL_API_KEY"; everything else runs on
 the recordings. If Python cannot verify the API's TLS certificate on macOS, set

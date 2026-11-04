@@ -46,7 +46,7 @@ same run from `frontend-mock/`.
 | Held-out package | `uv run python -m landsight review samples/heldout --fixtures` | planted 11 · found 10 · flagged 1 · missed 0 · false alarms 0 |
 | 20-floor tower | `uv run python -m landsight review samples/tower --fixtures` | planted 10 · found 8 · flagged 2 · missed 0 · false alarms 0 |
 
-The tests: `uv run pytest -q` (239 tests, 4–8 minutes) and `npm test` in `frontend/` (87 tests).
+The tests: `uv run pytest -q` (251 tests, 4–8 minutes) and `npm test` in `frontend/` (87 tests).
 
 ### 2. With your own keys: real model calls
 
@@ -73,7 +73,18 @@ git restore tests/fixtures/memory
 
 # Muse Spark Open on Baseten: every Muse Spark call again; SAM 3.1 stays on the Meta Model API, so this needs both keys (about 3 minutes, $0.23)
 uv run --env-file .env python -m landsight review samples/greenfield --reader open --live --fresh all --db out/open.db
+
+# The other two samples, on either model (add --reader open for Muse Spark Open; about 2 minutes each)
+uv run --env-file .env python -m landsight review samples/heldout --live --fresh all --db out/heldout.db
+uv run --env-file .env python -m landsight review samples/tower --live --fresh all --db out/tower.db
 ```
+
+Every command above was run this way, and scored what the table in step 1 says. Model answers can differ a little from
+run to run, so a real-call score can too.
+
+**If a key is wrong,** the command stops with one line naming it (`MODEL_API_KEY was rejected (HTTP 401)`). A busy API or
+a rate limit is tried again, up to three times. If a call still fails, the review says so at the end and exits with code
+3: that score is not a full result, so run the command again.
 
 To see real calls on the screen, start the backend with your keys and ask for them. When the review finishes, reload
 the screen: the run says `live`, and a question in Ask that has no recording goes to Muse Spark.
@@ -147,7 +158,7 @@ from the command line and the API; they are not on the screen yet.
 - **Two opt-in modes:** a private mode that runs every Muse Spark call on **Muse Spark Open**, Meta's open weights
   (the same scoreboard on the sample, $0.2253 for the review), and **firm memory**, where **Muse Wonder** learns a
   firm's habits from its estimator's decisions and drafts the next reply to the developer in the firm's terms.
-- **Offline by default:** every Meta answer is recorded and replays with no key; **239 Python tests pass**
+- **Offline by default:** every Meta answer is recorded and replays with no key; **251 Python tests pass**
   offline (`uv run pytest -q`).
 - **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
 
@@ -167,7 +178,7 @@ and sample outputs: [docs/OPEN-WEIGHTS.md](docs/OPEN-WEIGHTS.md).
 ## Status and plan
 
 - **Works today:** the whole review on a 30-file package, the hosted product at
-  [/try](https://landsight.co/try), 239 tests, the private mode on Muse Spark Open and firm memory
+  [/try](https://landsight.co/try), 251 tests, the private mode on Muse Spark Open and firm memory
   on Muse Wonder (CLI and API). **Not yet:** real packages from working firms (synthetic only), native DWG, the two modes on the
   screen.
 - **Next:** pilots with landscape design firms in Taiwan on a private deployment of Muse Spark Open, then the

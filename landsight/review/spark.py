@@ -33,6 +33,8 @@ from pathlib import Path
 
 import httpx
 
+from landsight.meta.http import post as post_retrying
+
 try:  # the meta module's constants, when present
     from landsight.meta.spark import BASE_URL, MODEL
 except Exception:  # pragma: no cover - the other module is being edited; keep our own defaults
@@ -75,6 +77,30 @@ def live_problem(reader: str | None = None) -> str | None:
     if key or base != OPEN_BASE_URL:  # a self-hosted server may run without a key
         return None
     return "live mode with the open reader needs BASETEN_API_KEY (or LANDSIGHT_OPEN_API_KEY)"
+
+
+def _models_status(base: str, key: str) -> int | None:
+    try:
+        return httpx.get(base.rstrip("/") + "/models", headers={"Authorization": f"Bearer {key}"}, timeout=15).status_code
+    except httpx.HTTPError:
+        return None
+
+
+def rejected_key(reader: str | None = None) -> str | None:
+    """Why the endpoint turns this key down (None when it does not), asked once before a live pass: a failed call only
+    becomes a note on the run, so a wrong key would look like a review with a lower score. Only HTTP 401 stops the
+    pass; any other answer, or none, lets it go ahead."""
+    keys = []
+    if reader_name(reader) == "open":
+        base, _, key = open_endpoint()
+        if key:
+            keys.append(("LANDSIGHT_OPEN_API_KEY" if os.environ.get("LANDSIGHT_OPEN_API_KEY") else "BASETEN_API_KEY", base, key))
+    if os.environ.get("MODEL_API_KEY"):  # SAM 3.1 stays on the Meta Model API with the open reader too
+        keys.append(("MODEL_API_KEY", BASE_URL, os.environ["MODEL_API_KEY"]))
+    for name, base, key in keys:
+        if _models_status(base, key) == 401:
+            return f"{name} was rejected (HTTP 401): check the key in .env"
+    return None
 
 
 def fixture_dir_for(reader: str, fixture_dir: Path | str) -> Path:
@@ -434,29 +460,23 @@ class ReviewSpark:
                 "response_format": {"type": "json_schema", "json_schema": {"name": call, "schema": schema}}}
         if self.reader == "open":
             return self._chat_open(call, body)
-        with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
-            r = client.post(BASE_URL.rstrip("/") + "/chat/completions", json=body,
-                            headers={"Authorization": f"Bearer {self.api_key}"})
+        r = post_retrying(BASE_URL.rstrip("/") + "/chat/completions", json=body,
+                          headers={"Authorization": f"Bearer {self.api_key}"}, timeout=self.timeout,
+                          transport=self.transport)
         if r.status_code != 200:
             raise SparkUnavailable(f"{call}: HTTP {r.status_code}: {r.text[:200]}")
         data = r.json()
         return json.loads(data["choices"][0]["message"]["content"]), data.get("usage") or {}, data
 
     def _chat_open(self, call: str, body: dict) -> tuple[dict, dict, dict]:
-        """The open reader's request: the same body to the open endpoint; one retry on HTTP 429, 5xx or a dropped
+        """The open reader's request: the same body to the open endpoint; retries on HTTP 429, 5xx or a dropped
         connection; a fenced answer is unwrapped. The key (if any) goes in the header and nowhere else."""
         headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
-        r = None
-        for attempt in range(2):
-            try:
-                with httpx.Client(timeout=self.timeout, transport=self.transport) as client:
-                    r = client.post(self.base_url + "/chat/completions", json=body, headers=headers)
-            except httpx.TransportError as e:
-                if attempt == 0:
-                    continue
-                raise SparkUnavailable(f"{call}: {type(e).__name__}") from e
-            if r.status_code == 200 or not (r.status_code == 429 or r.status_code >= 500):
-                break
+        try:
+            r = post_retrying(self.base_url + "/chat/completions", json=body, headers=headers, timeout=self.timeout,
+                              transport=self.transport)
+        except httpx.TransportError as e:
+            raise SparkUnavailable(f"{call}: {type(e).__name__}") from e
         if r.status_code != 200:
             raise SparkUnavailable(f"{call}: HTTP {r.status_code}: {r.text[:200]}")
         data = r.json()

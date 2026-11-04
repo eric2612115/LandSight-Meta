@@ -96,13 +96,15 @@ class PackageState:
         Meta call are written there and the firm's price list is read from there. `fresh` (live only) re-asks that
         many recorded calls (landsight.review.spark, D-61). `reader` (else LANDSIGHT_READER, else "api"): "open" reads
         with Muse Spark Open (landsight.review.spark)."""
-        from landsight.review.spark import live_problem, reader_name
+        from landsight.review.spark import live_problem, reader_name, rejected_key
 
         reader = reader_name(reader)
         if live and reader == "api" and not os.environ.get("MODEL_API_KEY"):
             raise ValueError("live mode needs MODEL_API_KEY")
         if live and reader == "open" and live_problem("open"):
             raise ValueError(live_problem("open"))
+        if live and (problem := rejected_key(reader)):
+            raise ValueError(problem)
         keep: dict = {}
         if package_id is not None:
             if self.db is None:

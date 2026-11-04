@@ -12,7 +12,10 @@ import pytest
 os.environ["LANDSIGHT_DB"] = str(Path(tempfile.mkdtemp(prefix="landsight-test-db-")) / "landsight.db")
 os.environ["LANDSIGHT_UPLOADS"] = tempfile.mkdtemp(prefix="landsight-test-uploads-")  # never out/uploads in tests
 
+from landsight.review import spark as _review_spark
 from landsight.synth import LEVELS, Messiness, generate
+
+_review_spark._models_status = lambda base, key: 200  # no test asks the network whether a key is good; test_keys.py sets its own
 
 
 @pytest.fixture(scope="session")
