@@ -20,7 +20,7 @@ against the drawings, and shows where every number came from before it goes into
   firm's habits from its estimator's decisions and drafts the next reply to the developer in the firm's terms.
 - **Offline by default:** every Meta answer is recorded and replays with no key; **239 Python tests pass**
   offline (`uv run pytest -q`).
-- **The 3-minute film:** FILM_URL
+- **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 
 ## Meta models: what is engineered around Muse Spark 1.3, SAM 3.1, Muse Spark Open and Muse Wonder
 
@@ -357,8 +357,9 @@ Everything in this repository was written during the Meta Global AI Developer Ha
   points, Muse Spark writing SAM's prompts, the controlled SAM test and the tree-pit downgrade; the FastAPI backend
   serving the sample package; the React product and director mode; the brand; the film pipeline (Remotion, narration,
   captures from the app).
-- **Nov 3–4.** The film and the submission. The decision log (docs/DECISIONS.md) records every choice made along
-  the way with its trade-off.
+- **Nov 3–4.** The film; on Nov 4, the two opt-in modes (the private reader on Muse Spark Open, firm memory on
+  Muse Wonder) and the submission. The decision log (docs/DECISIONS.md) records every choice made along the way
+  with its trade-off.
 
 ## Synthetic drawings, answer key in the repository
 

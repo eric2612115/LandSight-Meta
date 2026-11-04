@@ -3,8 +3,8 @@
 The form has 24 fields. The first nine are read by judges; the rest is Meta's developer survey (not scored; answer it
 honestly). Nothing below has been submitted. Every number matches the README and was checked on 2026-11-04 against
 the test run, the offline reviews of the sample and the held-out package, the live runs in landsight.db
-(docs/STACK.md has the call tables) and the open-reader and firm-memory recordings (docs/NEW-MODES.md). Replace
-FILM_URL and X_POST_URL before pasting.
+(docs/STACK.md has the call tables) and the open-reader and firm-memory recordings (docs/NEW-MODES.md). The film is
+https://www.youtube.com/watch?v=NSSqXng9zfg; replace X_POST_URL before pasting.
 
 ## Team Name
 `Landsight`
@@ -108,12 +108,12 @@ Opt-in: a private mode on Muse Spark Open, Meta's open weights (the same scorebo
 where Muse Wonder learns a firm's habits from its decisions and drafts its reply to the developer.
 
 ## Public GitHub Repository
-`https://github.com/eric2612115/landsight-meta` (make public before submitting; AGPL-3.0; the README opens with the
+`https://github.com/eric2612115/landsight-meta` (public; AGPL-3.0; the README opens with the
 results, the Meta engineering and a two-terminal quick start)
 
 ## 3-Minute Demo Video
-FILM_URL (YouTube; unlisted is fine). Part 1 illustrates real findings; Part 2 is the real product, with the sample's
-Analyze step replaying a recorded run.
+https://www.youtube.com/watch?v=NSSqXng9zfg. Part 1 illustrates real findings; Part 2 is the real product, with the
+sample's Analyze step replaying a recorded run.
 
 ## Describe your use of Meta products to build the submitted project
 
