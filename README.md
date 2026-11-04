@@ -19,6 +19,8 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 - [Run it locally](docs/GUIDE.md#quick-start-try-it-in-the-browser), [accuracy](docs/GUIDE.md#accuracy),
   [limits](docs/GUIDE.md#limits), [repository layout](docs/GUIDE.md#layout) and
   [the synthetic drawings](docs/GUIDE.md#synthetic-drawings-answer-key-in-the-repository).
+- [Status and roadmap](docs/ROADMAP.md): what works today, what doesn't yet, what comes next and what a prize would
+  pay for.
 - [Two opt-in modes](docs/NEW-MODES.md): the private reader on Muse Spark Open and firm memory on Muse Wonder.
 - [The stack](docs/STACK.md): every Meta call, its cost and latency, recording and replay.
 - [The API](docs/API.md), [the decision log](docs/DECISIONS.md) and [a judge's playbook](docs/JUDGE-PLAYBOOK.md).
@@ -40,6 +42,17 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 - **Offline by default:** every Meta answer is recorded and replays with no key; **239 Python tests pass**
   offline (`uv run pytest -q`).
 - **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
+
+## Status and plan
+
+- **Works today:** the whole review on a 30-file package, the hosted product at
+  [/try](https://landsight-frontend.vercel.app/try), 239 tests, the private mode on Muse Spark Open and firm memory
+  on Muse Wonder (CLI and API). **Not yet:** real packages from working firms (synthetic only), native DWG, the two modes on the
+  screen.
+- **Next:** pilots with landscape design firms in Taiwan on a private deployment of Muse Spark Open, then the
+  architecture and MEP firms that review the same packages.
+- **Why it continues:** Landsight is meant to become a company. A prize would go into building it: the company itself,
+  pilots on private deployments and the product work in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## What it does
 
