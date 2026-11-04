@@ -7,8 +7,8 @@ against the drawings, and shows where every number came from before it goes into
 Landscape comes first: that is what it is built for and scored on. Some checks are general (revisions, scale, the sheet
 index, the bill's arithmetic), but so far they have been tested only on the landscape packages in this repository.
 
-**Try it in a browser, no install:** https://landsight.co/try (the sample package on its recorded
-run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo · **Website:** https://landsight.co
+**Website:** https://landsight.co · **Try it in a browser, no install:** https://landsight.co/try (the sample package on
+its recorded run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
 
 | | |
 | --- | --- |
