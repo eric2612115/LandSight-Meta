@@ -3,6 +3,7 @@
 import { flagSheets, moneyOf, nums, objectsOn, type FlagMoney } from '../lib/flags'
 import { isAlarm } from '../lib/scenario'
 import type { Check, FileVerdict, Item, Run, Sheet } from '../lib/types'
+import { t, td } from './i18n'
 import { groupOf, SAMPLE, topicOf, type Group, type Topic } from './plain'
 
 export type Finding = {
@@ -179,19 +180,20 @@ export function replaySlices(steps: AnalyzeStep[], total: number): [number, numb
 
 /* ------------------------------------------------------------------ the change request */
 
-/** What to change, in one line, from the check's numbers (a bill row: from → to; else its first fix; else the ask). */
+/** What to change, in one line, from the check's numbers (a bill row: from → to; else its first fix; else the ask), in
+ * the screen's language. */
 export function changeOf(f: Finding, money: (twd: number) => string, shown?: string | null): string {
   const c = f.check
   const n = nums(c)
   const row = n.row
   if (typeof row === 'number' && typeof n.bill_qty === 'number' && typeof n.drawn_qty === 'number' && c.category === 'quantity')
-    return `Row ${row}: ${n.bill_qty} → ${n.drawn_qty} ${n.drawn_name ?? ''}${f.money.twd ? ` · ${shown ?? money(f.money.twd)}` : ''}`.replace(/\s+·/, ' ·')
+    return `${t('Row {0}: {1} → {2} {3}', row, n.bill_qty, n.drawn_qty, td(String(n.drawn_name ?? '')))}${f.money.twd ? ` · ${shown ?? money(f.money.twd)}` : ''}`.replace(/\s+·/, ' ·')
   if (typeof row === 'number' && c.category === 'price' && typeof n.list_low === 'number' && typeof n.list_high === 'number')
-    return `Row ${row}: reprice inside your list (${money(n.list_low)}–${money(n.list_high)})`
-  if (c.category === 'arithmetic' && typeof n.left_out === 'number') return `Fix the subtotal: add ${money(n.left_out)} left out`
+    return t('Row {0}: reprice inside your list ({1}–{2})', row, money(n.list_low), money(n.list_high))
+  if (c.category === 'arithmetic' && typeof n.left_out === 'number') return t('Fix the subtotal: add {0} left out', money(n.left_out))
   const fix = c.fixes?.find((x) => x.passes) ?? c.fixes?.[0]
-  if (fix) return fix.label
-  if (f.group === 'ask') return 'Ask the architect to confirm'
-  if (f.group === 'send') return 'Revise and reissue'
-  return 'Align the bill with the drawing'
+  if (fix) return td(fix.label)
+  if (f.group === 'ask') return t('Ask the architect to confirm')
+  if (f.group === 'send') return t('Revise and reissue')
+  return t('Align the bill with the drawing')
 }

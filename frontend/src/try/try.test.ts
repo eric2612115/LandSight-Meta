@@ -2,11 +2,13 @@
  * the fallback for other packages, the revision cloud's path. */
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { normalise } from '../lib/api'
+import { numberRows } from '../lib/flags'
 import { isAlarm } from '../lib/scenario'
 import type { Check, Run } from '../lib/types'
 import { cloudBox, cloudPath } from './cloud'
+import { dictionaries, readLang, useLang } from './i18n'
 import { changeOf, findingsOf, withConfirmed } from './model'
 import { groupOf, plainTitle, SAMPLE, TOWER } from './plain'
 
@@ -43,6 +45,68 @@ describe('the sample table', () => {
     const c = withConfirmed(run, ['I-01'])
     expect(c.checks.find((x) => x.check_id === 'E14')!.numbers!.provided).toBe(209.9)
     expect(c.items.find((x) => x.item_id === 'I-01')!.quote_count).toBe(8)
+  })
+})
+
+describe('the language a visitor starts in', () => {
+  it('takes the address, then the saved choice, then the browser', () => {
+    expect(readLang('?lang=en', 'zh-TW', ['zh-TW'])).toBe('en')
+    expect(readLang('?lang=zh-TW', 'en', ['en-US'])).toBe('zh-TW')
+    expect(readLang('', 'en', ['zh-TW'])).toBe('en')
+    expect(readLang('', 'zh-TW', ['en-US'])).toBe('zh-TW')
+  })
+  it('reads any Chinese browser as the Traditional screen and everything else as English', () => {
+    for (const b of ['zh-TW', 'zh-Hant', 'zh-HK', 'zh-MO', 'zh-CN', 'zh-Hans', 'zh']) expect(readLang('', null, [b]), b).toBe('zh-TW')
+    for (const b of ['en-US', 'en-GB', 'es-ES', 'ja-JP', 'zu']) expect(readLang('', null, [b]), b).toBe('en')
+    expect(readLang('', null, [])).toBe('en')
+    expect(readLang('', null)).toBe('en')
+  })
+  it('goes by the first language the browser lists', () => {
+    expect(readLang('', null, ['en-US', 'zh-TW'])).toBe('en')
+    expect(readLang('', null, ['zh-TW', 'en-US'])).toBe('zh-TW')
+  })
+  it('keeps a film take in English on a Chinese browser unless the address asks for Chinese', () => {
+    expect(readLang('?director=1', null, ['zh-TW'])).toBe('en')
+    expect(readLang('?director=1&lang=zh-TW', null, ['en-US'])).toBe('zh-TW')
+  })
+})
+
+describe('the change line follows the screen', () => {
+  afterEach(() => useLang.setState({ lang: 'en' }))
+  const money = (v: number) => `NT$${v}`
+  const line = (id: string) => changeOf(findingsOf(run).find((x) => x.id === id)!, money)
+  it('stays in English on an English screen', () => {
+    expect(line('E02.2')).toBe('Row 6: 12 → 8 Camphor · NT$16800')
+    expect(line('E20')).toBe('Row 11: reprice inside your list (NT$1300–NT$2300)')
+    expect(line('E21')).toBe('Fix the subtotal: add NT$117190 left out')
+    expect(line('E08')).toBe('Revise and reissue')
+    expect(line('E17')).toBe('Align the bill with the drawing')
+    expect(line('E09')).toBe('Ask the architect to confirm')
+  })
+  it('is Chinese on a Chinese screen: no English word in any line of the sample', () => {
+    useLang.setState({ lang: 'zh-TW' })
+    expect(line('E02.2')).toBe('第 6 列：12 → 8 樟樹 · NT$16800')
+    expect(line('E13')).toBe('第 8 列：450 → 150 杜鵑 · NT$23250')
+    expect(line('E22.2')).toBe('第 11 列：236 → 212 透水鋪面 · NT$91200')
+    expect(line('E20')).toBe('第 11 列：依單價表重新計價（NT$1300–NT$2300）')
+    expect(line('E21')).toBe('修正小計：補上漏算的 NT$117190')
+    expect(line('E08')).toBe('修正後重新發行')
+    expect(line('E17')).toBe('讓標單與圖面一致')
+    expect(line('E09')).toBe('請建築師確認')
+    for (const f of findingsOf(run)) expect(changeOf(f, money), f.id).not.toMatch(/[A-Za-z]{3,}/)
+  })
+  it('calls a bill 標單 everywhere on the Chinese screen', () => {
+    const { ui, data } = dictionaries()
+    const zh = [...Object.values(ui), ...Object.values(data), ...Object.values(SAMPLE).map((r) => r.zh), ...Object.values(TOWER).map((r) => r.zh)]
+    expect(zh.filter((s) => s.includes('數量表'))).toEqual([])
+    expect(ui.Bill).toBe('標單')
+    expect(ui['Quantities & quote']).toBe('數量與報價')
+  })
+  it('has Chinese for every label an open finding of the sample can show, confirmed or not', () => {
+    const { ui } = dictionaries()
+    const labels = [run, withConfirmed(run, ['I-01'])].flatMap((r) => findingsOf(r).flatMap((f) => numberRows(f.check, money, 99).map(([k]) => k)))
+    expect(labels.filter((k) => !ui[k])).toEqual([])
+    expect(ui.yes).toBe('是')
   })
 })
 

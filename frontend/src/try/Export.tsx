@@ -47,7 +47,7 @@ export function Export({ v }: { v: V }) {
   const lines = changeLines<Sheet>(v.findings, checked, marks, {
     finding: (f) => {
       const sheet = sheetOf(f.sheetId)
-      return { sheetRef: sheet, sheet: sheet?.number ?? v.where(f), what: plainTitle(f.check, lang, (s) => td(s)), change: v.m.text(t(td(changeOf(f, (twd) => v.m.money(twd), v.chip(f))))), money: v.chip(f) ?? '', evidence: v.evidence(f) }
+      return { sheetRef: sheet, sheet: sheet?.number ?? v.where(f), what: plainTitle(f.check, lang, (s) => td(s)), change: v.m.text(changeOf(f, (twd) => v.m.money(twd), v.chip(f))), money: v.chip(f) ?? '', evidence: v.evidence(f) }
     },
     mark: (m) => {
       const sheet = sheetOf(m.sheetId)

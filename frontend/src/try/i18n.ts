@@ -7,7 +7,8 @@
  * to Chinese templates. `t(s)` is the exact lookup; `td(s)` matches a string against the templates (the matcher is
  * built from each template once, the extractor's regex_of), carries the captured values into the Chinese template,
  * and gives the English back when nothing matches. Citation quotes, file names, ids and model names never go through
- * either. The language is kept in localStorage `landsight.lang`; `?lang=zh-TW|en` overrides; `en` is the default. */
+ * either. The language is kept in localStorage `landsight.lang`; `?lang=zh-TW|en` overrides; with neither, the
+ * browser's language decides, and `en` is the default. */
 import { create } from 'zustand'
 
 export type Lang = 'en' | 'zh-TW'
@@ -35,15 +36,22 @@ export const dictionaries = () => ({ ui: UI, data: DATA })
 
 export const isLang = (v: unknown): v is Lang => v === 'en' || v === 'zh-TW'
 
-/** `?lang=zh-TW|en` wins (`zh`, `zh-tw`, `zh-Hant` count as zh-TW); else what this browser saved; else English. */
-export function readLang(search: string, stored: string | null | undefined): Lang {
-  const q = new URLSearchParams(search).get('lang')
+/** The browser's first language as one of ours, by the site's rule: any Chinese reads the Traditional screen (the only
+ * Chinese there is), anything else English. */
+export const browserLang = (languages: readonly string[]): Lang => (/^zh(-|$)/i.test(languages[0] ?? '') ? 'zh-TW' : 'en')
+
+/** `?lang=zh-TW|en` wins (`zh`, `zh-tw`, `zh-Hant` count as zh-TW); else what this browser saved; else the browser's
+ * language, except that a film take stays in English unless its address says otherwise. */
+export function readLang(search: string, stored: string | null | undefined, browser: readonly string[] = []): Lang {
+  const params = new URLSearchParams(search)
+  const q = params.get('lang')
   if (q) {
     const v = q.toLowerCase()
     if (v === 'en') return 'en'
     if (v === 'zh-tw' || v === 'zh' || v === 'zh-hant' || v === 'zh-hant-tw') return 'zh-TW'
   }
-  return isLang(stored) ? stored : 'en'
+  if (isLang(stored)) return stored
+  return params.get('director') === '1' ? 'en' : browserLang(browser)
 }
 
 export function applyLang(lang: Lang, root: HTMLElement | null = typeof document === 'undefined' ? null : document.documentElement) {
@@ -58,10 +66,18 @@ const stored = (): string | null => {
   }
 }
 
+const browserLanguages = (): readonly string[] => {
+  try {
+    return navigator.languages?.length ? navigator.languages : [navigator.language]
+  } catch {
+    return []
+  }
+}
+
 type LangState = { lang: Lang; setLang: (l: Lang) => void; toggle: () => void }
 
 export const useLang = create<LangState>((set, get) => ({
-  lang: typeof window === 'undefined' ? 'en' : readLang(window.location.search, stored()),
+  lang: typeof window === 'undefined' ? 'en' : readLang(window.location.search, stored(), browserLanguages()),
   setLang: (lang) => {
     try {
       window.localStorage.setItem(LANG_KEY, lang)

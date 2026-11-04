@@ -48,12 +48,39 @@ export function formatTimes(n: number, twd: number | undefined | null, cur: Curr
 
 export const symbolOf = (cur: Currency, rate?: Rate | null) => (cur === 'usd' && rate?.usd_per_twd ? '$' : 'NT$')
 
-/** `?currency=usd|twd`; director mode (the film) and the quick review /try (its visitors are international) default to
- * USD, the review desk to TWD. TWD stays one click away on every screen. */
-export function readCurrency(search: string, director: boolean, path = ''): Currency {
+/** The visitor's local currency, as far as a page with no server can tell: the time zone says where they are, the
+ * browser's region stands in without one. Taiwan shows NT$; everywhere else USD, the only other rate a Run carries. */
+export function localCurrency(timeZone?: string | null, languages: readonly string[] = []): Currency {
+  if (timeZone) return timeZone === 'Asia/Taipei' ? 'twd' : 'usd'
+  return /-TW$/i.test(languages[0] ?? '') ? 'twd' : 'usd'
+}
+
+/** `?currency=usd|twd` wins. Director mode (the film) stays USD and the review desk TWD. The quick review /try takes
+ * what this browser saved, else the local currency. The language plays no part. */
+export function readCurrency(search: string, director: boolean, path = '', stored?: string | null, local: Currency = 'usd'): Currency {
   const q = new URLSearchParams(search).get('currency')?.toLowerCase()
   if (q === 'usd' || q === 'twd') return q
-  return director || path === '/try' || path.startsWith('/try/') ? 'usd' : 'twd'
+  if (director) return 'usd'
+  if (path !== '/try' && !path.startsWith('/try/')) return 'twd'
+  return stored === 'usd' || stored === 'twd' ? stored : local
+}
+
+const CURRENCY_KEY = 'landsight.currency'
+
+const savedCurrency = () => {
+  try {
+    return window.localStorage.getItem(CURRENCY_KEY)
+  } catch {
+    return null
+  }
+}
+
+const visitorCurrency = (): Currency => {
+  try {
+    return localCurrency(Intl.DateTimeFormat().resolvedOptions().timeZone, navigator.languages)
+  } catch {
+    return 'usd'
+  }
 }
 
 const isDirector = () => {
@@ -67,8 +94,14 @@ const isDirector = () => {
 type CurrencyState = { cur: Currency; setCur: (c: Currency) => void }
 
 export const useCurrency = create<CurrencyState>((set) => ({
-  cur: typeof window === 'undefined' ? 'twd' : readCurrency(window.location.search, isDirector(), window.location.pathname),
+  cur: typeof window === 'undefined' ? 'twd' : readCurrency(window.location.search, isDirector(), window.location.pathname, savedCurrency(), visitorCurrency()),
   setCur: (cur) => {
+    try {
+      // a person's choice is kept for the next visit; a film take leaves no trace in the browser
+      if (!isDirector()) window.localStorage.setItem(CURRENCY_KEY, cur)
+    } catch {
+      /* storage may be unavailable */
+    }
     try {
       const u = new URL(window.location.href)
       u.searchParams.set('currency', cur)

@@ -197,7 +197,7 @@ function Detail({ f, v, confirmed, state, onDecide }: { f: Finding; v: V; confir
       )}
       {!it?.spark && !gauge && rows.length > 0 && (
         <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 16, rowGap: 4, fontSize: 13.5 }}>
-          {rows.map(([k, val]) => <div key={k} style={{ display: 'contents' }}><span className="ink3">{t(k)}</span><span className="mono">{val}</span></div>)}
+          {rows.map(([k, val]) => <div key={k} style={{ display: 'contents' }}><span className="ink3">{t(k)}</span><span className="mono">{t(val)}</span></div>)}
         </div>
       )}
       <div style={{ display: 'flex', gap: 10 }}>

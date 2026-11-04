@@ -99,7 +99,7 @@ translations by hand; templates the data no longer carries are reported as notes
 
 ## Vocabulary
 
-bill of quantities / bill 數量表（BOQ）· developer 建商 · the owner 景觀公司老闆 · package 發包資料 · run 審閱紀錄 ·
+bill of quantities / bill 標單（BOQ）· developer 建商 · the owner 景觀公司老闆 · package 發包資料 · run 審閱紀錄 ·
 drawing / plan 圖面 / 平面圖 · sheet 圖紙 · planting plan 植栽平面圖 · plant schedule 植栽表 · legend 圖例 · title block 圖框 ·
 revision 版次 · superseded 已被取代 · governs 以此為準 · verdict 判定 · flag 標記 · confirm 確認 · dismiss 排除 ·
 query letter 查詢函 · price list 單價表 · unit rate 單價 · over-billed 多計 · under-billed 少計 · billed, not drawn 有計價、圖上沒有 ·
