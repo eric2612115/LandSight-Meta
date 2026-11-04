@@ -1164,7 +1164,7 @@ export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode =
               </div>
               <AbsoluteFill style={{background: U.logoBg, opacity: veil, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                 <Img src={staticFile(`v2/logo-lockup-${U.logo}.svg`)} style={{height: 160, opacity: logoIn, transform: `scale(${lerp(0.95, 1, logoIn)})`}} />
-                <div style={{fontFamily: FONT.sans, fontSize: 36, fontWeight: 500, marginTop: 48, color: U.endText, opacity: 0.88 * logoIn}}>github.com/eric2612115/landsight-meta</div>
+                <div style={{fontFamily: FONT.sans, fontSize: 36, fontWeight: 500, marginTop: 48, color: U.endText, opacity: 0.88 * logoIn}}>landsight.co</div>
                 <div style={{fontFamily: FONT.sans, fontSize: 34, marginTop: 14, color: U.endText, opacity: 0.6 * logoIn}}>{ext ? "Built with Meta's Muse Spark 1.3, SAM 3.1, Muse Wonder and Muse Spark Open" : 'Built with Muse Spark 1.3 and SAM 3.1'}</div>
               </AbsoluteFill>
             </>
