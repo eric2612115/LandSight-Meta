@@ -43,6 +43,18 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
   offline (`uv run pytest -q`).
 - **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 
+## Which Meta models, and where each runs
+
+| Model | What it does in Landsight | Where it runs |
+| --- | --- | --- |
+| Muse Spark 1.3 | Reads every sheet and document, writes SAM 3.1's prompts, answers questions about the package | Meta Model API |
+| SAM 3.1 | Measures the colour plans | Meta Model API |
+| Muse Wonder | Firm memory: learns a firm's habits from what its estimator confirms and dismisses | Meta Model API |
+| **Muse Spark Open** (open weights, `meta-models/muse-spark-open-1026`) | The private mode: every Muse Spark call of a review and of Ask | **Baseten**, through its OpenAI-compatible endpoint. Any OpenAI-compatible server a firm runs can take its place with `LANDSIGHT_OPEN_BASE_URL`; so far it has been run on Baseten only. |
+
+Switch to the open model with `--reader open`, `LANDSIGHT_READER=open` or `?reader=open`
+([docs/NEW-MODES.md](docs/NEW-MODES.md)).
+
 ## Status and plan
 
 - **Works today:** the whole review on a 30-file package, the hosted product at
