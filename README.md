@@ -21,6 +21,8 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
   [the synthetic drawings](docs/GUIDE.md#synthetic-drawings-answer-key-in-the-repository).
 - [Status and roadmap](docs/ROADMAP.md): what works today, what doesn't yet, what comes next and what a prize would
   pay for.
+- [Muse Spark Open, the evidence](docs/OPEN-WEIGHTS.md): the open-weight model, where it runs (Baseten), the run log and sample
+  outputs.
 - [Two opt-in modes](docs/NEW-MODES.md): the private reader on Muse Spark Open and firm memory on Muse Wonder.
 - [The stack](docs/STACK.md): every Meta call, its cost and latency, recording and replay.
 - [The API](docs/API.md), [the decision log](docs/DECISIONS.md) and [a judge's playbook](docs/JUDGE-PLAYBOOK.md).
@@ -53,7 +55,8 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 | **Muse Spark Open** (open weights, `meta-models/muse-spark-open-1026`) | The private mode: every Muse Spark call of a review and of Ask | **Baseten**, through its OpenAI-compatible endpoint. Any OpenAI-compatible server a firm runs can take its place with `LANDSIGHT_OPEN_BASE_URL`; so far it has been run on Baseten only. |
 
 Switch to the open model with `--reader open`, `LANDSIGHT_READER=open` or `?reader=open`
-([docs/NEW-MODES.md](docs/NEW-MODES.md)).
+([docs/NEW-MODES.md](docs/NEW-MODES.md)). The evidence for the open-weight run, with the model id, the run log with Baseten's response ids, screen captures
+and sample outputs: [docs/OPEN-WEIGHTS.md](docs/OPEN-WEIGHTS.md).
 
 ## Status and plan
 

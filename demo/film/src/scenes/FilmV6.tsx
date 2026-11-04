@@ -512,6 +512,9 @@ const PrivateMode: React.FC<{t: number}> = ({t}) => {
         </div>
         <div style={{color: ink, opacity: lerp(0.45, 1, flip), fontWeight: flip > 0.5 ? 700 : 500}}>Muse Spark Open (open weights)</div>
       </div>
+      <div style={{position: 'absolute', left: 110, top: 446, fontFamily: FONT.sans, fontSize: 28, color: ink, opacity: words * lerp(0, 0.75, flip), ...NUM}}>
+        Runs on Baseten · <span style={{fontFamily: FONT.mono, fontSize: 26}}>meta-models/muse-spark-open-1026</span>
+      </div>
       {/* the drawings slide into the firm's box; the lock closes */}
       <div style={{position: 'absolute', left: box.x, top: box.y, width: box.w, height: box.h, borderRadius: 28, border: `2.5px solid ${ink}`, boxSizing: 'border-box'}}>
         <div style={{position: 'absolute', left: 28, bottom: 22, display: 'flex', alignItems: 'center', gap: 12, fontFamily: FONT.sans, fontSize: 32, fontWeight: 700, color: ink}}>
@@ -1155,7 +1158,7 @@ export const FilmV6: React.FC<FilmV6Props> = ({sheets, proxy = false, timecode =
                 <div style={{marginTop: 18, fontSize: 58, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1.1, maxWidth: 1180, opacity: ov(u, 0.8, 1.15), transform: `translateX(${(1 - ov(u, 0.8, 1.15)) * -14}px)`}}>
                   {ext ? 'Muse Spark 1.3 reads. SAM 3.1 measures. Muse Wonder remembers.' : 'Muse Spark 1.3 reads. SAM 3.1 measures.'}
                 </div>
-                {ext ? <div style={{marginTop: 12, fontSize: 34, fontWeight: 500, opacity: 0.82 * ov(u, 1.3, 1.65)}}>Private mode on Muse Spark Open.</div> : null}
+                {ext ? <div style={{marginTop: 12, fontSize: 34, fontWeight: 500, opacity: 0.82 * ov(u, 1.3, 1.65)}}>Private mode on Muse Spark Open, running on Baseten.</div> : null}
                 <div style={{marginTop: 26, fontSize: 40, fontWeight: 400, lineHeight: 1.3, opacity: ov(u, 2.2, 2.55)}}>
                   <b style={{fontWeight: 700, color: NIGHTC.accent}}>30</b> planted errors · <b style={{fontWeight: 700, color: NIGHTC.accent}}>28</b> found · <b style={{fontWeight: 700, color: NIGHTC.accent}}>0</b> missed
                 </div>
