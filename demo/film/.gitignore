@@ -1,8 +1,0 @@
-node_modules/
-# build output: the clips and their cues (node capture.mjs), the render inputs (node prepare.mjs), the stills
-captures/
-public/
-stills/
-# renders: only the film itself is kept
-*.mp4
-!landsight-v1.mp4

@@ -1,4 +1,4 @@
-"""The gauge's two states on the greening check (demo/SCRIPT.md beat 8, D-37): `before_downgrade` and
+"""The gauge's two states on the greening check (the film's beat 8, D-37): `before_downgrade` and
 `after_downgrade`, each with its provided figure and its computed fixes, read from the rules result
 (landsight.rules.greening.check). Both null, with the reason, when no pit applies."""
 

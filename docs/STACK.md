@@ -464,23 +464,18 @@ samples/        greenfield/, heldout/, tower/: each a package folder with its an
 tests/          pytest (21 files) and fixtures/: every recorded Meta answer
 scripts/        eval.py (the accuracy table), frontend_mock.py, sam_probe.py, naive_probe.py, make_detail_sheet.py,
                 record_conditional.py, recording notes (capture.md, review_live.md)
-docs/           API, DECISIONS (D-01…D-98), STACK, NEW-MODES, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, research/
-demo/           the film: SCRIPT (the beat sheet the director scenes follow), DESIGN, TRY-UI, SUBMISSION, film/ (the
-                Remotion project)
+docs/           API, DECISIONS (D-01…D-99), STACK, NEW-MODES, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, research/
+demo/           DESIGN (the design brief), TRY-UI (the /try spec), SUBMISSION (the form's drafts)
 spike/          the 2026-11-01 probes that fixed the division of labour (D-03)
 out/            git-ignored: uploads/<hash>/ and scratch renders
 landsight.db    git-ignored: the local database (§7)
 pyproject.toml, uv.lock, LICENSE (AGPL-3.0), README.md
 ```
 
-## 12 Film tooling
+## 12 The film
 
-The film is cut in Remotion 4.0.535 (demo/film: `Film.tsx`, beats from `beats.json`, every number read at render time
-from the Run, never typed). The app's director scenes are captured by Playwright 1.56.1 under a frozen clock
-(`lib/vclock.js` replaces setTimeout, requestAnimationFrame, performance.now and Date.now and steps 1/30 s per frame;
-each frame a lossless screenshot piped to ffmpeg), with the app's sound cues logged at their virtual time and mixed on
-those cues. Narration is a prepared voice track. The two music beds
-are instrumental. `landsight-v1.mp4` (3:00, script v4) exists; v2 waits for the script.
+The film is on [YouTube](https://www.youtube.com/watch?v=ObB8pePCIAo). Its production files are not part of this
+repository; the app's director scenes (`?director=1`) are.
 
 ## 13 Limits
 

@@ -26,7 +26,7 @@ cd frontend && npm ci && npm run dev
 Open **http://localhost:5195/try**, then either:
 
 - under "Try a sample:", click **Greenfield Residences** (site, 30 files) — or **Greenfield Tower**, which opens only
-  while the API is running (on a fresh clone the first click reviews the sample from the recordings, about 10 s;
+  while the API is running (on a fresh clone the first click reviews the sample from the recordings, 10–35 s;
   later clicks open its latest run); or
 - drop the package folder `samples/greenfield/Greenfield Residences — Landscape Package` (the inner folder, not
   `samples/greenfield`) onto the drop zone, or pick it with "Choose a folder…" (uploading needs terminal 1).
@@ -127,7 +127,7 @@ samples/       greenfield/: the sample package, the firm's price list and the an
 tests/         pytest; fixtures/: the recorded Meta answers
 scripts/       eval.py (the accuracy table), frontend_mock.py, recording scripts
 docs/          META, GUIDE, API, DECISIONS, STACK, NEW-MODES, PLAN, PACKAGE, JUDGE-PLAYBOOK, research/, img/
-demo/          the film's script, design brief and Remotion project
+demo/          the design brief, the /try spec and the submission drafts
 spike/         the 2026-11-01 probes that fixed the division of labour (D-03)
 ```
 

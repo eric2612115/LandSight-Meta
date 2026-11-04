@@ -55,6 +55,5 @@ accent cobalt #4D7CFF; red #FF5A4F send back; amber #F5A524 fix; cobalt code; gr
 cursor above the camera layer (eased moves ~0.35 s, a click ripple, a folder ghost for the drag), a camera wrapper that
 zooms 1.4–1.8× to the target's rect and back (ease in-out 0.6 s, hold, ease out), typing at ~18 chars/s, deterministic
 waits on data readiness; it emits sound cues (`click`, `stamp`, `whoosh`, `type`) with timestamps to `window.__cues`
-and exposes `window.__director = {duration, ready}`. `demo/film/capture-try.mjs` (adapted from `capture.mjs` and
-`lib/vclock.js`) captures it frame-exact at 60 fps, viewport 1920×1080, deviceScaleFactor 2, to
-`demo/film/captures/try-4k60.mp4` plus `try-cues.json`.
+and exposes `window.__director = {duration, ready}`. The film's capture tool records it
+frame-exact at 60 fps, viewport 1920×1080, deviceScaleFactor 2.

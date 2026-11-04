@@ -1,4 +1,4 @@
-"""Record the real Meta calls behind the film's conditional builds (demo/SCRIPT.md), once each:
+"""Record the real Meta calls behind the film's conditional builds, once each:
 
   points   Muse Spark group_and_read on the m4 site's T-08 crop, with the grounding-points schema (1 call)
   legend   Muse Spark read_legend on the legend box of the L-1 and L-3 filled renders, then SAM 3.1 with exactly the

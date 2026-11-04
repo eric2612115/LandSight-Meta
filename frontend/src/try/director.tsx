@@ -1,4 +1,4 @@
-/** The film's Part 2 (demo/SCRIPT-V7.md, 1:30–2:58) played on /try: `?director=1&sample=greenfield`. Every beat sits
+/** The film's Part 2 (1:30–2:58) played on /try: `?director=1&sample=greenfield`. Every beat sits
  * at an absolute time from t0 (`until`), so the take is the same however long a frame takes; everything the take
  * needs (the run, the sheets, the cover's text, the price list, the thumbnails, the crop, the recorded answer, the
  * fonts) is loaded before t0, and the only waits after it are for an element the screen has just drawn. An in-page

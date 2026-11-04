@@ -12,6 +12,111 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
 | ![Every file in the package gets a verdict](docs/img/try-package.jpg) | ![Every finding opens on the drawing it came from](docs/img/try-review.jpg) |
 | ![Ask the package: an answer with its sources](docs/img/try-ask.jpg) | ![The change request, clouded and priced on the drawing](docs/img/try-request.jpg) |
 
+## Reproduce it
+
+Everything you need is in this repository: three sample packages with their answer keys (`samples/`), every recorded
+Meta answer (`tests/fixtures/`), the backend and the screen. You need macOS, Python 3.13 with
+[uv](https://docs.astral.sh/uv/) and Node 24. Last run from a fresh clone on macOS (Apple silicon) on 2026-11-05.
+
+### 1. With no key: the recorded answers
+
+Nothing is sent to a model. Terminal 1, the backend (the last command keeps running):
+
+```bash
+uv sync
+uv run python -m landsight review samples/greenfield --fixtures
+uv run python -m landsight serve --port 8795
+```
+
+The review prints `planted 30 · found 28 · flagged 2 · missed 0 · false alarms 0`. Terminal 2, the screen:
+
+```bash
+cd frontend
+npm ci
+npm run dev
+```
+
+Open http://localhost:5195; the first load opens the sample package (10–35 s). Without the backend, the screen shows the
+same run from `frontend-mock/`.
+
+| Sample | Command | Expected |
+| --- | --- | --- |
+| The 30-file package | `uv run python -m landsight review samples/greenfield --fixtures` | planted 30 · found 28 · flagged 2 · missed 0 · false alarms 0 |
+| Held-out package | `uv run python -m landsight review samples/heldout --fixtures` | planted 11 · found 10 · flagged 1 · missed 0 · false alarms 0 |
+| 20-floor tower | `uv run python -m landsight review samples/tower --fixtures` | planted 10 · found 8 · flagged 2 · missed 0 · false alarms 0 |
+
+The tests: `uv run pytest -q` (239 tests, 4–8 minutes) and `npm test` in `frontend/` (87 tests).
+
+### 2. With your own keys: real model calls
+
+```bash
+cp .env.example .env    # fill in MODEL_API_KEY, and BASETEN_API_KEY for Muse Spark Open
+```
+
+Recorded answers replay even when a key is set, so the commands below say how to force real calls. Run them from the
+repository root.
+
+```bash
+# Muse Spark 1.3 and SAM 3.1: ask all 51 calls of the sample again (2–6 minutes, about $0.28)
+uv run --env-file .env python -m landsight review samples/greenfield --live --fresh all --db out/live.db
+
+# Muse Spark 1.3: a question nobody recorded
+uv run --env-file .env python -m landsight ask "How many camphor trees are drawn on the planting plan, and how many does the bill price? Name the sheet and the bill row." --live --db out/live.db
+
+# Muse Wonder: remove its two recorded answers first, or they replay
+rm tests/fixtures/memory/*.json
+uv run --env-file .env python -m landsight memory seed-sample --db out/firm.db
+uv run --env-file .env python -m landsight memory distil --firm sample --live --db out/firm.db
+uv run --env-file .env python -m landsight memory apply --firm sample --package samples/tower --live --db out/firm.db
+git restore tests/fixtures/memory
+
+# Muse Spark Open on Baseten: every Muse Spark call again; SAM 3.1 stays on the Meta Model API, so this needs both keys (about 3 minutes, $0.23)
+uv run --env-file .env python -m landsight review samples/greenfield --reader open --live --fresh all --db out/open.db
+```
+
+To see real calls on the screen, start the backend with your keys and ask for them. When the review finishes, reload
+the screen: the run says `live`, and a question in Ask that has no recording goes to Muse Spark.
+
+```bash
+uv run --env-file .env python -m landsight serve --port 8795
+curl -X POST "http://localhost:8795/api/packages/1/review?live=1&fresh=all"    # from another terminal
+```
+
+**How to tell a real call from a replay.** The review prints `recorded` or the number of `live` calls beside each model. New answers appear under `tests/fixtures/`, in `fresh/`
+beside the recordings or as a new SAM 3.1 recording (`git status` lists them), `uv run python -m landsight db calls --db <file>` prints
+the call table, and in the API's Run, `timing.recorded` is `false`. Without `fresh`, `?live=1` asks only what is not
+already recorded, so on the sample it makes no calls.
+
+## How it is built
+
+| Part | What it uses | Where |
+| --- | --- | --- |
+| Backend | Python 3.13, FastAPI, uvicorn (port 8795) | `landsight/app/` |
+| Reading files and drawings | ezdxf, shapely, PyMuPDF, openpyxl, python-pptx | `landsight/ingest/`, `dxf/`, `geometry/`, `bill/` |
+| Checks and rules | Plain Python, each constant cited in `rules.json`; no model judges them | `landsight/checks/`, `rules/` |
+| Storage | SQLite (`landsight.db`, created on first run) | `landsight/store/` |
+| Screen | React 19, TypeScript, Vite, Tailwind (port 5195) | `frontend/` |
+| Models | The four in the table below, called over HTTPS with httpx | `landsight/meta/`, `review/spark.py`, `memory/` |
+| Recording | Every model answer is saved and can replay with no key | `tests/fixtures/` |
+
+```mermaid
+flowchart TD
+  A["Developer's folder<br/>DXF, PDF, images, Excel, zip"] --> B["A verdict for every file<br/>Muse Spark helps"]
+  B --> C["Every sheet read and classified<br/>Muse Spark"]
+  C --> D["Take-off: geometry first<br/>Muse Spark for what it cannot close"]
+  C --> E["Colour plans: Muse Spark reads the legend<br/>and writes the prompts for SAM 3.1"]
+  D --> F["Cross-checks: bill, drawings, price list, code<br/>plain Python"]
+  E --> F
+  F --> G["Flags, each traced to the drawing"]
+  G --> H["A person confirms or dismisses"]
+  H --> I["Statement and change request"]
+  H -. decisions .-> J["Firm memory<br/>Muse Wonder"]
+  J -. next package .-> G
+```
+
+In the private mode, Muse Spark Open takes every Muse Spark call in this picture. The private mode and firm memory run
+from the command line and the API; they are not on the screen yet.
+
 ## Contents
 
 - [The Meta engineering](docs/META.md): what is built around Muse Spark 1.3, SAM 3.1, Muse Spark Open and Muse Wonder,
@@ -36,8 +141,8 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
   **28 found, 2 flagged for a person, 0 missed**, 0 false alarms.
 - **Held-out package** (another layout and seed, reviewed once live before any check was looked at against it):
   11 planted, **10 found, 1 flagged for a person, 0 missed**, 0 false alarms.
-- **One live review** of the sample: 51 Meta calls (39 Muse Spark 1.3 + 12 SAM 3.1) in **106 s** with six calls in
-  parallel, **$0.23** at list prices (every pass on the sample so far: $0.23–$0.28).
+- **One live review** of the sample: 51 Meta calls (39 Muse Spark 1.3 + 12 SAM 3.1) in **2–6 minutes** with six calls in
+  parallel (fastest 106 s), **$0.23** at list prices (every pass on the sample so far: $0.23–$0.28).
 - **Two opt-in modes:** a private mode that runs every Muse Spark call on **Muse Spark Open**, Meta's open weights
   (the same scoreboard on the sample, $0.2253 for the review), and **firm memory**, where **Muse Wonder** learns a
   firm's habits from its estimator's decisions and drafts the next reply to the developer in the firm's terms.
@@ -133,7 +238,7 @@ npm run dev
 Then open:
 
 - http://localhost:5195 — the product: the sheets, the take-off, the disagreement with its Confirm button, every
-  check, the rules, the files and the scoreboard (the first load opens the sample package, about 10 s). Click
+  check, the rules, the files and the scoreboard (the first load opens the sample package, 10–35 s). Click
   Confirm on the camphor row; the tally turns green.
 - http://localhost:5195/?director=1&auto=1 — the film's scenes played by the app itself, on the same Run: the drop,
   the drawing waking up, the eye, hedge math, lines to colour, the gauge (twice), the bill traced, twelve again.
@@ -143,7 +248,7 @@ What each step shows: `package` writes the 30-file package, the firm's price lis
 an earlier copy in the same folder); `review` prints every file verdict, the 22 sheets it read (20 DXF and vector
 PDF pages, 2 raster pages read for their title blocks), the 12 take-off items (8 from the CAD, 4 measured by SAM 3.1 on
 the raster plan, awaiting confirmation), 71 checks and the scoreboard line above;
-`pytest` runs the Python tests, all passing (about 4 minutes on a laptop, longer on a busy machine; the frontend's are `npm test` in frontend/); `serve` answers `GET /api/health` and prints its address only once
+`pytest` runs the Python tests, all passing (4–8 minutes on a laptop; the frontend's are `npm test` in frontend/); `serve` answers `GET /api/health` and prints its address only once
 it is listening. Without the backend the screen falls back to `frontend-mock/` (the same Run, recorded); the corner
 toggle says which (`live`, `repo mock`).
 
@@ -152,17 +257,9 @@ toggle says which (`live`, `repo mock`).
 5195 is busy, Vite takes the next free port and prints it (or pin one: `npm run dev -- --port 5197`); open the URL it
 prints.
 
-**Live models.** `?live=1` needs `MODEL_API_KEY` in the backend's environment (terminal 1):
-
-```bash
-export MODEL_API_KEY=...                            # the Meta Model API key; never committed, never printed
-uv run python -m landsight serve --port 8795
-curl -X POST "http://localhost:8795/api/package/open?live=1"     # from another terminal; then reload the page
-```
-
-The CLI does the same with `uv run python -m landsight review <package> --live`. A live pass asks only what is not
-already recorded for the same content and prompt; add `--fresh all` to ask everything again (51 calls on the sample,
-106–113 s with six in parallel): the new answers go to `fresh/` beside the recordings, which are never overwritten.
+**Live models.** See [With your own keys](#2-with-your-own-keys-real-model-calls). A live pass asks only what is not
+already recorded for the same content and prompt; `--fresh all` asks everything again (51 calls on the sample, 2–6
+minutes with six in parallel): the new answers go to `fresh/` beside the recordings, which are never overwritten.
 
 More detail and troubleshooting (ports, Node version, the key): [docs/JUDGE-PLAYBOOK.md](docs/JUDGE-PLAYBOOK.md).
 
@@ -177,8 +274,7 @@ Everything in this repository was written during the Meta Global AI Developer Ha
   citations; the SAM 3.1 probe; data tables with sourced prices; the sample package generator (thirty files, thirty
   planted errors); the review (ingest, sheet reading, the pre-pass, checks, the bill reader, the scoreboard); grounding
   points, Muse Spark writing SAM's prompts, the controlled SAM test and the tree-pit downgrade; the FastAPI backend
-  serving the sample package; the React product and director mode; the brand; the film pipeline (Remotion, narration,
-  captures from the app).
+  serving the sample package; the React product and director mode; the brand; the film.
 - **Nov 3–4.** The film; on Nov 4, the two opt-in modes (the private reader on Muse Spark Open, firm memory on
   Muse Wonder) and the submission. The decision log (docs/DECISIONS.md) records every choice made along the way
   with its trade-off.

@@ -22,7 +22,7 @@ export function FlagList({ run, flags, pinNo, onSelect, onSheet, sheetId }: Prop
   const totals = useTotals(run)
   const m = useMoney(run.currency)
   const rowsShown = useShow((s) => s.rows)
-  const t = run.timing as Run['timing'] & { mode?: string }
+  const t = run.timing as Run['timing'] & { mode?: string; recorded?: boolean }
 
   const views: [Filter, string, number][] = [['need', 'Need you', c.need], ['noted', 'Noted', c.noted], ['confirmed', 'Confirmed', c.confirmed], ['all', 'All', c.all]]
   const groups: Scenario[] = ui.filter === 'need' || ui.filter === 'confirmed' ? [...CATCHES] : [...CATCHES, 'info']
@@ -45,7 +45,7 @@ export function FlagList({ run, flags, pinNo, onSelect, onSheet, sheetId }: Prop
   let index = 0
   return (
     <aside className="flex min-h-0 flex-col overflow-hidden bg-pane">
-      <div className="ph">Package <span className="r">{run.package.file_count} files · run {run.run_id.slice(0, 8)} · {t.mode ?? 'fixtures'}, recorded</span></div>
+      <div className="ph">Package <span className="r">{run.package.file_count} files · run {run.run_id.slice(0, 8)} · {t.mode ?? 'fixtures'}{t.recorded === false ? '' : ', recorded'}</span></div>
       <PackageTree run={run} sheetId={sheetId} onSheet={onSheet} />
       <div className="fh">
         Flags

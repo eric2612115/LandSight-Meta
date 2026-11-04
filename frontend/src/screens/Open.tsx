@@ -185,12 +185,12 @@ function FlagCount({ run }: { run: Run }) {
 
 function Facts({ run }: { run: Run }) {
   const sh = useShow()
-  const t = run.timing as Run['timing'] & { spark_s?: number; sam_s?: number; mode?: string }
+  const t = run.timing as Run['timing'] & { spark_s?: number; sam_s?: number; mode?: string; recorded?: boolean }
   const c = useCounts(run)
   const sheets = run.sheets.length
   const measured = run.sheets.filter((s) => s.counted).length
   const rows: [string, string][] = [
-    ['Run', `${run.run_id.slice(0, 12)} · ${t.mode ?? 'fixtures'}, recorded`],
+    ['Run', `${run.run_id.slice(0, 12)} · ${t.mode ?? 'fixtures'}${t.recorded === false ? '' : ', recorded'}`],
     ['Files', `${run.package.file_count} in the package · ${run.files.length - run.package.file_count} unpacked from an archive`],
     ['Sheets', `${sheets} read · ${measured} measured`],
     ['Muse Spark', `${t.spark_calls} calls${t.spark_s ? ` · ${fmt(t.spark_s, 1)} s` : ''} · sheet kinds, legends, schedules, the bill’s rows`],

@@ -12,8 +12,6 @@ npm run build      # tsc + vite build
 npm run lint       # oxlint
 npm test           # vitest: money, confirm on a live-shaped Item, the error boundary, scenarios, the Statement, ask
 node scripts/shoot.mjs screenshots/v2 name=<url>@<ms> ...   # 1920 × 1080 screenshots via local Chrome
-node scripts/shoot-pw.mjs --out F.png --url <url> [--click SEL --await SEL --shots MS:F.png,…] [--drop N] [--reduced]
-                                                            # the same with Playwright (demo/film's), clicking, dropping, waiting
 ```
 
 Routes (one 1920 × 1080 stage, scaled to the window; `?scale=1` pins it):

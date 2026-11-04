@@ -1,4 +1,4 @@
-"""Lines to colour, on the package (demo/SCRIPT.md beat 7; D-35, D-36 on the m4 site): for each counted DXF plan with a
+"""Lines to colour, on the package (the film's beat 7; D-35, D-36 on the m4 site): for each counted DXF plan with a
 legend box, Muse Spark reads the legend of the coloured render and names each swatch's colour; SAM 3.1 is prompted with
 exactly those words on the coloured render (landsight.meta.sam_plan), and the first prompt is also run on the plain line
 work as the controlled test (one variable changes: the image). Each mask takes the type of the outline it lies in.

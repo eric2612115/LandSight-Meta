@@ -1,4 +1,4 @@
-"""The film's conditional builds (demo/SCRIPT.md), offline on recorded Meta calls, each also with its flag off:
+"""The film's conditional builds, offline on recorded Meta calls, each also with its flag off:
 
 1. grounding points in the eye: Muse Spark's 0-1000 points on the T-08 crop, in crop pixels and drawing metres;
 2. Spark writes SAM's prompt: the legend read -> colour words -> the exact SAM prompts, and which path ran;

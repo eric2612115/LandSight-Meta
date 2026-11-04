@@ -392,7 +392,7 @@ def _bare(ref: str) -> str:
 
 
 def scenes(run: dict) -> list[dict]:
-    """The film's scenes (demo/SCRIPT.md v4), each a pointer into this Run: ids that exist in it, nothing typed."""
+    """The film's scenes, each a pointer into this Run: ids that exist in it, nothing typed."""
     items, checks, sheets, files = run["items"], run["checks"], run["sheets"], run["files"]
     if not sheets:  # a folder with no drawing at all: the drop is the whole film (no sheet to point at)
         top = [f["file_id"] for f in files if not f.get("parent")]

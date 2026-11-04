@@ -1135,3 +1135,26 @@ Trade-offs:
   goes to "Other … points", placed in the firm's scenario order, rather than to a named group.
 - The sample firm's 16 decisions are invented.
 - No screen change was made tonight.
+
+## D-99 A judge's path: keys in `.env`, the reproduce steps first, only commands that made real calls — Decided 2026-11-05
+
+A judge should be able to clone the repository and reproduce the result from what is in it. A fresh clone with no key
+already did: all three samples, the private mode, Ask, firm memory, the screen and the tests. What was missing was a
+place to put a key and a true path to real calls.
+
+- `.env.example` is new. Keys go in through `uv run --env-file .env`, so no product code changed and nothing new loads
+  a file on its own.
+- The README's `POST /api/package/open?live=1` made no calls on the sample, because every answer is recorded, while
+  `/api/health` said `live`. The docs now use `POST /api/packages/1/review?live=1&fresh=all`, which made 51 real calls
+  (39 Muse Spark 1.3, 12 SAM 3.1) and scored 28 found, 2 flagged, 0 missed.
+- The screen's label said "live, recorded" for every live run. It now drops "recorded" when `timing.recorded` is false.
+- The reproduce steps and a stack table with a flow diagram moved to the top of the README. The timings were updated to
+  what the runs on 2026-11-05 took (2–6 minutes for 51 calls).
+
+The film's production files (`demo/film/`, `demo/SCRIPT.md`) and the screenshot tool that borrowed their Playwright
+(`frontend/scripts/shoot-pw.mjs`) left the repository on the owner's word: running and checking the product does not
+need them, and no code or test used them. The film stays on YouTube. Older entries here still name those paths, as they
+stood then; the files remain in git history.
+
+Trade-off: `--env-file` needs the flag on each command, and errors if `.env` is missing, but it leaves the no-key path
+untouched. Verified on macOS (Apple silicon) only.
