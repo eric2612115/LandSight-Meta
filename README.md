@@ -4,7 +4,7 @@
 file, counts what is drawn, reads what is written, measures what is exact, checks the bill and the building code
 against the drawings, and shows where every number came from before it goes into a quote.**
 
-**Try it in a browser, no install:** https://landsight-frontend.vercel.app/try (the sample package on its recorded
+**Try it in a browser, no install:** https://landsight.co/try (the sample package on its recorded
 run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 
 | | |
@@ -46,7 +46,7 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=NSSqXng9zfg
 ## Status and plan
 
 - **Works today:** the whole review on a 30-file package, the hosted product at
-  [/try](https://landsight-frontend.vercel.app/try), 239 tests, the private mode on Muse Spark Open and firm memory
+  [/try](https://landsight.co/try), 239 tests, the private mode on Muse Spark Open and firm memory
   on Muse Wonder (CLI and API). **Not yet:** real packages from working firms (synthetic only), native DWG, the two modes on the
   screen.
 - **Next:** pilots with landscape design firms in Taiwan on a private deployment of Muse Spark Open, then the

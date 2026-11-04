@@ -13,12 +13,12 @@ next.
 | Counting and measuring what is drawn: geometry first, Muse Spark 1.3 on what geometry can't settle | Works | [META.md](META.md) |
 | Coloured plans measured by SAM 3.1, with the prompts written by Muse Spark from the legend | Works | `landsight/meta/sam_plan.py` |
 | The bill against the drawings and the firm's price list; building-code checks with article numbers | Works | `landsight/bill/`, `landsight/rules/` |
-| The change request clouded and priced on the drawing, and the reply to the developer | Works | [/try](https://landsight-frontend.vercel.app/try) |
+| The change request clouded and priced on the drawing, and the reply to the developer | Works | [/try](https://landsight.co/try) |
 | Ask the package: answers with the file, page and sentence they came from | Works | `landsight/ask/` |
 | Planted errors on the synthetic sample: 28 found, 2 flagged for a person, 0 missed; held-out package 10/1/0 | Measured | [README](../README.md#at-a-glance) |
 | Private mode: every Muse Spark call on Muse Spark Open, same scoreboard on the sample | Works (CLI and API) | [NEW-MODES.md](NEW-MODES.md) |
 | Firm memory: Muse Wonder learns a firm's habits from its decisions | Works (CLI and API) | [NEW-MODES.md](NEW-MODES.md) |
-| The product online, no install | Works on the recorded run | [landsight-frontend.vercel.app/try](https://landsight-frontend.vercel.app/try) |
+| The product online, no install | Works on the recorded run | [landsight.co/try](https://landsight.co/try) |
 | Real packages from working firms | Not yet: synthetic packages only | |
 | DWG without conversion, the two opt-in modes on the screen, trades other than landscape | Not yet | |
 
