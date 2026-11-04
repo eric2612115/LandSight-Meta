@@ -1166,3 +1166,11 @@ and Muse Spark Open and scored as the answer keys say.
 
 Trade-off: `--env-file` needs the flag on each command, and errors if `.env` is missing, but it leaves the no-key path
 untouched. Verified on macOS (Apple silicon) only.
+
+## D-100 The README leads with landscape and says how far the rest is tested — Decided 2026-11-05
+
+The owner's call: landscape first, and the general parts described as only partly tested. Every sample in this repository
+is a landscape package, and every recorded sheet is planting, paving, lighting, irrigation, metalwork or general. So the
+README says that the general checks (revisions, scale, the sheet index, the bill's arithmetic) have been tested only on
+those packages, rather than implying they have been tried on another trade's drawings. The website is named too: it was
+built during the hackathon, on Nov 4–5 (Taipei), in a separate repository, and its `/try` is built from `frontend/` here.

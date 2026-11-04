@@ -464,7 +464,7 @@ samples/        greenfield/, heldout/, tower/: each a package folder with its an
 tests/          pytest (21 files) and fixtures/: every recorded Meta answer
 scripts/        eval.py (the accuracy table), frontend_mock.py, sam_probe.py, naive_probe.py, make_detail_sheet.py,
                 record_conditional.py, recording notes (capture.md, review_live.md)
-docs/           API, DECISIONS (D-01…D-99), STACK, NEW-MODES, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, research/
+docs/           API, DECISIONS (D-01…D-100), STACK, NEW-MODES, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, research/
 demo/           DESIGN (the design brief), TRY-UI (the /try spec), SUBMISSION (the form's drafts)
 spike/          the 2026-11-01 probes that fixed the division of labour (D-03)
 out/            git-ignored: uploads/<hash>/ and scratch renders

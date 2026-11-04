@@ -1,11 +1,14 @@
 # Landsight
 
-**Landsight reviews a landscape developer's drawing package the way a design firm's estimator does: it reads every
+**Landsight reviews a developer's drawing package the way a design firm's estimator does: it reads every
 file, counts what is drawn, reads what is written, measures what is exact, checks the bill and the building code
 against the drawings, and shows where every number came from before it goes into a quote.**
 
+Landscape comes first: that is what it is built for and scored on. Some checks are general (revisions, scale, the sheet
+index, the bill's arithmetic), but so far they have been tested only on the landscape packages in this repository.
+
 **Try it in a browser, no install:** https://landsight.co/try (the sample package on its recorded
-run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
+run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo · **Website:** https://landsight.co
 
 | | |
 | --- | --- |
@@ -275,9 +278,10 @@ minutes with six in parallel): the new answers go to `fresh/` beside the recordi
 
 More detail and troubleshooting (ports, Node version, the key): [docs/JUDGE-PLAYBOOK.md](docs/JUDGE-PLAYBOOK.md).
 
-## Built Nov 1–4, 2026
+## Built Nov 1–5, 2026
 
-Everything in this repository was written during the Meta Global AI Developer Hackathon, November 1–4, 2026:
+Everything in this repository was written during the Meta Global AI Developer Hackathon, November 1–5, 2026 (Taipei
+time; the deadline was Nov 5, 10:00):
 
 - **Nov 1.** Spikes: how geometry, Muse Spark and SAM 3.1 each see a messy planting plan (the division of labour,
   D-03); research on the national greening and tree-protection rules, drawing conventions and the Meta Model API; the
@@ -290,6 +294,11 @@ Everything in this repository was written during the Meta Global AI Developer Ha
 - **Nov 3–4.** The film; on Nov 4, the two opt-in modes (the private reader on Muse Spark Open, firm memory on
   Muse Wonder) and the submission. The decision log (docs/DECISIONS.md) records every choice made along the way
   with its trade-off.
+- **Nov 5, before the deadline.** The reproduce steps, `.env.example`, retries on a busy API and a plain error for a
+  wrong key.
+
+The website, [landsight.co](https://landsight.co), was also built during the hackathon, on Nov 4–5 (Taipei). Its code is
+in a separate repository; `/try` on it is built from `frontend/` here.
 
 ## Licence
 
