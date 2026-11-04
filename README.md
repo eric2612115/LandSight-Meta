@@ -15,8 +15,9 @@ run) · **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
 ## Reproduce it
 
 Everything you need is in this repository: three sample packages with their answer keys (`samples/`), every recorded
-Meta answer (`tests/fixtures/`), the backend and the screen. You need macOS, Python 3.13 with
-[uv](https://docs.astral.sh/uv/) and Node 24. Last run from a fresh clone on macOS (Apple silicon) on 2026-11-05.
+Meta answer (`tests/fixtures/`), the backend and the screen. You need Python 3.13 with
+[uv](https://docs.astral.sh/uv/) and Node 24. Verified from a fresh clone on macOS (Apple silicon) on 2026-11-05; other
+systems have not been tried.
 
 ### 1. With no key: the recorded answers
 
