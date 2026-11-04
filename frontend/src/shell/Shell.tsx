@@ -114,7 +114,7 @@ export function StatusBar({ run }: { run?: Run }) {
     <div className="status">
       <div className="overflow-hidden text-ellipsis">
         {run ? (
-          <>Run <span className="mono">{run.run_id.slice(0, 8)}</span> · {t?.mode ?? 'fixtures'}, {t?.recorded === false ? 'live' : 'recorded'} · {fmt(t?.total_s, 1)} s · Muse Spark {t?.spark_calls ?? 0} calls{t?.spark_s ? `, ${fmt(t.spark_s, 1)} s` : ''} · SAM 3.1 {t?.sam_calls ?? 0} calls{t?.sam_s ? `, ${fmt(t.sam_s, 1)} s` : ''} · geometry {read} sheets, {measured} measured</>
+          <>Run <span className="mono">{run.run_id.slice(0, 8)}</span> · {t?.mode ?? 'fixtures'}{t?.recorded === false ? '' : ', recorded'} · {fmt(t?.total_s, 1)} s · Muse Spark {t?.spark_calls ?? 0} calls{t?.spark_s ? `, ${fmt(t.spark_s, 1)} s` : ''} · SAM 3.1 {t?.sam_calls ?? 0} calls{t?.sam_s ? `, ${fmt(t.sam_s, 1)} s` : ''} · geometry {read} sheets, {measured} measured</>
         ) : 'No package open'}
       </div>
       <div className="flex items-center gap-3">

@@ -156,7 +156,9 @@ def main(package_dir: str, live: bool = False, json_out: str | None = None, scen
         print(f"note: {n}")
     failed = [n for n in run.get("notes", []) if re.search(r"HTTP \d{3}|TransportError|Timeout", n)]
     if live and failed:
+        sys.stdout.flush()  # so that this is the last thing on the screen, even when the output is piped
+        fix = "Check the keys in .env." if any("HTTP 401" in n for n in failed) else "Run the same command again."
         print(f"\n{len(failed)} model calls failed, the first: {failed[0][:200]}\n"
-              "The score above is not a full result. Run the same command again.", file=sys.stderr)
+              f"The score above is not a full result. {fix}", file=sys.stderr)
         return 3
     return 0 if not problems else 1

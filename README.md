@@ -46,7 +46,7 @@ same run from `frontend-mock/`.
 | Held-out package | `uv run python -m landsight review samples/heldout --fixtures` | planted 11 · found 10 · flagged 1 · missed 0 · false alarms 0 |
 | 20-floor tower | `uv run python -m landsight review samples/tower --fixtures` | planted 10 · found 8 · flagged 2 · missed 0 · false alarms 0 |
 
-The tests: `uv run pytest -q` (251 tests, 4–8 minutes) and `npm test` in `frontend/` (87 tests).
+The tests: `uv run pytest -q` (253 tests, 4–8 minutes) and `npm test` in `frontend/` (87 tests).
 
 ### 2. With your own keys: real model calls
 
@@ -58,7 +58,7 @@ Recorded answers replay even when a key is set, so the commands below say how to
 repository root.
 
 ```bash
-# Muse Spark 1.3 and SAM 3.1: ask all 51 calls of the sample again (2–6 minutes, about $0.28)
+# Muse Spark 1.3 and SAM 3.1: ask all of the sample's calls again, about 50 (2–6 minutes, about $0.28)
 uv run --env-file .env python -m landsight review samples/greenfield --live --fresh all --db out/live.db
 
 # Muse Spark 1.3: a question nobody recorded
@@ -158,7 +158,7 @@ from the command line and the API; they are not on the screen yet.
 - **Two opt-in modes:** a private mode that runs every Muse Spark call on **Muse Spark Open**, Meta's open weights
   (the same scoreboard on the sample, $0.2253 for the review), and **firm memory**, where **Muse Wonder** learns a
   firm's habits from its estimator's decisions and drafts the next reply to the developer in the firm's terms.
-- **Offline by default:** every Meta answer is recorded and replays with no key; **251 Python tests pass**
+- **Offline by default:** every Meta answer is recorded and replays with no key; **253 Python tests pass**
   offline (`uv run pytest -q`).
 - **The 3-minute film:** https://www.youtube.com/watch?v=ObB8pePCIAo
 
@@ -178,7 +178,7 @@ and sample outputs: [docs/OPEN-WEIGHTS.md](docs/OPEN-WEIGHTS.md).
 ## Status and plan
 
 - **Works today:** the whole review on a 30-file package, the hosted product at
-  [/try](https://landsight.co/try), 251 tests, the private mode on Muse Spark Open and firm memory
+  [/try](https://landsight.co/try), 253 tests, the private mode on Muse Spark Open and firm memory
   on Muse Wonder (CLI and API). **Not yet:** real packages from working firms (synthetic only), native DWG, the two modes on the
   screen.
 - **Next:** pilots with landscape design firms in Taiwan on a private deployment of Muse Spark Open, then the

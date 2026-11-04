@@ -473,7 +473,7 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
     @app.post("/api/ask")
     def ask(body=Body(default=None), live: int = 0, reader: str = ""):
         from landsight.ask.service import ask_run
-        from landsight.review.spark import FixtureMissing, live_problem, reader_name, rejected_key
+        from landsight.review.spark import FixtureMissing, SparkUnavailable, live_problem, reader_name, rejected_key
 
         b = body_dict(body)
         q = b.get("question")
@@ -500,6 +500,8 @@ def create_app(features: dict[str, bool] | None = None, db_path: str | Path | No
         except FixtureMissing as e:
             raise HTTPException(404, f"no recorded answer for this question on this package ({e}); ask with "
                                      "live=1 and a key to record one") from e
+        except SparkUnavailable as e:  # the model's own answer, a wrong key or a rate limit: never the key itself
+            raise HTTPException(502, str(e)) from e
         except ValueError as e:
             raise HTTPException(422, str(e)) from e
         finally:

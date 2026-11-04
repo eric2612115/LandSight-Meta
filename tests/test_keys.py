@@ -103,4 +103,38 @@ def test_a_failed_call_does_not_pass_as_a_result(monkeypatch, capsys):
     monkeypatch.setenv("MODEL_API_KEY", "ok")
     monkeypatch.setattr(cli, "review", with_a_failure)
     assert main(["review", str(GREENFIELD), "--live", "--no-db"]) == 3
-    assert "not a full result" in capsys.readouterr().err
+    err = capsys.readouterr().err
+    assert "not a full result" in err and "Run the same command again" in err
+
+
+def test_a_key_turned_down_mid_run_says_to_check_the_key(monkeypatch, capsys):
+    from landsight.review import cli
+
+    real = cli.review
+
+    def with_a_401(*a, **k):
+        run = real(*a, **{**k, "mode": "fixtures"})
+        run["notes"] = [*run.get("notes", []), "L-1: read_legend: HTTP 401: Authentication required."]
+        return run
+
+    monkeypatch.setenv("MODEL_API_KEY", "ok")
+    monkeypatch.setattr(cli, "review", with_a_401)
+    assert main(["review", str(GREENFIELD), "--live", "--no-db"]) == 3
+    assert "Check the keys in .env" in capsys.readouterr().err
+
+
+def test_a_model_failure_on_ask_is_an_answer_not_a_crash(monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from landsight.app.server import create_app
+
+    monkeypatch.setenv("MODEL_API_KEY", "ok")
+
+    def refused(*a, **k):
+        raise RS.SparkUnavailable("ask_package: HTTP 429: too many requests")
+
+    monkeypatch.setattr("landsight.ask.service.ask_run", refused)
+    c = TestClient(create_app())
+    c.post("/api/package/open")
+    r = c.post("/api/ask?live=1", json={"question": "A question nobody recorded?"})
+    assert r.status_code == 502 and "HTTP 429" in r.json()["detail"]
