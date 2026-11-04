@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatMoney, formatRange, formatTimes, moneyInText, overList, readCurrency } from './money'
+import { formatMoney, formatRange, formatTimes, localCurrency, moneyInText, overList, readCurrency } from './money'
 
 const rate = { base: 'TWD', usd_per_twd: 1 / 32.478, twd_per_usd: 32.478, as_of: '2026-10-30' }
 
@@ -36,6 +36,34 @@ describe('money', () => {
     expect(readCurrency('', false, '/try')).toBe('usd')
     expect(readCurrency('?currency=twd', false, '/try')).toBe('twd')
     expect(readCurrency('', false, '/review')).toBe('twd')
+  })
+
+  it('finds the local currency by where the visitor is, not by the language they read', () => {
+    expect(localCurrency('Asia/Taipei', ['zh-TW'])).toBe('twd')
+    expect(localCurrency('Asia/Taipei', ['en-US'])).toBe('twd')
+    expect(localCurrency('Asia/Taipei', ['es-ES'])).toBe('twd')
+    expect(localCurrency('America/Los_Angeles', ['zh-TW'])).toBe('usd')
+    expect(localCurrency('America/New_York', ['en-US'])).toBe('usd')
+    expect(localCurrency('Europe/Madrid', ['es-ES'])).toBe('usd')
+    expect(localCurrency(undefined, ['zh-TW'])).toBe('twd')
+    expect(localCurrency(undefined, ['zh-Hant-TW'])).toBe('twd')
+    expect(localCurrency(undefined, ['zh-CN'])).toBe('usd')
+    expect(localCurrency(undefined, ['en-US', 'zh-TW'])).toBe('usd')
+    expect(localCurrency()).toBe('usd')
+  })
+
+  it('opens /try in the address’s currency, else the saved one, else the local one', () => {
+    expect(readCurrency('', false, '/try', null, 'twd')).toBe('twd')
+    expect(readCurrency('', false, '/try', null, 'usd')).toBe('usd')
+    expect(readCurrency('', false, '/try', 'usd', 'twd')).toBe('usd')
+    expect(readCurrency('', false, '/try', 'twd', 'usd')).toBe('twd')
+    expect(readCurrency('', false, '/try', 'eur', 'twd')).toBe('twd')
+    expect(readCurrency('?currency=usd', false, '/try', 'twd', 'twd')).toBe('usd')
+  })
+
+  it('leaves the film and the desk as they were, wherever the visitor is', () => {
+    expect(readCurrency('', true, '/try', 'twd', 'twd')).toBe('usd')
+    expect(readCurrency('', false, '/review', 'usd', 'usd')).toBe('twd')
   })
 
   it('sums what the bill asks over the top of the list, from the price flags only', () => {

@@ -2,10 +2,11 @@
  * the hero, findings in plain words grouped by what you do with them, one primary button per screen. The review desk
  * stays for the expert ("Open the full review desk →"). `?director=1&sample=greenfield` plays the film's Part 2 on
  * a virtual clock (director.ts) with an in-page cursor above the camera layer. */
-import { Check, Moon, Sun } from 'lucide-react'
+import { Check, ChevronDown, Moon, Sun } from 'lucide-react'
 import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import { Mark } from '../components/Brand'
 import { Stage } from '../components/Stage'
+import { useCurrency, type Currency } from '../lib/money'
 import { applyTheme } from '../lib/theme'
 import { Analyze } from './Analyze'
 import { Choose } from './Choose'
@@ -93,7 +94,7 @@ function TopBar({ theme, onTheme }: { theme: 'dark' | 'light'; onTheme: () => vo
   }
   return (
     <header style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 72, display: 'flex', alignItems: 'center', padding: '0 28px', borderBottom: '1px solid var(--t-line)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, width: 380 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, width: 500 }}>
         <Mark size={30} colour={theme === 'dark' ? '#e8edf2' : '#12161b'} />
         <span style={{ fontSize: 19, fontWeight: 650, letterSpacing: '-0.02em' }}>Landsight</span>
         <span className="ink3" style={{ fontSize: 14 }}>{t('Quick review')}</span>
@@ -117,17 +118,56 @@ function TopBar({ theme, onTheme }: { theme: 'dark' | 'light'; onTheme: () => vo
           )
         })}
       </nav>
-      <div style={{ width: 380, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 10 }}>
-        {step === 'review' && <button className="btn-g" onClick={desk}>{t('Open the full review desk →')}</button>}
+      <div style={{ width: 500, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 10 }}>
+        {step === 'review' && <button className="btn-g" onClick={desk} style={{ flex: 'none', whiteSpace: 'nowrap' }}>{t('Open the full review desk →')}</button>}
         <div className="seg" data-dir="lang">
           <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
           <button className={lang === 'zh-TW' ? 'on' : ''} onClick={() => setLang('zh-TW')}>中</button>
         </div>
+        {!isTryDirector() && <CurrencyMenu />}
         <button className="btn-g" onClick={onTheme} title={theme === 'dark' ? t('Light') : t('Dark')} style={{ display: 'grid', placeItems: 'center', width: 36, height: 36 }}>
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
       </div>
     </header>
+  )
+}
+
+const CURRENCY_NAME: Record<Currency, string> = { twd: 'NT$ TWD', usd: '$ USD' }
+
+/** The currency, a menu of its own beside the language: neither one moves the other. Not in a film take, whose frames
+ * stay as they were recorded. */
+function CurrencyMenu() {
+  const { cur, setCur } = useCurrency()
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (!open) return
+    const close = () => setOpen(false)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('pointerdown', close)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('pointerdown', close)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+  return (
+    <div className="cur-menu" data-dir="nav-currency" onPointerDown={(e) => e.stopPropagation()}>
+      <button aria-haspopup="listbox" aria-expanded={open} title={t('Currency')} onClick={() => setOpen(!open)}>
+        {CURRENCY_NAME[cur]} <ChevronDown size={14} />
+      </button>
+      {open && (
+        <div role="listbox" aria-label={t('Currency')}>
+          {(['twd', 'usd'] as const).map((c) => (
+            <button key={c} role="option" aria-selected={c === cur} className={c === cur ? 'on' : ''} data-dir={`nav-currency-${c}`} onClick={() => { setCur(c); setOpen(false) }}>
+              {CURRENCY_NAME[c]}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
