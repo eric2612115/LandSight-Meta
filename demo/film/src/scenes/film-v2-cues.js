@@ -13,7 +13,7 @@ import aligned from './voice-v2.json' with {type: 'json'};
 export const WPS = 155 / 60;
 
 /**
- * v6: the private-mode beat (the clone: "Confidential drawings? Run it on Meta's open weights, in a deployment you control.
+ * v6: the private-mode beat ("Confidential drawings? Run it on Meta's open weights, in a deployment you control.
  * Same result."), inserted before the type card: every cue from INSERT_AT on is INSERT_S later than in V2 (the type card
  * and its hit, Part 2, the night end, the closing lines, the logo, the end hold).
  */
@@ -137,7 +137,7 @@ export const V2 = {
    * are timed at 155 wpm from `at`. `pictureUntil` is the end of the line's picture.
    */
   voice: [
-    // the opening, spoken by Eric's clone since he no longer appears on camera (scripts/opening-v3.py); timed from
+    // the opening, in the narration voice since he no longer appears on camera (scripts/opening-v3.py); timed from
     // voice-v2.json like the narration, its numbers a beat after the cold open's cards (5.1, 8.4, 13.0)
     {n: 1, at: 0.331, who: 'Eric', text: 'Every building gets approved on drawings like these.'},
     {n: 2, at: 3.78, who: 'Eric', text: 'A landscape package is thirty files, and checking it by hand takes about two weeks.'},

@@ -7,13 +7,13 @@
  *   sheets of the grid; plus the measured length of every voice clip.
  * - public/v7/sheets/<id>.png: the thirty sheets as 1050 × 570 textures (each render padded onto white at the tower
  *   renders' 2100 × 1140 aspect); public/v7/lc1.png the typical plate at full size.
- * - public/audio/v7-eric/line-NN.mp3: the Part 1 voice, Eric's clone (ElevenLabs, eleven_v4); audio/music/v7-m1.mp3
- *   (ElevenLabs Music); audio/sfx/v7-<kind>.mp3 (ElevenLabs sound effects). Skipped when the file exists; 429s retried.
+ * - public/audio/v7-eric/line-NN.mp3: the Part 1 voice; audio/music/v7-m1.mp3
+ *   (instrumental); audio/sfx/v7-<kind>.mp3. Skipped when the file exists; 429s retried.
  * - public/gen/story-v7-mix.wav: the mix — voice at −16 LUFS, music ducked −8 dB under the voice and to near silence
  *   at 1:19–1:22, effects, the whole at −14 LUFS integrated, true peak −1 dB (ffmpeg loudnorm, two passes).
  * - demo/props/sheets-a3.pdf: the greenfield L-1, L-3, L-6 and the tower L-101…L-104, one per A3 page, for printing.
  *
- * Usage: node story-v7-prepare.mjs [--no-audio] [--no-mix] [--no-pdf]. ELEVENLABS_API_KEY from the environment
+ * Usage: node story-v7-prepare.mjs [--no-audio] [--no-mix] [--no-pdf]. SPEECH_API_KEY from the environment
  * (never printed). Node 24 (node:sqlite); ffmpeg at /opt/homebrew/bin/ffmpeg; python via `uv run` from the repo root.
  */
 import {execFileSync, spawnSync} from 'node:child_process';
@@ -153,14 +153,16 @@ function propsPdf() {
 }
 if (!args.has('--no-pdf')) propsPdf();
 
-// ---------------------------------------------------------------- ElevenLabs
-const KEY = process.env.ELEVENLABS_API_KEY;
+// ---------------------------------------------------------------- soundtrack
+const KEY = process.env.SPEECH_API_KEY;
+const API = (process.env.SPEECH_API_BASE || '').replace(/\/$/, '');
+const HEADER = process.env.SPEECH_API_HEADER;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-async function eleven(path, body, out, label) {
+async function fetchAudio(path, body, out, label) {
   if (existsSync(out)) return false;
-  if (!KEY) throw new Error(`ELEVENLABS_API_KEY is not set (needed for ${label})`);
+  if (!KEY || !API || !HEADER) throw new Error(`SPEECH_API_KEY, SPEECH_API_BASE and SPEECH_API_HEADER are required (needed for ${label})`);
   for (let attempt = 0; attempt < 6; attempt++) {
-    const res = await fetch(`https://api.elevenlabs.io${path}`, {method: 'POST', headers: {'xi-api-key': KEY, 'content-type': 'application/json', accept: 'audio/mpeg'}, body: JSON.stringify(body)});
+    const res = await fetch(`${API}${path}`, {method: 'POST', headers: {[HEADER]: KEY, 'content-type': 'application/json', accept: 'audio/mpeg'}, body: JSON.stringify(body)});
     if (res.ok) {
       writeFileSync(out, Buffer.from(await res.arrayBuffer()));
       console.log(`  ${label} → ${out.replace(PUB + '/', '')}`);
@@ -177,23 +179,23 @@ async function eleven(path, body, out, label) {
   }
   throw new Error(`${label}: gave up after 6 attempts`);
 }
-const voiceId = readFileSync(join(HERE, 'audio', 'eric-clone', 'voice_id_v2.txt'), 'utf8').trim();
+const voiceId = readFileSync(process.env.VOICE_ID_FILE, 'utf8').trim();
 const voiceFile = (n) => join(PUB, 'audio', 'v7-eric', `line-${String(n).padStart(2, '0')}.mp3`);
 const sfxFile = (kind) => join(PUB, 'audio', 'sfx', `v7-${kind}.mp3`);
 const musicFile = join(PUB, V7.music.file);
 
 async function sound() {
-  console.log('voice (Eric clone, eleven_v4)');
+  console.log('voice');
   for (const v of V7.voice) {
-    await eleven(`/v1/text-to-speech/${voiceId}?output_format=mp3_44100_192`, {text: v.text, model_id: 'eleven_v4', voice_settings: {stability: 0.65, similarity_boost: 0.9, style: 0, use_speaker_boost: true}}, voiceFile(v.n), `line ${v.n}`);
+    await fetchAudio(`/v1/text-to-speech/${voiceId}?output_format=mp3_44100_192`, {text: v.text, model_id: process.env.SPEECH_MODEL, voice_settings: {stability: 0.65, similarity_boost: 0.9, style: 0, use_speaker_boost: true}}, voiceFile(v.n), `line ${v.n}`);
   }
   console.log('effects');
   for (const [kind, spec] of Object.entries(V7.sfx.kinds)) {
-    await eleven(`/v1/sound-generation?output_format=mp3_44100_192`, {text: spec.text, duration_seconds: spec.seconds, prompt_influence: 0.5}, sfxFile(kind), `sfx ${kind}`);
+    await fetchAudio(`/v1/sound-generation?output_format=mp3_44100_192`, {text: spec.text, duration_seconds: spec.seconds, prompt_influence: 0.5}, sfxFile(kind), `sfx ${kind}`);
   }
   console.log('music M1');
   try {
-    await eleven(`/v1/music?output_format=mp3_44100_192`, {prompt: V7.music.prompt, music_length_ms: V7.music.seconds * 1000, model_id: 'music_v1'}, musicFile, 'M1');
+    await fetchAudio(`/v1/music?output_format=mp3_44100_192`, {prompt: V7.music.prompt, music_length_ms: V7.music.seconds * 1000, model_id: process.env.MUSIC_MODEL}, musicFile, 'M1');
   } catch (e) {
     console.log(`  M1 failed: ${String(e.message).slice(0, 200)} — the mix will run without music if the file is missing`);
   }

@@ -1,10 +1,10 @@
-"""The private-mode beat's line, spoken by Eric's clone: inserted before the type card at INSERT_AT (scripts/voice-v3.py,
+"""The private-mode beat's line, spoken by the narration voice: inserted before the type card at INSERT_AT (scripts/voice-v3.py,
 src/scenes/film-v2-cues.js), its first word 0.2 s in (as early as 0.1 s in if it needs to), ending inside the beat's 6 s
 (0.05 s before it ends, before the type card fades in). The brief asked for about 5.6 s; no take is shorter than 5.83 s at
 ×1.05 (all three are listed in private.json).
 
 Same voice, model, settings as the narration; context: narration line 18 before it, line 19 after it. Up to three takes:
-the first that fits (sped up at most ×1.05) and passes the speech-to-text check (scribe_v1, every word heard) is used.
+the first that fits (sped up at most ×1.05) and passes the speech-to-text check (every word heard) is used.
 Writes audio/voice-v3/private.wav (the line's stem, 48 kHz mono, at the narration's level), audio/voice-v3/private.json and
 entry 28 of src/scenes/voice-v3.json (the line, timed to its words like the narration).
 

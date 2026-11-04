@@ -1,16 +1,16 @@
-"""Narration v3 (D-93): Eric's clone speaks the script rewritten for speech (narration-v3.json), and every line is fitted
+"""Narration v3 (D-93): the narration voice speaks the script rewritten for speech (narration-v3.json), and every line is fitted
 to its v2 window. What changed from v2, and why:
 
   · Each request carries the neighbouring lines (previous_text / next_text), so the intonation runs on from line to line.
-  · The clone is less steady (stability 0.5, style 0.2, speaker boost).
+  · The voice is less steady (stability 0.5, style 0.2, speaker boost).
   · Pauses stay as spoken. Only a pause longer than 0.6 s is shortened, to 0.45 s, and only in its silent stretches, so a
     breath at a sentence break stays. (v2 cut every pause to 0.2 s.)
   · Up to three takes per line (line-<n>.mp3, line-<n>b.mp3, line-<n>c.mp3, each beside its character alignment). The
-    first take that fits its window as spoken and passes an ElevenLabs speech-to-text check (scribe_v1, every word
+    first take that fits its window as spoken and passes a speech-to-text check (every word
     recognised) is used; else the least-long passing take if it is at most 5 % long, sped up (atempo ≤ 1.05, pitch
     kept); else a line with a filler word ("Just", "Here,", "just", "right") drops it and gets three more takes (d, e, f).
     A line that still cannot meet every rule keeps its best take and is flagged in picks.json.
-  · The character times are ElevenLabs' alignment, carried through every cut and tempo change. Its grid is coarse and can
+  · The character times are the returned alignment, carried through every cut and tempo change. Its grid is coarse and can
     put a word beside a pause ~0.3 s off, so where the word heard by speech-to-text starts more than 0.15 s away, the
     heard times win (the captions are timed from these).
 
@@ -23,7 +23,7 @@ Writes audio/voice-v3/narration.wav (the narration stem, 48 kHz mono, every line
 audio/voice-v3/picks.json (what was chosen and why) and src/scenes/voice-v3.json (voice-v2.json's schema: each line's
 start, end, tempo, take, text and its characters' times in film seconds). scripts/audio-v3.py mixes the stem.
 
-The key comes from the environment (ELEVENLABS_API_KEY) and is never printed; requests go through curl (the key on
+The key comes from the environment (SPEECH_API_KEY) and is never printed; requests go through curl (the key on
 curl's stdin, never on its command line).
 
     set -a; . <env file>; set +a; uv run python demo/film/scripts/voice-v3.py
@@ -45,10 +45,10 @@ OUT = HERE / 'audio' / 'voice-v3'
 SCENES = HERE / 'src' / 'scenes'
 FFMPEG = '/opt/homebrew/bin/ffmpeg'
 SR = 48000
-API = 'https://api.elevenlabs.io'
-VOICE = (HERE / 'audio' / 'eric-clone' / 'voice_id_v2.txt').read_text().strip()
-MODEL = 'eleven_v4'
-# as specified for v3; GET /v1/models lists style and speaker boost as unsupported by eleven_v4, so those two likely do nothing
+API = os.environ['SPEECH_API_BASE'].rstrip('/')
+VOICE = Path(os.environ['VOICE_ID_FILE']).read_text().strip()
+MODEL = os.environ['SPEECH_MODEL']
+# style and speaker boost may be ignored by the model, so those two may do nothing
 SETTINGS = {'stability': 0.5, 'similarity_boost': 0.9, 'style': 0.2, 'use_speaker_boost': True}
 FORMAT = 'mp3_44100_192'
 OVER, KEEP = 0.6, 0.45  # a pause longer than OVER is shortened to KEEP; every shorter one stays as spoken
@@ -71,7 +71,7 @@ def script() -> dict[int, str]:
 
 def curl(url: str, args: list[str]) -> dict:
     """One API call through curl; the key goes in on stdin as a config line."""
-    cfg = 'header = "xi-api-key: %s"\n' % os.environ['ELEVENLABS_API_KEY']
+    cfg = 'header = "%s: %s"\n' % (os.environ['SPEECH_API_HEADER'], os.environ['SPEECH_API_KEY'])
     p = subprocess.run(['curl', '-sS', '-K', '-', '-w', '\n%{http_code}', *args, url], input=cfg.encode(), capture_output=True)
     body, _, code = p.stdout.decode().rpartition('\n')
     if p.returncode or code != '200':
@@ -332,14 +332,14 @@ def words(s: str) -> list[str]:
 
 
 def heard(n: int, take: str, x: np.ndarray) -> list[dict]:
-    """scribe_v1 on the line as it will be used (cached by its audio)."""
+    """Speech-to-text on the line as it will be used (cached by its audio)."""
     h = hashlib.sha1(x.astype(np.float32).tobytes()).hexdigest()
     f = OUT / f'stt-{n}{take}.json'
     if f.exists() and json.loads(f.read_text()).get('sha1') == h:
         return json.loads(f.read_text())['words']
     tmp = OUT / f'.check-{n}{take}.flac'
     save(tmp, x, 'flac')
-    d = curl(f'{API}/v1/speech-to-text', ['-F', 'model_id=scribe_v1', '-F', 'timestamps_granularity=word', '-F', 'tag_audio_events=false',
+    d = curl(f'{API}/v1/speech-to-text', ['-F', f'model_id={os.environ["STT_MODEL"]}', '-F', 'timestamps_granularity=word', '-F', 'tag_audio_events=false',
                                          '-F', 'language_code=en', '-F', f'file=@{tmp}'])
     tmp.unlink()
     ws = [{'text': w['text'], 'start': w['start'], 'end': w['end']} for w in d['words'] if w.get('type') == 'word']
@@ -359,7 +359,7 @@ def check(text: str, ws: list[dict]) -> tuple[list[str], list[str]]:
 
 
 def retime(text: str, st: list, en: list, ws: list[dict], tol=0.15) -> list[str]:
-    """ElevenLabs' alignment runs on a coarse grid and can place a word beside a pause ~0.3 s off. Where the word heard
+    """The alignment runs on a coarse grid and can place a word beside a pause ~0.3 s off. Where the word heard
     by speech-to-text (in the same audio) starts more than `tol` away, the word's letters take the heard times; then every
     character is kept in order. Returns the words moved."""
     spans = [(m.start(), m.end()) for m in re.finditer(r'\S+', text)]

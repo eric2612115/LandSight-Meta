@@ -3,7 +3,7 @@
  *
  * - public/data/scene1.json: the L-1 sheet the frontend serves (frontend-mock/api/sheets/L-1-revB.svg, inline so it
  *   stays vector-sharp at any push) and the two narration clip lengths (ffprobe).
- * - public/audio/scene1-brian/line-01.wav, line-02.wav: the ElevenLabs reads, loudness-normalised like the v1 film.
+ * - public/audio/scene1-brian/line-01.wav, line-02.wav: the scratch reads, loudness-normalised like the v1 film.
  * - public/gen/scene1-sfx.wav: the mixed effects track: room tone, one tick at the scan, a rasp per stroke as the
  *   twelve separate, the snap and the soft chime when they close (cues from src/scenes/scene1-cues.js).
  *
@@ -36,7 +36,7 @@ const narration = {voice: 'Brian', dir: `audio/${VOICE_DIR}`, clips: {}};
 mkdirSync(join(PUB, 'audio', VOICE_DIR), {recursive: true});
 for (const n of [1, 2]) {
   const src = join(HERE, 'audio', VOICE_DIR, `line-0${n}.mp3`);
-  if (!existsSync(src)) throw new Error(`${relative(REPO, src)} is missing (the ElevenLabs read)`);
+  if (!existsSync(src)) throw new Error(`${relative(REPO, src)} is missing (the scratch read)`);
   const dst = join(PUB, 'audio', VOICE_DIR, `line-0${n}.wav`);
   if (!existsSync(dst) || statSync(dst).mtimeMs <= statSync(src).mtimeMs) {
     // v1 normalises its lines to -16 LUFS under music; here the voice carries the mix, so -15.2 lands the scene at -17 LUFS

@@ -41,7 +41,7 @@ export const ANIM = {
     [178, 180, 'End', 2],
   ],
 
-  /** The voice, Eric's clone, one file per line at the script's start; `until` is the line's window (the next cue). */
+  /** The voice, one file per line at the script's start; `until` is the line's window (the next cue). */
   voice: [
     {n: 1, at: 3.2, until: 10.5, text: 'Every building is approved on paper.'},
     {n: 2, at: 10.5, until: 15.5, text: 'One sheet stands for four floors.'},
@@ -58,7 +58,7 @@ export const ANIM = {
     {n: 13, at: 69.5, until: 76.2, text: 'Nonsense — a pool in mid-air, a tree off the site — goes straight back.'},
     {n: 14, at: 76.2, until: 79.3, text: 'The details, flagged one by one.'},
     {n: 15, at: 79.3, until: 86.3, text: 'Two weeks — in about two minutes.'},
-    {n: 16, at: 86.3, until: 90.5, text: "No more of this. Here's the real product.", standIn: 'L-TURN: Eric records his own audio; the clone stands in'},
+    {n: 16, at: 86.3, until: 90.5, text: "No more of this. Here's the real product.", standIn: 'L-TURN: Eric records his own audio; the narration voice stands in'},
     {n: 17, at: 90.5, until: 100.2, text: 'Drop the folder exactly as it came — backups, scans, four versions of the bill. Every file gets a verdict.'},
     {n: 18, at: 100.2, until: 107.3, text: 'It reads the project off the title block. Choose what to check. Analyze.'},
     {n: 19, at: 107.3, until: 117.3, text: 'Muse Spark reads every sheet and document. SAM measures the colours. Geometry does the counting.'},

@@ -5,15 +5,15 @@ file_count = 30. Gauge numbers for the captions: provided 266 → required 297; 
 215; +7 trees, or one species change → 349. (The voice says "two more trees" and "seven". It speaks none of the
 other gauge numbers.) Numbers are written out as words so the TTS reads them the same way every time.
 
-## Voices (ElevenLabs, premade, model `eleven_v4`)
+## Voices
 
-| Folder | Voice | voice_id |
-|---|---|---|
-| `audio/v1-brian/` | Brian: deep, resonant, middle-aged American male | `nPczCjzI2devNBz1zQrb` |
-| `audio/v1-alice/` | Alice: clear, middle-aged British female | `Xb7hH8MSUJpSbSDYk0k2` |
+| Folder | Voice |
+|---|---|
+| `audio/v1-brian/` | Brian: deep, resonant, middle-aged American male |
+| `audio/v1-alice/` | Alice: clear, middle-aged British female |
 
 voice_settings: stability 0.85, similarity_boost 0.75, style 0.0, use_speaker_boost true, speed 1.0.
-Output mp3_44100_128. Every clip came from `eleven_v4`; the turbo fallback was not needed.
+Output mp3_44100_128.
 
 ## Lines
 
@@ -73,6 +73,6 @@ Characters sent to TTS: 3,570 across both voices (1,672 per voice for the final 
 
 - `audio/v1-brian/beat-01.mp3` … `beat-11.mp3`, `audio/v1-brian/all-beats.mp3`
 - `audio/v1-alice/beat-01.mp3` … `beat-11.mp3`, `audio/v1-alice/all-beats.mp3`
-- `audio/music/open.mp3`: 20 s, low sparse tense bed for beats 1–2 (ElevenLabs Music, `music_v1`, instrumental)
+- `audio/music/open.mp3`: 20 s, low sparse tense bed for beats 1–2 (instrumental)
 - `audio/music/close.mp3`: 20 s, warm resolving cue for beat 11 (same)
 - `audio/sfx/tick.wav` (60 ms), `snap.wav` (120 ms), `thud.wav` (200 ms), `chime.wav` (500 ms): ffmpeg synthesis, 48 kHz

@@ -1,10 +1,10 @@
-"""The final sound of Film v6: the clone's voice from the first word, music C2 (Eric's pick: minimal electronic with hand
+"""The final sound of Film v6: the narration voice from the first word, music C2 (Eric's pick: minimal electronic with hand
 claps and finger snaps), and clap accents placed exactly on the cuts. Mixed in one pass.
 
   · Voice: the opening (audio/voice-v3/opening.wav, scripts/opening-v3.py) and the narration (audio/voice-v3/narration.wav).
   · Music: scripts/music-v4.py's C2 pieces, each on its cut as audio-v4.py places them (the cold open from 0, the build's
     first beat on the push at 14.9, Part 2 on 94.1, the night swell on 155.3, the final chord on the logo at 163.3).
-  · Claps, placed (ElevenLabs sound effects, scripts/music-v4.py): one on each of the cold open's cards (5.1, 8.4, 13.0),
+  · Claps, placed (scripts/music-v4.py): one on each of the cold open's cards (5.1, 8.4, 13.0),
     each a beat before its number is spoken; a stomp and a group clap on the push (14.9); snaps, then claps, stacking up on
     the groove's own beat as the floors build, and one big clap on the materials sweep (20.0); a short clap fill into each
     new explanation beat where the voice leaves room for it.

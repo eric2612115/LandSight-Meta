@@ -8,7 +8,7 @@ import {ANIM} from './animatic-v7-cues.js';
  * building in a simple oblique drawing, arrows and dashed frames for every camera move, a mono label on every object
  * saying what the final will be, the type cards as plain white text at their real positions and times, the live
  * slots as dashed boxes, Part 2 as wireframe panes with a circle for the cursor. Corner: timecode, beat, part.
- * Sound: the voice only (Eric's clone, public/audio/v7-voice), subtitled; a 1 kHz tick at each music cue point.
+ * Sound: the voice only (public/audio/v7-voice), subtitled; a 1 kHz tick at each music cue point.
  */
 export type AnimaticData = {lines: {n: number; at: number; until: number; seconds: number | null; overrun: number | null; text: string}[]; ticks: string};
 export type AnimaticV7Props = {data?: AnimaticData};
@@ -785,7 +785,7 @@ export const AnimaticV7: React.FC<AnimaticV7Props> = ({data}) => {
         <>
           <Live
             title="LIVE L-TURN (1:22–1:30)"
-            lines={['the same dim room · Finder on the sample package folder, list view: .bak, .xls, .zip, scans, four bill versions', 'he scrolls and leans back', `1:25 a lamp clicks on, the room warms ${warm > 0 ? '← lamp on' : ''}`, "he turns to the lens: “No more of this. Here's the real product.” (his own audio; the clone stands in here)", 'fallback: the folder as a screen capture, the light as a grade change, the card below']}
+            lines={['the same dim room · Finder on the sample package folder, list view: .bak, .xls, .zip, scans, four bill versions', 'he scrolls and leans back', `1:25 a lamp clicks on, the room warms ${warm > 0 ? '← lamp on' : ''}`, "he turns to the lens: “No more of this. Here's the real product.” (his own audio; the narration voice stands in here)", 'fallback: the folder as a screen capture, the light as a grade change, the card below']}
             warm={warm}
           />
           {t >= 86.6 ? <Lbl x={120} y={620} text="fallback card: The real product. Recorded, not mocked." size={24} /> : null}

@@ -906,13 +906,12 @@ Trade-off: uploads are kept, never cleaned; one per distinct content, under the 
 
 ## D-83 Three AI systems, three scopes, never mixed — Decided by Eric (2026-11-02 18:30)
 
-ElevenLabs is used for everything that is sound: narration, any spoken line, music, voice. Meta's models (Muse
+The soundtrack (narration, any spoken line, music, voice) is prepared for the film and is not one of the product's model calls. Meta's models (Muse
 Spark 1.3, SAM 3.1) are used for what the product does with drawings, images and data: reading sheets, grouping
 line work, measuring colour, answering the package. Claude's own tooling (Claude Code, Remotion, ffmpeg, Playwright
 capture) does the rest of the film: cutting, camera moves, burned text and subtitles, any still or graphic. No model
 is used outside its scope: no Muse Image for the film's props (the "creative build" idea in WIN-STRATEGY is dropped),
-no Meta model for captions or editing, no ElevenLabs for anything but audio. Why: three systems doing three
-different jobs is explainable to a judge in one line; mixing them is not.
+no Meta model for captions or editing. Why: the product's model calls and the film's picture stay in separate jobs.
 
 ## D-84 The tower stack in the film: real sheets, real flags, the film's own geometry — Proposed (2026-11-02)
 
@@ -1007,7 +1006,7 @@ Eric pointed at two light-studio references (a product film with an exploded mod
 with the MIT "teardown" Claude skill: three.js parts built from code, one timeline driving the model, the panels
 and the sound, captured frame by frame). Our pipeline already works the same way (Remotion + three.js, frame-exact
 capture, 60 fps master), so the skill is not installed: installing runs third-party code, its procedural score
-conflicts with D-83 (sound only through ElevenLabs), and a new pipeline thirty-five hours before the deadline is
+conflicts with D-83 (the soundtrack is already settled), and a new pipeline thirty-five hours before the deadline is
 the wrong risk. What is borrowed is its art direction, which is where our white style frames fell short: ink edges
 on near-white parts, matte white with a darker ground, visible ambient occlusion and contact shadow, one accent on
 the part being examined, labels the viewer must read at 34 px or more on a 1080 canvas, short leader lines, its
@@ -1026,7 +1025,7 @@ its code calls only the local ffmpeg, ffprobe and Python, makes no network reque
 temporary outputs; its dependencies are pinned (three, playwright, esbuild, two font packages). It runs on the local
 Playwright Chromium with the real GPU. The new composition (FilmV4) replaces Part 1's 3D with a teardown-style
 simulator of the sample package (the tower on the site, operator moves following the narration, a sparse console in
-the product's blue) and keeps the opening footage, Part 2's real capture, the captions and the ElevenLabs mix (D-83:
+the product's blue) and keeps the opening footage, Part 2's real capture, the captions and the existing mix (D-83:
 the skill's procedural score is not used). Trade-off: a second full build competes for the remaining budget; the
 backup makes that a risk to the upgrade, not to the submission.
 
@@ -1034,11 +1033,11 @@ backup makes that a risk to the upgrade, not to the submission.
 
 Eric found the narration and captions too "AI". The causes: lines written for the eye (nine em-dash pivots, six
 semicolons, headline fragments such as "On the roof: …"), pauses flattened to a uniform 0.2 s to fit the picture,
-every line generated on its own, and the cut from Eric's real voice to a very even clone. Fillers ("um", "ah") were
-rejected: on a cloned voice they sound staged, each costs half a second in a cut timed to picture, and subtitles
+every line generated on its own, and the cut from Eric's real voice to a very even read. Fillers ("um", "ah") were
+rejected: on this read they sound staged, each costs half a second in a cut timed to picture, and subtitles
 drop them anyway. Instead (demo/film/narration-v3.json): the same 24 lines in spoken English (contractions, short
-sentences, a few questions, no em-dashes or semicolons), the same figures and the same start times, re-voiced with
-the clone at lower stability and some style, each line generated with its neighbours as context, and pauses kept
+sentences, a few questions, no em-dashes or semicolons), the same figures and the same start times, re-voiced at
+lower stability and some style, each line generated with its neighbours as context, and pauses kept
 where the meaning breaks. Trade-off: a new voice pass, mix and backup render, against a film the owner hears as
 written by a machine.
 
@@ -1046,7 +1045,7 @@ Addendum to D-93 (2026-11-04 00:50). The re-voice landed with captions within 0.
 +0.02 s) at −14.0 LUFS. Trade-offs taken: two filler words dropped to fit ("just" in line 5, "Just" in line 13);
 lines 7 and 21 sit at the 1.05 tempo cap, 0.16 s and 0.12 s before the next line (line 7 is shortened to "Two
 sheets? …" to win back a pause; line 21 keeps its wording); "hedge note" was heard as "hedge node" in every take, so
-line 15 says "hedge label"; numbers are never split across two captions. eleven_v4 ignores style and speaker boost,
+line 15 says "hedge label"; numbers are never split across two captions. Style and speaker boost are ignored,
 so the change in delivery comes from the lower stability, the neighbouring-line context and the restored pauses.
 The old-voice backup is kept beside the new one.
 

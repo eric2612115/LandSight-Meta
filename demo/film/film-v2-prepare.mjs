@@ -5,7 +5,7 @@
  *   live/A-1080.mp4, B-1080.mp4  the same at 1080p for the review cut
  *   live/A-last.png              the screen shot's last frame (4K), its menu bar text blurred (scripts/live-menubar.py):
  *                                the push into the monitor warps it
- *   audio/eric.wav               Eric's own voice: B-cut audio → ElevenLabs Audio Isolation → light EQ → −16 LUFS
+ *   audio/eric.wav               Eric's own voice: B-cut audio, then light EQ, then −16 LUFS
  *                                (audio/eric-live/b-voice.wav)
  *   try.mp4, try-1080.mp4        the /try capture (captures/try-4k60.mp4) and its 1080p60 proxy;
  *                                src/scenes/try-v2-cues.json its cues (captures/try-cues.json)

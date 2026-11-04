@@ -195,10 +195,10 @@ Four appearances: hands, face, hands again for one click, face. Voice throughout
    burned lower line `Every number traces back to the drawing.` at 2:49. Then the end card carries his name.
 
 Delivery: flat, unhurried, no "hi I'm Eric", no adjectives, nothing about finance. The flatter the better next to the
-reveals. The body (0:11–2:48) is his voice if his read is flatter and better timed than the ElevenLabs scratch;
+reveals. The body (0:11–2:48) is his voice if his read is flatter and better timed than the scratch read;
 otherwise keep the read and use his face without sync (both face lines are short enough to lip-sync loosely).
 
-Fallbacks: (a) hands only with the ElevenLabs voice — the face shots become the Open screen at 0:06 and the end card
+Fallbacks: (a) hands only with the scratch voice — the face shots become the Open screen at 0:06 and the end card
 at 2:48, the two face lines are read by the voice, and the two face burns move onto those frames (the 0:33.5 insert
 stays: it needs no face); (b) no camera at all
 — the typed-row cold open (v4's beat 1: the bill row typing itself, then the app renders the printed sheet with an
@@ -424,14 +424,14 @@ changes one (a live pass finds 27, the rate date moves), the caption and the voi
     stops above `Billed`, or is burned only; the dock shot is an (R) crop to the bill pane alone (stage x ≈ 597–1045,
     y ≈ 652–813, checked on capture day). Never voice a hedge dollar figure. A product fix (print the rate as $29.25,
     or the bill's own amount) is the better answer and is asked for, but not assumed.
-12. **Timing.** Record the ElevenLabs scratch read of section 4 before any capture and time it against the fit column.
+12. **Timing.** Record the scratch read of section 4 before any capture and time it against the fit column.
     If a take runs long, cut words in this order: "The bill." (beat 10), "every answer replayable" (beat 14), "a hundred
     and thirteen seconds" (beat 14, the caption carries it), "and pinned" (beat 4). Never trim the second before
     Confirm, the two seconds on the line sheet, or the scoreboard hold. The narration is 289 words because that is what
     fits; section 4 states the deviation from the 300–310 band and asks for sign-off on it; do not pad it back toward
     305 without naming the beats that lose their breath.
 13. **Eric's takes.** The 0:06 line carries the film's credibility and must be flat; if it lifts or sells, use the
-    ElevenLabs read under his silent face and credit the voice on the end card. Shoot the hands twice; the highlighter
+    scratch read under his silent face and credit the voice on the end card. Shoot the hands twice; the highlighter
     hesitation on the ninth is the shot, and it is now the opening frame. Shoot the 0:33.5 insert twice as well, in the
     same setup, with the director's `eye` scene parked at its gate (`auto` off, so the gate waits for the click) and
     the camera on frame C; the stiller hand wins, and the click is the take's sound.

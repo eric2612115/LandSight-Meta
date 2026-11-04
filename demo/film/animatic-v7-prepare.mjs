@@ -1,14 +1,14 @@
 /**
  * Film v7 animatic: the voice and the ticks.
  *
- * - audio/v7-voice/line-NN.mp3: every line of Parts 1 and 2 in Eric's cloned voice (ElevenLabs, eleven_v4,
- *   stability 0.65, similarity 0.9, style 0, speaker boost, mp3_44100_192), kept for the final if the lines stay; a
+ * - audio/v7-voice/line-NN.mp3: every line of Parts 1 and 2 in the narration voice
+ *   (stability 0.65, similarity 0.9, style 0, speaker boost, mp3_44100_192), kept for the final if the lines stay; a
  *   line whose text already exists in public/audio/v7-eric (the Part 1 pass) is copied, not re-generated. The files
  *   are mirrored into public/audio/v7-voice for Remotion.
  * - public/gen/animatic-ticks.wav: a 1 kHz tick at each music cue point.
  * - public/data/animatic-v7.json: each line's measured length and its overrun past its window.
  *
- * ELEVENLABS_API_KEY from the environment (never printed); 429s retried with backoff. node animatic-v7-prepare.mjs [--no-audio]
+ * SPEECH_API_KEY from the environment (never printed); 429s retried with backoff. node animatic-v7-prepare.mjs [--no-audio]
  */
 import {execFileSync} from 'node:child_process';
 import {copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync} from 'node:fs';
@@ -27,17 +27,19 @@ const args = new Set(process.argv.slice(2));
 for (const d of [VOICE, PUB_VOICE, join(PUB, 'gen'), join(PUB, 'data')]) mkdirSync(d, {recursive: true});
 
 const file = (n) => join(VOICE, `line-${String(n).padStart(2, '0')}.mp3`);
-const KEY = process.env.ELEVENLABS_API_KEY;
+const KEY = process.env.SPEECH_API_KEY;
+const API = (process.env.SPEECH_API_BASE || '').replace(/\/$/, '');
+const HEADER = process.env.SPEECH_API_HEADER;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const voiceId = readFileSync(join(HERE, 'audio', 'eric-clone', 'voice_id_v2.txt'), 'utf8').trim();
+const voiceId = readFileSync(process.env.VOICE_ID_FILE, 'utf8').trim();
 
 async function tts(text, out, label) {
-  if (!KEY) throw new Error(`ELEVENLABS_API_KEY is not set (needed for ${label})`);
+  if (!KEY || !API || !HEADER) throw new Error(`SPEECH_API_KEY, SPEECH_API_BASE and SPEECH_API_HEADER are required (needed for ${label})`);
   for (let attempt = 0; attempt < 6; attempt++) {
-    const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_192`, {
+    const res = await fetch(`${API}/v1/text-to-speech/${voiceId}?output_format=mp3_44100_192`, {
       method: 'POST',
-      headers: {'xi-api-key': KEY, 'content-type': 'application/json', accept: 'audio/mpeg'},
-      body: JSON.stringify({text, model_id: 'eleven_v4', voice_settings: {stability: 0.65, similarity_boost: 0.9, style: 0, use_speaker_boost: true}}),
+      headers: {[HEADER]: KEY, 'content-type': 'application/json', accept: 'audio/mpeg'},
+      body: JSON.stringify({text, model_id: process.env.SPEECH_MODEL, voice_settings: {stability: 0.65, similarity_boost: 0.9, style: 0, use_speaker_boost: true}}),
     });
     if (res.ok) {
       writeFileSync(out, Buffer.from(await res.arrayBuffer()));
@@ -73,7 +75,7 @@ if (!args.has('--no-audio')) {
     } catch (e) {
       const msg = String(e.message);
       if (/quota_exceeded/.test(msg)) {
-        console.log(`  line ${v.n}: ElevenLabs quota exhausted — this and the later lines are left silent (subtitled from the script): ${msg.match(/You have [^"]*required for this request/)?.[0] ?? ''}`);
+        console.log(`  line ${v.n}: speech quota exhausted — this and the later lines are left silent (subtitled from the script): ${msg.match(/You have [^"]*required for this request/)?.[0] ?? ''}`);
         break;
       }
       throw e;

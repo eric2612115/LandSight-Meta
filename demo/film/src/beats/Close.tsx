@@ -33,7 +33,7 @@ export const Close: React.FC<{data: FilmData; narrator: string; repoUrl: string}
         {row('built', 'Nov 1–4, 2026')}
         {row('code', repoUrl, true)}
         {row('drawings', 'synthetic, answer key in repo')}
-        {row('narration', `ElevenLabs · ${voice} (scratch read)`)}
+        {row('narration', `${voice} (scratch read)`)}
       </div>
     </AbsoluteFill>
   );

@@ -78,7 +78,7 @@ export const V7 = {
     {text: 'The real product. Recorded, not mocked.', at: 86.6, until: 90.0, place: 'centre', scrim: false, fallbackL3: true},
   ],
 
-  /** The voice, one ElevenLabs file per line (Eric's clone), at the script's start times. */
+  /** The voice, one file per line, at the script's start times. */
   voice: [
     {n: 1, at: 3.2, text: 'Every building is approved on paper.'},
     {n: 2, at: 10.5, text: 'One sheet stands for four floors.'},
@@ -98,7 +98,7 @@ export const V7 = {
     {n: 16, at: 86.5, text: "Here's the real product."},
   ],
 
-  /** Music M1: one 90 s bed from ElevenLabs Music; the dip and return are shaped in the mix. */
+  /** Music M1: one 90 s instrumental bed; the dip and return are shaped in the mix. */
   music: {
     file: 'audio/music/v7-m1.mp3',
     seconds: 90,
@@ -110,7 +110,7 @@ export const V7 = {
     end: {fadeFrom: 88.6, fadeTo: 90.0},
   },
 
-  /** The effects: a short ElevenLabs sound per kind, placed at the cue. */
+  /** The effects: a short sound per kind, placed at the cue. */
   sfx: {
     kinds: {
       'sub-hit': {text: 'A single deep cinematic sub bass hit, clean and dry, short tail', seconds: 2.0},

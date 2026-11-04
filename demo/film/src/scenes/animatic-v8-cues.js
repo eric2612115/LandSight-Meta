@@ -31,7 +31,7 @@ export const V8 = {
     {text: '30 planted · 28 found · 2 flagged · 0 missed', at: CLOSE_AT + 0.4, until: LOCKUP_AT},
   ],
 
-  /** The voice (subtitles; the clone later): `at` is the script's start, `pictureUntil` the end of the picture it sits on. */
+  /** The voice (subtitles): `at` is the script's start, `pictureUntil` the end of the picture it sits on. */
   voice: [
     {n: 1, at: 0.3, pictureUntil: 6, text: 'This is how a landscape package gets checked today. Thirty files, two weeks, one person boxing errors by hand.'},
     {n: 2, at: 8.0, pictureUntil: 10, text: 'Because a building arrives as a stack of drawings —'},

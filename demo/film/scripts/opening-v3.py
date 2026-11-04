@@ -1,11 +1,11 @@
-"""The opening, spoken by Eric's clone (he no longer appears on camera, so his recorded voice gives way to the voice of the
+"""The opening, spoken by the narration voice (he no longer appears on camera, so his recorded voice gives way to the voice of the
 narration): four lines, placed so the key words land on the cold open's number cards, each a beat after the clap on the
 card ("thirty" 5.1, "two" 8.4, "ten" 13.0; the word starts LAG after the card).
 
 Same voice, model, settings and neighbouring-line context as the narration (scripts/voice-v3.py, whose functions this
 uses); the last line's next_text is narration line 4. Up to three takes per line: the first take that can be placed (gaps
-of at least 0.2 s between the lines, the briefed starts and ends kept) and passes the speech-to-text check (scribe_v1,
-every word heard) is used; its word times (scribe's) place it. A line may be sped up (atempo ≤ 1.05), and the pause after
+of at least 0.2 s between the lines, the briefed starts and ends kept) and passes the speech-to-text check
+(every word heard) is used; its heard word times place it. A line may be sped up (atempo ≤ 1.05), and the pause after
 "I'm Eric." may be lengthened so the line starts near 9.2 s.
 
 Writes audio/voice-v3/opening.wav (the opening's stem, 48 kHz mono, at the narration's level), audio/voice-v3/opening.json

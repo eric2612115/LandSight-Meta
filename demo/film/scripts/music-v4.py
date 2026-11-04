@@ -1,13 +1,13 @@
-"""The score of Film v6 (two variants for Eric to choose) and its effects, from ElevenLabs.
+"""The score of Film v6 (two variants for Eric to choose) and its effects.
 
-  · Music (ElevenLabs Music, music_v1): one instrumental piece per variant, written from a composition plan whose sections
+  · Music: one instrumental piece per variant, written from a composition plan whose sections
     follow the cut (the cold open's gates, the build, the explanations, the type card, Part 2, the night end, the logo).
     A: cinematic electronic. B: cinematic minimal (felt piano, strings, percussive hits).
-  · Effects (ElevenLabs sound effects): risers into the cold open's numbers, the push's whoosh and impact, build ticks,
+  · Effects: risers into the cold open's numbers, the push's whoosh and impact, build ticks,
     the material shimmer, soft whooshes, restrained impacts, the swell into the night. Part 2's clicks and the card's hit
     are V2's (audio/sfx-v2).
 Writes audio/music-v4/<variant>.mp3 (+ the request beside it) and audio/sfx-v4/<name>.mp3. Files already made with the
-same request are kept. The key comes from the environment (ELEVENLABS_API_KEY), on curl's stdin, and is never printed.
+same request are kept. The key comes from the environment (SPEECH_API_KEY), on curl's stdin, and is never printed.
 
     set -a; . <env file>; set +a; uv run python demo/film/scripts/music-v4.py [A] [B] [sfx]
 """
@@ -21,7 +21,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent.parent
 MUSIC = HERE / 'audio' / 'music-v4'
 SFX = HERE / 'audio' / 'sfx-v4'
-API = 'https://api.elevenlabs.io'
+API = os.environ['SPEECH_API_BASE'].rstrip('/')
 END = 166.322  # the film's length (V2's timeline)
 LOGO = 162.95  # the logo starts to fade in (LOGO_AT); sets the pieces' lengths only: audio-v4.py lands the final chord at 163.3, the logo fully in
 
@@ -135,7 +135,7 @@ EFFECTS = {
 
 
 def curl(url: str, body: dict, out: Path) -> None:
-    cfg = 'header = "xi-api-key: %s"\n' % os.environ['ELEVENLABS_API_KEY']
+    cfg = 'header = "%s: %s"\n' % (os.environ['SPEECH_API_HEADER'], os.environ['SPEECH_API_KEY'])
     tmp = out.with_suffix('.request.tmp')
     tmp.write_text(json.dumps(body))
     p = subprocess.run(['curl', '-sS', '-K', '-', '-w', '%{http_code}', '-o', str(out), '-H', 'Content-Type: application/json',
@@ -161,7 +161,7 @@ def music(v: str) -> None:
     for piece in PIECES:
         if any(name not in SECTIONS[v] for name, _, _ in PIECES[piece][3]):
             continue  # a piece this variant has no sections for (the private beat is C2's only)
-        body = {'composition_plan': plan(v, piece), 'model_id': 'music_v1', 'respect_sections_durations': True}
+        body = {'composition_plan': plan(v, piece), 'model_id': os.environ['MUSIC_MODEL'], 'respect_sections_durations': True}
         meta = MUSIC / f'{v}-{piece}.json'
         if meta.exists() and json.loads(meta.read_text()) == body and (MUSIC / f'{v}-{piece}.mp3').exists():
             continue

@@ -1,13 +1,13 @@
 """The sound of the v2 film, mixed in one pass (film seconds from audio/voice-v2/timeline.json; node film-v2-timeline.mjs).
 
-  · Eric's own voice opens (audio/eric-live/b-voice.wav: B-cut → ElevenLabs Audio Isolation → light EQ).
-  · Every narration line is his clone (scripts/voice-v2.py, with timestamps). Each line is tightened — pauses longer than
+  · Eric's own voice opens (audio/eric-live/b-voice.wav: B-cut, then light EQ).
+  · Every narration line is the narration voice (scripts/voice-v2.py, with timestamps). Each line is tightened — pauses longer than
     0.28 s inside it are shortened to 0.2 s at their quiet middle — then placed at its cue, a little earlier when the line
     before has ended, and only if it still overruns its picture sped up (pitch kept, at most ×1.07). The character times
     follow every edit; src/scenes/voice-v2.json carries them so the captions are timed to the words.
-  · Music (ElevenLabs Music): a calm bed under Part 1 (audio/music-v2/bed1.mp3), out under "Two weeks → ten minutes.";
+  · Music: a calm bed under Part 1 (audio/music-v2/bed1.mp3), out under "Two weeks → ten minutes.";
     a lighter one under Part 2 and the end (bed2.mp3), its resolve landing on the logo. Voice ducks the music.
-  · Effects (ElevenLabs sound effects, audio/sfx-v2): whooshes on the big transitions, soft clicks on the capture's clicks,
+  · Effects (audio/sfx-v2): whooshes on the big transitions, soft clicks on the capture's clicks,
     a gentle hit under each big-type card.
   · Mix: −14 LUFS integrated, true peak ≤ −1 dBTP (gain, then a look-ahead limiter on the 4× oversampled signal).
 Writes public/v2/audio/mix.wav (48 kHz, 24-bit stereo) and prints the schedule and the measured figures.

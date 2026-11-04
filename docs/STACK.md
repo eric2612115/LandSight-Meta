@@ -479,8 +479,8 @@ The film is cut in Remotion 4.0.535 (demo/film: `Film.tsx`, beats from `beats.js
 from the Run, never typed). The app's director scenes are captured by Playwright 1.56.1 under a frozen clock
 (`lib/vclock.js` replaces setTimeout, requestAnimationFrame, performance.now and Date.now and steps 1/30 s per frame;
 each frame a lossless screenshot piped to ffmpeg), with the app's sound cues logged at their virtual time and mixed on
-those cues. Narration is ElevenLabs premade voices on `eleven_v4` (Brian default, Alice as a flag); the two music beds
-are ElevenLabs Music (`music_v1`, instrumental). `landsight-v1.mp4` (3:00, script v4) exists; v2 waits for the script.
+those cues. Narration is a prepared voice track. The two music beds
+are instrumental. `landsight-v1.mp4` (3:00, script v4) exists; v2 waits for the script.
 
 ## 13 Limits
 
