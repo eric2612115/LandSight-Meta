@@ -1,4 +1,4 @@
-"""Ask the package (the agentic layer, docs/WIN-STRATEGY.md): the corpus is the package's own material, retrieval is
+"""Ask the package (the agentic layer): the corpus is the package's own material, retrieval is
 BM25, the six recorded questions replay with every citation found in the source it names, and the proposed actions
 write confirmations, price rows, notes and flags to landsight.db and the Run."""
 

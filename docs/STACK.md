@@ -247,8 +247,8 @@ re-recorded live on 2026-11-02 when their keys gained the tag, and the 15 untagg
 30/28/2/0/0, 8/6/2/0/0, 11/10/1/0/0). SAM's key is the image hash plus the phrase; a question's key is the question
 plus the prompt hash. In `fixtures` mode a missing recording raises
 `FixtureMissing` and the check notes it; nothing is invented. The review replays in 14.2–14.4 s on the CLI path
-(4.9 s with SAM's decoding memo warm; 12.9–13.1 s in the gate runs; 10.4 s for the API open through the proxy in
-GATE-RUN-2).
+(4.9 s with SAM's decoding memo warm; 12.9–13.1 s in the fresh-clone runs; 10.4 s for the API open through the
+proxy in the second).
 
 **Live.** `--live` (CLI) / `?live=1` (API) with `MODEL_API_KEY` asks Muse Spark and SAM 3.1 for every prompt that has
 no recording and records it (one run per prompt; a prompt with a recording replays, so a second live pass on the same
@@ -447,12 +447,11 @@ upload).
 review … --fixtures`, `uv run pytest -q`, `landsight serve --port 8795`; `npm ci`, `npm run dev`; then
 http://localhost:5195 and the director URL; a drag of the folder onto the drop zone as the alternative to the path.
 
-**The AI-judge gate runs** (docs/GATE-RUN-1.md, GATE-RUN-2.md): a judge agent cloned the repo and ran the playbook as
-written. Run 1 (2026-11-02 ~07:55): every step passed except `npm run dev` on a busy :5195 (strictPort at the time);
-141 pytest passes; scoreboard as stated; three judges weighted 77, 69.75 and 70. Run 2 (~10:20, after the fixes and the
-currency toggle): every command ran as written, Vite took :5196, 157 passes; three judges weighted 74.5, 77 and 78.
-Both named the same limit: without a Meta key a
-judge sees replays, and with one a second live pass replays what is recorded unless `--fresh` is used (hence D-62).
+**Fresh-clone runs:** the playbook was run as written from a fresh clone, twice on 2026-11-02. Run 1 (~07:55): every
+step passed except `npm run dev` on a busy :5195 (strictPort at the time); 141 pytest passes; scoreboard as stated. Run 2
+(~10:20, after the fixes and the currency toggle): every command ran as written, Vite took :5196, 157 passes. Both named
+the same limit: without a Meta key a judge sees replays, and with one a second live pass replays what is recorded
+unless `--fresh` is used (hence D-62).
 
 ## 11 Repo layout
 
@@ -465,11 +464,9 @@ samples/        greenfield/, heldout/, tower/: each a package folder with its an
 tests/          pytest (21 files) and fixtures/: every recorded Meta answer
 scripts/        eval.py (the accuracy table), frontend_mock.py, sam_probe.py, naive_probe.py, make_detail_sheet.py,
                 record_conditional.py, recording notes (capture.md, review_live.md)
-docs/           API, DECISIONS (D-01…D-82), STACK, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, GATE-RUN-1/2, OVERNIGHT,
-                REPORT-2026-11-02, WIN-STRATEGY, research/
-demo/           the film: SCRIPT, THESIS, JUDGES-v1, DESIGN, HOOKS, SUBMISSION, WRITERS-ROOM, writers-room-v5/, film/
-                (the Remotion project and landsight-v1.mp4)
-design/         explore/: the three design directions (a drawing room, b review desk, c ledger) the screen was built from
+docs/           API, DECISIONS (D-01…D-98), STACK, NEW-MODES, PLAN, PLAN-V2, PACKAGE, JUDGE-PLAYBOOK, research/
+demo/           the film: SCRIPT (the beat sheet the director scenes follow), DESIGN, TRY-UI, SUBMISSION, film/ (the
+                Remotion project)
 spike/          the 2026-11-01 probes that fixed the division of labour (D-03)
 out/            git-ignored: uploads/<hash>/ and scratch renders
 landsight.db    git-ignored: the local database (§7)

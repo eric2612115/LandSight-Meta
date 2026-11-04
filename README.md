@@ -244,7 +244,7 @@ What each step shows: `package` writes the 30-file package, the firm's price lis
 an earlier copy in the same folder); `review` prints every file verdict, the 22 sheets it read (20 DXF and vector
 PDF pages, 2 raster pages read for their title blocks), the 12 take-off items (8 from the CAD, 4 measured by SAM 3.1 on
 the raster plan, awaiting confirmation), 71 checks and the scoreboard line above;
-`pytest` runs the Python tests, all passing (about 2–4 minutes; the frontend's are `npm test` in frontend/); `serve` answers `GET /api/health` and prints its address only once
+`pytest` runs the Python tests, all passing (about 4 minutes on a laptop, longer on a busy machine; the frontend's are `npm test` in frontend/); `serve` answers `GET /api/health` and prints its address only once
 it is listening. Without the backend the screen falls back to `frontend-mock/` (the same Run, recorded); the corner
 toggle says which (`live`, `repo mock`).
 
@@ -339,7 +339,7 @@ frontend-mock/ the API's real responses for the sample package, with every image
 samples/       greenfield/: the sample package, the firm's price list and the answer key
 tests/         pytest; fixtures/: the recorded Meta answers
 scripts/       eval.py (the accuracy table), frontend_mock.py, recording scripts
-docs/          API, DECISIONS, PLAN, PACKAGE, JUDGE-PLAYBOOK, research/
+docs/          API, DECISIONS, STACK, NEW-MODES, PLAN, PACKAGE, JUDGE-PLAYBOOK, research/
 demo/          the film's script, design brief and Remotion project
 spike/         the 2026-11-01 probes that fixed the division of labour (D-03)
 ```

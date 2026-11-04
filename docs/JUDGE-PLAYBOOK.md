@@ -51,7 +51,7 @@ planted 30 · found 28 · flagged 2 · missed 0 · false alarms 0
 ```bash
 uv run pytest -q
 ```
-The tests (about 2–4 minutes), all passing.
+The tests (about 4 minutes on a laptop, longer on a busy machine), all passing.
 
 ```bash
 uv run python -m landsight serve --port 8795

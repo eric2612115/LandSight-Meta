@@ -8,6 +8,7 @@ import { useResolvedSource } from '../lib/api'
 import { sourceName } from '../lib/ask'
 import { RECORDED } from '../lib/askMock'
 import { kindName } from '../lib/english'
+import { useMoney } from '../lib/money'
 import type { Run } from '../lib/types'
 import { askTry, RECORDED_T10 } from './data'
 import { t, useLang } from './i18n'
@@ -90,6 +91,7 @@ export function AskPanel({ run }: { run: Run }) {
 }
 
 function TurnView({ x, run }: { x: Turn; run: Run }) {
+  const m = useMoney(run.currency)
   const { chat, marks, checked, set } = useTry()
   const patch = (p: Partial<Turn>) => set({ chat: chat.map((y) => (y.id === x.id ? { ...y, ...p } : y)) })
   const act = x.a?.proposed_actions?.[0]
@@ -119,7 +121,7 @@ function TurnView({ x, run }: { x: Turn; run: Run }) {
         {x.error && <div style={{ color: 'var(--t-red)', fontSize: 14 }}>{x.error}</div>}
         {x.a && (
           <>
-            <div style={{ fontSize: 15, lineHeight: 1.5 }}>{x.a.answer}</div>
+            <div style={{ fontSize: 15, lineHeight: 1.5 }}>{m.text(x.a.answer)}</div>
             {x.a.citations.length > 0 && (
               <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 6 }} data-dir="citations">
                 {x.a.citations.slice(0, 3).map((c, i) => (

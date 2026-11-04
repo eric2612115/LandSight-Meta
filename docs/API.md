@@ -63,7 +63,7 @@ type DrawingObject = {
 }
 
 type Item = {
-  item_id: string; kind: DrawingObject["kind"]; label: string; species_code?: string; unit: "plant" | "m2" | "m"
+  item_id: string; kind: DrawingObject["kind"] | "unresolved"; label: string; species_code?: string; unit: "plant" | "m2" | "m"
   geometry_count?: number; spark_count?: number; schedule_count?: number; label_count?: number
   agreed: boolean; flagged_reason?: string; quote_count?: number
   object_ids: string[]; sheet_ids: string[]

@@ -1,4 +1,4 @@
-"""Ask the package (docs/WIN-STRATEGY.md, "The one thing the screen must do"): the owner's question answered by Muse
+"""Ask the package: the owner's question answered by Muse
 Spark from the package's own material, with the file, page and sentence each fact came from, plus actions that turn
 the answer into a confirmed element, a confirmed price, a regulation note or a flag."""
 

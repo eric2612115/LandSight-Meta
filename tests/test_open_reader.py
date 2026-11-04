@@ -12,6 +12,7 @@ import httpx
 import pytest
 
 from landsight.review import spark as RS
+from landsight.review.validate import validate
 
 REPO = Path(__file__).resolve().parents[1]
 GREENFIELD = REPO / "samples" / "greenfield"
@@ -49,6 +50,7 @@ def test_parity_run_replays_with_no_key(open_run):
     e = run["errors"]
     assert (e["planted"], len(e["found"]), len(e["flagged"]), len(e["missed"]), len(e["false_alarms"])) == (30, 28, 2, 0, 0)
     assert e["flagged"] == ["E15", "E18"]
+    assert validate(run) == []  # the run the open reader emits has the same shape as the default one
     t = run["timing"]
     assert t["reader"] == "open" and t["model"] == OPEN_MODEL and t["recorded"] is True
     assert t["spark_calls"] == 39 and t["sam_calls"] == 12

@@ -102,7 +102,7 @@ def validate(run: dict) -> list[str]:
         w = f"items[{i}]"
         for k in ("item_id", "label"):
             v.need(it, w, k, lambda x: isinstance(x, str), "string")
-        v.need(it, w, "kind", lambda x: x in OBJECT_KINDS, "an object kind")
+        v.need(it, w, "kind", lambda x: x in OBJECT_KINDS or x == "unresolved", "an object kind or unresolved")
         v.need(it, w, "unit", lambda x: x in UNITS, "plant|m2|m")
         for k in ("geometry_count", "spark_count", "schedule_count", "label_count", "quote_count"):
             v.need(it, w, k, _num, "number", optional=True)

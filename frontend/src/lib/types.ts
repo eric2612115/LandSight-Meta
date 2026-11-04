@@ -82,7 +82,7 @@ export type SparkView = {
 
 export type Item = {
   item_id: string
-  kind: ObjectKind
+  kind: ObjectKind | 'unresolved' // unresolved: an outline neither geometry nor the reader could settle
   label: string
   species_code?: string
   unit: 'plant' | 'm2' | 'm'

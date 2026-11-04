@@ -51,7 +51,7 @@ accent cobalt #4D7CFF; red #FF5A4F send back; amber #F5A524 fix; cobalt code; gr
 
 ## The director (the film's Part 2)
 
-`/try?director=1&sample=greenfield` plays the Part 2 timeline in demo/SCRIPT-V7.md on a virtual clock: an in-page
+`/try?director=1&sample=greenfield` plays the film's Part 2 timeline on a virtual clock: an in-page
 cursor above the camera layer (eased moves ~0.35 s, a click ripple, a folder ghost for the drag), a camera wrapper that
 zooms 1.4–1.8× to the target's rect and back (ease in-out 0.6 s, hold, ease out), typing at ~18 chars/s, deterministic
 waits on data readiness; it emits sound cues (`click`, `stamp`, `whoosh`, `type`) with timestamps to `window.__cues`
